@@ -2,19 +2,20 @@ speakeasyVersion: 1.459.2
 sources:
     Mixpeek API:
         sourceNamespace: mixpeek-api
-        sourceRevisionDigest: sha256:9cda4857e69a37e211edb47236e1ea7df748a3502110d6b10975fd1f3fc87eb2
-        sourceBlobDigest: sha256:21090f7dfded6bca463c8feba2169d517324102707eb4aa860f4a503a1020482
+        sourceRevisionDigest: sha256:bdd023a40a90f4d21f33db5deee16299aae5639c19218777c8a9753ffc7ab33b
+        sourceBlobDigest: sha256:1f494781e146eec5d9b82284ddd817f3430fa0f8aa8dbb497238bd364c93c5c8
         tags:
             - latest
+            - speakeasy-sdk-regen-1734907512
             - "0.81"
 targets:
     mixpeek:
         source: Mixpeek API
         sourceNamespace: mixpeek-api
-        sourceRevisionDigest: sha256:9cda4857e69a37e211edb47236e1ea7df748a3502110d6b10975fd1f3fc87eb2
-        sourceBlobDigest: sha256:21090f7dfded6bca463c8feba2169d517324102707eb4aa860f4a503a1020482
+        sourceRevisionDigest: sha256:bdd023a40a90f4d21f33db5deee16299aae5639c19218777c8a9753ffc7ab33b
+        sourceBlobDigest: sha256:1f494781e146eec5d9b82284ddd817f3430fa0f8aa8dbb497238bd364c93c5c8
         codeSamplesNamespace: mixpeek-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:2bf40386b27703098632de8c147c7a705156565503156851d99b804f85281c7d
+        codeSamplesRevisionDigest: sha256:85b4de46c9feb69d6e55ea8047f0a7abc9e74ed292613ec01f3bef8b8dfd9da5
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -30,6 +31,9 @@ workflow:
         mixpeek:
             target: python
             source: Mixpeek API
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/mixpeek/api/mixpeek-api-python-code-samples

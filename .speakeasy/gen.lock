@@ -1,12 +1,15 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: d558ee543136d09d3b6f5b7d0a4e008e
+  docChecksum: aadbf8414db4c597bbc1847f29a1ec51
   docVersion: "0.81"
   speakeasyVersion: 1.459.2
   generationVersion: 2.483.1
-  releaseVersion: 0.1.1
-  configChecksum: ec267404584c192d7c9b45ed04e846e2
+  releaseVersion: 0.1.2
+  configChecksum: 900e3d6435b5f64ee3c25867414fa31a
+  repoURL: https://github.com/mixpeek/python-sdk.git
+  installationURL: https://github.com/mixpeek/python-sdk.git
+  published: true
 features:
   python:
     additionalDependencies: 1.0.0
@@ -154,7 +157,6 @@ generatedFiles:
   - docs/models/organizationmodelmetadata.md
   - docs/models/partialassetupdateassetsassetidpatchrequest.md
   - docs/models/payloadindexconfig.md
-  - docs/models/payloadindexes.md
   - docs/models/payloadindextype.md
   - docs/models/payloadschematype.md
   - docs/models/percolaterequest.md
@@ -497,7 +499,7 @@ examples:
         application/json: {"namespace_name": "spotify_playlists_dev", "vector_indexes": ["image", "multimodal", "text", "keyword"], "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
       responses:
         "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>"]}
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>"], "payload_indexes": ["<value>"]}
         "400":
           application/json: {"detail": []}
         "422":
@@ -506,7 +508,7 @@ examples:
     speakeasy-default-list-namespaces-namespaces-get:
       responses:
         "200":
-          application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": []}]
+          application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>"], "payload_indexes": ["<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": [], "payload_indexes": ["<value>", "<value>"]}]
         "400":
           application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
         "422":
@@ -532,7 +534,7 @@ examples:
         application/json: {"namespace_name": "spotify_playlists_dev", "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
       responses:
         "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>"]}
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>"], "payload_indexes": ["<value>"]}
         "400":
           application/json: {"detail": []}
         "422":
@@ -544,7 +546,7 @@ examples:
           namespace: "ns_1234567890"
       responses:
         "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>", "<value>"]}
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
         "400":
           application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
         "422":
