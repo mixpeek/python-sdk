@@ -272,12 +272,7 @@ from .logicaloperator_output import (
 from .logodetectsettings import LogoDetectSettings, LogoDetectSettingsTypedDict
 from .modality import Modality
 from .modeldetails import ModelDetails, ModelDetailsTypedDict
-from .namespaceresponse import (
-    NamespaceResponse,
-    NamespaceResponseTypedDict,
-    PayloadIndexes,
-    PayloadIndexesTypedDict,
-)
+from .namespaceresponse import NamespaceResponse, NamespaceResponseTypedDict
 from .organizationmodel import (
     OrganizationModel,
     OrganizationModelMetadata,
@@ -657,8 +652,6 @@ __all__ = [
     "PayloadIndexConfigTypedDict",
     "PayloadIndexType",
     "PayloadIndexTypeTypedDict",
-    "PayloadIndexes",
-    "PayloadIndexesTypedDict",
     "PayloadSchemaType",
     "PercolateRequest",
     "PercolateRequestTypedDict",

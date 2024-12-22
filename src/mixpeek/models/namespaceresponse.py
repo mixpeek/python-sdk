@@ -3,23 +3,15 @@
 from __future__ import annotations
 from mixpeek.types import BaseModel, Nullable, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import Any, List
 from typing_extensions import TypedDict
-
-
-class PayloadIndexesTypedDict(TypedDict):
-    pass
-
-
-class PayloadIndexes(BaseModel):
-    pass
 
 
 class NamespaceResponseTypedDict(TypedDict):
     namespace_id: str
     namespace_name: str
     vector_indexes: List[str]
-    payload_indexes: Nullable[PayloadIndexesTypedDict]
+    payload_indexes: Nullable[List[Any]]
 
 
 class NamespaceResponse(BaseModel):
@@ -29,7 +21,7 @@ class NamespaceResponse(BaseModel):
 
     vector_indexes: List[str]
 
-    payload_indexes: Nullable[PayloadIndexes]
+    payload_indexes: Nullable[List[Any]]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
