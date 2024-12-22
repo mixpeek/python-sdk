@@ -1,0 +1,10 @@
+# PercolateRequest
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `enabled`                                                                                  | *Optional[bool]*                                                                           | :heavy_minus_sign:                                                                         | Whether to enable percolator matching for this request                                     |
+| `min_score`                                                                                | *OptionalNullable[float]*                                                                  | :heavy_minus_sign:                                                                         | Minimum similarity score (0-1) required for a match. Higher values mean stricter matching. |
+| `max_candidates`                                                                           | *OptionalNullable[int]*                                                                    | :heavy_minus_sign:                                                                         | Maximum number of matching percolators to return in the response                           |

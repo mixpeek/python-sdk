@@ -1,0 +1,11 @@
+# CollectionModel
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `collection_name`                                                                        | *str*                                                                                    | :heavy_check_mark:                                                                       | Name for the collection                                                                  |
+| `collection_id`                                                                          | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | Unique identifier for the collection                                                     |
+| `namespace_id`                                                                           | *OptionalNullable[str]*                                                                  | :heavy_minus_sign:                                                                       | Namespace for the collection                                                             |
+| `metadata`                                                                               | [OptionalNullable[models.CollectionModelMetadata]](../models/collectionmodelmetadata.md) | :heavy_minus_sign:                                                                       | Optional metadata for the collection                                                     |

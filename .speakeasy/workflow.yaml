@@ -1,0 +1,21 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Mixpeek API:
+        inputs:
+            - location: https://api.mixpeek.com/docs/openapi.json
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/mixpeek/api/mixpeek-api
+targets:
+    mixpeek:
+        target: python
+        source: Mixpeek API
+        publish:
+            pypi:
+                token: $pypi_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/mixpeek/api/mixpeek-api-python-code-samples
+            blocking: false

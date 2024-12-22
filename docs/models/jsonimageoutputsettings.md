@@ -1,0 +1,9 @@
+# JSONImageOutputSettings
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `response_shape`                                                                                                   | [OptionalNullable[models.JSONImageOutputSettingsResponseShape]](../models/jsonimageoutputsettingsresponseshape.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
+| `prompt`                                                                                                           | *OptionalNullable[str]*                                                                                            | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

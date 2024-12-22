@@ -1,0 +1,9 @@
+# CreateCollectionRequest
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `collection_name`                                                                                        | *str*                                                                                                    | :heavy_check_mark:                                                                                       | Name for the collection                                                                                  |
+| `metadata`                                                                                               | [OptionalNullable[models.CreateCollectionRequestMetadata]](../models/createcollectionrequestmetadata.md) | :heavy_minus_sign:                                                                                       | Optional metadata for the collection                                                                     |
