@@ -2,20 +2,20 @@ speakeasyVersion: 1.459.2
 sources:
     Mixpeek API:
         sourceNamespace: mixpeek-api
-        sourceRevisionDigest: sha256:b5259b8f5aa35aaa9835421d862d896b5bf1baf1115bd443df596e1c0d9b8e78
+        sourceRevisionDigest: sha256:16bb26baccfaea2abb104c0e47ee5dd656db5f77729aae5de8bc7eb0463e2987
         sourceBlobDigest: sha256:1f494781e146eec5d9b82284ddd817f3430fa0f8aa8dbb497238bd364c93c5c8
         tags:
             - latest
-            - speakeasy-sdk-regen-1734910505
+            - speakeasy-sdk-regen-1734911213
             - "0.81"
 targets:
     mixpeek:
         source: Mixpeek API
         sourceNamespace: mixpeek-api
-        sourceRevisionDigest: sha256:b5259b8f5aa35aaa9835421d862d896b5bf1baf1115bd443df596e1c0d9b8e78
+        sourceRevisionDigest: sha256:16bb26baccfaea2abb104c0e47ee5dd656db5f77729aae5de8bc7eb0463e2987
         sourceBlobDigest: sha256:1f494781e146eec5d9b82284ddd817f3430fa0f8aa8dbb497238bd364c93c5c8
         codeSamplesNamespace: mixpeek-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:01993800cfa933fa2459264192fdb872d835e0fe0c722f87c575b70d11bafc51
+        codeSamplesRevisionDigest: sha256:836357e4ded752c925b8f946a92fcf6d72b4a450b67f46e80fa650e7f306eb6e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
