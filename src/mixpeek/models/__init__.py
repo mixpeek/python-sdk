@@ -101,7 +101,7 @@ from .embeddingresponse import (
     EmbeddingResponseTypedDict,
     EmbeddingTypedDict,
 )
-from .errormessage import ErrorMessage, ErrorMessageTypedDict
+from .errordetail import Details, DetailsTypedDict, ErrorDetail, ErrorDetailTypedDict
 from .errorresponse import ErrorResponse, ErrorResponseData
 from .facedetectsettings import FaceDetectSettings, FaceDetectSettingsTypedDict
 from .featureextractionembeddingrequest import (
@@ -492,6 +492,8 @@ __all__ = [
     "DeleteUserOrganizationsUsersUserEmailDeleteRequestTypedDict",
     "DenseEmbedding",
     "DenseEmbeddingTypedDict",
+    "Details",
+    "DetailsTypedDict",
     "Direction",
     "Embedding",
     "EmbeddingRequest",
@@ -499,8 +501,8 @@ __all__ = [
     "EmbeddingResponse",
     "EmbeddingResponseTypedDict",
     "EmbeddingTypedDict",
-    "ErrorMessage",
-    "ErrorMessageTypedDict",
+    "ErrorDetail",
+    "ErrorDetailTypedDict",
     "ErrorResponse",
     "ErrorResponseData",
     "FaceDetectSettings",
