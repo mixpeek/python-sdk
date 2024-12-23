@@ -22,7 +22,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.collections.list()
@@ -64,7 +64,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.collections.create(collection_name="<value>")
@@ -106,7 +106,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.collections.delete(collection="col_1234567890")
@@ -147,7 +147,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.collections.update(collection="col_1234567890", collection_name="<value>")
@@ -190,7 +190,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.collections.get(collection="col_1234567890")

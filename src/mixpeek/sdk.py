@@ -15,6 +15,7 @@ from mixpeek.features import Features
 from mixpeek.health import Health
 from mixpeek.ingest import Ingest
 from mixpeek.interactions import Interactions
+from mixpeek.models import internal
 from mixpeek.namespaces import Namespaces
 from mixpeek.organizations import Organizations
 from mixpeek.searchinteractions import SearchInteractions
@@ -40,7 +41,8 @@ class Mixpeek(BaseSDK):
 
     def __init__(
         self,
-        bearer_auth: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
+        token: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
+        x_namespace: Optional[str] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -52,7 +54,8 @@ class Mixpeek(BaseSDK):
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
-        :param bearer_auth: The bearer_auth required for authentication
+        :param token: The token required for authentication
+        :param x_namespace: Configures the x_namespace parameter for all supported operations
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -79,20 +82,27 @@ class Mixpeek(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(bearer_auth):
-            security = lambda: models.Security(bearer_auth=bearer_auth())  # pylint: disable=unnecessary-lambda-assignment
+        if callable(token):
+            security = lambda: models.Security(token=token())  # pylint: disable=unnecessary-lambda-assignment
         else:
-            security = models.Security(bearer_auth=bearer_auth)
+            security = models.Security(token=token)
 
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
+
+        _globals = internal.Globals(
+            x_namespace=utils.get_global_from_env(
+                x_namespace, "MIXPEEK_X_NAMESPACE", str
+            ),
+        )
 
         BaseSDK.__init__(
             self,
             SDKConfiguration(
                 client=client,
                 async_client=async_client,
+                globals=_globals,
                 security=security,
                 server_url=server_url,
                 server_idx=server_idx,
