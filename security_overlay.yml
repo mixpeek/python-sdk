@@ -17,5 +17,3 @@ actions:
           type: apiKey
           in: header
           name: x-namespace
-  - target: $["components"]["schemas"]
-    remove: true
