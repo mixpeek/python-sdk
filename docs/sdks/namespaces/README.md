@@ -21,8 +21,11 @@ Creates a new namespace with the specified configuration
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.namespaces.create(namespace_name="spotify_playlists_dev", vector_indexes=[
         "image",
@@ -85,8 +88,11 @@ List all namespaces for a user
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.namespaces.list()
 
@@ -121,8 +127,11 @@ Deletes an existing namespace using either its name or ID
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.namespaces.delete(namespace="ns_1234567890")
 
@@ -159,8 +168,11 @@ Updates an existing namespace's payload indexes, this is a full update
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.namespaces.update(namespace="ns_1234567890", namespace_name="spotify_playlists_dev", payload_indexes=[
         {
@@ -218,8 +230,11 @@ Retrieve details of a specific namespace using either its name or ID
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.namespaces.get(namespace="ns_1234567890")
 
@@ -255,8 +270,11 @@ Returns all available indexes and their configurations
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.namespaces.list_indexes()
 

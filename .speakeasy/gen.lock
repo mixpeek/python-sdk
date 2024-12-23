@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: d1083e04c3f5f26e2d5b48422b002799
+  docChecksum: 632eb77f1a36a791af4d2b78081bd3d2
   docVersion: "0.81"
-  speakeasyVersion: 1.459.3
-  generationVersion: 2.483.6
-  releaseVersion: 0.13.3
-  configChecksum: b677133e5bf8dcba50ae84c8f7bde1fb
+  speakeasyVersion: 1.460.1
+  generationVersion: 2.484.0
+  releaseVersion: 0.14.0
+  configChecksum: 3cbe16fb7a3f749ae6e0392d8107668c
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -22,7 +22,9 @@ features:
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
     flattening: 3.1.0
+    globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
     groups: 3.0.0
     methodArguments: 1.0.2
@@ -181,6 +183,7 @@ generatedFiles:
   - docs/models/searchqueryoutputtype.md
   - docs/models/searchrequestfeaturesinput.md
   - docs/models/searchrequestfeaturesoutput.md
+  - docs/models/security.md
   - docs/models/sortoption.md
   - docs/models/sparseembedding.md
   - docs/models/tasksmodeltaskresponse.md
@@ -353,6 +356,7 @@ generatedFiles:
   - src/mixpeek/models/searchquery_output.py
   - src/mixpeek/models/searchrequestfeatures_input.py
   - src/mixpeek/models/searchrequestfeatures_output.py
+  - src/mixpeek/models/security.py
   - src/mixpeek/models/sortoption.py
   - src/mixpeek/models/sparseembedding.py
   - src/mixpeek/models/tasks_model_taskresponse.py

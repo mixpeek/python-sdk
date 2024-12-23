@@ -4,6 +4,7 @@ from .basesdk import BaseSDK
 from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
+from mixpeek.utils import get_security_from_env
 from typing import Any, Mapping, Optional, Union
 
 
@@ -55,6 +56,7 @@ class Collections(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -70,7 +72,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="list_collections_collections_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -150,6 +154,7 @@ class Collections(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -165,7 +170,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="list_collections_collections_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -250,10 +257,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_collection_request,
                 False,
@@ -276,7 +284,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="create_collection_collections_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -361,10 +371,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_collection_request,
                 False,
@@ -387,7 +398,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="create_collection_collections_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -462,10 +475,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -481,7 +495,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_collection_collections__collection__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -556,10 +572,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -575,7 +592,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_collection_collections__collection__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -665,10 +684,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_collection_request,
                 False,
@@ -691,7 +711,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="update_collection_collections__collection__put",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -781,10 +803,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.create_collection_request,
                 False,
@@ -807,7 +830,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="update_collection_collections__collection__put",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -882,10 +907,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -901,7 +927,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_collection_collections__collection__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -976,10 +1004,11 @@ class Collections(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -995,7 +1024,9 @@ class Collections(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_collection_collections__collection__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],

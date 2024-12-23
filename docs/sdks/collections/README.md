@@ -19,8 +19,11 @@ List Collections
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.collections.list()
 
@@ -58,8 +61,11 @@ Create Collection
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.collections.create(collection_name="<value>")
 
@@ -97,8 +103,11 @@ Delete a collection using either its name or ID
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.collections.delete(collection="col_1234567890")
 
@@ -135,8 +144,11 @@ Update a collection using either its name or ID
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.collections.update(collection="col_1234567890", collection_name="<value>")
 
@@ -175,8 +187,11 @@ Get a collection using either its name or ID
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.collections.get(collection="col_1234567890")
 

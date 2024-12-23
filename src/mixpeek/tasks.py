@@ -4,6 +4,7 @@ from .basesdk import BaseSDK
 from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
+from mixpeek.utils import get_security_from_env
 from typing import Any, Mapping, Optional
 
 
@@ -48,10 +49,11 @@ class Tasks(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -67,7 +69,9 @@ class Tasks(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="kill_task_tasks__task_id__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -140,10 +144,11 @@ class Tasks(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -159,7 +164,9 @@ class Tasks(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="kill_task_tasks__task_id__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -237,10 +244,11 @@ class Tasks(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -256,7 +264,9 @@ class Tasks(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_task_tasks__task_id__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -334,10 +344,11 @@ class Tasks(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -353,7 +364,9 @@ class Tasks(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_task_tasks__task_id__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],

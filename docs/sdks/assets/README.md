@@ -21,8 +21,11 @@ Get basic asset details
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.get(asset_id="ast_123", return_url=True)
 
@@ -60,8 +63,11 @@ Delete Asset
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.delete(asset_id="<id>")
 
@@ -98,8 +104,11 @@ Full Asset Update
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.update(asset_id="<id>", propagate_features=True, metadata={})
 
@@ -138,8 +147,11 @@ Partial Asset Update
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.partial_update(asset_id="<id>", propagate_features=True, metadata={})
 
@@ -178,8 +190,11 @@ Get asset details including all related features
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.get_features(asset_id="asset_123456789", return_url=False)
 
@@ -218,8 +233,11 @@ List Assets
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.list(collections=[
         "col_123",
@@ -293,8 +311,11 @@ Search Assets
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.assets.search(collections=[
         "col_123",

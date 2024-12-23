@@ -2,8 +2,11 @@
 ```python
 # Synchronous Example
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.organizations.get()
 
@@ -18,9 +21,12 @@ The same SDK client can also be used to make asychronous requests by importing a
 # Asynchronous Example
 import asyncio
 from mixpeek import Mixpeek
+import os
 
 async def main():
-    async with Mixpeek() as mixpeek:
+    async with Mixpeek(
+        bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    ) as mixpeek:
 
         res = await mixpeek.organizations.get_async()
 

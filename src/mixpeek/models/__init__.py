@@ -348,6 +348,7 @@ from .searchrequestfeatures_output import (
     SearchRequestFeaturesOutput,
     SearchRequestFeaturesOutputTypedDict,
 )
+from .security import Security, SecurityTypedDict
 from .sortoption import Direction, SortOption, SortOptionTypedDict
 from .sparseembedding import SparseEmbedding, SparseEmbeddingTypedDict
 from .tasks_model_taskresponse import (
@@ -695,6 +696,8 @@ __all__ = [
     "SearchRequestFeaturesInputTypedDict",
     "SearchRequestFeaturesOutput",
     "SearchRequestFeaturesOutputTypedDict",
+    "Security",
+    "SecurityTypedDict",
     "SortOption",
     "SortOptionTypedDict",
     "SparseEmbedding",
