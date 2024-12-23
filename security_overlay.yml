@@ -6,14 +6,21 @@ actions:
   - target: $
     update:
       security:
-        - bearerAuth: []
+        - token: []
+  - target: $
+    update:
+      x-speakeasy-globals:
+        parameters:
+          - name: x-namespace
+            in: header
+            required: false
+            description: "Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint."
+            title: "X-Namespace"
+            schema:
+              type: string
   - target: $["components"]
     update:
       securitySchemes:
-        bearerAuth:
+        token:
           type: http
           scheme: bearer
-        namespace:
-          type: apiKey
-          in: header
-          name: x-namespace
