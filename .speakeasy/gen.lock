@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 632eb77f1a36a791af4d2b78081bd3d2
+  docChecksum: 9fa3b0556e16d37efed991e9849d75c3
   docVersion: "0.81"
   speakeasyVersion: 1.460.1
   generationVersion: 2.484.0
-  releaseVersion: 0.14.0
-  configChecksum: 3cbe16fb7a3f749ae6e0392d8107668c
+  releaseVersion: 0.15.0
+  configChecksum: 840cbbe0ec324f96b6089c2078ca5332
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -26,6 +26,7 @@ features:
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
+    globals: 3.0.0
     groups: 3.0.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
@@ -124,6 +125,7 @@ generatedFiles:
   - docs/models/interactionresponse.md
   - docs/models/interactionresponsemetadata.md
   - docs/models/interactiontype.md
+  - docs/models/internal/globals.md
   - docs/models/jsonimageoutputsettings.md
   - docs/models/jsonimageoutputsettingsresponseshape.md
   - docs/models/jsonoutput.md
@@ -316,6 +318,8 @@ generatedFiles:
   - src/mixpeek/models/integerindexparams.py
   - src/mixpeek/models/interactionresponse.py
   - src/mixpeek/models/interactiontype.py
+  - src/mixpeek/models/internal/__init__.py
+  - src/mixpeek/models/internal/globals.py
   - src/mixpeek/models/jsonimageoutputsettings.py
   - src/mixpeek/models/jsontextoutputsettings.py
   - src/mixpeek/models/jsonvideooutputsettings.py

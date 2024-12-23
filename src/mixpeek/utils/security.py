@@ -64,8 +64,8 @@ def get_security_from_env(security: Any, security_class: Any) -> Optional[BaseMo
 
     security_dict: Any = {}
 
-    if os.getenv("MIXPEEK_BEARER_AUTH"):
-        security_dict["bearer_auth"] = os.getenv("MIXPEEK_BEARER_AUTH")
+    if os.getenv("MIXPEEK_TOKEN"):
+        security_dict["token"] = os.getenv("MIXPEEK_TOKEN")
 
     return security_class(**security_dict) if security_dict else None
 
