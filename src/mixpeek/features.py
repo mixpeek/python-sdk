@@ -43,7 +43,7 @@ class Features(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/features/{feature_id}",
             base_url=base_url,
@@ -138,7 +138,7 @@ class Features(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/features/{feature_id}",
             base_url=base_url,
@@ -230,7 +230,7 @@ class Features(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/features/{feature_id}",
             base_url=base_url,
@@ -322,7 +322,7 @@ class Features(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/features/{feature_id}",
             base_url=base_url,
@@ -424,7 +424,7 @@ class Features(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PUT",
             path="/features/{feature_id}",
             base_url=base_url,
@@ -533,7 +533,7 @@ class Features(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PUT",
             path="/features/{feature_id}",
             base_url=base_url,
@@ -664,7 +664,7 @@ class Features(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/features",
             base_url=base_url,
@@ -795,7 +795,7 @@ class Features(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/features",
             base_url=base_url,
@@ -951,7 +951,7 @@ class Features(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/features/search",
             base_url=base_url,
@@ -1110,7 +1110,7 @@ class Features(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/features/search",
             base_url=base_url,

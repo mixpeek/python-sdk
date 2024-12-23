@@ -43,7 +43,7 @@ class Collections(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/collections",
             base_url=base_url,
@@ -138,7 +138,7 @@ class Collections(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/collections",
             base_url=base_url,
@@ -242,7 +242,7 @@ class Collections(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/collections",
             base_url=base_url,
@@ -353,7 +353,7 @@ class Collections(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/collections",
             base_url=base_url,
@@ -454,7 +454,7 @@ class Collections(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/collections/{collection}",
             base_url=base_url,
@@ -548,7 +548,7 @@ class Collections(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/collections/{collection}",
             base_url=base_url,
@@ -657,7 +657,7 @@ class Collections(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PUT",
             path="/collections/{collection}",
             base_url=base_url,
@@ -773,7 +773,7 @@ class Collections(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PUT",
             path="/collections/{collection}",
             base_url=base_url,
@@ -874,7 +874,7 @@ class Collections(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/collections/{collection}",
             base_url=base_url,
@@ -968,7 +968,7 @@ class Collections(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/collections/{collection}",
             base_url=base_url,

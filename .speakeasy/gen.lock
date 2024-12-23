@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: aadbf8414db4c597bbc1847f29a1ec51
+  docChecksum: bbc8a5792fa3c1a4b6193e2984d029fd
   docVersion: "0.81"
-  speakeasyVersion: 1.459.2
-  generationVersion: 2.483.1
-  releaseVersion: 0.13.1
-  configChecksum: 255fe4b60c06c5028f5209b904af31c5
+  speakeasyVersion: 1.459.3
+  generationVersion: 2.483.6
+  releaseVersion: 0.13.2
+  configChecksum: 328f39fb46d4fc75e295751b90838aaa
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -26,7 +26,7 @@ features:
     globalServerURLs: 3.1.0
     groups: 3.0.0
     methodArguments: 1.0.2
-    nameOverrides: 3.0.0
+    nameOverrides: 3.0.1
     nullables: 1.0.0
     responseFormat: 1.0.1
     retries: 3.0.2
@@ -904,4 +904,9 @@ examples:
           application/json: {"status": "<value>"}
         "400":
           application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+  debug_openapi_debug_openapi_get:
+    speakeasy-default-debug-openapi-debug-openapi-get:
+      responses:
+        "200":
+          application/json: "<value>"
 generatedTests: {}
