@@ -7,17 +7,11 @@ actions:
     update:
       security:
         - bearerAuth: []
-        - bearerAuth: []
-          namespace: []
   - target: $["components"]
     update:
       securitySchemes:
         bearerAuth:
           type: http
           scheme: bearer
-        namespace:
-          type: apiKey
-          in: header
-          name: x-namespace
   - target: $["components"]["schemas"]
     remove: true
