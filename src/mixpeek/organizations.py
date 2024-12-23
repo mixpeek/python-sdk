@@ -31,7 +31,7 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/organizations",
             base_url=base_url,
@@ -113,7 +113,7 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/organizations",
             base_url=base_url,
@@ -195,7 +195,7 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/organizations/usage",
             base_url=base_url,
@@ -277,7 +277,7 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/organizations/usage",
             base_url=base_url,
@@ -366,7 +366,7 @@ class Organizations(BaseSDK):
             user_email=user_email,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/organizations/users/{user_email}",
             base_url=base_url,
@@ -455,7 +455,7 @@ class Organizations(BaseSDK):
             user_email=user_email,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/organizations/users/{user_email}",
             base_url=base_url,
@@ -544,7 +544,7 @@ class Organizations(BaseSDK):
             user_email=user_email,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/organizations/users/{user_email}",
             base_url=base_url,
@@ -633,7 +633,7 @@ class Organizations(BaseSDK):
             user_email=user_email,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/organizations/users/{user_email}",
             base_url=base_url,
@@ -740,7 +740,7 @@ class Organizations(BaseSDK):
             created_at=created_at,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/organizations/users",
             base_url=base_url,
@@ -850,7 +850,7 @@ class Organizations(BaseSDK):
             created_at=created_at,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/organizations/users",
             base_url=base_url,
@@ -947,7 +947,7 @@ class Organizations(BaseSDK):
             key_name=key_name,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/organizations/users/{user_email}/api-keys",
             base_url=base_url,
@@ -1041,7 +1041,7 @@ class Organizations(BaseSDK):
             key_name=key_name,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/organizations/users/{user_email}/api-keys",
             base_url=base_url,
@@ -1137,7 +1137,7 @@ class Organizations(BaseSDK):
             )
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
@@ -1233,7 +1233,7 @@ class Organizations(BaseSDK):
             )
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
@@ -1337,7 +1337,7 @@ class Organizations(BaseSDK):
             )
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
@@ -1444,7 +1444,7 @@ class Organizations(BaseSDK):
             )
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,

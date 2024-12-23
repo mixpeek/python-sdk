@@ -52,7 +52,7 @@ class Namespaces(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/namespaces",
             base_url=base_url,
@@ -159,7 +159,7 @@ class Namespaces(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/namespaces",
             base_url=base_url,
@@ -246,7 +246,7 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/namespaces",
             base_url=base_url,
@@ -330,7 +330,7 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/namespaces",
             base_url=base_url,
@@ -421,7 +421,7 @@ class Namespaces(BaseSDK):
             namespace=namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/namespaces/{namespace}",
             base_url=base_url,
@@ -512,7 +512,7 @@ class Namespaces(BaseSDK):
             namespace=namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/namespaces/{namespace}",
             base_url=base_url,
@@ -615,7 +615,7 @@ class Namespaces(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PUT",
             path="/namespaces/{namespace}",
             base_url=base_url,
@@ -725,7 +725,7 @@ class Namespaces(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PUT",
             path="/namespaces/{namespace}",
             base_url=base_url,
@@ -823,7 +823,7 @@ class Namespaces(BaseSDK):
             namespace=namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/namespaces/{namespace}",
             base_url=base_url,
@@ -914,7 +914,7 @@ class Namespaces(BaseSDK):
             namespace=namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/namespaces/{namespace}",
             base_url=base_url,
@@ -998,7 +998,7 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/namespaces/indexes",
             base_url=base_url,
@@ -1082,7 +1082,7 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/namespaces/indexes",
             base_url=base_url,

@@ -3,7 +3,7 @@
 import importlib.metadata
 
 __title__: str = "mixpeek"
-__version__: str = "0.13"
+__version__: str = "0.13.3"
 
 try:
     if __package__ is not None:

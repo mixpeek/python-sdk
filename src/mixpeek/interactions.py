@@ -54,7 +54,7 @@ class Interactions(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/features/search/interactions",
             base_url=base_url,
@@ -160,7 +160,7 @@ class Interactions(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/features/search/interactions",
             base_url=base_url,

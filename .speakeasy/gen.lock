@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: aadbf8414db4c597bbc1847f29a1ec51
+  docChecksum: d1083e04c3f5f26e2d5b48422b002799
   docVersion: "0.81"
-  speakeasyVersion: 1.459.2
-  generationVersion: 2.483.1
-  releaseVersion: "0.13"
-  configChecksum: 1dd52724fc0194cc9870417214bd6f45
+  speakeasyVersion: 1.459.3
+  generationVersion: 2.483.6
+  releaseVersion: 0.13.3
+  configChecksum: b677133e5bf8dcba50ae84c8f7bde1fb
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -26,7 +26,7 @@ features:
     globalServerURLs: 3.1.0
     groups: 3.0.0
     methodArguments: 1.0.2
-    nameOverrides: 3.0.0
+    nameOverrides: 3.0.1
     nullables: 1.0.0
     responseFormat: 1.0.1
     retries: 3.0.2
@@ -75,11 +75,12 @@ generatedFiles:
   - docs/models/deletenamespacenamespacesnamespacedeleterequest.md
   - docs/models/deleteuserorganizationsusersuseremaildeleterequest.md
   - docs/models/denseembedding.md
+  - docs/models/details.md
   - docs/models/direction.md
   - docs/models/embedding.md
   - docs/models/embeddingrequest.md
   - docs/models/embeddingresponse.md
-  - docs/models/errormessage.md
+  - docs/models/errordetail.md
   - docs/models/errorresponse.md
   - docs/models/facedetectsettings.md
   - docs/models/featureextractionembeddingrequest.md
@@ -276,7 +277,7 @@ generatedFiles:
   - src/mixpeek/models/denseembedding.py
   - src/mixpeek/models/embeddingrequest.py
   - src/mixpeek/models/embeddingresponse.py
-  - src/mixpeek/models/errormessage.py
+  - src/mixpeek/models/errordetail.py
   - src/mixpeek/models/errorresponse.py
   - src/mixpeek/models/facedetectsettings.py
   - src/mixpeek/models/featureextractionembeddingrequest.py
@@ -407,7 +408,7 @@ examples:
         "200":
           application/json: {"organization_name": "<value>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}]}
+          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_usage_organizations_usage_get:
@@ -416,7 +417,7 @@ examples:
         "200":
           application/json: {"total_credits": 392946, "dates": [{"date": "2024-05-17", "credits": 343162, "actions": [{"action": "<value>", "credits": 665115}, {"action": "<value>", "credits": 16413}, {"action": "<value>", "credits": 655748}]}]}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}]}
+          application/json: {"status": 224089, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_user_organizations_users__user_email__get:
@@ -428,7 +429,7 @@ examples:
         "200":
           application/json: {"email": "Dorian_Schaefer95@gmail.com"}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 746869, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   delete_user_organizations_users__user_email__delete:
@@ -440,7 +441,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 251343, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   add_user_organizations_users_post:
@@ -451,7 +452,7 @@ examples:
         "200":
           application/json: {"email": "Nakia_Lemke-Walter70@gmail.com"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}]}
+          application/json: {"status": 555876, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   create_api_key_organizations_users__user_email__api_keys_post:
@@ -464,7 +465,7 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 909677, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   delete_api_key_organizations_users__user_email__api_keys__key_name__delete:
@@ -477,7 +478,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 98556, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   update_api_key_organizations_users__user_email__api_keys__key_name__patch:
@@ -490,7 +491,7 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 867905, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   create_namespace_namespaces_post:
@@ -501,7 +502,7 @@ examples:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>"], "payload_indexes": ["<value>"]}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 486589, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   list_namespaces_namespaces_get:
@@ -510,7 +511,7 @@ examples:
         "200":
           application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>"], "payload_indexes": ["<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": [], "payload_indexes": ["<value>", "<value>"]}]
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   delete_namespace_namespaces__namespace__delete:
@@ -522,7 +523,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}]}
+          application/json: {"status": 386564, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   update_namespace_namespaces__namespace__put:
@@ -536,7 +537,7 @@ examples:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>"], "payload_indexes": ["<value>"]}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 344620, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_namespace_namespaces__namespace__get:
@@ -548,7 +549,7 @@ examples:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "vector_indexes": ["<value>", "<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 544221, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   list_available_indexes_namespaces_indexes_get:
@@ -557,7 +558,7 @@ examples:
         "200":
           application/json: {"vector_indexes": {"key": {"supported_modalities": ["audio", "text"], "vector_type": "sparse", "size": 252192}}, "payload_indexes": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}]}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 197324, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_feature_features__feature_id__get:
@@ -571,7 +572,7 @@ examples:
         "200":
           application/json: {"key": "<value>", "key1": "<value>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   delete_feature_features__feature_id__delete:
@@ -584,7 +585,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   full_feature_update_features__feature_id__put:
@@ -599,7 +600,7 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 857478, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   list_features_features_post:
@@ -610,7 +611,7 @@ examples:
         "200":
           application/json: {"results": [{"key": "<value>", "key1": "<value>", "key2": "<value>"}], "pagination": {"total": 37615, "page_size": 76430, "total_pages": 99738, "current_page": 887823, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   search_features_features_search_post:
@@ -624,7 +625,7 @@ examples:
         application/json: {"queries": [{"vector_index": "image", "value": "https://example.com/dog.jpg", "type": "url", "settings": {"limit": 50, "min_score": 0.7}}, {"vector_index": "text", "value": "This is a text query", "type": "text"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "metadata.field_name", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": true}, "session_id": "sess_abc123", "return_url": true}
       responses:
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 307631, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
         "200": {}
   create_interaction_features_search_interactions_post:
@@ -635,7 +636,7 @@ examples:
         "200":
           application/json: {"feature_id": "prod_123", "interaction_type": "positive_feedback", "search_request": {"queries": [{"vector_index": "image", "value": "This is a text query", "type": "url", "settings": {"limit": 10, "min_score": 0.5}}, {"vector_index": "text", "value": "This is a text query", "type": "url"}], "collections": ["collection1", "collection2"]}, "position": 3, "session_id": "sess_abc123", "interaction_id": "int_xyz789"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 486589, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   list_interactions_features_search_interactions_get:
@@ -644,7 +645,7 @@ examples:
         "200":
           application/json: []
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_interaction_features_search_interactions__interaction_id__get:
@@ -657,7 +658,7 @@ examples:
         "200":
           application/json: {"feature_id": "prod_123", "interaction_type": "click", "search_request": {"queries": [{"vector_index": "image", "value": "This is a text query", "type": "url", "settings": {"limit": 10, "min_score": 0.5}}, {"vector_index": "text", "value": "This is a text query", "type": "url"}], "collections": ["collection1", "collection2"]}, "position": 3, "session_id": "sess_abc123", "interaction_id": "int_xyz789"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 826676, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   delete_interaction_features_search_interactions__interaction_id__delete:
@@ -670,7 +671,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   extract_embeddings_features_extractors_embed_post:
@@ -681,7 +682,7 @@ examples:
         "200":
           application/json: {"embedding": {"vector": ["5727.00", "296.19", "1811.13"]}}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 484301, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   ingest_text_ingest_text_post:
@@ -692,7 +693,7 @@ examples:
         "200":
           application/json: {"message": "<value>", "task_id": "<id>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 531605, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   ingest_video_url_ingest_videos_url_post:
@@ -703,7 +704,7 @@ examples:
         "200":
           application/json: {"message": "<value>", "task_id": "<id>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 561301, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   ingest_image_url_ingest_images_url_post:
@@ -714,7 +715,7 @@ examples:
         "200":
           application/json: {"message": "<value>", "task_id": "<id>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 971279, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_asset_assets__asset_id__get:
@@ -729,7 +730,7 @@ examples:
         "200":
           application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
   delete_asset_assets__asset_id__delete:
     speakeasy-default-delete-asset-assets-asset-id-delete:
@@ -741,7 +742,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   full_asset_update_assets__asset_id__put:
@@ -756,7 +757,7 @@ examples:
         "200":
           application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 857478, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   partial_asset_update_assets__asset_id__patch:
@@ -771,7 +772,7 @@ examples:
         "200":
           application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 14672, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_asset_with_features_assets__asset_id__features_get:
@@ -786,7 +787,7 @@ examples:
         "200":
           application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 806281, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
   list_assets_assets_post:
     speakeasy-default-list-assets-assets-post:
@@ -796,7 +797,7 @@ examples:
         "200":
           application/json: {"results": [], "pagination": {"total": 260310, "page": 538291, "page_size": 345582, "total_pages": 975252, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   search_assets_assets_search_post:
@@ -807,7 +808,7 @@ examples:
         "200":
           application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 127606, "page": 666249, "page_size": 470157, "total_pages": 32419, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 307631, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   list_collections_collections_get:
@@ -816,7 +817,7 @@ examples:
         "200":
           application/json: {"results": [], "pagination": {"total": 811041, "page": 290173, "page_size": 471947, "total_pages": 213189, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   create_collection_collections_post:
@@ -827,7 +828,7 @@ examples:
         "200":
           application/json: {"collection_name": "<value>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 486589, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   delete_collection_collections__collection__delete:
@@ -840,7 +841,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 386564, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   update_collection_collections__collection__put:
@@ -855,7 +856,7 @@ examples:
         "200":
           application/json: {"collection_name": "<value>"}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 344620, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_collection_collections__collection__get:
@@ -868,7 +869,7 @@ examples:
         "200":
           application/json: {"collection_name": "<value>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 544221, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   kill_task_tasks__task_id__delete:
@@ -881,7 +882,7 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   get_task_tasks__task_id__get:
@@ -894,7 +895,7 @@ examples:
         "200":
           application/json: {"task_id": "<id>", "status": "DONE", "inputs": [], "outputs": ["<value>", "<value>"]}
         "400":
-          application/json: {"detail": []}
+          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
   healthcheck_healthcheck_get:
@@ -903,5 +904,10 @@ examples:
         "200":
           application/json: {"status": "<value>"}
         "400":
-          application/json: {"detail": [{"msg": "<value>"}, {"msg": "<value>"}]}
+          application/json: {"status": 935464, "error": {"message": "<value>", "type": "<value>"}}
+  debug_openapi_debug_openapi_get:
+    speakeasy-default-debug-openapi-debug-openapi-get:
+      responses:
+        "200":
+          application/json: "<value>"
 generatedTests: {}

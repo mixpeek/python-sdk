@@ -45,7 +45,7 @@ class Assets(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -142,7 +142,7 @@ class Assets(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -234,7 +234,7 @@ class Assets(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -326,7 +326,7 @@ class Assets(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -433,7 +433,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PUT",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -547,7 +547,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PUT",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -661,7 +661,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="PATCH",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -775,7 +775,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="PATCH",
             path="/assets/{asset_id}",
             base_url=base_url,
@@ -879,7 +879,7 @@ class Assets(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/assets/{asset_id}/features",
             base_url=base_url,
@@ -976,7 +976,7 @@ class Assets(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/assets/{asset_id}/features",
             base_url=base_url,
@@ -1103,7 +1103,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/assets",
             base_url=base_url,
@@ -1237,7 +1237,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/assets",
             base_url=base_url,
@@ -1365,7 +1365,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/assets/search",
             base_url=base_url,
@@ -1493,7 +1493,7 @@ class Assets(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/assets/search",
             base_url=base_url,

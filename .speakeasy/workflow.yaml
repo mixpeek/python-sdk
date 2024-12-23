@@ -6,6 +6,7 @@ sources:
             - location: https://api.mixpeek.com/docs/openapi.json
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: security_overlay.yml
         registry:
             location: registry.speakeasyapi.dev/mixpeek/api/mixpeek-api
 targets:

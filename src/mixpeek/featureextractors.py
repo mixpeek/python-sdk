@@ -43,7 +43,7 @@ class FeatureExtractors(BaseSDK):
             vector_index=vector_index,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/features/extractors/embed",
             base_url=base_url,
@@ -141,7 +141,7 @@ class FeatureExtractors(BaseSDK):
             vector_index=vector_index,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/features/extractors/embed",
             base_url=base_url,
