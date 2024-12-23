@@ -19,6 +19,6 @@ targets:
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/mixpeek/api/mixpeek-api-python-code-samples
-            blocking: false
             labelOverride:
-                fixedValue: "Python Client"
+                fixedValue: Python Client
+            blocking: false
