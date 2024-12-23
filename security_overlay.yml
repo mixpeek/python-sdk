@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: Overlay mixpeek.yml => mixpeek_with_security.yml
+  version: 0.0.0
+actions:
+  - target: $
+    update:
+      security:
+        - bearerAuth: []
+        - bearerAuth: []
+          namespace: []
+  - target: $["components"]
+    update:
+      securitySchemes:
+        bearerAuth:
+          type: http
+          scheme: bearer
+        namespace:
+          type: apiKey
+          in: header
+          name: x-namespace
+  - target: $["components"]["schemas"]
+    remove: true
