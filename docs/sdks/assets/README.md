@@ -24,7 +24,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.get(asset_id="ast_123", return_url=True)
@@ -66,7 +66,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.delete(asset_id="<id>")
@@ -107,7 +107,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.update(asset_id="<id>", propagate_features=True, metadata={})
@@ -150,7 +150,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.partial_update(asset_id="<id>", propagate_features=True, metadata={})
@@ -193,7 +193,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.get_features(asset_id="asset_123456789", return_url=False)
@@ -236,7 +236,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.list(collections=[
@@ -314,7 +314,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.assets.search(collections=[

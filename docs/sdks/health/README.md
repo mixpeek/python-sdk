@@ -18,7 +18,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.health.check()

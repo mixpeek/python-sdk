@@ -71,7 +71,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()
@@ -91,7 +91,7 @@ import os
 
 async def main():
     async with Mixpeek(
-        bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+        token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as mixpeek:
 
         res = await mixpeek.organizations.get_async()
@@ -110,17 +110,17 @@ asyncio.run(main())
 
 This SDK supports the following security scheme globally:
 
-| Name          | Type | Scheme      | Environment Variable  |
-| ------------- | ---- | ----------- | --------------------- |
-| `bearer_auth` | http | HTTP Bearer | `MIXPEEK_BEARER_AUTH` |
+| Name    | Type | Scheme      | Environment Variable |
+| ------- | ---- | ----------- | -------------------- |
+| `token` | http | HTTP Bearer | `MIXPEEK_TOKEN`      |
 
-To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
+To authenticate with the API the `token` parameter must be set when initializing the SDK client instance. For example:
 ```python
 from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()
@@ -228,7 +228,7 @@ from mixpeek.utils import BackoffStrategy, RetryConfig
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get(,
@@ -247,7 +247,7 @@ import os
 
 with Mixpeek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()
@@ -287,7 +287,7 @@ from mixpeek import Mixpeek, models
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
     res = None
     try:
@@ -321,7 +321,7 @@ import os
 
 with Mixpeek(
     server_url="https://api.mixpeek.com/",
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()

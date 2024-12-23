@@ -5,7 +5,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()
@@ -25,7 +25,7 @@ import os
 
 async def main():
     async with Mixpeek(
-        bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+        token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as mixpeek:
 
         res = await mixpeek.organizations.get_async()

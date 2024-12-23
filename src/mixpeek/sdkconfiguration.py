@@ -5,6 +5,7 @@ from .httpclient import AsyncHttpClient, HttpClient
 from .utils import Logger, RetryConfig, remove_suffix
 from dataclasses import dataclass
 from mixpeek import models
+from mixpeek.models import internal
 from mixpeek.types import OptionalNullable, UNSET
 from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
@@ -21,14 +22,15 @@ class SDKConfiguration:
     client: HttpClient
     async_client: AsyncHttpClient
     debug_logger: Logger
+    globals: internal.Globals
     security: Optional[Union[models.Security, Callable[[], models.Security]]] = None
     server_url: Optional[str] = ""
     server_idx: Optional[int] = 0
     language: str = "python"
     openapi_doc_version: str = "0.81"
-    sdk_version: str = "0.14.0"
+    sdk_version: str = "0.15.0"
     gen_version: str = "2.484.0"
-    user_agent: str = "speakeasy-sdk/python 0.14.0 2.484.0 0.81 mixpeek"
+    user_agent: str = "speakeasy-sdk/python 0.15.0 2.484.0 0.81 mixpeek"
     retry_config: OptionalNullable[RetryConfig] = Field(default_factory=lambda: UNSET)
     timeout_ms: Optional[int] = None
 
