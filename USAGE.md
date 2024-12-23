@@ -5,7 +5,7 @@ from mixpeek import Mixpeek
 
 with Mixpeek() as mixpeek:
 
-    res = mixpeek.debug_openapi_debug_openapi_get()
+    res = mixpeek.organizations.get()
 
     # Handle response
     print(res)
@@ -22,7 +22,7 @@ from mixpeek import Mixpeek
 async def main():
     async with Mixpeek() as mixpeek:
 
-        res = await mixpeek.debug_openapi_debug_openapi_get_async()
+        res = await mixpeek.organizations.get_async()
 
         # Handle response
         print(res)

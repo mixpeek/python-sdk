@@ -70,7 +70,7 @@ from mixpeek import Mixpeek
 
 with Mixpeek() as mixpeek:
 
-    res = mixpeek.debug_openapi_debug_openapi_get()
+    res = mixpeek.organizations.get()
 
     # Handle response
     print(res)
@@ -87,7 +87,7 @@ from mixpeek import Mixpeek
 async def main():
     async with Mixpeek() as mixpeek:
 
-        res = await mixpeek.debug_openapi_debug_openapi_get_async()
+        res = await mixpeek.organizations.get_async()
 
         # Handle response
         print(res)
@@ -146,9 +146,6 @@ asyncio.run(main())
 
 * [list](docs/sdks/interactions/README.md#list) - List Interactions
 
-### [Mixpeek SDK](docs/sdks/mixpeek/README.md)
-
-* [debug_openapi_debug_openapi_get](docs/sdks/mixpeek/README.md#debug_openapi_debug_openapi_get) - Debug Openapi
 
 ### [namespaces](docs/sdks/namespaces/README.md)
 
@@ -196,7 +193,7 @@ from mixpeek.utils import BackoffStrategy, RetryConfig
 
 with Mixpeek() as mixpeek:
 
-    res = mixpeek.debug_openapi_debug_openapi_get(,
+    res = mixpeek.organizations.get(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -213,7 +210,7 @@ with Mixpeek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
 ) as mixpeek:
 
-    res = mixpeek.debug_openapi_debug_openapi_get()
+    res = mixpeek.organizations.get()
 
     # Handle response
     print(res)
@@ -282,7 +279,7 @@ with Mixpeek(
     server_url="https://api.mixpeek.com/",
 ) as mixpeek:
 
-    res = mixpeek.debug_openapi_debug_openapi_get()
+    res = mixpeek.organizations.get()
 
     # Handle response
     print(res)
