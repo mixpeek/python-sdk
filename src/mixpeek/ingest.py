@@ -76,7 +76,7 @@ class Ingest(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/ingest/text",
             base_url=base_url,
@@ -211,7 +211,7 @@ class Ingest(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/ingest/text",
             base_url=base_url,
@@ -349,7 +349,7 @@ class Ingest(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/ingest/videos/url",
             base_url=base_url,
@@ -487,7 +487,7 @@ class Ingest(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/ingest/videos/url",
             base_url=base_url,
@@ -625,7 +625,7 @@ class Ingest(BaseSDK):
             ),
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="POST",
             path="/ingest/images/url",
             base_url=base_url,
@@ -763,7 +763,7 @@ class Ingest(BaseSDK):
             ),
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="POST",
             path="/ingest/images/url",
             base_url=base_url,

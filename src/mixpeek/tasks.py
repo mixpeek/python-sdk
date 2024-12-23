@@ -40,7 +40,7 @@ class Tasks(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="DELETE",
             path="/tasks/{task_id}",
             base_url=base_url,
@@ -132,7 +132,7 @@ class Tasks(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="DELETE",
             path="/tasks/{task_id}",
             base_url=base_url,
@@ -229,7 +229,7 @@ class Tasks(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request(
+        req = self._build_request(
             method="GET",
             path="/tasks/{task_id}",
             base_url=base_url,
@@ -326,7 +326,7 @@ class Tasks(BaseSDK):
             x_namespace=x_namespace,
         )
 
-        req = self.build_request_async(
+        req = self._build_request_async(
             method="GET",
             path="/tasks/{task_id}",
             base_url=base_url,
