@@ -4,6 +4,7 @@ from .basesdk import BaseSDK
 from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
+from mixpeek.utils import get_security_from_env
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -57,6 +58,7 @@ class Assets(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -72,7 +74,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_asset_assets__asset_id__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -154,6 +158,7 @@ class Assets(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -169,7 +174,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_asset_assets__asset_id__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -242,10 +249,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -261,7 +269,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_asset_assets__asset_id__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -334,10 +344,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -353,7 +364,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_asset_assets__asset_id__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -441,10 +454,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_asset_request,
                 False,
@@ -467,7 +481,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="full_asset_update_assets__asset_id__put",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -555,10 +571,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_asset_request,
                 False,
@@ -581,7 +598,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="full_asset_update_assets__asset_id__put",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -669,10 +688,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_asset_request,
                 False,
@@ -695,7 +715,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="partial_asset_update_assets__asset_id__patch",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -783,10 +805,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.update_asset_request,
                 False,
@@ -809,7 +832,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="partial_asset_update_assets__asset_id__patch",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -891,6 +916,7 @@ class Assets(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -906,7 +932,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_asset_with_features_assets__asset_id__features_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -988,6 +1016,7 @@ class Assets(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1003,7 +1032,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_asset_with_features_assets__asset_id__features_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1115,6 +1146,7 @@ class Assets(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.list_assets_request,
                 False,
@@ -1137,7 +1169,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="list_assets_assets_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1249,6 +1283,7 @@ class Assets(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.list_assets_request,
                 False,
@@ -1271,7 +1306,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="list_assets_assets_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1373,10 +1410,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.search_assets_request,
                 False,
@@ -1399,7 +1437,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="search_assets_assets_search_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1501,10 +1541,11 @@ class Assets(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.search_assets_request,
                 False,
@@ -1527,7 +1568,9 @@ class Assets(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="search_assets_assets_search_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],

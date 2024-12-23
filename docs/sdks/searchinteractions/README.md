@@ -18,8 +18,11 @@ Record a search interaction (view, click, feedback, etc.)
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.search_interactions.create(feature_id="prod_123", interaction_type=mixpeek.InteractionType.NEGATIVE_FEEDBACK, search_request=mixpeek.SearchRequestFeaturesInput(
         queries=[
@@ -108,8 +111,11 @@ Get a specific interaction
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.search_interactions.get_interaction(interaction_id="<id>")
 
@@ -146,8 +152,11 @@ Delete a specific interaction
 
 ```python
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.search_interactions.delete(interaction_id="<id>")
 

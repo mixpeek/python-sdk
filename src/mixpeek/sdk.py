@@ -6,7 +6,7 @@ from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 import httpx
-from mixpeek import utils
+from mixpeek import models, utils
 from mixpeek._hooks import SDKHooks
 from mixpeek.assets import Assets
 from mixpeek.collections import Collections
@@ -20,7 +20,7 @@ from mixpeek.organizations import Organizations
 from mixpeek.searchinteractions import SearchInteractions
 from mixpeek.tasks import Tasks
 from mixpeek.types import OptionalNullable, UNSET
-from typing import Dict, Optional
+from typing import Any, Callable, Dict, Optional, Union
 
 
 class Mixpeek(BaseSDK):
@@ -40,6 +40,7 @@ class Mixpeek(BaseSDK):
 
     def __init__(
         self,
+        bearer_auth: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -51,6 +52,7 @@ class Mixpeek(BaseSDK):
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
+        :param bearer_auth: The bearer_auth required for authentication
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -76,6 +78,12 @@ class Mixpeek(BaseSDK):
             type(async_client), AsyncHttpClient
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
+        security: Any = None
+        if callable(bearer_auth):
+            security = lambda: models.Security(bearer_auth=bearer_auth())  # pylint: disable=unnecessary-lambda-assignment
+        else:
+            security = models.Security(bearer_auth=bearer_auth)
+
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
@@ -85,6 +93,7 @@ class Mixpeek(BaseSDK):
             SDKConfiguration(
                 client=client,
                 async_client=async_client,
+                security=security,
                 server_url=server_url,
                 server_idx=server_idx,
                 retry_config=retry_config,

@@ -15,6 +15,7 @@ Mixpeek API: This is the Mixpeek API, providing access to various endpoints for 
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -67,8 +68,11 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 ```python
 # Synchronous Example
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.organizations.get()
 
@@ -83,9 +87,12 @@ The same SDK client can also be used to make asychronous requests by importing a
 # Asynchronous Example
 import asyncio
 from mixpeek import Mixpeek
+import os
 
 async def main():
-    async with Mixpeek() as mixpeek:
+    async with Mixpeek(
+        bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+    ) as mixpeek:
 
         res = await mixpeek.organizations.get_async()
 
@@ -95,6 +102,34 @@ async def main():
 asyncio.run(main())
 ```
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name          | Type | Scheme      | Environment Variable  |
+| ------------- | ---- | ----------- | --------------------- |
+| `bearer_auth` | http | HTTP Bearer | `MIXPEEK_BEARER_AUTH` |
+
+To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
+```python
+from mixpeek import Mixpeek
+import os
+
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
+
+    res = mixpeek.organizations.get()
+
+    # Handle response
+    print(res)
+
+```
+<!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -190,8 +225,11 @@ To change the default retry strategy for a single API call, simply provide a `Re
 ```python
 from mixpeek import Mixpeek
 from mixpeek.utils import BackoffStrategy, RetryConfig
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.organizations.get(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
@@ -205,9 +243,11 @@ If you'd like to override the default retry strategy for all operations that sup
 ```python
 from mixpeek import Mixpeek
 from mixpeek.utils import BackoffStrategy, RetryConfig
+import os
 
 with Mixpeek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()
@@ -244,8 +284,11 @@ When custom error responses are specified for an operation, the SDK may also rai
 
 ```python
 from mixpeek import Mixpeek, models
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
     res = None
     try:
 
@@ -274,9 +317,11 @@ with Mixpeek() as mixpeek:
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from mixpeek import Mixpeek
+import os
 
 with Mixpeek(
     server_url="https://api.mixpeek.com/",
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
 ) as mixpeek:
 
     res = mixpeek.organizations.get()

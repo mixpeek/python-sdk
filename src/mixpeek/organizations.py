@@ -5,6 +5,7 @@ from datetime import datetime
 from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
+from mixpeek.utils import get_security_from_env
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -39,10 +40,11 @@ class Organizations(BaseSDK):
             request=None,
             request_body_required=False,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -58,7 +60,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_organization_organizations_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -121,10 +125,11 @@ class Organizations(BaseSDK):
             request=None,
             request_body_required=False,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -140,7 +145,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_organization_organizations_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -203,10 +210,11 @@ class Organizations(BaseSDK):
             request=None,
             request_body_required=False,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -222,7 +230,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_usage_organizations_usage_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -285,10 +295,11 @@ class Organizations(BaseSDK):
             request=None,
             request_body_required=False,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -304,7 +315,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_usage_organizations_usage_get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -374,10 +387,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -393,7 +407,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_user_organizations_users__user_email__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -463,10 +479,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -482,7 +499,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_user_organizations_users__user_email__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -552,10 +571,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -571,7 +591,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_user_organizations_users__user_email__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -641,10 +663,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -660,7 +683,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_user_organizations_users__user_email__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -748,10 +773,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.UserModelInput
             ),
@@ -770,7 +796,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="add_user_organizations_users_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -858,10 +886,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.UserModelInput
             ),
@@ -880,7 +909,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="add_user_organizations_users_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -959,6 +990,7 @@ class Organizations(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -974,7 +1006,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="create_api_key_organizations_users__user_email__api_keys_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1053,6 +1087,7 @@ class Organizations(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1068,7 +1103,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="create_api_key_organizations_users__user_email__api_keys_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1145,10 +1182,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1164,7 +1202,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_api_key_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1241,10 +1281,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -1260,7 +1301,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_api_key_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1345,10 +1388,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.api_key_update, False, False, "json", models.APIKeyUpdate
             ),
@@ -1367,7 +1411,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="update_api_key_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1452,10 +1498,11 @@ class Organizations(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.api_key_update, False, False, "json", models.APIKeyUpdate
             ),
@@ -1474,7 +1521,9 @@ class Organizations(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="update_api_key_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],

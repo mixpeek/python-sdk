@@ -18,8 +18,11 @@ Ingest Text
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.ingest.text(collection="col_1234567890", metadata={}, feature_extractors={
         "embed": [
@@ -81,8 +84,11 @@ Ingest Video Url
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.ingest.video_from_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, percolate={}, feature_extractors=[
         mixpeek.VideoSettings(
@@ -157,8 +163,11 @@ Ingest Image Url
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.ingest.image_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, percolate={}, feature_extractors=mixpeek.ImageSettings(
         read={

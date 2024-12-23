@@ -4,6 +4,7 @@ from .basesdk import BaseSDK
 from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
+from mixpeek.utils import get_security_from_env
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -55,6 +56,7 @@ class Features(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -70,7 +72,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_feature_features__feature_id__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -150,6 +154,7 @@ class Features(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -165,7 +170,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="get_feature_features__feature_id__get",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -238,10 +245,11 @@ class Features(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -257,7 +265,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_feature_features__feature_id__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -330,10 +340,11 @@ class Features(BaseSDK):
             request=request,
             request_body_required=False,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
         )
 
@@ -349,7 +360,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="delete_feature_features__feature_id__delete",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -432,10 +445,11 @@ class Features(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.feature_update_request,
                 False,
@@ -458,7 +472,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="full_feature_update_features__feature_id__put",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -541,10 +557,11 @@ class Features(BaseSDK):
             request=request,
             request_body_required=True,
             request_has_path_params=True,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.feature_update_request,
                 False,
@@ -567,7 +584,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="full_feature_update_features__feature_id__put",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -676,6 +695,7 @@ class Features(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.list_features_request,
                 False,
@@ -698,7 +718,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="list_features_features_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -807,6 +829,7 @@ class Features(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.list_features_request,
                 False,
@@ -829,7 +852,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="list_features_features_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -963,6 +988,7 @@ class Features(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.search_request_features_input,
                 False,
@@ -985,7 +1011,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="search_features_features_search_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
@@ -1122,6 +1150,7 @@ class Features(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.search_request_features_input,
                 False,
@@ -1144,7 +1173,9 @@ class Features(BaseSDK):
             hook_ctx=HookContext(
                 operation_id="search_features_features_search_post",
                 oauth2_scopes=[],
-                security_source=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
             ),
             request=req,
             error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],

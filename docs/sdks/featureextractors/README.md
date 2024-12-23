@@ -16,8 +16,11 @@ Extract Embeddings
 ```python
 import mixpeek
 from mixpeek import Mixpeek
+import os
 
-with Mixpeek() as mixpeek:
+with Mixpeek(
+    bearer_auth=os.getenv("MIXPEEK_BEARER_AUTH", ""),
+) as mixpeek:
 
     res = mixpeek.feature_extractors.extract_embeddings(type_=mixpeek.InputType.TEXT, vector_index=mixpeek.VectorModel.IMAGE, value="https://example.com/image.jpg")
 
