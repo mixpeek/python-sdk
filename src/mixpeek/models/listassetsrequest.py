@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .groupbyoptionsasset import GroupByOptionsAsset, GroupByOptionsAssetTypedDict
-from .logicaloperator_input import LogicalOperatorInput, LogicalOperatorInputTypedDict
+from .logicaloperator import LogicalOperator, LogicalOperatorTypedDict
 from .sortoption import SortOption, SortOptionTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -13,7 +13,7 @@ from typing_extensions import NotRequired, TypedDict
 class ListAssetsRequestTypedDict(TypedDict):
     collections: List[str]
     r"""List of Collection IDs or Names to search within, required"""
-    filters: NotRequired[Nullable[LogicalOperatorInputTypedDict]]
+    filters: NotRequired[Nullable[LogicalOperatorTypedDict]]
     r"""Used for filtering across all indexes"""
     group_by: NotRequired[Nullable[GroupByOptionsAssetTypedDict]]
     r"""Grouping options for search results"""
@@ -29,7 +29,7 @@ class ListAssetsRequest(BaseModel):
     collections: List[str]
     r"""List of Collection IDs or Names to search within, required"""
 
-    filters: OptionalNullable[LogicalOperatorInput] = UNSET
+    filters: OptionalNullable[LogicalOperator] = UNSET
     r"""Used for filtering across all indexes"""
 
     group_by: OptionalNullable[GroupByOptionsAsset] = UNSET

@@ -177,10 +177,6 @@ with Mixpeek(
 * [video_from_url](docs/sdks/ingest/README.md#video_from_url) - Ingest Video Url
 * [image_url](docs/sdks/ingest/README.md#image_url) - Ingest Image Url
 
-### [interactions](docs/sdks/interactions/README.md)
-
-* [list](docs/sdks/interactions/README.md#list) - List Interactions
-
 
 ### [namespaces](docs/sdks/namespaces/README.md)
 
@@ -201,12 +197,6 @@ with Mixpeek(
 * [create_api_key](docs/sdks/organizations/README.md#create_api_key) - Create Api Key
 * [delete_api_key](docs/sdks/organizations/README.md#delete_api_key) - Delete Api Key
 * [update_api_key](docs/sdks/organizations/README.md#update_api_key) - Update Api Key
-
-### [search_interactions](docs/sdks/searchinteractions/README.md)
-
-* [create](docs/sdks/searchinteractions/README.md#create) - Create Interaction
-* [get_interaction](docs/sdks/searchinteractions/README.md#get_interaction) - Get Interaction
-* [delete](docs/sdks/searchinteractions/README.md#delete) - Delete Interaction
 
 ### [tasks](docs/sdks/tasks/README.md)
 

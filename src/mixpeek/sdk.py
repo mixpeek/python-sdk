@@ -14,11 +14,9 @@ from mixpeek.featureextractors import FeatureExtractors
 from mixpeek.features import Features
 from mixpeek.health import Health
 from mixpeek.ingest import Ingest
-from mixpeek.interactions import Interactions
 from mixpeek.models import internal
 from mixpeek.namespaces import Namespaces
 from mixpeek.organizations import Organizations
-from mixpeek.searchinteractions import SearchInteractions
 from mixpeek.tasks import Tasks
 from mixpeek.types import OptionalNullable, UNSET
 from typing import Any, Callable, Dict, Optional, Union
@@ -30,8 +28,6 @@ class Mixpeek(BaseSDK):
     organizations: Organizations
     namespaces: Namespaces
     features: Features
-    search_interactions: SearchInteractions
-    interactions: Interactions
     feature_extractors: FeatureExtractors
     ingest: Ingest
     assets: Assets
@@ -130,8 +126,6 @@ class Mixpeek(BaseSDK):
         self.organizations = Organizations(self.sdk_configuration)
         self.namespaces = Namespaces(self.sdk_configuration)
         self.features = Features(self.sdk_configuration)
-        self.search_interactions = SearchInteractions(self.sdk_configuration)
-        self.interactions = Interactions(self.sdk_configuration)
         self.feature_extractors = FeatureExtractors(self.sdk_configuration)
         self.ingest = Ingest(self.sdk_configuration)
         self.assets = Assets(self.sdk_configuration)

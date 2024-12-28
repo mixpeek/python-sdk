@@ -9,7 +9,7 @@ from typing import List, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class LogicalOperatorInputTypedDict(TypedDict):
+class LogicalOperatorTypedDict(TypedDict):
     case_sensitive: NotRequired[Nullable[bool]]
     r"""Whether to perform case-sensitive matching"""
     and_: NotRequired[Nullable[List[AndTypedDict]]]
@@ -20,7 +20,7 @@ class LogicalOperatorInputTypedDict(TypedDict):
     r"""Logical NOR operation"""
 
 
-class LogicalOperatorInput(BaseModel):
+class LogicalOperator(BaseModel):
     case_sensitive: OptionalNullable[bool] = UNSET
     r"""Whether to perform case-sensitive matching"""
 
@@ -65,24 +65,24 @@ class LogicalOperatorInput(BaseModel):
 
 
 AndTypedDict = TypeAliasType(
-    "AndTypedDict", Union[FilterConditionTypedDict, LogicalOperatorInputTypedDict]
+    "AndTypedDict", Union[FilterConditionTypedDict, LogicalOperatorTypedDict]
 )
 
 
-And = TypeAliasType("And", Union[FilterCondition, LogicalOperatorInput])
+And = TypeAliasType("And", Union[FilterCondition, LogicalOperator])
 
 
 OrTypedDict = TypeAliasType(
-    "OrTypedDict", Union[FilterConditionTypedDict, LogicalOperatorInputTypedDict]
+    "OrTypedDict", Union[FilterConditionTypedDict, LogicalOperatorTypedDict]
 )
 
 
-Or = TypeAliasType("Or", Union[FilterCondition, LogicalOperatorInput])
+Or = TypeAliasType("Or", Union[FilterCondition, LogicalOperator])
 
 
 NorTypedDict = TypeAliasType(
-    "NorTypedDict", Union[FilterConditionTypedDict, LogicalOperatorInputTypedDict]
+    "NorTypedDict", Union[FilterConditionTypedDict, LogicalOperatorTypedDict]
 )
 
 
-Nor = TypeAliasType("Nor", Union[FilterCondition, LogicalOperatorInput])
+Nor = TypeAliasType("Nor", Union[FilterCondition, LogicalOperator])

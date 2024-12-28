@@ -83,7 +83,7 @@ with Mixpeek(
 
 ### Response
 
-**[models.TasksModelTaskResponse](../../models/tasksmodeltaskresponse.md)**
+**[models.TaskResponse](../../models/taskresponse.md)**
 
 ### Errors
 

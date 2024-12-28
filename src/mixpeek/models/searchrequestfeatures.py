@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 from .groupbyoptions import GroupByOptions, GroupByOptionsTypedDict
-from .logicaloperator_output import (
-    LogicalOperatorOutput,
-    LogicalOperatorOutputTypedDict,
-)
+from .logicaloperator import LogicalOperator, LogicalOperatorTypedDict
 from .rerankingoptions import RerankingOptions, RerankingOptionsTypedDict
-from .searchquery_output import SearchQueryOutput, SearchQueryOutputTypedDict
+from .search_model_searchquery import (
+    SearchModelSearchQuery,
+    SearchModelSearchQueryTypedDict,
+)
 from .sortoption import SortOption, SortOptionTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -15,8 +15,8 @@ from typing import List
 from typing_extensions import NotRequired, TypedDict
 
 
-class SearchRequestFeaturesOutputTypedDict(TypedDict):
-    queries: List[SearchQueryOutputTypedDict]
+class SearchRequestFeaturesTypedDict(TypedDict):
+    queries: List[SearchModelSearchQueryTypedDict]
     r"""List of search queries to perform.
 
     Behavior:
@@ -40,7 +40,7 @@ class SearchRequestFeaturesOutputTypedDict(TypedDict):
     """
     collections: List[str]
     r"""List of Collection names to search within, required"""
-    filters: NotRequired[Nullable[LogicalOperatorOutputTypedDict]]
+    filters: NotRequired[Nullable[LogicalOperatorTypedDict]]
     r"""Used for filtering across all indexes"""
     group_by: NotRequired[Nullable[GroupByOptionsTypedDict]]
     r"""Grouping options for search results"""
@@ -56,8 +56,8 @@ class SearchRequestFeaturesOutputTypedDict(TypedDict):
     r"""Return the presigned URL for the asset and preview asset, this will introduce additional latency"""
 
 
-class SearchRequestFeaturesOutput(BaseModel):
-    queries: List[SearchQueryOutput]
+class SearchRequestFeatures(BaseModel):
+    queries: List[SearchModelSearchQuery]
     r"""List of search queries to perform.
 
     Behavior:
@@ -83,7 +83,7 @@ class SearchRequestFeaturesOutput(BaseModel):
     collections: List[str]
     r"""List of Collection names to search within, required"""
 
-    filters: OptionalNullable[LogicalOperatorOutput] = UNSET
+    filters: OptionalNullable[LogicalOperator] = UNSET
     r"""Used for filtering across all indexes"""
 
     group_by: OptionalNullable[GroupByOptions] = UNSET

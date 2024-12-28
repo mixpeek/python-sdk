@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .availablemodels import AvailableModels
-from .logicaloperator_input import LogicalOperatorInput, LogicalOperatorInputTypedDict
+from .logicaloperator import LogicalOperator, LogicalOperatorTypedDict
 from .querysettings import QuerySettings, QuerySettingsTypedDict
 from enum import Enum
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
@@ -18,20 +18,20 @@ class Type(str, Enum):
     BASE64 = "base64"
 
 
-class SearchModelSearchQueryInputTypedDict(TypedDict):
-    vector_index: AvailableModels
+class SearchModelSearchQueryTypedDict(TypedDict):
+    embedding_model: AvailableModels
     value: str
     r"""Query value - can be text, URL, or base64 encoded image"""
     type: Type
     r"""Type of input (text, url, or base64)"""
-    filters: NotRequired[Nullable[LogicalOperatorInputTypedDict]]
+    filters: NotRequired[Nullable[LogicalOperatorTypedDict]]
     r"""Optional filters for the query, this is used for filtering individual vector indexes"""
     settings: NotRequired[Nullable[QuerySettingsTypedDict]]
     r"""Optional settings for this specific query"""
 
 
-class SearchModelSearchQueryInput(BaseModel):
-    vector_index: AvailableModels
+class SearchModelSearchQuery(BaseModel):
+    embedding_model: AvailableModels
 
     value: str
     r"""Query value - can be text, URL, or base64 encoded image"""
@@ -39,7 +39,7 @@ class SearchModelSearchQueryInput(BaseModel):
     type: Type
     r"""Type of input (text, url, or base64)"""
 
-    filters: OptionalNullable[LogicalOperatorInput] = UNSET
+    filters: OptionalNullable[LogicalOperator] = UNSET
     r"""Optional filters for the query, this is used for filtering individual vector indexes"""
 
     settings: OptionalNullable[QuerySettings] = UNSET

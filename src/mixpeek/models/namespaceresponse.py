@@ -10,7 +10,7 @@ from typing_extensions import TypedDict
 class NamespaceResponseTypedDict(TypedDict):
     namespace_id: str
     namespace_name: str
-    vector_indexes: List[str]
+    embedding_models: List[str]
     payload_indexes: Nullable[List[Any]]
 
 
@@ -19,7 +19,7 @@ class NamespaceResponse(BaseModel):
 
     namespace_name: str
 
-    vector_indexes: List[str]
+    embedding_models: List[str]
 
     payload_indexes: Nullable[List[Any]]
 

@@ -208,7 +208,7 @@ class Tasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TasksModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Get Task Information
 
         Retrieve a task by its ID.
@@ -275,7 +275,7 @@ class Tasks(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.TasksModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -308,7 +308,7 @@ class Tasks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TasksModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Get Task Information
 
         Retrieve a task by its ID.
@@ -375,7 +375,7 @@ class Tasks(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.TasksModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):

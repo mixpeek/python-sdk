@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .assetupdate import AssetUpdate, AssetUpdateTypedDict
-from .percolaterequest import PercolateRequest, PercolateRequestTypedDict
 from .videosettings import VideoSettings, VideoSettingsTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -27,8 +26,6 @@ class ProcessVideoURLInputTypedDict(TypedDict):
     r"""Controls how processing results are stored - either creating a new asset or updating an existing one."""
     metadata: NotRequired[ProcessVideoURLInputMetadataTypedDict]
     r"""Additional metadata associated with the asset. Can include any key-value pairs relevant to the asset."""
-    percolate: NotRequired[Nullable[PercolateRequestTypedDict]]
-    r"""Settings for percolating the asset against stored queries."""
     skip_duplicate: NotRequired[Nullable[bool]]
     r"""Makes feature extraction idempotent. When True and a duplicate file hash is found, copies features from the existing asset instead of reprocessing. This allows the same file to be used multiple times with different metadata while avoiding redundant processing."""
     feature_extractors: NotRequired[Nullable[List[VideoSettingsTypedDict]]]
@@ -48,9 +45,6 @@ class ProcessVideoURLInput(BaseModel):
     metadata: Optional[ProcessVideoURLInputMetadata] = None
     r"""Additional metadata associated with the asset. Can include any key-value pairs relevant to the asset."""
 
-    percolate: OptionalNullable[PercolateRequest] = UNSET
-    r"""Settings for percolating the asset against stored queries."""
-
     skip_duplicate: OptionalNullable[bool] = UNSET
     r"""Makes feature extraction idempotent. When True and a duplicate file hash is found, copies features from the existing asset instead of reprocessing. This allows the same file to be used multiple times with different metadata while avoiding redundant processing."""
 
@@ -62,16 +56,10 @@ class ProcessVideoURLInput(BaseModel):
         optional_fields = [
             "asset_update",
             "metadata",
-            "percolate",
             "skip_duplicate",
             "feature_extractors",
         ]
-        nullable_fields = [
-            "asset_update",
-            "percolate",
-            "skip_duplicate",
-            "feature_extractors",
-        ]
+        nullable_fields = ["asset_update", "skip_duplicate", "feature_extractors"]
         null_default_fields = []
 
         serialized = handler(self)

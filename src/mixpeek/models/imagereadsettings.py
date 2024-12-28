@@ -23,8 +23,8 @@ class ImageReadSettingsTypedDict(TypedDict):
     r"""Prompt for reading on-screen text"""
     json_output: NotRequired[ImageReadSettingsJSONOutputTypedDict]
     r"""JSON format for the response"""
-    vector_index: NotRequired[Nullable[VectorModel]]
-    r"""Name of the vector model to use for embedding the text output. If vector_index is duplicated, the vector will be overwritten."""
+    embedding_model: NotRequired[Nullable[VectorModel]]
+    r"""Name of the vector model to use for embedding the text output. If embedding_model is duplicated, the vector will be overwritten."""
 
 
 class ImageReadSettings(BaseModel):
@@ -37,13 +37,13 @@ class ImageReadSettings(BaseModel):
     json_output: Optional[ImageReadSettingsJSONOutput] = None
     r"""JSON format for the response"""
 
-    vector_index: OptionalNullable[VectorModel] = UNSET
-    r"""Name of the vector model to use for embedding the text output. If vector_index is duplicated, the vector will be overwritten."""
+    embedding_model: OptionalNullable[VectorModel] = UNSET
+    r"""Name of the vector model to use for embedding the text output. If embedding_model is duplicated, the vector will be overwritten."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["enabled", "prompt", "json_output", "vector_index"]
-        nullable_fields = ["prompt", "vector_index"]
+        optional_fields = ["enabled", "prompt", "json_output", "embedding_model"]
+        nullable_fields = ["prompt", "embedding_model"]
         null_default_fields = []
 
         serialized = handler(self)

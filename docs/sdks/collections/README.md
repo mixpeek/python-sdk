@@ -126,7 +126,7 @@ with Mixpeek(
 
 ### Response
 
-**[Any](../../models/.md)**
+**[models.TaskResponse](../../models/taskresponse.md)**
 
 ### Errors
 

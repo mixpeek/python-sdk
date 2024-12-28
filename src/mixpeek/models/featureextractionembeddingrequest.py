@@ -10,7 +10,7 @@ from typing_extensions import NotRequired, TypedDict
 
 class FeatureExtractionEmbeddingRequestTypedDict(TypedDict):
     type: InputType
-    vector_index: VectorModel
+    embedding_model: VectorModel
     value: NotRequired[Nullable[str]]
     r"""The input content to embed. Could be a URL, text content, file path, or base64 encoded string"""
 
@@ -18,7 +18,7 @@ class FeatureExtractionEmbeddingRequestTypedDict(TypedDict):
 class FeatureExtractionEmbeddingRequest(BaseModel):
     type: InputType
 
-    vector_index: VectorModel
+    embedding_model: VectorModel
 
     value: OptionalNullable[str] = UNSET
     r"""The input content to embed. Could be a URL, text content, file path, or base64 encoded string"""

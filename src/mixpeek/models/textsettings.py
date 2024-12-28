@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .embeddingrequest import EmbeddingRequest, EmbeddingRequestTypedDict
+from .entitysettings import EntitySettings, EntitySettingsTypedDict
 from .jsontextoutputsettings import (
     JSONTextOutputSettings,
     JSONTextOutputSettingsTypedDict,
@@ -15,25 +16,30 @@ from typing_extensions import NotRequired, TypedDict
 class TextSettingsTypedDict(TypedDict):
     embed: NotRequired[List[EmbeddingRequestTypedDict]]
     r"""List of embedding settings for generating multiple embeddings. field_name's provided are how the raw text will be inserted, if not provided, the field_name will be auto-generated.
-    Default: [{type: 'text', vector_index: 'multimodal'}] if none provided.
+    Default: [{type: 'text', embedding_model: 'multimodal'}] if none provided.
     """
     json_output: NotRequired[Nullable[JSONTextOutputSettingsTypedDict]]
     r"""Settings for structured JSON output of text analysis."""
+    entities: NotRequired[Nullable[EntitySettingsTypedDict]]
+    r"""Settings for extracting entities from text content"""
 
 
 class TextSettings(BaseModel):
     embed: Optional[List[EmbeddingRequest]] = None
     r"""List of embedding settings for generating multiple embeddings. field_name's provided are how the raw text will be inserted, if not provided, the field_name will be auto-generated.
-    Default: [{type: 'text', vector_index: 'multimodal'}] if none provided.
+    Default: [{type: 'text', embedding_model: 'multimodal'}] if none provided.
     """
 
     json_output: OptionalNullable[JSONTextOutputSettings] = UNSET
     r"""Settings for structured JSON output of text analysis."""
 
+    entities: OptionalNullable[EntitySettings] = UNSET
+    r"""Settings for extracting entities from text content"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["embed", "json_output"]
-        nullable_fields = ["json_output"]
+        optional_fields = ["embed", "json_output", "entities"]
+        nullable_fields = ["json_output", "entities"]
         null_default_fields = []
 
         serialized = handler(self)

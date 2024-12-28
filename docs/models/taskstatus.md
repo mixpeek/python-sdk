@@ -14,3 +14,4 @@
 | `INITIALIZING` | INITIALIZING   |
 | `UPLOADING`    | UPLOADING      |
 | `QUEUED`       | QUEUED         |
+| `PENDING`      | PENDING        |

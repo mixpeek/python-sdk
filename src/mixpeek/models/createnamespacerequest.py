@@ -13,8 +13,8 @@ class CreateNamespaceRequestTypedDict(TypedDict):
 
     namespace_name: str
     r"""Name of the namespace to create"""
-    vector_indexes: List[str]
-    r"""List of vector indexes to be used within this namespace. Must be one of: 'image', 'multimodal', 'text', 'keyword'"""
+    embedding_models: List[str]
+    r"""List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'"""
     payload_indexes: NotRequired[Nullable[List[PayloadIndexConfigTypedDict]]]
     r"""List of payload index configurations"""
 
@@ -25,8 +25,8 @@ class CreateNamespaceRequest(BaseModel):
     namespace_name: str
     r"""Name of the namespace to create"""
 
-    vector_indexes: List[str]
-    r"""List of vector indexes to be used within this namespace. Must be one of: 'image', 'multimodal', 'text', 'keyword'"""
+    embedding_models: List[str]
+    r"""List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'"""
 
     payload_indexes: OptionalNullable[List[PayloadIndexConfig]] = UNSET
     r"""List of payload index configurations"""

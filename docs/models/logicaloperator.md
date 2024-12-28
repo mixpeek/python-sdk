@@ -1,4 +1,4 @@
-# LogicalOperatorInput
+# LogicalOperator
 
 
 ## Fields

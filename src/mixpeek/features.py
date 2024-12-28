@@ -627,7 +627,7 @@ class Features(BaseSDK):
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         sort: OptionalNullable[
             Union[models.SortOption, models.SortOptionTypedDict]
@@ -673,7 +673,7 @@ class Features(BaseSDK):
             list_features_request=models.ListFeaturesRequest(
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 sort=utils.get_pydantic_model(
                     sort, OptionalNullable[models.SortOption]
@@ -761,7 +761,7 @@ class Features(BaseSDK):
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         sort: OptionalNullable[
             Union[models.SortOption, models.SortOptionTypedDict]
@@ -807,7 +807,7 @@ class Features(BaseSDK):
             list_features_request=models.ListFeaturesRequest(
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 sort=utils.get_pydantic_model(
                     sort, OptionalNullable[models.SortOption]
@@ -891,15 +891,15 @@ class Features(BaseSDK):
         self,
         *,
         queries: Union[
-            List[models.SearchModelSearchQueryInput],
-            List[models.SearchModelSearchQueryInputTypedDict],
+            List[models.SearchModelSearchQuery],
+            List[models.SearchModelSearchQueryTypedDict],
         ],
         collections: List[str],
         offset_position: OptionalNullable[int] = UNSET,
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         group_by: OptionalNullable[
             Union[models.GroupByOptions, models.GroupByOptionsTypedDict]
@@ -953,13 +953,13 @@ class Features(BaseSDK):
             offset_position=offset_position,
             page_size=page_size,
             x_namespace=x_namespace,
-            search_request_features_input=models.SearchRequestFeaturesInput(
+            search_request_features=models.SearchRequestFeatures(
                 queries=utils.get_pydantic_model(
-                    queries, List[models.SearchModelSearchQueryInput]
+                    queries, List[models.SearchModelSearchQuery]
                 ),
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 group_by=utils.get_pydantic_model(
                     group_by, OptionalNullable[models.GroupByOptions]
@@ -990,11 +990,11 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.search_request_features_input,
+                request.search_request_features,
                 False,
                 False,
                 "json",
-                models.SearchRequestFeaturesInput,
+                models.SearchRequestFeatures,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1053,15 +1053,15 @@ class Features(BaseSDK):
         self,
         *,
         queries: Union[
-            List[models.SearchModelSearchQueryInput],
-            List[models.SearchModelSearchQueryInputTypedDict],
+            List[models.SearchModelSearchQuery],
+            List[models.SearchModelSearchQueryTypedDict],
         ],
         collections: List[str],
         offset_position: OptionalNullable[int] = UNSET,
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         group_by: OptionalNullable[
             Union[models.GroupByOptions, models.GroupByOptionsTypedDict]
@@ -1115,13 +1115,13 @@ class Features(BaseSDK):
             offset_position=offset_position,
             page_size=page_size,
             x_namespace=x_namespace,
-            search_request_features_input=models.SearchRequestFeaturesInput(
+            search_request_features=models.SearchRequestFeatures(
                 queries=utils.get_pydantic_model(
-                    queries, List[models.SearchModelSearchQueryInput]
+                    queries, List[models.SearchModelSearchQuery]
                 ),
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 group_by=utils.get_pydantic_model(
                     group_by, OptionalNullable[models.GroupByOptions]
@@ -1152,11 +1152,11 @@ class Features(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.search_request_features_input,
+                request.search_request_features,
                 False,
                 False,
                 "json",
-                models.SearchRequestFeaturesInput,
+                models.SearchRequestFeatures,
             ),
             timeout_ms=timeout_ms,
         )

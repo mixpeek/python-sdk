@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .embeddingrequest import EmbeddingRequest, EmbeddingRequestTypedDict
+from .entitysettings import EntitySettings, EntitySettingsTypedDict
 from .jsonvideooutputsettings import (
     JSONVideoOutputSettings,
     JSONVideoOutputSettingsTypedDict,
@@ -26,7 +27,7 @@ class VideoSettingsTypedDict(TypedDict):
     r"""Settings for reading and analyzing video content."""
     embed: NotRequired[List[EmbeddingRequestTypedDict]]
     r"""List of embedding settings for generating multiple embeddings. For now, if url is provided, value must be None.
-    Default: [{type: 'url', vector_index: 'multimodal'}] if none provided.
+    Default: [{type: 'url', embedding_model: 'multimodal'}] if none provided.
     """
     transcribe: NotRequired[Nullable[VideoTranscriptionSettingsTypedDict]]
     r"""Settings for transcribing video audio."""
@@ -36,6 +37,8 @@ class VideoSettingsTypedDict(TypedDict):
     r"""Settings for object detection in video frames."""
     json_output: NotRequired[Nullable[JSONVideoOutputSettingsTypedDict]]
     r"""Settings for structured JSON output of video analysis."""
+    entities: NotRequired[Nullable[EntitySettingsTypedDict]]
+    r"""Settings for extracting entities from video content"""
 
 
 class VideoSettings(BaseModel):
@@ -47,7 +50,7 @@ class VideoSettings(BaseModel):
 
     embed: Optional[List[EmbeddingRequest]] = None
     r"""List of embedding settings for generating multiple embeddings. For now, if url is provided, value must be None.
-    Default: [{type: 'url', vector_index: 'multimodal'}] if none provided.
+    Default: [{type: 'url', embedding_model: 'multimodal'}] if none provided.
     """
 
     transcribe: OptionalNullable[VideoTranscriptionSettings] = UNSET
@@ -62,6 +65,9 @@ class VideoSettings(BaseModel):
     json_output: OptionalNullable[JSONVideoOutputSettings] = UNSET
     r"""Settings for structured JSON output of video analysis."""
 
+    entities: OptionalNullable[EntitySettings] = UNSET
+    r"""Settings for extracting entities from video content"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
@@ -72,8 +78,16 @@ class VideoSettings(BaseModel):
             "describe",
             "detect",
             "json_output",
+            "entities",
         ]
-        nullable_fields = ["read", "transcribe", "describe", "detect", "json_output"]
+        nullable_fields = [
+            "read",
+            "transcribe",
+            "describe",
+            "detect",
+            "json_output",
+            "entities",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

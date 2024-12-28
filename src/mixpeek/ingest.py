@@ -26,15 +26,12 @@ class Ingest(BaseSDK):
         feature_extractors: OptionalNullable[
             Union[models.TextSettings, models.TextSettingsTypedDict]
         ] = UNSET,
-        percolate: OptionalNullable[
-            Union[models.PercolateRequest, models.PercolateRequestTypedDict]
-        ] = UNSET,
         skip_duplicate: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DbModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Ingest Text
 
         :param collection: Unique identifier for the collection where the processed asset will be stored, can be the collection name or collection ID. If neither exist, the collection will be created.
@@ -42,7 +39,6 @@ class Ingest(BaseSDK):
         :param asset_update: Controls how processing results are stored - either creating a new asset or updating an existing one.
         :param metadata: Additional metadata associated with the file. Can include any key-value pairs relevant to the file.
         :param feature_extractors: Settings for text processing.
-        :param percolate: Settings for percolating the asset against stored queries.
         :param skip_duplicate: Skips processing when a duplicate hash is found and stores an error by the task_id with the existing asset_id
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -69,9 +65,6 @@ class Ingest(BaseSDK):
                 ),
                 feature_extractors=utils.get_pydantic_model(
                     feature_extractors, OptionalNullable[models.TextSettings]
-                ),
-                percolate=utils.get_pydantic_model(
-                    percolate, OptionalNullable[models.PercolateRequest]
                 ),
                 skip_duplicate=skip_duplicate,
             ),
@@ -123,7 +116,7 @@ class Ingest(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DbModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -164,15 +157,12 @@ class Ingest(BaseSDK):
         feature_extractors: OptionalNullable[
             Union[models.TextSettings, models.TextSettingsTypedDict]
         ] = UNSET,
-        percolate: OptionalNullable[
-            Union[models.PercolateRequest, models.PercolateRequestTypedDict]
-        ] = UNSET,
         skip_duplicate: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DbModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Ingest Text
 
         :param collection: Unique identifier for the collection where the processed asset will be stored, can be the collection name or collection ID. If neither exist, the collection will be created.
@@ -180,7 +170,6 @@ class Ingest(BaseSDK):
         :param asset_update: Controls how processing results are stored - either creating a new asset or updating an existing one.
         :param metadata: Additional metadata associated with the file. Can include any key-value pairs relevant to the file.
         :param feature_extractors: Settings for text processing.
-        :param percolate: Settings for percolating the asset against stored queries.
         :param skip_duplicate: Skips processing when a duplicate hash is found and stores an error by the task_id with the existing asset_id
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -207,9 +196,6 @@ class Ingest(BaseSDK):
                 ),
                 feature_extractors=utils.get_pydantic_model(
                     feature_extractors, OptionalNullable[models.TextSettings]
-                ),
-                percolate=utils.get_pydantic_model(
-                    percolate, OptionalNullable[models.PercolateRequest]
                 ),
                 skip_duplicate=skip_duplicate,
             ),
@@ -261,7 +247,7 @@ class Ingest(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DbModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -300,9 +286,6 @@ class Ingest(BaseSDK):
                 models.ProcessVideoURLInputMetadataTypedDict,
             ]
         ] = None,
-        percolate: OptionalNullable[
-            Union[models.PercolateRequest, models.PercolateRequestTypedDict]
-        ] = UNSET,
         skip_duplicate: OptionalNullable[bool] = UNSET,
         feature_extractors: OptionalNullable[
             Union[List[models.VideoSettings], List[models.VideoSettingsTypedDict]]
@@ -311,7 +294,7 @@ class Ingest(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DbModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Ingest Video Url
 
         :param url: The URL of the asset to be processed. Must be a valid HTTP or HTTPS URL.
@@ -319,7 +302,6 @@ class Ingest(BaseSDK):
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param asset_update: Controls how processing results are stored - either creating a new asset or updating an existing one.
         :param metadata: Additional metadata associated with the asset. Can include any key-value pairs relevant to the asset.
-        :param percolate: Settings for percolating the asset against stored queries.
         :param skip_duplicate: Makes feature extraction idempotent. When True and a duplicate file hash is found, copies features from the existing asset instead of reprocessing. This allows the same file to be used multiple times with different metadata while avoiding redundant processing.
         :param feature_extractors: Settings for video processing. Only applicable if the URL points to a video file.
         :param retries: Override the default retry configuration for this method
@@ -345,9 +327,6 @@ class Ingest(BaseSDK):
                 ),
                 metadata=utils.get_pydantic_model(
                     metadata, Optional[models.ProcessVideoURLInputMetadata]
-                ),
-                percolate=utils.get_pydantic_model(
-                    percolate, OptionalNullable[models.PercolateRequest]
                 ),
                 skip_duplicate=skip_duplicate,
                 feature_extractors=utils.get_pydantic_model(
@@ -402,7 +381,7 @@ class Ingest(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DbModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -441,9 +420,6 @@ class Ingest(BaseSDK):
                 models.ProcessVideoURLInputMetadataTypedDict,
             ]
         ] = None,
-        percolate: OptionalNullable[
-            Union[models.PercolateRequest, models.PercolateRequestTypedDict]
-        ] = UNSET,
         skip_duplicate: OptionalNullable[bool] = UNSET,
         feature_extractors: OptionalNullable[
             Union[List[models.VideoSettings], List[models.VideoSettingsTypedDict]]
@@ -452,7 +428,7 @@ class Ingest(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DbModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Ingest Video Url
 
         :param url: The URL of the asset to be processed. Must be a valid HTTP or HTTPS URL.
@@ -460,7 +436,6 @@ class Ingest(BaseSDK):
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param asset_update: Controls how processing results are stored - either creating a new asset or updating an existing one.
         :param metadata: Additional metadata associated with the asset. Can include any key-value pairs relevant to the asset.
-        :param percolate: Settings for percolating the asset against stored queries.
         :param skip_duplicate: Makes feature extraction idempotent. When True and a duplicate file hash is found, copies features from the existing asset instead of reprocessing. This allows the same file to be used multiple times with different metadata while avoiding redundant processing.
         :param feature_extractors: Settings for video processing. Only applicable if the URL points to a video file.
         :param retries: Override the default retry configuration for this method
@@ -486,9 +461,6 @@ class Ingest(BaseSDK):
                 ),
                 metadata=utils.get_pydantic_model(
                     metadata, Optional[models.ProcessVideoURLInputMetadata]
-                ),
-                percolate=utils.get_pydantic_model(
-                    percolate, OptionalNullable[models.PercolateRequest]
                 ),
                 skip_duplicate=skip_duplicate,
                 feature_extractors=utils.get_pydantic_model(
@@ -543,7 +515,7 @@ class Ingest(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DbModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -582,9 +554,6 @@ class Ingest(BaseSDK):
                 models.ProcessImageURLInputMetadataTypedDict,
             ]
         ] = None,
-        percolate: OptionalNullable[
-            Union[models.PercolateRequest, models.PercolateRequestTypedDict]
-        ] = UNSET,
         skip_duplicate: OptionalNullable[bool] = UNSET,
         feature_extractors: OptionalNullable[
             Union[models.ImageSettings, models.ImageSettingsTypedDict]
@@ -593,7 +562,7 @@ class Ingest(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DbModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Ingest Image Url
 
         :param url: The URL of the asset to be processed. Must be a valid HTTP or HTTPS URL.
@@ -601,7 +570,6 @@ class Ingest(BaseSDK):
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param asset_update: Controls how processing results are stored - either creating a new asset or updating an existing one.
         :param metadata: Additional metadata associated with the asset. Can include any key-value pairs relevant to the asset.
-        :param percolate: Settings for percolating the asset against stored queries.
         :param skip_duplicate: Makes feature extraction idempotent. When True and a duplicate file hash is found, copies features from the existing asset instead of reprocessing. This allows the same file to be used multiple times with different metadata while avoiding redundant processing.
         :param feature_extractors: Settings for image processing. Only applicable if the URL points to an image file.
         :param retries: Override the default retry configuration for this method
@@ -627,9 +595,6 @@ class Ingest(BaseSDK):
                 ),
                 metadata=utils.get_pydantic_model(
                     metadata, Optional[models.ProcessImageURLInputMetadata]
-                ),
-                percolate=utils.get_pydantic_model(
-                    percolate, OptionalNullable[models.PercolateRequest]
                 ),
                 skip_duplicate=skip_duplicate,
                 feature_extractors=utils.get_pydantic_model(
@@ -684,7 +649,7 @@ class Ingest(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DbModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -723,9 +688,6 @@ class Ingest(BaseSDK):
                 models.ProcessImageURLInputMetadataTypedDict,
             ]
         ] = None,
-        percolate: OptionalNullable[
-            Union[models.PercolateRequest, models.PercolateRequestTypedDict]
-        ] = UNSET,
         skip_duplicate: OptionalNullable[bool] = UNSET,
         feature_extractors: OptionalNullable[
             Union[models.ImageSettings, models.ImageSettingsTypedDict]
@@ -734,7 +696,7 @@ class Ingest(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DbModelTaskResponse:
+    ) -> models.TaskResponse:
         r"""Ingest Image Url
 
         :param url: The URL of the asset to be processed. Must be a valid HTTP or HTTPS URL.
@@ -742,7 +704,6 @@ class Ingest(BaseSDK):
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param asset_update: Controls how processing results are stored - either creating a new asset or updating an existing one.
         :param metadata: Additional metadata associated with the asset. Can include any key-value pairs relevant to the asset.
-        :param percolate: Settings for percolating the asset against stored queries.
         :param skip_duplicate: Makes feature extraction idempotent. When True and a duplicate file hash is found, copies features from the existing asset instead of reprocessing. This allows the same file to be used multiple times with different metadata while avoiding redundant processing.
         :param feature_extractors: Settings for image processing. Only applicable if the URL points to an image file.
         :param retries: Override the default retry configuration for this method
@@ -768,9 +729,6 @@ class Ingest(BaseSDK):
                 ),
                 metadata=utils.get_pydantic_model(
                     metadata, Optional[models.ProcessImageURLInputMetadata]
-                ),
-                percolate=utils.get_pydantic_model(
-                    percolate, OptionalNullable[models.PercolateRequest]
                 ),
                 skip_duplicate=skip_duplicate,
                 feature_extractors=utils.get_pydantic_model(
@@ -825,7 +783,7 @@ class Ingest(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.DbModelTaskResponse)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):

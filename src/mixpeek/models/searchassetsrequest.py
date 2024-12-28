@@ -5,7 +5,7 @@ from .assets_model_searchquery import (
     AssetsModelSearchQuery,
     AssetsModelSearchQueryTypedDict,
 )
-from .logicaloperator_input import LogicalOperatorInput, LogicalOperatorInputTypedDict
+from .logicaloperator import LogicalOperator, LogicalOperatorTypedDict
 from .sortoption import SortOption, SortOptionTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -18,7 +18,7 @@ class SearchAssetsRequestTypedDict(TypedDict):
     r"""List of Collection IDs or Names to search within, required"""
     query: NotRequired[Nullable[AssetsModelSearchQueryTypedDict]]
     r"""Structured query object specifying which fields to search in and what to search for"""
-    filters: NotRequired[Nullable[LogicalOperatorInputTypedDict]]
+    filters: NotRequired[Nullable[LogicalOperatorTypedDict]]
     r"""Complex nested query filters"""
     sort: NotRequired[Nullable[SortOptionTypedDict]]
     r"""List of fields to sort by"""
@@ -35,7 +35,7 @@ class SearchAssetsRequest(BaseModel):
     query: OptionalNullable[AssetsModelSearchQuery] = UNSET
     r"""Structured query object specifying which fields to search in and what to search for"""
 
-    filters: OptionalNullable[LogicalOperatorInput] = UNSET
+    filters: OptionalNullable[LogicalOperator] = UNSET
     r"""Complex nested query filters"""
 
     sort: OptionalNullable[SortOption] = UNSET

@@ -1075,7 +1075,7 @@ class Assets(BaseSDK):
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         group_by: OptionalNullable[
             Union[models.GroupByOptionsAsset, models.GroupByOptionsAssetTypedDict]
@@ -1121,7 +1121,7 @@ class Assets(BaseSDK):
             list_assets_request=models.ListAssetsRequest(
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 group_by=utils.get_pydantic_model(
                     group_by, OptionalNullable[models.GroupByOptionsAsset]
@@ -1212,7 +1212,7 @@ class Assets(BaseSDK):
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         group_by: OptionalNullable[
             Union[models.GroupByOptionsAsset, models.GroupByOptionsAssetTypedDict]
@@ -1258,7 +1258,7 @@ class Assets(BaseSDK):
             list_assets_request=models.ListAssetsRequest(
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 group_by=utils.get_pydantic_model(
                     group_by, OptionalNullable[models.GroupByOptionsAsset]
@@ -1350,7 +1350,7 @@ class Assets(BaseSDK):
             Union[models.AssetsModelSearchQuery, models.AssetsModelSearchQueryTypedDict]
         ] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         sort: OptionalNullable[
             Union[models.SortOption, models.SortOptionTypedDict]
@@ -1392,7 +1392,7 @@ class Assets(BaseSDK):
                 ),
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 sort=utils.get_pydantic_model(
                     sort, OptionalNullable[models.SortOption]
@@ -1481,7 +1481,7 @@ class Assets(BaseSDK):
             Union[models.AssetsModelSearchQuery, models.AssetsModelSearchQueryTypedDict]
         ] = UNSET,
         filters: OptionalNullable[
-            Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
+            Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
         sort: OptionalNullable[
             Union[models.SortOption, models.SortOptionTypedDict]
@@ -1523,7 +1523,7 @@ class Assets(BaseSDK):
                 ),
                 collections=collections,
                 filters=utils.get_pydantic_model(
-                    filters, OptionalNullable[models.LogicalOperatorInput]
+                    filters, OptionalNullable[models.LogicalOperator]
                 ),
                 sort=utils.get_pydantic_model(
                     sort, OptionalNullable[models.SortOption]

@@ -7,11 +7,11 @@ from .apikeyupdate import APIKeyUpdate, APIKeyUpdateTypedDict
 from .assetfeatures import AssetFeatures, AssetFeaturesTypedDict
 from .assetresponse import (
     AssetResponse,
-    AssetResponseMetadata,
-    AssetResponseMetadataTypedDict,
     AssetResponseTypedDict,
     FileData,
     FileDataTypedDict,
+    Metadata,
+    MetadataTypedDict,
 )
 from .assets_model_searchquery import (
     AssetsModelSearchQuery,
@@ -44,10 +44,6 @@ from .create_collection_collections_postop import (
     CreateCollectionCollectionsPostRequest,
     CreateCollectionCollectionsPostRequestTypedDict,
 )
-from .create_interaction_features_search_interactions_postop import (
-    CreateInteractionFeaturesSearchInteractionsPostRequest,
-    CreateInteractionFeaturesSearchInteractionsPostRequestTypedDict,
-)
 from .createcollectionrequest import (
     CreateCollectionRequest,
     CreateCollectionRequestMetadata,
@@ -64,7 +60,6 @@ from .db_model_paginationresponse import (
     DbModelPaginationResponse,
     DbModelPaginationResponseTypedDict,
 )
-from .db_model_taskresponse import DbModelTaskResponse, DbModelTaskResponseTypedDict
 from .delete_api_key_organizations_users_user_email_api_keys_key_name_deleteop import (
     DeleteAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest,
     DeleteAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequestTypedDict,
@@ -80,10 +75,6 @@ from .delete_collection_collections_collection_deleteop import (
 from .delete_feature_features_feature_id_deleteop import (
     DeleteFeatureFeaturesFeatureIDDeleteRequest,
     DeleteFeatureFeaturesFeatureIDDeleteRequestTypedDict,
-)
-from .delete_interaction_features_search_interactions_interaction_id_deleteop import (
-    DeleteInteractionFeaturesSearchInteractionsInteractionIDDeleteRequest,
-    DeleteInteractionFeaturesSearchInteractionsInteractionIDDeleteRequestTypedDict,
 )
 from .delete_namespace_namespaces_namespace_deleteop import (
     DeleteNamespaceNamespacesNamespaceDeleteRequest,
@@ -101,6 +92,7 @@ from .embeddingresponse import (
     EmbeddingResponseTypedDict,
     EmbeddingTypedDict,
 )
+from .entitysettings import EntitySettings, EntitySettingsTypedDict
 from .errordetail import Details, DetailsTypedDict, ErrorDetail, ErrorDetailTypedDict
 from .errorresponse import ErrorResponse, ErrorResponseData
 from .facedetectsettings import FaceDetectSettings, FaceDetectSettingsTypedDict
@@ -145,10 +137,6 @@ from .get_collection_collections_collection_getop import (
 from .get_feature_features_feature_id_getop import (
     GetFeatureFeaturesFeatureIDGetRequest,
     GetFeatureFeaturesFeatureIDGetRequestTypedDict,
-)
-from .get_interaction_features_search_interactions_interaction_id_getop import (
-    GetInteractionFeaturesSearchInteractionsInteractionIDGetRequest,
-    GetInteractionFeaturesSearchInteractionsInteractionIDGetRequestTypedDict,
 )
 from .get_namespace_namespaces_namespace_getop import (
     GetNamespaceNamespacesNamespaceGetRequest,
@@ -195,13 +183,6 @@ from .ingest_video_url_ingest_videos_url_postop import (
 )
 from .inputtype import InputType
 from .integerindexparams import IntegerIndexParams, IntegerIndexParamsTypedDict
-from .interactionresponse import (
-    InteractionResponse,
-    InteractionResponseMetadata,
-    InteractionResponseMetadataTypedDict,
-    InteractionResponseTypedDict,
-)
-from .interactiontype import InteractionType
 from .jsonimageoutputsettings import (
     JSONImageOutputSettings,
     JSONImageOutputSettingsResponseShape,
@@ -237,10 +218,6 @@ from .list_features_features_postop import (
     ListFeaturesFeaturesPostRequest,
     ListFeaturesFeaturesPostRequestTypedDict,
 )
-from .list_interactions_features_search_interactions_getop import (
-    ListInteractionsFeaturesSearchInteractionsGetRequest,
-    ListInteractionsFeaturesSearchInteractionsGetRequestTypedDict,
-)
 from .listassetsrequest import ListAssetsRequest, ListAssetsRequestTypedDict
 from .listassetsresponse import ListAssetsResponse, ListAssetsResponseTypedDict
 from .listcollectionsresponse import (
@@ -249,25 +226,15 @@ from .listcollectionsresponse import (
 )
 from .listfeaturesrequest import ListFeaturesRequest, ListFeaturesRequestTypedDict
 from .listfeaturesresponse import ListFeaturesResponse, ListFeaturesResponseTypedDict
-from .logicaloperator_input import (
+from .logicaloperator import (
     And,
     AndTypedDict,
-    LogicalOperatorInput,
-    LogicalOperatorInputTypedDict,
+    LogicalOperator,
+    LogicalOperatorTypedDict,
     Nor,
     NorTypedDict,
     Or,
     OrTypedDict,
-)
-from .logicaloperator_output import (
-    LogicalOperatorOutput,
-    LogicalOperatorOutputAND,
-    LogicalOperatorOutputANDTypedDict,
-    LogicalOperatorOutputNOR,
-    LogicalOperatorOutputNORTypedDict,
-    LogicalOperatorOutputOR,
-    LogicalOperatorOutputORTypedDict,
-    LogicalOperatorOutputTypedDict,
 )
 from .logodetectsettings import LogoDetectSettings, LogoDetectSettingsTypedDict
 from .modality import Modality
@@ -291,7 +258,6 @@ from .payloadindexconfig import (
 )
 from .payloadindextype import PayloadIndexType, PayloadIndexTypeTypedDict
 from .payloadschematype import PayloadSchemaType
-from .percolaterequest import PercolateRequest, PercolateRequestTypedDict
 from .permission import Permission
 from .processimageurlinput import (
     ProcessImageURLInput,
@@ -323,39 +289,22 @@ from .search_features_features_search_postop import (
     SearchFeaturesFeaturesSearchPostResponseSearchFeaturesFeaturesSearchPost,
     SearchFeaturesFeaturesSearchPostResponseSearchFeaturesFeaturesSearchPostTypedDict,
 )
-from .search_model_searchquery_input import (
-    SearchModelSearchQueryInput,
-    SearchModelSearchQueryInputTypedDict,
+from .search_model_searchquery import (
+    SearchModelSearchQuery,
+    SearchModelSearchQueryTypedDict,
     Type,
 )
 from .searchassetsrequest import SearchAssetsRequest, SearchAssetsRequestTypedDict
-from .searchinteraction import (
-    Metadata,
-    MetadataTypedDict,
-    SearchInteraction,
-    SearchInteractionTypedDict,
-)
-from .searchquery_output import (
-    SearchQueryOutput,
-    SearchQueryOutputType,
-    SearchQueryOutputTypedDict,
-)
-from .searchrequestfeatures_input import (
-    SearchRequestFeaturesInput,
-    SearchRequestFeaturesInputTypedDict,
-)
-from .searchrequestfeatures_output import (
-    SearchRequestFeaturesOutput,
-    SearchRequestFeaturesOutputTypedDict,
-)
+from .searchrequestfeatures import SearchRequestFeatures, SearchRequestFeaturesTypedDict
 from .security import Security, SecurityTypedDict
 from .sortoption import Direction, SortOption, SortOptionTypedDict
 from .sparseembedding import SparseEmbedding, SparseEmbeddingTypedDict
-from .tasks_model_taskresponse import (
-    TasksModelTaskResponse,
-    TasksModelTaskResponseTypedDict,
-)
+from .taskresponse import TaskResponse, TaskResponseTypedDict
 from .taskstatus import TaskStatus
+from .taxonomyextractionconfig import (
+    TaxonomyExtractionConfig,
+    TaxonomyExtractionConfigTypedDict,
+)
 from .textindexparams import TextIndexParams, TextIndexParamsTypedDict
 from .textsettings import TextSettings, TextSettingsTypedDict
 from .tokenizertype import TokenizerType
@@ -437,8 +386,6 @@ __all__ = [
     "AssetFeatures",
     "AssetFeaturesTypedDict",
     "AssetResponse",
-    "AssetResponseMetadata",
-    "AssetResponseMetadataTypedDict",
     "AssetResponseTypedDict",
     "AssetUpdate",
     "AssetUpdateTypedDict",
@@ -465,8 +412,6 @@ __all__ = [
     "CreateCollectionRequestMetadata",
     "CreateCollectionRequestMetadataTypedDict",
     "CreateCollectionRequestTypedDict",
-    "CreateInteractionFeaturesSearchInteractionsPostRequest",
-    "CreateInteractionFeaturesSearchInteractionsPostRequestTypedDict",
     "CreateNamespaceRequest",
     "CreateNamespaceRequestTypedDict",
     "DateUsage",
@@ -475,8 +420,6 @@ __all__ = [
     "DatetimeIndexParamsTypedDict",
     "DbModelPaginationResponse",
     "DbModelPaginationResponseTypedDict",
-    "DbModelTaskResponse",
-    "DbModelTaskResponseTypedDict",
     "DeleteAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest",
     "DeleteAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequestTypedDict",
     "DeleteAssetAssetsAssetIDDeleteRequest",
@@ -485,8 +428,6 @@ __all__ = [
     "DeleteCollectionCollectionsCollectionDeleteRequestTypedDict",
     "DeleteFeatureFeaturesFeatureIDDeleteRequest",
     "DeleteFeatureFeaturesFeatureIDDeleteRequestTypedDict",
-    "DeleteInteractionFeaturesSearchInteractionsInteractionIDDeleteRequest",
-    "DeleteInteractionFeaturesSearchInteractionsInteractionIDDeleteRequestTypedDict",
     "DeleteNamespaceNamespacesNamespaceDeleteRequest",
     "DeleteNamespaceNamespacesNamespaceDeleteRequestTypedDict",
     "DeleteUserOrganizationsUsersUserEmailDeleteRequest",
@@ -502,6 +443,8 @@ __all__ = [
     "EmbeddingResponse",
     "EmbeddingResponseTypedDict",
     "EmbeddingTypedDict",
+    "EntitySettings",
+    "EntitySettingsTypedDict",
     "ErrorDetail",
     "ErrorDetailTypedDict",
     "ErrorResponse",
@@ -540,8 +483,6 @@ __all__ = [
     "GetCollectionCollectionsCollectionGetRequestTypedDict",
     "GetFeatureFeaturesFeatureIDGetRequest",
     "GetFeatureFeaturesFeatureIDGetRequestTypedDict",
-    "GetInteractionFeaturesSearchInteractionsInteractionIDGetRequest",
-    "GetInteractionFeaturesSearchInteractionsInteractionIDGetRequestTypedDict",
     "GetNamespaceNamespacesNamespaceGetRequest",
     "GetNamespaceNamespacesNamespaceGetRequestTypedDict",
     "GetTaskTasksTaskIDGetRequest",
@@ -579,11 +520,6 @@ __all__ = [
     "InputType",
     "IntegerIndexParams",
     "IntegerIndexParamsTypedDict",
-    "InteractionResponse",
-    "InteractionResponseMetadata",
-    "InteractionResponseMetadataTypedDict",
-    "InteractionResponseTypedDict",
-    "InteractionType",
     "JSONImageOutputSettings",
     "JSONImageOutputSettingsResponseShape",
     "JSONImageOutputSettingsResponseShapeTypedDict",
@@ -616,20 +552,10 @@ __all__ = [
     "ListFeaturesRequestTypedDict",
     "ListFeaturesResponse",
     "ListFeaturesResponseTypedDict",
-    "ListInteractionsFeaturesSearchInteractionsGetRequest",
-    "ListInteractionsFeaturesSearchInteractionsGetRequestTypedDict",
     "Loc",
     "LocTypedDict",
-    "LogicalOperatorInput",
-    "LogicalOperatorInputTypedDict",
-    "LogicalOperatorOutput",
-    "LogicalOperatorOutputAND",
-    "LogicalOperatorOutputANDTypedDict",
-    "LogicalOperatorOutputNOR",
-    "LogicalOperatorOutputNORTypedDict",
-    "LogicalOperatorOutputOR",
-    "LogicalOperatorOutputORTypedDict",
-    "LogicalOperatorOutputTypedDict",
+    "LogicalOperator",
+    "LogicalOperatorTypedDict",
     "LogoDetectSettings",
     "LogoDetectSettingsTypedDict",
     "Metadata",
@@ -656,8 +582,6 @@ __all__ = [
     "PayloadIndexType",
     "PayloadIndexTypeTypedDict",
     "PayloadSchemaType",
-    "PercolateRequest",
-    "PercolateRequestTypedDict",
     "Permission",
     "ProcessImageURLInput",
     "ProcessImageURLInputMetadata",
@@ -685,26 +609,21 @@ __all__ = [
     "SearchFeaturesFeaturesSearchPostRequestTypedDict",
     "SearchFeaturesFeaturesSearchPostResponseSearchFeaturesFeaturesSearchPost",
     "SearchFeaturesFeaturesSearchPostResponseSearchFeaturesFeaturesSearchPostTypedDict",
-    "SearchInteraction",
-    "SearchInteractionTypedDict",
-    "SearchModelSearchQueryInput",
-    "SearchModelSearchQueryInputTypedDict",
-    "SearchQueryOutput",
-    "SearchQueryOutputType",
-    "SearchQueryOutputTypedDict",
-    "SearchRequestFeaturesInput",
-    "SearchRequestFeaturesInputTypedDict",
-    "SearchRequestFeaturesOutput",
-    "SearchRequestFeaturesOutputTypedDict",
+    "SearchModelSearchQuery",
+    "SearchModelSearchQueryTypedDict",
+    "SearchRequestFeatures",
+    "SearchRequestFeaturesTypedDict",
     "Security",
     "SecurityTypedDict",
     "SortOption",
     "SortOptionTypedDict",
     "SparseEmbedding",
     "SparseEmbeddingTypedDict",
+    "TaskResponse",
+    "TaskResponseTypedDict",
     "TaskStatus",
-    "TasksModelTaskResponse",
-    "TasksModelTaskResponseTypedDict",
+    "TaxonomyExtractionConfig",
+    "TaxonomyExtractionConfigTypedDict",
     "TextIndexParams",
     "TextIndexParamsTypedDict",
     "TextSettings",

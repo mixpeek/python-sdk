@@ -11,13 +11,13 @@ from typing_extensions import TypedDict
 class AvailableIndexesResponseTypedDict(TypedDict):
     r"""Response schema for available indexes endpoint"""
 
-    vector_indexes: Dict[str, ModelDetailsTypedDict]
+    embedding_models: Dict[str, ModelDetailsTypedDict]
     payload_indexes: List[PayloadIndexTypeTypedDict]
 
 
 class AvailableIndexesResponse(BaseModel):
     r"""Response schema for available indexes endpoint"""
 
-    vector_indexes: Dict[str, ModelDetails]
+    embedding_models: Dict[str, ModelDetails]
 
     payload_indexes: List[PayloadIndexType]

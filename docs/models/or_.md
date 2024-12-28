@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `models.LogicalOperatorInput`
+### `models.LogicalOperator`
 
 ```python
-value: models.LogicalOperatorInput = /* values here */
+value: models.LogicalOperator = /* values here */
 ```
 
 ### `models.FilterCondition`

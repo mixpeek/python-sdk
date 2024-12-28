@@ -13,7 +13,7 @@ class Namespaces(BaseSDK):
         self,
         *,
         namespace_name: str,
-        vector_indexes: List[str],
+        embedding_models: List[str],
         payload_indexes: OptionalNullable[
             Union[
                 List[models.PayloadIndexConfig],
@@ -30,7 +30,7 @@ class Namespaces(BaseSDK):
         Creates a new namespace with the specified configuration
 
         :param namespace_name: Name of the namespace to create
-        :param vector_indexes: List of vector indexes to be used within this namespace. Must be one of: 'image', 'multimodal', 'text', 'keyword'
+        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'
         :param payload_indexes: List of payload index configurations
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -47,7 +47,7 @@ class Namespaces(BaseSDK):
 
         request = models.CreateNamespaceRequest(
             namespace_name=namespace_name,
-            vector_indexes=vector_indexes,
+            embedding_models=embedding_models,
             payload_indexes=utils.get_pydantic_model(
                 payload_indexes, OptionalNullable[List[models.PayloadIndexConfig]]
             ),
@@ -123,7 +123,7 @@ class Namespaces(BaseSDK):
         self,
         *,
         namespace_name: str,
-        vector_indexes: List[str],
+        embedding_models: List[str],
         payload_indexes: OptionalNullable[
             Union[
                 List[models.PayloadIndexConfig],
@@ -140,7 +140,7 @@ class Namespaces(BaseSDK):
         Creates a new namespace with the specified configuration
 
         :param namespace_name: Name of the namespace to create
-        :param vector_indexes: List of vector indexes to be used within this namespace. Must be one of: 'image', 'multimodal', 'text', 'keyword'
+        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'
         :param payload_indexes: List of payload index configurations
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -157,7 +157,7 @@ class Namespaces(BaseSDK):
 
         request = models.CreateNamespaceRequest(
             namespace_name=namespace_name,
-            vector_indexes=vector_indexes,
+            embedding_models=embedding_models,
             payload_indexes=utils.get_pydantic_model(
                 payload_indexes, OptionalNullable[List[models.PayloadIndexConfig]]
             ),

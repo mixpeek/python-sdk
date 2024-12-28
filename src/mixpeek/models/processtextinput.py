@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 from .assetupdate import AssetUpdate, AssetUpdateTypedDict
-from .percolaterequest import PercolateRequest, PercolateRequestTypedDict
 from .textsettings import TextSettings, TextSettingsTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
@@ -27,8 +26,6 @@ class ProcessTextInputTypedDict(TypedDict):
     r"""Additional metadata associated with the file. Can include any key-value pairs relevant to the file."""
     feature_extractors: NotRequired[Nullable[TextSettingsTypedDict]]
     r"""Settings for text processing."""
-    percolate: NotRequired[Nullable[PercolateRequestTypedDict]]
-    r"""Settings for percolating the asset against stored queries."""
     skip_duplicate: NotRequired[Nullable[bool]]
     r"""Skips processing when a duplicate hash is found and stores an error by the task_id with the existing asset_id"""
 
@@ -46,9 +43,6 @@ class ProcessTextInput(BaseModel):
     feature_extractors: OptionalNullable[TextSettings] = UNSET
     r"""Settings for text processing."""
 
-    percolate: OptionalNullable[PercolateRequest] = UNSET
-    r"""Settings for percolating the asset against stored queries."""
-
     skip_duplicate: OptionalNullable[bool] = UNSET
     r"""Skips processing when a duplicate hash is found and stores an error by the task_id with the existing asset_id"""
 
@@ -58,15 +52,9 @@ class ProcessTextInput(BaseModel):
             "asset_update",
             "metadata",
             "feature_extractors",
-            "percolate",
             "skip_duplicate",
         ]
-        nullable_fields = [
-            "asset_update",
-            "feature_extractors",
-            "percolate",
-            "skip_duplicate",
-        ]
+        nullable_fields = ["asset_update", "feature_extractors", "skip_duplicate"]
         null_default_fields = []
 
         serialized = handler(self)

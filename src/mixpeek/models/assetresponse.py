@@ -16,11 +16,11 @@ class FileData(BaseModel):
     pass
 
 
-class AssetResponseMetadataTypedDict(TypedDict):
+class MetadataTypedDict(TypedDict):
     pass
 
 
-class AssetResponseMetadata(BaseModel):
+class Metadata(BaseModel):
     pass
 
 
@@ -33,7 +33,7 @@ class AssetResponseTypedDict(TypedDict):
     r"""The current status of the asset processing"""
     file_data: NotRequired[Nullable[FileDataTypedDict]]
     r"""File data associated with the asset"""
-    metadata: NotRequired[Nullable[AssetResponseMetadataTypedDict]]
+    metadata: NotRequired[Nullable[MetadataTypedDict]]
     r"""Additional metadata associated with the asset"""
     error: NotRequired[Nullable[Any]]
     r"""The error message if the asset processing failed"""
@@ -70,7 +70,7 @@ class AssetResponse(BaseModel):
     file_data: OptionalNullable[FileData] = UNSET
     r"""File data associated with the asset"""
 
-    metadata: OptionalNullable[AssetResponseMetadata] = UNSET
+    metadata: OptionalNullable[Metadata] = UNSET
     r"""Additional metadata associated with the asset"""
 
     error: OptionalNullable[Any] = UNSET

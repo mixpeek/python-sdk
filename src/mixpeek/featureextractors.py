@@ -13,7 +13,7 @@ class FeatureExtractors(BaseSDK):
         self,
         *,
         type_: models.InputType,
-        vector_index: models.VectorModel,
+        embedding_model: models.VectorModel,
         value: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -23,7 +23,7 @@ class FeatureExtractors(BaseSDK):
         r"""Extract Embeddings
 
         :param type:
-        :param vector_index:
+        :param embedding_model:
         :param value: The input content to embed. Could be a URL, text content, file path, or base64 encoded string
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -41,7 +41,7 @@ class FeatureExtractors(BaseSDK):
         request = models.FeatureExtractionEmbeddingRequest(
             type=type_,
             value=value,
-            vector_index=vector_index,
+            embedding_model=embedding_model,
         )
 
         req = self._build_request(
@@ -114,7 +114,7 @@ class FeatureExtractors(BaseSDK):
         self,
         *,
         type_: models.InputType,
-        vector_index: models.VectorModel,
+        embedding_model: models.VectorModel,
         value: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -124,7 +124,7 @@ class FeatureExtractors(BaseSDK):
         r"""Extract Embeddings
 
         :param type:
-        :param vector_index:
+        :param embedding_model:
         :param value: The input content to embed. Could be a URL, text content, file path, or base64 encoded string
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -142,7 +142,7 @@ class FeatureExtractors(BaseSDK):
         request = models.FeatureExtractionEmbeddingRequest(
             type=type_,
             value=value,
-            vector_index=vector_index,
+            embedding_model=embedding_model,
         )
 
         req = self._build_request_async(

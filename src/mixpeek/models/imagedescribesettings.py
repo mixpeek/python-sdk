@@ -25,8 +25,8 @@ class ImageDescribeSettingsTypedDict(TypedDict):
     r"""Maximum length of the description"""
     json_output: NotRequired[ImageDescribeSettingsJSONOutputTypedDict]
     r"""JSON format for the response"""
-    vector_index: NotRequired[Nullable[VectorModel]]
-    r"""Name of the vector model to use for embedding the text output. If vector_index is duplicated, the vector will be overwritten."""
+    embedding_model: NotRequired[Nullable[VectorModel]]
+    r"""Name of the vector model to use for embedding the text output. If embedding_model is duplicated, the vector will be overwritten."""
 
 
 class ImageDescribeSettings(BaseModel):
@@ -42,8 +42,8 @@ class ImageDescribeSettings(BaseModel):
     json_output: Optional[ImageDescribeSettingsJSONOutput] = None
     r"""JSON format for the response"""
 
-    vector_index: OptionalNullable[VectorModel] = UNSET
-    r"""Name of the vector model to use for embedding the text output. If vector_index is duplicated, the vector will be overwritten."""
+    embedding_model: OptionalNullable[VectorModel] = UNSET
+    r"""Name of the vector model to use for embedding the text output. If embedding_model is duplicated, the vector will be overwritten."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -52,9 +52,9 @@ class ImageDescribeSettings(BaseModel):
             "enabled",
             "max_length",
             "json_output",
-            "vector_index",
+            "embedding_model",
         ]
-        nullable_fields = ["prompt", "max_length", "vector_index"]
+        nullable_fields = ["prompt", "max_length", "embedding_model"]
         null_default_fields = []
 
         serialized = handler(self)

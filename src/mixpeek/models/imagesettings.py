@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from .embeddingrequest import EmbeddingRequest, EmbeddingRequestTypedDict
+from .entitysettings import EntitySettings, EntitySettingsTypedDict
 from .imagedescribesettings import ImageDescribeSettings, ImageDescribeSettingsTypedDict
 from .imagedetectsettings import ImageDetectSettings, ImageDetectSettingsTypedDict
 from .imagereadsettings import ImageReadSettings, ImageReadSettingsTypedDict
@@ -20,7 +21,7 @@ class ImageSettingsTypedDict(TypedDict):
     r"""Settings for reading and analyzing image content."""
     embed: NotRequired[List[EmbeddingRequestTypedDict]]
     r"""List of embedding settings for generating multiple embeddings. If url is provided, value must be None.
-    Default: [{type: 'url', vector_index: 'multimodal'}] if none provided.
+    Default: [{type: 'url', embedding_model: 'multimodal'}] if none provided.
     """
     describe: NotRequired[Nullable[ImageDescribeSettingsTypedDict]]
     r"""Settings for generating image descriptions."""
@@ -28,6 +29,8 @@ class ImageSettingsTypedDict(TypedDict):
     r"""Settings for object detection in images."""
     json_output: NotRequired[Nullable[JSONImageOutputSettingsTypedDict]]
     r"""Settings for structured JSON output of image analysis."""
+    entities: NotRequired[Nullable[EntitySettingsTypedDict]]
+    r"""Settings for extracting entities from image content"""
 
 
 class ImageSettings(BaseModel):
@@ -36,7 +39,7 @@ class ImageSettings(BaseModel):
 
     embed: Optional[List[EmbeddingRequest]] = None
     r"""List of embedding settings for generating multiple embeddings. If url is provided, value must be None.
-    Default: [{type: 'url', vector_index: 'multimodal'}] if none provided.
+    Default: [{type: 'url', embedding_model: 'multimodal'}] if none provided.
     """
 
     describe: OptionalNullable[ImageDescribeSettings] = UNSET
@@ -48,10 +51,20 @@ class ImageSettings(BaseModel):
     json_output: OptionalNullable[JSONImageOutputSettings] = UNSET
     r"""Settings for structured JSON output of image analysis."""
 
+    entities: OptionalNullable[EntitySettings] = UNSET
+    r"""Settings for extracting entities from image content"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["read", "embed", "describe", "detect", "json_output"]
-        nullable_fields = ["read", "describe", "detect", "json_output"]
+        optional_fields = [
+            "read",
+            "embed",
+            "describe",
+            "detect",
+            "json_output",
+            "entities",
+        ]
+        nullable_fields = ["read", "describe", "detect", "json_output", "entities"]
         null_default_fields = []
 
         serialized = handler(self)
