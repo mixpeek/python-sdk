@@ -411,7 +411,7 @@ class Namespaces(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
+    ) -> models.TaskResponse:
         r"""Delete Namespace
 
         Deletes an existing namespace using either its name or ID
@@ -473,7 +473,7 @@ class Namespaces(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Any)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -505,7 +505,7 @@ class Namespaces(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Any:
+    ) -> models.TaskResponse:
         r"""Delete Namespace
 
         Deletes an existing namespace using either its name or ID
@@ -567,7 +567,7 @@ class Namespaces(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Any)
+            return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):

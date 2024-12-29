@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: c0a4f67dd9d00f80203a3031eca81f54
+  docChecksum: 0241cbe500950eb1647add053e77d688
   docVersion: "0.81"
   speakeasyVersion: 1.460.3
   generationVersion: 2.484.0
-  releaseVersion: 0.15.1
-  configChecksum: cb01616a5e9920d43ba0aa64d479124a
+  releaseVersion: 0.15.2
+  configChecksum: 567c022a2810c9b76381e2b6df4cd1d8
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -499,7 +499,7 @@ examples:
           namespace: "ns_1234567890"
       responses:
         "200":
-          application/json: "<value>"
+          application/json: {"task_id": "<id>"}
         "400":
           application/json: {"status": 386564, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -658,7 +658,7 @@ examples:
         application/json: {"type": "text", "value": "https://example.com/image.jpg", "embedding_model": "vertex-multimodal"}
       responses:
         "200":
-          application/json: {"embedding": {"indices": [29618, 181112], "values": ["5123.63"]}}
+          application/json: {"embedding": {"vector": ["5727.00", "296.19", "1811.13"]}}
         "400":
           application/json: {"status": 484301, "error": {"message": "<value>", "type": "<value>"}}
         "422":
