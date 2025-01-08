@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class Tasks(BaseSDK):
-    def delete(
+    def kill_task_v1_tasks_task_id_delete(
         self,
         *,
         task_id: str,
@@ -20,6 +20,9 @@ class Tasks(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Any:
         r"""Kill Task
+
+        **Requirements:**
+        - Required permissions: write
 
         :param task_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
@@ -36,14 +39,14 @@ class Tasks(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.KillTaskTasksTaskIDDeleteRequest(
+        request = models.KillTaskV1TasksTaskIDDeleteRequest(
             task_id=task_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/tasks/{task_id}",
+            path="/v1/tasks/{task_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -67,7 +70,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="kill_task_tasks__task_id__delete",
+                operation_id="kill_task_v1_tasks__task_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -104,7 +107,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    async def delete_async(
+    async def kill_task_v1_tasks_task_id_delete_async(
         self,
         *,
         task_id: str,
@@ -115,6 +118,9 @@ class Tasks(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Any:
         r"""Kill Task
+
+        **Requirements:**
+        - Required permissions: write
 
         :param task_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
@@ -131,14 +137,14 @@ class Tasks(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.KillTaskTasksTaskIDDeleteRequest(
+        request = models.KillTaskV1TasksTaskIDDeleteRequest(
             task_id=task_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/tasks/{task_id}",
+            path="/v1/tasks/{task_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -162,7 +168,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="kill_task_tasks__task_id__delete",
+                operation_id="kill_task_v1_tasks__task_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -199,7 +205,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    def get(
+    def get_task_v1_tasks_task_id_get(
         self,
         *,
         task_id: str,
@@ -231,14 +237,14 @@ class Tasks(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetTaskTasksTaskIDGetRequest(
+        request = models.GetTaskV1TasksTaskIDGetRequest(
             task_id=task_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="GET",
-            path="/tasks/{task_id}",
+            path="/v1/tasks/{task_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -262,7 +268,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_task_tasks__task_id__get",
+                operation_id="get_task_v1_tasks__task_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -299,7 +305,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    async def get_async(
+    async def get_task_v1_tasks_task_id_get_async(
         self,
         *,
         task_id: str,
@@ -331,14 +337,14 @@ class Tasks(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetTaskTasksTaskIDGetRequest(
+        request = models.GetTaskV1TasksTaskIDGetRequest(
             task_id=task_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/tasks/{task_id}",
+            path="/v1/tasks/{task_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -362,7 +368,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_task_tasks__task_id__get",
+                operation_id="get_task_v1_tasks__task_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [list](#list) - List Collections
-* [create](#create) - Create Collection
-* [delete](#delete) - Delete Collection
-* [update](#update) - Update Collection
-* [get](#get) - Get Collection
+* [list_collections_v1_collections_get](#list_collections_v1_collections_get) - List Collections
+* [create_collection_v1_collections_post](#create_collection_v1_collections_post) - Create Collection
+* [delete_collection_v1_collections_collection_delete](#delete_collection_v1_collections_collection_delete) - Delete Collection
+* [update_collection_v1_collections_collection_put](#update_collection_v1_collections_collection_put) - Update Collection
+* [get_collection_v1_collections_collection_get](#get_collection_v1_collections_collection_get) - Get Collection
 
-## list
+## list_collections_v1_collections_get
 
 List Collections
 
@@ -25,7 +25,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.collections.list()
+    res = mixpeek.collections.list_collections_v1_collections_get()
 
     # Handle response
     print(res)
@@ -53,9 +53,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## create
+## create_collection_v1_collections_post
 
-Create Collection
+**Requirements:**
+- Required permissions: write
 
 ### Example Usage
 
@@ -67,7 +68,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.collections.create(collection_name="<value>")
+    res = mixpeek.collections.create_collection_v1_collections_post(collection_name="<value>")
 
     # Handle response
     print(res)
@@ -95,7 +96,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete
+## delete_collection_v1_collections_collection_delete
 
 Delete a collection using either its name or ID
 
@@ -109,7 +110,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.collections.delete(collection="col_1234567890")
+    res = mixpeek.collections.delete_collection_v1_collections_collection_delete(collection="my_collection")
 
     # Handle response
     print(res)
@@ -136,7 +137,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update
+## update_collection_v1_collections_collection_put
 
 Update a collection using either its name or ID
 
@@ -150,7 +151,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.collections.update(collection="col_1234567890", collection_name="<value>")
+    res = mixpeek.collections.update_collection_v1_collections_collection_put(collection="col_1234567890", collection_name="<value>")
 
     # Handle response
     print(res)
@@ -179,7 +180,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get
+## get_collection_v1_collections_collection_get
 
 Get a collection using either its name or ID
 
@@ -193,7 +194,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.collections.get(collection="col_1234567890")
+    res = mixpeek.collections.get_collection_v1_collections_collection_get(collection="col_1234567890")
 
     # Handle response
     print(res)

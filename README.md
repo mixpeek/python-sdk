@@ -74,7 +74,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get()
+    res = mixpeek.health.check()
 
     # Handle response
     print(res)
@@ -94,7 +94,7 @@ async def main():
         token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as mixpeek:
 
-        res = await mixpeek.organizations.get_async()
+        res = await mixpeek.health.check_async()
 
         # Handle response
         print(res)
@@ -123,7 +123,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get()
+    res = mixpeek.health.check()
 
     # Handle response
     print(res)
@@ -139,69 +139,85 @@ with Mixpeek(
 
 ### [assets](docs/sdks/assets/README.md)
 
-* [get](docs/sdks/assets/README.md#get) - Get Asset
-* [delete](docs/sdks/assets/README.md#delete) - Delete Asset
-* [update](docs/sdks/assets/README.md#update) - Full Asset Update
-* [partial_update](docs/sdks/assets/README.md#partial_update) - Partial Asset Update
-* [get_features](docs/sdks/assets/README.md#get_features) - Get Asset With Features
-* [list](docs/sdks/assets/README.md#list) - List Assets
-* [search](docs/sdks/assets/README.md#search) - Search Assets
+* [get_asset_v1_assets_asset_id_get](docs/sdks/assets/README.md#get_asset_v1_assets_asset_id_get) - Get Asset
+* [delete_asset_v1_assets_asset_id_delete](docs/sdks/assets/README.md#delete_asset_v1_assets_asset_id_delete) - Delete Asset
+* [full_asset_update_v1_assets_asset_id_put](docs/sdks/assets/README.md#full_asset_update_v1_assets_asset_id_put) - Full Asset Update
+* [partial_asset_update_v1_assets_asset_id_patch](docs/sdks/assets/README.md#partial_asset_update_v1_assets_asset_id_patch) - Partial Asset Update
+* [get_asset_with_features_v1_assets_asset_id_features_get](docs/sdks/assets/README.md#get_asset_with_features_v1_assets_asset_id_features_get) - Get Asset With Features
+* [list_assets_v1_assets_post](docs/sdks/assets/README.md#list_assets_v1_assets_post) - List Assets
+* [search_assets_v1_assets_search_post](docs/sdks/assets/README.md#search_assets_v1_assets_search_post) - Search Assets
 
 ### [collections](docs/sdks/collections/README.md)
 
-* [list](docs/sdks/collections/README.md#list) - List Collections
-* [create](docs/sdks/collections/README.md#create) - Create Collection
-* [delete](docs/sdks/collections/README.md#delete) - Delete Collection
-* [update](docs/sdks/collections/README.md#update) - Update Collection
-* [get](docs/sdks/collections/README.md#get) - Get Collection
+* [list_collections_v1_collections_get](docs/sdks/collections/README.md#list_collections_v1_collections_get) - List Collections
+* [create_collection_v1_collections_post](docs/sdks/collections/README.md#create_collection_v1_collections_post) - Create Collection
+* [delete_collection_v1_collections_collection_delete](docs/sdks/collections/README.md#delete_collection_v1_collections_collection_delete) - Delete Collection
+* [update_collection_v1_collections_collection_put](docs/sdks/collections/README.md#update_collection_v1_collections_collection_put) - Update Collection
+* [get_collection_v1_collections_collection_get](docs/sdks/collections/README.md#get_collection_v1_collections_collection_get) - Get Collection
 
 ### [feature_extractors](docs/sdks/featureextractors/README.md)
 
-* [extract_embeddings](docs/sdks/featureextractors/README.md#extract_embeddings) - Extract Embeddings
+* [extract_embeddings_v1_features_extractors_embed_post](docs/sdks/featureextractors/README.md#extract_embeddings_v1_features_extractors_embed_post) - Extract Embeddings
+
+### [feature_search](docs/sdks/featuresearch/README.md)
+
+* [search_features_v1_features_search_post](docs/sdks/featuresearch/README.md#search_features_v1_features_search_post) - Search Features
 
 ### [features](docs/sdks/features/README.md)
 
-* [get](docs/sdks/features/README.md#get) - Get Feature
-* [delete](docs/sdks/features/README.md#delete) - Delete Feature
-* [update](docs/sdks/features/README.md#update) - Full Feature Update
-* [list](docs/sdks/features/README.md#list) - List Features
-* [search](docs/sdks/features/README.md#search) - Search Features
+* [get_feature_v1_features_feature_id_get](docs/sdks/features/README.md#get_feature_v1_features_feature_id_get) - Get Feature
+* [delete_feature_v1_features_feature_id_delete](docs/sdks/features/README.md#delete_feature_v1_features_feature_id_delete) - Delete Feature
+* [full_feature_update_v1_features_feature_id_put](docs/sdks/features/README.md#full_feature_update_v1_features_feature_id_put) - Full Feature Update
+* [list_features_v1_features_post](docs/sdks/features/README.md#list_features_v1_features_post) - List Features
 
 ### [health](docs/sdks/health/README.md)
 
 * [check](docs/sdks/health/README.md#check) - Healthcheck
 
-### [ingest](docs/sdks/ingest/README.md)
+### [ingest_assets](docs/sdks/ingestassets/README.md)
 
-* [text](docs/sdks/ingest/README.md#text) - Ingest Text
-* [video_from_url](docs/sdks/ingest/README.md#video_from_url) - Ingest Video Url
-* [image_url](docs/sdks/ingest/README.md#image_url) - Ingest Image Url
+* [ingest_text_v1_ingest_text_post](docs/sdks/ingestassets/README.md#ingest_text_v1_ingest_text_post) - Ingest Text
+* [ingest_video_url_v1_ingest_videos_url_post](docs/sdks/ingestassets/README.md#ingest_video_url_v1_ingest_videos_url_post) - Ingest Video Url
+* [ingest_image_url_v1_ingest_images_url_post](docs/sdks/ingestassets/README.md#ingest_image_url_v1_ingest_images_url_post) - Ingest Image Url
 
 
 ### [namespaces](docs/sdks/namespaces/README.md)
 
-* [create](docs/sdks/namespaces/README.md#create) - Create Namespace
-* [list](docs/sdks/namespaces/README.md#list) - List Namespaces
-* [delete](docs/sdks/namespaces/README.md#delete) - Delete Namespace
-* [update](docs/sdks/namespaces/README.md#update) - Update Namespace
-* [get](docs/sdks/namespaces/README.md#get) - Get Namespace
-* [list_indexes](docs/sdks/namespaces/README.md#list_indexes) - List Available Indexes
+* [create_namespace_v1_namespaces_post](docs/sdks/namespaces/README.md#create_namespace_v1_namespaces_post) - Create Namespace
+* [list_namespaces_v1_namespaces_get](docs/sdks/namespaces/README.md#list_namespaces_v1_namespaces_get) - List Namespaces
+* [delete_namespace_v1_namespaces_namespace_delete](docs/sdks/namespaces/README.md#delete_namespace_v1_namespaces_namespace_delete) - Delete Namespace
+* [update_namespace_v1_namespaces_namespace_put](docs/sdks/namespaces/README.md#update_namespace_v1_namespaces_namespace_put) - Update Namespace
+* [get_namespace_v1_namespaces_namespace_get](docs/sdks/namespaces/README.md#get_namespace_v1_namespaces_namespace_get) - Get Namespace
+* [list_available_models_v1_namespaces_models_get](docs/sdks/namespaces/README.md#list_available_models_v1_namespaces_models_get) - List Available Models
 
 ### [organizations](docs/sdks/organizations/README.md)
 
-* [get](docs/sdks/organizations/README.md#get) - Get Organization
-* [get_usage](docs/sdks/organizations/README.md#get_usage) - Get Usage
-* [get_user](docs/sdks/organizations/README.md#get_user) - Get User
-* [delete_user](docs/sdks/organizations/README.md#delete_user) - Delete User
-* [add_user](docs/sdks/organizations/README.md#add_user) - Add User
-* [create_api_key](docs/sdks/organizations/README.md#create_api_key) - Create Api Key
-* [delete_api_key](docs/sdks/organizations/README.md#delete_api_key) - Delete Api Key
-* [update_api_key](docs/sdks/organizations/README.md#update_api_key) - Update Api Key
+* [get_organization_v1_organizations_get](docs/sdks/organizations/README.md#get_organization_v1_organizations_get) - Get Organization
+* [get_usage_v1_organizations_usage_get](docs/sdks/organizations/README.md#get_usage_v1_organizations_usage_get) - Get Usage
+* [get_user_v1_organizations_users_user_email_get](docs/sdks/organizations/README.md#get_user_v1_organizations_users_user_email_get) - Get User
+* [delete_user_v1_organizations_users_user_email_delete](docs/sdks/organizations/README.md#delete_user_v1_organizations_users_user_email_delete) - Delete User
+* [add_user_v1_organizations_users_post](docs/sdks/organizations/README.md#add_user_v1_organizations_users_post) - Add User
+* [create_api_key_v1_organizations_users_user_email_api_keys_post](docs/sdks/organizations/README.md#create_api_key_v1_organizations_users_user_email_api_keys_post) - Create Api Key
+* [delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete](docs/sdks/organizations/README.md#delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete) - Delete Api Key
+* [update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch](docs/sdks/organizations/README.md#update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch) - Update Api Key
 
 ### [tasks](docs/sdks/tasks/README.md)
 
-* [delete](docs/sdks/tasks/README.md#delete) - Kill Task
-* [get](docs/sdks/tasks/README.md#get) - Get Task Information
+* [kill_task_v1_tasks_task_id_delete](docs/sdks/tasks/README.md#kill_task_v1_tasks_task_id_delete) - Kill Task
+* [get_task_v1_tasks_task_id_get](docs/sdks/tasks/README.md#get_task_v1_tasks_task_id_get) - Get Task Information
+
+### [taxonomy_entities](docs/sdks/taxonomyentities/README.md)
+
+* [create_taxonomy_v1_entities_taxonomies_post](docs/sdks/taxonomyentities/README.md#create_taxonomy_v1_entities_taxonomies_post) - Create Taxonomy
+* [list_taxonomies_v1_entities_taxonomies_get](docs/sdks/taxonomyentities/README.md#list_taxonomies_v1_entities_taxonomies_get) - List Taxonomies
+* [get_taxonomy_v1_entities_taxonomies_taxonomy_get](docs/sdks/taxonomyentities/README.md#get_taxonomy_v1_entities_taxonomies_taxonomy_get) - Get Taxonomy
+* [delete_taxonomy_v1_entities_taxonomies_taxonomy_delete](docs/sdks/taxonomyentities/README.md#delete_taxonomy_v1_entities_taxonomies_taxonomy_delete) - Delete Taxonomy
+* [update_taxonomy_v1_entities_taxonomies_taxonomy_patch](docs/sdks/taxonomyentities/README.md#update_taxonomy_v1_entities_taxonomies_taxonomy_patch) - Update Taxonomy
+* [get_taxonomy_node_v1_entities_taxonomies_nodes_node_get](docs/sdks/taxonomyentities/README.md#get_taxonomy_node_v1_entities_taxonomies_nodes_node_get) - Get Taxonomy Node
+* [update_node_v1_entities_taxonomies_nodes_node_patch](docs/sdks/taxonomyentities/README.md#update_node_v1_entities_taxonomies_nodes_node_patch) - Update Node
+* [classify_features_v1_entities_taxonomies_taxonomy_classify_post](docs/sdks/taxonomyentities/README.md#classify_features_v1_entities_taxonomies_taxonomy_classify_post) - Classify Features against Taxonomy
+* [list_classifications_v1_entities_taxonomies_taxonomy_classifications_post](docs/sdks/taxonomyentities/README.md#list_classifications_v1_entities_taxonomies_taxonomy_classifications_post) - List Taxonomy Classifications
+* [delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete](docs/sdks/taxonomyentities/README.md#delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete) - Delete Classifications
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -221,7 +237,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get(,
+    res = mixpeek.health.check(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -240,7 +256,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get()
+    res = mixpeek.health.check()
 
     # Handle response
     print(res)
@@ -262,7 +278,7 @@ By default, an API error will raise a models.APIError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `get_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `get_organization_v1_organizations_get_async` method may raise the following exceptions:
 
 | Error Type                 | Status Code             | Content Type     |
 | -------------------------- | ----------------------- | ---------------- |
@@ -282,7 +298,7 @@ with Mixpeek(
     res = None
     try:
 
-        res = mixpeek.organizations.get()
+        res = mixpeek.organizations.get_organization_v1_organizations_get()
 
         # Handle response
         print(res)
@@ -310,11 +326,11 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    server_url="https://api.mixpeek.com/",
+    server_url="https://api.mixpeek.com/v1",
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get()
+    res = mixpeek.health.check()
 
     # Handle response
     print(res)

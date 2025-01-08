@@ -10,7 +10,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Organizations(BaseSDK):
-    def get(
+    def get_organization_v1_organizations_get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -19,6 +19,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.OrganizationModel:
         r"""Get Organization
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -34,7 +37,7 @@ class Organizations(BaseSDK):
             base_url = server_url
         req = self._build_request(
             method="GET",
-            path="/organizations",
+            path="/v1/organizations",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -58,7 +61,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_organization_organizations_get",
+                operation_id="get_organization_v1_organizations_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -95,7 +98,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def get_async(
+    async def get_organization_v1_organizations_get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -104,6 +107,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.OrganizationModel:
         r"""Get Organization
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -119,7 +125,7 @@ class Organizations(BaseSDK):
             base_url = server_url
         req = self._build_request_async(
             method="GET",
-            path="/organizations",
+            path="/v1/organizations",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -143,7 +149,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_organization_organizations_get",
+                operation_id="get_organization_v1_organizations_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -180,7 +186,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def get_usage(
+    def get_usage_v1_organizations_usage_get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -189,6 +195,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Usage:
         r"""Get Usage
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -204,7 +213,7 @@ class Organizations(BaseSDK):
             base_url = server_url
         req = self._build_request(
             method="GET",
-            path="/organizations/usage",
+            path="/v1/organizations/usage",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -228,7 +237,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_usage_organizations_usage_get",
+                operation_id="get_usage_v1_organizations_usage_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -265,7 +274,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def get_usage_async(
+    async def get_usage_v1_organizations_usage_get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -274,6 +283,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Usage:
         r"""Get Usage
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -289,7 +301,7 @@ class Organizations(BaseSDK):
             base_url = server_url
         req = self._build_request_async(
             method="GET",
-            path="/organizations/usage",
+            path="/v1/organizations/usage",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -313,7 +325,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_usage_organizations_usage_get",
+                operation_id="get_usage_v1_organizations_usage_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -350,7 +362,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def get_user(
+    def get_user_v1_organizations_users_user_email_get(
         self,
         *,
         user_email: str,
@@ -375,13 +387,13 @@ class Organizations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetUserOrganizationsUsersUserEmailGetRequest(
+        request = models.GetUserV1OrganizationsUsersUserEmailGetRequest(
             user_email=user_email,
         )
 
         req = self._build_request(
             method="GET",
-            path="/organizations/users/{user_email}",
+            path="/v1/organizations/users/{user_email}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -405,7 +417,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_user_organizations_users__user_email__get",
+                operation_id="get_user_v1_organizations_users__user_email__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -442,7 +454,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def get_user_async(
+    async def get_user_v1_organizations_users_user_email_get_async(
         self,
         *,
         user_email: str,
@@ -467,13 +479,13 @@ class Organizations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetUserOrganizationsUsersUserEmailGetRequest(
+        request = models.GetUserV1OrganizationsUsersUserEmailGetRequest(
             user_email=user_email,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/organizations/users/{user_email}",
+            path="/v1/organizations/users/{user_email}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -497,7 +509,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_user_organizations_users__user_email__get",
+                operation_id="get_user_v1_organizations_users__user_email__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -534,7 +546,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def delete_user(
+    def delete_user_v1_organizations_users_user_email_delete(
         self,
         *,
         user_email: str,
@@ -544,6 +556,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Any:
         r"""Delete User
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param user_email:
         :param retries: Override the default retry configuration for this method
@@ -559,13 +574,13 @@ class Organizations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteUserOrganizationsUsersUserEmailDeleteRequest(
+        request = models.DeleteUserV1OrganizationsUsersUserEmailDeleteRequest(
             user_email=user_email,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/organizations/users/{user_email}",
+            path="/v1/organizations/users/{user_email}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -589,7 +604,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete_user_organizations_users__user_email__delete",
+                operation_id="delete_user_v1_organizations_users__user_email__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -626,7 +641,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def delete_user_async(
+    async def delete_user_v1_organizations_users_user_email_delete_async(
         self,
         *,
         user_email: str,
@@ -636,6 +651,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Any:
         r"""Delete User
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param user_email:
         :param retries: Override the default retry configuration for this method
@@ -651,13 +669,13 @@ class Organizations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteUserOrganizationsUsersUserEmailDeleteRequest(
+        request = models.DeleteUserV1OrganizationsUsersUserEmailDeleteRequest(
             user_email=user_email,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/organizations/users/{user_email}",
+            path="/v1/organizations/users/{user_email}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -681,7 +699,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete_user_organizations_users__user_email__delete",
+                operation_id="delete_user_v1_organizations_users__user_email__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -718,7 +736,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def add_user(
+    def add_user_v1_organizations_users_post(
         self,
         *,
         email: str,
@@ -736,6 +754,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserModelOutput:
         r"""Add User
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param email:
         :param user_id:
@@ -767,7 +788,7 @@ class Organizations(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/organizations/users",
+            path="/v1/organizations/users",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -794,7 +815,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="add_user_organizations_users_post",
+                operation_id="add_user_v1_organizations_users_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -831,7 +852,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def add_user_async(
+    async def add_user_v1_organizations_users_post_async(
         self,
         *,
         email: str,
@@ -849,6 +870,9 @@ class Organizations(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserModelOutput:
         r"""Add User
+
+        **Requirements:**
+        - Required permissions: admin
 
         :param email:
         :param user_id:
@@ -880,7 +904,7 @@ class Organizations(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/organizations/users",
+            path="/v1/organizations/users",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -907,7 +931,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="add_user_organizations_users_post",
+                operation_id="add_user_v1_organizations_users_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -944,7 +968,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def create_api_key(
+    def create_api_key_v1_organizations_users_user_email_api_keys_post(
         self,
         *,
         user_email: str,
@@ -973,14 +997,14 @@ class Organizations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.CreateAPIKeyOrganizationsUsersUserEmailAPIKeysPostRequest(
+        request = models.CreateAPIKeyV1OrganizationsUsersUserEmailAPIKeysPostRequest(
             user_email=user_email,
             key_name=key_name,
         )
 
         req = self._build_request(
             method="POST",
-            path="/organizations/users/{user_email}/api-keys",
+            path="/v1/organizations/users/{user_email}/api-keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1004,7 +1028,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="create_api_key_organizations_users__user_email__api_keys_post",
+                operation_id="create_api_key_v1_organizations_users__user_email__api_keys_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1041,7 +1065,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def create_api_key_async(
+    async def create_api_key_v1_organizations_users_user_email_api_keys_post_async(
         self,
         *,
         user_email: str,
@@ -1070,14 +1094,14 @@ class Organizations(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.CreateAPIKeyOrganizationsUsersUserEmailAPIKeysPostRequest(
+        request = models.CreateAPIKeyV1OrganizationsUsersUserEmailAPIKeysPostRequest(
             user_email=user_email,
             key_name=key_name,
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/organizations/users/{user_email}/api-keys",
+            path="/v1/organizations/users/{user_email}/api-keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1101,7 +1125,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="create_api_key_organizations_users__user_email__api_keys_post",
+                operation_id="create_api_key_v1_organizations_users__user_email__api_keys_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1138,7 +1162,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def delete_api_key(
+    def delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete(
         self,
         *,
         user_email: str,
@@ -1168,7 +1192,7 @@ class Organizations(BaseSDK):
             base_url = server_url
 
         request = (
-            models.DeleteAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest(
+            models.DeleteAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest(
                 user_email=user_email,
                 key_name=key_name,
             )
@@ -1176,7 +1200,7 @@ class Organizations(BaseSDK):
 
         req = self._build_request(
             method="DELETE",
-            path="/organizations/users/{user_email}/api-keys/{key_name}",
+            path="/v1/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1200,7 +1224,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete_api_key_organizations_users__user_email__api_keys__key_name__delete",
+                operation_id="delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1237,7 +1261,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def delete_api_key_async(
+    async def delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete_async(
         self,
         *,
         user_email: str,
@@ -1267,7 +1291,7 @@ class Organizations(BaseSDK):
             base_url = server_url
 
         request = (
-            models.DeleteAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest(
+            models.DeleteAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest(
                 user_email=user_email,
                 key_name=key_name,
             )
@@ -1275,7 +1299,7 @@ class Organizations(BaseSDK):
 
         req = self._build_request_async(
             method="DELETE",
-            path="/organizations/users/{user_email}/api-keys/{key_name}",
+            path="/v1/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1299,7 +1323,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete_api_key_organizations_users__user_email__api_keys__key_name__delete",
+                operation_id="delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1336,7 +1360,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    def update_api_key(
+    def update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch(
         self,
         *,
         user_email: str,
@@ -1370,7 +1394,7 @@ class Organizations(BaseSDK):
             base_url = server_url
 
         request = (
-            models.UpdateAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNamePatchRequest(
+            models.UpdateAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNamePatchRequest(
                 user_email=user_email,
                 key_name=key_name,
                 api_key_update=models.APIKeyUpdate(
@@ -1382,7 +1406,7 @@ class Organizations(BaseSDK):
 
         req = self._build_request(
             method="PATCH",
-            path="/organizations/users/{user_email}/api-keys/{key_name}",
+            path="/v1/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1409,7 +1433,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="update_api_key_organizations_users__user_email__api_keys__key_name__patch",
+                operation_id="update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1446,7 +1470,7 @@ class Organizations(BaseSDK):
             http_res,
         )
 
-    async def update_api_key_async(
+    async def update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch_async(
         self,
         *,
         user_email: str,
@@ -1480,7 +1504,7 @@ class Organizations(BaseSDK):
             base_url = server_url
 
         request = (
-            models.UpdateAPIKeyOrganizationsUsersUserEmailAPIKeysKeyNamePatchRequest(
+            models.UpdateAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNamePatchRequest(
                 user_email=user_email,
                 key_name=key_name,
                 api_key_update=models.APIKeyUpdate(
@@ -1492,7 +1516,7 @@ class Organizations(BaseSDK):
 
         req = self._build_request_async(
             method="PATCH",
-            path="/organizations/users/{user_email}/api-keys/{key_name}",
+            path="/v1/organizations/users/{user_email}/api-keys/{key_name}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1519,7 +1543,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="update_api_key_organizations_users__user_email__api_keys__key_name__patch",
+                operation_id="update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

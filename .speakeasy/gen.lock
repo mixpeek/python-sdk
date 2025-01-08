@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 0241cbe500950eb1647add053e77d688
+  docChecksum: 970ebdb4ff61560818de17c9f695ca20
   docVersion: "0.81"
-  speakeasyVersion: 1.460.3
-  generationVersion: 2.484.0
-  releaseVersion: 0.15.2
-  configChecksum: 567c022a2810c9b76381e2b6df4cd1d8
+  speakeasyVersion: 1.465.0
+  generationVersion: 2.486.6
+  releaseVersion: 0.16.0
+  configChecksum: 8b15f74ad6da12d6a3341102ba6b284f
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.7.4
+    core: 5.7.5
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -27,7 +27,6 @@ features:
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
     globals: 3.0.0
-    groups: 3.0.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
     nullables: 1.0.0
@@ -52,31 +51,41 @@ generatedFiles:
   - docs/models/assetresponse.md
   - docs/models/assetsmodelsearchquery.md
   - docs/models/assetupdate.md
-  - docs/models/availableindexesresponse.md
+  - docs/models/assignmentconfig.md
   - docs/models/availablemodels.md
+  - docs/models/availablemodelsresponse.md
   - docs/models/boolindexparams.md
+  - docs/models/classificationmatch.md
+  - docs/models/classificationwithfeature.md
+  - docs/models/classifyfeaturesv1entitiestaxonomiestaxonomyclassifypostrequest.md
   - docs/models/collectionmodel.md
   - docs/models/collectionmodelmetadata.md
   - docs/models/collectionresult.md
   - docs/models/collectionresultmetadata.md
-  - docs/models/createapikeyorganizationsusersuseremailapikeyspostrequest.md
-  - docs/models/createcollectioncollectionspostrequest.md
+  - docs/models/createapikeyv1organizationsusersuseremailapikeyspostrequest.md
   - docs/models/createcollectionrequest.md
   - docs/models/createcollectionrequestmetadata.md
+  - docs/models/createcollectionv1collectionspostrequest.md
   - docs/models/createnamespacerequest.md
+  - docs/models/createtaxonomyv1entitiestaxonomiespostrequest.md
   - docs/models/datetimeindexparams.md
   - docs/models/dateusage.md
   - docs/models/dbmodelpaginationresponse.md
-  - docs/models/deleteapikeyorganizationsusersuseremailapikeyskeynamedeleterequest.md
-  - docs/models/deleteassetassetsassetiddeleterequest.md
-  - docs/models/deletecollectioncollectionscollectiondeleterequest.md
-  - docs/models/deletefeaturefeaturesfeatureiddeleterequest.md
-  - docs/models/deletenamespacenamespacesnamespacedeleterequest.md
-  - docs/models/deleteuserorganizationsusersuseremaildeleterequest.md
+  - docs/models/deleteapikeyv1organizationsusersuseremailapikeyskeynamedeleterequest.md
+  - docs/models/deleteassetv1assetsassetiddeleterequest.md
+  - docs/models/deleteclassificationsv1entitiestaxonomiestaxonomyclassificationsclassificationiddeleterequest.md
+  - docs/models/deletecollectionv1collectionscollectiondeleterequest.md
+  - docs/models/deletefeaturev1featuresfeatureiddeleterequest.md
+  - docs/models/deletenamespacev1namespacesnamespacedeleterequest.md
+  - docs/models/deletetaxonomyv1entitiestaxonomiestaxonomydeleterequest.md
+  - docs/models/deleteuserv1organizationsusersuseremaildeleterequest.md
   - docs/models/denseembedding.md
   - docs/models/details.md
   - docs/models/direction.md
+  - docs/models/discoverrequest.md
   - docs/models/embedding.md
+  - docs/models/embeddingconfig.md
+  - docs/models/embeddingconfigtype.md
   - docs/models/embeddingrequest.md
   - docs/models/embeddingresponse.md
   - docs/models/entitysettings.md
@@ -84,6 +93,7 @@ generatedFiles:
   - docs/models/errorresponse.md
   - docs/models/facedetectsettings.md
   - docs/models/featureextractionembeddingrequest.md
+  - docs/models/featureoptions.md
   - docs/models/featureresponse.md
   - docs/models/featuresmodelpaginationresponse.md
   - docs/models/featureupdaterequest.md
@@ -92,16 +102,19 @@ generatedFiles:
   - docs/models/filedata.md
   - docs/models/filtercondition.md
   - docs/models/floatindexparams.md
-  - docs/models/fullassetupdateassetsassetidputrequest.md
-  - docs/models/fullfeatureupdatefeaturesfeatureidputrequest.md
+  - docs/models/fullassetupdatev1assetsassetidputrequest.md
+  - docs/models/fullfeatureupdatev1featuresfeatureidputrequest.md
+  - docs/models/genericsuccessresponse.md
   - docs/models/geoindexparams.md
-  - docs/models/getassetassetsassetidgetrequest.md
-  - docs/models/getassetwithfeaturesassetsassetidfeaturesgetrequest.md
-  - docs/models/getcollectioncollectionscollectiongetrequest.md
-  - docs/models/getfeaturefeaturesfeatureidgetrequest.md
-  - docs/models/getnamespacenamespacesnamespacegetrequest.md
-  - docs/models/gettasktaskstaskidgetrequest.md
-  - docs/models/getuserorganizationsusersuseremailgetrequest.md
+  - docs/models/getassetv1assetsassetidgetrequest.md
+  - docs/models/getassetwithfeaturesv1assetsassetidfeaturesgetrequest.md
+  - docs/models/getcollectionv1collectionscollectiongetrequest.md
+  - docs/models/getfeaturev1featuresfeatureidgetrequest.md
+  - docs/models/getnamespacev1namespacesnamespacegetrequest.md
+  - docs/models/gettaskv1taskstaskidgetrequest.md
+  - docs/models/gettaxonomynodev1entitiestaxonomiesnodesnodegetrequest.md
+  - docs/models/gettaxonomyv1entitiestaxonomiestaxonomygetrequest.md
+  - docs/models/getuserv1organizationsusersuseremailgetrequest.md
   - docs/models/groupbyoptions.md
   - docs/models/groupbyoptionsasset.md
   - docs/models/groupedassetdata.md
@@ -113,9 +126,9 @@ generatedFiles:
   - docs/models/imagereadsettings.md
   - docs/models/imagereadsettingsjsonoutput.md
   - docs/models/imagesettings.md
-  - docs/models/ingestimageurlingestimagesurlpostrequest.md
-  - docs/models/ingesttextingesttextpostrequest.md
-  - docs/models/ingestvideourlingestvideosurlpostrequest.md
+  - docs/models/ingestimageurlv1ingestimagesurlpostrequest.md
+  - docs/models/ingesttextv1ingesttextpostrequest.md
+  - docs/models/ingestvideourlv1ingestvideosurlpostrequest.md
   - docs/models/inputtype.md
   - docs/models/integerindexparams.md
   - docs/models/internal/globals.md
@@ -126,15 +139,20 @@ generatedFiles:
   - docs/models/jsonvideooutputsettings.md
   - docs/models/jsonvideooutputsettingsresponseshape.md
   - docs/models/keywordindexparams.md
-  - docs/models/killtasktaskstaskiddeleterequest.md
-  - docs/models/listassetsassetspostrequest.md
+  - docs/models/killtaskv1taskstaskiddeleterequest.md
   - docs/models/listassetsrequest.md
   - docs/models/listassetsresponse.md
-  - docs/models/listcollectionscollectionsgetrequest.md
+  - docs/models/listassetsv1assetspostrequest.md
+  - docs/models/listclassificationsrequest.md
+  - docs/models/listclassificationsresponse.md
+  - docs/models/listclassificationsv1entitiestaxonomiestaxonomyclassificationspostrequest.md
   - docs/models/listcollectionsresponse.md
-  - docs/models/listfeaturesfeaturespostrequest.md
+  - docs/models/listcollectionsv1collectionsgetrequest.md
   - docs/models/listfeaturesrequest.md
   - docs/models/listfeaturesresponse.md
+  - docs/models/listfeaturesv1featurespostrequest.md
+  - docs/models/listtaxonomiesresponse.md
+  - docs/models/listtaxonomiesv1entitiestaxonomiesgetrequest.md
   - docs/models/loc.md
   - docs/models/logicaloperator.md
   - docs/models/logodetectsettings.md
@@ -143,12 +161,14 @@ generatedFiles:
   - docs/models/mode.md
   - docs/models/modeldetails.md
   - docs/models/namespaceresponse.md
+  - docs/models/nodeoptions.md
+  - docs/models/nodeupdate.md
   - docs/models/nor.md
   - docs/models/operator.md
   - docs/models/or_.md
   - docs/models/organizationmodel.md
   - docs/models/organizationmodelmetadata.md
-  - docs/models/partialassetupdateassetsassetidpatchrequest.md
+  - docs/models/partialassetupdatev1assetsassetidpatchrequest.md
   - docs/models/payloadindexconfig.md
   - docs/models/payloadindextype.md
   - docs/models/payloadschematype.md
@@ -162,10 +182,10 @@ generatedFiles:
   - docs/models/querysettings.md
   - docs/models/rerankingoptions.md
   - docs/models/responseshape.md
-  - docs/models/searchassetsassetssearchpostrequest.md
   - docs/models/searchassetsrequest.md
-  - docs/models/searchfeaturesfeaturessearchpostrequest.md
-  - docs/models/searchfeaturesfeaturessearchpostresponsesearchfeaturesfeaturessearchpost.md
+  - docs/models/searchassetsv1assetssearchpostrequest.md
+  - docs/models/searchfeaturesv1featuressearchpostrequest.md
+  - docs/models/searchfeaturesv1featuressearchpostresponsesearchfeaturesv1featuressearchpost.md
   - docs/models/searchmodelsearchquery.md
   - docs/models/searchrequestfeatures.md
   - docs/models/security.md
@@ -173,17 +193,24 @@ generatedFiles:
   - docs/models/sparseembedding.md
   - docs/models/taskresponse.md
   - docs/models/taskstatus.md
+  - docs/models/taxonomycreate.md
   - docs/models/taxonomyextractionconfig.md
+  - docs/models/taxonomymodel.md
+  - docs/models/taxonomynode.md
+  - docs/models/taxonomynodecreate.md
+  - docs/models/taxonomyupdate.md
   - docs/models/textindexparams.md
   - docs/models/textsettings.md
   - docs/models/tokenizertype.md
   - docs/models/type.md
-  - docs/models/updateapikeyorganizationsusersuseremailapikeyskeynamepatchrequest.md
+  - docs/models/updateapikeyv1organizationsusersuseremailapikeyskeynamepatchrequest.md
   - docs/models/updateassetrequest.md
   - docs/models/updateassetrequestmetadata.md
-  - docs/models/updatecollectioncollectionscollectionputrequest.md
-  - docs/models/updatenamespacenamespacesnamespaceputrequest.md
+  - docs/models/updatecollectionv1collectionscollectionputrequest.md
   - docs/models/updatenamespacerequest.md
+  - docs/models/updatenamespacev1namespacesnamespaceputrequest.md
+  - docs/models/updatenodev1entitiestaxonomiesnodesnodepatchrequest.md
+  - docs/models/updatetaxonomyv1entitiestaxonomiestaxonomypatchrequest.md
   - docs/models/usage.md
   - docs/models/usermodelinput.md
   - docs/models/usermodelinputmetadata.md
@@ -205,12 +232,14 @@ generatedFiles:
   - docs/sdks/collections/README.md
   - docs/sdks/featureextractors/README.md
   - docs/sdks/features/README.md
+  - docs/sdks/featuresearch/README.md
   - docs/sdks/health/README.md
-  - docs/sdks/ingest/README.md
+  - docs/sdks/ingestassets/README.md
   - docs/sdks/mixpeek/README.md
   - docs/sdks/namespaces/README.md
   - docs/sdks/organizations/README.md
   - docs/sdks/tasks/README.md
+  - docs/sdks/taxonomyentities/README.md
   - poetry.toml
   - py.typed
   - pylintrc
@@ -225,11 +254,12 @@ generatedFiles:
   - src/mixpeek/assets.py
   - src/mixpeek/basesdk.py
   - src/mixpeek/collections.py
-  - src/mixpeek/featureextractors.py
+  - src/mixpeek/feature_extractors.py
+  - src/mixpeek/feature_search.py
   - src/mixpeek/features.py
   - src/mixpeek/health.py
   - src/mixpeek/httpclient.py
-  - src/mixpeek/ingest.py
+  - src/mixpeek/ingest_assets.py
   - src/mixpeek/models/__init__.py
   - src/mixpeek/models/actionusage.py
   - src/mixpeek/models/apierror.py
@@ -239,25 +269,34 @@ generatedFiles:
   - src/mixpeek/models/assetresponse.py
   - src/mixpeek/models/assets_model_searchquery.py
   - src/mixpeek/models/assetupdate.py
-  - src/mixpeek/models/availableindexesresponse.py
+  - src/mixpeek/models/assignmentconfig.py
   - src/mixpeek/models/availablemodels.py
+  - src/mixpeek/models/availablemodelsresponse.py
   - src/mixpeek/models/boolindexparams.py
+  - src/mixpeek/models/classificationmatch.py
+  - src/mixpeek/models/classificationwithfeature.py
+  - src/mixpeek/models/classify_features_v1_entities_taxonomies_taxonomy_classify_postop.py
   - src/mixpeek/models/collectionmodel.py
   - src/mixpeek/models/collectionresult.py
-  - src/mixpeek/models/create_api_key_organizations_users_user_email_api_keys_postop.py
-  - src/mixpeek/models/create_collection_collections_postop.py
+  - src/mixpeek/models/create_api_key_v1_organizations_users_user_email_api_keys_postop.py
+  - src/mixpeek/models/create_collection_v1_collections_postop.py
+  - src/mixpeek/models/create_taxonomy_v1_entities_taxonomies_postop.py
   - src/mixpeek/models/createcollectionrequest.py
   - src/mixpeek/models/createnamespacerequest.py
   - src/mixpeek/models/datetimeindexparams.py
   - src/mixpeek/models/dateusage.py
   - src/mixpeek/models/db_model_paginationresponse.py
-  - src/mixpeek/models/delete_api_key_organizations_users_user_email_api_keys_key_name_deleteop.py
-  - src/mixpeek/models/delete_asset_assets_asset_id_deleteop.py
-  - src/mixpeek/models/delete_collection_collections_collection_deleteop.py
-  - src/mixpeek/models/delete_feature_features_feature_id_deleteop.py
-  - src/mixpeek/models/delete_namespace_namespaces_namespace_deleteop.py
-  - src/mixpeek/models/delete_user_organizations_users_user_email_deleteop.py
+  - src/mixpeek/models/delete_api_key_v1_organizations_users_user_email_api_keys_key_name_deleteop.py
+  - src/mixpeek/models/delete_asset_v1_assets_asset_id_deleteop.py
+  - src/mixpeek/models/delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_deleteop.py
+  - src/mixpeek/models/delete_collection_v1_collections_collection_deleteop.py
+  - src/mixpeek/models/delete_feature_v1_features_feature_id_deleteop.py
+  - src/mixpeek/models/delete_namespace_v1_namespaces_namespace_deleteop.py
+  - src/mixpeek/models/delete_taxonomy_v1_entities_taxonomies_taxonomy_deleteop.py
+  - src/mixpeek/models/delete_user_v1_organizations_users_user_email_deleteop.py
   - src/mixpeek/models/denseembedding.py
+  - src/mixpeek/models/discoverrequest.py
+  - src/mixpeek/models/embeddingconfig.py
   - src/mixpeek/models/embeddingrequest.py
   - src/mixpeek/models/embeddingresponse.py
   - src/mixpeek/models/entitysettings.py
@@ -265,21 +304,25 @@ generatedFiles:
   - src/mixpeek/models/errorresponse.py
   - src/mixpeek/models/facedetectsettings.py
   - src/mixpeek/models/featureextractionembeddingrequest.py
+  - src/mixpeek/models/featureoptions.py
   - src/mixpeek/models/featureresponse.py
   - src/mixpeek/models/features_model_paginationresponse.py
   - src/mixpeek/models/featureupdaterequest.py
   - src/mixpeek/models/filtercondition.py
   - src/mixpeek/models/floatindexparams.py
-  - src/mixpeek/models/full_asset_update_assets_asset_id_putop.py
-  - src/mixpeek/models/full_feature_update_features_feature_id_putop.py
+  - src/mixpeek/models/full_asset_update_v1_assets_asset_id_putop.py
+  - src/mixpeek/models/full_feature_update_v1_features_feature_id_putop.py
+  - src/mixpeek/models/genericsuccessresponse.py
   - src/mixpeek/models/geoindexparams.py
-  - src/mixpeek/models/get_asset_assets_asset_id_getop.py
-  - src/mixpeek/models/get_asset_with_features_assets_asset_id_features_getop.py
-  - src/mixpeek/models/get_collection_collections_collection_getop.py
-  - src/mixpeek/models/get_feature_features_feature_id_getop.py
-  - src/mixpeek/models/get_namespace_namespaces_namespace_getop.py
-  - src/mixpeek/models/get_task_tasks_task_id_getop.py
-  - src/mixpeek/models/get_user_organizations_users_user_email_getop.py
+  - src/mixpeek/models/get_asset_v1_assets_asset_id_getop.py
+  - src/mixpeek/models/get_asset_with_features_v1_assets_asset_id_features_getop.py
+  - src/mixpeek/models/get_collection_v1_collections_collection_getop.py
+  - src/mixpeek/models/get_feature_v1_features_feature_id_getop.py
+  - src/mixpeek/models/get_namespace_v1_namespaces_namespace_getop.py
+  - src/mixpeek/models/get_task_v1_tasks_task_id_getop.py
+  - src/mixpeek/models/get_taxonomy_node_v1_entities_taxonomies_nodes_node_getop.py
+  - src/mixpeek/models/get_taxonomy_v1_entities_taxonomies_taxonomy_getop.py
+  - src/mixpeek/models/get_user_v1_organizations_users_user_email_getop.py
   - src/mixpeek/models/groupbyoptions.py
   - src/mixpeek/models/groupbyoptionsasset.py
   - src/mixpeek/models/groupedassetdata.py
@@ -289,9 +332,9 @@ generatedFiles:
   - src/mixpeek/models/imagedetectsettings.py
   - src/mixpeek/models/imagereadsettings.py
   - src/mixpeek/models/imagesettings.py
-  - src/mixpeek/models/ingest_image_url_ingest_images_url_postop.py
-  - src/mixpeek/models/ingest_text_ingest_text_postop.py
-  - src/mixpeek/models/ingest_video_url_ingest_videos_url_postop.py
+  - src/mixpeek/models/ingest_image_url_v1_ingest_images_url_postop.py
+  - src/mixpeek/models/ingest_text_v1_ingest_text_postop.py
+  - src/mixpeek/models/ingest_video_url_v1_ingest_videos_url_postop.py
   - src/mixpeek/models/inputtype.py
   - src/mixpeek/models/integerindexparams.py
   - src/mixpeek/models/internal/__init__.py
@@ -300,22 +343,29 @@ generatedFiles:
   - src/mixpeek/models/jsontextoutputsettings.py
   - src/mixpeek/models/jsonvideooutputsettings.py
   - src/mixpeek/models/keywordindexparams.py
-  - src/mixpeek/models/kill_task_tasks_task_id_deleteop.py
-  - src/mixpeek/models/list_assets_assets_postop.py
-  - src/mixpeek/models/list_collections_collections_getop.py
-  - src/mixpeek/models/list_features_features_postop.py
+  - src/mixpeek/models/kill_task_v1_tasks_task_id_deleteop.py
+  - src/mixpeek/models/list_assets_v1_assets_postop.py
+  - src/mixpeek/models/list_classifications_v1_entities_taxonomies_taxonomy_classifications_postop.py
+  - src/mixpeek/models/list_collections_v1_collections_getop.py
+  - src/mixpeek/models/list_features_v1_features_postop.py
+  - src/mixpeek/models/list_taxonomies_v1_entities_taxonomies_getop.py
   - src/mixpeek/models/listassetsrequest.py
   - src/mixpeek/models/listassetsresponse.py
+  - src/mixpeek/models/listclassificationsrequest.py
+  - src/mixpeek/models/listclassificationsresponse.py
   - src/mixpeek/models/listcollectionsresponse.py
   - src/mixpeek/models/listfeaturesrequest.py
   - src/mixpeek/models/listfeaturesresponse.py
+  - src/mixpeek/models/listtaxonomiesresponse.py
   - src/mixpeek/models/logicaloperator.py
   - src/mixpeek/models/logodetectsettings.py
   - src/mixpeek/models/modality.py
   - src/mixpeek/models/modeldetails.py
   - src/mixpeek/models/namespaceresponse.py
+  - src/mixpeek/models/nodeoptions.py
+  - src/mixpeek/models/nodeupdate.py
   - src/mixpeek/models/organizationmodel.py
-  - src/mixpeek/models/partial_asset_update_assets_asset_id_patchop.py
+  - src/mixpeek/models/partial_asset_update_v1_assets_asset_id_patchop.py
   - src/mixpeek/models/payloadindexconfig.py
   - src/mixpeek/models/payloadindextype.py
   - src/mixpeek/models/payloadschematype.py
@@ -325,8 +375,8 @@ generatedFiles:
   - src/mixpeek/models/processvideourlinput.py
   - src/mixpeek/models/querysettings.py
   - src/mixpeek/models/rerankingoptions.py
-  - src/mixpeek/models/search_assets_assets_search_postop.py
-  - src/mixpeek/models/search_features_features_search_postop.py
+  - src/mixpeek/models/search_assets_v1_assets_search_postop.py
+  - src/mixpeek/models/search_features_v1_features_search_postop.py
   - src/mixpeek/models/search_model_searchquery.py
   - src/mixpeek/models/searchassetsrequest.py
   - src/mixpeek/models/searchrequestfeatures.py
@@ -335,13 +385,20 @@ generatedFiles:
   - src/mixpeek/models/sparseembedding.py
   - src/mixpeek/models/taskresponse.py
   - src/mixpeek/models/taskstatus.py
+  - src/mixpeek/models/taxonomycreate.py
   - src/mixpeek/models/taxonomyextractionconfig.py
+  - src/mixpeek/models/taxonomymodel.py
+  - src/mixpeek/models/taxonomynode.py
+  - src/mixpeek/models/taxonomynodecreate.py
+  - src/mixpeek/models/taxonomyupdate.py
   - src/mixpeek/models/textindexparams.py
   - src/mixpeek/models/textsettings.py
   - src/mixpeek/models/tokenizertype.py
-  - src/mixpeek/models/update_api_key_organizations_users_user_email_api_keys_key_name_patchop.py
-  - src/mixpeek/models/update_collection_collections_collection_putop.py
-  - src/mixpeek/models/update_namespace_namespaces_namespace_putop.py
+  - src/mixpeek/models/update_api_key_v1_organizations_users_user_email_api_keys_key_name_patchop.py
+  - src/mixpeek/models/update_collection_v1_collections_collection_putop.py
+  - src/mixpeek/models/update_namespace_v1_namespaces_namespace_putop.py
+  - src/mixpeek/models/update_node_v1_entities_taxonomies_nodes_node_patchop.py
+  - src/mixpeek/models/update_taxonomy_v1_entities_taxonomies_taxonomy_patchop.py
   - src/mixpeek/models/updateassetrequest.py
   - src/mixpeek/models/updatenamespacerequest.py
   - src/mixpeek/models/usage.py
@@ -362,6 +419,7 @@ generatedFiles:
   - src/mixpeek/sdk.py
   - src/mixpeek/sdkconfiguration.py
   - src/mixpeek/tasks.py
+  - src/mixpeek/taxonomy_entities.py
   - src/mixpeek/types/__init__.py
   - src/mixpeek/types/basemodel.py
   - src/mixpeek/utils/__init__.py
@@ -888,4 +946,587 @@ examples:
       responses:
         "200":
           application/json: "<value>"
+  get_organization_v1_organizations_get:
+    speakeasy-default-get-organization-v1-organizations-get:
+      responses:
+        "200":
+          application/json: {"organization_name": "<value>"}
+        "400":
+          application/json: {"status": 441424, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_usage_v1_organizations_usage_get:
+    speakeasy-default-get-usage-v1-organizations-usage-get:
+      responses:
+        "200":
+          application/json: {"total_credits": 998093, "dates": [{"date": "2024-09-22", "credits": 106421, "actions": [{"action": "<value>", "credits": 10756}, {"action": "<value>", "credits": 835779}, {"action": "<value>", "credits": 414089}]}]}
+        "400":
+          application/json: {"status": 606141, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_user_v1_organizations_users__user_email__get:
+    speakeasy-default-get-user-v1-organizations-users-user-email-get:
+      parameters:
+        path:
+          user_email: "<value>"
+      responses:
+        "200":
+          application/json: {"email": "Gilberto37@hotmail.com"}
+        "400":
+          application/json: {"status": 946032, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_user_v1_organizations_users__user_email__delete:
+    speakeasy-default-delete-user-v1-organizations-users-user-email-delete:
+      parameters:
+        path:
+          user_email: "<value>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"status": 234836, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  add_user_v1_organizations_users_post:
+    speakeasy-default-add-user-v1-organizations-users-post:
+      requestBody:
+        application/json: {"email": "Wendell_Larson94@hotmail.com"}
+      responses:
+        "200":
+          application/json: {"email": "Shakira.Feest@hotmail.com"}
+        "400":
+          application/json: {"status": 274044, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  create_api_key_v1_organizations_users__user_email__api_keys_post:
+    speakeasy-default-create-api-key-v1-organizations-users-user-email-api-keys-post:
+      parameters:
+        path:
+          user_email: "<value>"
+        query: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"status": 834061, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete:
+    speakeasy-default-delete-api-key-v1-organizations-users-user-email-api-keys-key-name-delete:
+      parameters:
+        path:
+          user_email: "<value>"
+          key_name: "<value>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"status": 235068, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch:
+    speakeasy-default-update-api-key-v1-organizations-users-user-email-api-keys-key-name-patch:
+      parameters:
+        path:
+          user_email: "<value>"
+          key_name: "<value>"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"status": 490703, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  create_namespace_v1_namespaces_post:
+    speakeasy-default-create-namespace-v1-namespaces-post:
+      requestBody:
+        application/json: {"namespace_name": "spotify_playlists_dev", "embedding_models": ["image", "multimodal", "text", "keyword"], "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
+      responses:
+        "200":
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
+        "400":
+          application/json: {"status": 97273, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  list_namespaces_v1_namespaces_get:
+    speakeasy-default-list-namespaces-v1-namespaces-get:
+      responses:
+        "200":
+          application/json: []
+        "400":
+          application/json: {"status": 803212, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_namespace_v1_namespaces__namespace__delete:
+    speakeasy-default-delete-namespace-v1-namespaces-namespace-delete:
+      parameters:
+        path:
+          namespace: "ns_1234567890"
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 469804, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  update_namespace_v1_namespaces__namespace__put:
+    speakeasy-default-update-namespace-v1-namespaces-namespace-put:
+      parameters:
+        path:
+          namespace: "ns_1234567890"
+      requestBody:
+        application/json: {"namespace_name": "spotify_playlists_dev", "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
+      responses:
+        "200":
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>", "<value>"], "payload_indexes": []}
+        "400":
+          application/json: {"status": 366934, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_namespace_v1_namespaces__namespace__get:
+    speakeasy-default-get-namespace-v1-namespaces-namespace-get:
+      parameters:
+        path:
+          namespace: "my_namespace"
+      responses:
+        "200":
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}
+        "400":
+          application/json: {"status": 449425, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  list_available_models_v1_namespaces_models_get:
+    speakeasy-default-list-available-models-v1-namespaces-models-get:
+      responses:
+        "200":
+          application/json: {"embedding_models": {"multimodal": {"supported_modalities": ["text", "image"], "vector_type": "dense", "size": 512}, "text": {"supported_modalities": ["text", "image"], "vector_type": "dense", "size": 512}}, "payload_indexes": [{"type": "keyword"}, {"type": "integer"}, {"type": "text"}]}
+        "400":
+          application/json: {"status": 700624, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_feature_v1_features__feature_id__get:
+    speakeasy-default-get-feature-v1-features-feature-id-get:
+      parameters:
+        path:
+          feature_id: "<id>"
+        query: {}
+        header: {}
+      responses:
+        "200":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "400":
+          application/json: {"status": 80595, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_feature_v1_features__feature_id__delete:
+    speakeasy-default-delete-feature-v1-features-feature-id-delete:
+      parameters:
+        path:
+          feature_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"status": 763083, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  full_feature_update_v1_features__feature_id__put:
+    speakeasy-default-full-feature-update-v1-features-feature-id-put:
+      parameters:
+        path:
+          feature_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"status": 915812, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  list_features_v1_features_post:
+    speakeasy-default-list-features-v1-features-post:
+      requestBody:
+        application/json: {"collections": ["collection_123", "my_collection_name"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "select": ["metadata.tags"]}
+      responses:
+        "200":
+          application/json: {"results": [{"key": "<value>"}], "pagination": {"total": 575076, "page_size": 575245, "total_pages": 583391, "current_page": 10831, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 723909, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  search_features_v1_features_search_post:
+    "":
+      parameters:
+        query:
+          offset_position: 0
+          page_size: 10
+        header: {}
+      requestBody:
+        application/json: {"queries": [{"embedding_model": "image", "value": "https://example.com/dog.jpg", "type": "url", "settings": {"limit": 50, "min_score": 0.7}}, {"embedding_model": "text", "value": "This is a text query", "type": "text"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "metadata.field_name", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": true}, "session_id": "sess_abc123", "return_url": true}
+      responses:
+        "400":
+          application/json: {"status": 402821, "error": {"message": "<value>", "type": "<value>"}}
+        "422": {}
+  extract_embeddings_v1_features_extractors_embed_post:
+    speakeasy-default-extract-embeddings-v1-features-extractors-embed-post:
+      requestBody:
+        application/json: {"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "baai-bge-m3"}
+      responses:
+        "200":
+          application/json: {"embedding": {"indices": [58863], "values": ["244.75"]}}
+        "400":
+          application/json: {"status": 996580, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  ingest_text_v1_ingest_text_post:
+    speakeasy-default-ingest-text-v1-ingest-text-post:
+      requestBody:
+        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "embedding_models": ["multimodal", "text"]}}}}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 699645, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  ingest_video_url_v1_ingest_videos_url_post:
+    speakeasy-default-ingest-video-url-v1-ingest-videos-url-post:
+      requestBody:
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": []}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 189274, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  ingest_image_url_v1_ingest_images_url_post:
+    speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
+      requestBody:
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "text"}], "describe": {"enabled": true, "max_length": 1000}, "detect": {"faces": {"enabled": true, "confidence_threshold": 0.8}}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "embedding_models": ["multimodal", "text"]}}}}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 287622, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  create_taxonomy_v1_entities_taxonomies_post:
+    speakeasy-default-create-taxonomy-v1-entities-taxonomies-post:
+      requestBody:
+        application/json: {"taxonomy_name": "electronics", "nodes": [{"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}, {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "children": []}]}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 735189, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  list_taxonomies_v1_entities_taxonomies_get:
+    speakeasy-default-list-taxonomies-v1-entities-taxonomies-get:
+      responses:
+        "200":
+          application/json: {"results": [{"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}], "pagination": {"total": 925831, "page": 676079, "page_size": 33553, "total_pages": 325990, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 408430, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_taxonomy_v1_entities_taxonomies__taxonomy__get:
+    speakeasy-default-get-taxonomy-v1-entities-taxonomies-taxonomy-get:
+      parameters:
+        path:
+          taxonomy: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}
+        "400":
+          application/json: {"status": 593425, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_taxonomy_v1_entities_taxonomies__taxonomy__delete:
+    speakeasy-default-delete-taxonomy-v1-entities-taxonomies-taxonomy-delete:
+      parameters:
+        path:
+          taxonomy: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"message": "<value>"}
+        "400":
+          application/json: {"status": 628193, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  update_taxonomy_v1_entities_taxonomies__taxonomy__patch:
+    speakeasy-default-update-taxonomy-v1-entities-taxonomies-taxonomy-patch:
+      parameters:
+        path:
+          taxonomy: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"taxonomy_name": "electronics_updated", "description": "Updated electronics taxonomy"}
+      responses:
+        "200":
+          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}
+        "400":
+          application/json: {"status": 115509, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_taxonomy_node_v1_entities_taxonomies_nodes__node__get:
+    speakeasy-default-get-taxonomy-node-v1-entities-taxonomies-nodes-node-get:
+      parameters:
+        path:
+          node: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
+        "400":
+          application/json: {"status": 966201, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  update_node_v1_entities_taxonomies_nodes__node__patch:
+    speakeasy-default-update-node-v1-entities-taxonomies-nodes-node-patch:
+      parameters:
+        path:
+          node: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category"}
+      responses:
+        "200":
+          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
+        "400":
+          application/json: {"status": 869537, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  classify_features_v1_entities_taxonomies__taxonomy__classify_post:
+    speakeasy-default-classify-features-v1-entities-taxonomies-taxonomy-classify-post:
+      parameters:
+        path:
+          taxonomy: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"collections": ["<value>", "<value>", "<value>"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 555572, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  list_classifications_v1_entities_taxonomies__taxonomy__classifications_post:
+    speakeasy-default-list-classifications-v1-entities-taxonomies-taxonomy-classifications-post:
+      parameters:
+        path:
+          taxonomy: "<value>"
+        query: {}
+        header: {}
+      requestBody:
+        application/json: {"filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "feature_options": {"return_payload": true, "return_url": true}, "node_options": {"return_payload": true}}
+      responses:
+        "200":
+          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": "6021.18", "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 195554, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_classifications_v1_entities_taxonomies__taxonomy__classifications__classification_id__delete:
+    speakeasy-default-delete-classifications-v1-entities-taxonomies-taxonomy-classifications-classification-id-delete:
+      parameters:
+        path:
+          taxonomy: "<value>"
+          classification_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"message": "<value>"}
+        "400":
+          application/json: {"status": 62269, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_asset_v1_assets__asset_id__get:
+    "":
+      parameters:
+        path:
+          asset_id: "ast_123"
+        query:
+          return_url: true
+        header: {}
+      responses:
+        "200":
+          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
+        "400":
+          application/json: {"status": 15948, "error": {"message": "<value>", "type": "<value>"}}
+        "422": {}
+  delete_asset_v1_assets__asset_id__delete:
+    speakeasy-default-delete-asset-v1-assets-asset-id-delete:
+      parameters:
+        path:
+          asset_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"status": 155071, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  full_asset_update_v1_assets__asset_id__put:
+    speakeasy-default-full-asset-update-v1-assets-asset-id-put:
+      parameters:
+        path:
+          asset_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"propagate_features": true}
+      responses:
+        "200":
+          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
+        "400":
+          application/json: {"status": 556461, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  partial_asset_update_v1_assets__asset_id__patch:
+    speakeasy-default-partial-asset-update-v1-assets-asset-id-patch:
+      parameters:
+        path:
+          asset_id: "<id>"
+        header: {}
+      requestBody:
+        application/json: {"propagate_features": true}
+      responses:
+        "200":
+          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
+        "400":
+          application/json: {"status": 134086, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_asset_with_features_v1_assets__asset_id__features_get:
+    "":
+      parameters:
+        path:
+          asset_id: "asset_123456789"
+        query:
+          return_url: false
+        header: {}
+      responses:
+        "200":
+          application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}}
+        "400":
+          application/json: {"status": 761028, "error": {"message": "<value>", "type": "<value>"}}
+        "422": {}
+  list_assets_v1_assets_post:
+    speakeasy-default-list-assets-v1-assets-post:
+      requestBody:
+        application/json: {"collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_assets": 10, "sort": {"field": "score", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "return_url": true}
+      responses:
+        "200":
+          application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 134748, "page": 493994, "page_size": 833111, "total_pages": 739368, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 555566, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  search_assets_v1_assets_search_post:
+    speakeasy-default-search-assets-v1-assets-search-post:
+      requestBody:
+        application/json: {"query": {"key": ["title", "description"], "value": "search term"}, "collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "return_url": true}
+      responses:
+        "200":
+          application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 55398, "page": 826364, "page_size": 217286, "total_pages": 822588, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 795180, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  list_collections_v1_collections_get:
+    speakeasy-default-list-collections-v1-collections-get:
+      responses:
+        "200":
+          application/json: {"results": [{"count": 725044, "size_bytes": 339199, "last_updated": "2023-02-17T10:46:32.060Z", "collection_id": "<id>"}], "pagination": {"total": 528574, "page": 944272, "page_size": 520228, "total_pages": 815502, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 682508, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  create_collection_v1_collections_post:
+    speakeasy-default-create-collection-v1-collections-post:
+      requestBody:
+        application/json: {"collection_name": "<value>"}
+      responses:
+        "200":
+          application/json: {"collection_name": "<value>"}
+        "400":
+          application/json: {"status": 210546, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  delete_collection_v1_collections__collection__delete:
+    speakeasy-default-delete-collection-v1-collections-collection-delete:
+      parameters:
+        path:
+          collection: "my_collection"
+        header: {}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 348710, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  update_collection_v1_collections__collection__put:
+    speakeasy-default-update-collection-v1-collections-collection-put:
+      parameters:
+        path:
+          collection: "col_1234567890"
+        header: {}
+      requestBody:
+        application/json: {"collection_name": "<value>"}
+      responses:
+        "200":
+          application/json: {"collection_name": "<value>"}
+        "400":
+          application/json: {"status": 405534, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_collection_v1_collections__collection__get:
+    speakeasy-default-get-collection-v1-collections-collection-get:
+      parameters:
+        path:
+          collection: "col_1234567890"
+        header: {}
+      responses:
+        "200":
+          application/json: {"collection_name": "<value>"}
+        "400":
+          application/json: {"status": 52108, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  kill_task_v1_tasks__task_id__delete:
+    speakeasy-default-kill-task-v1-tasks-task-id-delete:
+      parameters:
+        path:
+          task_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"status": 133802, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+  get_task_v1_tasks__task_id__get:
+    speakeasy-default-get-task-v1-tasks-task-id-get:
+      parameters:
+        path:
+          task_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"status": 153841, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
 generatedTests: {}

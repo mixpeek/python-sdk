@@ -3,32 +3,36 @@
 from __future__ import annotations
 from .modality import Modality
 from .vectortype import VectorType
-from mixpeek.types import BaseModel, Nullable, UNSET_SENTINEL
+from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class ModelDetailsTypedDict(TypedDict):
     r"""Details about a model in the registry"""
 
     supported_modalities: List[Modality]
+    r"""List of modalities that this model supports"""
     vector_type: VectorType
-    size: Nullable[int]
+    size: NotRequired[Nullable[int]]
+    r"""Dimensionality of the output vector (if applicable)"""
 
 
 class ModelDetails(BaseModel):
     r"""Details about a model in the registry"""
 
     supported_modalities: List[Modality]
+    r"""List of modalities that this model supports"""
 
     vector_type: VectorType
 
-    size: Nullable[int]
+    size: OptionalNullable[int] = UNSET
+    r"""Dimensionality of the output vector (if applicable)"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
+        optional_fields = ["size"]
         nullable_fields = ["size"]
         null_default_fields = []
 

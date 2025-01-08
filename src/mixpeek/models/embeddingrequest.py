@@ -9,15 +9,51 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class EmbeddingRequestTypedDict(TypedDict):
+    r"""
+    Request model for embedding generation.
+
+    When multiple EmbeddingRequests use the same embedding_model:
+    - All inputs will be embedded in the same vector space
+    - The final embedding will be the average of all individual embeddings
+    - Original values will be stored with a ' | ' separator
+
+    Example:
+    Two requests with same model \"clip\":
+    1. type: \"text\", value: \"a dog\", embedding_model: \"clip\"
+    2. type: \"url\", value: \"https://example.com/image.jpg\", embedding_model: \"clip\"
+
+    Result:
+    - vectors[\"clip\"] = average of both embeddings
+    - embedding_configs[\"clip\"] = \"a dog | https://example.com/image.jpg\"
+
+    """
+
     type: InputType
     embedding_model: VectorModel
     value: NotRequired[Nullable[str]]
     r"""The input content to embed. Could be a URL, text content, file path, or base64 encoded string"""
-    field_name: NotRequired[Nullable[str]]
-    r"""Field name to insert into the database, if not provided, the embedding will be inserted into the default field"""
 
 
 class EmbeddingRequest(BaseModel):
+    r"""
+    Request model for embedding generation.
+
+    When multiple EmbeddingRequests use the same embedding_model:
+    - All inputs will be embedded in the same vector space
+    - The final embedding will be the average of all individual embeddings
+    - Original values will be stored with a ' | ' separator
+
+    Example:
+    Two requests with same model \"clip\":
+    1. type: \"text\", value: \"a dog\", embedding_model: \"clip\"
+    2. type: \"url\", value: \"https://example.com/image.jpg\", embedding_model: \"clip\"
+
+    Result:
+    - vectors[\"clip\"] = average of both embeddings
+    - embedding_configs[\"clip\"] = \"a dog | https://example.com/image.jpg\"
+
+    """
+
     type: InputType
 
     embedding_model: VectorModel
@@ -25,13 +61,10 @@ class EmbeddingRequest(BaseModel):
     value: OptionalNullable[str] = UNSET
     r"""The input content to embed. Could be a URL, text content, file path, or base64 encoded string"""
 
-    field_name: OptionalNullable[str] = UNSET
-    r"""Field name to insert into the database, if not provided, the embedding will be inserted into the default field"""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["value", "field_name"]
-        nullable_fields = ["value", "field_name"]
+        optional_fields = ["value"]
+        nullable_fields = ["value"]
         null_default_fields = []
 
         serialized = handler(self)

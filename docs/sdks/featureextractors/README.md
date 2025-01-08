@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [extract_embeddings](#extract_embeddings) - Extract Embeddings
+* [extract_embeddings_v1_features_extractors_embed_post](#extract_embeddings_v1_features_extractors_embed_post) - Extract Embeddings
 
-## extract_embeddings
+## extract_embeddings_v1_features_extractors_embed_post
 
 Extract Embeddings
 
@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.feature_extractors.extract_embeddings(type_=mixpeek.InputType.TEXT, embedding_model=mixpeek.VectorModel.VERTEX_MULTIMODAL, value="https://example.com/image.jpg")
+    res = mixpeek.feature_extractors.extract_embeddings_v1_features_extractors_embed_post(type_=mixpeek.InputType.URL, embedding_model=mixpeek.VectorModel.BAAI_BGE_M3, value="https://example.com/image.jpg")
 
     # Handle response
     print(res)

@@ -8,7 +8,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get()
+    res = mixpeek.health.check()
 
     # Handle response
     print(res)
@@ -28,7 +28,7 @@ async def main():
         token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as mixpeek:
 
-        res = await mixpeek.organizations.get_async()
+        res = await mixpeek.health.check_async()
 
         # Handle response
         print(res)

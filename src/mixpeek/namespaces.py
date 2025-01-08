@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Namespaces(BaseSDK):
-    def create(
+    def create_namespace_v1_namespaces_post(
         self,
         *,
         namespace_name: str,
@@ -30,7 +30,7 @@ class Namespaces(BaseSDK):
         Creates a new namespace with the specified configuration
 
         :param namespace_name: Name of the namespace to create
-        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'
+        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3', 'answerai-modern-bert'
         :param payload_indexes: List of payload index configurations
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -55,7 +55,7 @@ class Namespaces(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/namespaces",
+            path="/v1/namespaces",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -82,7 +82,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="create_namespace_namespaces_post",
+                operation_id="create_namespace_v1_namespaces_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -119,7 +119,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def create_async(
+    async def create_namespace_v1_namespaces_post_async(
         self,
         *,
         namespace_name: str,
@@ -140,7 +140,7 @@ class Namespaces(BaseSDK):
         Creates a new namespace with the specified configuration
 
         :param namespace_name: Name of the namespace to create
-        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'
+        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3', 'answerai-modern-bert'
         :param payload_indexes: List of payload index configurations
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -165,7 +165,7 @@ class Namespaces(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/namespaces",
+            path="/v1/namespaces",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -192,7 +192,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="create_namespace_namespaces_post",
+                operation_id="create_namespace_v1_namespaces_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -229,7 +229,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def list(
+    def list_namespaces_v1_namespaces_get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -255,7 +255,7 @@ class Namespaces(BaseSDK):
             base_url = server_url
         req = self._build_request(
             method="GET",
-            path="/namespaces",
+            path="/v1/namespaces",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -279,7 +279,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="list_namespaces_namespaces_get",
+                operation_id="list_namespaces_v1_namespaces_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -316,7 +316,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def list_async(
+    async def list_namespaces_v1_namespaces_get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -342,7 +342,7 @@ class Namespaces(BaseSDK):
             base_url = server_url
         req = self._build_request_async(
             method="GET",
-            path="/namespaces",
+            path="/v1/namespaces",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -366,7 +366,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="list_namespaces_namespaces_get",
+                operation_id="list_namespaces_v1_namespaces_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -403,7 +403,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def delete(
+    def delete_namespace_v1_namespaces_namespace_delete(
         self,
         *,
         namespace: str,
@@ -430,13 +430,13 @@ class Namespaces(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteNamespaceNamespacesNamespaceDeleteRequest(
+        request = models.DeleteNamespaceV1NamespacesNamespaceDeleteRequest(
             namespace=namespace,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/namespaces/{namespace}",
+            path="/v1/namespaces/{namespace}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -460,7 +460,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete_namespace_namespaces__namespace__delete",
+                operation_id="delete_namespace_v1_namespaces__namespace__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -497,7 +497,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def delete_async(
+    async def delete_namespace_v1_namespaces_namespace_delete_async(
         self,
         *,
         namespace: str,
@@ -524,13 +524,13 @@ class Namespaces(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteNamespaceNamespacesNamespaceDeleteRequest(
+        request = models.DeleteNamespaceV1NamespacesNamespaceDeleteRequest(
             namespace=namespace,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/namespaces/{namespace}",
+            path="/v1/namespaces/{namespace}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -554,7 +554,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete_namespace_namespaces__namespace__delete",
+                operation_id="delete_namespace_v1_namespaces__namespace__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -591,7 +591,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def update(
+    def update_namespace_v1_namespaces_namespace_put(
         self,
         *,
         namespace: str,
@@ -624,7 +624,7 @@ class Namespaces(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.UpdateNamespaceNamespacesNamespacePutRequest(
+        request = models.UpdateNamespaceV1NamespacesNamespacePutRequest(
             namespace=namespace,
             update_namespace_request=models.UpdateNamespaceRequest(
                 namespace_name=namespace_name,
@@ -636,7 +636,7 @@ class Namespaces(BaseSDK):
 
         req = self._build_request(
             method="PUT",
-            path="/namespaces/{namespace}",
+            path="/v1/namespaces/{namespace}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -667,7 +667,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="update_namespace_namespaces__namespace__put",
+                operation_id="update_namespace_v1_namespaces__namespace__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -704,7 +704,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def update_async(
+    async def update_namespace_v1_namespaces_namespace_put_async(
         self,
         *,
         namespace: str,
@@ -737,7 +737,7 @@ class Namespaces(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.UpdateNamespaceNamespacesNamespacePutRequest(
+        request = models.UpdateNamespaceV1NamespacesNamespacePutRequest(
             namespace=namespace,
             update_namespace_request=models.UpdateNamespaceRequest(
                 namespace_name=namespace_name,
@@ -749,7 +749,7 @@ class Namespaces(BaseSDK):
 
         req = self._build_request_async(
             method="PUT",
-            path="/namespaces/{namespace}",
+            path="/v1/namespaces/{namespace}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -780,7 +780,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="update_namespace_namespaces__namespace__put",
+                operation_id="update_namespace_v1_namespaces__namespace__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -817,7 +817,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def get(
+    def get_namespace_v1_namespaces_namespace_get(
         self,
         *,
         namespace: str,
@@ -844,13 +844,13 @@ class Namespaces(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetNamespaceNamespacesNamespaceGetRequest(
+        request = models.GetNamespaceV1NamespacesNamespaceGetRequest(
             namespace=namespace,
         )
 
         req = self._build_request(
             method="GET",
-            path="/namespaces/{namespace}",
+            path="/v1/namespaces/{namespace}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -874,7 +874,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_namespace_namespaces__namespace__get",
+                operation_id="get_namespace_v1_namespaces__namespace__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -911,7 +911,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def get_async(
+    async def get_namespace_v1_namespaces_namespace_get_async(
         self,
         *,
         namespace: str,
@@ -938,13 +938,13 @@ class Namespaces(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetNamespaceNamespacesNamespaceGetRequest(
+        request = models.GetNamespaceV1NamespacesNamespaceGetRequest(
             namespace=namespace,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/namespaces/{namespace}",
+            path="/v1/namespaces/{namespace}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -968,7 +968,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_namespace_namespaces__namespace__get",
+                operation_id="get_namespace_v1_namespaces__namespace__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1005,17 +1005,17 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def list_indexes(
+    def list_available_models_v1_namespaces_models_get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AvailableIndexesResponse:
-        r"""List Available Indexes
+    ) -> models.AvailableModelsResponse:
+        r"""List Available Models
 
-        Returns all available indexes and their configurations
+        Returns all available models and their configurations, scoped to the organization
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1031,7 +1031,7 @@ class Namespaces(BaseSDK):
             base_url = server_url
         req = self._build_request(
             method="GET",
-            path="/namespaces/indexes",
+            path="/v1/namespaces/models",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -1055,7 +1055,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="list_available_indexes_namespaces_indexes_get",
+                operation_id="list_available_models_v1_namespaces_models_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1068,7 +1068,7 @@ class Namespaces(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.AvailableIndexesResponse)
+            return utils.unmarshal_json(http_res.text, models.AvailableModelsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):
@@ -1092,17 +1092,17 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def list_indexes_async(
+    async def list_available_models_v1_namespaces_models_get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.AvailableIndexesResponse:
-        r"""List Available Indexes
+    ) -> models.AvailableModelsResponse:
+        r"""List Available Models
 
-        Returns all available indexes and their configurations
+        Returns all available models and their configurations, scoped to the organization
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1118,7 +1118,7 @@ class Namespaces(BaseSDK):
             base_url = server_url
         req = self._build_request_async(
             method="GET",
-            path="/namespaces/indexes",
+            path="/v1/namespaces/models",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -1142,7 +1142,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="list_available_indexes_namespaces_indexes_get",
+                operation_id="list_available_models_v1_namespaces_models_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1155,7 +1155,7 @@ class Namespaces(BaseSDK):
 
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.AvailableIndexesResponse)
+            return utils.unmarshal_json(http_res.text, models.AvailableModelsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404", "500"], "application/json"
         ):

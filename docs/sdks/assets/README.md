@@ -5,15 +5,15 @@
 
 ### Available Operations
 
-* [get](#get) - Get Asset
-* [delete](#delete) - Delete Asset
-* [update](#update) - Full Asset Update
-* [partial_update](#partial_update) - Partial Asset Update
-* [get_features](#get_features) - Get Asset With Features
-* [list](#list) - List Assets
-* [search](#search) - Search Assets
+* [get_asset_v1_assets_asset_id_get](#get_asset_v1_assets_asset_id_get) - Get Asset
+* [delete_asset_v1_assets_asset_id_delete](#delete_asset_v1_assets_asset_id_delete) - Delete Asset
+* [full_asset_update_v1_assets_asset_id_put](#full_asset_update_v1_assets_asset_id_put) - Full Asset Update
+* [partial_asset_update_v1_assets_asset_id_patch](#partial_asset_update_v1_assets_asset_id_patch) - Partial Asset Update
+* [get_asset_with_features_v1_assets_asset_id_features_get](#get_asset_with_features_v1_assets_asset_id_features_get) - Get Asset With Features
+* [list_assets_v1_assets_post](#list_assets_v1_assets_post) - List Assets
+* [search_assets_v1_assets_search_post](#search_assets_v1_assets_search_post) - Search Assets
 
-## get
+## get_asset_v1_assets_asset_id_get
 
 Get basic asset details
 
@@ -27,7 +27,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.get(asset_id="ast_123", return_url=True)
+    res = mixpeek.assets.get_asset_v1_assets_asset_id_get(asset_id="ast_123", return_url=True)
 
     # Handle response
     print(res)
@@ -55,9 +55,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete
+## delete_asset_v1_assets_asset_id_delete
 
-Delete Asset
+**Requirements:**
+- Required permissions: write
 
 ### Example Usage
 
@@ -69,7 +70,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.delete(asset_id="<id>")
+    res = mixpeek.assets.delete_asset_v1_assets_asset_id_delete(asset_id="<id>")
 
     # Handle response
     print(res)
@@ -96,9 +97,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update
+## full_asset_update_v1_assets_asset_id_put
 
-Full Asset Update
+**Requirements:**
+- Required permissions: write
 
 ### Example Usage
 
@@ -110,7 +112,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.update(asset_id="<id>", propagate_features=True, metadata={})
+    res = mixpeek.assets.full_asset_update_v1_assets_asset_id_put(asset_id="<id>", propagate_features=True, metadata={})
 
     # Handle response
     print(res)
@@ -139,9 +141,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## partial_update
+## partial_asset_update_v1_assets_asset_id_patch
 
-Partial Asset Update
+**Requirements:**
+- Required permissions: write
 
 ### Example Usage
 
@@ -153,7 +156,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.partial_update(asset_id="<id>", propagate_features=True, metadata={})
+    res = mixpeek.assets.partial_asset_update_v1_assets_asset_id_patch(asset_id="<id>", propagate_features=True, metadata={})
 
     # Handle response
     print(res)
@@ -182,7 +185,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_features
+## get_asset_with_features_v1_assets_asset_id_features_get
 
 Get asset details including all related features
 
@@ -196,7 +199,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.get_features(asset_id="asset_123456789", return_url=False)
+    res = mixpeek.assets.get_asset_with_features_v1_assets_asset_id_features_get(asset_id="asset_123456789", return_url=False)
 
     # Handle response
     print(res)
@@ -224,7 +227,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list
+## list_assets_v1_assets_post
 
 List Assets
 
@@ -239,7 +242,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.list(collections=[
+    res = mixpeek.assets.list_assets_v1_assets_post(collections=[
         "col_123",
         "my_collection",
     ], filters={
@@ -302,7 +305,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## search
+## search_assets_v1_assets_search_post
 
 Search Assets
 
@@ -317,7 +320,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.assets.search(collections=[
+    res = mixpeek.assets.search_assets_v1_assets_search_post(collections=[
         "col_123",
         "my_collection",
     ], query={

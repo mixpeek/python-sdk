@@ -5,18 +5,19 @@
 
 ### Available Operations
 
-* [get](#get) - Get Organization
-* [get_usage](#get_usage) - Get Usage
-* [get_user](#get_user) - Get User
-* [delete_user](#delete_user) - Delete User
-* [add_user](#add_user) - Add User
-* [create_api_key](#create_api_key) - Create Api Key
-* [delete_api_key](#delete_api_key) - Delete Api Key
-* [update_api_key](#update_api_key) - Update Api Key
+* [get_organization_v1_organizations_get](#get_organization_v1_organizations_get) - Get Organization
+* [get_usage_v1_organizations_usage_get](#get_usage_v1_organizations_usage_get) - Get Usage
+* [get_user_v1_organizations_users_user_email_get](#get_user_v1_organizations_users_user_email_get) - Get User
+* [delete_user_v1_organizations_users_user_email_delete](#delete_user_v1_organizations_users_user_email_delete) - Delete User
+* [add_user_v1_organizations_users_post](#add_user_v1_organizations_users_post) - Add User
+* [create_api_key_v1_organizations_users_user_email_api_keys_post](#create_api_key_v1_organizations_users_user_email_api_keys_post) - Create Api Key
+* [delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete](#delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete) - Delete Api Key
+* [update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch](#update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch) - Update Api Key
 
-## get
+## get_organization_v1_organizations_get
 
-Get Organization
+**Requirements:**
+- Required permissions: admin
 
 ### Example Usage
 
@@ -28,7 +29,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get()
+    res = mixpeek.organizations.get_organization_v1_organizations_get()
 
     # Handle response
     print(res)
@@ -53,9 +54,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_usage
+## get_usage_v1_organizations_usage_get
 
-Get Usage
+**Requirements:**
+- Required permissions: admin
 
 ### Example Usage
 
@@ -67,7 +69,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get_usage()
+    res = mixpeek.organizations.get_usage_v1_organizations_usage_get()
 
     # Handle response
     print(res)
@@ -92,7 +94,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_user
+## get_user_v1_organizations_users_user_email_get
 
 Get User
 
@@ -106,7 +108,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.get_user(user_email="<value>")
+    res = mixpeek.organizations.get_user_v1_organizations_users_user_email_get(user_email="<value>")
 
     # Handle response
     print(res)
@@ -132,9 +134,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_user
+## delete_user_v1_organizations_users_user_email_delete
 
-Delete User
+**Requirements:**
+- Required permissions: admin
 
 ### Example Usage
 
@@ -146,7 +149,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.delete_user(user_email="<value>")
+    res = mixpeek.organizations.delete_user_v1_organizations_users_user_email_delete(user_email="<value>")
 
     # Handle response
     print(res)
@@ -172,9 +175,10 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## add_user
+## add_user_v1_organizations_users_post
 
-Add User
+**Requirements:**
+- Required permissions: admin
 
 ### Example Usage
 
@@ -186,7 +190,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.add_user(email="Idella47@gmail.com")
+    res = mixpeek.organizations.add_user_v1_organizations_users_post(email="Wendell_Larson94@hotmail.com")
 
     # Handle response
     print(res)
@@ -216,7 +220,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## create_api_key
+## create_api_key_v1_organizations_users_user_email_api_keys_post
 
 Create a new API key for a specific user
 
@@ -230,7 +234,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.create_api_key(user_email="<value>")
+    res = mixpeek.organizations.create_api_key_v1_organizations_users_user_email_api_keys_post(user_email="<value>")
 
     # Handle response
     print(res)
@@ -257,7 +261,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_api_key
+## delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete
 
 Delete a specific API key for a user
 
@@ -271,7 +275,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.delete_api_key(user_email="<value>", key_name="<value>")
+    res = mixpeek.organizations.delete_api_key_v1_organizations_users_user_email_api_keys_key_name_delete(user_email="<value>", key_name="<value>")
 
     # Handle response
     print(res)
@@ -298,7 +302,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update_api_key
+## update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch
 
 Update an API key's name or permissions
 
@@ -312,7 +316,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.update_api_key(user_email="<value>", key_name="<value>")
+    res = mixpeek.organizations.update_api_key_v1_organizations_users_user_email_api_keys_key_name_patch(user_email="<value>", key_name="<value>")
 
     # Handle response
     print(res)

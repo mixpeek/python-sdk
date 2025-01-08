@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Collections(BaseSDK):
-    def list(
+    def list_collections_v1_collections_get(
         self,
         *,
         page: OptionalNullable[int] = UNSET,
@@ -38,7 +38,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.ListCollectionsCollectionsGetRequest(
+        request = models.ListCollectionsV1CollectionsGetRequest(
             page=page,
             page_size=page_size,
             x_namespace=x_namespace,
@@ -46,7 +46,7 @@ class Collections(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/collections",
+            path="/v1/collections",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -70,7 +70,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="list_collections_collections_get",
+                operation_id="list_collections_v1_collections_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -107,7 +107,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def list_async(
+    async def list_collections_v1_collections_get_async(
         self,
         *,
         page: OptionalNullable[int] = UNSET,
@@ -136,7 +136,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.ListCollectionsCollectionsGetRequest(
+        request = models.ListCollectionsV1CollectionsGetRequest(
             page=page,
             page_size=page_size,
             x_namespace=x_namespace,
@@ -144,7 +144,7 @@ class Collections(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/collections",
+            path="/v1/collections",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -168,7 +168,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="list_collections_collections_get",
+                operation_id="list_collections_v1_collections_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -205,7 +205,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def create(
+    def create_collection_v1_collections_post(
         self,
         *,
         collection_name: str,
@@ -223,6 +223,9 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Create Collection
 
+        **Requirements:**
+        - Required permissions: write
+
         :param collection_name: Name for the collection
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param metadata: Optional metadata for the collection
@@ -239,7 +242,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.CreateCollectionCollectionsPostRequest(
+        request = models.CreateCollectionV1CollectionsPostRequest(
             x_namespace=x_namespace,
             create_collection_request=models.CreateCollectionRequest(
                 collection_name=collection_name,
@@ -251,7 +254,7 @@ class Collections(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/collections",
+            path="/v1/collections",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -282,7 +285,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="create_collection_collections_post",
+                operation_id="create_collection_v1_collections_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -319,7 +322,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def create_async(
+    async def create_collection_v1_collections_post_async(
         self,
         *,
         collection_name: str,
@@ -337,6 +340,9 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Create Collection
 
+        **Requirements:**
+        - Required permissions: write
+
         :param collection_name: Name for the collection
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param metadata: Optional metadata for the collection
@@ -353,7 +359,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.CreateCollectionCollectionsPostRequest(
+        request = models.CreateCollectionV1CollectionsPostRequest(
             x_namespace=x_namespace,
             create_collection_request=models.CreateCollectionRequest(
                 collection_name=collection_name,
@@ -365,7 +371,7 @@ class Collections(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/collections",
+            path="/v1/collections",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -396,7 +402,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="create_collection_collections_post",
+                operation_id="create_collection_v1_collections_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -433,7 +439,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def delete(
+    def delete_collection_v1_collections_collection_delete(
         self,
         *,
         collection: str,
@@ -462,14 +468,14 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteCollectionCollectionsCollectionDeleteRequest(
+        request = models.DeleteCollectionV1CollectionsCollectionDeleteRequest(
             collection=collection,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/collections/{collection}",
+            path="/v1/collections/{collection}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -493,7 +499,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete_collection_collections__collection__delete",
+                operation_id="delete_collection_v1_collections__collection__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -530,7 +536,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def delete_async(
+    async def delete_collection_v1_collections_collection_delete_async(
         self,
         *,
         collection: str,
@@ -559,14 +565,14 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteCollectionCollectionsCollectionDeleteRequest(
+        request = models.DeleteCollectionV1CollectionsCollectionDeleteRequest(
             collection=collection,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/collections/{collection}",
+            path="/v1/collections/{collection}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -590,7 +596,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete_collection_collections__collection__delete",
+                operation_id="delete_collection_v1_collections__collection__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -627,7 +633,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def update(
+    def update_collection_v1_collections_collection_put(
         self,
         *,
         collection: str,
@@ -665,7 +671,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.UpdateCollectionCollectionsCollectionPutRequest(
+        request = models.UpdateCollectionV1CollectionsCollectionPutRequest(
             collection=collection,
             x_namespace=x_namespace,
             create_collection_request=models.CreateCollectionRequest(
@@ -678,7 +684,7 @@ class Collections(BaseSDK):
 
         req = self._build_request(
             method="PUT",
-            path="/collections/{collection}",
+            path="/v1/collections/{collection}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -709,7 +715,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="update_collection_collections__collection__put",
+                operation_id="update_collection_v1_collections__collection__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -746,7 +752,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def update_async(
+    async def update_collection_v1_collections_collection_put_async(
         self,
         *,
         collection: str,
@@ -784,7 +790,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.UpdateCollectionCollectionsCollectionPutRequest(
+        request = models.UpdateCollectionV1CollectionsCollectionPutRequest(
             collection=collection,
             x_namespace=x_namespace,
             create_collection_request=models.CreateCollectionRequest(
@@ -797,7 +803,7 @@ class Collections(BaseSDK):
 
         req = self._build_request_async(
             method="PUT",
-            path="/collections/{collection}",
+            path="/v1/collections/{collection}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -828,7 +834,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="update_collection_collections__collection__put",
+                operation_id="update_collection_v1_collections__collection__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -865,7 +871,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def get(
+    def get_collection_v1_collections_collection_get(
         self,
         *,
         collection: str,
@@ -894,14 +900,14 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetCollectionCollectionsCollectionGetRequest(
+        request = models.GetCollectionV1CollectionsCollectionGetRequest(
             collection=collection,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="GET",
-            path="/collections/{collection}",
+            path="/v1/collections/{collection}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -925,7 +931,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_collection_collections__collection__get",
+                operation_id="get_collection_v1_collections__collection__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -962,7 +968,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def get_async(
+    async def get_collection_v1_collections_collection_get_async(
         self,
         *,
         collection: str,
@@ -991,14 +997,14 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetCollectionCollectionsCollectionGetRequest(
+        request = models.GetCollectionV1CollectionsCollectionGetRequest(
             collection=collection,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/collections/{collection}",
+            path="/v1/collections/{collection}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1022,7 +1028,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_collection_collections__collection__get",
+                operation_id="get_collection_v1_collections__collection__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

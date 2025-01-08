@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Assets(BaseSDK):
-    def get(
+    def get_asset_v1_assets_asset_id_get(
         self,
         *,
         asset_id: str,
@@ -40,7 +40,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetAssetAssetsAssetIDGetRequest(
+        request = models.GetAssetV1AssetsAssetIDGetRequest(
             asset_id=asset_id,
             return_url=return_url,
             x_namespace=x_namespace,
@@ -48,7 +48,7 @@ class Assets(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -72,7 +72,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_asset_assets__asset_id__get",
+                operation_id="get_asset_v1_assets__asset_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -109,7 +109,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def get_async(
+    async def get_asset_v1_assets_asset_id_get_async(
         self,
         *,
         asset_id: str,
@@ -140,7 +140,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetAssetAssetsAssetIDGetRequest(
+        request = models.GetAssetV1AssetsAssetIDGetRequest(
             asset_id=asset_id,
             return_url=return_url,
             x_namespace=x_namespace,
@@ -148,7 +148,7 @@ class Assets(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -172,7 +172,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_asset_assets__asset_id__get",
+                operation_id="get_asset_v1_assets__asset_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -209,7 +209,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def delete(
+    def delete_asset_v1_assets_asset_id_delete(
         self,
         *,
         asset_id: str,
@@ -220,6 +220,9 @@ class Assets(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Any:
         r"""Delete Asset
+
+        **Requirements:**
+        - Required permissions: write
 
         :param asset_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
@@ -236,14 +239,14 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteAssetAssetsAssetIDDeleteRequest(
+        request = models.DeleteAssetV1AssetsAssetIDDeleteRequest(
             asset_id=asset_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -267,7 +270,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete_asset_assets__asset_id__delete",
+                operation_id="delete_asset_v1_assets__asset_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -304,7 +307,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def delete_async(
+    async def delete_asset_v1_assets_asset_id_delete_async(
         self,
         *,
         asset_id: str,
@@ -315,6 +318,9 @@ class Assets(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Any:
         r"""Delete Asset
+
+        **Requirements:**
+        - Required permissions: write
 
         :param asset_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
@@ -331,14 +337,14 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.DeleteAssetAssetsAssetIDDeleteRequest(
+        request = models.DeleteAssetV1AssetsAssetIDDeleteRequest(
             asset_id=asset_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -362,7 +368,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete_asset_assets__asset_id__delete",
+                operation_id="delete_asset_v1_assets__asset_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -399,7 +405,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def update(
+    def full_asset_update_v1_assets_asset_id_put(
         self,
         *,
         asset_id: str,
@@ -418,6 +424,9 @@ class Assets(BaseSDK):
     ) -> models.AssetResponse:
         r"""Full Asset Update
 
+        **Requirements:**
+        - Required permissions: write
+
         :param asset_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param propagate_features: If True, the features will be propagated to all assets with the same asset_id
@@ -435,7 +444,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.FullAssetUpdateAssetsAssetIDPutRequest(
+        request = models.FullAssetUpdateV1AssetsAssetIDPutRequest(
             asset_id=asset_id,
             x_namespace=x_namespace,
             update_asset_request=models.UpdateAssetRequest(
@@ -448,7 +457,7 @@ class Assets(BaseSDK):
 
         req = self._build_request(
             method="PUT",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -479,7 +488,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="full_asset_update_assets__asset_id__put",
+                operation_id="full_asset_update_v1_assets__asset_id__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -516,7 +525,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def update_async(
+    async def full_asset_update_v1_assets_asset_id_put_async(
         self,
         *,
         asset_id: str,
@@ -535,6 +544,9 @@ class Assets(BaseSDK):
     ) -> models.AssetResponse:
         r"""Full Asset Update
 
+        **Requirements:**
+        - Required permissions: write
+
         :param asset_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param propagate_features: If True, the features will be propagated to all assets with the same asset_id
@@ -552,7 +564,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.FullAssetUpdateAssetsAssetIDPutRequest(
+        request = models.FullAssetUpdateV1AssetsAssetIDPutRequest(
             asset_id=asset_id,
             x_namespace=x_namespace,
             update_asset_request=models.UpdateAssetRequest(
@@ -565,7 +577,7 @@ class Assets(BaseSDK):
 
         req = self._build_request_async(
             method="PUT",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -596,7 +608,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="full_asset_update_assets__asset_id__put",
+                operation_id="full_asset_update_v1_assets__asset_id__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -633,7 +645,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def partial_update(
+    def partial_asset_update_v1_assets_asset_id_patch(
         self,
         *,
         asset_id: str,
@@ -652,6 +664,9 @@ class Assets(BaseSDK):
     ) -> models.AssetResponse:
         r"""Partial Asset Update
 
+        **Requirements:**
+        - Required permissions: write
+
         :param asset_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param propagate_features: If True, the features will be propagated to all assets with the same asset_id
@@ -669,7 +684,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PartialAssetUpdateAssetsAssetIDPatchRequest(
+        request = models.PartialAssetUpdateV1AssetsAssetIDPatchRequest(
             asset_id=asset_id,
             x_namespace=x_namespace,
             update_asset_request=models.UpdateAssetRequest(
@@ -682,7 +697,7 @@ class Assets(BaseSDK):
 
         req = self._build_request(
             method="PATCH",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -713,7 +728,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="partial_asset_update_assets__asset_id__patch",
+                operation_id="partial_asset_update_v1_assets__asset_id__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -750,7 +765,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def partial_update_async(
+    async def partial_asset_update_v1_assets_asset_id_patch_async(
         self,
         *,
         asset_id: str,
@@ -769,6 +784,9 @@ class Assets(BaseSDK):
     ) -> models.AssetResponse:
         r"""Partial Asset Update
 
+        **Requirements:**
+        - Required permissions: write
+
         :param asset_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param propagate_features: If True, the features will be propagated to all assets with the same asset_id
@@ -786,7 +804,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.PartialAssetUpdateAssetsAssetIDPatchRequest(
+        request = models.PartialAssetUpdateV1AssetsAssetIDPatchRequest(
             asset_id=asset_id,
             x_namespace=x_namespace,
             update_asset_request=models.UpdateAssetRequest(
@@ -799,7 +817,7 @@ class Assets(BaseSDK):
 
         req = self._build_request_async(
             method="PATCH",
-            path="/assets/{asset_id}",
+            path="/v1/assets/{asset_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -830,7 +848,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="partial_asset_update_assets__asset_id__patch",
+                operation_id="partial_asset_update_v1_assets__asset_id__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -867,7 +885,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def get_features(
+    def get_asset_with_features_v1_assets_asset_id_features_get(
         self,
         *,
         asset_id: str,
@@ -898,7 +916,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetAssetWithFeaturesAssetsAssetIDFeaturesGetRequest(
+        request = models.GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest(
             asset_id=asset_id,
             return_url=return_url,
             x_namespace=x_namespace,
@@ -906,7 +924,7 @@ class Assets(BaseSDK):
 
         req = self._build_request(
             method="GET",
-            path="/assets/{asset_id}/features",
+            path="/v1/assets/{asset_id}/features",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -930,7 +948,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_asset_with_features_assets__asset_id__features_get",
+                operation_id="get_asset_with_features_v1_assets__asset_id__features_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -967,7 +985,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def get_features_async(
+    async def get_asset_with_features_v1_assets_asset_id_features_get_async(
         self,
         *,
         asset_id: str,
@@ -998,7 +1016,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetAssetWithFeaturesAssetsAssetIDFeaturesGetRequest(
+        request = models.GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest(
             asset_id=asset_id,
             return_url=return_url,
             x_namespace=x_namespace,
@@ -1006,7 +1024,7 @@ class Assets(BaseSDK):
 
         req = self._build_request_async(
             method="GET",
-            path="/assets/{asset_id}/features",
+            path="/v1/assets/{asset_id}/features",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1030,7 +1048,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_asset_with_features_assets__asset_id__features_get",
+                operation_id="get_asset_with_features_v1_assets__asset_id__features_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1067,7 +1085,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def list(
+    def list_assets_v1_assets_post(
         self,
         *,
         collections: List[str],
@@ -1114,7 +1132,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.ListAssetsAssetsPostRequest(
+        request = models.ListAssetsV1AssetsPostRequest(
             page=page,
             page_size=page_size,
             x_namespace=x_namespace,
@@ -1136,7 +1154,7 @@ class Assets(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/assets",
+            path="/v1/assets",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1167,7 +1185,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="list_assets_assets_post",
+                operation_id="list_assets_v1_assets_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1204,7 +1222,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def list_async(
+    async def list_assets_v1_assets_post_async(
         self,
         *,
         collections: List[str],
@@ -1251,7 +1269,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.ListAssetsAssetsPostRequest(
+        request = models.ListAssetsV1AssetsPostRequest(
             page=page,
             page_size=page_size,
             x_namespace=x_namespace,
@@ -1273,7 +1291,7 @@ class Assets(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/assets",
+            path="/v1/assets",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1304,7 +1322,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="list_assets_assets_post",
+                operation_id="list_assets_v1_assets_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1341,7 +1359,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def search(
+    def search_assets_v1_assets_search_post(
         self,
         *,
         collections: List[str],
@@ -1384,7 +1402,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.SearchAssetsAssetsSearchPostRequest(
+        request = models.SearchAssetsV1AssetsSearchPostRequest(
             x_namespace=x_namespace,
             search_assets_request=models.SearchAssetsRequest(
                 query=utils.get_pydantic_model(
@@ -1404,7 +1422,7 @@ class Assets(BaseSDK):
 
         req = self._build_request(
             method="POST",
-            path="/assets/search",
+            path="/v1/assets/search",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1435,7 +1453,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="search_assets_assets_search_post",
+                operation_id="search_assets_v1_assets_search_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1472,7 +1490,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def search_async(
+    async def search_assets_v1_assets_search_post_async(
         self,
         *,
         collections: List[str],
@@ -1515,7 +1533,7 @@ class Assets(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.SearchAssetsAssetsSearchPostRequest(
+        request = models.SearchAssetsV1AssetsSearchPostRequest(
             x_namespace=x_namespace,
             search_assets_request=models.SearchAssetsRequest(
                 query=utils.get_pydantic_model(
@@ -1535,7 +1553,7 @@ class Assets(BaseSDK):
 
         req = self._build_request_async(
             method="POST",
-            path="/assets/search",
+            path="/v1/assets/search",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1566,7 +1584,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="search_assets_assets_search_post",
+                operation_id="search_assets_v1_assets_search_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

@@ -5,12 +5,13 @@
 
 ### Available Operations
 
-* [delete](#delete) - Kill Task
-* [get](#get) - Get Task Information
+* [kill_task_v1_tasks_task_id_delete](#kill_task_v1_tasks_task_id_delete) - Kill Task
+* [get_task_v1_tasks_task_id_get](#get_task_v1_tasks_task_id_get) - Get Task Information
 
-## delete
+## kill_task_v1_tasks_task_id_delete
 
-Kill Task
+**Requirements:**
+- Required permissions: write
 
 ### Example Usage
 
@@ -22,7 +23,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.tasks.delete(task_id="<id>")
+    res = mixpeek.tasks.kill_task_v1_tasks_task_id_delete(task_id="<id>")
 
     # Handle response
     print(res)
@@ -49,7 +50,7 @@ with Mixpeek(
 | models.HTTPValidationError | 422                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get
+## get_task_v1_tasks_task_id_get
 
 Retrieve a task by its ID.
     
@@ -66,7 +67,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.tasks.get(task_id="<id>")
+    res = mixpeek.tasks.get_task_v1_tasks_task_id_get(task_id="<id>")
 
     # Handle response
     print(res)
