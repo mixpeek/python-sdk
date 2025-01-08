@@ -326,7 +326,7 @@ from mixpeek import Mixpeek
 import os
 
 with Mixpeek(
-    server_url="https://api.mixpeek.com/v1",
+    server_url="https://api.mixpeek.com",
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 

@@ -12,14 +12,16 @@ class FeatureSearch(BaseSDK):
     def search_features_v1_features_search_post(
         self,
         *,
-        queries: Union[
-            List[models.SearchModelSearchQuery],
-            List[models.SearchModelSearchQueryTypedDict],
-        ],
         collections: List[str],
         offset_position: OptionalNullable[int] = UNSET,
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
+        queries: OptionalNullable[
+            Union[
+                List[models.SearchModelSearchQuery],
+                List[models.SearchModelSearchQueryTypedDict],
+            ]
+        ] = UNSET,
         filters: OptionalNullable[
             Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
@@ -44,11 +46,11 @@ class FeatureSearch(BaseSDK):
 
         This endpoint allows you to search features.
 
-        :param queries: List of search queries to perform.                  Behavior:         - Single query: Results are returned directly from that query         - Multiple queries: Results are combined using Reciprocal Rank Fusion (RRF)                  RRF combines results from multiple queries by:         1. Taking each item's rank position in each result list         2. Re-ranking all items by their combined RRF scores                  When merging lists from different sources,          RRF considers all items that appear in any of the input lists,          not just items that appear in all lists.                  This helps surface items that rank well across multiple queries while         reducing the impact of outlier high rankings in single queries.                  NOTE: If query array is empty, it will return all features.
         :param collections: List of Collection names to search within, required
         :param offset_position: The position to start returning results from. Used for pagination. Does not work with group_by
         :param page_size: Number of results to return per page.
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param queries: List of search queries to perform.                  Behavior:         - Single query: Results are returned directly from that query         - Multiple queries: Results are combined using Reciprocal Rank Fusion (RRF)                  RRF combines results from multiple queries by:         1. Taking each item's rank position in each result list         2. Re-ranking all items by their combined RRF scores                  When merging lists from different sources,          RRF considers all items that appear in any of the input lists,          not just items that appear in all lists.                  This helps surface items that rank well across multiple queries while         reducing the impact of outlier high rankings in single queries.                  NOTE: If query array is empty, it will return all features.
         :param filters: Used for filtering across all indexes
         :param group_by: Grouping options for search results
         :param sort: List of fields to sort by, with direction (asc or desc). Supports dot notation for nested fields.
@@ -75,7 +77,7 @@ class FeatureSearch(BaseSDK):
             x_namespace=x_namespace,
             search_request_features=models.SearchRequestFeatures(
                 queries=utils.get_pydantic_model(
-                    queries, List[models.SearchModelSearchQuery]
+                    queries, OptionalNullable[List[models.SearchModelSearchQuery]]
                 ),
                 collections=collections,
                 filters=utils.get_pydantic_model(
@@ -172,14 +174,16 @@ class FeatureSearch(BaseSDK):
     async def search_features_v1_features_search_post_async(
         self,
         *,
-        queries: Union[
-            List[models.SearchModelSearchQuery],
-            List[models.SearchModelSearchQueryTypedDict],
-        ],
         collections: List[str],
         offset_position: OptionalNullable[int] = UNSET,
         page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
+        queries: OptionalNullable[
+            Union[
+                List[models.SearchModelSearchQuery],
+                List[models.SearchModelSearchQueryTypedDict],
+            ]
+        ] = UNSET,
         filters: OptionalNullable[
             Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
@@ -204,11 +208,11 @@ class FeatureSearch(BaseSDK):
 
         This endpoint allows you to search features.
 
-        :param queries: List of search queries to perform.                  Behavior:         - Single query: Results are returned directly from that query         - Multiple queries: Results are combined using Reciprocal Rank Fusion (RRF)                  RRF combines results from multiple queries by:         1. Taking each item's rank position in each result list         2. Re-ranking all items by their combined RRF scores                  When merging lists from different sources,          RRF considers all items that appear in any of the input lists,          not just items that appear in all lists.                  This helps surface items that rank well across multiple queries while         reducing the impact of outlier high rankings in single queries.                  NOTE: If query array is empty, it will return all features.
         :param collections: List of Collection names to search within, required
         :param offset_position: The position to start returning results from. Used for pagination. Does not work with group_by
         :param page_size: Number of results to return per page.
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param queries: List of search queries to perform.                  Behavior:         - Single query: Results are returned directly from that query         - Multiple queries: Results are combined using Reciprocal Rank Fusion (RRF)                  RRF combines results from multiple queries by:         1. Taking each item's rank position in each result list         2. Re-ranking all items by their combined RRF scores                  When merging lists from different sources,          RRF considers all items that appear in any of the input lists,          not just items that appear in all lists.                  This helps surface items that rank well across multiple queries while         reducing the impact of outlier high rankings in single queries.                  NOTE: If query array is empty, it will return all features.
         :param filters: Used for filtering across all indexes
         :param group_by: Grouping options for search results
         :param sort: List of fields to sort by, with direction (asc or desc). Supports dot notation for nested fields.
@@ -235,7 +239,7 @@ class FeatureSearch(BaseSDK):
             x_namespace=x_namespace,
             search_request_features=models.SearchRequestFeatures(
                 queries=utils.get_pydantic_model(
-                    queries, List[models.SearchModelSearchQuery]
+                    queries, OptionalNullable[List[models.SearchModelSearchQuery]]
                 ),
                 collections=collections,
                 filters=utils.get_pydantic_model(

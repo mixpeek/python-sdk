@@ -16,7 +16,9 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class SearchRequestFeaturesTypedDict(TypedDict):
-    queries: List[SearchModelSearchQueryTypedDict]
+    collections: List[str]
+    r"""List of Collection names to search within, required"""
+    queries: NotRequired[Nullable[List[SearchModelSearchQueryTypedDict]]]
     r"""List of search queries to perform.
 
     Behavior:
@@ -38,8 +40,6 @@ class SearchRequestFeaturesTypedDict(TypedDict):
 
 
     """
-    collections: List[str]
-    r"""List of Collection names to search within, required"""
     filters: NotRequired[Nullable[LogicalOperatorTypedDict]]
     r"""Used for filtering across all indexes"""
     group_by: NotRequired[Nullable[GroupByOptionsTypedDict]]
@@ -57,7 +57,10 @@ class SearchRequestFeaturesTypedDict(TypedDict):
 
 
 class SearchRequestFeatures(BaseModel):
-    queries: List[SearchModelSearchQuery]
+    collections: List[str]
+    r"""List of Collection names to search within, required"""
+
+    queries: OptionalNullable[List[SearchModelSearchQuery]] = UNSET
     r"""List of search queries to perform.
 
     Behavior:
@@ -79,9 +82,6 @@ class SearchRequestFeatures(BaseModel):
 
 
     """
-
-    collections: List[str]
-    r"""List of Collection names to search within, required"""
 
     filters: OptionalNullable[LogicalOperator] = UNSET
     r"""Used for filtering across all indexes"""
@@ -107,6 +107,7 @@ class SearchRequestFeatures(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "queries",
             "filters",
             "group_by",
             "sort",
@@ -116,6 +117,7 @@ class SearchRequestFeatures(BaseModel):
             "return_url",
         ]
         nullable_fields = [
+            "queries",
             "filters",
             "group_by",
             "sort",

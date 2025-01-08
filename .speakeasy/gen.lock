@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 970ebdb4ff61560818de17c9f695ca20
+  docChecksum: 99b2705bea97e5ff75b47ed89d3e3258
   docVersion: "0.81"
-  speakeasyVersion: 1.465.0
-  generationVersion: 2.486.6
-  releaseVersion: 0.16.0
-  configChecksum: 8b15f74ad6da12d6a3341102ba6b284f
+  speakeasyVersion: 1.465.1
+  generationVersion: 2.488.4
+  releaseVersion: 0.16.1
+  configChecksum: 36ad92fcc4dc88cdf3a1564c9ad9d741
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.7.5
+    core: 5.7.6
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -1171,13 +1171,14 @@ examples:
         "400":
           application/json: {"status": 402821, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
+        "200": {}
   extract_embeddings_v1_features_extractors_embed_post:
     speakeasy-default-extract-embeddings-v1-features-extractors-embed-post:
       requestBody:
         application/json: {"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "baai-bge-m3"}
       responses:
         "200":
-          application/json: {"embedding": {"indices": [58863], "values": ["244.75"]}}
+          application/json: {"embedding": {"vector": ["6200.94", "4891.39"]}}
         "400":
           application/json: {"status": 996580, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1218,7 +1219,7 @@ examples:
   create_taxonomy_v1_entities_taxonomies_post:
     speakeasy-default-create-taxonomy-v1-entities-taxonomies-post:
       requestBody:
-        application/json: {"taxonomy_name": "electronics", "nodes": [{"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}, {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "children": []}]}
+        application/json: {"taxonomy_name": "electronics", "nodes": [{"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}, {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "children": []}]}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -1230,7 +1231,7 @@ examples:
     speakeasy-default-list-taxonomies-v1-entities-taxonomies-get:
       responses:
         "200":
-          application/json: {"results": [{"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}], "pagination": {"total": 925831, "page": 676079, "page_size": 33553, "total_pages": 325990, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}], "pagination": {"total": 925831, "page": 676079, "page_size": 33553, "total_pages": 325990, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
           application/json: {"status": 408430, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1243,7 +1244,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}
+          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}
         "400":
           application/json: {"status": 593425, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1271,7 +1272,7 @@ examples:
         application/json: {"taxonomy_name": "electronics_updated", "description": "Updated electronics taxonomy"}
       responses:
         "200":
-          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}]}]}
+          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}
         "400":
           application/json: {"status": 115509, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1284,7 +1285,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
+          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
         "400":
           application/json: {"status": 966201, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1299,7 +1300,7 @@ examples:
         application/json: {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category"}
       responses:
         "200":
-          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
+          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
         "400":
           application/json: {"status": 869537, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1330,7 +1331,7 @@ examples:
         application/json: {"filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "feature_options": {"return_payload": true, "return_url": true}, "node_options": {"return_payload": true}}
       responses:
         "200":
-          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "text", "value": "text", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": "6021.18", "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": "6021.18", "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
           application/json: {"status": 195554, "error": {"message": "<value>", "type": "<value>"}}
         "422":
