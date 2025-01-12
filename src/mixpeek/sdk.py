@@ -83,7 +83,8 @@ class Mixpeek(BaseSDK):
 
         security: Any = None
         if callable(token):
-            security = lambda: models.Security(token=token())  # pylint: disable=unnecessary-lambda-assignment
+            # pylint: disable=unnecessary-lambda-assignment
+            security = lambda: models.Security(token=token())
         else:
             security = models.Security(token=token)
 
