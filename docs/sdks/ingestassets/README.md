@@ -84,7 +84,6 @@ with Mixpeek(
 ### Example Usage
 
 ```python
-import mixpeek
 from mixpeek import Mixpeek
 import os
 
@@ -93,49 +92,7 @@ with Mixpeek(
 ) as mixpeek:
 
     res = mixpeek.ingest_assets.ingest_video_url_v1_ingest_videos_url_post(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
-        mixpeek.VideoSettings(
-            interval_sec=15,
-            read={
-                "enabled": True,
-            },
-            embed=[
-                {
-                    "type": mixpeek.InputType.URL,
-                    "embedding_model": mixpeek.VectorModel.MULTIMODAL,
-                },
-                {
-                    "type": mixpeek.InputType.TEXT,
-                    "embedding_model": mixpeek.VectorModel.TEXT,
-                    "value": "lorem ipsum",
-                },
-            ],
-            transcribe={
-                "enabled": True,
-            },
-            describe={
-                "enabled": True,
-            },
-            detect={
-                "faces": {
-                    "enabled": True,
-                    "confidence_threshold": 0.8,
-                },
-            },
-            json_output={
-                "response_shape": {},
-            },
-            entities={
-                "taxonomy_extraction": {
-                    "taxonomy_ids": [
-                        "tax_123",
-                    ],
-                    "embedding_models": [
-                        mixpeek.AvailableModels.MULTIMODAL,
-                        mixpeek.AvailableModels.TEXT,
-                    ],
-                },
-            },
-        ),
+
     ])
 
     # Handle response
@@ -191,19 +148,13 @@ with Mixpeek(
         embed=[
             {
                 "type": mixpeek.InputType.TEXT,
-                "embedding_model": mixpeek.VectorModel.TEXT,
+                "embedding_model": mixpeek.VectorModel.VERTEX_MULTIMODAL,
                 "value": "a dog",
             },
         ],
         describe={
             "enabled": True,
             "max_length": 1000,
-        },
-        detect={
-            "faces": {
-                "enabled": True,
-                "confidence_threshold": 0.8,
-            },
         },
         json_output={},
         entities={

@@ -13,4 +13,3 @@ class VectorModel(str, Enum):
     BAAI_BGE_M3 = "baai-bge-m3"
     KEYWORD = "keyword"
     NAVER_SPLADE_V3 = "naver-splade-v3"
-    ANSWERAI_MODERN_BERT = "answerai-modern-bert"

@@ -2,7 +2,5 @@
 
 from .globals import Globals, GlobalsTypedDict
 
-__all__ = [
-    "Globals",
-    "GlobalsTypedDict",
-]
+
+__all__ = ["Globals", "GlobalsTypedDict"]

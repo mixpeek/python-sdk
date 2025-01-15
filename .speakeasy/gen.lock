@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 99b2705bea97e5ff75b47ed89d3e3258
+  docChecksum: fda14d8151267e74aa47fe45a0744fe1
   docVersion: "0.81"
-  speakeasyVersion: 1.468.2
-  generationVersion: 2.493.4
-  releaseVersion: 0.17.2
-  configChecksum: 4380c8b4f6b9ce5eeebe79d1df44c021
+  speakeasyVersion: 1.468.6
+  generationVersion: 2.493.13
+  releaseVersion: 0.17.3
+  configChecksum: fbb88df9697426e3cb8150e32ed289b6
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -90,7 +90,6 @@ generatedFiles:
   - docs/models/entitysettings.md
   - docs/models/errordetail.md
   - docs/models/errorresponse.md
-  - docs/models/facedetectsettings.md
   - docs/models/featureextractionembeddingrequest.md
   - docs/models/featureoptions.md
   - docs/models/featureresponse.md
@@ -301,7 +300,6 @@ generatedFiles:
   - src/mixpeek/models/entitysettings.py
   - src/mixpeek/models/errordetail.py
   - src/mixpeek/models/errorresponse.py
-  - src/mixpeek/models/facedetectsettings.py
   - src/mixpeek/models/featureextractionembeddingrequest.py
   - src/mixpeek/models/featureoptions.py
   - src/mixpeek/models/featureresponse.py
@@ -1030,6 +1028,8 @@ examples:
         path:
           user_email: "<value>"
           key_name: "<value>"
+      requestBody:
+        application/json: {}
       responses:
         "200":
           application/json: {}
@@ -1177,7 +1177,7 @@ examples:
         application/json: {"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "baai-bge-m3"}
       responses:
         "200":
-          application/json: {"embedding": {"vector": ["6200.94", "4891.39"]}}
+          application/json: {"embedding": {"vector": [6200.94, 4891.39]}}
         "400":
           application/json: {"status": 996580, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1207,7 +1207,7 @@ examples:
   ingest_image_url_v1_ingest_images_url_post:
     speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "text"}], "describe": {"enabled": true, "max_length": 1000}, "detect": {"faces": {"enabled": true, "confidence_threshold": 0.8}}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "embedding_models": ["multimodal", "text"]}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -1416,7 +1416,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}}
+          application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, "features": {}}
         "400":
           application/json: {"status": 761028, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}

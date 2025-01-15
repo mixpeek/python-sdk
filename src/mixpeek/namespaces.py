@@ -30,7 +30,7 @@ class Namespaces(BaseSDK):
         Creates a new namespace with the specified configuration
 
         :param namespace_name: Name of the namespace to create
-        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3', 'answerai-modern-bert'
+        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'
         :param payload_indexes: List of payload index configurations
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -140,7 +140,7 @@ class Namespaces(BaseSDK):
         Creates a new namespace with the specified configuration
 
         :param namespace_name: Name of the namespace to create
-        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3', 'answerai-modern-bert'
+        :param embedding_models: List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'
         :param payload_indexes: List of payload index configurations
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

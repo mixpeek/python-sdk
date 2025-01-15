@@ -123,7 +123,6 @@ from .embeddingresponse import (
 from .entitysettings import EntitySettings, EntitySettingsTypedDict
 from .errordetail import Details, DetailsTypedDict, ErrorDetail, ErrorDetailTypedDict
 from .errorresponse import ErrorResponse, ErrorResponseData
-from .facedetectsettings import FaceDetectSettings, FaceDetectSettingsTypedDict
 from .featureextractionembeddingrequest import (
     FeatureExtractionEmbeddingRequest,
     FeatureExtractionEmbeddingRequestTypedDict,
@@ -449,6 +448,7 @@ from .videotranscriptionsettings import (
     VideoTranscriptionSettingsTypedDict,
 )
 
+
 __all__ = [
     "APIError",
     "APIKey",
@@ -544,8 +544,6 @@ __all__ = [
     "ErrorDetailTypedDict",
     "ErrorResponse",
     "ErrorResponseData",
-    "FaceDetectSettings",
-    "FaceDetectSettingsTypedDict",
     "FeatureExtractionEmbeddingRequest",
     "FeatureExtractionEmbeddingRequestTypedDict",
     "FeatureOptions",
