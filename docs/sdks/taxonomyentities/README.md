@@ -59,8 +59,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## list_taxonomies_v1_entities_taxonomies_get
@@ -101,8 +102,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get_taxonomy_v1_entities_taxonomies_taxonomy_get
@@ -142,8 +144,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete_taxonomy_v1_entities_taxonomies_taxonomy_delete
@@ -192,8 +195,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update_taxonomy_v1_entities_taxonomies_taxonomy_patch
@@ -238,8 +242,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get_taxonomy_node_v1_entities_taxonomies_nodes_node_get
@@ -279,8 +284,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update_node_v1_entities_taxonomies_nodes_node_patch
@@ -325,8 +331,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## classify_features_v1_entities_taxonomies_taxonomy_classify_post
@@ -386,8 +393,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## list_classifications_v1_entities_taxonomies_taxonomy_classifications_post
@@ -453,8 +461,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete
@@ -496,6 +505,7 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |

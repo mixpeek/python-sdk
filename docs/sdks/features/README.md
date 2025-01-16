@@ -48,8 +48,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete_feature_v1_features_feature_id_delete
@@ -90,8 +91,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## full_feature_update_v1_features_feature_id_put
@@ -133,8 +135,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## list_features_v1_features_post
@@ -202,6 +205,7 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |

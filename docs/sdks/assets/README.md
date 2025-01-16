@@ -51,8 +51,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete_asset_v1_assets_asset_id_delete
@@ -93,8 +94,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## full_asset_update_v1_assets_asset_id_put
@@ -137,8 +139,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## partial_asset_update_v1_assets_asset_id_patch
@@ -181,8 +184,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get_asset_with_features_v1_assets_asset_id_features_get
@@ -223,8 +227,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## list_assets_v1_assets_post
@@ -301,8 +306,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## search_assets_v1_assets_search_post
@@ -371,6 +377,7 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |

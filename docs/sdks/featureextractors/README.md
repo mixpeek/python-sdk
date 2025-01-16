@@ -46,6 +46,7 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |

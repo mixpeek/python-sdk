@@ -280,11 +280,12 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `get_organization_v1_organizations_get_async` method may raise the following exceptions:
 
-| Error Type                 | Status Code             | Content Type     |
-| -------------------------- | ----------------------- | ---------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500 | application/json |
-| models.HTTPValidationError | 422                     | application/json |
-| models.APIError            | 4XX, 5XX                | \*/\*            |
+| Error Type                 | Status Code        | Content Type     |
+| -------------------------- | ------------------ | ---------------- |
+| models.ErrorResponse       | 400, 401, 403, 404 | application/json |
+| models.HTTPValidationError | 422                | application/json |
+| models.ErrorResponse       | 500                | application/json |
+| models.APIError            | 4XX, 5XX           | \*/\*            |
 
 ### Example
 
@@ -308,6 +309,9 @@ with Mixpeek(
         raise(e)
     except models.HTTPValidationError as e:
         # handle e.data: models.HTTPValidationErrorData
+        raise(e)
+    except models.ErrorResponse as e:
+        # handle e.data: models.ErrorResponseData
         raise(e)
     except models.APIError as e:
         # handle exception

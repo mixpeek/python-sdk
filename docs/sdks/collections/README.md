@@ -49,8 +49,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create_collection_v1_collections_post
@@ -92,8 +93,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## delete_collection_v1_collections_collection_delete
@@ -133,8 +135,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update_collection_v1_collections_collection_put
@@ -176,8 +179,9 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get_collection_v1_collections_collection_get
@@ -217,6 +221,7 @@ with Mixpeek(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404, 500    | application/json           |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
 | models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |

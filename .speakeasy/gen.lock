@@ -3,10 +3,10 @@ id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
   docChecksum: fda14d8151267e74aa47fe45a0744fe1
   docVersion: "0.81"
-  speakeasyVersion: 1.468.6
-  generationVersion: 2.493.13
-  releaseVersion: 0.17.3
-  configChecksum: fbb88df9697426e3cb8150e32ed289b6
+  speakeasyVersion: 1.468.8
+  generationVersion: 2.493.19
+  releaseVersion: 0.17.4
+  configChecksum: adb14e5f11064b635575cd206c8ef7a2
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.10.1
+    core: 5.10.2
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -952,6 +952,8 @@ examples:
           application/json: {"status": 441424, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 441424, "error": {"message": "<value>", "type": "<value>"}}
   get_usage_v1_organizations_usage_get:
     speakeasy-default-get-usage-v1-organizations-usage-get:
       responses:
@@ -961,6 +963,8 @@ examples:
           application/json: {"status": 606141, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 998093, "error": {"message": "<value>", "type": "<value>"}}
   get_user_v1_organizations_users__user_email__get:
     speakeasy-default-get-user-v1-organizations-users-user-email-get:
       parameters:
@@ -973,6 +977,8 @@ examples:
           application/json: {"status": 946032, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 794534, "error": {"message": "<value>", "type": "<value>"}}
   delete_user_v1_organizations_users__user_email__delete:
     speakeasy-default-delete-user-v1-organizations-users-user-email-delete:
       parameters:
@@ -985,6 +991,8 @@ examples:
           application/json: {"status": 234836, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 234836, "error": {"message": "<value>", "type": "<value>"}}
   add_user_v1_organizations_users_post:
     speakeasy-default-add-user-v1-organizations-users-post:
       requestBody:
@@ -996,6 +1004,8 @@ examples:
           application/json: {"status": 274044, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 938061, "error": {"message": "<value>", "type": "<value>"}}
   create_api_key_v1_organizations_users__user_email__api_keys_post:
     speakeasy-default-create-api-key-v1-organizations-users-user-email-api-keys-post:
       parameters:
@@ -1009,6 +1019,8 @@ examples:
           application/json: {"status": 834061, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 834061, "error": {"message": "<value>", "type": "<value>"}}
   delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete:
     speakeasy-default-delete-api-key-v1-organizations-users-user-email-api-keys-key-name-delete:
       parameters:
@@ -1022,6 +1034,8 @@ examples:
           application/json: {"status": 235068, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 235068, "error": {"message": "<value>", "type": "<value>"}}
   update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch:
     speakeasy-default-update-api-key-v1-organizations-users-user-email-api-keys-key-name-patch:
       parameters:
@@ -1037,6 +1051,8 @@ examples:
           application/json: {"status": 490703, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 490703, "error": {"message": "<value>", "type": "<value>"}}
   create_namespace_v1_namespaces_post:
     speakeasy-default-create-namespace-v1-namespaces-post:
       requestBody:
@@ -1048,6 +1064,8 @@ examples:
           application/json: {"status": 97273, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 503345, "error": {"message": "<value>", "type": "<value>"}}
   list_namespaces_v1_namespaces_get:
     speakeasy-default-list-namespaces-v1-namespaces-get:
       responses:
@@ -1057,6 +1075,8 @@ examples:
           application/json: {"status": 803212, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 65220, "error": {"message": "<value>", "type": "<value>"}}
   delete_namespace_v1_namespaces__namespace__delete:
     speakeasy-default-delete-namespace-v1-namespaces-namespace-delete:
       parameters:
@@ -1069,6 +1089,8 @@ examples:
           application/json: {"status": 469804, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 469804, "error": {"message": "<value>", "type": "<value>"}}
   update_namespace_v1_namespaces__namespace__put:
     speakeasy-default-update-namespace-v1-namespaces-namespace-put:
       parameters:
@@ -1083,6 +1105,8 @@ examples:
           application/json: {"status": 366934, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 947983, "error": {"message": "<value>", "type": "<value>"}}
   get_namespace_v1_namespaces__namespace__get:
     speakeasy-default-get-namespace-v1-namespaces-namespace-get:
       parameters:
@@ -1095,6 +1119,8 @@ examples:
           application/json: {"status": 449425, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 591954, "error": {"message": "<value>", "type": "<value>"}}
   list_available_models_v1_namespaces_models_get:
     speakeasy-default-list-available-models-v1-namespaces-models-get:
       responses:
@@ -1104,6 +1130,8 @@ examples:
           application/json: {"status": 700624, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 700624, "error": {"message": "<value>", "type": "<value>"}}
   get_feature_v1_features__feature_id__get:
     speakeasy-default-get-feature-v1-features-feature-id-get:
       parameters:
@@ -1118,6 +1146,8 @@ examples:
           application/json: {"status": 80595, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 746397, "error": {"message": "<value>", "type": "<value>"}}
   delete_feature_v1_features__feature_id__delete:
     speakeasy-default-delete-feature-v1-features-feature-id-delete:
       parameters:
@@ -1131,6 +1161,8 @@ examples:
           application/json: {"status": 763083, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 763083, "error": {"message": "<value>", "type": "<value>"}}
   full_feature_update_v1_features__feature_id__put:
     speakeasy-default-full-feature-update-v1-features-feature-id-put:
       parameters:
@@ -1146,6 +1178,8 @@ examples:
           application/json: {"status": 915812, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 153488, "error": {"message": "<value>", "type": "<value>"}}
   list_features_v1_features_post:
     speakeasy-default-list-features-v1-features-post:
       requestBody:
@@ -1157,6 +1191,8 @@ examples:
           application/json: {"status": 723909, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 409234, "error": {"message": "<value>", "type": "<value>"}}
   search_features_v1_features_search_post:
     "":
       parameters:
@@ -1171,6 +1207,8 @@ examples:
           application/json: {"status": 402821, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
         "200": {}
+        "500":
+          application/json: {"status": 402821, "error": {"message": "<value>", "type": "<value>"}}
   extract_embeddings_v1_features_extractors_embed_post:
     speakeasy-default-extract-embeddings-v1-features-extractors-embed-post:
       requestBody:
@@ -1182,6 +1220,8 @@ examples:
           application/json: {"status": 996580, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 34173, "error": {"message": "<value>", "type": "<value>"}}
   ingest_text_v1_ingest_text_post:
     speakeasy-default-ingest-text-v1-ingest-text-post:
       requestBody:
@@ -1193,6 +1233,8 @@ examples:
           application/json: {"status": 699645, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 699645, "error": {"message": "<value>", "type": "<value>"}}
   ingest_video_url_v1_ingest_videos_url_post:
     speakeasy-default-ingest-video-url-v1-ingest-videos-url-post:
       requestBody:
@@ -1204,6 +1246,8 @@ examples:
           application/json: {"status": 189274, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 104307, "error": {"message": "<value>", "type": "<value>"}}
   ingest_image_url_v1_ingest_images_url_post:
     speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
       requestBody:
@@ -1215,6 +1259,8 @@ examples:
           application/json: {"status": 287622, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 287622, "error": {"message": "<value>", "type": "<value>"}}
   create_taxonomy_v1_entities_taxonomies_post:
     speakeasy-default-create-taxonomy-v1-entities-taxonomies-post:
       requestBody:
@@ -1226,6 +1272,8 @@ examples:
           application/json: {"status": 735189, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 699664, "error": {"message": "<value>", "type": "<value>"}}
   list_taxonomies_v1_entities_taxonomies_get:
     speakeasy-default-list-taxonomies-v1-entities-taxonomies-get:
       responses:
@@ -1235,6 +1283,8 @@ examples:
           application/json: {"status": 408430, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 868979, "error": {"message": "<value>", "type": "<value>"}}
   get_taxonomy_v1_entities_taxonomies__taxonomy__get:
     speakeasy-default-get-taxonomy-v1-entities-taxonomies-taxonomy-get:
       parameters:
@@ -1248,6 +1298,8 @@ examples:
           application/json: {"status": 593425, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 593425, "error": {"message": "<value>", "type": "<value>"}}
   delete_taxonomy_v1_entities_taxonomies__taxonomy__delete:
     speakeasy-default-delete-taxonomy-v1-entities-taxonomies-taxonomy-delete:
       parameters:
@@ -1261,6 +1313,8 @@ examples:
           application/json: {"status": 628193, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 628193, "error": {"message": "<value>", "type": "<value>"}}
   update_taxonomy_v1_entities_taxonomies__taxonomy__patch:
     speakeasy-default-update-taxonomy-v1-entities-taxonomies-taxonomy-patch:
       parameters:
@@ -1276,6 +1330,8 @@ examples:
           application/json: {"status": 115509, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 115509, "error": {"message": "<value>", "type": "<value>"}}
   get_taxonomy_node_v1_entities_taxonomies_nodes__node__get:
     speakeasy-default-get-taxonomy-node-v1-entities-taxonomies-nodes-node-get:
       parameters:
@@ -1289,6 +1345,8 @@ examples:
           application/json: {"status": 966201, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 273668, "error": {"message": "<value>", "type": "<value>"}}
   update_node_v1_entities_taxonomies_nodes__node__patch:
     speakeasy-default-update-node-v1-entities-taxonomies-nodes-node-patch:
       parameters:
@@ -1304,6 +1362,8 @@ examples:
           application/json: {"status": 869537, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 855937, "error": {"message": "<value>", "type": "<value>"}}
   classify_features_v1_entities_taxonomies__taxonomy__classify_post:
     speakeasy-default-classify-features-v1-entities-taxonomies-taxonomy-classify-post:
       parameters:
@@ -1319,6 +1379,8 @@ examples:
           application/json: {"status": 555572, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 887808, "error": {"message": "<value>", "type": "<value>"}}
   list_classifications_v1_entities_taxonomies__taxonomy__classifications_post:
     speakeasy-default-list-classifications-v1-entities-taxonomies-taxonomy-classifications-post:
       parameters:
@@ -1335,6 +1397,8 @@ examples:
           application/json: {"status": 195554, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 748683, "error": {"message": "<value>", "type": "<value>"}}
   delete_classifications_v1_entities_taxonomies__taxonomy__classifications__classification_id__delete:
     speakeasy-default-delete-classifications-v1-entities-taxonomies-taxonomy-classifications-classification-id-delete:
       parameters:
@@ -1349,6 +1413,8 @@ examples:
           application/json: {"status": 62269, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 62269, "error": {"message": "<value>", "type": "<value>"}}
   get_asset_v1_assets__asset_id__get:
     "":
       parameters:
@@ -1363,6 +1429,8 @@ examples:
         "400":
           application/json: {"status": 15948, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
+        "500":
+          application/json: {"status": 15948, "error": {"message": "<value>", "type": "<value>"}}
   delete_asset_v1_assets__asset_id__delete:
     speakeasy-default-delete-asset-v1-assets-asset-id-delete:
       parameters:
@@ -1376,6 +1444,8 @@ examples:
           application/json: {"status": 155071, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 155071, "error": {"message": "<value>", "type": "<value>"}}
   full_asset_update_v1_assets__asset_id__put:
     speakeasy-default-full-asset-update-v1-assets-asset-id-put:
       parameters:
@@ -1391,6 +1461,8 @@ examples:
           application/json: {"status": 556461, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 556461, "error": {"message": "<value>", "type": "<value>"}}
   partial_asset_update_v1_assets__asset_id__patch:
     speakeasy-default-partial-asset-update-v1-assets-asset-id-patch:
       parameters:
@@ -1406,6 +1478,8 @@ examples:
           application/json: {"status": 134086, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 134086, "error": {"message": "<value>", "type": "<value>"}}
   get_asset_with_features_v1_assets__asset_id__features_get:
     "":
       parameters:
@@ -1420,6 +1494,8 @@ examples:
         "400":
           application/json: {"status": 761028, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
+        "500":
+          application/json: {"status": 761028, "error": {"message": "<value>", "type": "<value>"}}
   list_assets_v1_assets_post:
     speakeasy-default-list-assets-v1-assets-post:
       requestBody:
@@ -1431,6 +1507,8 @@ examples:
           application/json: {"status": 555566, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 715845, "error": {"message": "<value>", "type": "<value>"}}
   search_assets_v1_assets_search_post:
     speakeasy-default-search-assets-v1-assets-search-post:
       requestBody:
@@ -1442,6 +1520,8 @@ examples:
           application/json: {"status": 795180, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 741393, "error": {"message": "<value>", "type": "<value>"}}
   list_collections_v1_collections_get:
     speakeasy-default-list-collections-v1-collections-get:
       responses:
@@ -1451,6 +1531,8 @@ examples:
           application/json: {"status": 682508, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 478215, "error": {"message": "<value>", "type": "<value>"}}
   create_collection_v1_collections_post:
     speakeasy-default-create-collection-v1-collections-post:
       requestBody:
@@ -1462,6 +1544,8 @@ examples:
           application/json: {"status": 210546, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 210546, "error": {"message": "<value>", "type": "<value>"}}
   delete_collection_v1_collections__collection__delete:
     speakeasy-default-delete-collection-v1-collections-collection-delete:
       parameters:
@@ -1475,6 +1559,8 @@ examples:
           application/json: {"status": 348710, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 348710, "error": {"message": "<value>", "type": "<value>"}}
   update_collection_v1_collections__collection__put:
     speakeasy-default-update-collection-v1-collections-collection-put:
       parameters:
@@ -1490,6 +1576,8 @@ examples:
           application/json: {"status": 405534, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 405534, "error": {"message": "<value>", "type": "<value>"}}
   get_collection_v1_collections__collection__get:
     speakeasy-default-get-collection-v1-collections-collection-get:
       parameters:
@@ -1503,6 +1591,8 @@ examples:
           application/json: {"status": 52108, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 52108, "error": {"message": "<value>", "type": "<value>"}}
   kill_task_v1_tasks__task_id__delete:
     speakeasy-default-kill-task-v1-tasks-task-id-delete:
       parameters:
@@ -1516,6 +1606,8 @@ examples:
           application/json: {"status": 133802, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 133802, "error": {"message": "<value>", "type": "<value>"}}
   get_task_v1_tasks__task_id__get:
     speakeasy-default-get-task-v1-tasks-task-id-get:
       parameters:
@@ -1529,4 +1621,6 @@ examples:
           application/json: {"status": 153841, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
+        "500":
+          application/json: {"status": 153841, "error": {"message": "<value>", "type": "<value>"}}
 generatedTests: {}
