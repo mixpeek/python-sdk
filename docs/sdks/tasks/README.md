@@ -7,6 +7,7 @@
 
 * [kill_task_v1_tasks_task_id_delete](#kill_task_v1_tasks_task_id_delete) - Kill Task
 * [get_task_v1_tasks_task_id_get](#get_task_v1_tasks_task_id_get) - Get Task Information
+* [list_active_tasks_v1_tasks_get](#list_active_tasks_v1_tasks_get) - List Active Tasks
 
 ## kill_task_v1_tasks_task_id_delete
 
@@ -86,6 +87,49 @@ with Mixpeek(
 ### Response
 
 **[models.TaskResponse](../../models/taskresponse.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
+| models.HTTPValidationError | 422                        | application/json           |
+| models.ErrorResponse       | 500                        | application/json           |
+| models.APIError            | 4XX, 5XX                   | \*/\*                      |
+
+## list_active_tasks_v1_tasks_get
+
+Retrieve all tasks that are not in a complete state (DONE, FAILED, SKIPPED, or CANCELLED)
+
+### Example Usage
+
+```python
+from mixpeek import Mixpeek
+import os
+
+with Mixpeek(
+    token=os.getenv("MIXPEEK_TOKEN", ""),
+) as mixpeek:
+
+    res = mixpeek.tasks.list_active_tasks_v1_tasks_get()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page`                                                                                                                                                                                | *OptionalNullable[int]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
+| `page_size`                                                                                                                                                                           | *Optional[int]*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
+| `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
+| `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |
+
+### Response
+
+**[models.ListTasksResponse](../../models/listtasksresponse.md)**
 
 ### Errors
 

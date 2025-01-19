@@ -14,12 +14,10 @@ class DiscoverRequestTypedDict(TypedDict):
     r"""List of collection names or ids to search for features"""
     filters: NotRequired[Nullable[LogicalOperatorTypedDict]]
     r"""Filters to apply to the discovery task"""
-    confidence_threshold: NotRequired[float]
-    r"""Minimum confidence score required for classification"""
     assignment: NotRequired[AssignmentConfigTypedDict]
     r"""Configuration for how classifications should be assigned to features"""
-    sample_size: NotRequired[Nullable[int]]
-    r"""Number of feature samples to process"""
+    limit: NotRequired[Nullable[int]]
+    r"""Number of feature samples to process, if None, all features that match the filters are processed"""
 
 
 class DiscoverRequest(BaseModel):
@@ -29,24 +27,16 @@ class DiscoverRequest(BaseModel):
     filters: OptionalNullable[LogicalOperator] = UNSET
     r"""Filters to apply to the discovery task"""
 
-    confidence_threshold: Optional[float] = 0.8
-    r"""Minimum confidence score required for classification"""
-
     assignment: Optional[AssignmentConfig] = None
     r"""Configuration for how classifications should be assigned to features"""
 
-    sample_size: OptionalNullable[int] = UNSET
-    r"""Number of feature samples to process"""
+    limit: OptionalNullable[int] = UNSET
+    r"""Number of feature samples to process, if None, all features that match the filters are processed"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "filters",
-            "confidence_threshold",
-            "assignment",
-            "sample_size",
-        ]
-        nullable_fields = ["filters", "sample_size"]
+        optional_fields = ["filters", "assignment", "limit"]
+        nullable_fields = ["filters", "limit"]
         null_default_fields = []
 
         serialized = handler(self)

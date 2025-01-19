@@ -205,6 +205,7 @@ with Mixpeek(
 
 * [kill_task_v1_tasks_task_id_delete](docs/sdks/tasks/README.md#kill_task_v1_tasks_task_id_delete) - Kill Task
 * [get_task_v1_tasks_task_id_get](docs/sdks/tasks/README.md#get_task_v1_tasks_task_id_get) - Get Task Information
+* [list_active_tasks_v1_tasks_get](docs/sdks/tasks/README.md#list_active_tasks_v1_tasks_get) - List Active Tasks
 
 ### [taxonomy_entities](docs/sdks/taxonomyentities/README.md)
 

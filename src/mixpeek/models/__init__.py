@@ -19,6 +19,7 @@ from .assets_model_searchquery import (
 )
 from .assetupdate import AssetUpdate, AssetUpdateTypedDict, Mode
 from .assignmentconfig import AssignmentConfig, AssignmentConfigTypedDict
+from .assignmentmode import AssignmentMode
 from .availablemodels import AvailableModels
 from .availablemodelsresponse import (
     AvailableModelsResponse,
@@ -246,6 +247,10 @@ from .kill_task_v1_tasks_task_id_deleteop import (
     KillTaskV1TasksTaskIDDeleteRequest,
     KillTaskV1TasksTaskIDDeleteRequestTypedDict,
 )
+from .list_active_tasks_v1_tasks_getop import (
+    ListActiveTasksV1TasksGetRequest,
+    ListActiveTasksV1TasksGetRequestTypedDict,
+)
 from .list_assets_v1_assets_postop import (
     ListAssetsV1AssetsPostRequest,
     ListAssetsV1AssetsPostRequestTypedDict,
@@ -282,6 +287,7 @@ from .listcollectionsresponse import (
 )
 from .listfeaturesrequest import ListFeaturesRequest, ListFeaturesRequestTypedDict
 from .listfeaturesresponse import ListFeaturesResponse, ListFeaturesResponseTypedDict
+from .listtasksresponse import ListTasksResponse, ListTasksResponseTypedDict
 from .listtaxonomiesresponse import (
     ListTaxonomiesResponse,
     ListTaxonomiesResponseTypedDict,
@@ -469,6 +475,7 @@ __all__ = [
     "AssetsModelSearchQueryTypedDict",
     "AssignmentConfig",
     "AssignmentConfigTypedDict",
+    "AssignmentMode",
     "AvailableModels",
     "AvailableModelsResponse",
     "AvailableModelsResponseTypedDict",
@@ -637,6 +644,8 @@ __all__ = [
     "KeywordIndexParamsTypedDict",
     "KillTaskV1TasksTaskIDDeleteRequest",
     "KillTaskV1TasksTaskIDDeleteRequestTypedDict",
+    "ListActiveTasksV1TasksGetRequest",
+    "ListActiveTasksV1TasksGetRequestTypedDict",
     "ListAssetsRequest",
     "ListAssetsRequestTypedDict",
     "ListAssetsResponse",
@@ -659,6 +668,8 @@ __all__ = [
     "ListFeaturesResponseTypedDict",
     "ListFeaturesV1FeaturesPostRequest",
     "ListFeaturesV1FeaturesPostRequestTypedDict",
+    "ListTasksResponse",
+    "ListTasksResponseTypedDict",
     "ListTaxonomiesResponse",
     "ListTaxonomiesResponseTypedDict",
     "ListTaxonomiesV1EntitiesTaxonomiesGetRequest",

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: fda14d8151267e74aa47fe45a0744fe1
+  docChecksum: 62f4bf43222d4b9b29ff9054db6891c7
   docVersion: "0.81"
   speakeasyVersion: 1.469.1
   generationVersion: 2.493.21
-  releaseVersion: 0.17.6
-  configChecksum: 89d6bc29995bbe52398284d4c250369c
+  releaseVersion: 0.17.7
+  configChecksum: 6ac8711c7fbe39e26d528461cad1f90f
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -51,6 +51,7 @@ generatedFiles:
   - docs/models/assetsmodelsearchquery.md
   - docs/models/assetupdate.md
   - docs/models/assignmentconfig.md
+  - docs/models/assignmentmode.md
   - docs/models/availablemodels.md
   - docs/models/availablemodelsresponse.md
   - docs/models/boolindexparams.md
@@ -138,6 +139,7 @@ generatedFiles:
   - docs/models/jsonvideooutputsettingsresponseshape.md
   - docs/models/keywordindexparams.md
   - docs/models/killtaskv1taskstaskiddeleterequest.md
+  - docs/models/listactivetasksv1tasksgetrequest.md
   - docs/models/listassetsrequest.md
   - docs/models/listassetsresponse.md
   - docs/models/listassetsv1assetspostrequest.md
@@ -149,6 +151,7 @@ generatedFiles:
   - docs/models/listfeaturesrequest.md
   - docs/models/listfeaturesresponse.md
   - docs/models/listfeaturesv1featurespostrequest.md
+  - docs/models/listtasksresponse.md
   - docs/models/listtaxonomiesresponse.md
   - docs/models/listtaxonomiesv1entitiestaxonomiesgetrequest.md
   - docs/models/loc.md
@@ -268,6 +271,7 @@ generatedFiles:
   - src/mixpeek/models/assets_model_searchquery.py
   - src/mixpeek/models/assetupdate.py
   - src/mixpeek/models/assignmentconfig.py
+  - src/mixpeek/models/assignmentmode.py
   - src/mixpeek/models/availablemodels.py
   - src/mixpeek/models/availablemodelsresponse.py
   - src/mixpeek/models/boolindexparams.py
@@ -341,6 +345,7 @@ generatedFiles:
   - src/mixpeek/models/jsonvideooutputsettings.py
   - src/mixpeek/models/keywordindexparams.py
   - src/mixpeek/models/kill_task_v1_tasks_task_id_deleteop.py
+  - src/mixpeek/models/list_active_tasks_v1_tasks_getop.py
   - src/mixpeek/models/list_assets_v1_assets_postop.py
   - src/mixpeek/models/list_classifications_v1_entities_taxonomies_taxonomy_classifications_postop.py
   - src/mixpeek/models/list_collections_v1_collections_getop.py
@@ -353,6 +358,7 @@ generatedFiles:
   - src/mixpeek/models/listcollectionsresponse.py
   - src/mixpeek/models/listfeaturesrequest.py
   - src/mixpeek/models/listfeaturesresponse.py
+  - src/mixpeek/models/listtasksresponse.py
   - src/mixpeek/models/listtaxonomiesresponse.py
   - src/mixpeek/models/logicaloperator.py
   - src/mixpeek/models/logodetectsettings.py
@@ -1623,4 +1629,15 @@ examples:
           application/json: {}
         "500":
           application/json: {"status": 153841, "error": {"message": "<value>", "type": "<value>"}}
+  list_active_tasks_v1_tasks_get:
+    speakeasy-default-list-active-tasks-v1-tasks-get:
+      responses:
+        "200":
+          application/json: {"results": [{"task_id": "<id>"}, {"task_id": "<id>"}], "pagination": {"total": 703165, "page": 334588, "page_size": 602059, "total_pages": 415917, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"status": 993501, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"status": 620291, "error": {"message": "<value>", "type": "<value>"}}
 generatedTests: {}

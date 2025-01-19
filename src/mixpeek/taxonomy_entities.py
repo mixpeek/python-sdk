@@ -1594,11 +1594,10 @@ class TaxonomyEntities(BaseSDK):
         filters: OptionalNullable[
             Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
-        confidence_threshold: Optional[float] = 0.8,
         assignment: Optional[
             Union[models.AssignmentConfig, models.AssignmentConfigTypedDict]
         ] = None,
-        sample_size: OptionalNullable[int] = UNSET,
+        limit: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1612,9 +1611,8 @@ class TaxonomyEntities(BaseSDK):
         :param collections: List of collection names or ids to search for features
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param filters: Filters to apply to the discovery task
-        :param confidence_threshold: Minimum confidence score required for classification
         :param assignment: Configuration for how classifications should be assigned to features
-        :param sample_size: Number of feature samples to process
+        :param limit: Number of feature samples to process, if None, all features that match the filters are processed
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1637,11 +1635,10 @@ class TaxonomyEntities(BaseSDK):
                     filters=utils.get_pydantic_model(
                         filters, OptionalNullable[models.LogicalOperator]
                     ),
-                    confidence_threshold=confidence_threshold,
                     assignment=utils.get_pydantic_model(
                         assignment, Optional[models.AssignmentConfig]
                     ),
-                    sample_size=sample_size,
+                    limit=limit,
                 ),
             )
         )
@@ -1729,11 +1726,10 @@ class TaxonomyEntities(BaseSDK):
         filters: OptionalNullable[
             Union[models.LogicalOperator, models.LogicalOperatorTypedDict]
         ] = UNSET,
-        confidence_threshold: Optional[float] = 0.8,
         assignment: Optional[
             Union[models.AssignmentConfig, models.AssignmentConfigTypedDict]
         ] = None,
-        sample_size: OptionalNullable[int] = UNSET,
+        limit: OptionalNullable[int] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1747,9 +1743,8 @@ class TaxonomyEntities(BaseSDK):
         :param collections: List of collection names or ids to search for features
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param filters: Filters to apply to the discovery task
-        :param confidence_threshold: Minimum confidence score required for classification
         :param assignment: Configuration for how classifications should be assigned to features
-        :param sample_size: Number of feature samples to process
+        :param limit: Number of feature samples to process, if None, all features that match the filters are processed
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1772,11 +1767,10 @@ class TaxonomyEntities(BaseSDK):
                     filters=utils.get_pydantic_model(
                         filters, OptionalNullable[models.LogicalOperator]
                     ),
-                    confidence_threshold=confidence_threshold,
                     assignment=utils.get_pydantic_model(
                         assignment, Optional[models.AssignmentConfig]
                     ),
-                    sample_size=sample_size,
+                    limit=limit,
                 ),
             )
         )
