@@ -5,8 +5,8 @@ management:
   docVersion: "0.81"
   speakeasyVersion: 1.469.11
   generationVersion: 2.493.32
-  releaseVersion: 0.18.0
-  configChecksum: df064ed02a8dc7b3c2864e8611f6b695
+  releaseVersion: 0.18.1
+  configChecksum: 8b4a5f0615493268ece2e22034c79230
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
