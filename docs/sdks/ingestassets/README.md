@@ -103,7 +103,7 @@ with Mixpeek(
             embed=[
                 {
                     "type": mixpeek.InputType.TEXT,
-                    "embedding_model": mixpeek.VectorModel.OPENAI_CLIP_VIT_BASE_PATCH32,
+                    "embedding_model": mixpeek.VectorModel.IMAGE,
                     "value": "a dog",
                 },
             ],
