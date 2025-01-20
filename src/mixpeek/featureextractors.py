@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class FeatureExtractors(BaseSDK):
-    def extract_embeddings_v1_features_extractors_embed_post(
+    def extract_embeddings(
         self,
         *,
         type_: models.InputType,
@@ -118,7 +118,7 @@ class FeatureExtractors(BaseSDK):
             http_res,
         )
 
-    async def extract_embeddings_v1_features_extractors_embed_post_async(
+    async def extract_embeddings_async(
         self,
         *,
         type_: models.InputType,

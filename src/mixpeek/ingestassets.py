@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class IngestAssets(BaseSDK):
-    def ingest_text_v1_ingest_text_post(
+    def ingest_text(
         self,
         *,
         collection: str,
@@ -151,7 +151,7 @@ class IngestAssets(BaseSDK):
             http_res,
         )
 
-    async def ingest_text_v1_ingest_text_post_async(
+    async def ingest_text_async(
         self,
         *,
         collection: str,
@@ -293,7 +293,7 @@ class IngestAssets(BaseSDK):
             http_res,
         )
 
-    def ingest_video_url_v1_ingest_videos_url_post(
+    def ingest_video_url(
         self,
         *,
         url: str,
@@ -438,7 +438,7 @@ class IngestAssets(BaseSDK):
             http_res,
         )
 
-    async def ingest_video_url_v1_ingest_videos_url_post_async(
+    async def ingest_video_url_async(
         self,
         *,
         url: str,
@@ -583,7 +583,7 @@ class IngestAssets(BaseSDK):
             http_res,
         )
 
-    def ingest_image_url_v1_ingest_images_url_post(
+    def ingest_image_url(
         self,
         *,
         url: str,
@@ -728,7 +728,7 @@ class IngestAssets(BaseSDK):
             http_res,
         )
 
-    async def ingest_image_url_v1_ingest_images_url_post_async(
+    async def ingest_image_url_async(
         self,
         *,
         url: str,

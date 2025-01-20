@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [ingest_text_v1_ingest_text_post](#ingest_text_v1_ingest_text_post) - Ingest Text
-* [ingest_video_url_v1_ingest_videos_url_post](#ingest_video_url_v1_ingest_videos_url_post) - Ingest Video Url
-* [ingest_image_url_v1_ingest_images_url_post](#ingest_image_url_v1_ingest_images_url_post) - Ingest Image Url
+* [ingest_text](#ingest_text) - Ingest Text
+* [ingest_video_url](#ingest_video_url) - Ingest Video Url
+* [ingest_image_url](#ingest_image_url) - Ingest Image Url
 
-## ingest_text_v1_ingest_text_post
+## ingest_text
 
 **Requirements:**
 - Required permissions: write
@@ -25,11 +25,11 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.ingest_assets.ingest_text_v1_ingest_text_post(collection="col_1234567890", metadata={}, feature_extractors={
+    res = mixpeek.ingest_assets.ingest_text(collection="col_1234567890", metadata={}, feature_extractors={
         "embed": [
             {
                 "type": mixpeek.InputType.TEXT,
-                "embedding_model": mixpeek.VectorModel.BAAI_BGE_M3,
+                "embedding_model": mixpeek.VectorModel.MULTIMODAL,
                 "value": "a dog",
             },
         ],
@@ -78,7 +78,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## ingest_video_url_v1_ingest_videos_url_post
+## ingest_video_url
 
 **Requirements:**
 - Required permissions: write
@@ -94,7 +94,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.ingest_assets.ingest_video_url_v1_ingest_videos_url_post(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
+    res = mixpeek.ingest_assets.ingest_video_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
         mixpeek.VideoSettings(
             interval_sec=15,
             read={
@@ -103,7 +103,7 @@ with Mixpeek(
             embed=[
                 {
                     "type": mixpeek.InputType.TEXT,
-                    "embedding_model": mixpeek.VectorModel.IMAGE,
+                    "embedding_model": mixpeek.VectorModel.VERTEX_MULTIMODAL,
                     "value": "a dog",
                 },
             ],
@@ -160,7 +160,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## ingest_image_url_v1_ingest_images_url_post
+## ingest_image_url
 
 **Requirements:**
 - Required permissions: write
@@ -176,14 +176,14 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.ingest_assets.ingest_image_url_v1_ingest_images_url_post(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=mixpeek.ImageSettings(
+    res = mixpeek.ingest_assets.ingest_image_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=mixpeek.ImageSettings(
         read={
             "enabled": True,
         },
         embed=[
             {
                 "type": mixpeek.InputType.TEXT,
-                "embedding_model": mixpeek.VectorModel.VERTEX_MULTIMODAL,
+                "embedding_model": mixpeek.VectorModel.BAAI_BGE_M3,
                 "value": "a dog",
             },
         ],

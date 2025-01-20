@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [kill_task_v1_tasks_task_id_delete](#kill_task_v1_tasks_task_id_delete) - Kill Task
-* [get_task_v1_tasks_task_id_get](#get_task_v1_tasks_task_id_get) - Get Task Information
-* [list_active_tasks_v1_tasks_get](#list_active_tasks_v1_tasks_get) - List Active Tasks
+* [delete](#delete) - Kill Task
+* [get](#get) - Get Task Information
+* [list_active](#list_active) - List Active Tasks
 
-## kill_task_v1_tasks_task_id_delete
+## delete
 
 **Requirements:**
 - Required permissions: write
@@ -24,7 +24,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.tasks.kill_task_v1_tasks_task_id_delete(task_id="<id>")
+    res = mixpeek.tasks.delete(task_id="<id>")
 
     # Handle response
     print(res)
@@ -52,7 +52,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_task_v1_tasks_task_id_get
+## get
 
 Retrieve a task by its ID.
     
@@ -69,7 +69,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.tasks.get_task_v1_tasks_task_id_get(task_id="<id>")
+    res = mixpeek.tasks.get(task_id="<id>")
 
     # Handle response
     print(res)
@@ -97,7 +97,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_active_tasks_v1_tasks_get
+## list_active
 
 Retrieve all tasks that are not in a complete state (DONE, FAILED, SKIPPED, or CANCELLED)
 
@@ -111,7 +111,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.tasks.list_active_tasks_v1_tasks_get(page_size=10)
+    res = mixpeek.tasks.list_active(page_size=10)
 
     # Handle response
     print(res)

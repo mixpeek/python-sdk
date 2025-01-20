@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class Tasks(BaseSDK):
-    def kill_task_v1_tasks_task_id_delete(
+    def delete(
         self,
         *,
         task_id: str,
@@ -115,7 +115,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    async def kill_task_v1_tasks_task_id_delete_async(
+    async def delete_async(
         self,
         *,
         task_id: str,
@@ -221,7 +221,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    def get_task_v1_tasks_task_id_get(
+    def get(
         self,
         *,
         task_id: str,
@@ -329,7 +329,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    async def get_task_v1_tasks_task_id_get_async(
+    async def get_async(
         self,
         *,
         task_id: str,
@@ -437,7 +437,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    def list_active_tasks_v1_tasks_get(
+    def list_active(
         self,
         *,
         page: OptionalNullable[int] = UNSET,
@@ -545,7 +545,7 @@ class Tasks(BaseSDK):
             http_res,
         )
 
-    async def list_active_tasks_v1_tasks_get_async(
+    async def list_active_async(
         self,
         *,
         page: OptionalNullable[int] = UNSET,

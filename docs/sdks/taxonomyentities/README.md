@@ -5,18 +5,15 @@
 
 ### Available Operations
 
-* [create_taxonomy_v1_entities_taxonomies_post](#create_taxonomy_v1_entities_taxonomies_post) - Create Taxonomy
-* [list_taxonomies_v1_entities_taxonomies_get](#list_taxonomies_v1_entities_taxonomies_get) - List Taxonomies
-* [get_taxonomy_v1_entities_taxonomies_taxonomy_get](#get_taxonomy_v1_entities_taxonomies_taxonomy_get) - Get Taxonomy
-* [delete_taxonomy_v1_entities_taxonomies_taxonomy_delete](#delete_taxonomy_v1_entities_taxonomies_taxonomy_delete) - Delete Taxonomy
-* [update_taxonomy_v1_entities_taxonomies_taxonomy_patch](#update_taxonomy_v1_entities_taxonomies_taxonomy_patch) - Update Taxonomy
-* [get_taxonomy_node_v1_entities_taxonomies_nodes_node_get](#get_taxonomy_node_v1_entities_taxonomies_nodes_node_get) - Get Taxonomy Node
-* [update_node_v1_entities_taxonomies_nodes_node_patch](#update_node_v1_entities_taxonomies_nodes_node_patch) - Update Node
-* [classify_features_v1_entities_taxonomies_taxonomy_classify_post](#classify_features_v1_entities_taxonomies_taxonomy_classify_post) - Classify Features against Taxonomy
-* [list_classifications_v1_entities_taxonomies_taxonomy_classifications_post](#list_classifications_v1_entities_taxonomies_taxonomy_classifications_post) - List Taxonomy Classifications
-* [delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete](#delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete) - Delete Classifications
+* [create](#create) - Create Taxonomy
+* [list](#list) - List Taxonomies
+* [get_node](#get_node) - Get Taxonomy Node
+* [update_node](#update_node) - Update Node
+* [classify_features](#classify_features) - Classify Features against Taxonomy
+* [list_classifications](#list_classifications) - List Taxonomy Classifications
+* [delete_classification](#delete_classification) - Delete Classifications
 
-## create_taxonomy_v1_entities_taxonomies_post
+## create
 
 Register new taxonomies with their descriptions
 
@@ -33,7 +30,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.create_taxonomy_v1_entities_taxonomies_post(taxonomy_name="electronics", nodes=[
+    res = mixpeek.taxonomy_entities.create(taxonomy_name="electronics", nodes=[
 
     ])
 
@@ -64,7 +61,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_taxonomies_v1_entities_taxonomies_get
+## list
 
 Get all taxonomies for the current namespace
 
@@ -78,7 +75,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.list_taxonomies_v1_entities_taxonomies_get(page_size=10)
+    res = mixpeek.taxonomy_entities.list(page_size=10)
 
     # Handle response
     print(res)
@@ -107,7 +104,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_taxonomy_v1_entities_taxonomies_taxonomy_get
+## get_node
 
 Get the complete taxonomy that contains the specified node
 
@@ -121,147 +118,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.get_taxonomy_v1_entities_taxonomies_taxonomy_get(taxonomy="<value>")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `taxonomy`                                                                                                                                                                            | *str*                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                    | The name or id of the taxonomy to find                                                                                                                                                |
-| `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
-| `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |
-
-### Response
-
-**[models.TaxonomyModel](../../models/taxonomymodel.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.ErrorResponse       | 500                        | application/json           |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## delete_taxonomy_v1_entities_taxonomies_taxonomy_delete
-
-Delete an existing taxonomy and remove all associated node classifications from features.
-
-    This operation:
-    - Deletes the taxonomy and all its nodes
-    - Removes any node classifications associated with this taxonomy from all features
-    - This action cannot be undone
-    
-
-**Requirements:**
-- Required permissions: write
-
-### Example Usage
-
-```python
-from mixpeek import Mixpeek
-import os
-
-with Mixpeek(
-    token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
-
-    res = mixpeek.taxonomy_entities.delete_taxonomy_v1_entities_taxonomies_taxonomy_delete(taxonomy="<value>")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `taxonomy`                                                                                                                                                                            | *str*                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                    | The ID or name of the taxonomy to delete                                                                                                                                              |
-| `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
-| `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |
-
-### Response
-
-**[models.GenericSuccessResponse](../../models/genericsuccessresponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.ErrorResponse       | 500                        | application/json           |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## update_taxonomy_v1_entities_taxonomies_taxonomy_patch
-
-Update an existing taxonomy's metadata
-
-**Requirements:**
-- Required permissions: write
-
-### Example Usage
-
-```python
-from mixpeek import Mixpeek
-import os
-
-with Mixpeek(
-    token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
-
-    res = mixpeek.taxonomy_entities.update_taxonomy_v1_entities_taxonomies_taxonomy_patch(taxonomy="<value>", taxonomy_name="electronics_updated", description="Updated electronics taxonomy")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           | Example                                                                                                                                                                               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `taxonomy`                                                                                                                                                                            | *str*                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                    | The ID or name of the taxonomy to update                                                                                                                                              |                                                                                                                                                                                       |
-| `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |                                                                                                                                                                                       |
-| `taxonomy_name`                                                                                                                                                                       | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Updated taxonomy name (must not contain spaces or special characters)                                                                                                                 | electronics_updated                                                                                                                                                                   |
-| `description`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Updated taxonomy description                                                                                                                                                          | Updated electronics taxonomy                                                                                                                                                          |
-| `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |                                                                                                                                                                                       |
-
-### Response
-
-**[models.TaxonomyModel](../../models/taxonomymodel.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.ErrorResponse       | 500                        | application/json           |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## get_taxonomy_node_v1_entities_taxonomies_nodes_node_get
-
-Get the complete taxonomy that contains the specified node
-
-### Example Usage
-
-```python
-from mixpeek import Mixpeek
-import os
-
-with Mixpeek(
-    token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
-
-    res = mixpeek.taxonomy_entities.get_taxonomy_node_v1_entities_taxonomies_nodes_node_get(node="<value>")
+    res = mixpeek.taxonomy_entities.get_node(node="<value>")
 
     # Handle response
     print(res)
@@ -289,7 +146,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update_node_v1_entities_taxonomies_nodes_node_patch
+## update_node
 
 Update an existing taxonomy node
 
@@ -306,7 +163,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.update_node_v1_entities_taxonomies_nodes_node_patch(node="<value>", node_name="electronics_accessories", node_description="Electronics accessories and peripherals category")
+    res = mixpeek.taxonomy_entities.update_node(node="<value>", node_name="electronics_accessories", node_description="Electronics accessories and peripherals category")
 
     # Handle response
     print(res)
@@ -336,7 +193,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## classify_features_v1_entities_taxonomies_taxonomy_classify_post
+## classify_features
 
 Starts an asynchronous task to classify features within collections for a given taxonomy.
 
@@ -350,7 +207,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.classify_features_v1_entities_taxonomies_taxonomy_classify_post(taxonomy="<value>", collections=[
+    res = mixpeek.taxonomy_entities.classify_features(taxonomy="<value>", collections=[
         "<value>",
         "<value>",
         "<value>",
@@ -397,7 +254,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_classifications_v1_entities_taxonomies_taxonomy_classifications_post
+## list_classifications
 
 Retrieves a paginated list of classification entries with optional filtering.
 
@@ -412,7 +269,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.list_classifications_v1_entities_taxonomies_taxonomy_classifications_post(taxonomy="<value>", page_size=10, filters={
+    res = mixpeek.taxonomy_entities.list_classifications(taxonomy="<value>", page_size=10, filters={
         "case_sensitive": True,
         "and_": [
 
@@ -465,7 +322,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete
+## delete_classification
 
 **Requirements:**
 - Required permissions: write
@@ -480,7 +337,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_delete(taxonomy="<value>", classification_id="<id>")
+    res = mixpeek.taxonomy_entities.delete_classification(taxonomy="<value>", classification_id="<id>")
 
     # Handle response
     print(res)

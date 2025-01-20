@@ -5,14 +5,14 @@
 
 ### Available Operations
 
-* [create_namespace_v1_namespaces_post](#create_namespace_v1_namespaces_post) - Create Namespace
-* [list_namespaces_v1_namespaces_get](#list_namespaces_v1_namespaces_get) - List Namespaces
-* [delete_namespace_v1_namespaces_namespace_delete](#delete_namespace_v1_namespaces_namespace_delete) - Delete Namespace
-* [update_namespace_v1_namespaces_namespace_put](#update_namespace_v1_namespaces_namespace_put) - Update Namespace
-* [get_namespace_v1_namespaces_namespace_get](#get_namespace_v1_namespaces_namespace_get) - Get Namespace
-* [list_available_models_v1_namespaces_models_get](#list_available_models_v1_namespaces_models_get) - List Available Models
+* [create](#create) - Create Namespace
+* [list](#list) - List Namespaces
+* [delete](#delete) - Delete Namespace
+* [update](#update) - Update Namespace
+* [get](#get) - Get Namespace
+* [list_models](#list_models) - List Available Models
 
-## create_namespace_v1_namespaces_post
+## create
 
 Creates a new namespace with the specified configuration
 
@@ -27,7 +27,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.namespaces.create_namespace_v1_namespaces_post(namespace_name="spotify_playlists_dev", embedding_models=[
+    res = mixpeek.namespaces.create(namespace_name="spotify_playlists_dev", embedding_models=[
         "image",
         "multimodal",
         "text",
@@ -81,7 +81,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_namespaces_v1_namespaces_get
+## list
 
 List all namespaces for a user
 
@@ -95,7 +95,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.namespaces.list_namespaces_v1_namespaces_get()
+    res = mixpeek.namespaces.list()
 
     # Handle response
     print(res)
@@ -121,7 +121,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_namespace_v1_namespaces_namespace_delete
+## delete
 
 Deletes an existing namespace using either its name or ID
 
@@ -135,7 +135,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.namespaces.delete_namespace_v1_namespaces_namespace_delete(namespace="ns_1234567890")
+    res = mixpeek.namespaces.delete(namespace="ns_1234567890")
 
     # Handle response
     print(res)
@@ -162,7 +162,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update_namespace_v1_namespaces_namespace_put
+## update
 
 Updates an existing namespace's payload indexes, this is a full update
 
@@ -177,7 +177,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.namespaces.update_namespace_v1_namespaces_namespace_put(namespace="ns_1234567890", namespace_name="spotify_playlists_dev", payload_indexes=[
+    res = mixpeek.namespaces.update(namespace="ns_1234567890", namespace_name="spotify_playlists_dev", payload_indexes=[
         {
             "field_name": "metadata.title",
             "type": mixpeek.PayloadSchemaType.TEXT,
@@ -226,7 +226,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_namespace_v1_namespaces_namespace_get
+## get
 
 Retrieve details of a specific namespace using either its name or ID
 
@@ -240,7 +240,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.namespaces.get_namespace_v1_namespaces_namespace_get(namespace="my_namespace")
+    res = mixpeek.namespaces.get(namespace="ns_1234567890")
 
     # Handle response
     print(res)
@@ -267,7 +267,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_available_models_v1_namespaces_models_get
+## list_models
 
 Returns all available models and their configurations, scoped to the organization
 
@@ -281,7 +281,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.namespaces.list_available_models_v1_namespaces_models_get()
+    res = mixpeek.namespaces.list_models()
 
     # Handle response
     print(res)

@@ -10,17 +10,18 @@ from mixpeek import models, utils
 from mixpeek._hooks import SDKHooks
 from mixpeek.assets import Assets
 from mixpeek.collections import Collections
-from mixpeek.feature_extractors import FeatureExtractors
-from mixpeek.feature_search import FeatureSearch
+from mixpeek.featureextractors import FeatureExtractors
 from mixpeek.features import Features
 from mixpeek.health import Health
-from mixpeek.ingest_assets import IngestAssets
+from mixpeek.ingestassets import IngestAssets
 from mixpeek.models import internal
 from mixpeek.namespaces import Namespaces
 from mixpeek.organizations import Organizations
 from mixpeek.tasks import Tasks
-from mixpeek.taxonomy_entities import TaxonomyEntities
+from mixpeek.taxonomies import Taxonomies
+from mixpeek.taxonomyentities import TaxonomyEntities
 from mixpeek.types import OptionalNullable, UNSET
+from mixpeek.users import Users
 from typing import Any, Callable, Dict, Optional, Union
 
 
@@ -29,12 +30,13 @@ class Mixpeek(BaseSDK):
 
     health: Health
     organizations: Organizations
+    users: Users
     namespaces: Namespaces
     features: Features
-    feature_search: FeatureSearch
     feature_extractors: FeatureExtractors
     ingest_assets: IngestAssets
     taxonomy_entities: TaxonomyEntities
+    taxonomies: Taxonomies
     assets: Assets
     collections: Collections
     tasks: Tasks
@@ -130,12 +132,13 @@ class Mixpeek(BaseSDK):
     def _init_sdks(self):
         self.health = Health(self.sdk_configuration)
         self.organizations = Organizations(self.sdk_configuration)
+        self.users = Users(self.sdk_configuration)
         self.namespaces = Namespaces(self.sdk_configuration)
         self.features = Features(self.sdk_configuration)
-        self.feature_search = FeatureSearch(self.sdk_configuration)
         self.feature_extractors = FeatureExtractors(self.sdk_configuration)
         self.ingest_assets = IngestAssets(self.sdk_configuration)
         self.taxonomy_entities = TaxonomyEntities(self.sdk_configuration)
+        self.taxonomies = Taxonomies(self.sdk_configuration)
         self.assets = Assets(self.sdk_configuration)
         self.collections = Collections(self.sdk_configuration)
         self.tasks = Tasks(self.sdk_configuration)

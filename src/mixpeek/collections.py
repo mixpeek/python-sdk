@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Collections(BaseSDK):
-    def list_collections_v1_collections_get(
+    def list(
         self,
         *,
         page: OptionalNullable[int] = UNSET,
@@ -115,7 +115,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def list_collections_v1_collections_get_async(
+    async def list_async(
         self,
         *,
         page: OptionalNullable[int] = UNSET,
@@ -221,7 +221,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def create_collection_v1_collections_post(
+    def create(
         self,
         *,
         collection_name: str,
@@ -346,7 +346,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def create_collection_v1_collections_post_async(
+    async def create_async(
         self,
         *,
         collection_name: str,
@@ -471,7 +471,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def delete_collection_v1_collections_collection_delete(
+    def delete(
         self,
         *,
         collection: str,
@@ -576,7 +576,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def delete_collection_v1_collections_collection_delete_async(
+    async def delete_async(
         self,
         *,
         collection: str,
@@ -681,7 +681,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def update_collection_v1_collections_collection_put(
+    def update(
         self,
         *,
         collection: str,
@@ -808,7 +808,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def update_collection_v1_collections_collection_put_async(
+    async def update_async(
         self,
         *,
         collection: str,
@@ -935,7 +935,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def get_collection_v1_collections_collection_get(
+    def get(
         self,
         *,
         collection: str,
@@ -1040,7 +1040,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def get_collection_v1_collections_collection_get_async(
+    async def get_async(
         self,
         *,
         collection: str,

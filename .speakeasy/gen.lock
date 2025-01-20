@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 62f4bf43222d4b9b29ff9054db6891c7
+  docChecksum: f7ac3f82c08f0f151fa71400be2a533b
   docVersion: "0.81"
   speakeasyVersion: 1.469.11
   generationVersion: 2.493.32
-  releaseVersion: 0.17.9
-  configChecksum: 7e41f8e9eefbd9e6eb99162257657878
+  releaseVersion: 0.18.0
+  configChecksum: df064ed02a8dc7b3c2864e8611f6b695
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -27,6 +27,7 @@ features:
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
     globals: 3.0.0
+    groups: 3.0.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
     nullables: 1.0.0
@@ -233,14 +234,15 @@ generatedFiles:
   - docs/sdks/collections/README.md
   - docs/sdks/featureextractors/README.md
   - docs/sdks/features/README.md
-  - docs/sdks/featuresearch/README.md
   - docs/sdks/health/README.md
   - docs/sdks/ingestassets/README.md
   - docs/sdks/mixpeek/README.md
   - docs/sdks/namespaces/README.md
   - docs/sdks/organizations/README.md
   - docs/sdks/tasks/README.md
+  - docs/sdks/taxonomies/README.md
   - docs/sdks/taxonomyentities/README.md
+  - docs/sdks/users/README.md
   - poetry.toml
   - py.typed
   - pylintrc
@@ -255,12 +257,11 @@ generatedFiles:
   - src/mixpeek/assets.py
   - src/mixpeek/basesdk.py
   - src/mixpeek/collections.py
-  - src/mixpeek/feature_extractors.py
-  - src/mixpeek/feature_search.py
+  - src/mixpeek/featureextractors.py
   - src/mixpeek/features.py
   - src/mixpeek/health.py
   - src/mixpeek/httpclient.py
-  - src/mixpeek/ingest_assets.py
+  - src/mixpeek/ingestassets.py
   - src/mixpeek/models/__init__.py
   - src/mixpeek/models/actionusage.py
   - src/mixpeek/models/apierror.py
@@ -422,9 +423,11 @@ generatedFiles:
   - src/mixpeek/sdk.py
   - src/mixpeek/sdkconfiguration.py
   - src/mixpeek/tasks.py
-  - src/mixpeek/taxonomy_entities.py
+  - src/mixpeek/taxonomies.py
+  - src/mixpeek/taxonomyentities.py
   - src/mixpeek/types/__init__.py
   - src/mixpeek/types/basemodel.py
+  - src/mixpeek/users.py
   - src/mixpeek/utils/__init__.py
   - src/mixpeek/utils/annotations.py
   - src/mixpeek/utils/enums.py
@@ -615,7 +618,7 @@ examples:
     speakeasy-default-get-namespace-v1-namespaces-namespace-get:
       parameters:
         path:
-          namespace: "my_namespace"
+          namespace: "ns_1234567890"
       responses:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}
@@ -733,7 +736,7 @@ examples:
   ingest_text_v1_ingest_text_post:
     speakeasy-default-ingest-text-v1-ingest-text-post:
       requestBody:
-        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "multimodal"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -746,7 +749,7 @@ examples:
   ingest_video_url_v1_ingest_videos_url_post:
     speakeasy-default-ingest-video-url-v1-ingest-videos-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "image"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}]}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}]}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -759,7 +762,7 @@ examples:
   ingest_image_url_v1_ingest_images_url_post:
     speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -1071,7 +1074,7 @@ examples:
     speakeasy-default-delete-collection-v1-collections-collection-delete:
       parameters:
         path:
-          collection: "my_collection"
+          collection: "col_1234567890"
         header: {}
       responses:
         "200":

@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Assets(BaseSDK):
-    def get_asset_v1_assets_asset_id_get(
+    def get(
         self,
         *,
         asset_id: str,
@@ -117,7 +117,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def get_asset_v1_assets_asset_id_get_async(
+    async def get_async(
         self,
         *,
         asset_id: str,
@@ -225,7 +225,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def delete_asset_v1_assets_asset_id_delete(
+    def delete(
         self,
         *,
         asset_id: str,
@@ -331,7 +331,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def delete_asset_v1_assets_asset_id_delete_async(
+    async def delete_async(
         self,
         *,
         asset_id: str,
@@ -437,7 +437,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def full_asset_update_v1_assets_asset_id_put(
+    def update(
         self,
         *,
         asset_id: str,
@@ -565,7 +565,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def full_asset_update_v1_assets_asset_id_put_async(
+    async def update_async(
         self,
         *,
         asset_id: str,
@@ -693,7 +693,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def partial_asset_update_v1_assets_asset_id_patch(
+    def partial_update(
         self,
         *,
         asset_id: str,
@@ -821,7 +821,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def partial_asset_update_v1_assets_asset_id_patch_async(
+    async def partial_update_async(
         self,
         *,
         asset_id: str,
@@ -949,7 +949,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def get_asset_with_features_v1_assets_asset_id_features_get(
+    def get_with_features(
         self,
         *,
         asset_id: str,
@@ -1057,7 +1057,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def get_asset_with_features_v1_assets_asset_id_features_get_async(
+    async def get_with_features_async(
         self,
         *,
         asset_id: str,
@@ -1165,7 +1165,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def list_assets_v1_assets_post(
+    def list(
         self,
         *,
         collections: List[str],
@@ -1310,7 +1310,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def list_assets_v1_assets_post_async(
+    async def list_async(
         self,
         *,
         collections: List[str],
@@ -1455,7 +1455,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    def search_assets_v1_assets_search_post(
+    def search(
         self,
         *,
         collections: List[str],
@@ -1594,7 +1594,7 @@ class Assets(BaseSDK):
             http_res,
         )
 
-    async def search_assets_v1_assets_search_post_async(
+    async def search_async(
         self,
         *,
         collections: List[str],

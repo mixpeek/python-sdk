@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Namespaces(BaseSDK):
-    def create_namespace_v1_namespaces_post(
+    def create(
         self,
         *,
         namespace_name: str,
@@ -127,7 +127,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def create_namespace_v1_namespaces_post_async(
+    async def create_async(
         self,
         *,
         namespace_name: str,
@@ -245,7 +245,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def list_namespaces_v1_namespaces_get(
+    def list(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -340,7 +340,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def list_namespaces_v1_namespaces_get_async(
+    async def list_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -435,7 +435,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def delete_namespace_v1_namespaces_namespace_delete(
+    def delete(
         self,
         *,
         namespace: str,
@@ -537,7 +537,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def delete_namespace_v1_namespaces_namespace_delete_async(
+    async def delete_async(
         self,
         *,
         namespace: str,
@@ -639,7 +639,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def update_namespace_v1_namespaces_namespace_put(
+    def update(
         self,
         *,
         namespace: str,
@@ -760,7 +760,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def update_namespace_v1_namespaces_namespace_put_async(
+    async def update_async(
         self,
         *,
         namespace: str,
@@ -881,7 +881,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def get_namespace_v1_namespaces_namespace_get(
+    def get(
         self,
         *,
         namespace: str,
@@ -983,7 +983,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def get_namespace_v1_namespaces_namespace_get_async(
+    async def get_async(
         self,
         *,
         namespace: str,
@@ -1085,7 +1085,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    def list_available_models_v1_namespaces_models_get(
+    def list_models(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1180,7 +1180,7 @@ class Namespaces(BaseSDK):
             http_res,
         )
 
-    async def list_available_models_v1_namespaces_models_get_async(
+    async def list_models_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
