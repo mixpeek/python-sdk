@@ -160,7 +160,7 @@ with Mixpeek(
     res = mixpeek.features.list_features_v1_features_post(collections=[
         "collection_123",
         "my_collection_name",
-    ], filters={
+    ], page_size=10, filters={
         "case_sensitive": True,
         "and_": [
 
@@ -176,7 +176,7 @@ with Mixpeek(
         "direction": mixpeek.Direction.DESC,
     }, select=[
         "metadata.tags",
-    ])
+    ], return_urls=False)
 
     # Handle response
     print(res)

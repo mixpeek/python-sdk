@@ -43,6 +43,7 @@ with Mixpeek(
                     mixpeek.AvailableModels.MULTIMODAL,
                     mixpeek.AvailableModels.TEXT,
                 ],
+                "confidence_threshold": 0.8,
             },
         },
     })
@@ -85,6 +86,7 @@ with Mixpeek(
 ### Example Usage
 
 ```python
+import mixpeek
 from mixpeek import Mixpeek
 import os
 
@@ -93,7 +95,38 @@ with Mixpeek(
 ) as mixpeek:
 
     res = mixpeek.ingest_assets.ingest_video_url_v1_ingest_videos_url_post(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
-
+        mixpeek.VideoSettings(
+            interval_sec=15,
+            read={
+                "enabled": True,
+            },
+            embed=[
+                {
+                    "type": mixpeek.InputType.TEXT,
+                    "embedding_model": mixpeek.VectorModel.OPENAI_CLIP_VIT_BASE_PATCH32,
+                    "value": "a dog",
+                },
+            ],
+            transcribe={
+                "enabled": True,
+            },
+            describe={
+                "enabled": True,
+            },
+            json_output={},
+            entities={
+                "taxonomy_extraction": {
+                    "taxonomy_ids": [
+                        "tax_123",
+                    ],
+                    "embedding_models": [
+                        mixpeek.AvailableModels.MULTIMODAL,
+                        mixpeek.AvailableModels.TEXT,
+                    ],
+                    "confidence_threshold": 0.8,
+                },
+            },
+        ),
     ])
 
     # Handle response
@@ -168,6 +201,7 @@ with Mixpeek(
                     mixpeek.AvailableModels.MULTIMODAL,
                     mixpeek.AvailableModels.TEXT,
                 ],
+                "confidence_threshold": 0.8,
             },
         },
     ))

@@ -25,7 +25,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.collections.list_collections_v1_collections_get()
+    res = mixpeek.collections.list_collections_v1_collections_get(page_size=10)
 
     # Handle response
     print(res)

@@ -111,7 +111,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.tasks.list_active_tasks_v1_tasks_get()
+    res = mixpeek.tasks.list_active_tasks_v1_tasks_get(page_size=10)
 
     # Handle response
     print(res)

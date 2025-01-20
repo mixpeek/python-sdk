@@ -239,7 +239,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.organizations.create_api_key_v1_organizations_users_user_email_api_keys_post(user_email="<value>")
+    res = mixpeek.organizations.create_api_key_v1_organizations_users_user_email_api_keys_post(user_email="<value>", key_name="default")
 
     # Handle response
     print(res)

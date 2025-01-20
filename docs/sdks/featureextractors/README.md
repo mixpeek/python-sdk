@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.feature_extractors.extract_embeddings_v1_features_extractors_embed_post(type_=mixpeek.InputType.URL, embedding_model=mixpeek.VectorModel.BAAI_BGE_M3, value="https://example.com/image.jpg")
+    res = mixpeek.feature_extractors.extract_embeddings_v1_features_extractors_embed_post(type_=mixpeek.InputType.URL, embedding_model=mixpeek.VectorModel.TEXT, value="https://example.com/image.jpg")
 
     # Handle response
     print(res)

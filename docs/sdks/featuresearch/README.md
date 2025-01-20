@@ -58,7 +58,7 @@ with Mixpeek(
             "feedback": 0.7,
             "popularity": 0.3,
         },
-        "enable_reranking": True,
+        "enable_reranking": False,
     }, session_id="sess_abc123", return_url=True)
 
     # Handle response

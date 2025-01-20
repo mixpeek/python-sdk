@@ -250,7 +250,7 @@ with Mixpeek(
     res = mixpeek.assets.list_assets_v1_assets_post(collections=[
         "col_123",
         "my_collection",
-    ], filters={
+    ], page_size=10, filters={
         "case_sensitive": True,
         "and_": [
 

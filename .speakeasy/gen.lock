@@ -3,10 +3,10 @@ id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
   docChecksum: 62f4bf43222d4b9b29ff9054db6891c7
   docVersion: "0.81"
-  speakeasyVersion: 1.469.1
-  generationVersion: 2.493.21
-  releaseVersion: 0.17.7
-  configChecksum: 6ac8711c7fbe39e26d528461cad1f90f
+  speakeasyVersion: 1.469.2
+  generationVersion: 2.493.23
+  releaseVersion: 0.17.8
+  configChecksum: 521882d5bd7cdeecb1426d8484b2ed9c
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -441,536 +441,33 @@ generatedFiles:
   - src/mixpeek/utils/url.py
   - src/mixpeek/utils/values.py
 examples:
-  get_organization_organizations_get:
-    speakeasy-default-get-organization-organizations-get:
-      responses:
-        "200":
-          application/json: {"organization_name": "<value>"}
-        "400":
-          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_usage_organizations_usage_get:
-    speakeasy-default-get-usage-organizations-usage-get:
-      responses:
-        "200":
-          application/json: {"total_credits": 392946, "dates": [{"date": "2024-05-17", "credits": 343162, "actions": [{"action": "<value>", "credits": 665115}, {"action": "<value>", "credits": 16413}, {"action": "<value>", "credits": 655748}]}]}
-        "400":
-          application/json: {"status": 224089, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_user_organizations_users__user_email__get:
-    speakeasy-default-get-user-organizations-users-user-email-get:
-      parameters:
-        path:
-          user_email: "<value>"
-      responses:
-        "200":
-          application/json: {"email": "Dorian_Schaefer95@gmail.com"}
-        "400":
-          application/json: {"status": 746869, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  delete_user_organizations_users__user_email__delete:
-    speakeasy-default-delete-user-organizations-users-user-email-delete:
-      parameters:
-        path:
-          user_email: "<value>"
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"status": 251343, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  add_user_organizations_users_post:
-    speakeasy-default-add-user-organizations-users-post:
-      requestBody:
-        application/json: {"email": "Idella47@gmail.com"}
-      responses:
-        "200":
-          application/json: {"email": "Nakia_Lemke-Walter70@gmail.com"}
-        "400":
-          application/json: {"status": 555876, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  create_api_key_organizations_users__user_email__api_keys_post:
-    speakeasy-default-create-api-key-organizations-users-user-email-api-keys-post:
-      parameters:
-        path:
-          user_email: "<value>"
-        query: {}
-      responses:
-        "200":
-          application/json: {}
-        "400":
-          application/json: {"status": 909677, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  delete_api_key_organizations_users__user_email__api_keys__key_name__delete:
-    speakeasy-default-delete-api-key-organizations-users-user-email-api-keys-key-name-delete:
-      parameters:
-        path:
-          user_email: "<value>"
-          key_name: "<value>"
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"status": 98556, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  update_api_key_organizations_users__user_email__api_keys__key_name__patch:
-    speakeasy-default-update-api-key-organizations-users-user-email-api-keys-key-name-patch:
-      parameters:
-        path:
-          user_email: "<value>"
-          key_name: "<value>"
-      responses:
-        "200":
-          application/json: {}
-        "400":
-          application/json: {"status": 867905, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  create_namespace_namespaces_post:
-    speakeasy-default-create-namespace-namespaces-post:
-      requestBody:
-        application/json: {"namespace_name": "spotify_playlists_dev", "embedding_models": ["image", "multimodal", "text", "keyword"], "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
-      responses:
-        "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>"], "payload_indexes": ["<value>"]}
-        "400":
-          application/json: {"status": 486589, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  list_namespaces_namespaces_get:
-    speakeasy-default-list-namespaces-namespaces-get:
-      responses:
-        "200":
-          application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}]
-        "400":
-          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  delete_namespace_namespaces__namespace__delete:
-    speakeasy-default-delete-namespace-namespaces-namespace-delete:
-      parameters:
-        path:
-          namespace: "ns_1234567890"
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"status": 386564, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  update_namespace_namespaces__namespace__put:
-    speakeasy-default-update-namespace-namespaces-namespace-put:
-      parameters:
-        path:
-          namespace: "ns_1234567890"
-      requestBody:
-        application/json: {"namespace_name": "spotify_playlists_dev", "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
-      responses:
-        "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>"], "payload_indexes": ["<value>"]}
-        "400":
-          application/json: {"status": 344620, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_namespace_namespaces__namespace__get:
-    speakeasy-default-get-namespace-namespaces-namespace-get:
-      parameters:
-        path:
-          namespace: "ns_1234567890"
-      responses:
-        "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
-        "400":
-          application/json: {"status": 544221, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  list_available_indexes_namespaces_indexes_get:
-    speakeasy-default-list-available-indexes-namespaces-indexes-get:
-      responses:
-        "200":
-          application/json: {"embedding_models": {}, "payload_indexes": [{"type": "<value>"}, {"type": "<value>"}, {"type": "<value>"}]}
-        "400":
-          application/json: {"status": 197324, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_feature_features__feature_id__get:
-    speakeasy-default-get-feature-features-feature-id-get:
-      parameters:
-        path:
-          feature_id: "<id>"
-        query: {}
-        header: {}
-      responses:
-        "200":
-          application/json: {"key": "<value>", "key1": "<value>"}
-        "400":
-          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  delete_feature_features__feature_id__delete:
-    speakeasy-default-delete-feature-features-feature-id-delete:
-      parameters:
-        path:
-          feature_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  full_feature_update_features__feature_id__put:
-    speakeasy-default-full-feature-update-features-feature-id-put:
-      parameters:
-        path:
-          feature_id: "<id>"
-        header: {}
-      requestBody:
-        application/json: {}
-      responses:
-        "200":
-          application/json: {}
-        "400":
-          application/json: {"status": 857478, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  list_features_features_post:
-    speakeasy-default-list-features-features-post:
-      requestBody:
-        application/json: {"collections": ["collection_123", "my_collection_name"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "select": ["metadata.tags"]}
-      responses:
-        "200":
-          application/json: {"results": [{"key": "<value>", "key1": "<value>", "key2": "<value>"}], "pagination": {"total": 37615, "page_size": 76430, "total_pages": 99738, "current_page": 887823, "next_page": "<value>", "previous_page": "<value>"}}
-        "400":
-          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  search_features_features_search_post:
-    "":
-      parameters:
-        query:
-          offset_position: 0
-          page_size: 10
-        header: {}
-      requestBody:
-        application/json: {"queries": [{"embedding_model": "text", "value": "https://example.com/dog.jpg", "type": "url", "settings": {"limit": 50, "min_score": 0.7}}, {"embedding_model": "video", "value": "This is a text query", "type": "text"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "metadata.field_name", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": true}, "session_id": "sess_abc123", "return_url": true}
-      responses:
-        "400":
-          application/json: {"status": 307631, "error": {"message": "<value>", "type": "<value>"}}
-        "422": {}
-        "200": {}
-  create_interaction_features_search_interactions_post:
-    speakeasy-default-create-interaction-features-search-interactions-post:
-      requestBody:
-        application/json: {"feature_id": "prod_123", "interaction_type": "negative_feedback", "search_request": {"queries": [{"vector_index": "image", "value": "This is a text query", "type": "url", "settings": {"limit": 10, "min_score": 0.5}}, {"vector_index": "text", "value": "This is a text query", "type": "url"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "score", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": true}, "session_id": "sess_abc123", "return_url": true}, "position": 3, "session_id": "sess_abc123"}
-      responses:
-        "200":
-          application/json: {"feature_id": "prod_123", "interaction_type": "positive_feedback", "search_request": {"queries": [{"vector_index": "image", "value": "This is a text query", "type": "url", "settings": {"limit": 10, "min_score": 0.5}}, {"vector_index": "text", "value": "This is a text query", "type": "url"}], "collections": ["collection1", "collection2"]}, "position": 3, "session_id": "sess_abc123", "interaction_id": "int_xyz789"}
-        "400":
-          application/json: {"status": 486589, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  list_interactions_features_search_interactions_get:
-    speakeasy-default-list-interactions-features-search-interactions-get:
-      responses:
-        "200":
-          application/json: []
-        "400":
-          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_interaction_features_search_interactions__interaction_id__get:
-    speakeasy-default-get-interaction-features-search-interactions-interaction-id-get:
-      parameters:
-        path:
-          interaction_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: {"feature_id": "prod_123", "interaction_type": "click", "search_request": {"queries": [{"vector_index": "image", "value": "This is a text query", "type": "url", "settings": {"limit": 10, "min_score": 0.5}}, {"vector_index": "text", "value": "This is a text query", "type": "url"}], "collections": ["collection1", "collection2"]}, "position": 3, "session_id": "sess_abc123", "interaction_id": "int_xyz789"}
-        "400":
-          application/json: {"status": 826676, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  delete_interaction_features_search_interactions__interaction_id__delete:
-    speakeasy-default-delete-interaction-features-search-interactions-interaction-id-delete:
-      parameters:
-        path:
-          interaction_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  extract_embeddings_features_extractors_embed_post:
-    speakeasy-default-extract-embeddings-features-extractors-embed-post:
-      requestBody:
-        application/json: {"type": "text", "value": "https://example.com/image.jpg", "embedding_model": "vertex-multimodal"}
-      responses:
-        "200":
-          application/json: {"embedding": {"vector": ["5727.00", "296.19", "1811.13"]}}
-        "400":
-          application/json: {"status": 484301, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  ingest_text_ingest_text_post:
-    speakeasy-default-ingest-text-ingest-text-post:
-      requestBody:
-        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "https://example.com/image.jpg", "embedding_model": "multimodal"}, {"type": "text", "value": "https://example.com/image.jpg", "embedding_model": "keyword"}, {"type": "text", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "json_output": {}}}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"status": 531605, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  ingest_video_url_ingest_videos_url_post:
-    speakeasy-default-ingest-video-url-ingest-videos-url-post:
-      requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "url", "embedding_model": "multimodal"}, {"type": "text", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "detect": {"faces": {"enabled": true, "confidence_threshold": 0.8}}, "json_output": {}}]}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"status": 561301, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  ingest_image_url_ingest_images_url_post:
-    speakeasy-default-ingest-image-url-ingest-images-url-post:
-      requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "url", "embedding_model": "multimodal"}, {"type": "url", "embedding_model": "image"}], "describe": {"enabled": true, "max_length": 1000}, "detect": {"faces": {"enabled": true, "confidence_threshold": 0.8}}, "json_output": {}}}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"status": 971279, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_asset_assets__asset_id__get:
-    "":
-      parameters:
-        path:
-          asset_id: "ast_123"
-        query:
-          return_url: true
-        header: {}
-      responses:
-        "200":
-          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
-        "400":
-          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
-        "422": {}
-  delete_asset_assets__asset_id__delete:
-    speakeasy-default-delete-asset-assets-asset-id-delete:
-      parameters:
-        path:
-          asset_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  full_asset_update_assets__asset_id__put:
-    speakeasy-default-full-asset-update-assets-asset-id-put:
-      parameters:
-        path:
-          asset_id: "<id>"
-        header: {}
-      requestBody:
-        application/json: {"propagate_features": true}
-      responses:
-        "200":
-          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
-        "400":
-          application/json: {"status": 857478, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  partial_asset_update_assets__asset_id__patch:
-    speakeasy-default-partial-asset-update-assets-asset-id-patch:
-      parameters:
-        path:
-          asset_id: "<id>"
-        header: {}
-      requestBody:
-        application/json: {"propagate_features": true}
-      responses:
-        "200":
-          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
-        "400":
-          application/json: {"status": 14672, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_asset_with_features_assets__asset_id__features_get:
-    "":
-      parameters:
-        path:
-          asset_id: "asset_123456789"
-        query:
-          return_url: false
-        header: {}
-      responses:
-        "200":
-          application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}}
-        "400":
-          application/json: {"status": 806281, "error": {"message": "<value>", "type": "<value>"}}
-        "422": {}
-  list_assets_assets_post:
-    speakeasy-default-list-assets-assets-post:
-      requestBody:
-        application/json: {"collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_assets": 10, "sort": {"field": "score", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "return_url": true}
-      responses:
-        "200":
-          application/json: {"results": [], "pagination": {"total": 260310, "page": 538291, "page_size": 345582, "total_pages": 975252, "next_page": "<value>", "previous_page": "<value>"}}
-        "400":
-          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  search_assets_assets_search_post:
-    speakeasy-default-search-assets-assets-search-post:
-      requestBody:
-        application/json: {"query": {"key": ["title", "description"], "value": "search term"}, "collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "return_url": true}
-      responses:
-        "200":
-          application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 127606, "page": 666249, "page_size": 470157, "total_pages": 32419, "next_page": "<value>", "previous_page": "<value>"}}
-        "400":
-          application/json: {"status": 307631, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  list_collections_collections_get:
-    speakeasy-default-list-collections-collections-get:
-      responses:
-        "200":
-          application/json: {"results": [], "pagination": {"total": 811041, "page": 290173, "page_size": 471947, "total_pages": 213189, "next_page": "<value>", "previous_page": "<value>"}}
-        "400":
-          application/json: {"status": 768578, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  create_collection_collections_post:
-    speakeasy-default-create-collection-collections-post:
-      requestBody:
-        application/json: {"collection_name": "<value>"}
-      responses:
-        "200":
-          application/json: {"collection_name": "<value>"}
-        "400":
-          application/json: {"status": 486589, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  delete_collection_collections__collection__delete:
-    speakeasy-default-delete-collection-collections-collection-delete:
-      parameters:
-        path:
-          collection: "col_1234567890"
-        header: {}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"status": 386564, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  update_collection_collections__collection__put:
-    speakeasy-default-update-collection-collections-collection-put:
-      parameters:
-        path:
-          collection: "col_1234567890"
-        header: {}
-      requestBody:
-        application/json: {"collection_name": "<value>"}
-      responses:
-        "200":
-          application/json: {"collection_name": "<value>"}
-        "400":
-          application/json: {"status": 344620, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_collection_collections__collection__get:
-    speakeasy-default-get-collection-collections-collection-get:
-      parameters:
-        path:
-          collection: "col_1234567890"
-        header: {}
-      responses:
-        "200":
-          application/json: {"collection_name": "<value>"}
-        "400":
-          application/json: {"status": 544221, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  kill_task_tasks__task_id__delete:
-    speakeasy-default-kill-task-tasks-task-id-delete:
-      parameters:
-        path:
-          task_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"status": 545907, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-  get_task_tasks__task_id__get:
-    speakeasy-default-get-task-tasks-task-id-get:
-      parameters:
-        path:
-          task_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>", "status": "DONE", "inputs": [], "outputs": ["<value>", "<value>"]}
-        "400":
-          application/json: {"status": 700347, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
   healthcheck_healthcheck_get:
     speakeasy-default-healthcheck-healthcheck-get:
       responses:
         "200":
           application/json: {"status": "<value>"}
-        "400":
-          application/json: {"status": 935464, "error": {"message": "<value>", "type": "<value>"}}
-  debug_openapi_debug_openapi_get:
-    speakeasy-default-debug-openapi-debug-openapi-get:
-      responses:
-        "200":
-          application/json: "<value>"
   get_organization_v1_organizations_get:
     speakeasy-default-get-organization-v1-organizations-get:
       responses:
         "200":
-          application/json: {"organization_name": "<value>"}
+          application/json: {"organization_name": "<value>", "account_type": "free", "credit_count": 1000}
         "400":
-          application/json: {"status": 441424, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 441424, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 441424, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 252499, "error": {"message": "<value>", "type": "<value>"}}
   get_usage_v1_organizations_usage_get:
     speakeasy-default-get-usage-v1-organizations-usage-get:
       responses:
         "200":
-          application/json: {"total_credits": 998093, "dates": [{"date": "2024-09-22", "credits": 106421, "actions": [{"action": "<value>", "credits": 10756}, {"action": "<value>", "credits": 835779}, {"action": "<value>", "credits": 414089}]}]}
+          application/json: {"total_credits": 998093, "dates": [{"date": "2024-10-04", "credits": 106421, "actions": [{"action": "<value>", "credits": 10756}, {"action": "<value>", "credits": 835779}, {"action": "<value>", "credits": 414089}]}]}
         "400":
-          application/json: {"status": 606141, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 606141, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 998093, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 939273, "error": {"message": "<value>", "type": "<value>"}}
   get_user_v1_organizations_users__user_email__get:
     speakeasy-default-get-user-v1-organizations-users-user-email-get:
       parameters:
@@ -980,11 +477,11 @@ examples:
         "200":
           application/json: {"email": "Gilberto37@hotmail.com"}
         "400":
-          application/json: {"status": 946032, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 946032, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 794534, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 345757, "error": {"message": "<value>", "type": "<value>"}}
   delete_user_v1_organizations_users__user_email__delete:
     speakeasy-default-delete-user-v1-organizations-users-user-email-delete:
       parameters:
@@ -994,11 +491,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"status": 234836, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 234836, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 234836, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 330067, "error": {"message": "<value>", "type": "<value>"}}
   add_user_v1_organizations_users_post:
     speakeasy-default-add-user-v1-organizations-users-post:
       requestBody:
@@ -1007,26 +504,27 @@ examples:
         "200":
           application/json: {"email": "Shakira.Feest@hotmail.com"}
         "400":
-          application/json: {"status": 274044, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 274044, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 938061, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 980189, "error": {"message": "<value>", "type": "<value>"}}
   create_api_key_v1_organizations_users__user_email__api_keys_post:
     speakeasy-default-create-api-key-v1-organizations-users-user-email-api-keys-post:
       parameters:
         path:
           user_email: "<value>"
-        query: {}
+        query:
+          key_name: "default"
       responses:
         "200":
           application/json: {}
         "400":
-          application/json: {"status": 834061, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 834061, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 834061, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 801493, "error": {"message": "<value>", "type": "<value>"}}
   delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete:
     speakeasy-default-delete-api-key-v1-organizations-users-user-email-api-keys-key-name-delete:
       parameters:
@@ -1037,11 +535,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"status": 235068, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 235068, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 235068, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 711814, "error": {"message": "<value>", "type": "<value>"}}
   update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch:
     speakeasy-default-update-api-key-v1-organizations-users-user-email-api-keys-key-name-patch:
       parameters:
@@ -1054,11 +552,11 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"status": 490703, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 490703, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 490703, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 184222, "error": {"message": "<value>", "type": "<value>"}}
   create_namespace_v1_namespaces_post:
     speakeasy-default-create-namespace-v1-namespaces-post:
       requestBody:
@@ -1067,22 +565,22 @@ examples:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
         "400":
-          application/json: {"status": 97273, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 97273, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 503345, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 970213, "error": {"message": "<value>", "type": "<value>"}}
   list_namespaces_v1_namespaces_get:
     speakeasy-default-list-namespaces-v1-namespaces-get:
       responses:
         "200":
-          application/json: []
+          application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>", "<value>"], "payload_indexes": []}]
         "400":
-          application/json: {"status": 803212, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 82280, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 65220, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 237137, "error": {"message": "<value>", "type": "<value>"}}
   delete_namespace_v1_namespaces__namespace__delete:
     speakeasy-default-delete-namespace-v1-namespaces-namespace-delete:
       parameters:
@@ -1092,11 +590,11 @@ examples:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 469804, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 469804, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 469804, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 371711, "error": {"message": "<value>", "type": "<value>"}}
   update_namespace_v1_namespaces__namespace__put:
     speakeasy-default-update-namespace-v1-namespaces-namespace-put:
       parameters:
@@ -1108,11 +606,11 @@ examples:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>", "<value>"], "payload_indexes": []}
         "400":
-          application/json: {"status": 366934, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 366934, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 947983, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 7586, "error": {"message": "<value>", "type": "<value>"}}
   get_namespace_v1_namespaces__namespace__get:
     speakeasy-default-get-namespace-v1-namespaces-namespace-get:
       parameters:
@@ -1122,22 +620,22 @@ examples:
         "200":
           application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}
         "400":
-          application/json: {"status": 449425, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 449425, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 591954, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 56837, "error": {"message": "<value>", "type": "<value>"}}
   list_available_models_v1_namespaces_models_get:
     speakeasy-default-list-available-models-v1-namespaces-models-get:
       responses:
         "200":
           application/json: {"embedding_models": {"multimodal": {"supported_modalities": ["text", "image"], "vector_type": "dense", "size": 512}, "text": {"supported_modalities": ["text", "image"], "vector_type": "dense", "size": 512}}, "payload_indexes": [{"type": "keyword"}, {"type": "integer"}, {"type": "text"}]}
         "400":
-          application/json: {"status": 700624, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 700624, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 700624, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 623763, "error": {"message": "<value>", "type": "<value>"}}
   get_feature_v1_features__feature_id__get:
     speakeasy-default-get-feature-v1-features-feature-id-get:
       parameters:
@@ -1147,13 +645,13 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"key": "<value>", "key1": "<value>"}
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
         "400":
-          application/json: {"status": 80595, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 80595, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 746397, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 48222, "error": {"message": "<value>", "type": "<value>"}}
   delete_feature_v1_features__feature_id__delete:
     speakeasy-default-delete-feature-v1-features-feature-id-delete:
       parameters:
@@ -1164,11 +662,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"status": 763083, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 763083, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 763083, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 626532, "error": {"message": "<value>", "type": "<value>"}}
   full_feature_update_v1_features__feature_id__put:
     speakeasy-default-full-feature-update-v1-features-feature-id-put:
       parameters:
@@ -1176,29 +674,33 @@ examples:
           feature_id: "<id>"
         header: {}
       requestBody:
-        application/json: {}
+        application/json: {"metadata": {}}
       responses:
         "200":
-          application/json: {}
+          application/json: {"key": "<value>"}
         "400":
-          application/json: {"status": 915812, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 915812, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 153488, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 636088, "error": {"message": "<value>", "type": "<value>"}}
   list_features_v1_features_post:
     speakeasy-default-list-features-v1-features-post:
+      parameters:
+        query:
+          page_size: 10
+        header: {}
       requestBody:
-        application/json: {"collections": ["collection_123", "my_collection_name"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "select": ["metadata.tags"]}
+        application/json: {"collections": ["collection_123", "my_collection_name"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "select": ["metadata.tags"], "return_urls": false}
       responses:
         "200":
           application/json: {"results": [{"key": "<value>"}], "pagination": {"total": 575076, "page_size": 575245, "total_pages": 583391, "current_page": 10831, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 723909, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 723909, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 409234, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 548150, "error": {"message": "<value>", "type": "<value>"}}
   search_features_v1_features_search_post:
     "":
       parameters:
@@ -1207,90 +709,93 @@ examples:
           page_size: 10
         header: {}
       requestBody:
-        application/json: {"queries": [{"embedding_model": "image", "value": "https://example.com/dog.jpg", "type": "url", "settings": {"limit": 50, "min_score": 0.7}}, {"embedding_model": "text", "value": "This is a text query", "type": "text"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "metadata.field_name", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": true}, "session_id": "sess_abc123", "return_url": true}
+        application/json: {"queries": [{"embedding_model": "image", "value": "https://example.com/dog.jpg", "type": "url", "settings": {"limit": 50, "min_score": 0.7}}, {"embedding_model": "text", "value": "This is a text query", "type": "text"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "metadata.field_name", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": false}, "session_id": "sess_abc123", "return_url": true}
       responses:
         "400":
-          application/json: {"status": 402821, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 402821, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
-        "200": {}
         "500":
-          application/json: {"status": 402821, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 262208, "error": {"message": "<value>", "type": "<value>"}}
   extract_embeddings_v1_features_extractors_embed_post:
     speakeasy-default-extract-embeddings-v1-features-extractors-embed-post:
       requestBody:
-        application/json: {"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "baai-bge-m3"}
+        application/json: {"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}
       responses:
         "200":
-          application/json: {"embedding": {"vector": [6200.94, 4891.39]}}
+          application/json: {"embedding": {"indices": [58863], "values": [244.75]}}
         "400":
-          application/json: {"status": 996580, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 996580, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 34173, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 481808, "error": {"message": "<value>", "type": "<value>"}}
   ingest_text_v1_ingest_text_post:
     speakeasy-default-ingest-text-v1-ingest-text-post:
       requestBody:
-        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 699645, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 699645, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 699645, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 366871, "error": {"message": "<value>", "type": "<value>"}}
   ingest_video_url_v1_ingest_videos_url_post:
     speakeasy-default-ingest-video-url-v1-ingest-videos-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": []}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "openai-clip-vit-base-patch32"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}]}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 189274, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 731165, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 104307, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 747801, "error": {"message": "<value>", "type": "<value>"}}
   ingest_image_url_v1_ingest_images_url_post:
     speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 287622, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 287622, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 287622, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 260441, "error": {"message": "<value>", "type": "<value>"}}
   create_taxonomy_v1_entities_taxonomies_post:
     speakeasy-default-create-taxonomy-v1-entities-taxonomies-post:
       requestBody:
-        application/json: {"taxonomy_name": "electronics", "nodes": [{"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}, {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "children": []}]}
+        application/json: {"taxonomy_name": "electronics", "nodes": [{"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}, {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 735189, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 735189, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 699664, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 927591, "error": {"message": "<value>", "type": "<value>"}}
   list_taxonomies_v1_entities_taxonomies_get:
     speakeasy-default-list-taxonomies-v1-entities-taxonomies-get:
+      parameters:
+        query:
+          page_size: 10
+        header: {}
       responses:
         "200":
-          application/json: {"results": [{"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}], "pagination": {"total": 925831, "page": 676079, "page_size": 33553, "total_pages": 325990, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}], "pagination": {"total": 925831, "page": 676079, "page_size": 33553, "total_pages": 325990, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 408430, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 408430, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 868979, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 697675, "error": {"message": "<value>", "type": "<value>"}}
   get_taxonomy_v1_entities_taxonomies__taxonomy__get:
     speakeasy-default-get-taxonomy-v1-entities-taxonomies-taxonomy-get:
       parameters:
@@ -1299,13 +804,13 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}
+          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}
         "400":
-          application/json: {"status": 593425, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 593425, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 593425, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 680643, "error": {"message": "<value>", "type": "<value>"}}
   delete_taxonomy_v1_entities_taxonomies__taxonomy__delete:
     speakeasy-default-delete-taxonomy-v1-entities-taxonomies-taxonomy-delete:
       parameters:
@@ -1314,13 +819,13 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"message": "<value>"}
+          application/json: {"message": "<value>", "success": true}
         "400":
-          application/json: {"status": 628193, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 628193, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 628193, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 427306, "error": {"message": "<value>", "type": "<value>"}}
   update_taxonomy_v1_entities_taxonomies__taxonomy__patch:
     speakeasy-default-update-taxonomy-v1-entities-taxonomies-taxonomy-patch:
       parameters:
@@ -1331,13 +836,13 @@ examples:
         application/json: {"taxonomy_name": "electronics_updated", "description": "Updated electronics taxonomy"}
       responses:
         "200":
-          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}
+          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}
         "400":
-          application/json: {"status": 115509, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 115509, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 115509, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 143003, "error": {"message": "<value>", "type": "<value>"}}
   get_taxonomy_node_v1_entities_taxonomies_nodes__node__get:
     speakeasy-default-get-taxonomy-node-v1-entities-taxonomies-nodes-node-get:
       parameters:
@@ -1348,11 +853,11 @@ examples:
         "200":
           application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
         "400":
-          application/json: {"status": 966201, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 966201, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 273668, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 630700, "error": {"message": "<value>", "type": "<value>"}}
   update_node_v1_entities_taxonomies_nodes__node__patch:
     speakeasy-default-update-node-v1-entities-taxonomies-nodes-node-patch:
       parameters:
@@ -1365,11 +870,11 @@ examples:
         "200":
           application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
         "400":
-          application/json: {"status": 869537, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 869537, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 855937, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 32799, "error": {"message": "<value>", "type": "<value>"}}
   classify_features_v1_entities_taxonomies__taxonomy__classify_post:
     speakeasy-default-classify-features-v1-entities-taxonomies-taxonomy-classify-post:
       parameters:
@@ -1382,29 +887,30 @@ examples:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 555572, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 555572, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 887808, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 478354, "error": {"message": "<value>", "type": "<value>"}}
   list_classifications_v1_entities_taxonomies__taxonomy__classifications_post:
     speakeasy-default-list-classifications-v1-entities-taxonomies-taxonomy-classifications-post:
       parameters:
         path:
           taxonomy: "<value>"
-        query: {}
+        query:
+          page_size: 10
         header: {}
       requestBody:
         application/json: {"filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "feature_options": {"return_payload": true, "return_url": true}, "node_options": {"return_payload": true}}
       responses:
         "200":
-          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": "6021.18", "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 6021.18, "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 195554, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 195554, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 748683, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 476159, "error": {"message": "<value>", "type": "<value>"}}
   delete_classifications_v1_entities_taxonomies__taxonomy__classifications__classification_id__delete:
     speakeasy-default-delete-classifications-v1-entities-taxonomies-taxonomy-classifications-classification-id-delete:
       parameters:
@@ -1414,13 +920,13 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"message": "<value>"}
+          application/json: {"message": "<value>", "success": true}
         "400":
-          application/json: {"status": 62269, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 62269, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 62269, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 684818, "error": {"message": "<value>", "type": "<value>"}}
   get_asset_v1_assets__asset_id__get:
     "":
       parameters:
@@ -1433,10 +939,10 @@ examples:
         "200":
           application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
         "400":
-          application/json: {"status": 15948, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 15948, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
         "500":
-          application/json: {"status": 15948, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 68409, "error": {"message": "<value>", "type": "<value>"}}
   delete_asset_v1_assets__asset_id__delete:
     speakeasy-default-delete-asset-v1-assets-asset-id-delete:
       parameters:
@@ -1447,11 +953,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"status": 155071, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 155071, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 155071, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 460998, "error": {"message": "<value>", "type": "<value>"}}
   full_asset_update_v1_assets__asset_id__put:
     speakeasy-default-full-asset-update-v1-assets-asset-id-put:
       parameters:
@@ -1464,11 +970,11 @@ examples:
         "200":
           application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
         "400":
-          application/json: {"status": 556461, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 556461, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 556461, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 722605, "error": {"message": "<value>", "type": "<value>"}}
   partial_asset_update_v1_assets__asset_id__patch:
     speakeasy-default-partial-asset-update-v1-assets-asset-id-patch:
       parameters:
@@ -1481,11 +987,11 @@ examples:
         "200":
           application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
         "400":
-          application/json: {"status": 134086, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 134086, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 134086, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 459166, "error": {"message": "<value>", "type": "<value>"}}
   get_asset_with_features_v1_assets__asset_id__features_get:
     "":
       parameters:
@@ -1498,23 +1004,27 @@ examples:
         "200":
           application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, "features": {}}
         "400":
-          application/json: {"status": 761028, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 761028, "error": {"message": "<value>", "type": "<value>"}}
         "422": {}
         "500":
-          application/json: {"status": 761028, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 897645, "error": {"message": "<value>", "type": "<value>"}}
   list_assets_v1_assets_post:
     speakeasy-default-list-assets-v1-assets-post:
+      parameters:
+        query:
+          page_size: 10
+        header: {}
       requestBody:
         application/json: {"collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_assets": 10, "sort": {"field": "score", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "return_url": true}
       responses:
         "200":
           application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 134748, "page": 493994, "page_size": 833111, "total_pages": 739368, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 555566, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 555566, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 715845, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 385435, "error": {"message": "<value>", "type": "<value>"}}
   search_assets_v1_assets_search_post:
     speakeasy-default-search-assets-v1-assets-search-post:
       requestBody:
@@ -1523,22 +1033,26 @@ examples:
         "200":
           application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 55398, "page": 826364, "page_size": 217286, "total_pages": 822588, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 795180, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 795180, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 741393, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 392864, "error": {"message": "<value>", "type": "<value>"}}
   list_collections_v1_collections_get:
     speakeasy-default-list-collections-v1-collections-get:
+      parameters:
+        query:
+          page_size: 10
+        header: {}
       responses:
         "200":
           application/json: {"results": [{"count": 725044, "size_bytes": 339199, "last_updated": "2023-02-17T10:46:32.060Z", "collection_id": "<id>"}], "pagination": {"total": 528574, "page": 944272, "page_size": 520228, "total_pages": 815502, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 682508, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 682508, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 478215, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 550325, "error": {"message": "<value>", "type": "<value>"}}
   create_collection_v1_collections_post:
     speakeasy-default-create-collection-v1-collections-post:
       requestBody:
@@ -1547,11 +1061,11 @@ examples:
         "200":
           application/json: {"collection_name": "<value>"}
         "400":
-          application/json: {"status": 210546, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 210546, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 210546, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 568784, "error": {"message": "<value>", "type": "<value>"}}
   delete_collection_v1_collections__collection__delete:
     speakeasy-default-delete-collection-v1-collections-collection-delete:
       parameters:
@@ -1562,11 +1076,11 @@ examples:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 348710, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 348710, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 348710, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 757695, "error": {"message": "<value>", "type": "<value>"}}
   update_collection_v1_collections__collection__put:
     speakeasy-default-update-collection-v1-collections-collection-put:
       parameters:
@@ -1579,11 +1093,11 @@ examples:
         "200":
           application/json: {"collection_name": "<value>"}
         "400":
-          application/json: {"status": 405534, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 405534, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 405534, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 137008, "error": {"message": "<value>", "type": "<value>"}}
   get_collection_v1_collections__collection__get:
     speakeasy-default-get-collection-v1-collections-collection-get:
       parameters:
@@ -1594,11 +1108,11 @@ examples:
         "200":
           application/json: {"collection_name": "<value>"}
         "400":
-          application/json: {"status": 52108, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 52108, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 52108, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 680479, "error": {"message": "<value>", "type": "<value>"}}
   kill_task_v1_tasks__task_id__delete:
     speakeasy-default-kill-task-v1-tasks-task-id-delete:
       parameters:
@@ -1609,11 +1123,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"status": 133802, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 133802, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 133802, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 558071, "error": {"message": "<value>", "type": "<value>"}}
   get_task_v1_tasks__task_id__get:
     speakeasy-default-get-task-v1-tasks-task-id-get:
       parameters:
@@ -1624,20 +1138,25 @@ examples:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"status": 153841, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 153841, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 153841, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 178897, "error": {"message": "<value>", "type": "<value>"}}
   list_active_tasks_v1_tasks_get:
     speakeasy-default-list-active-tasks-v1-tasks-get:
+      parameters:
+        query:
+          page_size: 10
+        header: {}
       responses:
         "200":
           application/json: {"results": [{"task_id": "<id>"}, {"task_id": "<id>"}], "pagination": {"total": 703165, "page": 334588, "page_size": 602059, "total_pages": 415917, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"status": 993501, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 993501, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"status": 620291, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 620291, "error": {"message": "<value>", "type": "<value>"}}
+examplesVersion: 1.0.0
 generatedTests: {}

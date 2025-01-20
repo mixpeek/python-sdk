@@ -78,7 +78,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.list_taxonomies_v1_entities_taxonomies_get()
+    res = mixpeek.taxonomy_entities.list_taxonomies_v1_entities_taxonomies_get(page_size=10)
 
     # Handle response
     print(res)
@@ -412,7 +412,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.taxonomy_entities.list_classifications_v1_entities_taxonomies_taxonomy_classifications_post(taxonomy="<value>", filters={
+    res = mixpeek.taxonomy_entities.list_classifications_v1_entities_taxonomies_taxonomy_classifications_post(taxonomy="<value>", page_size=10, filters={
         "case_sensitive": True,
         "and_": [
 
