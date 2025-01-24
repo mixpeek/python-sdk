@@ -31,6 +31,11 @@ Mixpeek API: This is the Mixpeek API, providing access to various endpoints for 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
+
 The SDK can be installed with either *pip* or *poetry* package managers.
 
 ### PIP
