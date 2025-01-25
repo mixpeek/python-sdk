@@ -21,6 +21,7 @@ Mixpeek API: This is the Mixpeek API, providing access to various endpoints for 
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
+  * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
@@ -431,6 +432,32 @@ class CustomClient(AsyncHttpClient):
 s = Mixpeek(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
+
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Mixpeek` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from mixpeek import Mixpeek
+import os
+def main():
+    with Mixpeek(
+        token=os.getenv("MIXPEEK_TOKEN", ""),
+    ) as mixpeek:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with Mixpeek(
+        token=os.getenv("MIXPEEK_TOKEN", ""),
+    ) as mixpeek:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging
