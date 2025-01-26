@@ -88,7 +88,7 @@ with Mixpeek(
 
 ### Response
 
-**[Any](../../models/.md)**
+**[models.GenericSuccessResponse](../../models/genericsuccessresponse.md)**
 
 ### Errors
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: f7ac3f82c08f0f151fa71400be2a533b
+  docChecksum: f00159e7c7174cfec930d7c5f8e67e12
   docVersion: "0.81"
-  speakeasyVersion: 1.476.0
-  generationVersion: 2.496.0
-  releaseVersion: 0.18.7
-  configChecksum: f52ff3bbe8cfbd4a31adc25ce6dc8b9f
+  speakeasyVersion: 1.476.1
+  generationVersion: 2.495.1
+  releaseVersion: 0.18.8
+  configChecksum: 8509eff6784df36f428710d812ad9f13
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -663,7 +663,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: "<value>"
+          application/json: {"message": "<value>", "success": true}
         "400":
           application/json: {"success": false, "status": 763083, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -955,7 +955,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: "<value>"
+          application/json: {"message": "<value>", "success": true}
         "400":
           application/json: {"success": false, "status": 155071, "error": {"message": "<value>", "type": "<value>"}}
         "422":
