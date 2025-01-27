@@ -36,14 +36,7 @@ with Mixpeek(
         "json_output": {},
         "entities": {
             "taxonomy_extraction": {
-                "taxonomy_ids": [
-                    "tax_123",
-                ],
-                "embedding_models": [
-                    mixpeek.AvailableModels.MULTIMODAL,
-                    mixpeek.AvailableModels.TEXT,
-                ],
-                "confidence_threshold": 0.8,
+                "taxonomy": "tax_123",
             },
         },
     })
@@ -116,14 +109,7 @@ with Mixpeek(
             json_output={},
             entities={
                 "taxonomy_extraction": {
-                    "taxonomy_ids": [
-                        "tax_123",
-                    ],
-                    "embedding_models": [
-                        mixpeek.AvailableModels.MULTIMODAL,
-                        mixpeek.AvailableModels.TEXT,
-                    ],
-                    "confidence_threshold": 0.8,
+                    "taxonomy": "tax_123",
                 },
             },
         ),
@@ -194,14 +180,7 @@ with Mixpeek(
         json_output={},
         entities={
             "taxonomy_extraction": {
-                "taxonomy_ids": [
-                    "tax_123",
-                ],
-                "embedding_models": [
-                    mixpeek.AvailableModels.MULTIMODAL,
-                    mixpeek.AvailableModels.TEXT,
-                ],
-                "confidence_threshold": 0.8,
+                "taxonomy": "tax_123",
             },
         },
     ))

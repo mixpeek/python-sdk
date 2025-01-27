@@ -6,6 +6,10 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *mixp
 ## Summary
 
 Mixpeek API: This is the Mixpeek API, providing access to various endpoints for data processing and retrieval.
+    
+Download OpenAPI Specification:
+- [OpenAPI JSON](/openapi.json)
+- [OpenAPI YAML](/openapi.yaml)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
@@ -80,7 +84,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.health.check()
+    res = mixpeek.get_openapi_json_openapi_json_get()
 
     # Handle response
     print(res)
@@ -100,7 +104,7 @@ async def main():
         token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as mixpeek:
 
-        res = await mixpeek.health.check_async()
+        res = await mixpeek.get_openapi_json_openapi_json_get_async()
 
         # Handle response
         print(res)
@@ -129,7 +133,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.health.check()
+    res = mixpeek.get_openapi_json_openapi_json_get()
 
     # Handle response
     print(res)
@@ -183,6 +187,10 @@ with Mixpeek(
 * [ingest_video_url](docs/sdks/ingestassets/README.md#ingest_video_url) - Ingest Video Url
 * [ingest_image_url](docs/sdks/ingestassets/README.md#ingest_image_url) - Ingest Image Url
 
+### [Mixpeek SDK](docs/sdks/mixpeek/README.md)
+
+* [get_openapi_json_openapi_json_get](docs/sdks/mixpeek/README.md#get_openapi_json_openapi_json_get) - Get Openapi Json
+* [get_openapi_yaml_openapi_yaml_get](docs/sdks/mixpeek/README.md#get_openapi_yaml_openapi_yaml_get) - Get Openapi Yaml
 
 ### [namespaces](docs/sdks/namespaces/README.md)
 
@@ -247,7 +255,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.health.check(,
+    res = mixpeek.get_openapi_json_openapi_json_get(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -266,7 +274,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.health.check()
+    res = mixpeek.get_openapi_json_openapi_json_get()
 
     # Handle response
     print(res)
@@ -344,7 +352,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as mixpeek:
 
-    res = mixpeek.health.check()
+    res = mixpeek.get_openapi_json_openapi_json_get()
 
     # Handle response
     print(res)

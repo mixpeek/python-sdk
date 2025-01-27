@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: f00159e7c7174cfec930d7c5f8e67e12
+  docChecksum: 3d9283e6dc21534664ab463884f52e8f
   docVersion: "0.81"
   speakeasyVersion: 1.476.1
   generationVersion: 2.495.1
-  releaseVersion: 0.18.8
-  configChecksum: 8509eff6784df36f428710d812ad9f13
+  releaseVersion: 0.18.9
+  configChecksum: f8656418ce081542a7d6a676f8b73b90
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -736,7 +736,7 @@ examples:
   ingest_text_v1_ingest_text_post:
     speakeasy-default-ingest-text-v1-ingest-text-post:
       requestBody:
-        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "multimodal"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "multimodal"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy": "tax_123"}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -749,7 +749,7 @@ examples:
   ingest_video_url_v1_ingest_videos_url_post:
     speakeasy-default-ingest-video-url-v1-ingest-videos-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}]}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy": "tax_123"}}}]}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -762,7 +762,7 @@ examples:
   ingest_image_url_v1_ingest_images_url_post:
     speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
       requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
+        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy": "tax_123"}}}}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -908,7 +908,7 @@ examples:
         application/json: {"filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "feature_options": {"return_payload": true, "return_url": true}, "node_options": {"return_payload": true}}
       responses:
         "200":
-          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 6021.18, "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"taxonomy_id": "<id>", "node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 6021.18, "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
           application/json: {"success": false, "status": 195554, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1162,5 +1162,15 @@ examples:
           application/json: {}
         "500":
           application/json: {"success": false, "status": 620291, "error": {"message": "<value>", "type": "<value>"}}
+  get_openapi_json_openapi_json_get:
+    speakeasy-default-get-openapi-json-openapi-json-get:
+      responses:
+        "200":
+          application/json: "<value>"
+  get_openapi_yaml_openapi_yaml_get:
+    speakeasy-default-get-openapi-yaml-openapi-yaml-get:
+      responses:
+        "200":
+          application/json: "<value>"
 examplesVersion: 1.0.0
 generatedTests: {}

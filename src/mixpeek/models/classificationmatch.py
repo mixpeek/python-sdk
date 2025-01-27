@@ -11,6 +11,8 @@ from typing_extensions import NotRequired, TypedDict
 class ClassificationMatchTypedDict(TypedDict):
     r"""Individual node match with score"""
 
+    taxonomy_id: str
+    r"""ID of the matched taxonomy"""
     node_id: str
     r"""ID of the matched taxonomy node"""
     score: float
@@ -25,6 +27,9 @@ class ClassificationMatchTypedDict(TypedDict):
 
 class ClassificationMatch(BaseModel):
     r"""Individual node match with score"""
+
+    taxonomy_id: str
+    r"""ID of the matched taxonomy"""
 
     node_id: str
     r"""ID of the matched taxonomy node"""
