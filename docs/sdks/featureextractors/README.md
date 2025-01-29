@@ -20,9 +20,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.feature_extractors.extract_embeddings(type_=mixpeek.InputType.URL, embedding_model=mixpeek.VectorModel.TEXT, value="https://example.com/image.jpg")
+    res = m_client.feature_extractors.extract_embeddings(type_=mixpeek.InputType.URL, embedding_model=mixpeek.VectorModel.TEXT, value="https://example.com/image.jpg")
 
     # Handle response
     print(res)

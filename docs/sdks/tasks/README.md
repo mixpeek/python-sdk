@@ -22,9 +22,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.tasks.delete(task_id="<id>")
+    res = m_client.tasks.delete(task_id="<id>")
 
     # Handle response
     print(res)
@@ -67,9 +67,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.tasks.get(task_id="<id>")
+    res = m_client.tasks.get(task_id="<id>")
 
     # Handle response
     print(res)
@@ -109,9 +109,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.tasks.list_active(page_size=10)
+    res = m_client.tasks.list_active(page_size=10)
 
     # Handle response
     print(res)

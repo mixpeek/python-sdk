@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 3d9283e6dc21534664ab463884f52e8f
+  docChecksum: 6d5c1b8883ef8e4e7a84687fbbfd74a4
   docVersion: "0.81"
-  speakeasyVersion: 1.476.2
-  generationVersion: 2.495.1
-  releaseVersion: 0.18.10
-  configChecksum: 60bf6222e51e0cd8f2538958079d6a9e
+  speakeasyVersion: 1.477.0
+  generationVersion: 2.497.0
+  releaseVersion: 0.18.11
+  configChecksum: 1263771b40fe6d3e264fa830c540e6a8
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -171,6 +171,7 @@ generatedFiles:
   - docs/models/organizationmodel.md
   - docs/models/organizationmodelmetadata.md
   - docs/models/partialassetupdatev1assetsassetidpatchrequest.md
+  - docs/models/patchnamespacev1namespacesnamespacepatchrequest.md
   - docs/models/payloadindexconfig.md
   - docs/models/payloadindextype.md
   - docs/models/payloadschematype.md
@@ -370,6 +371,7 @@ generatedFiles:
   - src/mixpeek/models/nodeupdate.py
   - src/mixpeek/models/organizationmodel.py
   - src/mixpeek/models/partial_asset_update_v1_assets_asset_id_patchop.py
+  - src/mixpeek/models/patch_namespace_v1_namespaces_namespace_patchop.py
   - src/mixpeek/models/payloadindexconfig.py
   - src/mixpeek/models/payloadindextype.py
   - src/mixpeek/models/payloadschematype.py
@@ -1172,5 +1174,21 @@ examples:
       responses:
         "200":
           application/json: "<value>"
+  patch_namespace_v1_namespaces__namespace__patch:
+    speakeasy-default-patch-namespace-v1-namespaces-namespace-patch:
+      parameters:
+        path:
+          namespace: "ns_1234567890"
+      requestBody:
+        application/json: {"namespace_name": "spotify_playlists_dev", "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
+      responses:
+        "200":
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
+        "400":
+          application/json: {"success": false, "status": 464197, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 315101, "error": {"message": "<value>", "type": "<value>"}}
 examplesVersion: 1.0.0
 generatedTests: {}

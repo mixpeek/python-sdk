@@ -28,9 +28,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.create(taxonomy_name="electronics", nodes=[
+    res = m_client.taxonomy_entities.create(taxonomy_name="electronics", nodes=[
 
     ])
 
@@ -73,9 +73,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.list(page_size=10)
+    res = m_client.taxonomy_entities.list(page_size=10)
 
     # Handle response
     print(res)
@@ -116,9 +116,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.get_node(node="<value>")
+    res = m_client.taxonomy_entities.get_node(node="<value>")
 
     # Handle response
     print(res)
@@ -161,9 +161,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.update_node(node="<value>", node_name="electronics_accessories", node_description="Electronics accessories and peripherals category")
+    res = m_client.taxonomy_entities.update_node(node="<value>", node_name="electronics_accessories", node_description="Electronics accessories and peripherals category")
 
     # Handle response
     print(res)
@@ -205,9 +205,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.classify_features(taxonomy="<value>", collections=[
+    res = m_client.taxonomy_entities.classify_features(taxonomy="<value>", collections=[
         "<value>",
         "<value>",
         "<value>",
@@ -267,9 +267,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.list_classifications(taxonomy="<value>", page_size=10, filters={
+    res = m_client.taxonomy_entities.list_classifications(taxonomy="<value>", page_size=10, filters={
         "case_sensitive": True,
         "and_": [
 
@@ -335,9 +335,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomy_entities.delete_classification(taxonomy="<value>", classification_id="<id>")
+    res = m_client.taxonomy_entities.delete_classification(taxonomy="<value>", classification_id="<id>")
 
     # Handle response
     print(res)

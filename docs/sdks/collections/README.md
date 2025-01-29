@@ -23,9 +23,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.collections.list(page_size=10)
+    res = m_client.collections.list(page_size=10)
 
     # Handle response
     print(res)
@@ -67,9 +67,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.collections.create(collection_name="<value>")
+    res = m_client.collections.create(collection_name="<value>")
 
     # Handle response
     print(res)
@@ -110,9 +110,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.collections.delete(collection="col_1234567890")
+    res = m_client.collections.delete(collection="col_1234567890")
 
     # Handle response
     print(res)
@@ -152,9 +152,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.collections.update(collection="col_1234567890", collection_name="<value>")
+    res = m_client.collections.update(collection="col_1234567890", collection_name="<value>")
 
     # Handle response
     print(res)
@@ -196,9 +196,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.collections.get(collection="col_1234567890")
+    res = m_client.collections.get(collection="col_1234567890")
 
     # Handle response
     print(res)

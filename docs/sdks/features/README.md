@@ -23,9 +23,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.features.get(feature_id="<id>")
+    res = m_client.features.get(feature_id="<id>")
 
     # Handle response
     print(res)
@@ -67,9 +67,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.features.delete(feature_id="<id>")
+    res = m_client.features.delete(feature_id="<id>")
 
     # Handle response
     print(res)
@@ -110,9 +110,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.features.update(feature_id="<id>", metadata={})
+    res = m_client.features.update(feature_id="<id>", metadata={})
 
     # Handle response
     print(res)
@@ -156,9 +156,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.features.list(collections=[
+    res = m_client.features.list(collections=[
         "collection_123",
         "my_collection_name",
     ], page_size=10, filters={
@@ -224,9 +224,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.features.search(collections=[
+    res = m_client.features.search(collections=[
         "collection1",
         "collection2",
     ], offset_position=0, page_size=10, queries=[

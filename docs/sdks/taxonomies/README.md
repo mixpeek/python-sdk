@@ -21,9 +21,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomies.get(taxonomy="<value>")
+    res = m_client.taxonomies.get(taxonomy="<value>")
 
     # Handle response
     print(res)
@@ -72,9 +72,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomies.delete(taxonomy="<value>")
+    res = m_client.taxonomies.delete(taxonomy="<value>")
 
     # Handle response
     print(res)
@@ -117,9 +117,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.taxonomies.update(taxonomy="<value>", taxonomy_name="electronics_updated", description="Updated electronics taxonomy")
+    res = m_client.taxonomies.update(taxonomy="<value>", taxonomy_name="electronics_updated", description="Updated electronics taxonomy")
 
     # Handle response
     print(res)

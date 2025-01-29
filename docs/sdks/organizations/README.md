@@ -24,9 +24,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.get()
+    res = m_client.organizations.get()
 
     # Handle response
     print(res)
@@ -65,9 +65,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.get_usage()
+    res = m_client.organizations.get_usage()
 
     # Handle response
     print(res)
@@ -106,9 +106,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.add_user(email="Wendell_Larson94@hotmail.com")
+    res = m_client.organizations.add_user(email="Wendell_Larson94@hotmail.com")
 
     # Handle response
     print(res)
@@ -151,9 +151,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.delete_api_key(user_email="<value>", key_name="<value>")
+    res = m_client.organizations.delete_api_key(user_email="<value>", key_name="<value>")
 
     # Handle response
     print(res)
@@ -193,9 +193,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.update_api_key(user_email="<value>", key_name="<value>")
+    res = m_client.organizations.update_api_key(user_email="<value>", key_name="<value>")
 
     # Handle response
     print(res)

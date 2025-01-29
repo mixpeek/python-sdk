@@ -23,9 +23,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.ingest_assets.ingest_text(collection="col_1234567890", metadata={}, feature_extractors={
+    res = m_client.ingest_assets.ingest_text(collection="col_1234567890", metadata={}, feature_extractors={
         "embed": [
             {
                 "type": mixpeek.InputType.TEXT,
@@ -85,9 +85,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.ingest_assets.ingest_video_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
+    res = m_client.ingest_assets.ingest_video_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
         mixpeek.VideoSettings(
             interval_sec=15,
             read={
@@ -160,9 +160,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.ingest_assets.ingest_image_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=mixpeek.ImageSettings(
+    res = m_client.ingest_assets.ingest_image_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=mixpeek.ImageSettings(
         read={
             "enabled": True,
         },

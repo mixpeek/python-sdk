@@ -25,9 +25,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.get(asset_id="ast_123", return_url=True)
+    res = m_client.assets.get(asset_id="ast_123", return_url=True)
 
     # Handle response
     print(res)
@@ -69,9 +69,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.delete(asset_id="<id>")
+    res = m_client.assets.delete(asset_id="<id>")
 
     # Handle response
     print(res)
@@ -112,9 +112,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.update(asset_id="<id>", propagate_features=True, metadata={})
+    res = m_client.assets.update(asset_id="<id>", propagate_features=True, metadata={})
 
     # Handle response
     print(res)
@@ -157,9 +157,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.partial_update(asset_id="<id>", propagate_features=True, metadata={})
+    res = m_client.assets.partial_update(asset_id="<id>", propagate_features=True, metadata={})
 
     # Handle response
     print(res)
@@ -201,9 +201,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.get_with_features(asset_id="asset_123456789", return_url=False)
+    res = m_client.assets.get_with_features(asset_id="asset_123456789", return_url=False)
 
     # Handle response
     print(res)
@@ -245,9 +245,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.list(collections=[
+    res = m_client.assets.list(collections=[
         "col_123",
         "my_collection",
     ], page_size=10, filters={
@@ -324,9 +324,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.assets.search(collections=[
+    res = m_client.assets.search(collections=[
         "col_123",
         "my_collection",
     ], query={

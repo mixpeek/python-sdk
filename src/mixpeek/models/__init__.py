@@ -318,6 +318,10 @@ from .partial_asset_update_v1_assets_asset_id_patchop import (
     PartialAssetUpdateV1AssetsAssetIDPatchRequest,
     PartialAssetUpdateV1AssetsAssetIDPatchRequestTypedDict,
 )
+from .patch_namespace_v1_namespaces_namespace_patchop import (
+    PatchNamespaceV1NamespacesNamespacePatchRequest,
+    PatchNamespaceV1NamespacesNamespacePatchRequestTypedDict,
+)
 from .payloadindexconfig import (
     FieldSchema,
     FieldSchemaTypedDict,
@@ -703,6 +707,8 @@ __all__ = [
     "OrganizationModelTypedDict",
     "PartialAssetUpdateV1AssetsAssetIDPatchRequest",
     "PartialAssetUpdateV1AssetsAssetIDPatchRequestTypedDict",
+    "PatchNamespaceV1NamespacesNamespacePatchRequest",
+    "PatchNamespaceV1NamespacesNamespacePatchRequestTypedDict",
     "PayloadIndexConfig",
     "PayloadIndexConfigTypedDict",
     "PayloadIndexType",

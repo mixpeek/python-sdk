@@ -82,9 +82,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.get_openapi_json_openapi_json_get()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -102,9 +102,9 @@ import os
 async def main():
     async with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
-    ) as mixpeek:
+    ) as m_client:
 
-        res = await mixpeek.get_openapi_json_openapi_json_get_async()
+        res = await m_client.health.check_async()
 
         # Handle response
         print(res)
@@ -131,9 +131,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.get_openapi_json_openapi_json_get()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -187,16 +187,13 @@ with Mixpeek(
 * [ingest_video_url](docs/sdks/ingestassets/README.md#ingest_video_url) - Ingest Video Url
 * [ingest_image_url](docs/sdks/ingestassets/README.md#ingest_image_url) - Ingest Image Url
 
-### [Mixpeek SDK](docs/sdks/mixpeek/README.md)
-
-* [get_openapi_json_openapi_json_get](docs/sdks/mixpeek/README.md#get_openapi_json_openapi_json_get) - Get Openapi Json
-* [get_openapi_yaml_openapi_yaml_get](docs/sdks/mixpeek/README.md#get_openapi_yaml_openapi_yaml_get) - Get Openapi Yaml
 
 ### [namespaces](docs/sdks/namespaces/README.md)
 
 * [create](docs/sdks/namespaces/README.md#create) - Create Namespace
 * [list](docs/sdks/namespaces/README.md#list) - List Namespaces
 * [delete](docs/sdks/namespaces/README.md#delete) - Delete Namespace
+* [patch_namespace_v1_namespaces_namespace_patch](docs/sdks/namespaces/README.md#patch_namespace_v1_namespaces_namespace_patch) - Partially Update Namespace
 * [update](docs/sdks/namespaces/README.md#update) - Update Namespace
 * [get](docs/sdks/namespaces/README.md#get) - Get Namespace
 * [list_models](docs/sdks/namespaces/README.md#list_models) - List Available Models
@@ -253,9 +250,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.get_openapi_json_openapi_json_get(,
+    res = m_client.health.check(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -272,9 +269,9 @@ import os
 with Mixpeek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.get_openapi_json_openapi_json_get()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -313,11 +310,11 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
     res = None
     try:
 
-        res = mixpeek.organizations.get()
+        res = m_client.organizations.get()
 
         # Handle response
         print(res)
@@ -350,9 +347,9 @@ import os
 with Mixpeek(
     server_url="https://api.mixpeek.com",
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.get_openapi_json_openapi_json_get()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -454,7 +451,7 @@ import os
 def main():
     with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
-    ) as mixpeek:
+    ) as m_client:
         # Rest of application here...
 
 
@@ -462,7 +459,7 @@ def main():
 async def amain():
     async with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
-    ) as mixpeek:
+    ) as m_client:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->

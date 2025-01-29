@@ -19,9 +19,9 @@ import os
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.health.check()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
