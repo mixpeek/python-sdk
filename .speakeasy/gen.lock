@@ -3,10 +3,10 @@ id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
   docChecksum: 6d5c1b8883ef8e4e7a84687fbbfd74a4
   docVersion: "0.81"
-  speakeasyVersion: 1.477.0
-  generationVersion: 2.497.0
-  releaseVersion: 0.18.11
-  configChecksum: 1263771b40fe6d3e264fa830c540e6a8
+  speakeasyVersion: 1.477.2
+  generationVersion: 2.497.8
+  releaseVersion: 0.18.12
+  configChecksum: b58768920c7f8eaf07fc12c789fd3517
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.10.5
+    core: 5.10.6
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
