@@ -75,7 +75,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.taxonomy_entities.list(page_size=10)
+    res = m_client.taxonomy_entities.list()
 
     # Handle response
     print(res)
@@ -269,7 +269,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.taxonomy_entities.list_classifications(taxonomy="<value>", page_size=10, filters={
+    res = m_client.taxonomy_entities.list_classifications(taxonomy="<value>", filters={
         "case_sensitive": True,
         "and_": [
 
@@ -283,12 +283,7 @@ with Mixpeek(
     }, sort={
         "field": "score",
         "direction": mixpeek.Direction.DESC,
-    }, feature_options={
-        "return_payload": True,
-        "return_url": True,
-    }, node_options={
-        "return_payload": True,
-    })
+    }, feature_options={}, node_options={})
 
     # Handle response
     print(res)

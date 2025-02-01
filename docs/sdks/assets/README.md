@@ -27,7 +27,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.assets.get(asset_id="ast_123", return_url=True)
+    res = m_client.assets.get(asset_id="ast_123")
 
     # Handle response
     print(res)
@@ -203,7 +203,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.assets.get_with_features(asset_id="asset_123456789", return_url=False)
+    res = m_client.assets.get_with_features(asset_id="asset_123456789")
 
     # Handle response
     print(res)
@@ -250,7 +250,7 @@ with Mixpeek(
     res = m_client.assets.list(collections=[
         "col_123",
         "my_collection",
-    ], page_size=10, filters={
+    ], filters={
         "case_sensitive": True,
         "and_": [
 

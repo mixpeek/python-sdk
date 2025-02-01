@@ -25,7 +25,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collections.list(page_size=10)
+    res = m_client.collections.list()
 
     # Handle response
     print(res)

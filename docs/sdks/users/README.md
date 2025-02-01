@@ -106,7 +106,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.users.create_api_key(user_email="<value>", key_name="default")
+    res = m_client.users.create_api_key(user_email="<value>")
 
     # Handle response
     print(res)

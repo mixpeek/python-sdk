@@ -89,10 +89,7 @@ with Mixpeek(
 
     res = m_client.ingest_assets.ingest_video_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=[
         mixpeek.VideoSettings(
-            interval_sec=15,
-            read={
-                "enabled": True,
-            },
+            read={},
             embed=[
                 {
                     "type": mixpeek.InputType.TEXT,
@@ -100,12 +97,8 @@ with Mixpeek(
                     "value": "a dog",
                 },
             ],
-            transcribe={
-                "enabled": True,
-            },
-            describe={
-                "enabled": True,
-            },
+            transcribe={},
+            describe={},
             json_output={},
             entities={
                 "taxonomy_extraction": {
@@ -163,9 +156,7 @@ with Mixpeek(
 ) as m_client:
 
     res = m_client.ingest_assets.ingest_image_url(url="https://example.com/sample-video.mp4", collection="col_1234567890", metadata={}, feature_extractors=mixpeek.ImageSettings(
-        read={
-            "enabled": True,
-        },
+        read={},
         embed=[
             {
                 "type": mixpeek.InputType.TEXT,
@@ -174,7 +165,6 @@ with Mixpeek(
             },
         ],
         describe={
-            "enabled": True,
             "max_length": 1000,
         },
         json_output={},

@@ -83,20 +83,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.AssetResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -191,20 +197,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.AssetResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -297,20 +309,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.GenericSuccessResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -403,20 +421,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.GenericSuccessResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -531,20 +555,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.AssetResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -659,20 +689,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.AssetResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -787,20 +823,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.AssetResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -915,20 +957,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.AssetResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1023,20 +1071,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.GroupedAssetData)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1131,20 +1185,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.GroupedAssetData)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1276,20 +1336,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ListAssetsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1421,20 +1487,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ListAssetsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1560,20 +1632,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ListAssetsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1699,20 +1777,26 @@ class Assets(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ListAssetsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

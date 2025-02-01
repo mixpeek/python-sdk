@@ -161,7 +161,7 @@ with Mixpeek(
     res = m_client.features.list(collections=[
         "collection_123",
         "my_collection_name",
-    ], page_size=10, filters={
+    ], filters={
         "case_sensitive": True,
         "and_": [
 
@@ -177,7 +177,7 @@ with Mixpeek(
         "direction": mixpeek.Direction.DESC,
     }, select=[
         "metadata.tags",
-    ], return_urls=False)
+    ])
 
     # Handle response
     print(res)
@@ -229,7 +229,7 @@ with Mixpeek(
     res = m_client.features.search(collections=[
         "collection1",
         "collection2",
-    ], offset_position=0, page_size=10, queries=[
+    ], offset_position=0, queries=[
 
     ], filters={
         "case_sensitive": True,
@@ -262,7 +262,6 @@ with Mixpeek(
             "feedback": 0.7,
             "popularity": 0.3,
         },
-        "enable_reranking": False,
     }, session_id="sess_abc123", return_url=True)
 
     # Handle response
