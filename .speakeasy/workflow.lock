@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:8e6f4c34b8eaf1bd11ff68b489d956e9a9928399deac09bf604388854d2b71bb
         sourceBlobDigest: sha256:35541f9169ad0a4c902746e48f6498c61d1832e68083e3ca700f5daeb21bb4b8
         codeSamplesNamespace: mixpeek-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:4f2e5d0258b1a70b2b120ca76ebd5b9e6b58271cb0abe0d4b9dc204603328bb8
+        codeSamplesRevisionDigest: sha256:2b33c8edc060249b2ce0f7f7336fc0c9e7d322ff3c9bd66da92173e712c58a13
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
