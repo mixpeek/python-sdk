@@ -1,4 +1,4 @@
-# GetCollectionV1CollectionsCollectionGetRequest
+# GetCollectionDetailsV1CollectionsCollectionGetRequest
 
 
 ## Fields

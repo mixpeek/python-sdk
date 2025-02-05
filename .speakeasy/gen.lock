@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 6d5c1b8883ef8e4e7a84687fbbfd74a4
+  docChecksum: 139821cf7f3e3ea12c495336b7dda4df
   docVersion: "0.81"
-  speakeasyVersion: 1.483.0
-  generationVersion: 2.502.0
-  releaseVersion: 0.18.17
-  configChecksum: 957ea736655548e99a2ce90050e39e2e
+  speakeasyVersion: 1.484.1
+  generationVersion: 2.503.2
+  releaseVersion: 0.18.18
+  configChecksum: 3dfacdcd80e1e1db85ad64c7886f9b9b
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -59,6 +59,8 @@ generatedFiles:
   - docs/models/classificationmatch.md
   - docs/models/classificationwithfeature.md
   - docs/models/classifyfeaturesv1entitiestaxonomiestaxonomyclassifypostrequest.md
+  - docs/models/collectiondetailsresponse.md
+  - docs/models/collectiondetailsresponsemetadata.md
   - docs/models/collectionmodel.md
   - docs/models/collectionmodelmetadata.md
   - docs/models/collectionresult.md
@@ -108,7 +110,7 @@ generatedFiles:
   - docs/models/geoindexparams.md
   - docs/models/getassetv1assetsassetidgetrequest.md
   - docs/models/getassetwithfeaturesv1assetsassetidfeaturesgetrequest.md
-  - docs/models/getcollectionv1collectionscollectiongetrequest.md
+  - docs/models/getcollectiondetailsv1collectionscollectiongetrequest.md
   - docs/models/getfeaturev1featuresfeatureidgetrequest.md
   - docs/models/getnamespacev1namespacesnamespacegetrequest.md
   - docs/models/gettaskv1taskstaskidgetrequest.md
@@ -280,6 +282,7 @@ generatedFiles:
   - src/mixpeek/models/classificationmatch.py
   - src/mixpeek/models/classificationwithfeature.py
   - src/mixpeek/models/classify_features_v1_entities_taxonomies_taxonomy_classify_postop.py
+  - src/mixpeek/models/collectiondetailsresponse.py
   - src/mixpeek/models/collectionmodel.py
   - src/mixpeek/models/collectionresult.py
   - src/mixpeek/models/create_api_key_v1_organizations_users_user_email_api_keys_postop.py
@@ -319,7 +322,7 @@ generatedFiles:
   - src/mixpeek/models/geoindexparams.py
   - src/mixpeek/models/get_asset_v1_assets_asset_id_getop.py
   - src/mixpeek/models/get_asset_with_features_v1_assets_asset_id_features_getop.py
-  - src/mixpeek/models/get_collection_v1_collections_collection_getop.py
+  - src/mixpeek/models/get_collection_details_v1_collections_collection_getop.py
   - src/mixpeek/models/get_feature_v1_features_feature_id_getop.py
   - src/mixpeek/models/get_namespace_v1_namespaces_namespace_getop.py
   - src/mixpeek/models/get_task_v1_tasks_task_id_getop.py
@@ -1052,7 +1055,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"results": [{"count": 725044, "size_bytes": 339199, "last_updated": "2023-02-17T10:46:32.060Z", "collection_id": "<id>"}], "pagination": {"total": 528574, "page": 944272, "page_size": 520228, "total_pages": 815502, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"collection_id": "<id>"}], "pagination": {"total": 528574, "page": 944272, "page_size": 520228, "total_pages": 815502, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
           application/json: {"success": false, "status": 682508, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -1190,5 +1193,20 @@ examples:
           application/json: {}
         "500":
           application/json: {"success": false, "status": 315101, "error": {"message": "<value>", "type": "<value>"}}
+  get_collection_details_v1_collections__collection__get:
+    speakeasy-default-get-collection-details-v1-collections-collection-get:
+      parameters:
+        path:
+          collection: "col_1234567890"
+        header: {}
+      responses:
+        "200":
+          application/json: {"collection_id": "<id>", "collection_name": "<value>"}
+        "400":
+          application/json: {"success": false, "status": 544221, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 521235, "error": {"message": "<value>", "type": "<value>"}}
 examplesVersion: 1.0.0
 generatedTests: {}

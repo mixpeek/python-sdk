@@ -9,7 +9,7 @@
 * [create](#create) - Create Collection
 * [delete](#delete) - Delete Collection
 * [update](#update) - Update Collection
-* [get](#get) - Get Collection
+* [get](#get) - Get Collection Details
 
 ## list
 
@@ -215,7 +215,7 @@ with Mixpeek(
 
 ### Response
 
-**[models.CollectionModel](../../models/collectionmodel.md)**
+**[models.CollectionDetailsResponse](../../models/collectiondetailsresponse.md)**
 
 ### Errors
 

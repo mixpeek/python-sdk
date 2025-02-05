@@ -8,14 +8,14 @@ from pydantic import model_serializer
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class GetCollectionV1CollectionsCollectionGetRequestTypedDict(TypedDict):
+class GetCollectionDetailsV1CollectionsCollectionGetRequestTypedDict(TypedDict):
     collection: str
     r"""Either the collection name or collection ID"""
     x_namespace: NotRequired[Nullable[str]]
     r"""Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint."""
 
 
-class GetCollectionV1CollectionsCollectionGetRequest(BaseModel):
+class GetCollectionDetailsV1CollectionsCollectionGetRequest(BaseModel):
     collection: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]

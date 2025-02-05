@@ -35,6 +35,12 @@ from .classify_features_v1_entities_taxonomies_taxonomy_classify_postop import (
     ClassifyFeaturesV1EntitiesTaxonomiesTaxonomyClassifyPostRequest,
     ClassifyFeaturesV1EntitiesTaxonomiesTaxonomyClassifyPostRequestTypedDict,
 )
+from .collectiondetailsresponse import (
+    CollectionDetailsResponse,
+    CollectionDetailsResponseMetadata,
+    CollectionDetailsResponseMetadataTypedDict,
+    CollectionDetailsResponseTypedDict,
+)
 from .collectionmodel import (
     CollectionModel,
     CollectionModelMetadata,
@@ -163,9 +169,9 @@ from .get_asset_with_features_v1_assets_asset_id_features_getop import (
     GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest,
     GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequestTypedDict,
 )
-from .get_collection_v1_collections_collection_getop import (
-    GetCollectionV1CollectionsCollectionGetRequest,
-    GetCollectionV1CollectionsCollectionGetRequestTypedDict,
+from .get_collection_details_v1_collections_collection_getop import (
+    GetCollectionDetailsV1CollectionsCollectionGetRequest,
+    GetCollectionDetailsV1CollectionsCollectionGetRequestTypedDict,
 )
 from .get_feature_v1_features_feature_id_getop import (
     GetFeatureV1FeaturesFeatureIDGetRequest,
@@ -491,6 +497,10 @@ __all__ = [
     "ClassificationWithFeatureTypedDict",
     "ClassifyFeaturesV1EntitiesTaxonomiesTaxonomyClassifyPostRequest",
     "ClassifyFeaturesV1EntitiesTaxonomiesTaxonomyClassifyPostRequestTypedDict",
+    "CollectionDetailsResponse",
+    "CollectionDetailsResponseMetadata",
+    "CollectionDetailsResponseMetadataTypedDict",
+    "CollectionDetailsResponseTypedDict",
     "CollectionModel",
     "CollectionModelMetadata",
     "CollectionModelMetadataTypedDict",
@@ -587,8 +597,8 @@ __all__ = [
     "GetAssetV1AssetsAssetIDGetRequestTypedDict",
     "GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest",
     "GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequestTypedDict",
-    "GetCollectionV1CollectionsCollectionGetRequest",
-    "GetCollectionV1CollectionsCollectionGetRequestTypedDict",
+    "GetCollectionDetailsV1CollectionsCollectionGetRequest",
+    "GetCollectionDetailsV1CollectionsCollectionGetRequestTypedDict",
     "GetFeatureV1FeaturesFeatureIDGetRequest",
     "GetFeatureV1FeaturesFeatureIDGetRequestTypedDict",
     "GetNamespaceV1NamespacesNamespaceGetRequest",

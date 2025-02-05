@@ -992,8 +992,8 @@ class Collections(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CollectionModel:
-        r"""Get Collection
+    ) -> models.CollectionDetailsResponse:
+        r"""Get Collection Details
 
         Get a collection using either its name or ID
 
@@ -1012,7 +1012,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetCollectionV1CollectionsCollectionGetRequest(
+        request = models.GetCollectionDetailsV1CollectionsCollectionGetRequest(
             collection=collection,
             x_namespace=x_namespace,
         )
@@ -1043,7 +1043,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_collection_v1_collections__collection__get",
+                operation_id="get_collection_details_v1_collections__collection__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1056,7 +1056,7 @@ class Collections(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CollectionModel)
+            return utils.unmarshal_json(http_res.text, models.CollectionDetailsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -1103,8 +1103,8 @@ class Collections(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CollectionModel:
-        r"""Get Collection
+    ) -> models.CollectionDetailsResponse:
+        r"""Get Collection Details
 
         Get a collection using either its name or ID
 
@@ -1123,7 +1123,7 @@ class Collections(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        request = models.GetCollectionV1CollectionsCollectionGetRequest(
+        request = models.GetCollectionDetailsV1CollectionsCollectionGetRequest(
             collection=collection,
             x_namespace=x_namespace,
         )
@@ -1154,7 +1154,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_collection_v1_collections__collection__get",
+                operation_id="get_collection_details_v1_collections__collection__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1167,7 +1167,7 @@ class Collections(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CollectionModel)
+            return utils.unmarshal_json(http_res.text, models.CollectionDetailsResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
