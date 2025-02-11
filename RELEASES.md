@@ -449,3 +449,13 @@ Based on:
 - [python v0.19.3] .
 ### Releases
 - [PyPI v0.19.3] https://pypi.org/project/mixpeek/0.19.3 - .
+
+## 2025-02-11 00:07:18
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.488.0 (2.506.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.19.4] .
+### Releases
+- [PyPI v0.19.4] https://pypi.org/project/mixpeek/0.19.4 - .
