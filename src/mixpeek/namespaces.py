@@ -82,6 +82,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create_namespace_v1_namespaces_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -206,6 +207,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create_namespace_v1_namespaces_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -307,6 +309,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_namespaces_v1_namespaces_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -408,6 +411,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_namespaces_v1_namespaces_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -516,6 +520,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_namespace_v1_namespaces__namespace__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -624,6 +629,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_namespace_v1_namespaces__namespace__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -754,6 +760,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch_namespace_v1_namespaces__namespace__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -884,6 +891,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch_namespace_v1_namespaces__namespace__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1014,6 +1022,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_namespace_v1_namespaces__namespace__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1144,6 +1153,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_namespace_v1_namespaces__namespace__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1252,6 +1262,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_namespace_v1_namespaces__namespace__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1360,6 +1371,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_namespace_v1_namespaces__namespace__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1461,6 +1473,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_available_models_v1_namespaces_models_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1562,6 +1575,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_available_models_v1_namespaces_models_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

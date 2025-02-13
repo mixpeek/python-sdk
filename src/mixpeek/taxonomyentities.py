@@ -82,6 +82,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create_taxonomy_v1_entities_taxonomies_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -206,6 +207,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create_taxonomy_v1_entities_taxonomies_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -320,6 +322,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_taxonomies_v1_entities_taxonomies_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -434,6 +437,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_taxonomies_v1_entities_taxonomies_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -545,6 +549,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_taxonomy_node_v1_entities_taxonomies_nodes__node__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -656,6 +661,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_taxonomy_node_v1_entities_taxonomies_nodes__node__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -781,6 +787,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_node_v1_entities_taxonomies_nodes__node__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -906,6 +913,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_node_v1_entities_taxonomies_nodes__node__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1044,6 +1052,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="classify_features_v1_entities_taxonomies__taxonomy__classify_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1182,6 +1191,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="classify_features_v1_entities_taxonomies__taxonomy__classify_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1336,6 +1346,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_classifications_v1_entities_taxonomies__taxonomy__classifications_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1492,6 +1503,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_classifications_v1_entities_taxonomies__taxonomy__classifications_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1609,6 +1621,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_classifications_v1_entities_taxonomies__taxonomy__classifications__classification_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1724,6 +1737,7 @@ class TaxonomyEntities(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_classifications_v1_entities_taxonomies__taxonomy__classifications__classification_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

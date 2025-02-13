@@ -69,6 +69,7 @@ class Taxonomies(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_taxonomy_v1_entities_taxonomies__taxonomy__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -180,6 +181,7 @@ class Taxonomies(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_taxonomy_v1_entities_taxonomies__taxonomy__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -300,6 +302,7 @@ class Taxonomies(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_taxonomy_v1_entities_taxonomies__taxonomy__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -420,6 +423,7 @@ class Taxonomies(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_taxonomy_v1_entities_taxonomies__taxonomy__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -545,6 +549,7 @@ class Taxonomies(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_taxonomy_v1_entities_taxonomies__taxonomy__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -670,6 +675,7 @@ class Taxonomies(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_taxonomy_v1_entities_taxonomies__taxonomy__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

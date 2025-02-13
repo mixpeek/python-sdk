@@ -72,6 +72,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_asset_v1_assets__asset_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -186,6 +187,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_asset_v1_assets__asset_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -298,6 +300,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_asset_v1_assets__asset_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -410,6 +413,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_asset_v1_assets__asset_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -544,6 +548,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="full_asset_update_v1_assets__asset_id__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -678,6 +683,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="full_asset_update_v1_assets__asset_id__put",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -812,6 +818,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="partial_asset_update_v1_assets__asset_id__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -946,6 +953,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="partial_asset_update_v1_assets__asset_id__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1060,6 +1068,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_asset_with_features_v1_assets__asset_id__features_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1174,6 +1183,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_asset_with_features_v1_assets__asset_id__features_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1325,6 +1335,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_assets_v1_assets_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1476,6 +1487,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_assets_v1_assets_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1621,6 +1633,7 @@ class Assets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="search_assets_v1_assets_search_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1766,6 +1779,7 @@ class Assets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="search_assets_v1_assets_search_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

@@ -99,6 +99,7 @@ with Mixpeek(
             ],
             transcribe={},
             describe={},
+            detect={},
             json_output={},
             entities={
                 "taxonomy_extraction": {
@@ -167,6 +168,7 @@ with Mixpeek(
         describe={
             "max_length": 1000,
         },
+        detect={},
         json_output={},
         entities={
             "taxonomy_extraction": {

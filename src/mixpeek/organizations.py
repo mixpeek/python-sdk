@@ -61,6 +61,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_organization_v1_organizations_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -163,6 +164,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_organization_v1_organizations_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -265,6 +267,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_usage_v1_organizations_usage_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -367,6 +370,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_usage_v1_organizations_usage_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -497,6 +501,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="add_user_v1_organizations_users_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -627,6 +632,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="add_user_v1_organizations_users_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -740,6 +746,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -853,6 +860,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -977,6 +985,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1101,6 +1110,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
