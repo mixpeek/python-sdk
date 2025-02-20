@@ -37,6 +37,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetFeatureV1FeaturesFeatureIDGetRequest(
             feature_id=feature_id,
@@ -150,6 +152,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetFeatureV1FeaturesFeatureIDGetRequest(
             feature_id=feature_id,
@@ -264,6 +268,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteFeatureV1FeaturesFeatureIDDeleteRequest(
             feature_id=feature_id,
@@ -377,6 +383,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteFeatureV1FeaturesFeatureIDDeleteRequest(
             feature_id=feature_id,
@@ -495,6 +503,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.FullFeatureUpdateV1FeaturesFeatureIDPutRequest(
             feature_id=feature_id,
@@ -625,6 +635,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.FullFeatureUpdateV1FeaturesFeatureIDPutRequest(
             feature_id=feature_id,
@@ -767,6 +779,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListFeaturesV1FeaturesPostRequest(
             offset_feature_id=offset_feature_id,
@@ -916,6 +930,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListFeaturesV1FeaturesPostRequest(
             offset_feature_id=offset_feature_id,
@@ -1080,6 +1096,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.SearchFeaturesV1FeaturesSearchPostRequest(
             offset_position=offset_position,
@@ -1257,6 +1275,8 @@ class Features(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.SearchFeaturesV1FeaturesSearchPostRequest(
             offset_position=offset_position,

@@ -35,6 +35,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/v1/organizations",
@@ -138,6 +140,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/v1/organizations",
@@ -241,6 +245,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/v1/organizations/usage",
@@ -344,6 +350,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/v1/organizations/usage",
@@ -461,6 +469,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UserModelInput(
             user_id=user_id,
@@ -592,6 +602,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UserModelInput(
             user_id=user_id,
@@ -712,6 +724,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = (
             models.DeleteAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest(
@@ -826,6 +840,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = (
             models.DeleteAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNameDeleteRequest(
@@ -944,6 +960,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = (
             models.UpdateAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNamePatchRequest(
@@ -1069,6 +1087,8 @@ class Organizations(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = (
             models.UpdateAPIKeyV1OrganizationsUsersUserEmailAPIKeysKeyNamePatchRequest(

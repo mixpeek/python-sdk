@@ -33,6 +33,8 @@ class Users(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetUserV1OrganizationsUsersUserEmailGetRequest(
             user_email=user_email,
@@ -140,6 +142,8 @@ class Users(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetUserV1OrganizationsUsersUserEmailGetRequest(
             user_email=user_email,
@@ -250,6 +254,8 @@ class Users(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteUserV1OrganizationsUsersUserEmailDeleteRequest(
             user_email=user_email,
@@ -360,6 +366,8 @@ class Users(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteUserV1OrganizationsUsersUserEmailDeleteRequest(
             user_email=user_email,
@@ -471,6 +479,8 @@ class Users(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateAPIKeyV1OrganizationsUsersUserEmailAPIKeysPostRequest(
             user_email=user_email,
@@ -583,6 +593,8 @@ class Users(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateAPIKeyV1OrganizationsUsersUserEmailAPIKeysPostRequest(
             user_email=user_email,

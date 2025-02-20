@@ -55,6 +55,8 @@ class IngestAssets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IngestTextV1IngestTextPostRequest(
             x_namespace=x_namespace,
@@ -204,6 +206,8 @@ class IngestAssets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IngestTextV1IngestTextPostRequest(
             x_namespace=x_namespace,
@@ -355,6 +359,8 @@ class IngestAssets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IngestVideoURLV1IngestVideosURLPostRequest(
             x_namespace=x_namespace,
@@ -507,6 +513,8 @@ class IngestAssets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IngestVideoURLV1IngestVideosURLPostRequest(
             x_namespace=x_namespace,
@@ -659,6 +667,8 @@ class IngestAssets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IngestImageURLV1IngestImagesURLPostRequest(
             x_namespace=x_namespace,
@@ -811,6 +821,8 @@ class IngestAssets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.IngestImageURLV1IngestImagesURLPostRequest(
             x_namespace=x_namespace,

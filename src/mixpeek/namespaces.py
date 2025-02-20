@@ -44,6 +44,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateNamespaceRequest(
             namespace_name=namespace_name,
@@ -169,6 +171,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateNamespaceRequest(
             namespace_name=namespace_name,
@@ -283,6 +287,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/v1/namespaces",
@@ -385,6 +391,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/v1/namespaces",
@@ -489,6 +497,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteNamespaceV1NamespacesNamespaceDeleteRequest(
             namespace=namespace,
@@ -598,6 +608,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteNamespaceV1NamespacesNamespaceDeleteRequest(
             namespace=namespace,
@@ -716,6 +728,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchNamespaceV1NamespacesNamespacePatchRequest(
             namespace=namespace,
@@ -847,6 +861,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchNamespaceV1NamespacesNamespacePatchRequest(
             namespace=namespace,
@@ -978,6 +994,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateNamespaceV1NamespacesNamespacePutRequest(
             namespace=namespace,
@@ -1109,6 +1127,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateNamespaceV1NamespacesNamespacePutRequest(
             namespace=namespace,
@@ -1231,6 +1251,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetNamespaceV1NamespacesNamespaceGetRequest(
             namespace=namespace,
@@ -1340,6 +1362,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetNamespaceV1NamespacesNamespaceGetRequest(
             namespace=namespace,
@@ -1447,6 +1471,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/v1/namespaces/models",
@@ -1549,6 +1575,8 @@ class Namespaces(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/v1/namespaces/models",

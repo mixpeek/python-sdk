@@ -39,6 +39,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetAssetV1AssetsAssetIDGetRequest(
             asset_id=asset_id,
@@ -154,6 +156,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetAssetV1AssetsAssetIDGetRequest(
             asset_id=asset_id,
@@ -268,6 +272,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteAssetV1AssetsAssetIDDeleteRequest(
             asset_id=asset_id,
@@ -381,6 +387,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteAssetV1AssetsAssetIDDeleteRequest(
             asset_id=asset_id,
@@ -503,6 +511,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.FullAssetUpdateV1AssetsAssetIDPutRequest(
             asset_id=asset_id,
@@ -638,6 +648,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.FullAssetUpdateV1AssetsAssetIDPutRequest(
             asset_id=asset_id,
@@ -773,6 +785,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PartialAssetUpdateV1AssetsAssetIDPatchRequest(
             asset_id=asset_id,
@@ -908,6 +922,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PartialAssetUpdateV1AssetsAssetIDPatchRequest(
             asset_id=asset_id,
@@ -1035,6 +1051,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest(
             asset_id=asset_id,
@@ -1150,6 +1168,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest(
             asset_id=asset_id,
@@ -1281,6 +1301,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListAssetsV1AssetsPostRequest(
             page=page,
@@ -1433,6 +1455,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListAssetsV1AssetsPostRequest(
             page=page,
@@ -1581,6 +1605,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.SearchAssetsV1AssetsSearchPostRequest(
             x_namespace=x_namespace,
@@ -1727,6 +1753,8 @@ class Assets(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.SearchAssetsV1AssetsSearchPostRequest(
             x_namespace=x_namespace,

@@ -37,6 +37,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListCollectionsV1CollectionsGetRequest(
             page=page,
@@ -150,6 +152,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListCollectionsV1CollectionsGetRequest(
             page=page,
@@ -271,6 +275,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateCollectionV1CollectionsPostRequest(
             x_namespace=x_namespace,
@@ -403,6 +409,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateCollectionV1CollectionsPostRequest(
             x_namespace=x_namespace,
@@ -527,6 +535,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteCollectionV1CollectionsCollectionDeleteRequest(
             collection=collection,
@@ -639,6 +649,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteCollectionV1CollectionsCollectionDeleteRequest(
             collection=collection,
@@ -760,6 +772,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateCollectionV1CollectionsCollectionPutRequest(
             collection=collection,
@@ -894,6 +908,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateCollectionV1CollectionsCollectionPutRequest(
             collection=collection,
@@ -1019,6 +1035,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetCollectionDetailsV1CollectionsCollectionGetRequest(
             collection=collection,
@@ -1131,6 +1149,8 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetCollectionDetailsV1CollectionsCollectionGetRequest(
             collection=collection,

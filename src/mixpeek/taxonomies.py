@@ -37,6 +37,8 @@ class Taxonomies(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTaxonomyV1EntitiesTaxonomiesTaxonomyGetRequest(
             taxonomy=taxonomy,
@@ -149,6 +151,8 @@ class Taxonomies(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTaxonomyV1EntitiesTaxonomiesTaxonomyGetRequest(
             taxonomy=taxonomy,
@@ -270,6 +274,8 @@ class Taxonomies(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteTaxonomyV1EntitiesTaxonomiesTaxonomyDeleteRequest(
             taxonomy=taxonomy,
@@ -391,6 +397,8 @@ class Taxonomies(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteTaxonomyV1EntitiesTaxonomiesTaxonomyDeleteRequest(
             taxonomy=taxonomy,
@@ -510,6 +518,8 @@ class Taxonomies(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateTaxonomyV1EntitiesTaxonomiesTaxonomyPatchRequest(
             taxonomy=taxonomy,
@@ -636,6 +646,8 @@ class Taxonomies(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateTaxonomyV1EntitiesTaxonomiesTaxonomyPatchRequest(
             taxonomy=taxonomy,

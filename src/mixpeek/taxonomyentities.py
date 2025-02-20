@@ -44,6 +44,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateTaxonomyV1EntitiesTaxonomiesPostRequest(
             x_namespace=x_namespace,
@@ -169,6 +171,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateTaxonomyV1EntitiesTaxonomiesPostRequest(
             x_namespace=x_namespace,
@@ -289,6 +293,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListTaxonomiesV1EntitiesTaxonomiesGetRequest(
             offset_id=offset_id,
@@ -404,6 +410,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListTaxonomiesV1EntitiesTaxonomiesGetRequest(
             offset_id=offset_id,
@@ -517,6 +525,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTaxonomyNodeV1EntitiesTaxonomiesNodesNodeGetRequest(
             node=node,
@@ -629,6 +639,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTaxonomyNodeV1EntitiesTaxonomiesNodesNodeGetRequest(
             node=node,
@@ -748,6 +760,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateNodeV1EntitiesTaxonomiesNodesNodePatchRequest(
             node=node,
@@ -874,6 +888,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateNodeV1EntitiesTaxonomiesNodesNodePatchRequest(
             node=node,
@@ -1005,6 +1021,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = (
             models.ClassifyFeaturesV1EntitiesTaxonomiesTaxonomyClassifyPostRequest(
@@ -1144,6 +1162,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = (
             models.ClassifyFeaturesV1EntitiesTaxonomiesTaxonomyClassifyPostRequest(
@@ -1291,6 +1311,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListClassificationsV1EntitiesTaxonomiesTaxonomyClassificationsPostRequest(
             taxonomy=taxonomy,
@@ -1448,6 +1470,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListClassificationsV1EntitiesTaxonomiesTaxonomyClassificationsPostRequest(
             taxonomy=taxonomy,
@@ -1588,6 +1612,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteClassificationsV1EntitiesTaxonomiesTaxonomyClassificationsClassificationIDDeleteRequest(
             taxonomy=taxonomy,
@@ -1704,6 +1730,8 @@ class TaxonomyEntities(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteClassificationsV1EntitiesTaxonomiesTaxonomyClassificationsClassificationIDDeleteRequest(
             taxonomy=taxonomy,
