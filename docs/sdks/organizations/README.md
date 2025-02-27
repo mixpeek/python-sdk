@@ -22,6 +22,7 @@
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -63,6 +64,7 @@ with Mixpeek(
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -103,6 +105,7 @@ with Mixpeek(
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
@@ -149,6 +152,7 @@ Delete a specific API key for a user
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -190,6 +194,7 @@ Update an API key's name or permissions
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),

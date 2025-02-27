@@ -111,6 +111,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -131,6 +132,7 @@ from mixpeek import Mixpeek
 import os
 
 async def main():
+
     async with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as m_client:
@@ -159,6 +161,7 @@ To authenticate with the API the `token` parameter must be set when initializing
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
@@ -279,6 +282,7 @@ from mixpeek import Mixpeek
 from mixpeek.utils import BackoffStrategy, RetryConfig
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -296,6 +300,7 @@ If you'd like to override the default retry strategy for all operations that sup
 from mixpeek import Mixpeek
 from mixpeek.utils import BackoffStrategy, RetryConfig
 import os
+
 
 with Mixpeek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
@@ -339,6 +344,7 @@ When custom error responses are specified for an operation, the SDK may also rai
 from mixpeek import Mixpeek, models
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -374,6 +380,7 @@ The default server can be overridden globally by passing a URL to the `server_ur
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     server_url="https://api.mixpeek.com",
@@ -480,6 +487,7 @@ The `Mixpeek` class implements the context manager protocol and registers a fina
 from mixpeek import Mixpeek
 import os
 def main():
+
     with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as m_client:
@@ -488,6 +496,7 @@ def main():
 
 # Or when using async:
 async def amain():
+
     async with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
     ) as m_client:

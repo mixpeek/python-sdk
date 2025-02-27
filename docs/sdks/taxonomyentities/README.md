@@ -26,6 +26,7 @@ Register new taxonomies with their descriptions
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -71,6 +72,7 @@ Get all taxonomies for the current namespace
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -113,6 +115,7 @@ Get the complete taxonomy that contains the specified node
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
@@ -159,6 +162,7 @@ Update an existing taxonomy node
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -202,6 +206,7 @@ Starts an asynchronous task to classify features within collections for a given 
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
@@ -265,6 +270,7 @@ import mixpeek
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -327,6 +333,7 @@ with Mixpeek(
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),

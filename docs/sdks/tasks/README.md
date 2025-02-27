@@ -20,6 +20,7 @@
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -65,6 +66,7 @@ Retrieve a task by its ID.
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -106,6 +108,7 @@ Retrieve all tasks that are not in a complete state (DONE, FAILED, SKIPPED, or C
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),

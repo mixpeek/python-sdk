@@ -21,6 +21,7 @@ import mixpeek
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -82,6 +83,7 @@ with Mixpeek(
 import mixpeek
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
@@ -151,6 +153,7 @@ with Mixpeek(
 import mixpeek
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),

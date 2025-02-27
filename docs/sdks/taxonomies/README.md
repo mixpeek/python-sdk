@@ -19,6 +19,7 @@ Get the complete taxonomy that contains the specified node
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -70,6 +71,7 @@ Delete an existing taxonomy and remove all associated node classifications from 
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
@@ -114,6 +116,7 @@ Update an existing taxonomy's metadata
 ```python
 from mixpeek import Mixpeek
 import os
+
 
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
