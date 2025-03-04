@@ -65,24 +65,24 @@ class LogicalOperator(BaseModel):
 
 
 AndTypedDict = TypeAliasType(
-    "AndTypedDict", Union[FilterConditionTypedDict, LogicalOperatorTypedDict]
+    "AndTypedDict", Union[FilterConditionTypedDict, "LogicalOperatorTypedDict"]
 )
 
 
-And = TypeAliasType("And", Union[FilterCondition, LogicalOperator])
+And = TypeAliasType("And", Union[FilterCondition, "LogicalOperator"])
 
 
 OrTypedDict = TypeAliasType(
-    "OrTypedDict", Union[FilterConditionTypedDict, LogicalOperatorTypedDict]
+    "OrTypedDict", Union[FilterConditionTypedDict, "LogicalOperatorTypedDict"]
 )
 
 
-Or = TypeAliasType("Or", Union[FilterCondition, LogicalOperator])
+Or = TypeAliasType("Or", Union[FilterCondition, "LogicalOperator"])
 
 
 NorTypedDict = TypeAliasType(
-    "NorTypedDict", Union[FilterConditionTypedDict, LogicalOperatorTypedDict]
+    "NorTypedDict", Union[FilterConditionTypedDict, "LogicalOperatorTypedDict"]
 )
 
 
-Nor = TypeAliasType("Nor", Union[FilterCondition, LogicalOperator])
+Nor = TypeAliasType("Nor", Union[FilterCondition, "LogicalOperator"])

@@ -198,6 +198,7 @@ with Mixpeek(
 * [delete](docs/sdks/collections/README.md#delete) - Delete Collection
 * [update](docs/sdks/collections/README.md#update) - Update Collection
 * [get](docs/sdks/collections/README.md#get) - Get Collection Details
+* [get_collection_details_v1_collections_collection_details_get](docs/sdks/collections/README.md#get_collection_details_v1_collections_collection_details_get) - Get Collection Details
 
 ### [feature_extractors](docs/sdks/featureextractors/README.md)
 

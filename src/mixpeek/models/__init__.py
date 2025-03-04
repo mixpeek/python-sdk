@@ -169,6 +169,10 @@ from .get_asset_with_features_v1_assets_asset_id_features_getop import (
     GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest,
     GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequestTypedDict,
 )
+from .get_collection_details_v1_collections_collection_details_getop import (
+    GetCollectionDetailsV1CollectionsCollectionDetailsGetRequest,
+    GetCollectionDetailsV1CollectionsCollectionDetailsGetRequestTypedDict,
+)
 from .get_collection_details_v1_collections_collection_getop import (
     GetCollectionDetailsV1CollectionsCollectionGetRequest,
     GetCollectionDetailsV1CollectionsCollectionGetRequestTypedDict,
@@ -597,6 +601,8 @@ __all__ = [
     "GetAssetV1AssetsAssetIDGetRequestTypedDict",
     "GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequest",
     "GetAssetWithFeaturesV1AssetsAssetIDFeaturesGetRequestTypedDict",
+    "GetCollectionDetailsV1CollectionsCollectionDetailsGetRequest",
+    "GetCollectionDetailsV1CollectionsCollectionDetailsGetRequestTypedDict",
     "GetCollectionDetailsV1CollectionsCollectionGetRequest",
     "GetCollectionDetailsV1CollectionsCollectionGetRequestTypedDict",
     "GetFeatureV1FeaturesFeatureIDGetRequest",

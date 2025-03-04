@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 139821cf7f3e3ea12c495336b7dda4df
+  docChecksum: 9bcafaf89ee2b5a77e6322f951e3c1fb
   docVersion: "0.81"
-  speakeasyVersion: 1.508.1
-  generationVersion: 2.536.0
-  releaseVersion: 0.20.9
-  configChecksum: 06b98ae734b70abff2f6a21a73117df2
+  speakeasyVersion: 1.509.0
+  generationVersion: 2.539.0
+  releaseVersion: 0.20.10
+  configChecksum: e0adef4be19a494f623bcc56c59f8d00
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.12.1
+    core: 5.12.2
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -110,6 +110,7 @@ generatedFiles:
   - docs/models/geoindexparams.md
   - docs/models/getassetv1assetsassetidgetrequest.md
   - docs/models/getassetwithfeaturesv1assetsassetidfeaturesgetrequest.md
+  - docs/models/getcollectiondetailsv1collectionscollectiondetailsgetrequest.md
   - docs/models/getcollectiondetailsv1collectionscollectiongetrequest.md
   - docs/models/getfeaturev1featuresfeatureidgetrequest.md
   - docs/models/getnamespacev1namespacesnamespacegetrequest.md
@@ -322,6 +323,7 @@ generatedFiles:
   - src/mixpeek/models/geoindexparams.py
   - src/mixpeek/models/get_asset_v1_assets_asset_id_getop.py
   - src/mixpeek/models/get_asset_with_features_v1_assets_asset_id_features_getop.py
+  - src/mixpeek/models/get_collection_details_v1_collections_collection_details_getop.py
   - src/mixpeek/models/get_collection_details_v1_collections_collection_getop.py
   - src/mixpeek/models/get_feature_v1_features_feature_id_getop.py
   - src/mixpeek/models/get_namespace_v1_namespaces_namespace_getop.py
@@ -1208,5 +1210,20 @@ examples:
           application/json: {}
         "500":
           application/json: {"success": false, "status": 521235, "error": {"message": "<value>", "type": "<value>"}}
+  get_collection_details_v1_collections__collection__details_get:
+    speakeasy-default-get-collection-details-v1-collections-collection-details-get:
+      parameters:
+        path:
+          collection: "my_collection"
+        header: {}
+      responses:
+        "200":
+          application/json: {"collection_id": "<id>", "collection_name": "<value>"}
+        "400":
+          application/json: {"success": false, "status": 105860, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 445261, "error": {"message": "<value>", "type": "<value>"}}
 examplesVersion: 1.0.0
 generatedTests: {}
