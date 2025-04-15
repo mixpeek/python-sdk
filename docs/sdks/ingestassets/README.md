@@ -30,8 +30,8 @@ with Mixpeek(
         "embed": [
             {
                 "type": mixpeek.InputType.TEXT,
-                "embedding_model": mixpeek.VectorModel.MULTIMODAL,
                 "value": "a dog",
+                "embedding_model": mixpeek.VectorModel.MULTIMODAL,
             },
         ],
         "json_output": {},
@@ -95,8 +95,27 @@ with Mixpeek(
             embed=[
                 mixpeek.EmbeddingRequest(
                     type=mixpeek.InputType.TEXT,
-                    embedding_model=mixpeek.VectorModel.VERTEX_MULTIMODAL,
                     value="a dog",
+                    embedding_model=mixpeek.VectorModel.MULTIMODAL,
+                ),
+            ],
+            transcribe=mixpeek.VideoTranscriptionSettings(),
+            describe=mixpeek.VideoDescribeSettings(),
+            detect=mixpeek.VideoDetectSettings(),
+            json_output=mixpeek.JSONVideoOutputSettings(),
+            entities=mixpeek.EntitySettings(
+                taxonomy_extraction=mixpeek.TaxonomyExtractionConfig(
+                    taxonomy="tax_123",
+                ),
+            ),
+        ),
+        mixpeek.VideoSettings(
+            read=mixpeek.VideoReadSettings(),
+            embed=[
+                mixpeek.EmbeddingRequest(
+                    type=mixpeek.InputType.TEXT,
+                    value="a dog",
+                    embedding_model=mixpeek.VectorModel.MULTIMODAL,
                 ),
             ],
             transcribe=mixpeek.VideoTranscriptionSettings(),
@@ -164,8 +183,8 @@ with Mixpeek(
         embed=[
             mixpeek.EmbeddingRequest(
                 type=mixpeek.InputType.TEXT,
-                embedding_model=mixpeek.VectorModel.BAAI_BGE_M3,
                 value="a dog",
+                embedding_model=mixpeek.VectorModel.BAAI_BGE_M3,
             ),
         ],
         describe=mixpeek.ImageDescribeSettings(

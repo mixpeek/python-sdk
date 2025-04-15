@@ -111,7 +111,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.organizations.add_user(email="Wendell_Larson94@hotmail.com")
+    res = m_client.organizations.add_user(email="Caterina_Bartell@yahoo.com")
 
     # Handle response
     print(res)

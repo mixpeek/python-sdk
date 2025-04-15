@@ -214,8 +214,6 @@ with Mixpeek(
 
     res = m_client.taxonomy_entities.classify_features(taxonomy="<value>", collections=[
         "<value>",
-        "<value>",
-        "<value>",
     ], filters={
         "case_sensitive": True,
         "and_": [
