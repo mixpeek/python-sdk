@@ -96,7 +96,7 @@ with Mixpeek(
                 mixpeek.EmbeddingRequest(
                     type=mixpeek.InputType.TEXT,
                     value="a dog",
-                    embedding_model=mixpeek.VectorModel.MULTIMODAL,
+                    embedding_model=mixpeek.VectorModel.VERTEX_MULTIMODAL,
                 ),
             ],
             transcribe=mixpeek.VideoTranscriptionSettings(),
