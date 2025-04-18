@@ -5,231 +5,41 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Union
 
 
 class Collections(BaseSDK):
-    def list(
-        self,
-        *,
-        page: OptionalNullable[int] = UNSET,
-        page_size: Optional[int] = 10,
-        x_namespace: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListCollectionsResponse:
-        r"""List Collections
-
-        :param page:
-        :param page_size:
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.ListCollectionsV1CollectionsGetRequest(
-            page=page,
-            page_size=page_size,
-            x_namespace=x_namespace,
-        )
-
-        req = self._build_request(
-            method="GET",
-            path="/v1/collections",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="list_collections_v1_collections_get",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ListCollectionsResponse)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def list_async(
-        self,
-        *,
-        page: OptionalNullable[int] = UNSET,
-        page_size: Optional[int] = 10,
-        x_namespace: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ListCollectionsResponse:
-        r"""List Collections
-
-        :param page:
-        :param page_size:
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.ListCollectionsV1CollectionsGetRequest(
-            page=page,
-            page_size=page_size,
-            x_namespace=x_namespace,
-        )
-
-        req = self._build_request_async(
-            method="GET",
-            path="/v1/collections",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="list_collections_v1_collections_get",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.ListCollectionsResponse)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def create(
+    def create_collection_v1_collections_create_post(
         self,
         *,
         collection_name: str,
+        source: Union[models.SourceConfigInput, models.SourceConfigInputTypedDict],
+        feature_extractors: Union[
+            List[models.FeatureExtractorConfig],
+            List[models.FeatureExtractorConfigTypedDict],
+        ],
         x_namespace: OptionalNullable[str] = UNSET,
+        description: OptionalNullable[str] = UNSET,
+        taxonomy_applications: Optional[
+            Union[
+                List[models.TaxonomyApplicationConfig],
+                List[models.TaxonomyApplicationConfigTypedDict],
+            ]
+        ] = None,
+        enabled: Optional[bool] = True,
         metadata: OptionalNullable[
             Union[
                 models.CreateCollectionRequestMetadata,
                 models.CreateCollectionRequestMetadataTypedDict,
+            ]
+        ] = UNSET,
+        document_handling: OptionalNullable[
+            Union[models.DocumentHandlingConfig, models.DocumentHandlingConfigTypedDict]
+        ] = UNSET,
+        cache_config: OptionalNullable[
+            Union[
+                models.CollectionCacheConfigInput,
+                models.CollectionCacheConfigInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -239,12 +49,18 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Create Collection
 
-        **Requirements:**
-        - Required permissions: write
+        This endpoint allows you to create a new collection.
 
         :param collection_name: Name for the collection
+        :param source: Configuration for a collection source
+        :param feature_extractors: List of feature extractor configurations to use
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param description: Description for the collection
+        :param taxonomy_applications: List of taxonomy application configurations. there are two options: on ingestion store the taxonomy application results to this collection, or on demand compute the taxonomy application results at query time
+        :param enabled: Enable or disable processing of this collection
         :param metadata: Optional metadata for the collection
+        :param document_handling: Configuration for how documents are handled by this extractor
+        :param cache_config: Configuration for collection-level caching
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -257,20 +73,38 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateCollectionV1CollectionsPostRequest(
+        request = models.CreateCollectionV1CollectionsCreatePostRequest(
             x_namespace=x_namespace,
             create_collection_request=models.CreateCollectionRequest(
                 collection_name=collection_name,
+                description=description,
+                source=utils.get_pydantic_model(source, models.SourceConfigInput),
+                feature_extractors=utils.get_pydantic_model(
+                    feature_extractors, List[models.FeatureExtractorConfig]
+                ),
+                taxonomy_applications=utils.get_pydantic_model(
+                    taxonomy_applications,
+                    Optional[List[models.TaxonomyApplicationConfig]],
+                ),
+                enabled=enabled,
                 metadata=utils.get_pydantic_model(
                     metadata, OptionalNullable[models.CreateCollectionRequestMetadata]
+                ),
+                document_handling=utils.get_pydantic_model(
+                    document_handling, OptionalNullable[models.DocumentHandlingConfig]
+                ),
+                cache_config=utils.get_pydantic_model(
+                    cache_config, OptionalNullable[models.CollectionCacheConfigInput]
                 ),
             ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/v1/collections",
+            path="/v1/collections/create",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -301,7 +135,8 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="create_collection_v1_collections_post",
+                base_url=base_url or "",
+                operation_id="create_collection_v1_collections_create_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -312,20 +147,26 @@ class Collections(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.CollectionModel)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -346,15 +187,37 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def create_async(
+    async def create_collection_v1_collections_create_post_async(
         self,
         *,
         collection_name: str,
+        source: Union[models.SourceConfigInput, models.SourceConfigInputTypedDict],
+        feature_extractors: Union[
+            List[models.FeatureExtractorConfig],
+            List[models.FeatureExtractorConfigTypedDict],
+        ],
         x_namespace: OptionalNullable[str] = UNSET,
+        description: OptionalNullable[str] = UNSET,
+        taxonomy_applications: Optional[
+            Union[
+                List[models.TaxonomyApplicationConfig],
+                List[models.TaxonomyApplicationConfigTypedDict],
+            ]
+        ] = None,
+        enabled: Optional[bool] = True,
         metadata: OptionalNullable[
             Union[
                 models.CreateCollectionRequestMetadata,
                 models.CreateCollectionRequestMetadataTypedDict,
+            ]
+        ] = UNSET,
+        document_handling: OptionalNullable[
+            Union[models.DocumentHandlingConfig, models.DocumentHandlingConfigTypedDict]
+        ] = UNSET,
+        cache_config: OptionalNullable[
+            Union[
+                models.CollectionCacheConfigInput,
+                models.CollectionCacheConfigInputTypedDict,
             ]
         ] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -364,12 +227,18 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Create Collection
 
-        **Requirements:**
-        - Required permissions: write
+        This endpoint allows you to create a new collection.
 
         :param collection_name: Name for the collection
+        :param source: Configuration for a collection source
+        :param feature_extractors: List of feature extractor configurations to use
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param description: Description for the collection
+        :param taxonomy_applications: List of taxonomy application configurations. there are two options: on ingestion store the taxonomy application results to this collection, or on demand compute the taxonomy application results at query time
+        :param enabled: Enable or disable processing of this collection
         :param metadata: Optional metadata for the collection
+        :param document_handling: Configuration for how documents are handled by this extractor
+        :param cache_config: Configuration for collection-level caching
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -382,20 +251,38 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.CreateCollectionV1CollectionsPostRequest(
+        request = models.CreateCollectionV1CollectionsCreatePostRequest(
             x_namespace=x_namespace,
             create_collection_request=models.CreateCollectionRequest(
                 collection_name=collection_name,
+                description=description,
+                source=utils.get_pydantic_model(source, models.SourceConfigInput),
+                feature_extractors=utils.get_pydantic_model(
+                    feature_extractors, List[models.FeatureExtractorConfig]
+                ),
+                taxonomy_applications=utils.get_pydantic_model(
+                    taxonomy_applications,
+                    Optional[List[models.TaxonomyApplicationConfig]],
+                ),
+                enabled=enabled,
                 metadata=utils.get_pydantic_model(
                     metadata, OptionalNullable[models.CreateCollectionRequestMetadata]
+                ),
+                document_handling=utils.get_pydantic_model(
+                    document_handling, OptionalNullable[models.DocumentHandlingConfig]
+                ),
+                cache_config=utils.get_pydantic_model(
+                    cache_config, OptionalNullable[models.CollectionCacheConfigInput]
                 ),
             ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/v1/collections",
+            path="/v1/collections/create",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -426,7 +313,8 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="create_collection_v1_collections_post",
+                base_url=base_url or "",
+                operation_id="create_collection_v1_collections_create_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -437,20 +325,26 @@ class Collections(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.CollectionModel)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -471,474 +365,10 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def delete(
+    def get_collection_v1_collections_collection_id_get(
         self,
         *,
-        collection: str,
-        x_namespace: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TaskResponse:
-        r"""Delete Collection
-
-        Delete a collection using either its name or ID
-
-        :param collection: Either the collection name or collection ID
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.DeleteCollectionV1CollectionsCollectionDeleteRequest(
-            collection=collection,
-            x_namespace=x_namespace,
-        )
-
-        req = self._build_request(
-            method="DELETE",
-            path="/v1/collections/{collection}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="delete_collection_v1_collections__collection__delete",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.TaskResponse)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def delete_async(
-        self,
-        *,
-        collection: str,
-        x_namespace: OptionalNullable[str] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TaskResponse:
-        r"""Delete Collection
-
-        Delete a collection using either its name or ID
-
-        :param collection: Either the collection name or collection ID
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.DeleteCollectionV1CollectionsCollectionDeleteRequest(
-            collection=collection,
-            x_namespace=x_namespace,
-        )
-
-        req = self._build_request_async(
-            method="DELETE",
-            path="/v1/collections/{collection}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="delete_collection_v1_collections__collection__delete",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.TaskResponse)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def update(
-        self,
-        *,
-        collection: str,
-        collection_name: str,
-        x_namespace: OptionalNullable[str] = UNSET,
-        metadata: OptionalNullable[
-            Union[
-                models.CreateCollectionRequestMetadata,
-                models.CreateCollectionRequestMetadataTypedDict,
-            ]
-        ] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CollectionModel:
-        r"""Update Collection
-
-        Update a collection using either its name or ID
-
-        :param collection: Either the collection name or collection ID
-        :param collection_name: Name for the collection
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param metadata: Optional metadata for the collection
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.UpdateCollectionV1CollectionsCollectionPutRequest(
-            collection=collection,
-            x_namespace=x_namespace,
-            create_collection_request=models.CreateCollectionRequest(
-                collection_name=collection_name,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.CreateCollectionRequestMetadata]
-                ),
-            ),
-        )
-
-        req = self._build_request(
-            method="PUT",
-            path="/v1/collections/{collection}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_collection_request,
-                False,
-                False,
-                "json",
-                models.CreateCollectionRequest,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="update_collection_v1_collections__collection__put",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CollectionModel)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def update_async(
-        self,
-        *,
-        collection: str,
-        collection_name: str,
-        x_namespace: OptionalNullable[str] = UNSET,
-        metadata: OptionalNullable[
-            Union[
-                models.CreateCollectionRequestMetadata,
-                models.CreateCollectionRequestMetadataTypedDict,
-            ]
-        ] = UNSET,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CollectionModel:
-        r"""Update Collection
-
-        Update a collection using either its name or ID
-
-        :param collection: Either the collection name or collection ID
-        :param collection_name: Name for the collection
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param metadata: Optional metadata for the collection
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.UpdateCollectionV1CollectionsCollectionPutRequest(
-            collection=collection,
-            x_namespace=x_namespace,
-            create_collection_request=models.CreateCollectionRequest(
-                collection_name=collection_name,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.CreateCollectionRequestMetadata]
-                ),
-            ),
-        )
-
-        req = self._build_request_async(
-            method="PUT",
-            path="/v1/collections/{collection}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_collection_request,
-                False,
-                False,
-                "json",
-                models.CreateCollectionRequest,
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="update_collection_v1_collections__collection__put",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CollectionModel)
-        if utils.match_response(
-            http_res, ["400", "401", "403", "404"], "application/json"
-        ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def get(
-        self,
-        *,
-        collection: str,
+        collection_id: str,
         x_namespace: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -947,9 +377,7 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Get Collection
 
-        Get a collection using either its name or ID
-
-        :param collection: Either the collection name or collection ID
+        :param collection_id: The ID of the collection to retrieve
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -963,15 +391,17 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCollectionV1CollectionsCollectionGetRequest(
-            collection=collection,
+        request = models.GetCollectionV1CollectionsCollectionIDGetRequest(
+            collection_id=collection_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="GET",
-            path="/v1/collections/{collection}",
+            path="/v1/collections/{collection_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -995,7 +425,8 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get_collection_v1_collections__collection__get",
+                base_url=base_url or "",
+                operation_id="get_collection_v1_collections__collection_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1006,20 +437,26 @@ class Collections(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.CollectionModel)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1040,10 +477,10 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def get_async(
+    async def get_collection_v1_collections_collection_id_get_async(
         self,
         *,
-        collection: str,
+        collection_id: str,
         x_namespace: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1052,9 +489,7 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Get Collection
 
-        Get a collection using either its name or ID
-
-        :param collection: Either the collection name or collection ID
+        :param collection_id: The ID of the collection to retrieve
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1068,15 +503,17 @@ class Collections(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCollectionV1CollectionsCollectionGetRequest(
-            collection=collection,
+        request = models.GetCollectionV1CollectionsCollectionIDGetRequest(
+            collection_id=collection_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/v1/collections/{collection}",
+            path="/v1/collections/{collection_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -1100,7 +537,8 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get_collection_v1_collections__collection__get",
+                base_url=base_url or "",
+                operation_id="get_collection_v1_collections__collection_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1111,20 +549,26 @@ class Collections(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.CollectionModel)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

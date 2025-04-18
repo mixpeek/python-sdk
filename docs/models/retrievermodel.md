@@ -1,0 +1,17 @@
+# RetrieverModel
+
+Definition of a retriever
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `retriever_id`                                                                     | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | Unique identifier for the retriever                                                |
+| `retriever_name`                                                                   | *str*                                                                              | :heavy_check_mark:                                                                 | Name of the retriever                                                              |
+| `description`                                                                      | *OptionalNullable[str]*                                                            | :heavy_minus_sign:                                                                 | Description of the retriever                                                       |
+| `input_schema`                                                                     | [models.BucketSchemaOutput](../models/bucketschemaoutput.md)                       | :heavy_check_mark:                                                                 | Schema definition for bucket objects                                               |
+| `collection_ids`                                                                   | List[*str*]                                                                        | :heavy_check_mark:                                                                 | List of collection IDs to search in                                                |
+| `stages`                                                                           | List[[models.StageConfigOutput](../models/stageconfigoutput.md)]                   | :heavy_check_mark:                                                                 | List of stages to execute in order                                                 |
+| `metadata`                                                                         | [Optional[models.RetrieverModelMetadata]](../models/retrievermodelmetadata.md)     | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `cache_config`                                                                     | [OptionalNullable[models.RetrieverCacheConfig]](../models/retrievercacheconfig.md) | :heavy_minus_sign:                                                                 | Configuration for retriever-level caching                                          |

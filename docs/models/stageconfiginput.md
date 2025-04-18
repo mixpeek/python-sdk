@@ -1,0 +1,21 @@
+# StageConfigInput
+
+Configuration for how a retriever stage processes queries and handles results.
+
+This model consolidates stage-specific settings that control behavior
+during retrieval operations, making it easier to configure stages
+with consistent options.
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `stage_name`                                                                                   | *str*                                                                                          | :heavy_check_mark:                                                                             | Name of the stage                                                                              |
+| `version`                                                                                      | *str*                                                                                          | :heavy_check_mark:                                                                             | Version of the stage                                                                           |
+| `module_path`                                                                                  | *str*                                                                                          | :heavy_check_mark:                                                                             | Python module path for the stage                                                               |
+| `parameters`                                                                                   | [Optional[models.StageConfigInputParameters]](../models/stageconfiginputparameters.md)         | :heavy_minus_sign:                                                                             | Parameters for the stage                                                                       |
+| `pre_filters`                                                                                  | [OptionalNullable[models.LogicalOperatorInput]](../models/logicaloperatorinput.md)             | :heavy_minus_sign:                                                                             | Filters to apply before the main search is executed                                            |
+| `post_filters`                                                                                 | [OptionalNullable[models.LogicalOperatorInput]](../models/logicaloperatorinput.md)             | :heavy_minus_sign:                                                                             | Filters to apply to search results after retrieval                                             |
+| `timeout_seconds`                                                                              | *OptionalNullable[float]*                                                                      | :heavy_minus_sign:                                                                             | Maximum execution time for this stage in seconds                                               |
+| `exclude_from_final`                                                                           | *Optional[bool]*                                                                               | :heavy_minus_sign:                                                                             | If True, results from this stage are used for subsequent stages but excluded from final output |

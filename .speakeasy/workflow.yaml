@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Mixpeek API:
         inputs:
-            - location: https://api.mixpeek.com/docs/openapi.json
+            - location: https://server-xb24.onrender.com/docs/openapi.json
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
             - location: security_overlay.yml

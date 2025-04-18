@@ -38,6 +38,8 @@ class Tasks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.KillTaskV1TasksTaskIDDeleteRequest(
             task_id=task_id,
@@ -70,6 +72,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="kill_task_v1_tasks__task_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -81,20 +84,26 @@ class Tasks(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Any)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -144,6 +153,8 @@ class Tasks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.KillTaskV1TasksTaskIDDeleteRequest(
             task_id=task_id,
@@ -176,6 +187,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="kill_task_v1_tasks__task_id__delete",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -187,20 +199,26 @@ class Tasks(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Any)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -252,6 +270,8 @@ class Tasks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTaskV1TasksTaskIDGetRequest(
             task_id=task_id,
@@ -284,6 +304,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_task_v1_tasks__task_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -295,20 +316,26 @@ class Tasks(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -360,6 +387,8 @@ class Tasks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTaskV1TasksTaskIDGetRequest(
             task_id=task_id,
@@ -392,6 +421,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get_task_v1_tasks__task_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -403,20 +433,26 @@ class Tasks(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.TaskResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -467,6 +503,8 @@ class Tasks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListActiveTasksV1TasksGetRequest(
             page=page,
@@ -500,6 +538,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_active_tasks_v1_tasks_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -511,20 +550,26 @@ class Tasks(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ListTasksResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -575,6 +620,8 @@ class Tasks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListActiveTasksV1TasksGetRequest(
             page=page,
@@ -608,6 +655,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list_active_tasks_v1_tasks_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -619,20 +667,26 @@ class Tasks(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ListTasksResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.HTTPValidationErrorData)
-            raise models.HTTPValidationError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorResponseData)
-            raise models.ErrorResponse(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

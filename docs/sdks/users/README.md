@@ -19,11 +19,12 @@ Get User
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.users.get(user_email="<value>")
+    res = m_client.users.get(user_email="<value>")
 
     # Handle response
     print(res)
@@ -61,11 +62,12 @@ with Mixpeek(
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.users.delete(user_email="<value>")
+    res = m_client.users.delete(user_email="<value>")
 
     # Handle response
     print(res)
@@ -102,11 +104,12 @@ Create a new API key for a specific user
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.users.create_api_key(user_email="<value>", key_name="default")
+    res = m_client.users.create_api_key(user_email="<value>")
 
     # Handle response
     print(res)

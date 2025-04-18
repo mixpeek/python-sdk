@@ -15,3 +15,4 @@
 | `UPLOADING`    | UPLOADING      |
 | `QUEUED`       | QUEUED         |
 | `PENDING`      | PENDING        |
+| `CONVERTING`   | CONVERTING     |

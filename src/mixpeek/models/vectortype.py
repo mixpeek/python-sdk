@@ -5,5 +5,8 @@ from enum import Enum
 
 
 class VectorType(str, Enum):
-    SPARSE = "sparse"
+    r"""Types of vectors supported"""
+
     DENSE = "dense"
+    SPARSE = "sparse"
+    INT8 = "int8"

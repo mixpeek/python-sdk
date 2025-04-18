@@ -6,7 +6,6 @@
 ### Available Operations
 
 * [get](#get) - Get Organization
-* [get_usage](#get_usage) - Get Usage
 * [add_user](#add_user) - Add User
 * [delete_api_key](#delete_api_key) - Delete Api Key
 * [update_api_key](#update_api_key) - Update Api Key
@@ -22,11 +21,12 @@
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.get()
+    res = m_client.organizations.get()
 
     # Handle response
     print(res)
@@ -52,47 +52,6 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_usage
-
-**Requirements:**
-- Required permissions: admin
-
-### Example Usage
-
-```python
-from mixpeek import Mixpeek
-import os
-
-with Mixpeek(
-    token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
-
-    res = mixpeek.organizations.get_usage()
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.Usage](../../models/usage.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.ErrorResponse       | 500                        | application/json           |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
-
 ## add_user
 
 **Requirements:**
@@ -104,11 +63,12 @@ with Mixpeek(
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.add_user(email="Wendell_Larson94@hotmail.com")
+    res = m_client.organizations.add_user(email="Caterina_Bartell@yahoo.com")
 
     # Handle response
     print(res)
@@ -121,6 +81,7 @@ with Mixpeek(
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | `email`                                                                           | *str*                                                                             | :heavy_check_mark:                                                                | N/A                                                                               |
 | `user_id`                                                                         | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | N/A                                                                               |
+| `user_name`                                                                       | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | N/A                                                                               |
 | `api_keys`                                                                        | List[[models.APIKey](../../models/apikey.md)]                                     | :heavy_minus_sign:                                                                | N/A                                                                               |
 | `metadata`                                                                        | [Optional[models.UserModelInputMetadata]](../../models/usermodelinputmetadata.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
 | `created_at`                                                                      | [date](https://docs.python.org/3/library/datetime.html#date-objects)              | :heavy_minus_sign:                                                                | N/A                                                                               |
@@ -149,11 +110,12 @@ Delete a specific API key for a user
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.delete_api_key(user_email="<value>", key_name="<value>")
+    res = m_client.organizations.delete_api_key(user_email="<value>", key_name="<value>")
 
     # Handle response
     print(res)
@@ -191,11 +153,12 @@ Update an API key's name or permissions
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.organizations.update_api_key(user_email="<value>", key_name="<value>")
+    res = m_client.organizations.update_api_key(user_email="<value>", key_name="<value>")
 
     # Handle response
     print(res)

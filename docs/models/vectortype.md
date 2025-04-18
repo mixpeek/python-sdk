@@ -1,9 +1,12 @@
 # VectorType
 
+Types of vectors supported
+
 
 ## Values
 
 | Name     | Value    |
 | -------- | -------- |
-| `SPARSE` | sparse   |
 | `DENSE`  | dense    |
+| `SPARSE` | sparse   |
+| `INT8`   | int8     |

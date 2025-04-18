@@ -19,6 +19,7 @@ class UserModelInputMetadata(BaseModel):
 class UserModelInputTypedDict(TypedDict):
     email: str
     user_id: NotRequired[str]
+    user_name: NotRequired[str]
     api_keys: NotRequired[List[APIKeyTypedDict]]
     metadata: NotRequired[UserModelInputMetadataTypedDict]
     created_at: NotRequired[datetime]
@@ -28,6 +29,8 @@ class UserModelInput(BaseModel):
     email: str
 
     user_id: Optional[str] = None
+
+    user_name: Optional[str] = None
 
     api_keys: Optional[List[APIKey]] = None
 

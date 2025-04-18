@@ -1,9 +1,0 @@
-# JSONVideoOutputSettings
-
-
-## Fields
-
-| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `response_shape`                                                                                                   | [OptionalNullable[models.JSONVideoOutputSettingsResponseShape]](../models/jsonvideooutputsettingsresponseshape.md) | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |
-| `prompt`                                                                                                           | *OptionalNullable[str]*                                                                                            | :heavy_minus_sign:                                                                                                 | N/A                                                                                                                |

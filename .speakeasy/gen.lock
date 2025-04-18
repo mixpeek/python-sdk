@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: f7ac3f82c08f0f151fa71400be2a533b
+  docChecksum: 762a34453434abaa090e1ca5c2b7c7e3
   docVersion: "0.81"
-  speakeasyVersion: 1.469.11
-  generationVersion: 2.493.32
-  releaseVersion: 0.18.1
-  configChecksum: 8b4a5f0615493268ece2e22034c79230
+  speakeasyVersion: 1.532.0
+  generationVersion: 2.578.0
+  releaseVersion: 0.21.0
+  configChecksum: 23cacc90fc6df4db9dfed6dd30653a02
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -15,14 +15,14 @@ features:
     additionalDependencies: 1.0.0
     additionalProperties: 1.0.1
     constsAndDefaults: 1.0.5
-    core: 5.10.4
+    core: 5.14.0
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
-    flattening: 3.1.0
-    globalSecurity: 3.0.2
+    flattening: 3.1.1
+    globalSecurity: 3.0.3
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.1.0
@@ -30,10 +30,10 @@ features:
     groups: 3.0.0
     methodArguments: 1.0.2
     nameOverrides: 3.0.1
-    nullables: 1.0.0
+    nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
-    sdkHooks: 1.0.0
+    sdkHooks: 1.0.1
     unions: 3.0.4
 generatedFiles:
   - .devcontainer/README.md
@@ -43,177 +43,201 @@ generatedFiles:
   - .python-version
   - .vscode/settings.json
   - USAGE.md
-  - docs/models/actionusage.md
+  - docs/models/aggregationtype.md
   - docs/models/and_.md
   - docs/models/apikey.md
   - docs/models/apikeyupdate.md
-  - docs/models/assetfeatures.md
-  - docs/models/assetresponse.md
-  - docs/models/assetsmodelsearchquery.md
-  - docs/models/assetupdate.md
-  - docs/models/assignmentconfig.md
-  - docs/models/assignmentmode.md
-  - docs/models/availablemodels.md
-  - docs/models/availablemodelsresponse.md
+  - docs/models/attributebasedconfig.md
+  - docs/models/automaticnaming.md
+  - docs/models/basicfeatureextractor.md
+  - docs/models/batchdeletedocumentsv1collectionscollectionidentifierdocumentsbatchdeleterequest.md
+  - docs/models/batchupdatedocumentsv1collectionscollectionidentifierdocumentsbatchputrequest.md
+  - docs/models/blobdetails.md
+  - docs/models/blobmodel.md
+  - docs/models/blobmodelmetadata.md
   - docs/models/boolindexparams.md
-  - docs/models/classificationmatch.md
-  - docs/models/classificationwithfeature.md
-  - docs/models/classifyfeaturesv1entitiestaxonomiestaxonomyclassifypostrequest.md
+  - docs/models/bucketcreaterequest.md
+  - docs/models/bucketcreaterequestmetadata.md
+  - docs/models/bucketresponse.md
+  - docs/models/bucketresponsemetadata.md
+  - docs/models/bucketschemafieldinput.md
+  - docs/models/bucketschemafieldoutput.md
+  - docs/models/bucketschemafieldtype.md
+  - docs/models/bucketschemainput.md
+  - docs/models/bucketschemaoutput.md
+  - docs/models/bucketupdaterequest.md
+  - docs/models/cachestats.md
+  - docs/models/cleanupcachev1collectionscachecleanuppostrequest.md
+  - docs/models/clusteringmethod.md
+  - docs/models/clustertype.md
+  - docs/models/collectioncacheconfiginput.md
+  - docs/models/collectioncacheconfigoutput.md
+  - docs/models/collectionconfig.md
   - docs/models/collectionmodel.md
   - docs/models/collectionmodelmetadata.md
-  - docs/models/collectionresult.md
-  - docs/models/collectionresultmetadata.md
   - docs/models/createapikeyv1organizationsusersuseremailapikeyspostrequest.md
+  - docs/models/createblobrequest.md
+  - docs/models/createblobrequestmetadata.md
+  - docs/models/createbucketv1bucketscreatepostrequest.md
+  - docs/models/createclusterrequest.md
+  - docs/models/createclusterv1clusterspostrequest.md
   - docs/models/createcollectionrequest.md
   - docs/models/createcollectionrequestmetadata.md
-  - docs/models/createcollectionv1collectionspostrequest.md
+  - docs/models/createcollectionv1collectionscreatepostrequest.md
+  - docs/models/createinteractionv1retrieversinteractionspostrequest.md
   - docs/models/createnamespacerequest.md
-  - docs/models/createtaxonomyv1entitiestaxonomiespostrequest.md
+  - docs/models/createobjectrequest.md
+  - docs/models/createobjectrequestmetadata.md
+  - docs/models/createobjectv1bucketsbucketidentifierobjectscreatepostrequest.md
+  - docs/models/createretrieverrequest.md
+  - docs/models/createretrieverrequestmetadata.md
+  - docs/models/createretrieverv1retrieversretrieverspostrequest.md
+  - docs/models/createtaxonomyrequest.md
+  - docs/models/createtaxonomyv1taxonomiespostrequest.md
   - docs/models/datetimeindexparams.md
-  - docs/models/dateusage.md
-  - docs/models/dbmodelpaginationresponse.md
+  - docs/models/defaultparameters.md
   - docs/models/deleteapikeyv1organizationsusersuseremailapikeyskeynamedeleterequest.md
-  - docs/models/deleteassetv1assetsassetiddeleterequest.md
-  - docs/models/deleteclassificationsv1entitiestaxonomiestaxonomyclassificationsclassificationiddeleterequest.md
-  - docs/models/deletecollectionv1collectionscollectiondeleterequest.md
-  - docs/models/deletefeaturev1featuresfeatureiddeleterequest.md
+  - docs/models/deletebucketv1bucketsbucketidentifierdeleterequest.md
+  - docs/models/deletedocumentv1collectionscollectionidentifierdocumentsdocumentiddeleterequest.md
+  - docs/models/deleteinteractionv1retrieversinteractionsinteractioniddeleterequest.md
   - docs/models/deletenamespacev1namespacesnamespacedeleterequest.md
-  - docs/models/deletetaxonomyv1entitiestaxonomiestaxonomydeleterequest.md
+  - docs/models/deleteobjectv1bucketsbucketidentifierobjectsobjectidentifierdeleterequest.md
   - docs/models/deleteuserv1organizationsusersuseremaildeleterequest.md
-  - docs/models/denseembedding.md
   - docs/models/details.md
-  - docs/models/direction.md
-  - docs/models/discoverrequest.md
-  - docs/models/embedding.md
-  - docs/models/embeddingconfig.md
-  - docs/models/embeddingconfigtype.md
-  - docs/models/embeddingrequest.md
-  - docs/models/embeddingresponse.md
-  - docs/models/entitysettings.md
+  - docs/models/documenthandlingconfig.md
+  - docs/models/documentinputhandling.md
+  - docs/models/documentlistresponse.md
+  - docs/models/documentoutputhandling.md
+  - docs/models/documentoutputtype.md
+  - docs/models/documentresponse.md
+  - docs/models/documentresponsemetadata.md
+  - docs/models/documentupdate.md
+  - docs/models/documentupdatemetadata.md
+  - docs/models/enrichmentfield.md
   - docs/models/errordetail.md
   - docs/models/errorresponse.md
-  - docs/models/featureextractionembeddingrequest.md
-  - docs/models/featureoptions.md
-  - docs/models/featureresponse.md
-  - docs/models/featuresmodelpaginationresponse.md
-  - docs/models/featureupdaterequest.md
-  - docs/models/featureupdaterequestmetadata.md
+  - docs/models/executeretrieverv1retrieversretrieversretrieveridexecutepostrequest.md
+  - docs/models/featureextractorconfig.md
+  - docs/models/featureextractordefinition.md
   - docs/models/fieldschema.md
-  - docs/models/filedata.md
   - docs/models/filtercondition.md
+  - docs/models/filteroperator.md
   - docs/models/floatindexparams.md
-  - docs/models/fullassetupdatev1assetsassetidputrequest.md
-  - docs/models/fullfeatureupdatev1featuresfeatureidputrequest.md
+  - docs/models/generativemodels.md
   - docs/models/genericsuccessresponse.md
   - docs/models/geoindexparams.md
-  - docs/models/getassetv1assetsassetidgetrequest.md
-  - docs/models/getassetwithfeaturesv1assetsassetidfeaturesgetrequest.md
-  - docs/models/getcollectionv1collectionscollectiongetrequest.md
-  - docs/models/getfeaturev1featuresfeatureidgetrequest.md
+  - docs/models/getbucketv1bucketsbucketidentifiergetrequest.md
+  - docs/models/getcachestatsv1collectionscachestatsgetrequest.md
+  - docs/models/getcollectionv1collectionscollectionidgetrequest.md
+  - docs/models/getdocumentv1collectionscollectionidentifierdocumentsdocumentidgetrequest.md
+  - docs/models/getfeatureextractorv1featuresextractorsfeatureidgetrequest.md
+  - docs/models/getinteractionv1retrieversinteractionsinteractionidgetrequest.md
   - docs/models/getnamespacev1namespacesnamespacegetrequest.md
+  - docs/models/getobjectv1bucketsbucketidentifierobjectsobjectidentifiergetrequest.md
+  - docs/models/getresearchv1researchgetrequest.md
+  - docs/models/getretrieverstagesv1retrieversstagesgetrequest.md
+  - docs/models/getretrieverv1retrieversretrieversretrieveridgetrequest.md
   - docs/models/gettaskv1taskstaskidgetrequest.md
-  - docs/models/gettaxonomynodev1entitiestaxonomiesnodesnodegetrequest.md
-  - docs/models/gettaxonomyv1entitiestaxonomiestaxonomygetrequest.md
+  - docs/models/getusagerequestmodel.md
   - docs/models/getuserv1organizationsusersuseremailgetrequest.md
-  - docs/models/groupbyoptions.md
-  - docs/models/groupbyoptionsasset.md
-  - docs/models/groupedassetdata.md
+  - docs/models/hdbscanparameters.md
   - docs/models/healthcheckresponse.md
   - docs/models/httpvalidationerror.md
-  - docs/models/imagedescribesettings.md
-  - docs/models/imagedescribesettingsjsonoutput.md
-  - docs/models/imagedetectsettings.md
-  - docs/models/imagereadsettings.md
-  - docs/models/imagereadsettingsjsonoutput.md
-  - docs/models/imagesettings.md
-  - docs/models/ingestimageurlv1ingestimagesurlpostrequest.md
-  - docs/models/ingesttextv1ingesttextpostrequest.md
-  - docs/models/ingestvideourlv1ingestvideosurlpostrequest.md
-  - docs/models/inputtype.md
+  - docs/models/index.md
+  - docs/models/inputs.md
+  - docs/models/inputschema.md
   - docs/models/integerindexparams.md
+  - docs/models/interactionresponse.md
+  - docs/models/interactionresponsemetadata.md
+  - docs/models/interactiontype.md
   - docs/models/internal/globals.md
-  - docs/models/jsonimageoutputsettings.md
-  - docs/models/jsonimageoutputsettingsresponseshape.md
-  - docs/models/jsonoutput.md
-  - docs/models/jsontextoutputsettings.md
-  - docs/models/jsonvideooutputsettings.md
-  - docs/models/jsonvideooutputsettingsresponseshape.md
+  - docs/models/invalidatecachev1collectionscacheinvalidatepostrequest.md
+  - docs/models/invalidationevent.md
+  - docs/models/invalidationstrategy.md
   - docs/models/keywordindexparams.md
   - docs/models/killtaskv1taskstaskiddeleterequest.md
   - docs/models/listactivetasksv1tasksgetrequest.md
-  - docs/models/listassetsrequest.md
-  - docs/models/listassetsresponse.md
-  - docs/models/listassetsv1assetspostrequest.md
-  - docs/models/listclassificationsrequest.md
-  - docs/models/listclassificationsresponse.md
-  - docs/models/listclassificationsv1entitiestaxonomiestaxonomyclassificationspostrequest.md
-  - docs/models/listcollectionsresponse.md
-  - docs/models/listcollectionsv1collectionsgetrequest.md
-  - docs/models/listfeaturesrequest.md
-  - docs/models/listfeaturesresponse.md
-  - docs/models/listfeaturesv1featurespostrequest.md
+  - docs/models/listbucketsrequest.md
+  - docs/models/listbucketsresponse.md
+  - docs/models/listbucketsv1bucketspostrequest.md
+  - docs/models/listdocumentsv1collectionscollectionidentifierdocumentsgetrequest.md
+  - docs/models/listinteractionsv1retrieversinteractionsgetrequest.md
+  - docs/models/listobjectsrequest.md
+  - docs/models/listobjectsresponse.md
+  - docs/models/listobjectsv1bucketsbucketidentifierobjectspostrequest.md
   - docs/models/listtasksresponse.md
-  - docs/models/listtaxonomiesresponse.md
-  - docs/models/listtaxonomiesv1entitiestaxonomiesgetrequest.md
   - docs/models/loc.md
-  - docs/models/logicaloperator.md
-  - docs/models/logodetectsettings.md
+  - docs/models/logicaloperatorinput.md
+  - docs/models/logicaloperatoroutput.md
+  - docs/models/logicaloperatoroutputand.md
+  - docs/models/logicaloperatoroutputnot.md
+  - docs/models/logicaloperatoroutputor.md
   - docs/models/metadata.md
-  - docs/models/modality.md
-  - docs/models/mode.md
-  - docs/models/modeldetails.md
+  - docs/models/multivectorindex.md
   - docs/models/namespaceresponse.md
-  - docs/models/nodeoptions.md
-  - docs/models/nodeupdate.md
-  - docs/models/nor.md
-  - docs/models/operator.md
+  - docs/models/namespaceusage.md
+  - docs/models/namingmethod.md
+  - docs/models/not_.md
+  - docs/models/objectresponse.md
+  - docs/models/objectresponsemetadata.md
   - docs/models/or_.md
   - docs/models/organizationmodel.md
   - docs/models/organizationmodelmetadata.md
-  - docs/models/partialassetupdatev1assetsassetidpatchrequest.md
+  - docs/models/outputschema.md
+  - docs/models/paginationresponse.md
+  - docs/models/parameters.md
+  - docs/models/parameterschema.md
   - docs/models/payloadindexconfig.md
-  - docs/models/payloadindextype.md
   - docs/models/payloadschematype.md
   - docs/models/permission.md
-  - docs/models/processimageurlinput.md
-  - docs/models/processimageurlinputmetadata.md
-  - docs/models/processtextinput.md
-  - docs/models/processtextinputmetadata.md
-  - docs/models/processvideourlinput.md
-  - docs/models/processvideourlinputmetadata.md
-  - docs/models/querysettings.md
-  - docs/models/rerankingoptions.md
-  - docs/models/responseshape.md
-  - docs/models/searchassetsrequest.md
-  - docs/models/searchassetsv1assetssearchpostrequest.md
-  - docs/models/searchfeaturesv1featuressearchpostrequest.md
-  - docs/models/searchfeaturesv1featuressearchpostresponsesearchfeaturesv1featuressearchpost.md
-  - docs/models/searchmodelsearchquery.md
-  - docs/models/searchrequestfeatures.md
+  - docs/models/plan.md
+  - docs/models/recomputestrategy.md
+  - docs/models/requestbody.md
+  - docs/models/resourcetotals.md
+  - docs/models/results.md
+  - docs/models/retrieverbinding.md
+  - docs/models/retrievercacheconfig.md
+  - docs/models/retrievermodel.md
+  - docs/models/retrievermodelmetadata.md
+  - docs/models/retrieverqueryrequest.md
+  - docs/models/retrieverqueryrequestinputs.md
+  - docs/models/retrieverresponse.md
+  - docs/models/searchinteraction.md
+  - docs/models/searchinteractionmetadata.md
   - docs/models/security.md
+  - docs/models/singlelineageentry.md
+  - docs/models/sortdirection.md
   - docs/models/sortoption.md
-  - docs/models/sparseembedding.md
+  - docs/models/sourceconfiginput.md
+  - docs/models/sourceconfigoutput.md
+  - docs/models/sourcetype.md
+  - docs/models/stageconfiginput.md
+  - docs/models/stageconfiginputparameters.md
+  - docs/models/stageconfigoutput.md
+  - docs/models/stageconfigoutputparameters.md
+  - docs/models/stagedefinition.md
+  - docs/models/stagedefinitiondefaultparameters.md
+  - docs/models/stageresponse.md
   - docs/models/taskresponse.md
   - docs/models/taskstatus.md
-  - docs/models/taxonomycreate.md
-  - docs/models/taxonomyextractionconfig.md
-  - docs/models/taxonomymodel.md
-  - docs/models/taxonomynode.md
-  - docs/models/taxonomynodecreate.md
-  - docs/models/taxonomyupdate.md
+  - docs/models/taxonomyapplicationconfig.md
+  - docs/models/taxonomyconfig.md
   - docs/models/textindexparams.md
-  - docs/models/textsettings.md
+  - docs/models/timeseriesdatapoint.md
+  - docs/models/timeseriesusage.md
   - docs/models/tokenizertype.md
   - docs/models/type.md
   - docs/models/updateapikeyv1organizationsusersuseremailapikeyskeynamepatchrequest.md
-  - docs/models/updateassetrequest.md
-  - docs/models/updateassetrequestmetadata.md
-  - docs/models/updatecollectionv1collectionscollectionputrequest.md
+  - docs/models/updatebucketv1bucketsbucketidentifierputrequest.md
+  - docs/models/updatedocumentv1collectionscollectionidentifierdocumentsdocumentidputrequest.md
   - docs/models/updatenamespacerequest.md
   - docs/models/updatenamespacev1namespacesnamespaceputrequest.md
-  - docs/models/updatenodev1entitiestaxonomiesnodesnodepatchrequest.md
-  - docs/models/updatetaxonomyv1entitiestaxonomiestaxonomypatchrequest.md
-  - docs/models/usage.md
+  - docs/models/updateobjectrequest.md
+  - docs/models/updateobjectrequestmetadata.md
+  - docs/models/updateobjectv1bucketsbucketidentifierobjectsobjectidentifierputrequest.md
+  - docs/models/usageresponse.md
+  - docs/models/usagesummary.md
+  - docs/models/usagetimerange.md
   - docs/models/usermodelinput.md
   - docs/models/usermodelinputmetadata.md
   - docs/models/usermodeloutput.md
@@ -221,210 +245,230 @@ generatedFiles:
   - docs/models/utils/retryconfig.md
   - docs/models/uuidindexparams.md
   - docs/models/validationerror.md
-  - docs/models/vectormodel.md
+  - docs/models/vectorbasedconfig.md
+  - docs/models/vectorindex.md
+  - docs/models/vectorindexdefinition.md
   - docs/models/vectortype.md
-  - docs/models/videodescribesettings.md
-  - docs/models/videodescribesettingsjsonoutput.md
-  - docs/models/videodetectsettings.md
-  - docs/models/videoreadsettings.md
-  - docs/models/videosettings.md
-  - docs/models/videotranscriptionsettings.md
-  - docs/models/videotranscriptionsettingsjsonoutput.md
-  - docs/sdks/assets/README.md
+  - docs/sdks/bucketobjects/README.md
+  - docs/sdks/buckets/README.md
+  - docs/sdks/clusters/README.md
+  - docs/sdks/collectioncache/README.md
+  - docs/sdks/collectiondocuments/README.md
   - docs/sdks/collections/README.md
-  - docs/sdks/featureextractors/README.md
   - docs/sdks/features/README.md
   - docs/sdks/health/README.md
-  - docs/sdks/ingestassets/README.md
   - docs/sdks/mixpeek/README.md
   - docs/sdks/namespaces/README.md
+  - docs/sdks/organizationnotifications/README.md
   - docs/sdks/organizations/README.md
+  - docs/sdks/organizationsusage/README.md
+  - docs/sdks/research/README.md
+  - docs/sdks/retrieverinteractions/README.md
+  - docs/sdks/retrievers/README.md
+  - docs/sdks/retrieverstages/README.md
   - docs/sdks/tasks/README.md
   - docs/sdks/taxonomies/README.md
-  - docs/sdks/taxonomyentities/README.md
   - docs/sdks/users/README.md
   - poetry.toml
   - py.typed
   - pylintrc
   - pyproject.toml
-  - scripts/prepare-readme.py
+  - scripts/prepare_readme.py
   - scripts/publish.sh
   - src/mixpeek/__init__.py
   - src/mixpeek/_hooks/__init__.py
   - src/mixpeek/_hooks/sdkhooks.py
   - src/mixpeek/_hooks/types.py
   - src/mixpeek/_version.py
-  - src/mixpeek/assets.py
   - src/mixpeek/basesdk.py
+  - src/mixpeek/bucket_objects.py
+  - src/mixpeek/buckets.py
+  - src/mixpeek/clusters.py
+  - src/mixpeek/collection_cache.py
+  - src/mixpeek/collection_documents.py
   - src/mixpeek/collections.py
-  - src/mixpeek/featureextractors.py
   - src/mixpeek/features.py
   - src/mixpeek/health.py
   - src/mixpeek/httpclient.py
-  - src/mixpeek/ingestassets.py
   - src/mixpeek/models/__init__.py
-  - src/mixpeek/models/actionusage.py
+  - src/mixpeek/models/aggregationtype.py
   - src/mixpeek/models/apierror.py
   - src/mixpeek/models/apikey.py
   - src/mixpeek/models/apikeyupdate.py
-  - src/mixpeek/models/assetfeatures.py
-  - src/mixpeek/models/assetresponse.py
-  - src/mixpeek/models/assets_model_searchquery.py
-  - src/mixpeek/models/assetupdate.py
-  - src/mixpeek/models/assignmentconfig.py
-  - src/mixpeek/models/assignmentmode.py
-  - src/mixpeek/models/availablemodels.py
-  - src/mixpeek/models/availablemodelsresponse.py
+  - src/mixpeek/models/attributebasedconfig.py
+  - src/mixpeek/models/automaticnaming.py
+  - src/mixpeek/models/basicfeatureextractor.py
+  - src/mixpeek/models/batch_delete_documents_v1_collections_collection_identifier_documents_batch_deleteop.py
+  - src/mixpeek/models/batch_update_documents_v1_collections_collection_identifier_documents_batch_putop.py
+  - src/mixpeek/models/blobdetails.py
+  - src/mixpeek/models/blobmodel.py
   - src/mixpeek/models/boolindexparams.py
-  - src/mixpeek/models/classificationmatch.py
-  - src/mixpeek/models/classificationwithfeature.py
-  - src/mixpeek/models/classify_features_v1_entities_taxonomies_taxonomy_classify_postop.py
+  - src/mixpeek/models/bucketcreaterequest.py
+  - src/mixpeek/models/bucketresponse.py
+  - src/mixpeek/models/bucketschema_input.py
+  - src/mixpeek/models/bucketschema_output.py
+  - src/mixpeek/models/bucketschemafield_input.py
+  - src/mixpeek/models/bucketschemafield_output.py
+  - src/mixpeek/models/bucketschemafieldtype.py
+  - src/mixpeek/models/bucketupdaterequest.py
+  - src/mixpeek/models/cachestats.py
+  - src/mixpeek/models/cleanup_cache_v1_collections_cache_cleanup_postop.py
+  - src/mixpeek/models/clusteringmethod.py
+  - src/mixpeek/models/clustertype.py
+  - src/mixpeek/models/collectioncacheconfig_input.py
+  - src/mixpeek/models/collectioncacheconfig_output.py
+  - src/mixpeek/models/collectionconfig.py
   - src/mixpeek/models/collectionmodel.py
-  - src/mixpeek/models/collectionresult.py
   - src/mixpeek/models/create_api_key_v1_organizations_users_user_email_api_keys_postop.py
-  - src/mixpeek/models/create_collection_v1_collections_postop.py
-  - src/mixpeek/models/create_taxonomy_v1_entities_taxonomies_postop.py
+  - src/mixpeek/models/create_bucket_v1_buckets_create_postop.py
+  - src/mixpeek/models/create_cluster_v1_clusters_postop.py
+  - src/mixpeek/models/create_collection_v1_collections_create_postop.py
+  - src/mixpeek/models/create_interaction_v1_retrievers_interactions_postop.py
+  - src/mixpeek/models/create_object_v1_buckets_bucket_identifier_objects_create_postop.py
+  - src/mixpeek/models/create_retriever_v1_retrievers_retrievers_postop.py
+  - src/mixpeek/models/create_taxonomy_v1_taxonomies_postop.py
+  - src/mixpeek/models/createblobrequest.py
+  - src/mixpeek/models/createclusterrequest.py
   - src/mixpeek/models/createcollectionrequest.py
   - src/mixpeek/models/createnamespacerequest.py
+  - src/mixpeek/models/createobjectrequest.py
+  - src/mixpeek/models/createretrieverrequest.py
+  - src/mixpeek/models/createtaxonomyrequest.py
   - src/mixpeek/models/datetimeindexparams.py
-  - src/mixpeek/models/dateusage.py
-  - src/mixpeek/models/db_model_paginationresponse.py
   - src/mixpeek/models/delete_api_key_v1_organizations_users_user_email_api_keys_key_name_deleteop.py
-  - src/mixpeek/models/delete_asset_v1_assets_asset_id_deleteop.py
-  - src/mixpeek/models/delete_classifications_v1_entities_taxonomies_taxonomy_classifications_classification_id_deleteop.py
-  - src/mixpeek/models/delete_collection_v1_collections_collection_deleteop.py
-  - src/mixpeek/models/delete_feature_v1_features_feature_id_deleteop.py
+  - src/mixpeek/models/delete_bucket_v1_buckets_bucket_identifier_deleteop.py
+  - src/mixpeek/models/delete_document_v1_collections_collection_identifier_documents_document_id_deleteop.py
+  - src/mixpeek/models/delete_interaction_v1_retrievers_interactions_interaction_id_deleteop.py
   - src/mixpeek/models/delete_namespace_v1_namespaces_namespace_deleteop.py
-  - src/mixpeek/models/delete_taxonomy_v1_entities_taxonomies_taxonomy_deleteop.py
+  - src/mixpeek/models/delete_object_v1_buckets_bucket_identifier_objects_object_identifier_deleteop.py
   - src/mixpeek/models/delete_user_v1_organizations_users_user_email_deleteop.py
-  - src/mixpeek/models/denseembedding.py
-  - src/mixpeek/models/discoverrequest.py
-  - src/mixpeek/models/embeddingconfig.py
-  - src/mixpeek/models/embeddingrequest.py
-  - src/mixpeek/models/embeddingresponse.py
-  - src/mixpeek/models/entitysettings.py
+  - src/mixpeek/models/documenthandlingconfig.py
+  - src/mixpeek/models/documentinputhandling.py
+  - src/mixpeek/models/documentlistresponse.py
+  - src/mixpeek/models/documentoutputhandling.py
+  - src/mixpeek/models/documentoutputtype.py
+  - src/mixpeek/models/documentresponse.py
+  - src/mixpeek/models/documentupdate.py
+  - src/mixpeek/models/enrichmentfield.py
   - src/mixpeek/models/errordetail.py
   - src/mixpeek/models/errorresponse.py
-  - src/mixpeek/models/featureextractionembeddingrequest.py
-  - src/mixpeek/models/featureoptions.py
-  - src/mixpeek/models/featureresponse.py
-  - src/mixpeek/models/features_model_paginationresponse.py
-  - src/mixpeek/models/featureupdaterequest.py
+  - src/mixpeek/models/execute_retriever_v1_retrievers_retrievers_retriever_id_execute_postop.py
+  - src/mixpeek/models/featureextractorconfig.py
+  - src/mixpeek/models/featureextractordefinition.py
   - src/mixpeek/models/filtercondition.py
+  - src/mixpeek/models/filteroperator.py
   - src/mixpeek/models/floatindexparams.py
-  - src/mixpeek/models/full_asset_update_v1_assets_asset_id_putop.py
-  - src/mixpeek/models/full_feature_update_v1_features_feature_id_putop.py
+  - src/mixpeek/models/generativemodels.py
   - src/mixpeek/models/genericsuccessresponse.py
   - src/mixpeek/models/geoindexparams.py
-  - src/mixpeek/models/get_asset_v1_assets_asset_id_getop.py
-  - src/mixpeek/models/get_asset_with_features_v1_assets_asset_id_features_getop.py
-  - src/mixpeek/models/get_collection_v1_collections_collection_getop.py
-  - src/mixpeek/models/get_feature_v1_features_feature_id_getop.py
+  - src/mixpeek/models/get_bucket_v1_buckets_bucket_identifier_getop.py
+  - src/mixpeek/models/get_cache_stats_v1_collections_cache_stats_getop.py
+  - src/mixpeek/models/get_collection_v1_collections_collection_id_getop.py
+  - src/mixpeek/models/get_document_v1_collections_collection_identifier_documents_document_id_getop.py
+  - src/mixpeek/models/get_feature_extractor_v1_features_extractors_feature_id_getop.py
+  - src/mixpeek/models/get_interaction_v1_retrievers_interactions_interaction_id_getop.py
   - src/mixpeek/models/get_namespace_v1_namespaces_namespace_getop.py
+  - src/mixpeek/models/get_object_v1_buckets_bucket_identifier_objects_object_identifier_getop.py
+  - src/mixpeek/models/get_research_v1_research_getop.py
+  - src/mixpeek/models/get_retriever_stages_v1_retrievers_stages_getop.py
+  - src/mixpeek/models/get_retriever_v1_retrievers_retrievers_retriever_id_getop.py
   - src/mixpeek/models/get_task_v1_tasks_task_id_getop.py
-  - src/mixpeek/models/get_taxonomy_node_v1_entities_taxonomies_nodes_node_getop.py
-  - src/mixpeek/models/get_taxonomy_v1_entities_taxonomies_taxonomy_getop.py
   - src/mixpeek/models/get_user_v1_organizations_users_user_email_getop.py
-  - src/mixpeek/models/groupbyoptions.py
-  - src/mixpeek/models/groupbyoptionsasset.py
-  - src/mixpeek/models/groupedassetdata.py
+  - src/mixpeek/models/getusagerequestmodel.py
+  - src/mixpeek/models/hdbscanparameters.py
   - src/mixpeek/models/healthcheckresponse.py
   - src/mixpeek/models/httpvalidationerror.py
-  - src/mixpeek/models/imagedescribesettings.py
-  - src/mixpeek/models/imagedetectsettings.py
-  - src/mixpeek/models/imagereadsettings.py
-  - src/mixpeek/models/imagesettings.py
-  - src/mixpeek/models/ingest_image_url_v1_ingest_images_url_postop.py
-  - src/mixpeek/models/ingest_text_v1_ingest_text_postop.py
-  - src/mixpeek/models/ingest_video_url_v1_ingest_videos_url_postop.py
-  - src/mixpeek/models/inputtype.py
   - src/mixpeek/models/integerindexparams.py
+  - src/mixpeek/models/interactionresponse.py
+  - src/mixpeek/models/interactiontype.py
   - src/mixpeek/models/internal/__init__.py
   - src/mixpeek/models/internal/globals.py
-  - src/mixpeek/models/jsonimageoutputsettings.py
-  - src/mixpeek/models/jsontextoutputsettings.py
-  - src/mixpeek/models/jsonvideooutputsettings.py
+  - src/mixpeek/models/invalidate_cache_v1_collections_cache_invalidate_postop.py
+  - src/mixpeek/models/invalidationevent.py
+  - src/mixpeek/models/invalidationstrategy.py
   - src/mixpeek/models/keywordindexparams.py
   - src/mixpeek/models/kill_task_v1_tasks_task_id_deleteop.py
   - src/mixpeek/models/list_active_tasks_v1_tasks_getop.py
-  - src/mixpeek/models/list_assets_v1_assets_postop.py
-  - src/mixpeek/models/list_classifications_v1_entities_taxonomies_taxonomy_classifications_postop.py
-  - src/mixpeek/models/list_collections_v1_collections_getop.py
-  - src/mixpeek/models/list_features_v1_features_postop.py
-  - src/mixpeek/models/list_taxonomies_v1_entities_taxonomies_getop.py
-  - src/mixpeek/models/listassetsrequest.py
-  - src/mixpeek/models/listassetsresponse.py
-  - src/mixpeek/models/listclassificationsrequest.py
-  - src/mixpeek/models/listclassificationsresponse.py
-  - src/mixpeek/models/listcollectionsresponse.py
-  - src/mixpeek/models/listfeaturesrequest.py
-  - src/mixpeek/models/listfeaturesresponse.py
+  - src/mixpeek/models/list_buckets_v1_buckets_postop.py
+  - src/mixpeek/models/list_documents_v1_collections_collection_identifier_documents_getop.py
+  - src/mixpeek/models/list_interactions_v1_retrievers_interactions_getop.py
+  - src/mixpeek/models/list_objects_v1_buckets_bucket_identifier_objects_postop.py
+  - src/mixpeek/models/listbucketsrequest.py
+  - src/mixpeek/models/listbucketsresponse.py
+  - src/mixpeek/models/listobjectsrequest.py
+  - src/mixpeek/models/listobjectsresponse.py
   - src/mixpeek/models/listtasksresponse.py
-  - src/mixpeek/models/listtaxonomiesresponse.py
-  - src/mixpeek/models/logicaloperator.py
-  - src/mixpeek/models/logodetectsettings.py
-  - src/mixpeek/models/modality.py
-  - src/mixpeek/models/modeldetails.py
+  - src/mixpeek/models/logicaloperator_input.py
+  - src/mixpeek/models/logicaloperator_output.py
+  - src/mixpeek/models/multivectorindex.py
   - src/mixpeek/models/namespaceresponse.py
-  - src/mixpeek/models/nodeoptions.py
-  - src/mixpeek/models/nodeupdate.py
+  - src/mixpeek/models/namespaceusage.py
+  - src/mixpeek/models/namingmethod.py
+  - src/mixpeek/models/objectresponse.py
   - src/mixpeek/models/organizationmodel.py
-  - src/mixpeek/models/partial_asset_update_v1_assets_asset_id_patchop.py
+  - src/mixpeek/models/paginationresponse.py
   - src/mixpeek/models/payloadindexconfig.py
-  - src/mixpeek/models/payloadindextype.py
   - src/mixpeek/models/payloadschematype.py
   - src/mixpeek/models/permission.py
-  - src/mixpeek/models/processimageurlinput.py
-  - src/mixpeek/models/processtextinput.py
-  - src/mixpeek/models/processvideourlinput.py
-  - src/mixpeek/models/querysettings.py
-  - src/mixpeek/models/rerankingoptions.py
-  - src/mixpeek/models/search_assets_v1_assets_search_postop.py
-  - src/mixpeek/models/search_features_v1_features_search_postop.py
-  - src/mixpeek/models/search_model_searchquery.py
-  - src/mixpeek/models/searchassetsrequest.py
-  - src/mixpeek/models/searchrequestfeatures.py
+  - src/mixpeek/models/plan.py
+  - src/mixpeek/models/recomputestrategy.py
+  - src/mixpeek/models/resourcetotals.py
+  - src/mixpeek/models/retrieverbinding.py
+  - src/mixpeek/models/retrievercacheconfig.py
+  - src/mixpeek/models/retrievermodel.py
+  - src/mixpeek/models/retrieverqueryrequest.py
+  - src/mixpeek/models/retrieverresponse.py
+  - src/mixpeek/models/searchinteraction.py
   - src/mixpeek/models/security.py
+  - src/mixpeek/models/singlelineageentry.py
+  - src/mixpeek/models/sortdirection.py
   - src/mixpeek/models/sortoption.py
-  - src/mixpeek/models/sparseembedding.py
+  - src/mixpeek/models/sourceconfig_input.py
+  - src/mixpeek/models/sourceconfig_output.py
+  - src/mixpeek/models/sourcetype.py
+  - src/mixpeek/models/stageconfig_input.py
+  - src/mixpeek/models/stageconfig_output.py
+  - src/mixpeek/models/stagedefinition.py
+  - src/mixpeek/models/stageresponse.py
   - src/mixpeek/models/taskresponse.py
   - src/mixpeek/models/taskstatus.py
-  - src/mixpeek/models/taxonomycreate.py
-  - src/mixpeek/models/taxonomyextractionconfig.py
-  - src/mixpeek/models/taxonomymodel.py
-  - src/mixpeek/models/taxonomynode.py
-  - src/mixpeek/models/taxonomynodecreate.py
-  - src/mixpeek/models/taxonomyupdate.py
+  - src/mixpeek/models/taxonomyapplicationconfig.py
+  - src/mixpeek/models/taxonomyconfig.py
   - src/mixpeek/models/textindexparams.py
-  - src/mixpeek/models/textsettings.py
+  - src/mixpeek/models/timeseriesdatapoint.py
+  - src/mixpeek/models/timeseriesusage.py
   - src/mixpeek/models/tokenizertype.py
   - src/mixpeek/models/update_api_key_v1_organizations_users_user_email_api_keys_key_name_patchop.py
-  - src/mixpeek/models/update_collection_v1_collections_collection_putop.py
+  - src/mixpeek/models/update_bucket_v1_buckets_bucket_identifier_putop.py
+  - src/mixpeek/models/update_document_v1_collections_collection_identifier_documents_document_id_putop.py
   - src/mixpeek/models/update_namespace_v1_namespaces_namespace_putop.py
-  - src/mixpeek/models/update_node_v1_entities_taxonomies_nodes_node_patchop.py
-  - src/mixpeek/models/update_taxonomy_v1_entities_taxonomies_taxonomy_patchop.py
-  - src/mixpeek/models/updateassetrequest.py
+  - src/mixpeek/models/update_object_v1_buckets_bucket_identifier_objects_object_identifier_putop.py
   - src/mixpeek/models/updatenamespacerequest.py
-  - src/mixpeek/models/usage.py
+  - src/mixpeek/models/updateobjectrequest.py
+  - src/mixpeek/models/usageresponse.py
+  - src/mixpeek/models/usagesummary.py
+  - src/mixpeek/models/usagetimerange.py
   - src/mixpeek/models/usermodel_input.py
   - src/mixpeek/models/usermodel_output.py
   - src/mixpeek/models/uuidindexparams.py
   - src/mixpeek/models/validationerror.py
-  - src/mixpeek/models/vectormodel.py
+  - src/mixpeek/models/vectorbasedconfig.py
+  - src/mixpeek/models/vectorindex.py
+  - src/mixpeek/models/vectorindexdefinition.py
   - src/mixpeek/models/vectortype.py
-  - src/mixpeek/models/videodescribesettings.py
-  - src/mixpeek/models/videodetectsettings.py
-  - src/mixpeek/models/videoreadsettings.py
-  - src/mixpeek/models/videosettings.py
-  - src/mixpeek/models/videotranscriptionsettings.py
   - src/mixpeek/namespaces.py
+  - src/mixpeek/organization_notifications.py
   - src/mixpeek/organizations.py
+  - src/mixpeek/organizations_usage.py
   - src/mixpeek/py.typed
+  - src/mixpeek/research.py
+  - src/mixpeek/retriever_interactions.py
+  - src/mixpeek/retriever_stages.py
+  - src/mixpeek/retrievers.py
   - src/mixpeek/sdk.py
   - src/mixpeek/sdkconfiguration.py
   - src/mixpeek/tasks.py
   - src/mixpeek/taxonomies.py
-  - src/mixpeek/taxonomyentities.py
   - src/mixpeek/types/__init__.py
   - src/mixpeek/types/basemodel.py
   - src/mixpeek/users.py
@@ -455,79 +499,24 @@ examples:
         "200":
           application/json: {"organization_name": "<value>", "account_type": "free", "credit_count": 1000}
         "400":
-          application/json: {"success": false, "status": 441424, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 700347, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 252499, "error": {"message": "<value>", "type": "<value>"}}
-  get_usage_v1_organizations_usage_get:
-    speakeasy-default-get-usage-v1-organizations-usage-get:
-      responses:
-        "200":
-          application/json: {"total_credits": 998093, "dates": [{"date": "2024-10-04", "credits": 106421, "actions": [{"action": "<value>", "credits": 10756}, {"action": "<value>", "credits": 835779}, {"action": "<value>", "credits": 414089}]}]}
-        "400":
-          application/json: {"success": false, "status": 606141, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 939273, "error": {"message": "<value>", "type": "<value>"}}
-  get_user_v1_organizations_users__user_email__get:
-    speakeasy-default-get-user-v1-organizations-users-user-email-get:
-      parameters:
-        path:
-          user_email: "<value>"
-      responses:
-        "200":
-          application/json: {"email": "Gilberto37@hotmail.com"}
-        "400":
-          application/json: {"success": false, "status": 946032, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 345757, "error": {"message": "<value>", "type": "<value>"}}
-  delete_user_v1_organizations_users__user_email__delete:
-    speakeasy-default-delete-user-v1-organizations-users-user-email-delete:
-      parameters:
-        path:
-          user_email: "<value>"
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"success": false, "status": 234836, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 330067, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 558834, "error": {"message": "<value>", "type": "<value>"}}
   add_user_v1_organizations_users_post:
     speakeasy-default-add-user-v1-organizations-users-post:
       requestBody:
-        application/json: {"email": "Wendell_Larson94@hotmail.com"}
+        application/json: {"email": "Caterina_Bartell@yahoo.com"}
       responses:
         "200":
-          application/json: {"email": "Shakira.Feest@hotmail.com"}
+          application/json: {"email": "Kaleigh.Hackett61@gmail.com"}
         "400":
-          application/json: {"success": false, "status": 274044, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 798238, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 980189, "error": {"message": "<value>", "type": "<value>"}}
-  create_api_key_v1_organizations_users__user_email__api_keys_post:
-    speakeasy-default-create-api-key-v1-organizations-users-user-email-api-keys-post:
-      parameters:
-        path:
-          user_email: "<value>"
-        query:
-          key_name: "default"
-      responses:
-        "200":
-          application/json: {}
-        "400":
-          application/json: {"success": false, "status": 834061, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 801493, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 905335, "error": {"message": "<value>", "type": "<value>"}}
   delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete:
     speakeasy-default-delete-api-key-v1-organizations-users-user-email-api-keys-key-name-delete:
       parameters:
@@ -538,11 +527,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"success": false, "status": 235068, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 98556, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 711814, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 791859, "error": {"message": "<value>", "type": "<value>"}}
   update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch:
     speakeasy-default-update-api-key-v1-organizations-users-user-email-api-keys-key-name-patch:
       parameters:
@@ -555,49 +544,115 @@ examples:
         "200":
           application/json: {}
         "400":
-          application/json: {"success": false, "status": 490703, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 867905, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 184222, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 617365, "error": {"message": "<value>", "type": "<value>"}}
+  get_user_v1_organizations_users__user_email__get:
+    speakeasy-default-get-user-v1-organizations-users-user-email-get:
+      parameters:
+        path:
+          user_email: "<value>"
+      responses:
+        "200":
+          application/json: {"email": "Keeley_Lebsack@hotmail.com"}
+        "400":
+          application/json: {"success": false, "status": 262795, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 213457, "error": {"message": "<value>", "type": "<value>"}}
+  delete_user_v1_organizations_users__user_email__delete:
+    speakeasy-default-delete-user-v1-organizations-users-user-email-delete:
+      parameters:
+        path:
+          user_email: "<value>"
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"success": false, "status": 545907, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 698486, "error": {"message": "<value>", "type": "<value>"}}
+  create_api_key_v1_organizations_users__user_email__api_keys_post:
+    speakeasy-default-create-api-key-v1-organizations-users-user-email-api-keys-post:
+      parameters:
+        path:
+          user_email: "<value>"
+        query:
+          key_name: "default"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"success": false, "status": 909677, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 124948, "error": {"message": "<value>", "type": "<value>"}}
+  get_usage_v1_organizations_usage_post:
+    speakeasy-default-get-usage-v1-organizations-usage-post:
+      responses:
+        "200":
+          application/json: {"usage_summary": {"api_calls": 664549, "storage_used_gb": 3496.28, "documents_processed": 382014, "active_collections": 482442, "credits_used": 444376}, "namespace_usage": [], "billing_period_end": "2025-02-05T01:26:54.669Z", "organization_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 398536, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 461334, "error": {"message": "<value>", "type": "<value>"}}
+  send_notification_v1_organizations_notifications_send_post:
+    speakeasy-default-send-notification-v1-organizations-notifications-send-post:
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"success": false, "status": 731694, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 890292, "error": {"message": "<value>", "type": "<value>"}}
   create_namespace_v1_namespaces_post:
     speakeasy-default-create-namespace-v1-namespaces-post:
       requestBody:
-        application/json: {"namespace_name": "spotify_playlists_dev", "embedding_models": ["image", "multimodal", "text", "keyword"], "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
+        application/json: {"namespace_name": "spotify_playlists_dev", "description": "This namespace contains playlists from Spotify", "feature_extractors": [{"feature_extractor_name": "text-extractor", "description": "Text extractor", "supported_input_types": ["text"], "version": "1.0.0"}], "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": true}}]}
       responses:
         "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>"], "payload_indexes": ["<value>", "<value>"]}
         "400":
-          application/json: {"success": false, "status": 97273, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 417458, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 970213, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 134365, "error": {"message": "<value>", "type": "<value>"}}
   list_namespaces_v1_namespaces_get:
     speakeasy-default-list-namespaces-v1-namespaces-get:
       responses:
         "200":
-          application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>", "<value>"], "payload_indexes": []}]
+          application/json: [{"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}, {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": [], "payload_indexes": []}, {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": [], "payload_indexes": ["<value>", "<value>"]}]
         "400":
-          application/json: {"success": false, "status": 82280, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 639387, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 237137, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 17577, "error": {"message": "<value>", "type": "<value>"}}
   delete_namespace_v1_namespaces__namespace__delete:
     speakeasy-default-delete-namespace-v1-namespaces-namespace-delete:
       parameters:
         path:
-          namespace: "ns_1234567890"
+          namespace: "<value>"
       responses:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"success": false, "status": 469804, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 545907, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 371711, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 698486, "error": {"message": "<value>", "type": "<value>"}}
   update_namespace_v1_namespaces__namespace__put:
     speakeasy-default-update-namespace-v1-namespaces-namespace-put:
       parameters:
@@ -607,13 +662,13 @@ examples:
         application/json: {"namespace_name": "spotify_playlists_dev", "payload_indexes": [{"field_name": "metadata.title", "type": "text", "field_schema": {"type": "text", "tokenizer": "word", "min_token_len": 2, "max_token_len": 15, "lowercase": true}}, {"field_name": "metadata.description", "type": "keyword", "field_schema": {"type": "keyword", "is_tenant": false}}]}
       responses:
         "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>", "<value>"], "payload_indexes": []}
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}
         "400":
-          application/json: {"success": false, "status": 366934, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 627690, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 7586, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 488852, "error": {"message": "<value>", "type": "<value>"}}
   get_namespace_v1_namespaces__namespace__get:
     speakeasy-default-get-namespace-v1-namespaces-namespace-get:
       parameters:
@@ -621,502 +676,481 @@ examples:
           namespace: "ns_1234567890"
       responses:
         "200":
-          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>", "<value>"]}
+          application/json: {"namespace_id": "<id>", "namespace_name": "<value>", "embedding_models": ["<value>", "<value>"], "payload_indexes": ["<value>", "<value>"]}
         "400":
-          application/json: {"success": false, "status": 449425, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 969961, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 56837, "error": {"message": "<value>", "type": "<value>"}}
-  list_available_models_v1_namespaces_models_get:
-    speakeasy-default-list-available-models-v1-namespaces-models-get:
+          application/json: {"success": false, "status": 458049, "error": {"message": "<value>", "type": "<value>"}}
+  create_bucket_v1_buckets_create_post:
+    speakeasy-default-create-bucket-v1-buckets-create-post:
+      requestBody:
+        application/json: {"bucket_name": "user_profiles", "description": "Bucket for storing user profile information", "bucket_schema": {"properties": {}}}
       responses:
         "200":
-          application/json: {"embedding_models": {"multimodal": {"supported_modalities": ["text", "image"], "vector_type": "dense", "size": 512}, "text": {"supported_modalities": ["text", "image"], "vector_type": "dense", "size": 512}}, "payload_indexes": [{"type": "keyword"}, {"type": "integer"}, {"type": "text"}]}
+          application/json: {"bucket_name": "<value>", "bucket_schema": {"properties": {"key": {"type": "text"}, "key1": {"type": "video"}, "key2": {"type": "spreadsheet"}}}, "object_count": 488790, "total_size_bytes": 147637}
         "400":
-          application/json: {"success": false, "status": 700624, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 601966, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 623763, "error": {"message": "<value>", "type": "<value>"}}
-  get_feature_v1_features__feature_id__get:
-    speakeasy-default-get-feature-v1-features-feature-id-get:
+          application/json: {"success": false, "status": 624337, "error": {"message": "<value>", "type": "<value>"}}
+  get_bucket_v1_buckets__bucket_identifier__get:
+    speakeasy-default-get-bucket-v1-buckets-bucket-identifier-get:
       parameters:
         path:
-          feature_id: "<id>"
+          bucket_identifier: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"bucket_name": "<value>", "bucket_schema": {"properties": {"key": {"type": "audio"}, "key1": {"type": "int8_vector"}, "key2": {"type": "array"}}}, "object_count": 354379, "total_size_bytes": 849860}
+        "400":
+          application/json: {"success": false, "status": 586233, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 804001, "error": {"message": "<value>", "type": "<value>"}}
+  update_bucket_v1_buckets__bucket_identifier__put:
+    speakeasy-default-update-bucket-v1-buckets-bucket-identifier-put:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
+        header: {}
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"bucket_name": "<value>", "bucket_schema": {"properties": {"key": {"type": "array"}, "key1": {"type": "number"}}}, "object_count": 561877, "total_size_bytes": 272095}
+        "400":
+          application/json: {"success": false, "status": 189993, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 891765, "error": {"message": "<value>", "type": "<value>"}}
+  delete_bucket_v1_buckets__bucket_identifier__delete:
+    speakeasy-default-delete-bucket-v1-buckets-bucket-identifier-delete:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 842183, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 492216, "error": {"message": "<value>", "type": "<value>"}}
+  list_buckets_v1_buckets_post:
+    speakeasy-default-list-buckets-v1-buckets-post:
+      requestBody:
+        application/json: {"filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "sort": {"field": "created_at"}}
+      responses:
+        "200":
+          application/json: {"results": [{"bucket_name": "<value>", "bucket_schema": {"properties": {"key": {"type": "image"}, "key1": {"type": "presentation"}, "key2": {"type": "spreadsheet"}}}, "object_count": 341492, "total_size_bytes": 377004}, {"bucket_name": "<value>", "bucket_schema": {"properties": {"key": {"type": "document"}}}, "object_count": 779729, "total_size_bytes": 187609}], "pagination": {"total": 241664, "page": 928334, "page_size": 436642, "total_pages": 592783, "next_page": "<value>", "previous_page": "<value>"}}
+        "400":
+          application/json: {"success": false, "status": 935831, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 300560, "error": {"message": "<value>", "type": "<value>"}}
+  create_object_v1_buckets__bucket_identifier__objects_create_post:
+    speakeasy-default-create-object-v1-buckets-bucket-identifier-objects-create-post:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"key_prefix": "/contract-2024", "blobs": [{"property": "content", "key_prefix": "/content.pdf", "type": "string", "data": {"num_pages": 5, "title": "Service Agreement 2024"}}], "skip_duplicates": false}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 560225, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 494443, "error": {"message": "<value>", "type": "<value>"}}
+  get_object_v1_buckets__bucket_identifier__objects__object_identifier__get:
+    speakeasy-default-get-object-v1-buckets-bucket-identifier-objects-object-identifier-get:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
+          object_identifier: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"object_id": "obj_a1b2c3d4e5f6", "bucket_id": "bkt_12345678", "task_id": "task_87654321", "key": "/documents/contract-2024", "blobs": [{"property": "content", "type": "pdf", "data": {"num_pages": 5, "title": "Service Agreement 2024"}, "details": {"filename": "agreement.pdf", "size_bytes": 1245678, "mime_type": "application/pdf", "hash": "sha256:a1b2c3d4e5f6...", "s3_object_key": "tenant123/object456/content.pdf"}, "status": "CANCELLED"}], "status": "UPLOADING", "metadata": {}, "created_by": "user_12345", "created_at": "2024-06-01T10:30:00Z", "updated_at": "2024-06-01T10:35:12Z"}
+        "400":
+          application/json: {"success": false, "status": 388769, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 39002, "error": {"message": "<value>", "type": "<value>"}}
+  update_object_v1_buckets__bucket_identifier__objects__object_identifier__put:
+    speakeasy-default-update-object-v1-buckets-bucket-identifier-objects-object-identifier-put:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
+          object_identifier: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"key_prefix": "/updated-documents", "blobs": [{"property": "content", "key_prefix": "/contract-2024-revised", "type": "integer", "data": {"num_pages": 6, "title": "Revised Service Agreement 2024"}}]}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 627534, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 453624, "error": {"message": "<value>", "type": "<value>"}}
+  delete_object_v1_buckets__bucket_identifier__objects__object_identifier__delete:
+    speakeasy-default-delete-object-v1-buckets-bucket-identifier-objects-object-identifier-delete:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
+          object_identifier: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 562359, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 63633, "error": {"message": "<value>", "type": "<value>"}}
+  list_objects_v1_buckets__bucket_identifier__objects_post:
+    speakeasy-default-list-objects-v1-buckets-bucket-identifier-objects-post:
+      parameters:
+        path:
+          bucket_identifier: "<value>"
         query: {}
         header: {}
-      responses:
-        "200":
-          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
-        "400":
-          application/json: {"success": false, "status": 80595, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 48222, "error": {"message": "<value>", "type": "<value>"}}
-  delete_feature_v1_features__feature_id__delete:
-    speakeasy-default-delete-feature-v1-features-feature-id-delete:
-      parameters:
-        path:
-          feature_id: "<id>"
-        header: {}
-      responses:
-        "200":
-          application/json: "<value>"
-        "400":
-          application/json: {"success": false, "status": 763083, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 626532, "error": {"message": "<value>", "type": "<value>"}}
-  full_feature_update_v1_features__feature_id__put:
-    speakeasy-default-full-feature-update-v1-features-feature-id-put:
-      parameters:
-        path:
-          feature_id: "<id>"
-        header: {}
       requestBody:
-        application/json: {"metadata": {}}
+        application/json: {"filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "sort": {"field": "created_at"}}
       responses:
         "200":
-          application/json: {"key": "<value>"}
+          application/json: {"results": [{"object_id": "obj_a1b2c3d4e5f6", "bucket_id": "bkt_12345678", "task_id": "task_87654321", "key": "/documents/contract-2024", "blobs": [{"property": "content", "type": "video", "data": {"num_pages": 5, "title": "Service Agreement 2024"}, "details": {"filename": "agreement.pdf", "size_bytes": 1245678, "mime_type": "application/pdf", "hash": "sha256:a1b2c3d4e5f6...", "s3_object_key": "tenant123/object456/content.pdf"}, "status": "SKIPPED"}], "status": "CONVERTING", "metadata": {}, "created_by": "user_12345", "created_at": "2024-06-01T10:30:00Z", "updated_at": "2024-06-01T10:35:12Z"}], "pagination": {"total": 526674, "page": 98033, "page_size": 715438, "total_pages": 273639, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"success": false, "status": 915812, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 204538, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 636088, "error": {"message": "<value>", "type": "<value>"}}
-  list_features_v1_features_post:
-    speakeasy-default-list-features-v1-features-post:
+          application/json: {"success": false, "status": 400550, "error": {"message": "<value>", "type": "<value>"}}
+  create_collection_v1_collections_create_post:
+    speakeasy-default-create-collection-v1-collections-create-post:
+      requestBody:
+        application/json: {"collection_name": "<value>", "source": {"type": "bucket", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "feature_extractors": [{"feature_extractor_name": "<value>", "version": "<value>"}, {"feature_extractor_name": "<value>", "version": "<value>"}, {"feature_extractor_name": "<value>", "version": "<value>"}], "enabled": true}
+      responses:
+        "200":
+          application/json: {"collection_name": "<value>", "enabled": true, "source_lineage": [{"source_type": "bucket", "bucket_config": {"type": "bucket", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "collection_config": {"type": "collection", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "output_schema": {"properties": {"key": {"type": "object"}, "key1": {"type": "image"}, "key2": {"type": "image"}}}}], "feature_extractors": [{"feature_extractor_name": "<value>", "version": "<value>"}, {"feature_extractor_name": "<value>", "version": "<value>"}, {"feature_extractor_name": "<value>", "version": "<value>"}], "output_schema": {"properties": {}}}
+        "400":
+          application/json: {"success": false, "status": 844614, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 665640, "error": {"message": "<value>", "type": "<value>"}}
+  get_collection_v1_collections__collection_id__get:
+    speakeasy-default-get-collection-v1-collections-collection-id-get:
+      parameters:
+        path:
+          collection_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"collection_name": "<value>", "enabled": true, "source_lineage": [{"source_type": "collection", "bucket_config": {"type": "collection", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "collection_config": {"type": "collection", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "output_schema": {"properties": {}}}, {"source_type": "bucket", "bucket_config": {"type": "collection", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "collection_config": {"type": "bucket", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "output_schema": {"properties": {"key": {"type": "array"}, "key1": {"type": "presentation"}, "key2": {"type": "datetime"}}}}, {"source_type": "bucket", "bucket_config": {"type": "bucket", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "collection_config": {"type": "collection", "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}}, "output_schema": {"properties": {}}}], "feature_extractors": [{"feature_extractor_name": "<value>", "version": "<value>"}, {"feature_extractor_name": "<value>", "version": "<value>"}], "output_schema": {"properties": {}}}
+        "400":
+          application/json: {"success": false, "status": 878733, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 888447, "error": {"message": "<value>", "type": "<value>"}}
+  invalidate_cache_v1_collections_cache_invalidate_post:
+    speakeasy-default-invalidate-cache-v1-collections-cache-invalidate-post:
       parameters:
         query:
-          page_size: 10
+          collection_id: "<id>"
+          action: "<value>"
+          internal_id: "<id>"
         header: {}
-      requestBody:
-        application/json: {"collections": ["collection_123", "my_collection_name"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "select": ["metadata.tags"], "return_urls": false}
       responses:
         "200":
-          application/json: {"results": [{"key": "<value>"}], "pagination": {"total": 575076, "page_size": 575245, "total_pages": 583391, "current_page": 10831, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"key": true, "key1": true, "key2": true}
         "400":
-          application/json: {"success": false, "status": 723909, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 60219, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 548150, "error": {"message": "<value>", "type": "<value>"}}
-  search_features_v1_features_search_post:
-    "":
+          application/json: {"success": false, "status": 305226, "error": {"message": "<value>", "type": "<value>"}}
+  get_cache_stats_v1_collections_cache_stats_get:
+    speakeasy-default-get-cache-stats-v1-collections-cache-stats-get:
       parameters:
         query:
-          offset_position: 0
-          page_size: 10
+          internal_id: "<id>"
         header: {}
-      requestBody:
-        application/json: {"queries": [{"embedding_model": "image", "value": "https://example.com/dog.jpg", "type": "url", "settings": {"limit": 50, "min_score": 0.7}}, {"embedding_model": "text", "value": "This is a text query", "type": "text"}], "collections": ["collection1", "collection2"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_features": 10, "sort": {"field": "metadata.field_name", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "reranking_options": {"weights": {"feedback": 0.7, "popularity": 0.3}, "enable_reranking": false}, "session_id": "sess_abc123", "return_url": true}
-      responses:
-        "400":
-          application/json: {"success": false, "status": 402821, "error": {"message": "<value>", "type": "<value>"}}
-        "422": {}
-        "500":
-          application/json: {"success": false, "status": 262208, "error": {"message": "<value>", "type": "<value>"}}
-        "200": {}
-  extract_embeddings_v1_features_extractors_embed_post:
-    speakeasy-default-extract-embeddings-v1-features-extractors-embed-post:
-      requestBody:
-        application/json: {"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}
       responses:
         "200":
-          application/json: {"embedding": {"indices": [58863], "values": [244.75]}}
+          application/json: {"hits": 0, "misses": 0, "size": 0, "hit_ratio": 0}
         "400":
-          application/json: {"success": false, "status": 996580, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 416817, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 481808, "error": {"message": "<value>", "type": "<value>"}}
-  ingest_text_v1_ingest_text_post:
-    speakeasy-default-ingest-text-v1-ingest-text-post:
-      requestBody:
-        application/json: {"collection": "col_1234567890", "feature_extractors": {"embed": [{"type": "text", "value": "a dog", "embedding_model": "multimodal"}], "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"success": false, "status": 699645, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 366871, "error": {"message": "<value>", "type": "<value>"}}
-  ingest_video_url_v1_ingest_videos_url_post:
-    speakeasy-default-ingest-video-url-v1-ingest-videos-url-post:
-      requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": [{"interval_sec": 15, "read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "vertex-multimodal"}], "transcribe": {"enabled": true}, "describe": {"enabled": true}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}]}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"success": false, "status": 731165, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 747801, "error": {"message": "<value>", "type": "<value>"}}
-  ingest_image_url_v1_ingest_images_url_post:
-    speakeasy-default-ingest-image-url-v1-ingest-images-url-post:
-      requestBody:
-        application/json: {"url": "https://example.com/sample-video.mp4", "collection": "col_1234567890", "feature_extractors": {"read": {"enabled": true}, "embed": [{"type": "text", "value": "a dog", "embedding_model": "baai-bge-m3"}], "describe": {"enabled": true, "max_length": 1000}, "json_output": {}, "entities": {"taxonomy_extraction": {"taxonomy_ids": ["tax_123"], "confidence_threshold": 0.8, "embedding_models": ["multimodal", "text"]}}}}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"success": false, "status": 287622, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 260441, "error": {"message": "<value>", "type": "<value>"}}
-  create_taxonomy_v1_entities_taxonomies_post:
-    speakeasy-default-create-taxonomy-v1-entities-taxonomies-post:
-      requestBody:
-        application/json: {"taxonomy_name": "electronics", "nodes": [{"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}, {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}]}]}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"success": false, "status": 735189, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 927591, "error": {"message": "<value>", "type": "<value>"}}
-  list_taxonomies_v1_entities_taxonomies_get:
-    speakeasy-default-list-taxonomies-v1-entities-taxonomies-get:
+          application/json: {"success": false, "status": 737290, "error": {"message": "<value>", "type": "<value>"}}
+  cleanup_cache_v1_collections_cache_cleanup_post:
+    speakeasy-default-cleanup-cache-v1-collections-cache-cleanup-post:
       parameters:
         query:
-          page_size: 10
+          batch_size: 1000
+          internal_id: "<id>"
         header: {}
       responses:
         "200":
-          application/json: {"results": [{"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}, {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}], "pagination": {"total": 925831, "page": 676079, "page_size": 33553, "total_pages": 325990, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"key": 520381, "key1": 867699}
         "400":
-          application/json: {"success": false, "status": 408430, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 997395, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 697675, "error": {"message": "<value>", "type": "<value>"}}
-  get_taxonomy_v1_entities_taxonomies__taxonomy__get:
-    speakeasy-default-get-taxonomy-v1-entities-taxonomies-taxonomy-get:
+          application/json: {"success": false, "status": 757178, "error": {"message": "<value>", "type": "<value>"}}
+  get_document_v1_collections__collection_identifier__documents__document_id__get:
+    speakeasy-default-get-document-v1-collections-collection-identifier-documents-document-id-get:
       parameters:
         path:
-          taxonomy: "<value>"
+          collection_identifier: "<value>"
+          document_id: "<id>"
         header: {}
       responses:
         "200":
-          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}
+          application/json: {"document_id": "<id>", "collection_id": "<id>", "internal_id": "<id>", "namespace_id": "<id>"}
         "400":
-          application/json: {"success": false, "status": 593425, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 996662, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 680643, "error": {"message": "<value>", "type": "<value>"}}
-  delete_taxonomy_v1_entities_taxonomies__taxonomy__delete:
-    speakeasy-default-delete-taxonomy-v1-entities-taxonomies-taxonomy-delete:
+          application/json: {"success": false, "status": 496005, "error": {"message": "<value>", "type": "<value>"}}
+  update_document_v1_collections__collection_identifier__documents__document_id__put:
+    speakeasy-default-update-document-v1-collections-collection-identifier-documents-document-id-put:
       parameters:
         path:
-          taxonomy: "<value>"
+          collection_identifier: "<value>"
+          document_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"document_id": "<id>", "collection_id": "<id>", "internal_id": "<id>", "namespace_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 425344, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 862713, "error": {"message": "<value>", "type": "<value>"}}
+  delete_document_v1_collections__collection_identifier__documents__document_id__delete:
+    speakeasy-default-delete-document-v1-collections-collection-identifier-documents-document-id-delete:
+      parameters:
+        path:
+          collection_identifier: "<value>"
+          document_id: "<id>"
         header: {}
       responses:
         "200":
           application/json: {"message": "<value>", "success": true}
         "400":
-          application/json: {"success": false, "status": 628193, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 467007, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 427306, "error": {"message": "<value>", "type": "<value>"}}
-  update_taxonomy_v1_entities_taxonomies__taxonomy__patch:
-    speakeasy-default-update-taxonomy-v1-entities-taxonomies-taxonomy-patch:
+          application/json: {"success": false, "status": 614650, "error": {"message": "<value>", "type": "<value>"}}
+  list_documents_v1_collections__collection_identifier__documents_get:
+    speakeasy-default-list-documents-v1-collections-collection-identifier-documents-get:
       parameters:
         path:
-          taxonomy: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"taxonomy_name": "electronics_updated", "description": "Updated electronics taxonomy"}
-      responses:
-        "200":
-          application/json: {"taxonomy_id": "tax_abc123xyz", "taxonomy_name": "electronics", "nodes": [{"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "depth": 1}]}
-        "400":
-          application/json: {"success": false, "status": 115509, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 143003, "error": {"message": "<value>", "type": "<value>"}}
-  get_taxonomy_node_v1_entities_taxonomies_nodes__node__get:
-    speakeasy-default-get-taxonomy-node-v1-entities-taxonomies-nodes-node-get:
-      parameters:
-        path:
-          node: "<value>"
-        header: {}
-      responses:
-        "200":
-          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
-        "400":
-          application/json: {"success": false, "status": 966201, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 630700, "error": {"message": "<value>", "type": "<value>"}}
-  update_node_v1_entities_taxonomies_nodes__node__patch:
-    speakeasy-default-update-node-v1-entities-taxonomies-nodes-node-patch:
-      parameters:
-        path:
-          node: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category"}
-      responses:
-        "200":
-          application/json: {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}
-        "400":
-          application/json: {"success": false, "status": 869537, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 32799, "error": {"message": "<value>", "type": "<value>"}}
-  classify_features_v1_entities_taxonomies__taxonomy__classify_post:
-    speakeasy-default-classify-features-v1-entities-taxonomies-taxonomy-classify-post:
-      parameters:
-        path:
-          taxonomy: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"collections": ["<value>", "<value>", "<value>"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}}
-      responses:
-        "200":
-          application/json: {"task_id": "<id>"}
-        "400":
-          application/json: {"success": false, "status": 555572, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 478354, "error": {"message": "<value>", "type": "<value>"}}
-  list_classifications_v1_entities_taxonomies__taxonomy__classifications_post:
-    speakeasy-default-list-classifications-v1-entities-taxonomies-taxonomy-classifications-post:
-      parameters:
-        path:
-          taxonomy: "<value>"
+          collection_identifier: "<value>"
         query:
-          page_size: 10
+          limit: 10
         header: {}
-      requestBody:
-        application/json: {"filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "feature_options": {"return_payload": true, "return_url": true}, "node_options": {"return_payload": true}}
       responses:
         "200":
-          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 6021.18, "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 720133, "page": 546255, "page_size": 65555, "total_pages": 17118, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"items": [{"document_id": "<id>", "collection_id": "<id>", "internal_id": "<id>", "namespace_id": "<id>"}], "total": 879448}
         "400":
-          application/json: {"success": false, "status": 195554, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 830482, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 476159, "error": {"message": "<value>", "type": "<value>"}}
-  delete_classifications_v1_entities_taxonomies__taxonomy__classifications__classification_id__delete:
-    speakeasy-default-delete-classifications-v1-entities-taxonomies-taxonomy-classifications-classification-id-delete:
+          application/json: {"success": false, "status": 991216, "error": {"message": "<value>", "type": "<value>"}}
+  batch_update_documents_v1_collections__collection_identifier__documents_batch_put:
+    speakeasy-default-batch-update-documents-v1-collections-collection-identifier-documents-batch-put:
       parameters:
         path:
-          taxonomy: "<value>"
-          classification_id: "<id>"
+          collection_identifier: "<value>"
         header: {}
       responses:
         "200":
-          application/json: {"message": "<value>", "success": true}
+          application/json: [{"document_id": "<id>", "collection_id": "<id>", "internal_id": "<id>", "namespace_id": "<id>"}]
         "400":
-          application/json: {"success": false, "status": 62269, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 393649, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 684818, "error": {"message": "<value>", "type": "<value>"}}
-  get_asset_v1_assets__asset_id__get:
-    "":
+          application/json: {"success": false, "status": 364992, "error": {"message": "<value>", "type": "<value>"}}
+  batch_delete_documents_v1_collections__collection_identifier__documents_batch_delete:
+    speakeasy-default-batch-delete-documents-v1-collections-collection-identifier-documents-batch-delete:
       parameters:
         path:
-          asset_id: "ast_123"
-        query:
-          return_url: true
-        header: {}
-      responses:
-        "200":
-          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
-        "400":
-          application/json: {"success": false, "status": 15948, "error": {"message": "<value>", "type": "<value>"}}
-        "422": {}
-        "500":
-          application/json: {"success": false, "status": 68409, "error": {"message": "<value>", "type": "<value>"}}
-  delete_asset_v1_assets__asset_id__delete:
-    speakeasy-default-delete-asset-v1-assets-asset-id-delete:
-      parameters:
-        path:
-          asset_id: "<id>"
+          collection_identifier: "<value>"
         header: {}
       responses:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"success": false, "status": 155071, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 386579, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 460998, "error": {"message": "<value>", "type": "<value>"}}
-  full_asset_update_v1_assets__asset_id__put:
-    speakeasy-default-full-asset-update-v1-assets-asset-id-put:
+          application/json: {"success": false, "status": 461757, "error": {"message": "<value>", "type": "<value>"}}
+  list_feature_extractors_v1_features_extractors_get:
+    speakeasy-default-list-feature-extractors-v1-features-extractors-get:
+      responses:
+        "200":
+          application/json: [{"feature_id": "", "feature_extractor_name": "<value>", "description": "larva for outset afore story cinema rim injunction anti luck", "version": "<value>", "module_path": "<value>", "key": "<value>", "key1": "<value>", "key2": "<value>"}, {"feature_id": "", "feature_extractor_name": "<value>", "description": "who as keenly", "version": "<value>", "module_path": "<value>", "key": "<value>"}]
+        "400":
+          application/json: {"success": false, "status": 640853, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 270708, "error": {"message": "<value>", "type": "<value>"}}
+  get_feature_extractor_v1_features_extractors__feature_id__get:
+    speakeasy-default-get-feature-extractor-v1-features-extractors-feature-id-get:
       parameters:
         path:
-          asset_id: "<id>"
+          feature_id: "<id>"
+      responses:
+        "200":
+          application/json: {"feature_id": "", "feature_extractor_name": "<value>", "description": "shyly impolite colossal pinion inasmuch whoever", "version": "<value>", "module_path": "<value>", "key": "<value>", "key1": "<value>"}
+        "400":
+          application/json: {"success": false, "status": 651405, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 878003, "error": {"message": "<value>", "type": "<value>"}}
+  create_retriever_v1_retrievers_retrievers_post:
+    speakeasy-default-create-retriever-v1-retrievers-retrievers-post:
+      requestBody:
+        application/json: {"retriever_name": "<value>", "input_schema": {"properties": {"key": {"type": "image"}, "key1": {"type": "dense_vector"}}}, "collection_ids": ["<value>"], "stages": []}
+      responses:
+        "200":
+          application/json: {"retriever_name": "<value>", "input_schema": {"properties": {"key": {"type": "video"}}}, "collection_ids": ["<value>", "<value>"], "stages": [{"stage_name": "<value>", "version": "<value>", "module_path": "<value>", "pre_filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "post_filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "exclude_from_final": false}, {"stage_name": "<value>", "version": "<value>", "module_path": "<value>", "pre_filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "post_filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "exclude_from_final": false}]}
+        "400":
+          application/json: {"success": false, "status": 710525, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 410755, "error": {"message": "<value>", "type": "<value>"}}
+  get_retriever_v1_retrievers_retrievers__retriever_id__get:
+    speakeasy-default-get-retriever-v1-retrievers-retrievers-retriever-id-get:
+      parameters:
+        path:
+          retriever_id: "<id>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"retriever_name": "<value>", "input_schema": {"properties": {}}, "collection_ids": ["<value>", "<value>", "<value>"], "stages": []}
+        "400":
+          application/json: {"success": false, "status": 108650, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 831361, "error": {"message": "<value>", "type": "<value>"}}
+  execute_retriever_v1_retrievers_retrievers__retriever_id__execute_post:
+    speakeasy-default-execute-retriever-v1-retrievers-retrievers-retriever-id-execute-post:
+      parameters:
+        path:
+          retriever_id: "<id>"
         header: {}
       requestBody:
-        application/json: {"propagate_features": true}
+        application/json: {"inputs": {}, "filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "sorts": [{"field": "created_at"}, {"field": "created_at"}], "limit": 10, "offset": 0, "return_urls": false}
       responses:
         "200":
-          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
+          application/json: {"execution_time": 563.55}
         "400":
-          application/json: {"success": false, "status": 556461, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 706611, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 722605, "error": {"message": "<value>", "type": "<value>"}}
-  partial_asset_update_v1_assets__asset_id__patch:
-    speakeasy-default-partial-asset-update-v1-assets-asset-id-patch:
-      parameters:
-        path:
-          asset_id: "<id>"
-        header: {}
+          application/json: {"success": false, "status": 504207, "error": {"message": "<value>", "type": "<value>"}}
+  get_retriever_stages_v1_retrievers_stages_get:
+    speakeasy-default-get-retriever-stages-v1-retrievers-stages-get:
+      responses:
+        "200":
+          application/json: [{"stage_name": "<value>", "description": "ah once down in valley fence tackle complete", "version": "<value>", "module_path": "<value>", "input_schema": {"key": {"type": "image"}, "key1": {"type": "datetime"}}, "output_schema": {"key": {"type": "audio"}}, "parameter_schema": {}, "supported_input_types": ["<value>"], "max_inputs": {"key": 705972, "key1": 739884}, "default_parameters": {}}, {"stage_name": "<value>", "description": "suspiciously duh inasmuch hefty what reluctantly ouch march", "version": "<value>", "module_path": "<value>", "input_schema": {"key": {"type": "object"}, "key1": {"type": "integer"}, "key2": {"type": "boolean"}}, "output_schema": {"key": {"type": "dense_vector"}, "key1": {"type": "document"}}, "parameter_schema": {"key": {"type": "json"}, "key1": {"type": "datetime"}, "key2": {"type": "presentation"}}, "supported_input_types": ["<value>", "<value>", "<value>"], "max_inputs": {"key": 300981, "key1": 248468}, "default_parameters": {}}]
+        "400":
+          application/json: {"success": false, "status": 506337, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 325511, "error": {"message": "<value>", "type": "<value>"}}
+  create_interaction_v1_retrievers_interactions_post:
+    speakeasy-default-create-interaction-v1-retrievers-interactions-post:
       requestBody:
-        application/json: {"propagate_features": true}
+        application/json: {"feature_id": "prod_123", "interaction_type": ["positive_feedback", "click", "long_view"], "position": 3, "user_id": "customer_user_456", "session_id": "sess_abc123"}
       responses:
         "200":
-          application/json: {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}
+          application/json: {"feature_id": "prod_123", "interaction_type": ["positive_feedback", "click", "long_view"], "position": 3, "user_id": "customer_user_456", "session_id": "sess_abc123", "interaction_id": "int_xyz789"}
         "400":
-          application/json: {"success": false, "status": 134086, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 61958, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 459166, "error": {"message": "<value>", "type": "<value>"}}
-  get_asset_with_features_v1_assets__asset_id__features_get:
-    "":
-      parameters:
-        path:
-          asset_id: "asset_123456789"
-        query:
-          return_url: false
-        header: {}
-      responses:
-        "200":
-          application/json: {"asset": {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, "features": {}}
-        "400":
-          application/json: {"success": false, "status": 761028, "error": {"message": "<value>", "type": "<value>"}}
-        "422": {}
-        "500":
-          application/json: {"success": false, "status": 897645, "error": {"message": "<value>", "type": "<value>"}}
-  list_assets_v1_assets_post:
-    speakeasy-default-list-assets-v1-assets-post:
+          application/json: {"success": false, "status": 176576, "error": {"message": "<value>", "type": "<value>"}}
+  list_interactions_v1_retrievers_interactions_get:
+    speakeasy-default-list-interactions-v1-retrievers-interactions-get:
       parameters:
         query:
           page_size: 10
         header: {}
-      requestBody:
-        application/json: {"collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "group_by": {"field": "asset_id", "max_assets": 10, "sort": {"field": "score", "direction": "desc"}}, "sort": {"field": "score", "direction": "desc"}, "select": ["title", "content", "metadata.author", "metadata.publication_date"], "return_url": true}
       responses:
         "200":
-          application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 134748, "page": 493994, "page_size": 833111, "total_pages": 739368, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: [{"feature_id": "prod_123", "interaction_type": ["positive_feedback", "click", "long_view"], "position": 3, "user_id": "customer_user_456", "session_id": "sess_abc123", "interaction_id": "int_xyz789"}, {"feature_id": "prod_123", "interaction_type": ["positive_feedback", "click", "long_view"], "position": 3, "user_id": "customer_user_456", "session_id": "sess_abc123", "interaction_id": "int_xyz789"}]
         "400":
-          application/json: {"success": false, "status": 555566, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 492246, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 385435, "error": {"message": "<value>", "type": "<value>"}}
-  search_assets_v1_assets_search_post:
-    speakeasy-default-search-assets-v1-assets-search-post:
-      requestBody:
-        application/json: {"query": {"key": ["title", "description"], "value": "search term"}, "collections": ["col_123", "my_collection"], "filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "return_url": true}
-      responses:
-        "200":
-          application/json: {"results": [{"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}, {"asset_id": "ast_123", "collection_id": "col_123", "status": "processing", "modality": "image", "task_id": "task123", "file_hash": "hash123", "updated_at": "2023-01-01T00:00:00.000Z", "created_at": "2023-01-01T00:00:00.000Z", "score": 0.5}], "pagination": {"total": 55398, "page": 826364, "page_size": 217286, "total_pages": 822588, "next_page": "<value>", "previous_page": "<value>"}}
-        "400":
-          application/json: {"success": false, "status": 795180, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 392864, "error": {"message": "<value>", "type": "<value>"}}
-  list_collections_v1_collections_get:
-    speakeasy-default-list-collections-v1-collections-get:
-      parameters:
-        query:
-          page_size: 10
-        header: {}
-      responses:
-        "200":
-          application/json: {"results": [{"count": 725044, "size_bytes": 339199, "last_updated": "2023-02-17T10:46:32.060Z", "collection_id": "<id>"}], "pagination": {"total": 528574, "page": 944272, "page_size": 520228, "total_pages": 815502, "next_page": "<value>", "previous_page": "<value>"}}
-        "400":
-          application/json: {"success": false, "status": 682508, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 550325, "error": {"message": "<value>", "type": "<value>"}}
-  create_collection_v1_collections_post:
-    speakeasy-default-create-collection-v1-collections-post:
-      requestBody:
-        application/json: {"collection_name": "<value>"}
-      responses:
-        "200":
-          application/json: {"collection_name": "<value>"}
-        "400":
-          application/json: {"success": false, "status": 210546, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 568784, "error": {"message": "<value>", "type": "<value>"}}
-  delete_collection_v1_collections__collection__delete:
-    speakeasy-default-delete-collection-v1-collections-collection-delete:
+          application/json: {"success": false, "status": 256983, "error": {"message": "<value>", "type": "<value>"}}
+  get_interaction_v1_retrievers_interactions__interaction_id__get:
+    speakeasy-default-get-interaction-v1-retrievers-interactions-interaction-id-get:
       parameters:
         path:
-          collection: "col_1234567890"
+          interaction_id: "<id>"
         header: {}
       responses:
         "200":
-          application/json: {"task_id": "<id>"}
+          application/json: {"feature_id": "prod_123", "interaction_type": ["positive_feedback", "click", "long_view"], "position": 3, "user_id": "customer_user_456", "session_id": "sess_abc123", "interaction_id": "int_xyz789"}
         "400":
-          application/json: {"success": false, "status": 348710, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 679214, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 757695, "error": {"message": "<value>", "type": "<value>"}}
-  update_collection_v1_collections__collection__put:
-    speakeasy-default-update-collection-v1-collections-collection-put:
+          application/json: {"success": false, "status": 561455, "error": {"message": "<value>", "type": "<value>"}}
+  delete_interaction_v1_retrievers_interactions__interaction_id__delete:
+    speakeasy-default-delete-interaction-v1-retrievers-interactions-interaction-id-delete:
       parameters:
         path:
-          collection: "col_1234567890"
-        header: {}
-      requestBody:
-        application/json: {"collection_name": "<value>"}
-      responses:
-        "200":
-          application/json: {"collection_name": "<value>"}
-        "400":
-          application/json: {"success": false, "status": 405534, "error": {"message": "<value>", "type": "<value>"}}
-        "422":
-          application/json: {}
-        "500":
-          application/json: {"success": false, "status": 137008, "error": {"message": "<value>", "type": "<value>"}}
-  get_collection_v1_collections__collection__get:
-    speakeasy-default-get-collection-v1-collections-collection-get:
-      parameters:
-        path:
-          collection: "col_1234567890"
+          interaction_id: "<id>"
         header: {}
       responses:
         "200":
-          application/json: {"collection_name": "<value>"}
+          application/json: "<value>"
         "400":
-          application/json: {"success": false, "status": 52108, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 906080, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 680479, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 467303, "error": {"message": "<value>", "type": "<value>"}}
   kill_task_v1_tasks__task_id__delete:
     speakeasy-default-kill-task-v1-tasks-task-id-delete:
       parameters:
@@ -1127,11 +1161,11 @@ examples:
         "200":
           application/json: "<value>"
         "400":
-          application/json: {"success": false, "status": 133802, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 545907, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 558071, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 698486, "error": {"message": "<value>", "type": "<value>"}}
   get_task_v1_tasks__task_id__get:
     speakeasy-default-get-task-v1-tasks-task-id-get:
       parameters:
@@ -1142,11 +1176,11 @@ examples:
         "200":
           application/json: {"task_id": "<id>"}
         "400":
-          application/json: {"success": false, "status": 153841, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 700347, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 178897, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 558834, "error": {"message": "<value>", "type": "<value>"}}
   list_active_tasks_v1_tasks_get:
     speakeasy-default-list-active-tasks-v1-tasks-get:
       parameters:
@@ -1155,12 +1189,49 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"results": [{"task_id": "<id>"}, {"task_id": "<id>"}], "pagination": {"total": 703165, "page": 334588, "page_size": 602059, "total_pages": 415917, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"task_id": "<id>"}, {"task_id": "<id>"}, {"task_id": "<id>"}], "pagination": {"total": 238029, "page": 101574, "page_size": 180586, "total_pages": 340535, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
-          application/json: {"success": false, "status": 993501, "error": {"message": "<value>", "type": "<value>"}}
+          application/json: {"success": false, "status": 796119, "error": {"message": "<value>", "type": "<value>"}}
         "422":
           application/json: {}
         "500":
-          application/json: {"success": false, "status": 620291, "error": {"message": "<value>", "type": "<value>"}}
-examplesVersion: 1.0.0
+          application/json: {"success": false, "status": 940228, "error": {"message": "<value>", "type": "<value>"}}
+  get_research_v1_research_get:
+    speakeasy-default-get-research-v1-research-get:
+      responses:
+        "200":
+          application/json: "<value>"
+        "400":
+          application/json: {"success": false, "status": 524990, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 509338, "error": {"message": "<value>", "type": "<value>"}}
+  create_taxonomy_v1_taxonomies_post:
+    speakeasy-default-create-taxonomy-v1-taxonomies-post:
+      requestBody:
+        application/json: {"taxonomy_name": "<value>", "config": {"source_collections": [{"collection_id": "<id>", "retriever": {"retriever_id": "<id>"}}, {"collection_id": "<id>", "retriever": {"retriever_id": "<id>"}}]}}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 975730, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 129148, "error": {"message": "<value>", "type": "<value>"}}
+  create_cluster_v1_clusters_post:
+    speakeasy-default-create-cluster-v1-clusters-post:
+      requestBody:
+        application/json: {"collection_id": "<id>"}
+      responses:
+        "200":
+          application/json: {"task_id": "<id>"}
+        "400":
+          application/json: {"success": false, "status": 179149, "error": {"message": "<value>", "type": "<value>"}}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"success": false, "status": 264017, "error": {"message": "<value>", "type": "<value>"}}
+examplesVersion: 1.0.1
 generatedTests: {}

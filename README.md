@@ -21,6 +21,7 @@ Mixpeek API: This is the Mixpeek API, providing access to various endpoints for 
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
+  * [Resource Management](#resource-management)
   * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
@@ -30,6 +31,11 @@ Mixpeek API: This is the Mixpeek API, providing access to various endpoints for 
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
 The SDK can be installed with either *pip* or *poetry* package managers.
 
@@ -48,6 +54,37 @@ pip install mixpeek
 ```bash
 poetry add mixpeek
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from mixpeek python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "mixpeek",
+# ]
+# ///
+
+from mixpeek import Mixpeek
+
+sdk = Mixpeek(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start IDE Support [idesupport] -->
@@ -70,11 +107,12 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.health.check()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -90,11 +128,12 @@ from mixpeek import Mixpeek
 import os
 
 async def main():
+
     async with Mixpeek(
         token=os.getenv("MIXPEEK_TOKEN", ""),
-    ) as mixpeek:
+    ) as m_client:
 
-        res = await mixpeek.health.check_async()
+        res = await m_client.health.check_async()
 
         # Handle response
         print(res)
@@ -119,11 +158,12 @@ To authenticate with the API the `token` parameter must be set when initializing
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.health.check()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -137,45 +177,54 @@ with Mixpeek(
 <details open>
 <summary>Available methods</summary>
 
-### [assets](docs/sdks/assets/README.md)
+### [bucket_objects](docs/sdks/bucketobjects/README.md)
 
-* [get](docs/sdks/assets/README.md#get) - Get Asset
-* [delete](docs/sdks/assets/README.md#delete) - Delete Asset
-* [update](docs/sdks/assets/README.md#update) - Full Asset Update
-* [partial_update](docs/sdks/assets/README.md#partial_update) - Partial Asset Update
-* [get_with_features](docs/sdks/assets/README.md#get_with_features) - Get Asset With Features
-* [list](docs/sdks/assets/README.md#list) - List Assets
-* [search](docs/sdks/assets/README.md#search) - Search Assets
+* [create_object_v1_buckets_bucket_identifier_objects_create_post](docs/sdks/bucketobjects/README.md#create_object_v1_buckets_bucket_identifier_objects_create_post) - Create Object
+* [get_object_v1_buckets_bucket_identifier_objects_object_identifier_get](docs/sdks/bucketobjects/README.md#get_object_v1_buckets_bucket_identifier_objects_object_identifier_get) - Get Object
+* [update_object_v1_buckets_bucket_identifier_objects_object_identifier_put](docs/sdks/bucketobjects/README.md#update_object_v1_buckets_bucket_identifier_objects_object_identifier_put) - Update Object
+* [delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete](docs/sdks/bucketobjects/README.md#delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete) - Delete Object
+* [list_objects_v1_buckets_bucket_identifier_objects_post](docs/sdks/bucketobjects/README.md#list_objects_v1_buckets_bucket_identifier_objects_post) - List Objects
+
+### [buckets](docs/sdks/buckets/README.md)
+
+* [create_bucket_v1_buckets_create_post](docs/sdks/buckets/README.md#create_bucket_v1_buckets_create_post) - Create Bucket
+* [get_bucket_v1_buckets_bucket_identifier_get](docs/sdks/buckets/README.md#get_bucket_v1_buckets_bucket_identifier_get) - Get Bucket
+* [update_bucket_v1_buckets_bucket_identifier_put](docs/sdks/buckets/README.md#update_bucket_v1_buckets_bucket_identifier_put) - Update Bucket
+* [delete_bucket_v1_buckets_bucket_identifier_delete](docs/sdks/buckets/README.md#delete_bucket_v1_buckets_bucket_identifier_delete) - Delete Bucket
+* [list_buckets_v1_buckets_post](docs/sdks/buckets/README.md#list_buckets_v1_buckets_post) - List Buckets
+
+### [clusters](docs/sdks/clusters/README.md)
+
+* [create_cluster_v1_clusters_post](docs/sdks/clusters/README.md#create_cluster_v1_clusters_post) - Create Cluster
+
+### [collection_cache](docs/sdks/collectioncache/README.md)
+
+* [invalidate_cache_v1_collections_cache_invalidate_post](docs/sdks/collectioncache/README.md#invalidate_cache_v1_collections_cache_invalidate_post) - Invalidate Cache
+* [get_cache_stats_v1_collections_cache_stats_get](docs/sdks/collectioncache/README.md#get_cache_stats_v1_collections_cache_stats_get) - Get Cache Stats
+* [cleanup_cache_v1_collections_cache_cleanup_post](docs/sdks/collectioncache/README.md#cleanup_cache_v1_collections_cache_cleanup_post) - Cleanup Cache
+
+### [collection_documents](docs/sdks/collectiondocuments/README.md)
+
+* [get_document_v1_collections_collection_identifier_documents_document_id_get](docs/sdks/collectiondocuments/README.md#get_document_v1_collections_collection_identifier_documents_document_id_get) - Get Document
+* [update_document_v1_collections_collection_identifier_documents_document_id_put](docs/sdks/collectiondocuments/README.md#update_document_v1_collections_collection_identifier_documents_document_id_put) - Update Document
+* [delete_document_v1_collections_collection_identifier_documents_document_id_delete](docs/sdks/collectiondocuments/README.md#delete_document_v1_collections_collection_identifier_documents_document_id_delete) - Delete Document
+* [list_documents_v1_collections_collection_identifier_documents_get](docs/sdks/collectiondocuments/README.md#list_documents_v1_collections_collection_identifier_documents_get) - List Documents
+* [batch_update_documents_v1_collections_collection_identifier_documents_batch_put](docs/sdks/collectiondocuments/README.md#batch_update_documents_v1_collections_collection_identifier_documents_batch_put) - Batch Update Documents
+* [batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete](docs/sdks/collectiondocuments/README.md#batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete) - Batch Delete Documents
 
 ### [collections](docs/sdks/collections/README.md)
 
-* [list](docs/sdks/collections/README.md#list) - List Collections
-* [create](docs/sdks/collections/README.md#create) - Create Collection
-* [delete](docs/sdks/collections/README.md#delete) - Delete Collection
-* [update](docs/sdks/collections/README.md#update) - Update Collection
-* [get](docs/sdks/collections/README.md#get) - Get Collection
-
-### [feature_extractors](docs/sdks/featureextractors/README.md)
-
-* [extract_embeddings](docs/sdks/featureextractors/README.md#extract_embeddings) - Extract Embeddings
+* [create_collection_v1_collections_create_post](docs/sdks/collections/README.md#create_collection_v1_collections_create_post) - Create Collection
+* [get_collection_v1_collections_collection_id_get](docs/sdks/collections/README.md#get_collection_v1_collections_collection_id_get) - Get Collection
 
 ### [features](docs/sdks/features/README.md)
 
-* [get](docs/sdks/features/README.md#get) - Get Feature
-* [delete](docs/sdks/features/README.md#delete) - Delete Feature
-* [update](docs/sdks/features/README.md#update) - Full Feature Update
-* [list](docs/sdks/features/README.md#list) - List Features
-* [search](docs/sdks/features/README.md#search) - Search Features
+* [list_feature_extractors_v1_features_extractors_get](docs/sdks/features/README.md#list_feature_extractors_v1_features_extractors_get) - List Feature Extractors
+* [get_feature_extractor_v1_features_extractors_feature_id_get](docs/sdks/features/README.md#get_feature_extractor_v1_features_extractors_feature_id_get) - Get Feature Extractor Details
 
 ### [health](docs/sdks/health/README.md)
 
 * [check](docs/sdks/health/README.md#check) - Healthcheck
-
-### [ingest_assets](docs/sdks/ingestassets/README.md)
-
-* [ingest_text](docs/sdks/ingestassets/README.md#ingest_text) - Ingest Text
-* [ingest_video_url](docs/sdks/ingestassets/README.md#ingest_video_url) - Ingest Video Url
-* [ingest_image_url](docs/sdks/ingestassets/README.md#ingest_image_url) - Ingest Image Url
 
 
 ### [namespaces](docs/sdks/namespaces/README.md)
@@ -185,15 +234,42 @@ with Mixpeek(
 * [delete](docs/sdks/namespaces/README.md#delete) - Delete Namespace
 * [update](docs/sdks/namespaces/README.md#update) - Update Namespace
 * [get](docs/sdks/namespaces/README.md#get) - Get Namespace
-* [list_models](docs/sdks/namespaces/README.md#list_models) - List Available Models
+
+### [organization_notifications](docs/sdks/organizationnotifications/README.md)
+
+* [send_notification_v1_organizations_notifications_send_post](docs/sdks/organizationnotifications/README.md#send_notification_v1_organizations_notifications_send_post) - Send Notification
 
 ### [organizations](docs/sdks/organizations/README.md)
 
 * [get](docs/sdks/organizations/README.md#get) - Get Organization
-* [get_usage](docs/sdks/organizations/README.md#get_usage) - Get Usage
 * [add_user](docs/sdks/organizations/README.md#add_user) - Add User
 * [delete_api_key](docs/sdks/organizations/README.md#delete_api_key) - Delete Api Key
 * [update_api_key](docs/sdks/organizations/README.md#update_api_key) - Update Api Key
+
+### [organizations_usage](docs/sdks/organizationsusage/README.md)
+
+* [get_usage_v1_organizations_usage_post](docs/sdks/organizationsusage/README.md#get_usage_v1_organizations_usage_post) - Get Usage
+
+### [research](docs/sdks/research/README.md)
+
+* [get_research_v1_research_get](docs/sdks/research/README.md#get_research_v1_research_get) - Get Research
+
+### [retriever_interactions](docs/sdks/retrieverinteractions/README.md)
+
+* [create_interaction_v1_retrievers_interactions_post](docs/sdks/retrieverinteractions/README.md#create_interaction_v1_retrievers_interactions_post) - Create Interaction
+* [list_interactions_v1_retrievers_interactions_get](docs/sdks/retrieverinteractions/README.md#list_interactions_v1_retrievers_interactions_get) - List Interactions
+* [get_interaction_v1_retrievers_interactions_interaction_id_get](docs/sdks/retrieverinteractions/README.md#get_interaction_v1_retrievers_interactions_interaction_id_get) - Get Interaction
+* [delete_interaction_v1_retrievers_interactions_interaction_id_delete](docs/sdks/retrieverinteractions/README.md#delete_interaction_v1_retrievers_interactions_interaction_id_delete) - Delete Interaction
+
+### [retriever_stages](docs/sdks/retrieverstages/README.md)
+
+* [get_retriever_stages_v1_retrievers_stages_get](docs/sdks/retrieverstages/README.md#get_retriever_stages_v1_retrievers_stages_get) - List Retriever Stages
+
+### [retrievers](docs/sdks/retrievers/README.md)
+
+* [create_retriever_v1_retrievers_retrievers_post](docs/sdks/retrievers/README.md#create_retriever_v1_retrievers_retrievers_post) - Create Retriever
+* [get_retriever_v1_retrievers_retrievers_retriever_id_get](docs/sdks/retrievers/README.md#get_retriever_v1_retrievers_retrievers_retriever_id_get) - Get Retriever
+* [execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post](docs/sdks/retrievers/README.md#execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post) - Execute Retriever
 
 ### [tasks](docs/sdks/tasks/README.md)
 
@@ -203,19 +279,7 @@ with Mixpeek(
 
 ### [taxonomies](docs/sdks/taxonomies/README.md)
 
-* [get](docs/sdks/taxonomies/README.md#get) - Get Taxonomy
-* [delete](docs/sdks/taxonomies/README.md#delete) - Delete Taxonomy
-* [update](docs/sdks/taxonomies/README.md#update) - Update Taxonomy
-
-### [taxonomy_entities](docs/sdks/taxonomyentities/README.md)
-
-* [create](docs/sdks/taxonomyentities/README.md#create) - Create Taxonomy
-* [list](docs/sdks/taxonomyentities/README.md#list) - List Taxonomies
-* [get_node](docs/sdks/taxonomyentities/README.md#get_node) - Get Taxonomy Node
-* [update_node](docs/sdks/taxonomyentities/README.md#update_node) - Update Node
-* [classify_features](docs/sdks/taxonomyentities/README.md#classify_features) - Classify Features against Taxonomy
-* [list_classifications](docs/sdks/taxonomyentities/README.md#list_classifications) - List Taxonomy Classifications
-* [delete_classification](docs/sdks/taxonomyentities/README.md#delete_classification) - Delete Classifications
+* [create_taxonomy_v1_taxonomies_post](docs/sdks/taxonomies/README.md#create_taxonomy_v1_taxonomies_post) - Create Taxonomy
 
 ### [users](docs/sdks/users/README.md)
 
@@ -237,11 +301,12 @@ from mixpeek import Mixpeek
 from mixpeek.utils import BackoffStrategy, RetryConfig
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.health.check(,
+    res = m_client.health.check(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -255,12 +320,13 @@ from mixpeek import Mixpeek
 from mixpeek.utils import BackoffStrategy, RetryConfig
 import os
 
+
 with Mixpeek(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.health.check()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -297,13 +363,14 @@ When custom error responses are specified for an operation, the SDK may also rai
 from mixpeek import Mixpeek, models
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
     res = None
     try:
 
-        res = mixpeek.organizations.get()
+        res = m_client.organizations.get()
 
         # Handle response
         print(res)
@@ -328,17 +395,18 @@ with Mixpeek(
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     server_url="https://api.mixpeek.com",
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.health.check()
+    res = m_client.health.check()
 
     # Handle response
     print(res)
@@ -426,6 +494,34 @@ class CustomClient(AsyncHttpClient):
 s = Mixpeek(async_client=CustomClient(httpx.AsyncClient()))
 ```
 <!-- End Custom HTTP Client [http-client] -->
+
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Mixpeek` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from mixpeek import Mixpeek
+import os
+def main():
+
+    with Mixpeek(
+        token=os.getenv("MIXPEEK_TOKEN", ""),
+    ) as m_client:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+
+    async with Mixpeek(
+        token=os.getenv("MIXPEEK_TOKEN", ""),
+    ) as m_client:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging

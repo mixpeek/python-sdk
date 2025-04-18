@@ -1,0 +1,20 @@
+# FeatureExtractorConfig
+
+Configuration for a feature extractor that is selected for use within a collection.
+This model represents a selected feature extractor along with its specific configuration
+for a particular collection.
+This gets stored in the collection settings.
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `feature_extractor_name`                                                               | *str*                                                                                  | :heavy_check_mark:                                                                     | Name of the feature extractor                                                          |
+| `version`                                                                              | *str*                                                                                  | :heavy_check_mark:                                                                     | Version of the feature extractor                                                       |
+| `parameters`                                                                           | [Optional[models.Parameters]](../models/parameters.md)                                 | :heavy_minus_sign:                                                                     | Custom parameters for the extractor                                                    |
+| `input_mapping`                                                                        | Dict[str, *str*]                                                                       | :heavy_minus_sign:                                                                     | Maps pipeline inputs to extractor inputs (source -> target)                            |
+| `output_mapping`                                                                       | Dict[str, *str*]                                                                       | :heavy_minus_sign:                                                                     | Maps extractor outputs to pipeline outputs (source -> target)                          |
+| `document_output_type`                                                                 | [OptionalNullable[models.DocumentOutputType]](../models/documentoutputtype.md)         | :heavy_minus_sign:                                                                     | Type of document output produced by the extractor                                      |
+| `document_input_handling`                                                              | [OptionalNullable[models.DocumentInputHandling]](../models/documentinputhandling.md)   | :heavy_minus_sign:                                                                     | How documents are provided to the extractor                                            |
+| `document_output_handling`                                                             | [OptionalNullable[models.DocumentOutputHandling]](../models/documentoutputhandling.md) | :heavy_minus_sign:                                                                     | How extractor output is handled for documents                                          |

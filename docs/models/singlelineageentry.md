@@ -1,0 +1,16 @@
+# SingleLineageEntry
+
+A single entry in the collection lineage path
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `source_type`                                                                  | [models.SourceType](../models/sourcetype.md)                                   | :heavy_check_mark:                                                             | Types of entries in a collection lineage                                       |
+| `collection_id`                                                                | *OptionalNullable[str]*                                                        | :heavy_minus_sign:                                                             | ID of this entry (collection_id)                                               |
+| `bucket_id`                                                                    | *OptionalNullable[str]*                                                        | :heavy_minus_sign:                                                             | ID of this entry (bucket_id)                                                   |
+| `bucket_config`                                                                | [OptionalNullable[models.SourceConfigOutput]](../models/sourceconfigoutput.md) | :heavy_minus_sign:                                                             | Bucket details if this is a bucket or using a bucket source                    |
+| `collection_config`                                                            | [OptionalNullable[models.SourceConfigOutput]](../models/sourceconfigoutput.md) | :heavy_minus_sign:                                                             | Collection details if this is a collection or using a collection source        |
+| `feature_extractors`                                                           | List[[models.FeatureExtractorConfig](../models/featureextractorconfig.md)]     | :heavy_minus_sign:                                                             | Feature extractors applied                                                     |
+| `output_schema`                                                                | [models.BucketSchemaOutput](../models/bucketschemaoutput.md)                   | :heavy_check_mark:                                                             | Schema definition for bucket objects                                           |

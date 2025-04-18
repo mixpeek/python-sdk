@@ -10,7 +10,6 @@
 * [delete](#delete) - Delete Namespace
 * [update](#update) - Update Namespace
 * [get](#get) - Get Namespace
-* [list_models](#list_models) - List Available Models
 
 ## create
 
@@ -23,15 +22,20 @@ import mixpeek
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.namespaces.create(namespace_name="spotify_playlists_dev", embedding_models=[
-        "image",
-        "multimodal",
-        "text",
-        "keyword",
+    res = m_client.namespaces.create(namespace_name="spotify_playlists_dev", description="This namespace contains playlists from Spotify", feature_extractors=[
+        {
+            "feature_extractor_name": "text-extractor",
+            "description": "Text extractor",
+            "supported_input_types": [
+                "text",
+            ],
+            "version": "1.0.0",
+        },
     ], payload_indexes=[
         {
             "field_name": "metadata.title",
@@ -49,7 +53,7 @@ with Mixpeek(
             "type": mixpeek.PayloadSchemaType.KEYWORD,
             "field_schema": {
                 "type": "keyword",
-                "is_tenant": False,
+                "is_tenant": True,
             },
         },
     ])
@@ -61,12 +65,13 @@ with Mixpeek(
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                                                                | Required                                                                                                                                                                                                                                                                                            | Description                                                                                                                                                                                                                                                                                         | Example                                                                                                                                                                                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `namespace_name`                                                                                                                                                                                                                                                                                    | *str*                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                  | Name of the namespace to create                                                                                                                                                                                                                                                                     | spotify_playlists_dev                                                                                                                                                                                                                                                                               |
-| `embedding_models`                                                                                                                                                                                                                                                                                  | List[*str*]                                                                                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                                                                  | List of vector indexes to be used within this namespace. Must be one of: 'image', 'openai-clip-vit-base-patch32', 'multimodal', 'vertex-multimodal', 'text', 'baai-bge-m3', 'keyword', 'naver-splade-v3'                                                                                            | [<br/>"image",<br/>"multimodal",<br/>"text",<br/>"keyword"<br/>]                                                                                                                                                                                                                                    |
-| `payload_indexes`                                                                                                                                                                                                                                                                                   | List[[models.PayloadIndexConfig](../../models/payloadindexconfig.md)]                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                  | List of payload index configurations                                                                                                                                                                                                                                                                | [<br/>{<br/>"field_name": "metadata.title",<br/>"field_schema": {<br/>"lowercase": true,<br/>"max_token_len": 15,<br/>"min_token_len": 2,<br/>"tokenizer": "word",<br/>"type": "text"<br/>},<br/>"type": "text"<br/>},<br/>{<br/>"field_name": "metadata.description",<br/>"field_schema": {<br/>"is_tenant": false,<br/>"type": "keyword"<br/>},<br/>"type": "keyword"<br/>}<br/>] |
-| `retries`                                                                                                                                                                                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                     |
+| Parameter                                                                                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                        | Example                                                                                                                                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `namespace_name`                                                                                                                                                                                                                                                                                   | *str*                                                                                                                                                                                                                                                                                              | :heavy_check_mark:                                                                                                                                                                                                                                                                                 | Name of the namespace to create                                                                                                                                                                                                                                                                    | spotify_playlists_dev                                                                                                                                                                                                                                                                              |
+| `description`                                                                                                                                                                                                                                                                                      | *OptionalNullable[str]*                                                                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Description of the namespace                                                                                                                                                                                                                                                                       | This namespace contains playlists from Spotify                                                                                                                                                                                                                                                     |
+| `feature_extractors`                                                                                                                                                                                                                                                                               | List[[models.BasicFeatureExtractor](../../models/basicfeatureextractor.md)]                                                                                                                                                                                                                        | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | List of feature extractors to use                                                                                                                                                                                                                                                                  | [<br/>{<br/>"description": "Text extractor",<br/>"feature_extractor_name": "text-extractor",<br/>"supported_input_types": [<br/>"text"<br/>],<br/>"version": "1.0.0"<br/>}<br/>]                                                                                                                   |
+| `payload_indexes`                                                                                                                                                                                                                                                                                  | List[[models.PayloadIndexConfig](../../models/payloadindexconfig.md)]                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | List of payload index configurations                                                                                                                                                                                                                                                               | [<br/>{<br/>"field_name": "metadata.title",<br/>"field_schema": {<br/>"lowercase": true,<br/>"max_token_len": 15,<br/>"min_token_len": 2,<br/>"tokenizer": "word",<br/>"type": "text"<br/>},<br/>"type": "text"<br/>},<br/>{<br/>"field_name": "metadata.description",<br/>"field_schema": {<br/>"is_tenant": true,<br/>"type": "keyword"<br/>},<br/>"type": "keyword"<br/>}<br/>] |
+| `retries`                                                                                                                                                                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                |                                                                                                                                                                                                                                                                                                    |
 
 ### Response
 
@@ -91,11 +96,12 @@ List all namespaces for a user
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.namespaces.list()
+    res = m_client.namespaces.list()
 
     # Handle response
     print(res)
@@ -131,11 +137,12 @@ Deletes an existing namespace using either its name or ID
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.namespaces.delete(namespace="ns_1234567890")
+    res = m_client.namespaces.delete(namespace="<value>")
 
     # Handle response
     print(res)
@@ -144,10 +151,10 @@ with Mixpeek(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         | Example                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `namespace`                                                         | *str*                                                               | :heavy_check_mark:                                                  | Either the namespace name or namespace ID                           | my_namespace                                                        |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |                                                                     |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `namespace`                                                         | *str*                                                               | :heavy_check_mark:                                                  | Either the namespace name or namespace ID                           |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
@@ -164,7 +171,7 @@ with Mixpeek(
 
 ## update
 
-Updates an existing namespace's payload indexes, this is a full update
+Fully updates an existing namespace (all fields required)
 
 ### Example Usage
 
@@ -173,11 +180,12 @@ import mixpeek
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.namespaces.update(namespace="ns_1234567890", namespace_name="spotify_playlists_dev", payload_indexes=[
+    res = m_client.namespaces.update(namespace="ns_1234567890", namespace_name="spotify_playlists_dev", payload_indexes=[
         {
             "field_name": "metadata.title",
             "type": mixpeek.PayloadSchemaType.TEXT,
@@ -209,8 +217,8 @@ with Mixpeek(
 | Parameter                                                                                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                                                                                | Required                                                                                                                                                                                                                                                                                            | Description                                                                                                                                                                                                                                                                                         | Example                                                                                                                                                                                                                                                                                             |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `namespace`                                                                                                                                                                                                                                                                                         | *str*                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                  | Either the namespace name or namespace ID                                                                                                                                                                                                                                                           | my_namespace                                                                                                                                                                                                                                                                                        |
-| `namespace_name`                                                                                                                                                                                                                                                                                    | *str*                                                                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                  | Name of the namespace to update                                                                                                                                                                                                                                                                     | spotify_playlists_dev                                                                                                                                                                                                                                                                               |
-| `payload_indexes`                                                                                                                                                                                                                                                                                   | List[[models.PayloadIndexConfig](../../models/payloadindexconfig.md)]                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                                                                  | Updated list of payload index configurations                                                                                                                                                                                                                                                        | [<br/>{<br/>"field_name": "metadata.title",<br/>"field_schema": {<br/>"lowercase": true,<br/>"max_token_len": 15,<br/>"min_token_len": 2,<br/>"tokenizer": "word",<br/>"type": "text"<br/>},<br/>"type": "text"<br/>},<br/>{<br/>"field_name": "metadata.description",<br/>"field_schema": {<br/>"is_tenant": false,<br/>"type": "keyword"<br/>},<br/>"type": "keyword"<br/>}<br/>] |
+| `namespace_name`                                                                                                                                                                                                                                                                                    | *OptionalNullable[str]*                                                                                                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                                                                                  | Name of the namespace to update                                                                                                                                                                                                                                                                     | spotify_playlists_dev                                                                                                                                                                                                                                                                               |
+| `payload_indexes`                                                                                                                                                                                                                                                                                   | List[[models.PayloadIndexConfig](../../models/payloadindexconfig.md)]                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                                                                  | Updated list of payload index configurations                                                                                                                                                                                                                                                        | [<br/>{<br/>"field_name": "metadata.title",<br/>"field_schema": {<br/>"lowercase": true,<br/>"max_token_len": 15,<br/>"min_token_len": 2,<br/>"tokenizer": "word",<br/>"type": "text"<br/>},<br/>"type": "text"<br/>},<br/>{<br/>"field_name": "metadata.description",<br/>"field_schema": {<br/>"is_tenant": false,<br/>"type": "keyword"<br/>},<br/>"type": "keyword"<br/>}<br/>] |
 | `retries`                                                                                                                                                                                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                 |                                                                                                                                                                                                                                                                                                     |
 
 ### Response
@@ -236,11 +244,12 @@ Retrieve details of a specific namespace using either its name or ID
 from mixpeek import Mixpeek
 import os
 
+
 with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
+) as m_client:
 
-    res = mixpeek.namespaces.get(namespace="ns_1234567890")
+    res = m_client.namespaces.get(namespace="ns_1234567890")
 
     # Handle response
     print(res)
@@ -257,46 +266,6 @@ with Mixpeek(
 ### Response
 
 **[models.NamespaceResponse](../../models/namespaceresponse.md)**
-
-### Errors
-
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.ErrorResponse       | 400, 401, 403, 404         | application/json           |
-| models.HTTPValidationError | 422                        | application/json           |
-| models.ErrorResponse       | 500                        | application/json           |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
-
-## list_models
-
-Returns all available models and their configurations, scoped to the organization
-
-### Example Usage
-
-```python
-from mixpeek import Mixpeek
-import os
-
-with Mixpeek(
-    token=os.getenv("MIXPEEK_TOKEN", ""),
-) as mixpeek:
-
-    res = mixpeek.namespaces.list_models()
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.AvailableModelsResponse](../../models/availablemodelsresponse.md)**
 
 ### Errors
 
