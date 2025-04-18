@@ -214,15 +214,9 @@ with Mixpeek(
 
     res = m_client.buckets.list_buckets_v1_buckets_post(list_buckets_request={
         "filters": {
-            "and_": [
-
-            ],
-            "or_": [
-
-            ],
-            "not_": [
-
-            ],
+            "and_": [],
+            "or_": [],
+            "not_": [],
             "case_sensitive": True,
         },
         "sort": {

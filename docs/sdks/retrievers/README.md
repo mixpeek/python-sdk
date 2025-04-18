@@ -27,13 +27,16 @@ with Mixpeek(
 
     res = m_client.retrievers.create_retriever_v1_retrievers_retrievers_post(retriever_name="<value>", input_schema=mixpeek.BucketSchemaInput(
         properties={
-
+            "key": mixpeek.BucketSchemaFieldInput(
+                type=mixpeek.BucketSchemaFieldType.IMAGE,
+            ),
+            "key1": mixpeek.BucketSchemaFieldInput(
+                type=mixpeek.BucketSchemaFieldType.DENSE_VECTOR,
+            ),
         },
     ), collection_ids=[
         "<value>",
-    ], stages=[
-
-    ])
+    ], stages=[])
 
     # Handle response
     print(res)
@@ -126,15 +129,9 @@ with Mixpeek(
 ) as m_client:
 
     res = m_client.retrievers.execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post(retriever_id="<id>", inputs={}, filters={
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "not_": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "not_": [],
         "case_sensitive": True,
     }, sorts=[
         {

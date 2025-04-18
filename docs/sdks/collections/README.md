@@ -27,15 +27,9 @@ with Mixpeek(
     res = m_client.collections.create_collection_v1_collections_create_post(collection_name="<value>", source={
         "type": mixpeek.SourceType.BUCKET,
         "filters": {
-            "and_": [
-
-            ],
-            "or_": [
-
-            ],
-            "not_": [
-
-            ],
+            "and_": [],
+            "or_": [],
+            "not_": [],
             "case_sensitive": True,
         },
     }, feature_extractors=[

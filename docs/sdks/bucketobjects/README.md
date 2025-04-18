@@ -234,15 +234,9 @@ with Mixpeek(
 ) as m_client:
 
     res = m_client.bucket_objects.list_objects_v1_buckets_bucket_identifier_objects_post(bucket_identifier="<value>", filters={
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "not_": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "not_": [],
         "case_sensitive": True,
     }, sort={
         "field": "created_at",
