@@ -258,15 +258,9 @@ with Mixpeek(
         "my_collection",
     ], filters={
         "case_sensitive": True,
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "nor": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "nor": [],
     }, group_by={
         "field": "asset_id",
         "max_assets": 10,
@@ -344,15 +338,9 @@ with Mixpeek(
         "value": "search term",
     }, filters={
         "case_sensitive": True,
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "nor": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "nor": [],
     }, sort={
         "field": "score",
         "direction": mixpeek.Direction.DESC,

@@ -3,10 +3,10 @@ id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
   docChecksum: 9bcafaf89ee2b5a77e6322f951e3c1fb
   docVersion: "0.81"
-  speakeasyVersion: 1.533.0
-  generationVersion: 2.578.0
-  releaseVersion: 0.30.2
-  configChecksum: 8a225630bf463b7b481dae0eb7b8fc84
+  speakeasyVersion: 1.535.1
+  generationVersion: 2.585.2
+  releaseVersion: 0.30.3
+  configChecksum: bc67072a6a9109d7fa8925f679635042
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -884,7 +884,7 @@ examples:
         application/json: {"filters": {"case_sensitive": true, "AND": [{"key": "name", "value": "John", "operator": "eq"}, {"key": "age", "value": 30, "operator": "gte"}], "OR": [{"key": "status", "value": "active", "operator": "eq"}, {"key": "role", "value": "admin", "operator": "eq"}], "NOR": [{"key": "department", "value": "HR", "operator": "eq"}, {"key": "location", "value": "remote", "operator": "eq"}]}, "sort": {"field": "score", "direction": "desc"}, "feature_options": {"return_payload": true, "return_url": true}, "node_options": {"return_payload": true}}
       responses:
         "200":
-          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"taxonomy_id": "<id>", "node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 8590.21, "depth": 1, "order": [1, 2, 3]}, {"taxonomy_id": "<id>", "node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 7086.72, "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 237604, "page": 227286, "page_size": 9820, "total_pages": 227508, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": []}, {"feature_id": "<id>", "classification_id": "<id>", "taxonomy_id": "<id>", "matches": [{"taxonomy_id": "<id>", "node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 8590.21, "depth": 1, "order": [1, 2, 3]}, {"taxonomy_id": "<id>", "node_id": "<id>", "node": {"node_id": "node_abc123def456gh", "taxonomy_id": "tax_xyz789", "parent_node_id": "node_123abc456def", "node_name": "electronics_accessories", "node_description": "Electronics accessories and peripherals category", "children": [], "path_tokens": ["electronics", "accessories", "cables"], "embedding_configs": [{"type": "url", "value": "https://example.com/image.jpg", "embedding_model": "text"}], "order": [1, 2, 3], "depth": 1}, "score": 7086.72, "depth": 1, "order": [1, 2, 3]}]}], "pagination": {"total": 237604, "page": 227286, "page_size": 9820, "total_pages": 227508, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
           application/json: {"success": false, "status": 70539, "error": {"message": "<value>", "type": "<value>"}}
         "422":

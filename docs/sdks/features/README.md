@@ -167,15 +167,9 @@ with Mixpeek(
         "my_collection_name",
     ], filters={
         "case_sensitive": True,
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "nor": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "nor": [],
     }, sort={
         "field": "score",
         "direction": mixpeek.Direction.DESC,
@@ -235,18 +229,25 @@ with Mixpeek(
         "collection1",
         "collection2",
     ], offset_position=0, queries=[
-
+        {
+            "embedding_model": mixpeek.AvailableModels.IMAGE,
+            "value": "https://example.com/dog.jpg",
+            "type": mixpeek.Type.URL,
+            "settings": {
+                "limit": 50,
+                "min_score": 0.7,
+            },
+        },
+        {
+            "embedding_model": mixpeek.AvailableModels.TEXT,
+            "value": "This is a text query",
+            "type": mixpeek.Type.TEXT,
+        },
     ], filters={
         "case_sensitive": True,
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "nor": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "nor": [],
     }, group_by={
         "field": "asset_id",
         "max_features": 10,

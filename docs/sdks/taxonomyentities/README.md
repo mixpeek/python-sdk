@@ -23,6 +23,7 @@ Register new taxonomies with their descriptions
 ### Example Usage
 
 ```python
+import mixpeek
 from mixpeek import Mixpeek
 import os
 
@@ -32,7 +33,17 @@ with Mixpeek(
 ) as m_client:
 
     res = m_client.taxonomy_entities.create(taxonomy_name="electronics", nodes=[
-
+        {
+            "node_name": "electronics_accessories",
+            "node_description": "Electronics accessories and peripherals category",
+            "embedding_configs": [
+                {
+                    "type": mixpeek.EmbeddingConfigType.URL,
+                    "value": "https://example.com/image.jpg",
+                    "embedding_model": mixpeek.AvailableModels.TEXT,
+                },
+            ],
+        },
     ])
 
     # Handle response
@@ -216,15 +227,9 @@ with Mixpeek(
         "<value>",
     ], filters={
         "case_sensitive": True,
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "nor": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "nor": [],
     })
 
     # Handle response
@@ -275,15 +280,9 @@ with Mixpeek(
 
     res = m_client.taxonomy_entities.list_classifications(taxonomy="<value>", filters={
         "case_sensitive": True,
-        "and_": [
-
-        ],
-        "or_": [
-
-        ],
-        "nor": [
-
-        ],
+        "and_": [],
+        "or_": [],
+        "nor": [],
     }, sort={
         "field": "score",
         "direction": mixpeek.Direction.DESC,
