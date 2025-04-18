@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [create_bucket_v1_buckets_create_post](#create_bucket_v1_buckets_create_post) - Create Bucket
-* [get_bucket_v1_buckets_bucket_identifier_get](#get_bucket_v1_buckets_bucket_identifier_get) - Get Bucket
-* [update_bucket_v1_buckets_bucket_identifier_put](#update_bucket_v1_buckets_bucket_identifier_put) - Update Bucket
-* [delete_bucket_v1_buckets_bucket_identifier_delete](#delete_bucket_v1_buckets_bucket_identifier_delete) - Delete Bucket
-* [list_buckets_v1_buckets_post](#list_buckets_v1_buckets_post) - List Buckets
+* [create](#create) - Create Bucket
+* [get](#get) - Get Bucket
+* [update](#update) - Update Bucket
+* [delete](#delete) - Delete Bucket
+* [list](#list) - List Buckets
 
-## create_bucket_v1_buckets_create_post
+## create
 
 This endpoint allows you to create a new bucket with a defined schema.
     A bucket is a collection of objects that conform to the schema.
@@ -29,7 +29,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.buckets.create_bucket_v1_buckets_create_post(bucket_name="user_profiles", bucket_schema=mixpeek.BucketSchemaInput(
+    res = m_client.buckets.create(bucket_name="user_profiles", bucket_schema=mixpeek.BucketSchemaInput(
         properties={
 
         },
@@ -64,7 +64,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_bucket_v1_buckets_bucket_identifier_get
+## get
 
 This endpoint retrieves a bucket by its ID.
 
@@ -79,7 +79,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.buckets.get_bucket_v1_buckets_bucket_identifier_get(bucket_identifier="<value>")
+    res = m_client.buckets.get(bucket_identifier="<value>")
 
     # Handle response
     print(res)
@@ -107,7 +107,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update_bucket_v1_buckets_bucket_identifier_put
+## update
 
 This endpoint allows you to update an existing bucket.
     You can update the bucket's name, description, and metadata.
@@ -123,7 +123,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.buckets.update_bucket_v1_buckets_bucket_identifier_put(bucket_identifier="<value>")
+    res = m_client.buckets.update(bucket_identifier="<value>")
 
     # Handle response
     print(res)
@@ -154,7 +154,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_bucket_v1_buckets_bucket_identifier_delete
+## delete
 
 This endpoint deletes a bucket and all its objects.
 
@@ -169,7 +169,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.buckets.delete_bucket_v1_buckets_bucket_identifier_delete(bucket_identifier="<value>")
+    res = m_client.buckets.delete(bucket_identifier="<value>")
 
     # Handle response
     print(res)
@@ -197,7 +197,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_buckets_v1_buckets_post
+## list
 
 This endpoint lists buckets with pagination, sorting, and filtering options.
 
@@ -212,7 +212,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.buckets.list_buckets_v1_buckets_post(list_buckets_request={
+    res = m_client.buckets.list(list_buckets_request={
         "filters": {
             "and_": [],
             "or_": [],

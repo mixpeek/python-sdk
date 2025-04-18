@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 762a34453434abaa090e1ca5c2b7c7e3
+  docChecksum: 4d01c56f1b1993640e51c4e935bf334c
   docVersion: "0.81"
   speakeasyVersion: 1.535.1
   generationVersion: 2.585.2
-  releaseVersion: 0.21.1
-  configChecksum: 640184ea10077e36d8c042f8e699c987
+  releaseVersion: 0.21.6
+  configChecksum: e34e723da4e364768837712b982a48b6
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -281,11 +281,11 @@ generatedFiles:
   - src/mixpeek/_hooks/types.py
   - src/mixpeek/_version.py
   - src/mixpeek/basesdk.py
-  - src/mixpeek/bucket_objects.py
+  - src/mixpeek/bucketobjects.py
   - src/mixpeek/buckets.py
   - src/mixpeek/clusters.py
-  - src/mixpeek/collection_cache.py
-  - src/mixpeek/collection_documents.py
+  - src/mixpeek/collectioncache.py
+  - src/mixpeek/collectiondocuments.py
   - src/mixpeek/collections.py
   - src/mixpeek/features.py
   - src/mixpeek/health.py
@@ -457,14 +457,14 @@ generatedFiles:
   - src/mixpeek/models/vectorindexdefinition.py
   - src/mixpeek/models/vectortype.py
   - src/mixpeek/namespaces.py
-  - src/mixpeek/organization_notifications.py
+  - src/mixpeek/organizationnotifications.py
   - src/mixpeek/organizations.py
-  - src/mixpeek/organizations_usage.py
+  - src/mixpeek/organizationsusage.py
   - src/mixpeek/py.typed
   - src/mixpeek/research.py
-  - src/mixpeek/retriever_interactions.py
-  - src/mixpeek/retriever_stages.py
+  - src/mixpeek/retrieverinteractions.py
   - src/mixpeek/retrievers.py
+  - src/mixpeek/retrieverstages.py
   - src/mixpeek/sdk.py
   - src/mixpeek/sdkconfiguration.py
   - src/mixpeek/tasks.py
@@ -763,7 +763,7 @@ examples:
           bucket_identifier: "<value>"
         header: {}
       requestBody:
-        application/json: {"key_prefix": "/contract-2024", "blobs": [{"property": "content", "key_prefix": "/content.pdf", "type": "string", "data": {"num_pages": 5, "title": "Service Agreement 2024"}}], "skip_duplicates": false}
+        application/json: {"key_prefix": "/contract-2024", "blobs": [{"property": "content", "key_prefix": "/content.pdf", "type": "text", "data": {"num_pages": 5, "title": "Service Agreement 2024"}}], "skip_duplicates": false}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -782,7 +782,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"object_id": "obj_a1b2c3d4e5f6", "bucket_id": "bkt_12345678", "task_id": "task_87654321", "key": "/documents/contract-2024", "blobs": [{"property": "content", "type": "pdf", "data": {"num_pages": 5, "title": "Service Agreement 2024"}, "details": {"filename": "agreement.pdf", "size_bytes": 1245678, "mime_type": "application/pdf", "hash": "sha256:a1b2c3d4e5f6...", "s3_object_key": "tenant123/object456/content.pdf"}, "status": "CANCELLED"}], "status": "UPLOADING", "metadata": {}, "created_by": "user_12345", "created_at": "2024-06-01T10:30:00Z", "updated_at": "2024-06-01T10:35:12Z"}
+          application/json: {"object_id": "obj_a1b2c3d4e5f6", "bucket_id": "bkt_12345678", "task_id": "task_87654321", "key": "/documents/contract-2024", "blobs": [{"property": "content", "type": "document", "data": {"num_pages": 5, "title": "Service Agreement 2024"}, "details": {"filename": "agreement.pdf", "size_bytes": 1245678, "mime_type": "application/pdf", "hash": "sha256:a1b2c3d4e5f6...", "s3_object_key": "tenant123/object456/content.pdf"}, "status": "INITIALIZING"}], "status": "DOWNLOADING", "metadata": {}, "created_by": "user_12345", "created_at": "2024-06-01T10:30:00Z", "updated_at": "2024-06-01T10:35:12Z"}
         "400":
           application/json: {"success": false, "status": 388769, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -797,7 +797,7 @@ examples:
           object_identifier: "<value>"
         header: {}
       requestBody:
-        application/json: {"key_prefix": "/updated-documents", "blobs": [{"property": "content", "key_prefix": "/contract-2024-revised", "type": "integer", "data": {"num_pages": 6, "title": "Revised Service Agreement 2024"}}]}
+        application/json: {"key_prefix": "/updated-documents", "blobs": [{"property": "content", "key_prefix": "/contract-2024-revised", "type": "dense_vector", "data": {"num_pages": 6, "title": "Revised Service Agreement 2024"}}]}
       responses:
         "200":
           application/json: {"task_id": "<id>"}
@@ -834,7 +834,7 @@ examples:
         application/json: {"filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "sort": {"field": "created_at"}}
       responses:
         "200":
-          application/json: {"results": [{"object_id": "obj_a1b2c3d4e5f6", "bucket_id": "bkt_12345678", "task_id": "task_87654321", "key": "/documents/contract-2024", "blobs": [{"property": "content", "type": "video", "data": {"num_pages": 5, "title": "Service Agreement 2024"}, "details": {"filename": "agreement.pdf", "size_bytes": 1245678, "mime_type": "application/pdf", "hash": "sha256:a1b2c3d4e5f6...", "s3_object_key": "tenant123/object456/content.pdf"}, "status": "SKIPPED"}], "status": "CONVERTING", "metadata": {}, "created_by": "user_12345", "created_at": "2024-06-01T10:30:00Z", "updated_at": "2024-06-01T10:35:12Z"}], "pagination": {"total": 526674, "page": 98033, "page_size": 715438, "total_pages": 273639, "next_page": "<value>", "previous_page": "<value>"}}
+          application/json: {"results": [{"object_id": "obj_a1b2c3d4e5f6", "bucket_id": "bkt_12345678", "task_id": "task_87654321", "key": "/documents/contract-2024", "blobs": [{"property": "content", "type": "spreadsheet", "data": {"num_pages": 5, "title": "Service Agreement 2024"}, "details": {"filename": "agreement.pdf", "size_bytes": 1245678, "mime_type": "application/pdf", "hash": "sha256:a1b2c3d4e5f6...", "s3_object_key": "tenant123/object456/content.pdf"}, "status": "INITIALIZING"}], "status": "UPLOADING", "metadata": {}, "created_by": "user_12345", "created_at": "2024-06-01T10:30:00Z", "updated_at": "2024-06-01T10:35:12Z"}], "pagination": {"total": 526674, "page": 98033, "page_size": 715438, "total_pages": 273639, "next_page": "<value>", "previous_page": "<value>"}}
         "400":
           application/json: {"success": false, "status": 204538, "error": {"message": "<value>", "type": "<value>"}}
         "422":
@@ -910,7 +910,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"key": 520381, "key1": 867699}
+          application/json: {"key": 386265}
         "400":
           application/json: {"success": false, "status": 997395, "error": {"message": "<value>", "type": "<value>"}}
         "422":

@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [create_interaction_v1_retrievers_interactions_post](#create_interaction_v1_retrievers_interactions_post) - Create Interaction
-* [list_interactions_v1_retrievers_interactions_get](#list_interactions_v1_retrievers_interactions_get) - List Interactions
-* [get_interaction_v1_retrievers_interactions_interaction_id_get](#get_interaction_v1_retrievers_interactions_interaction_id_get) - Get Interaction
-* [delete_interaction_v1_retrievers_interactions_interaction_id_delete](#delete_interaction_v1_retrievers_interactions_interaction_id_delete) - Delete Interaction
+* [create](#create) - Create Interaction
+* [list](#list) - List Interactions
+* [get](#get) - Get Interaction
+* [delete](#delete) - Delete Interaction
 
-## create_interaction_v1_retrievers_interactions_post
+## create
 
 Record a search interaction (view, click, feedback, etc.)
 
@@ -29,7 +29,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retriever_interactions.create_interaction_v1_retrievers_interactions_post(feature_id="prod_123", interaction_type=[
+    res = m_client.retriever_interactions.create(feature_id="prod_123", interaction_type=[
         mixpeek.InteractionType.POSITIVE_FEEDBACK,
         mixpeek.InteractionType.CLICK,
         mixpeek.InteractionType.LONG_VIEW,
@@ -66,7 +66,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_interactions_v1_retrievers_interactions_get
+## list
 
 List interactions with optional filters and pagination
 
@@ -84,7 +84,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retriever_interactions.list_interactions_v1_retrievers_interactions_get()
+    res = m_client.retriever_interactions.list()
 
     # Handle response
     print(res)
@@ -116,7 +116,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_interaction_v1_retrievers_interactions_interaction_id_get
+## get
 
 Get a specific interaction
 
@@ -134,7 +134,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retriever_interactions.get_interaction_v1_retrievers_interactions_interaction_id_get(interaction_id="<id>")
+    res = m_client.retriever_interactions.get(interaction_id="<id>")
 
     # Handle response
     print(res)
@@ -162,7 +162,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_interaction_v1_retrievers_interactions_interaction_id_delete
+## delete
 
 Delete a specific interaction
 
@@ -180,7 +180,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retriever_interactions.delete_interaction_v1_retrievers_interactions_interaction_id_delete(interaction_id="<id>")
+    res = m_client.retriever_interactions.delete(interaction_id="<id>")
 
     # Handle response
     print(res)

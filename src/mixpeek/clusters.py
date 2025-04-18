@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Clusters(BaseSDK):
-    def create_cluster_v1_clusters_post(
+    def create(
         self,
         *,
         collection_id: str,
@@ -157,7 +157,7 @@ class Clusters(BaseSDK):
             http_res,
         )
 
-    async def create_cluster_v1_clusters_post_async(
+    async def create_async(
         self,
         *,
         collection_id: str,

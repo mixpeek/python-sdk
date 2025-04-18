@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [list_feature_extractors_v1_features_extractors_get](#list_feature_extractors_v1_features_extractors_get) - List Feature Extractors
-* [get_feature_extractor_v1_features_extractors_feature_id_get](#get_feature_extractor_v1_features_extractors_feature_id_get) - Get Feature Extractor Details
+* [list_extractors](#list_extractors) - List Feature Extractors
+* [get_extractor](#get_extractor) - Get Feature Extractor Details
 
-## list_feature_extractors_v1_features_extractors_get
+## list_extractors
 
 List all available feature extractors grouped by category
 
@@ -23,7 +23,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.features.list_feature_extractors_v1_features_extractors_get()
+    res = m_client.features.list_extractors()
 
     # Handle response
     print(res)
@@ -49,7 +49,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_feature_extractor_v1_features_extractors_feature_id_get
+## get_extractor
 
 Get detailed information about a specific feature extractor
 
@@ -64,7 +64,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.features.get_feature_extractor_v1_features_extractors_feature_id_get(feature_id="<id>")
+    res = m_client.features.get_extractor(feature_id="<id>")
 
     # Handle response
     print(res)

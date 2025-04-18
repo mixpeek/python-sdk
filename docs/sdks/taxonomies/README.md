@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [create_taxonomy_v1_taxonomies_post](#create_taxonomy_v1_taxonomies_post) - Create Taxonomy
+* [create](#create) - Create Taxonomy
 
-## create_taxonomy_v1_taxonomies_post
+## create
 
 **Requirements:**
 - Required permissions: write
@@ -23,7 +23,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.taxonomies.create_taxonomy_v1_taxonomies_post(taxonomy_name="<value>", config={
+    res = m_client.taxonomies.create(taxonomy_name="<value>", config={
         "source_collections": [
             {
                 "collection_id": "<id>",

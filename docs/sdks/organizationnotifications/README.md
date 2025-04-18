@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [send_notification_v1_organizations_notifications_send_post](#send_notification_v1_organizations_notifications_send_post) - Send Notification
+* [send](#send) - Send Notification
 
-## send_notification_v1_organizations_notifications_send_post
+## send
 
 Send Notification
 
@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.organization_notifications.send_notification_v1_organizations_notifications_send_post()
+    res = m_client.organization_notifications.send()
 
     # Handle response
     print(res)

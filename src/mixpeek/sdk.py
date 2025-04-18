@@ -8,23 +8,23 @@ from .utils.retries import RetryConfig
 import httpx
 from mixpeek import models, utils
 from mixpeek._hooks import SDKHooks
-from mixpeek.bucket_objects import BucketObjects
+from mixpeek.bucketobjects import BucketObjects
 from mixpeek.buckets import Buckets
 from mixpeek.clusters import Clusters
-from mixpeek.collection_cache import CollectionCache
-from mixpeek.collection_documents import CollectionDocuments
+from mixpeek.collectioncache import CollectionCache
+from mixpeek.collectiondocuments import CollectionDocuments
 from mixpeek.collections import Collections
 from mixpeek.features import Features
 from mixpeek.health import Health
 from mixpeek.models import internal
 from mixpeek.namespaces import Namespaces
-from mixpeek.organization_notifications import OrganizationNotifications
+from mixpeek.organizationnotifications import OrganizationNotifications
 from mixpeek.organizations import Organizations
-from mixpeek.organizations_usage import OrganizationsUsage
+from mixpeek.organizationsusage import OrganizationsUsage
 from mixpeek.research import Research
-from mixpeek.retriever_interactions import RetrieverInteractions
-from mixpeek.retriever_stages import RetrieverStages
+from mixpeek.retrieverinteractions import RetrieverInteractions
 from mixpeek.retrievers import Retrievers
+from mixpeek.retrieverstages import RetrieverStages
 from mixpeek.tasks import Tasks
 from mixpeek.taxonomies import Taxonomies
 from mixpeek.types import OptionalNullable, UNSET

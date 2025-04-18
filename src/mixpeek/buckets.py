@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Buckets(BaseSDK):
-    def create_bucket_v1_buckets_create_post(
+    def create(
         self,
         *,
         bucket_name: str,
@@ -154,7 +154,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    async def create_bucket_v1_buckets_create_post_async(
+    async def create_async(
         self,
         *,
         bucket_name: str,
@@ -299,7 +299,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    def get_bucket_v1_buckets_bucket_identifier_get(
+    def get(
         self,
         *,
         bucket_identifier: str,
@@ -413,7 +413,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    async def get_bucket_v1_buckets_bucket_identifier_get_async(
+    async def get_async(
         self,
         *,
         bucket_identifier: str,
@@ -527,7 +527,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    def update_bucket_v1_buckets_bucket_identifier_put(
+    def update(
         self,
         *,
         bucket_identifier: str,
@@ -664,7 +664,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    async def update_bucket_v1_buckets_bucket_identifier_put_async(
+    async def update_async(
         self,
         *,
         bucket_identifier: str,
@@ -801,7 +801,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    def delete_bucket_v1_buckets_bucket_identifier_delete(
+    def delete(
         self,
         *,
         bucket_identifier: str,
@@ -915,7 +915,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    async def delete_bucket_v1_buckets_bucket_identifier_delete_async(
+    async def delete_async(
         self,
         *,
         bucket_identifier: str,
@@ -1029,7 +1029,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    def list_buckets_v1_buckets_post(
+    def list(
         self,
         *,
         limit: OptionalNullable[int] = UNSET,
@@ -1160,7 +1160,7 @@ class Buckets(BaseSDK):
             http_res,
         )
 
-    async def list_buckets_v1_buckets_post_async(
+    async def list_async(
         self,
         *,
         limit: OptionalNullable[int] = UNSET,

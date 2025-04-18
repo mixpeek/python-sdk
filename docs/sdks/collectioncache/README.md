@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [invalidate_cache_v1_collections_cache_invalidate_post](#invalidate_cache_v1_collections_cache_invalidate_post) - Invalidate Cache
-* [get_cache_stats_v1_collections_cache_stats_get](#get_cache_stats_v1_collections_cache_stats_get) - Get Cache Stats
-* [cleanup_cache_v1_collections_cache_cleanup_post](#cleanup_cache_v1_collections_cache_cleanup_post) - Cleanup Cache
+* [invalidate](#invalidate) - Invalidate Cache
+* [get_stats](#get_stats) - Get Cache Stats
+* [cleanup](#cleanup) - Cleanup Cache
 
-## invalidate_cache_v1_collections_cache_invalidate_post
+## invalidate
 
 Invalidate cache entries for a collection.
 
@@ -35,7 +35,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_cache.invalidate_cache_v1_collections_cache_invalidate_post(collection_id="<id>", action="<value>", internal_id="<id>")
+    res = m_client.collection_cache.invalidate(collection_id="<id>", action="<value>", internal_id="<id>")
 
     # Handle response
     print(res)
@@ -70,7 +70,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_cache_stats_v1_collections_cache_stats_get
+## get_stats
 
 Get cache statistics.
 
@@ -91,7 +91,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_cache.get_cache_stats_v1_collections_cache_stats_get(internal_id="<id>")
+    res = m_client.collection_cache.get_stats(internal_id="<id>")
 
     # Handle response
     print(res)
@@ -121,7 +121,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## cleanup_cache_v1_collections_cache_cleanup_post
+## cleanup
 
 Cleanup expired cache entries.
 
@@ -143,7 +143,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_cache.cleanup_cache_v1_collections_cache_cleanup_post(internal_id="<id>")
+    res = m_client.collection_cache.cleanup(internal_id="<id>")
 
     # Handle response
     print(res)

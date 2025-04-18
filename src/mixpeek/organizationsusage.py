@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class OrganizationsUsage(BaseSDK):
-    def get_usage_v1_organizations_usage_post(
+    def get(
         self,
         *,
         request: Union[
@@ -123,7 +123,7 @@ class OrganizationsUsage(BaseSDK):
             http_res,
         )
 
-    async def get_usage_v1_organizations_usage_post_async(
+    async def get_async(
         self,
         *,
         request: Union[

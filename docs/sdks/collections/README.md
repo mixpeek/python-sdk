@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [create_collection_v1_collections_create_post](#create_collection_v1_collections_create_post) - Create Collection
-* [get_collection_v1_collections_collection_id_get](#get_collection_v1_collections_collection_id_get) - Get Collection
+* [create](#create) - Create Collection
+* [get](#get) - Get Collection
 
-## create_collection_v1_collections_create_post
+## create
 
 This endpoint allows you to create a new collection.
 
@@ -24,7 +24,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collections.create_collection_v1_collections_create_post(collection_name="<value>", source={
+    res = m_client.collections.create(collection_name="<value>", source={
         "type": mixpeek.SourceType.BUCKET,
         "filters": {
             "and_": [],
@@ -81,7 +81,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_collection_v1_collections_collection_id_get
+## get
 
 Get Collection
 
@@ -96,7 +96,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collections.get_collection_v1_collections_collection_id_get(collection_id="<id>")
+    res = m_client.collections.get(collection_id="<id>")
 
     # Handle response
     print(res)

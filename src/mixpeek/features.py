@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional
 
 
 class Features(BaseSDK):
-    def list_feature_extractors_v1_features_extractors_get(
+    def list_extractors(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -115,7 +115,7 @@ class Features(BaseSDK):
             http_res,
         )
 
-    async def list_feature_extractors_v1_features_extractors_get_async(
+    async def list_extractors_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -221,7 +221,7 @@ class Features(BaseSDK):
             http_res,
         )
 
-    def get_feature_extractor_v1_features_extractors_feature_id_get(
+    def get_extractor(
         self,
         *,
         feature_id: str,
@@ -334,7 +334,7 @@ class Features(BaseSDK):
             http_res,
         )
 
-    async def get_feature_extractor_v1_features_extractors_feature_id_get_async(
+    async def get_extractor_async(
         self,
         *,
         feature_id: str,

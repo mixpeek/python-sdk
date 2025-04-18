@@ -5,51 +5,44 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, Dict, List, Mapping, Optional
+from typing import Any, List, Mapping, Optional, Union
 
 
-class CollectionCache(BaseSDK):
-    def invalidate_cache_v1_collections_cache_invalidate_post(
+class RetrieverInteractions(BaseSDK):
+    def create(
         self,
         *,
-        collection_id: str,
-        action: str,
-        internal_id: str,
-        retriever_id: OptionalNullable[str] = UNSET,
-        recompute_strategy: Optional[models.RecomputeStrategy] = None,
-        redis_url: OptionalNullable[str] = UNSET,
-        prefix: OptionalNullable[str] = UNSET,
+        feature_id: str,
+        interaction_type: List[models.InteractionType],
         x_namespace: OptionalNullable[str] = UNSET,
-        request_body: OptionalNullable[List[str]] = UNSET,
+        position: OptionalNullable[int] = UNSET,
+        metadata: OptionalNullable[
+            Union[
+                models.SearchInteractionMetadata,
+                models.SearchInteractionMetadataTypedDict,
+            ]
+        ] = UNSET,
+        user_id: OptionalNullable[str] = UNSET,
+        session_id: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Dict[str, bool]:
-        r"""Invalidate Cache
+    ) -> models.InteractionResponse:
+        r"""Create Interaction
 
-        Invalidate cache entries for a collection.
+        Record a search interaction (view, click, feedback, etc.)
 
-        Args:
-        collection_id: ID of the collection to invalidate
-        action: Action that triggered invalidation (create, update, delete)
-        document_ids: Optional list of specific document IDs to invalidate
-        retriever_id: Optional retriever ID for retriever-specific invalidation
-        recompute_strategy: Strategy for recomputing invalidated entries
-        cache_service: Cache service instance
+        **Requirements:**
+        - Required permissions: write
 
-        Returns:
-        Success status
-
-        :param collection_id:
-        :param action:
-        :param internal_id:
-        :param retriever_id:
-        :param recompute_strategy: Strategies for recomputing cache entries
-        :param redis_url:
-        :param prefix:
+        :param feature_id: ID of the item that was interacted with
+        :param interaction_type: Type of interaction or feedback
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param request_body:
+        :param position: Position in search results where interaction occurred
+        :param metadata: Additional context about the interaction
+        :param user_id: Customer's authenticated user identifier - persists across sessions
+        :param session_id: Temporary identifier for a single search journey/session (typically 30min-1hr) - tracks anonymous and authenticated users
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -65,25 +58,27 @@ class CollectionCache(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.InvalidateCacheV1CollectionsCacheInvalidatePostRequest(
-            collection_id=collection_id,
-            action=action,
-            retriever_id=retriever_id,
-            recompute_strategy=recompute_strategy,
-            internal_id=internal_id,
-            redis_url=redis_url,
-            prefix=prefix,
+        request = models.CreateInteractionV1RetrieversInteractionsPostRequest(
             x_namespace=x_namespace,
-            request_body=request_body,
+            search_interaction=models.SearchInteraction(
+                feature_id=feature_id,
+                interaction_type=interaction_type,
+                position=position,
+                metadata=utils.get_pydantic_model(
+                    metadata, OptionalNullable[models.SearchInteractionMetadata]
+                ),
+                user_id=user_id,
+                session_id=session_id,
+            ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/v1/collections/cache/invalidate",
+            path="/v1/retrievers/interactions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -91,7 +86,11 @@ class CollectionCache(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body, True, True, "json", OptionalNullable[List[str]]
+                request.search_interaction,
+                False,
+                False,
+                "json",
+                models.SearchInteraction,
             ),
             timeout_ms=timeout_ms,
         )
@@ -107,7 +106,7 @@ class CollectionCache(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="invalidate_cache_v1_collections_cache_invalidate_post",
+                operation_id="create_interaction_v1_retrievers_interactions_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -120,7 +119,7 @@ class CollectionCache(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Dict[str, bool])
+            return utils.unmarshal_json(http_res.text, models.InteractionResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -158,47 +157,40 @@ class CollectionCache(BaseSDK):
             http_res,
         )
 
-    async def invalidate_cache_v1_collections_cache_invalidate_post_async(
+    async def create_async(
         self,
         *,
-        collection_id: str,
-        action: str,
-        internal_id: str,
-        retriever_id: OptionalNullable[str] = UNSET,
-        recompute_strategy: Optional[models.RecomputeStrategy] = None,
-        redis_url: OptionalNullable[str] = UNSET,
-        prefix: OptionalNullable[str] = UNSET,
+        feature_id: str,
+        interaction_type: List[models.InteractionType],
         x_namespace: OptionalNullable[str] = UNSET,
-        request_body: OptionalNullable[List[str]] = UNSET,
+        position: OptionalNullable[int] = UNSET,
+        metadata: OptionalNullable[
+            Union[
+                models.SearchInteractionMetadata,
+                models.SearchInteractionMetadataTypedDict,
+            ]
+        ] = UNSET,
+        user_id: OptionalNullable[str] = UNSET,
+        session_id: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Dict[str, bool]:
-        r"""Invalidate Cache
+    ) -> models.InteractionResponse:
+        r"""Create Interaction
 
-        Invalidate cache entries for a collection.
+        Record a search interaction (view, click, feedback, etc.)
 
-        Args:
-        collection_id: ID of the collection to invalidate
-        action: Action that triggered invalidation (create, update, delete)
-        document_ids: Optional list of specific document IDs to invalidate
-        retriever_id: Optional retriever ID for retriever-specific invalidation
-        recompute_strategy: Strategy for recomputing invalidated entries
-        cache_service: Cache service instance
+        **Requirements:**
+        - Required permissions: write
 
-        Returns:
-        Success status
-
-        :param collection_id:
-        :param action:
-        :param internal_id:
-        :param retriever_id:
-        :param recompute_strategy: Strategies for recomputing cache entries
-        :param redis_url:
-        :param prefix:
+        :param feature_id: ID of the item that was interacted with
+        :param interaction_type: Type of interaction or feedback
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :param request_body:
+        :param position: Position in search results where interaction occurred
+        :param metadata: Additional context about the interaction
+        :param user_id: Customer's authenticated user identifier - persists across sessions
+        :param session_id: Temporary identifier for a single search journey/session (typically 30min-1hr) - tracks anonymous and authenticated users
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -214,25 +206,27 @@ class CollectionCache(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.InvalidateCacheV1CollectionsCacheInvalidatePostRequest(
-            collection_id=collection_id,
-            action=action,
-            retriever_id=retriever_id,
-            recompute_strategy=recompute_strategy,
-            internal_id=internal_id,
-            redis_url=redis_url,
-            prefix=prefix,
+        request = models.CreateInteractionV1RetrieversInteractionsPostRequest(
             x_namespace=x_namespace,
-            request_body=request_body,
+            search_interaction=models.SearchInteraction(
+                feature_id=feature_id,
+                interaction_type=interaction_type,
+                position=position,
+                metadata=utils.get_pydantic_model(
+                    metadata, OptionalNullable[models.SearchInteractionMetadata]
+                ),
+                user_id=user_id,
+                session_id=session_id,
+            ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/v1/collections/cache/invalidate",
+            path="/v1/retrievers/interactions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -240,7 +234,11 @@ class CollectionCache(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body, True, True, "json", OptionalNullable[List[str]]
+                request.search_interaction,
+                False,
+                False,
+                "json",
+                models.SearchInteraction,
             ),
             timeout_ms=timeout_ms,
         )
@@ -256,7 +254,7 @@ class CollectionCache(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="invalidate_cache_v1_collections_cache_invalidate_post",
+                operation_id="create_interaction_v1_retrievers_interactions_post",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -269,7 +267,7 @@ class CollectionCache(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Dict[str, bool])
+            return utils.unmarshal_json(http_res.text, models.InteractionResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -307,31 +305,32 @@ class CollectionCache(BaseSDK):
             http_res,
         )
 
-    def get_cache_stats_v1_collections_cache_stats_get(
+    def list(
         self,
         *,
-        internal_id: str,
-        redis_url: OptionalNullable[str] = UNSET,
-        prefix: OptionalNullable[str] = UNSET,
+        feature_id: OptionalNullable[str] = UNSET,
+        interaction_type: OptionalNullable[str] = UNSET,
+        session_id: OptionalNullable[str] = UNSET,
+        page: OptionalNullable[int] = UNSET,
+        page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CacheStats:
-        r"""Get Cache Stats
+    ) -> List[models.InteractionResponse]:
+        r"""List Interactions
 
-        Get cache statistics.
+        List interactions with optional filters and pagination
 
-        Args:
-        cache_service: Cache service instance
+        **Requirements:**
+        - Required permissions: read
 
-        Returns:
-        Cache statistics
-
-        :param internal_id:
-        :param redis_url:
-        :param prefix:
+        :param feature_id:
+        :param interaction_type:
+        :param session_id:
+        :param page:
+        :param page_size:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -348,16 +347,18 @@ class CollectionCache(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCacheStatsV1CollectionsCacheStatsGetRequest(
-            internal_id=internal_id,
-            redis_url=redis_url,
-            prefix=prefix,
+        request = models.ListInteractionsV1RetrieversInteractionsGetRequest(
+            feature_id=feature_id,
+            interaction_type=interaction_type,
+            session_id=session_id,
+            page=page,
+            page_size=page_size,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
             method="GET",
-            path="/v1/collections/cache/stats",
+            path="/v1/retrievers/interactions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -382,7 +383,7 @@ class CollectionCache(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="get_cache_stats_v1_collections_cache_stats_get",
+                operation_id="list_interactions_v1_retrievers_interactions_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -395,7 +396,7 @@ class CollectionCache(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CacheStats)
+            return utils.unmarshal_json(http_res.text, List[models.InteractionResponse])
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -433,31 +434,32 @@ class CollectionCache(BaseSDK):
             http_res,
         )
 
-    async def get_cache_stats_v1_collections_cache_stats_get_async(
+    async def list_async(
         self,
         *,
-        internal_id: str,
-        redis_url: OptionalNullable[str] = UNSET,
-        prefix: OptionalNullable[str] = UNSET,
+        feature_id: OptionalNullable[str] = UNSET,
+        interaction_type: OptionalNullable[str] = UNSET,
+        session_id: OptionalNullable[str] = UNSET,
+        page: OptionalNullable[int] = UNSET,
+        page_size: Optional[int] = 10,
         x_namespace: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CacheStats:
-        r"""Get Cache Stats
+    ) -> List[models.InteractionResponse]:
+        r"""List Interactions
 
-        Get cache statistics.
+        List interactions with optional filters and pagination
 
-        Args:
-        cache_service: Cache service instance
+        **Requirements:**
+        - Required permissions: read
 
-        Returns:
-        Cache statistics
-
-        :param internal_id:
-        :param redis_url:
-        :param prefix:
+        :param feature_id:
+        :param interaction_type:
+        :param session_id:
+        :param page:
+        :param page_size:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -474,16 +476,18 @@ class CollectionCache(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetCacheStatsV1CollectionsCacheStatsGetRequest(
-            internal_id=internal_id,
-            redis_url=redis_url,
-            prefix=prefix,
+        request = models.ListInteractionsV1RetrieversInteractionsGetRequest(
+            feature_id=feature_id,
+            interaction_type=interaction_type,
+            session_id=session_id,
+            page=page,
+            page_size=page_size,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/v1/collections/cache/stats",
+            path="/v1/retrievers/interactions",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -508,7 +512,7 @@ class CollectionCache(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="get_cache_stats_v1_collections_cache_stats_get",
+                operation_id="list_interactions_v1_retrievers_interactions_get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -521,7 +525,7 @@ class CollectionCache(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, models.CacheStats)
+            return utils.unmarshal_json(http_res.text, List[models.InteractionResponse])
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -559,34 +563,24 @@ class CollectionCache(BaseSDK):
             http_res,
         )
 
-    def cleanup_cache_v1_collections_cache_cleanup_post(
+    def get(
         self,
         *,
-        internal_id: str,
-        batch_size: Optional[int] = 1000,
-        redis_url: OptionalNullable[str] = UNSET,
-        prefix: OptionalNullable[str] = UNSET,
+        interaction_id: str,
         x_namespace: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Dict[str, int]:
-        r"""Cleanup Cache
+    ) -> models.InteractionResponse:
+        r"""Get Interaction
 
-        Cleanup expired cache entries.
+        Get a specific interaction
 
-        Args:
-        batch_size: Number of keys to process per batch
-        cache_service: Cache service instance
+        **Requirements:**
+        - Required permissions: read
 
-        Returns:
-        Number of keys deleted
-
-        :param internal_id:
-        :param batch_size:
-        :param redis_url:
-        :param prefix:
+        :param interaction_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -603,22 +597,19 @@ class CollectionCache(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CleanupCacheV1CollectionsCacheCleanupPostRequest(
-            batch_size=batch_size,
-            internal_id=internal_id,
-            redis_url=redis_url,
-            prefix=prefix,
+        request = models.GetInteractionV1RetrieversInteractionsInteractionIDGetRequest(
+            interaction_id=interaction_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request(
-            method="POST",
-            path="/v1/collections/cache/cleanup",
+            method="GET",
+            path="/v1/retrievers/interactions/{interaction_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -638,7 +629,7 @@ class CollectionCache(BaseSDK):
         http_res = self.do_request(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="cleanup_cache_v1_collections_cache_cleanup_post",
+                operation_id="get_interaction_v1_retrievers_interactions__interaction_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -651,7 +642,7 @@ class CollectionCache(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Dict[str, int])
+            return utils.unmarshal_json(http_res.text, models.InteractionResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):
@@ -689,34 +680,24 @@ class CollectionCache(BaseSDK):
             http_res,
         )
 
-    async def cleanup_cache_v1_collections_cache_cleanup_post_async(
+    async def get_async(
         self,
         *,
-        internal_id: str,
-        batch_size: Optional[int] = 1000,
-        redis_url: OptionalNullable[str] = UNSET,
-        prefix: OptionalNullable[str] = UNSET,
+        interaction_id: str,
         x_namespace: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> Dict[str, int]:
-        r"""Cleanup Cache
+    ) -> models.InteractionResponse:
+        r"""Get Interaction
 
-        Cleanup expired cache entries.
+        Get a specific interaction
 
-        Args:
-        batch_size: Number of keys to process per batch
-        cache_service: Cache service instance
+        **Requirements:**
+        - Required permissions: read
 
-        Returns:
-        Number of keys deleted
-
-        :param internal_id:
-        :param batch_size:
-        :param redis_url:
-        :param prefix:
+        :param interaction_id:
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -733,22 +714,19 @@ class CollectionCache(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.CleanupCacheV1CollectionsCacheCleanupPostRequest(
-            batch_size=batch_size,
-            internal_id=internal_id,
-            redis_url=redis_url,
-            prefix=prefix,
+        request = models.GetInteractionV1RetrieversInteractionsInteractionIDGetRequest(
+            interaction_id=interaction_id,
             x_namespace=x_namespace,
         )
 
         req = self._build_request_async(
-            method="POST",
-            path="/v1/collections/cache/cleanup",
+            method="GET",
+            path="/v1/retrievers/interactions/{interaction_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -768,7 +746,7 @@ class CollectionCache(BaseSDK):
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
                 base_url=base_url or "",
-                operation_id="cleanup_cache_v1_collections_cache_cleanup_post",
+                operation_id="get_interaction_v1_retrievers_interactions__interaction_id__get",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -781,7 +759,245 @@ class CollectionCache(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(http_res.text, Dict[str, int])
+            return utils.unmarshal_json(http_res.text, models.InteractionResponse)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def delete(
+        self,
+        *,
+        interaction_id: str,
+        x_namespace: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Any:
+        r"""Delete Interaction
+
+        Delete a specific interaction
+
+        **Requirements:**
+        - Required permissions: write
+
+        :param interaction_id:
+        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = (
+            models.DeleteInteractionV1RetrieversInteractionsInteractionIDDeleteRequest(
+                interaction_id=interaction_id,
+                x_namespace=x_namespace,
+            )
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/v1/retrievers/interactions/{interaction_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="delete_interaction_v1_retrievers_interactions__interaction_id__delete",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(http_res.text, Any)
+        if utils.match_response(
+            http_res, ["400", "401", "403", "404"], "application/json"
+        ):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
+        if utils.match_response(http_res, "422", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.HTTPValidationErrorData
+            )
+            raise models.HTTPValidationError(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text, models.ErrorResponseData
+            )
+            raise models.ErrorResponse(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def delete_async(
+        self,
+        *,
+        interaction_id: str,
+        x_namespace: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Any:
+        r"""Delete Interaction
+
+        Delete a specific interaction
+
+        **Requirements:**
+        - Required permissions: write
+
+        :param interaction_id:
+        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = (
+            models.DeleteInteractionV1RetrieversInteractionsInteractionIDDeleteRequest(
+                interaction_id=interaction_id,
+                x_namespace=x_namespace,
+            )
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/v1/retrievers/interactions/{interaction_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="delete_interaction_v1_retrievers_interactions__interaction_id__delete",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "404", "422", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(http_res.text, Any)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
         ):

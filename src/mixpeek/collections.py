@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Collections(BaseSDK):
-    def create_collection_v1_collections_create_post(
+    def create(
         self,
         *,
         collection_name: str,
@@ -187,7 +187,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def create_collection_v1_collections_create_post_async(
+    async def create_async(
         self,
         *,
         collection_name: str,
@@ -365,7 +365,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    def get_collection_v1_collections_collection_id_get(
+    def get(
         self,
         *,
         collection_id: str,
@@ -477,7 +477,7 @@ class Collections(BaseSDK):
             http_res,
         )
 
-    async def get_collection_v1_collections_collection_id_get_async(
+    async def get_async(
         self,
         *,
         collection_id: str,

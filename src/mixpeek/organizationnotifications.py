@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class OrganizationNotifications(BaseSDK):
-    def send_notification_v1_organizations_notifications_send_post(
+    def send(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -111,7 +111,7 @@ class OrganizationNotifications(BaseSDK):
             http_res,
         )
 
-    async def send_notification_v1_organizations_notifications_send_post_async(
+    async def send_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,

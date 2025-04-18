@@ -179,48 +179,48 @@ with Mixpeek(
 
 ### [bucket_objects](docs/sdks/bucketobjects/README.md)
 
-* [create_object_v1_buckets_bucket_identifier_objects_create_post](docs/sdks/bucketobjects/README.md#create_object_v1_buckets_bucket_identifier_objects_create_post) - Create Object
-* [get_object_v1_buckets_bucket_identifier_objects_object_identifier_get](docs/sdks/bucketobjects/README.md#get_object_v1_buckets_bucket_identifier_objects_object_identifier_get) - Get Object
-* [update_object_v1_buckets_bucket_identifier_objects_object_identifier_put](docs/sdks/bucketobjects/README.md#update_object_v1_buckets_bucket_identifier_objects_object_identifier_put) - Update Object
-* [delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete](docs/sdks/bucketobjects/README.md#delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete) - Delete Object
-* [list_objects_v1_buckets_bucket_identifier_objects_post](docs/sdks/bucketobjects/README.md#list_objects_v1_buckets_bucket_identifier_objects_post) - List Objects
+* [create](docs/sdks/bucketobjects/README.md#create) - Create Object
+* [get](docs/sdks/bucketobjects/README.md#get) - Get Object
+* [update](docs/sdks/bucketobjects/README.md#update) - Update Object
+* [delete](docs/sdks/bucketobjects/README.md#delete) - Delete Object
+* [list](docs/sdks/bucketobjects/README.md#list) - List Objects
 
 ### [buckets](docs/sdks/buckets/README.md)
 
-* [create_bucket_v1_buckets_create_post](docs/sdks/buckets/README.md#create_bucket_v1_buckets_create_post) - Create Bucket
-* [get_bucket_v1_buckets_bucket_identifier_get](docs/sdks/buckets/README.md#get_bucket_v1_buckets_bucket_identifier_get) - Get Bucket
-* [update_bucket_v1_buckets_bucket_identifier_put](docs/sdks/buckets/README.md#update_bucket_v1_buckets_bucket_identifier_put) - Update Bucket
-* [delete_bucket_v1_buckets_bucket_identifier_delete](docs/sdks/buckets/README.md#delete_bucket_v1_buckets_bucket_identifier_delete) - Delete Bucket
-* [list_buckets_v1_buckets_post](docs/sdks/buckets/README.md#list_buckets_v1_buckets_post) - List Buckets
+* [create](docs/sdks/buckets/README.md#create) - Create Bucket
+* [get](docs/sdks/buckets/README.md#get) - Get Bucket
+* [update](docs/sdks/buckets/README.md#update) - Update Bucket
+* [delete](docs/sdks/buckets/README.md#delete) - Delete Bucket
+* [list](docs/sdks/buckets/README.md#list) - List Buckets
 
 ### [clusters](docs/sdks/clusters/README.md)
 
-* [create_cluster_v1_clusters_post](docs/sdks/clusters/README.md#create_cluster_v1_clusters_post) - Create Cluster
+* [create](docs/sdks/clusters/README.md#create) - Create Cluster
 
 ### [collection_cache](docs/sdks/collectioncache/README.md)
 
-* [invalidate_cache_v1_collections_cache_invalidate_post](docs/sdks/collectioncache/README.md#invalidate_cache_v1_collections_cache_invalidate_post) - Invalidate Cache
-* [get_cache_stats_v1_collections_cache_stats_get](docs/sdks/collectioncache/README.md#get_cache_stats_v1_collections_cache_stats_get) - Get Cache Stats
-* [cleanup_cache_v1_collections_cache_cleanup_post](docs/sdks/collectioncache/README.md#cleanup_cache_v1_collections_cache_cleanup_post) - Cleanup Cache
+* [invalidate](docs/sdks/collectioncache/README.md#invalidate) - Invalidate Cache
+* [get_stats](docs/sdks/collectioncache/README.md#get_stats) - Get Cache Stats
+* [cleanup](docs/sdks/collectioncache/README.md#cleanup) - Cleanup Cache
 
 ### [collection_documents](docs/sdks/collectiondocuments/README.md)
 
-* [get_document_v1_collections_collection_identifier_documents_document_id_get](docs/sdks/collectiondocuments/README.md#get_document_v1_collections_collection_identifier_documents_document_id_get) - Get Document
-* [update_document_v1_collections_collection_identifier_documents_document_id_put](docs/sdks/collectiondocuments/README.md#update_document_v1_collections_collection_identifier_documents_document_id_put) - Update Document
-* [delete_document_v1_collections_collection_identifier_documents_document_id_delete](docs/sdks/collectiondocuments/README.md#delete_document_v1_collections_collection_identifier_documents_document_id_delete) - Delete Document
-* [list_documents_v1_collections_collection_identifier_documents_get](docs/sdks/collectiondocuments/README.md#list_documents_v1_collections_collection_identifier_documents_get) - List Documents
-* [batch_update_documents_v1_collections_collection_identifier_documents_batch_put](docs/sdks/collectiondocuments/README.md#batch_update_documents_v1_collections_collection_identifier_documents_batch_put) - Batch Update Documents
-* [batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete](docs/sdks/collectiondocuments/README.md#batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete) - Batch Delete Documents
+* [get](docs/sdks/collectiondocuments/README.md#get) - Get Document
+* [update](docs/sdks/collectiondocuments/README.md#update) - Update Document
+* [delete](docs/sdks/collectiondocuments/README.md#delete) - Delete Document
+* [list](docs/sdks/collectiondocuments/README.md#list) - List Documents
+* [batch_update](docs/sdks/collectiondocuments/README.md#batch_update) - Batch Update Documents
+* [batch_delete](docs/sdks/collectiondocuments/README.md#batch_delete) - Batch Delete Documents
 
 ### [collections](docs/sdks/collections/README.md)
 
-* [create_collection_v1_collections_create_post](docs/sdks/collections/README.md#create_collection_v1_collections_create_post) - Create Collection
-* [get_collection_v1_collections_collection_id_get](docs/sdks/collections/README.md#get_collection_v1_collections_collection_id_get) - Get Collection
+* [create](docs/sdks/collections/README.md#create) - Create Collection
+* [get](docs/sdks/collections/README.md#get) - Get Collection
 
 ### [features](docs/sdks/features/README.md)
 
-* [list_feature_extractors_v1_features_extractors_get](docs/sdks/features/README.md#list_feature_extractors_v1_features_extractors_get) - List Feature Extractors
-* [get_feature_extractor_v1_features_extractors_feature_id_get](docs/sdks/features/README.md#get_feature_extractor_v1_features_extractors_feature_id_get) - Get Feature Extractor Details
+* [list_extractors](docs/sdks/features/README.md#list_extractors) - List Feature Extractors
+* [get_extractor](docs/sdks/features/README.md#get_extractor) - Get Feature Extractor Details
 
 ### [health](docs/sdks/health/README.md)
 
@@ -237,7 +237,7 @@ with Mixpeek(
 
 ### [organization_notifications](docs/sdks/organizationnotifications/README.md)
 
-* [send_notification_v1_organizations_notifications_send_post](docs/sdks/organizationnotifications/README.md#send_notification_v1_organizations_notifications_send_post) - Send Notification
+* [send](docs/sdks/organizationnotifications/README.md#send) - Send Notification
 
 ### [organizations](docs/sdks/organizations/README.md)
 
@@ -248,28 +248,28 @@ with Mixpeek(
 
 ### [organizations_usage](docs/sdks/organizationsusage/README.md)
 
-* [get_usage_v1_organizations_usage_post](docs/sdks/organizationsusage/README.md#get_usage_v1_organizations_usage_post) - Get Usage
+* [get](docs/sdks/organizationsusage/README.md#get) - Get Usage
 
 ### [research](docs/sdks/research/README.md)
 
-* [get_research_v1_research_get](docs/sdks/research/README.md#get_research_v1_research_get) - Get Research
+* [get](docs/sdks/research/README.md#get) - Get Research
 
 ### [retriever_interactions](docs/sdks/retrieverinteractions/README.md)
 
-* [create_interaction_v1_retrievers_interactions_post](docs/sdks/retrieverinteractions/README.md#create_interaction_v1_retrievers_interactions_post) - Create Interaction
-* [list_interactions_v1_retrievers_interactions_get](docs/sdks/retrieverinteractions/README.md#list_interactions_v1_retrievers_interactions_get) - List Interactions
-* [get_interaction_v1_retrievers_interactions_interaction_id_get](docs/sdks/retrieverinteractions/README.md#get_interaction_v1_retrievers_interactions_interaction_id_get) - Get Interaction
-* [delete_interaction_v1_retrievers_interactions_interaction_id_delete](docs/sdks/retrieverinteractions/README.md#delete_interaction_v1_retrievers_interactions_interaction_id_delete) - Delete Interaction
+* [create](docs/sdks/retrieverinteractions/README.md#create) - Create Interaction
+* [list](docs/sdks/retrieverinteractions/README.md#list) - List Interactions
+* [get](docs/sdks/retrieverinteractions/README.md#get) - Get Interaction
+* [delete](docs/sdks/retrieverinteractions/README.md#delete) - Delete Interaction
 
 ### [retriever_stages](docs/sdks/retrieverstages/README.md)
 
-* [get_retriever_stages_v1_retrievers_stages_get](docs/sdks/retrieverstages/README.md#get_retriever_stages_v1_retrievers_stages_get) - List Retriever Stages
+* [list](docs/sdks/retrieverstages/README.md#list) - List Retriever Stages
 
 ### [retrievers](docs/sdks/retrievers/README.md)
 
-* [create_retriever_v1_retrievers_retrievers_post](docs/sdks/retrievers/README.md#create_retriever_v1_retrievers_retrievers_post) - Create Retriever
-* [get_retriever_v1_retrievers_retrievers_retriever_id_get](docs/sdks/retrievers/README.md#get_retriever_v1_retrievers_retrievers_retriever_id_get) - Get Retriever
-* [execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post](docs/sdks/retrievers/README.md#execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post) - Execute Retriever
+* [create](docs/sdks/retrievers/README.md#create) - Create Retriever
+* [get](docs/sdks/retrievers/README.md#get) - Get Retriever
+* [execute](docs/sdks/retrievers/README.md#execute) - Execute Retriever
 
 ### [tasks](docs/sdks/tasks/README.md)
 
@@ -279,7 +279,7 @@ with Mixpeek(
 
 ### [taxonomies](docs/sdks/taxonomies/README.md)
 
-* [create_taxonomy_v1_taxonomies_post](docs/sdks/taxonomies/README.md#create_taxonomy_v1_taxonomies_post) - Create Taxonomy
+* [create](docs/sdks/taxonomies/README.md#create) - Create Taxonomy
 
 ### [users](docs/sdks/users/README.md)
 

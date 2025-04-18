@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get_research_v1_research_get](#get_research_v1_research_get) - Get Research
+* [get](#get) - Get Research
 
-## get_research_v1_research_get
+## get
 
 Get Research
 
@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.research.get_research_v1_research_get()
+    res = m_client.research.get()
 
     # Handle response
     print(res)

@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class CollectionDocuments(BaseSDK):
-    def get_document_v1_collections_collection_identifier_documents_document_id_get(
+    def get(
         self,
         *,
         collection_identifier: str,
@@ -130,7 +130,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    async def get_document_v1_collections_collection_identifier_documents_document_id_get_async(
+    async def get_async(
         self,
         *,
         collection_identifier: str,
@@ -251,7 +251,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    def update_document_v1_collections_collection_identifier_documents_document_id_put(
+    def update(
         self,
         *,
         collection_identifier: str,
@@ -391,7 +391,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    async def update_document_v1_collections_collection_identifier_documents_document_id_put_async(
+    async def update_async(
         self,
         *,
         collection_identifier: str,
@@ -531,7 +531,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    def delete_document_v1_collections_collection_identifier_documents_document_id_delete(
+    def delete(
         self,
         *,
         collection_identifier: str,
@@ -652,7 +652,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    async def delete_document_v1_collections_collection_identifier_documents_document_id_delete_async(
+    async def delete_async(
         self,
         *,
         collection_identifier: str,
@@ -773,7 +773,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    def list_documents_v1_collections_collection_identifier_documents_get(
+    def list(
         self,
         *,
         collection_identifier: str,
@@ -908,7 +908,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    async def list_documents_v1_collections_collection_identifier_documents_get_async(
+    async def list_async(
         self,
         *,
         collection_identifier: str,
@@ -1043,7 +1043,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    def batch_update_documents_v1_collections_collection_identifier_documents_batch_put(
+    def batch_update(
         self,
         *,
         collection_identifier: str,
@@ -1179,7 +1179,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    async def batch_update_documents_v1_collections_collection_identifier_documents_batch_put_async(
+    async def batch_update_async(
         self,
         *,
         collection_identifier: str,
@@ -1315,7 +1315,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    def batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete(
+    def batch_delete(
         self,
         *,
         collection_identifier: str,
@@ -1439,7 +1439,7 @@ class CollectionDocuments(BaseSDK):
             http_res,
         )
 
-    async def batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete_async(
+    async def batch_delete_async(
         self,
         *,
         collection_identifier: str,

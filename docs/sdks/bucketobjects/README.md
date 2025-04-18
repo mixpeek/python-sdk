@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [create_object_v1_buckets_bucket_identifier_objects_create_post](#create_object_v1_buckets_bucket_identifier_objects_create_post) - Create Object
-* [get_object_v1_buckets_bucket_identifier_objects_object_identifier_get](#get_object_v1_buckets_bucket_identifier_objects_object_identifier_get) - Get Object
-* [update_object_v1_buckets_bucket_identifier_objects_object_identifier_put](#update_object_v1_buckets_bucket_identifier_objects_object_identifier_put) - Update Object
-* [delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete](#delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete) - Delete Object
-* [list_objects_v1_buckets_bucket_identifier_objects_post](#list_objects_v1_buckets_bucket_identifier_objects_post) - List Objects
+* [create](#create) - Create Object
+* [get](#get) - Get Object
+* [update](#update) - Update Object
+* [delete](#delete) - Delete Object
+* [list](#list) - List Objects
 
-## create_object_v1_buckets_bucket_identifier_objects_create_post
+## create
 
 This endpoint creates a new object in the specified bucket.
     The object must conform to the bucket's schema.
@@ -28,11 +28,11 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.bucket_objects.create_object_v1_buckets_bucket_identifier_objects_create_post(bucket_identifier="<value>", key_prefix="/contract-2024", blobs=[
+    res = m_client.bucket_objects.create(bucket_identifier="<value>", key_prefix="/contract-2024", blobs=[
         {
             "property": "content",
             "key_prefix": "/content.pdf",
-            "type": mixpeek.BucketSchemaFieldType.STRING,
+            "type": mixpeek.BucketSchemaFieldType.TEXT,
             "data": {
                 "num_pages": 5,
                 "title": "Service Agreement 2024",
@@ -70,7 +70,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_object_v1_buckets_bucket_identifier_objects_object_identifier_get
+## get
 
 This endpoint retrieves an object by its ID from the specified bucket.
 
@@ -85,7 +85,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.bucket_objects.get_object_v1_buckets_bucket_identifier_objects_object_identifier_get(bucket_identifier="<value>", object_identifier="<value>")
+    res = m_client.bucket_objects.get(bucket_identifier="<value>", object_identifier="<value>")
 
     # Handle response
     print(res)
@@ -114,7 +114,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update_object_v1_buckets_bucket_identifier_objects_object_identifier_put
+## update
 
 This endpoint updates an existing object in the specified bucket.
     The updated object must conform to the bucket's schema.
@@ -131,11 +131,11 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.bucket_objects.update_object_v1_buckets_bucket_identifier_objects_object_identifier_put(bucket_identifier="<value>", object_identifier="<value>", key_prefix="/updated-documents", blobs=[
+    res = m_client.bucket_objects.update(bucket_identifier="<value>", object_identifier="<value>", key_prefix="/updated-documents", blobs=[
         {
             "property": "content",
             "key_prefix": "/contract-2024-revised",
-            "type": mixpeek.BucketSchemaFieldType.INTEGER,
+            "type": mixpeek.BucketSchemaFieldType.DENSE_VECTOR,
             "data": {
                 "num_pages": 6,
                 "title": "Revised Service Agreement 2024",
@@ -174,7 +174,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete
+## delete
 
 This endpoint deletes an object from the specified bucket.
 
@@ -189,7 +189,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.bucket_objects.delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete(bucket_identifier="<value>", object_identifier="<value>")
+    res = m_client.bucket_objects.delete(bucket_identifier="<value>", object_identifier="<value>")
 
     # Handle response
     print(res)
@@ -218,7 +218,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_objects_v1_buckets_bucket_identifier_objects_post
+## list
 
 This endpoint lists objects in a bucket with pagination, sorting, and filtering options.
 
@@ -233,7 +233,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.bucket_objects.list_objects_v1_buckets_bucket_identifier_objects_post(bucket_identifier="<value>", filters={
+    res = m_client.bucket_objects.list(bucket_identifier="<value>", filters={
         "and_": [],
         "or_": [],
         "not_": [],

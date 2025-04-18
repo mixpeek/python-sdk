@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [create_cluster_v1_clusters_post](#create_cluster_v1_clusters_post) - Create Cluster
+* [create](#create) - Create Cluster
 
-## create_cluster_v1_clusters_post
+## create
 
 Create Cluster
 
@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.clusters.create_cluster_v1_clusters_post(collection_id="<id>")
+    res = m_client.clusters.create(collection_id="<id>")
 
     # Handle response
     print(res)

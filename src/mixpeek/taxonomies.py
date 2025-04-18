@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Taxonomies(BaseSDK):
-    def create_taxonomy_v1_taxonomies_post(
+    def create(
         self,
         *,
         taxonomy_name: str,
@@ -139,7 +139,7 @@ class Taxonomies(BaseSDK):
             http_res,
         )
 
-    async def create_taxonomy_v1_taxonomies_post_async(
+    async def create_async(
         self,
         *,
         taxonomy_name: str,

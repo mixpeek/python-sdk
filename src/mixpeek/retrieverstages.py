@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional
 
 
 class RetrieverStages(BaseSDK):
-    def get_retriever_stages_v1_retrievers_stages_get(
+    def list(
         self,
         *,
         x_namespace: OptionalNullable[str] = UNSET,
@@ -120,7 +120,7 @@ class RetrieverStages(BaseSDK):
             http_res,
         )
 
-    async def get_retriever_stages_v1_retrievers_stages_get_async(
+    async def list_async(
         self,
         *,
         x_namespace: OptionalNullable[str] = UNSET,

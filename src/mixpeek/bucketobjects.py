@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class BucketObjects(BaseSDK):
-    def create_object_v1_buckets_bucket_identifier_objects_create_post(
+    def create(
         self,
         *,
         bucket_identifier: str,
@@ -158,7 +158,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    async def create_object_v1_buckets_bucket_identifier_objects_create_post_async(
+    async def create_async(
         self,
         *,
         bucket_identifier: str,
@@ -307,7 +307,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    def get_object_v1_buckets_bucket_identifier_objects_object_identifier_get(
+    def get(
         self,
         *,
         bucket_identifier: str,
@@ -426,7 +426,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    async def get_object_v1_buckets_bucket_identifier_objects_object_identifier_get_async(
+    async def get_async(
         self,
         *,
         bucket_identifier: str,
@@ -545,7 +545,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    def update_object_v1_buckets_bucket_identifier_objects_object_identifier_put(
+    def update(
         self,
         *,
         bucket_identifier: str,
@@ -697,7 +697,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    async def update_object_v1_buckets_bucket_identifier_objects_object_identifier_put_async(
+    async def update_async(
         self,
         *,
         bucket_identifier: str,
@@ -849,7 +849,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    def delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete(
+    def delete(
         self,
         *,
         bucket_identifier: str,
@@ -966,7 +966,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    async def delete_object_v1_buckets_bucket_identifier_objects_object_identifier_delete_async(
+    async def delete_async(
         self,
         *,
         bucket_identifier: str,
@@ -1083,7 +1083,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    def list_objects_v1_buckets_bucket_identifier_objects_post(
+    def list(
         self,
         *,
         bucket_identifier: str,
@@ -1229,7 +1229,7 @@ class BucketObjects(BaseSDK):
             http_res,
         )
 
-    async def list_objects_v1_buckets_bucket_identifier_objects_post_async(
+    async def list_async(
         self,
         *,
         bucket_identifier: str,

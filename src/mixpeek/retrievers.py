@@ -9,7 +9,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 
 class Retrievers(BaseSDK):
-    def create_retriever_v1_retrievers_retrievers_post(
+    def create(
         self,
         *,
         retriever_name: str,
@@ -165,7 +165,7 @@ class Retrievers(BaseSDK):
             http_res,
         )
 
-    async def create_retriever_v1_retrievers_retrievers_post_async(
+    async def create_async(
         self,
         *,
         retriever_name: str,
@@ -321,7 +321,7 @@ class Retrievers(BaseSDK):
             http_res,
         )
 
-    def get_retriever_v1_retrievers_retrievers_retriever_id_get(
+    def get(
         self,
         *,
         retriever_id: str,
@@ -433,7 +433,7 @@ class Retrievers(BaseSDK):
             http_res,
         )
 
-    async def get_retriever_v1_retrievers_retrievers_retriever_id_get_async(
+    async def get_async(
         self,
         *,
         retriever_id: str,
@@ -545,7 +545,7 @@ class Retrievers(BaseSDK):
             http_res,
         )
 
-    def execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post(
+    def execute(
         self,
         *,
         retriever_id: str,
@@ -705,7 +705,7 @@ class Retrievers(BaseSDK):
             http_res,
         )
 
-    async def execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post_async(
+    async def execute_async(
         self,
         *,
         retriever_id: str,

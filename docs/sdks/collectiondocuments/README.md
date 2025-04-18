@@ -5,14 +5,14 @@
 
 ### Available Operations
 
-* [get_document_v1_collections_collection_identifier_documents_document_id_get](#get_document_v1_collections_collection_identifier_documents_document_id_get) - Get Document
-* [update_document_v1_collections_collection_identifier_documents_document_id_put](#update_document_v1_collections_collection_identifier_documents_document_id_put) - Update Document
-* [delete_document_v1_collections_collection_identifier_documents_document_id_delete](#delete_document_v1_collections_collection_identifier_documents_document_id_delete) - Delete Document
-* [list_documents_v1_collections_collection_identifier_documents_get](#list_documents_v1_collections_collection_identifier_documents_get) - List Documents
-* [batch_update_documents_v1_collections_collection_identifier_documents_batch_put](#batch_update_documents_v1_collections_collection_identifier_documents_batch_put) - Batch Update Documents
-* [batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete](#batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete) - Batch Delete Documents
+* [get](#get) - Get Document
+* [update](#update) - Update Document
+* [delete](#delete) - Delete Document
+* [list](#list) - List Documents
+* [batch_update](#batch_update) - Batch Update Documents
+* [batch_delete](#batch_delete) - Batch Delete Documents
 
-## get_document_v1_collections_collection_identifier_documents_document_id_get
+## get
 
 Get a document by ID.
     
@@ -31,7 +31,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_documents.get_document_v1_collections_collection_identifier_documents_document_id_get(collection_identifier="<value>", document_id="<id>")
+    res = m_client.collection_documents.get(collection_identifier="<value>", document_id="<id>")
 
     # Handle response
     print(res)
@@ -60,7 +60,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## update_document_v1_collections_collection_identifier_documents_document_id_put
+## update
 
 Update an existing document.
     
@@ -79,7 +79,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_documents.update_document_v1_collections_collection_identifier_documents_document_id_put(collection_identifier="<value>", document_id="<id>")
+    res = m_client.collection_documents.update(collection_identifier="<value>", document_id="<id>")
 
     # Handle response
     print(res)
@@ -110,7 +110,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## delete_document_v1_collections_collection_identifier_documents_document_id_delete
+## delete
 
 Delete a document.
     
@@ -129,7 +129,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_documents.delete_document_v1_collections_collection_identifier_documents_document_id_delete(collection_identifier="<value>", document_id="<id>")
+    res = m_client.collection_documents.delete(collection_identifier="<value>", document_id="<id>")
 
     # Handle response
     print(res)
@@ -158,7 +158,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## list_documents_v1_collections_collection_identifier_documents_get
+## list
 
 List documents with pagination and filtering.
     
@@ -177,7 +177,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_documents.list_documents_v1_collections_collection_identifier_documents_get(collection_identifier="<value>")
+    res = m_client.collection_documents.list(collection_identifier="<value>")
 
     # Handle response
     print(res)
@@ -210,7 +210,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## batch_update_documents_v1_collections_collection_identifier_documents_batch_put
+## batch_update
 
 Update multiple documents in a batch.
     
@@ -229,7 +229,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_documents.batch_update_documents_v1_collections_collection_identifier_documents_batch_put(collection_identifier="<value>")
+    res = m_client.collection_documents.batch_update(collection_identifier="<value>")
 
     # Handle response
     print(res)
@@ -258,7 +258,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete
+## batch_delete
 
 Delete multiple documents in a batch.
     
@@ -277,7 +277,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.collection_documents.batch_delete_documents_v1_collections_collection_identifier_documents_batch_delete(collection_identifier="<value>")
+    res = m_client.collection_documents.batch_delete(collection_identifier="<value>")
 
     # Handle response
     print(res)

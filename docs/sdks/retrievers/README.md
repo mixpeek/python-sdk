@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [create_retriever_v1_retrievers_retrievers_post](#create_retriever_v1_retrievers_retrievers_post) - Create Retriever
-* [get_retriever_v1_retrievers_retrievers_retriever_id_get](#get_retriever_v1_retrievers_retrievers_retriever_id_get) - Get Retriever
-* [execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post](#execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post) - Execute Retriever
+* [create](#create) - Create Retriever
+* [get](#get) - Get Retriever
+* [execute](#execute) - Execute Retriever
 
-## create_retriever_v1_retrievers_retrievers_post
+## create
 
 Create Retriever
 
@@ -25,7 +25,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retrievers.create_retriever_v1_retrievers_retrievers_post(retriever_name="<value>", input_schema=mixpeek.BucketSchemaInput(
+    res = m_client.retrievers.create(retriever_name="<value>", input_schema=mixpeek.BucketSchemaInput(
         properties={
             "key": mixpeek.BucketSchemaFieldInput(
                 type=mixpeek.BucketSchemaFieldType.IMAGE,
@@ -70,7 +70,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## get_retriever_v1_retrievers_retrievers_retriever_id_get
+## get
 
 Get Retriever
 
@@ -85,7 +85,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retrievers.get_retriever_v1_retrievers_retrievers_retriever_id_get(retriever_id="<id>")
+    res = m_client.retrievers.get(retriever_id="<id>")
 
     # Handle response
     print(res)
@@ -113,7 +113,7 @@ with Mixpeek(
 | models.ErrorResponse       | 500                        | application/json           |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post
+## execute
 
 Execute Retriever
 
@@ -128,7 +128,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retrievers.execute_retriever_v1_retrievers_retrievers_retriever_id_execute_post(retriever_id="<id>", inputs={}, filters={
+    res = m_client.retrievers.execute(retriever_id="<id>", inputs={}, filters={
         "and_": [],
         "or_": [],
         "not_": [],

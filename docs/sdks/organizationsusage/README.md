@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get_usage_v1_organizations_usage_post](#get_usage_v1_organizations_usage_post) - Get Usage
+* [get](#get) - Get Usage
 
-## get_usage_v1_organizations_usage_post
+## get
 
 Get Usage
 
@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.organizations_usage.get_usage_v1_organizations_usage_post()
+    res = m_client.organizations_usage.get()
 
     # Handle response
     print(res)

@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get_retriever_stages_v1_retrievers_stages_get](#get_retriever_stages_v1_retrievers_stages_get) - List Retriever Stages
+* [list](#list) - List Retriever Stages
 
-## get_retriever_stages_v1_retrievers_stages_get
+## list
 
 List all available retriever stages from the registry
 
@@ -22,7 +22,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retriever_stages.get_retriever_stages_v1_retrievers_stages_get()
+    res = m_client.retriever_stages.list()
 
     # Handle response
     print(res)

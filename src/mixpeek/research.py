@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class Research(BaseSDK):
-    def get_research_v1_research_get(
+    def get(
         self,
         *,
         x_namespace: OptionalNullable[str] = UNSET,
@@ -118,7 +118,7 @@ class Research(BaseSDK):
             http_res,
         )
 
-    async def get_research_v1_research_get_async(
+    async def get_async(
         self,
         *,
         x_namespace: OptionalNullable[str] = UNSET,
