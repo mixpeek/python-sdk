@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "mixpeek"
-__version__: str = "0.21.6"
+__version__: str = "0.21.7"
 __openapi_doc_version__: str = "0.81"
 __gen_version__: str = "2.585.2"
-__user_agent__: str = "speakeasy-sdk/python 0.21.6 2.585.2 0.81 mixpeek"
+__user_agent__: str = "speakeasy-sdk/python 0.21.7 2.585.2 0.81 mixpeek"
 
 try:
     if __package__ is not None:
