@@ -389,6 +389,19 @@ from .retrieverqueryrequest import (
     RetrieverQueryRequestTypedDict,
 )
 from .retrieverresponse import RetrieverResponse, RetrieverResponseTypedDict
+from .retrieverschema_input import RetrieverSchemaInput, RetrieverSchemaInputTypedDict
+from .retrieverschema_output import (
+    RetrieverSchemaOutput,
+    RetrieverSchemaOutputTypedDict,
+)
+from .retrieverschemafield_input import (
+    RetrieverSchemaFieldInput,
+    RetrieverSchemaFieldInputTypedDict,
+)
+from .retrieverschemafield_output import (
+    RetrieverSchemaFieldOutput,
+    RetrieverSchemaFieldOutputTypedDict,
+)
 from .searchinteraction import (
     SearchInteraction,
     SearchInteractionMetadata,
@@ -804,6 +817,14 @@ __all__ = [
     "RetrieverQueryRequestTypedDict",
     "RetrieverResponse",
     "RetrieverResponseTypedDict",
+    "RetrieverSchemaFieldInput",
+    "RetrieverSchemaFieldInputTypedDict",
+    "RetrieverSchemaFieldOutput",
+    "RetrieverSchemaFieldOutputTypedDict",
+    "RetrieverSchemaInput",
+    "RetrieverSchemaInputTypedDict",
+    "RetrieverSchemaOutput",
+    "RetrieverSchemaOutputTypedDict",
     "SearchInteraction",
     "SearchInteractionMetadata",
     "SearchInteractionMetadataTypedDict",

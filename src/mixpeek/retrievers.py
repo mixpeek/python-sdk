@@ -14,7 +14,7 @@ class Retrievers(BaseSDK):
         *,
         retriever_name: str,
         input_schema: Union[
-            models.BucketSchemaInput, models.BucketSchemaInputTypedDict
+            models.RetrieverSchemaInput, models.RetrieverSchemaInputTypedDict
         ],
         collection_ids: List[str],
         stages: Union[
@@ -39,7 +39,7 @@ class Retrievers(BaseSDK):
         r"""Create Retriever
 
         :param retriever_name: Name of the retriever
-        :param input_schema: Schema definition for bucket objects
+        :param input_schema: Schema definition for retriever inputs
         :param collection_ids: List of collection IDs to search in
         :param stages: List of stages to execute in order
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
@@ -67,7 +67,7 @@ class Retrievers(BaseSDK):
                 retriever_name=retriever_name,
                 description=description,
                 input_schema=utils.get_pydantic_model(
-                    input_schema, models.BucketSchemaInput
+                    input_schema, models.RetrieverSchemaInput
                 ),
                 collection_ids=collection_ids,
                 stages=utils.get_pydantic_model(stages, List[models.StageConfigInput]),
@@ -170,7 +170,7 @@ class Retrievers(BaseSDK):
         *,
         retriever_name: str,
         input_schema: Union[
-            models.BucketSchemaInput, models.BucketSchemaInputTypedDict
+            models.RetrieverSchemaInput, models.RetrieverSchemaInputTypedDict
         ],
         collection_ids: List[str],
         stages: Union[
@@ -195,7 +195,7 @@ class Retrievers(BaseSDK):
         r"""Create Retriever
 
         :param retriever_name: Name of the retriever
-        :param input_schema: Schema definition for bucket objects
+        :param input_schema: Schema definition for retriever inputs
         :param collection_ids: List of collection IDs to search in
         :param stages: List of stages to execute in order
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
@@ -223,7 +223,7 @@ class Retrievers(BaseSDK):
                 retriever_name=retriever_name,
                 description=description,
                 input_schema=utils.get_pydantic_model(
-                    input_schema, models.BucketSchemaInput
+                    input_schema, models.RetrieverSchemaInput
                 ),
                 collection_ids=collection_ids,
                 stages=utils.get_pydantic_model(stages, List[models.StageConfigInput]),

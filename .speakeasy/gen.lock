@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 82df1e5d-b6ea-4e02-ac0f-abaa4eefdb64
 management:
-  docChecksum: 4d01c56f1b1993640e51c4e935bf334c
+  docChecksum: 546f3ab5cd1952d942b6f1404d455164
   docVersion: "0.81"
   speakeasyVersion: 1.535.1
   generationVersion: 2.585.2
-  releaseVersion: 0.21.7
-  configChecksum: 97114b9f07236a053fcccac8cd1c5be7
+  releaseVersion: 0.21.8
+  configChecksum: 4719448071cfdaabc80f3a4fd781fc2a
   repoURL: https://github.com/mixpeek/python-sdk.git
   installationURL: https://github.com/mixpeek/python-sdk.git
   published: true
@@ -202,6 +202,10 @@ generatedFiles:
   - docs/models/retrieverqueryrequest.md
   - docs/models/retrieverqueryrequestinputs.md
   - docs/models/retrieverresponse.md
+  - docs/models/retrieverschemafieldinput.md
+  - docs/models/retrieverschemafieldoutput.md
+  - docs/models/retrieverschemainput.md
+  - docs/models/retrieverschemaoutput.md
   - docs/models/searchinteraction.md
   - docs/models/searchinteractionmetadata.md
   - docs/models/security.md
@@ -418,6 +422,10 @@ generatedFiles:
   - src/mixpeek/models/retrievermodel.py
   - src/mixpeek/models/retrieverqueryrequest.py
   - src/mixpeek/models/retrieverresponse.py
+  - src/mixpeek/models/retrieverschema_input.py
+  - src/mixpeek/models/retrieverschema_output.py
+  - src/mixpeek/models/retrieverschemafield_input.py
+  - src/mixpeek/models/retrieverschemafield_output.py
   - src/mixpeek/models/searchinteraction.py
   - src/mixpeek/models/security.py
   - src/mixpeek/models/singlelineageentry.py
@@ -1040,10 +1048,10 @@ examples:
   create_retriever_v1_retrievers_retrievers_post:
     speakeasy-default-create-retriever-v1-retrievers-retrievers-post:
       requestBody:
-        application/json: {"retriever_name": "<value>", "input_schema": {"properties": {"key": {"type": "image"}, "key1": {"type": "dense_vector"}}}, "collection_ids": ["<value>"], "stages": []}
+        application/json: {"retriever_name": "<value>", "input_schema": {"properties": {"key": {"type": "image", "required": true}, "key1": {"type": "dense_vector", "required": true}}}, "collection_ids": ["<value>"], "stages": []}
       responses:
         "200":
-          application/json: {"retriever_name": "<value>", "input_schema": {"properties": {"key": {"type": "video"}}}, "collection_ids": ["<value>", "<value>"], "stages": [{"stage_name": "<value>", "version": "<value>", "module_path": "<value>", "pre_filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "post_filters": {"AND": [], "OR": [], "NOT": [], "case_sensitive": true}, "exclude_from_final": false}, {"stage_name": "<value>", "version": "<value>", "module_path": "<value>", "pre_filters": {"AND": [], "OR": [], "NOT": [], "case_sensitive": true}, "post_filters": {"AND": [], "OR": [], "NOT": [], "case_sensitive": true}, "exclude_from_final": false}]}
+          application/json: {"retriever_name": "<value>", "input_schema": {"properties": {"key": {"type": "video", "required": true}}}, "collection_ids": ["<value>", "<value>"], "stages": [{"stage_name": "<value>", "version": "<value>", "module_path": "<value>", "pre_filters": {"AND": [{"field": "name", "operator": "eq", "value": "John"}, {"field": "age", "operator": "gte", "value": 30}], "OR": [{"field": "status", "operator": "eq", "value": "active"}, {"field": "role", "operator": "eq", "value": "admin"}], "NOT": [{"field": "department", "operator": "eq", "value": "HR"}, {"field": "location", "operator": "eq", "value": "remote"}], "case_sensitive": true}, "post_filters": {"AND": [], "OR": [], "NOT": [], "case_sensitive": true}, "exclude_from_final": false}, {"stage_name": "<value>", "version": "<value>", "module_path": "<value>", "pre_filters": {"AND": [], "OR": [], "NOT": [], "case_sensitive": true}, "post_filters": {"AND": [], "OR": [], "NOT": [], "case_sensitive": true}, "exclude_from_final": false}]}
         "400":
           application/json: {"success": false, "status": 710525, "error": {"message": "<value>", "type": "<value>"}}
         "422":
