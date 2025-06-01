@@ -5,7 +5,7 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Collections(BaseSDK):
@@ -27,12 +27,7 @@ class Collections(BaseSDK):
             ]
         ] = None,
         enabled: Optional[bool] = True,
-        metadata: OptionalNullable[
-            Union[
-                models.CreateCollectionRequestMetadata,
-                models.CreateCollectionRequestMetadataTypedDict,
-            ]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         document_handling: OptionalNullable[
             Union[models.DocumentHandlingConfig, models.DocumentHandlingConfigTypedDict]
         ] = UNSET,
@@ -90,9 +85,7 @@ class Collections(BaseSDK):
                     Optional[List[models.TaxonomyApplicationConfig]],
                 ),
                 enabled=enabled,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.CreateCollectionRequestMetadata]
-                ),
+                metadata=metadata,
                 document_handling=utils.get_pydantic_model(
                     document_handling, OptionalNullable[models.DocumentHandlingConfig]
                 ),
@@ -135,6 +128,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_collection_v1_collections_create_post",
                 oauth2_scopes=[],
@@ -205,12 +199,7 @@ class Collections(BaseSDK):
             ]
         ] = None,
         enabled: Optional[bool] = True,
-        metadata: OptionalNullable[
-            Union[
-                models.CreateCollectionRequestMetadata,
-                models.CreateCollectionRequestMetadataTypedDict,
-            ]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         document_handling: OptionalNullable[
             Union[models.DocumentHandlingConfig, models.DocumentHandlingConfigTypedDict]
         ] = UNSET,
@@ -268,9 +257,7 @@ class Collections(BaseSDK):
                     Optional[List[models.TaxonomyApplicationConfig]],
                 ),
                 enabled=enabled,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.CreateCollectionRequestMetadata]
-                ),
+                metadata=metadata,
                 document_handling=utils.get_pydantic_model(
                     document_handling, OptionalNullable[models.DocumentHandlingConfig]
                 ),
@@ -313,6 +300,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_collection_v1_collections_create_post",
                 oauth2_scopes=[],
@@ -377,6 +365,8 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Get Collection
 
+        This endpoint allows you to retrieve a collection by ID.
+
         :param collection_id: The ID of the collection to retrieve
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
@@ -425,6 +415,7 @@ class Collections(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_collection_v1_collections__collection_id__get",
                 oauth2_scopes=[],
@@ -489,6 +480,8 @@ class Collections(BaseSDK):
     ) -> models.CollectionModel:
         r"""Get Collection
 
+        This endpoint allows you to retrieve a collection by ID.
+
         :param collection_id: The ID of the collection to retrieve
         :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
         :param retries: Override the default retry configuration for this method
@@ -537,6 +530,7 @@ class Collections(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_collection_v1_collections__collection_id__get",
                 oauth2_scopes=[],

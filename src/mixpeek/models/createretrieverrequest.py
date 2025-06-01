@@ -6,16 +6,8 @@ from .retrieverschema_input import RetrieverSchemaInput, RetrieverSchemaInputTyp
 from .stageconfig_input import StageConfigInput, StageConfigInputTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class CreateRetrieverRequestMetadataTypedDict(TypedDict):
-    pass
-
-
-class CreateRetrieverRequestMetadata(BaseModel):
-    pass
 
 
 class CreateRetrieverRequestTypedDict(TypedDict):
@@ -31,7 +23,7 @@ class CreateRetrieverRequestTypedDict(TypedDict):
     r"""List of stages to execute in order"""
     description: NotRequired[Nullable[str]]
     r"""Description of the retriever"""
-    metadata: NotRequired[CreateRetrieverRequestMetadataTypedDict]
+    metadata: NotRequired[Dict[str, Any]]
     cache_config: NotRequired[Nullable[RetrieverCacheConfigTypedDict]]
     r"""Configuration for retriever-level caching"""
 
@@ -54,7 +46,7 @@ class CreateRetrieverRequest(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description of the retriever"""
 
-    metadata: Optional[CreateRetrieverRequestMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
 
     cache_config: OptionalNullable[RetrieverCacheConfig] = UNSET
     r"""Configuration for retriever-level caching"""

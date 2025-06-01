@@ -6,55 +6,82 @@ from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 import httpx
+import importlib
 from mixpeek import models, utils
 from mixpeek._hooks import SDKHooks
-from mixpeek.bucketobjects import BucketObjects
-from mixpeek.buckets import Buckets
-from mixpeek.clusters import Clusters
-from mixpeek.collectioncache import CollectionCache
-from mixpeek.collectiondocuments import CollectionDocuments
-from mixpeek.collections import Collections
-from mixpeek.features import Features
-from mixpeek.health import Health
 from mixpeek.models import internal
-from mixpeek.namespaces import Namespaces
-from mixpeek.organizationnotifications import OrganizationNotifications
-from mixpeek.organizations import Organizations
-from mixpeek.organizationsusage import OrganizationsUsage
-from mixpeek.research import Research
-from mixpeek.retrieverinteractions import RetrieverInteractions
-from mixpeek.retrievers import Retrievers
-from mixpeek.retrieverstages import RetrieverStages
-from mixpeek.tasks import Tasks
-from mixpeek.taxonomies import Taxonomies
 from mixpeek.types import OptionalNullable, UNSET
-from mixpeek.users import Users
-from typing import Any, Callable, Dict, Optional, Union, cast
+from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
+
+if TYPE_CHECKING:
+    from mixpeek.bucketobjects import BucketObjects
+    from mixpeek.buckets import Buckets
+    from mixpeek.clusters import Clusters
+    from mixpeek.collectioncache import CollectionCache
+    from mixpeek.collections import Collections
+    from mixpeek.features import Features
+    from mixpeek.health import Health
+    from mixpeek.namespaces import Namespaces
+    from mixpeek.organizationnotifications import OrganizationNotifications
+    from mixpeek.organizations import Organizations
+    from mixpeek.organizationsusage import OrganizationsUsage
+    from mixpeek.research import Research
+    from mixpeek.retrieverinteractions import RetrieverInteractions
+    from mixpeek.retrievers import Retrievers
+    from mixpeek.retrieverstages import RetrieverStages
+    from mixpeek.tasks import Tasks
+    from mixpeek.taxonomies import Taxonomies
+    from mixpeek.users import Users
 
 
 class Mixpeek(BaseSDK):
     r"""Mixpeek API: This is the Mixpeek API, providing access to various endpoints for data processing and retrieval."""
 
-    health: Health
-    organizations: Organizations
-    users: Users
-    organizations_usage: OrganizationsUsage
-    organization_notifications: OrganizationNotifications
-    namespaces: Namespaces
-    buckets: Buckets
-    bucket_objects: BucketObjects
-    collections: Collections
-    collection_cache: CollectionCache
-    collection_documents: CollectionDocuments
-    features: Features
-    retrievers: Retrievers
-    retriever_stages: RetrieverStages
-    retriever_interactions: RetrieverInteractions
-    tasks: Tasks
-    research: Research
-    taxonomies: Taxonomies
-    clusters: Clusters
+    health: "Health"
+    organizations: "Organizations"
+    users: "Users"
+    organizations_usage: "OrganizationsUsage"
+    organization_notifications: "OrganizationNotifications"
+    namespaces: "Namespaces"
+    buckets: "Buckets"
+    bucket_objects: "BucketObjects"
+    collections: "Collections"
+    collection_cache: "CollectionCache"
+    features: "Features"
+    retrievers: "Retrievers"
+    retriever_stages: "RetrieverStages"
+    retriever_interactions: "RetrieverInteractions"
+    tasks: "Tasks"
+    research: "Research"
+    taxonomies: "Taxonomies"
+    clusters: "Clusters"
+    _sub_sdk_map = {
+        "health": ("mixpeek.health", "Health"),
+        "organizations": ("mixpeek.organizations", "Organizations"),
+        "users": ("mixpeek.users", "Users"),
+        "organizations_usage": ("mixpeek.organizationsusage", "OrganizationsUsage"),
+        "organization_notifications": (
+            "mixpeek.organizationnotifications",
+            "OrganizationNotifications",
+        ),
+        "namespaces": ("mixpeek.namespaces", "Namespaces"),
+        "buckets": ("mixpeek.buckets", "Buckets"),
+        "bucket_objects": ("mixpeek.bucketobjects", "BucketObjects"),
+        "collections": ("mixpeek.collections", "Collections"),
+        "collection_cache": ("mixpeek.collectioncache", "CollectionCache"),
+        "features": ("mixpeek.features", "Features"),
+        "retrievers": ("mixpeek.retrievers", "Retrievers"),
+        "retriever_stages": ("mixpeek.retrieverstages", "RetrieverStages"),
+        "retriever_interactions": (
+            "mixpeek.retrieverinteractions",
+            "RetrieverInteractions",
+        ),
+        "tasks": ("mixpeek.tasks", "Tasks"),
+        "research": ("mixpeek.research", "Research"),
+        "taxonomies": ("mixpeek.taxonomies", "Taxonomies"),
+        "clusters": ("mixpeek.clusters", "Clusters"),
+    }
 
     def __init__(
         self,
@@ -138,15 +165,15 @@ class Mixpeek(BaseSDK):
 
         hooks = SDKHooks()
 
+        # pylint: disable=protected-access
+        self.sdk_configuration.__dict__["_hooks"] = hooks
+
         current_server_url, *_ = self.sdk_configuration.get_server_details()
         server_url, self.sdk_configuration.client = hooks.sdk_init(
             current_server_url, client
         )
         if current_server_url != server_url:
             self.sdk_configuration.server_url = server_url
-
-        # pylint: disable=protected-access
-        self.sdk_configuration.__dict__["_hooks"] = hooks
 
         weakref.finalize(
             self,
@@ -158,30 +185,32 @@ class Mixpeek(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
-        self._init_sdks()
+    def __getattr__(self, name: str):
+        if name in self._sub_sdk_map:
+            module_path, class_name = self._sub_sdk_map[name]
+            try:
+                module = importlib.import_module(module_path)
+                klass = getattr(module, class_name)
+                instance = klass(self.sdk_configuration)
+                setattr(self, name, instance)
+                return instance
+            except ImportError as e:
+                raise AttributeError(
+                    f"Failed to import module {module_path} for attribute {name}: {e}"
+                ) from e
+            except AttributeError as e:
+                raise AttributeError(
+                    f"Failed to find class {class_name} in module {module_path} for attribute {name}: {e}"
+                ) from e
 
-    def _init_sdks(self):
-        self.health = Health(self.sdk_configuration)
-        self.organizations = Organizations(self.sdk_configuration)
-        self.users = Users(self.sdk_configuration)
-        self.organizations_usage = OrganizationsUsage(self.sdk_configuration)
-        self.organization_notifications = OrganizationNotifications(
-            self.sdk_configuration
+        raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
         )
-        self.namespaces = Namespaces(self.sdk_configuration)
-        self.buckets = Buckets(self.sdk_configuration)
-        self.bucket_objects = BucketObjects(self.sdk_configuration)
-        self.collections = Collections(self.sdk_configuration)
-        self.collection_cache = CollectionCache(self.sdk_configuration)
-        self.collection_documents = CollectionDocuments(self.sdk_configuration)
-        self.features = Features(self.sdk_configuration)
-        self.retrievers = Retrievers(self.sdk_configuration)
-        self.retriever_stages = RetrieverStages(self.sdk_configuration)
-        self.retriever_interactions = RetrieverInteractions(self.sdk_configuration)
-        self.tasks = Tasks(self.sdk_configuration)
-        self.research = Research(self.sdk_configuration)
-        self.taxonomies = Taxonomies(self.sdk_configuration)
-        self.clusters = Clusters(self.sdk_configuration)
+
+    def __dir__(self):
+        default_attrs = list(super().__dir__())
+        lazy_attrs = list(self._sub_sdk_map.keys())
+        return sorted(list(set(default_attrs + lazy_attrs)))
 
     def __enter__(self):
         return self

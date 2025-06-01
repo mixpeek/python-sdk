@@ -10,6 +10,7 @@ class BucketSchemaFieldType(str, Enum):
     STRING = "string"
     NUMBER = "number"
     INTEGER = "integer"
+    FLOAT = "float"
     BOOLEAN = "boolean"
     OBJECT = "object"
     ARRAY = "array"

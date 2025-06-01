@@ -9,16 +9,8 @@ from .retrieverschema_output import (
 from .stageconfig_output import StageConfigOutput, StageConfigOutputTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class RetrieverModelMetadataTypedDict(TypedDict):
-    pass
-
-
-class RetrieverModelMetadata(BaseModel):
-    pass
 
 
 class RetrieverModelTypedDict(TypedDict):
@@ -36,7 +28,7 @@ class RetrieverModelTypedDict(TypedDict):
     r"""Unique identifier for the retriever"""
     description: NotRequired[Nullable[str]]
     r"""Description of the retriever"""
-    metadata: NotRequired[RetrieverModelMetadataTypedDict]
+    metadata: NotRequired[Dict[str, Any]]
     cache_config: NotRequired[Nullable[RetrieverCacheConfigTypedDict]]
     r"""Configuration for retriever-level caching"""
 
@@ -62,7 +54,7 @@ class RetrieverModel(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description of the retriever"""
 
-    metadata: Optional[RetrieverModelMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
 
     cache_config: OptionalNullable[RetrieverCacheConfig] = UNSET
     r"""Configuration for retriever-level caching"""

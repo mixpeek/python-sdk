@@ -4,16 +4,8 @@ from __future__ import annotations
 from .createblobrequest import CreateBlobRequest, CreateBlobRequestTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class CreateObjectRequestMetadataTypedDict(TypedDict):
-    r"""Additional metadata for the object, this will be appended in all downstream documents of the your connected collections."""
-
-
-class CreateObjectRequestMetadata(BaseModel):
-    r"""Additional metadata for the object, this will be appended in all downstream documents of the your connected collections."""
 
 
 class CreateObjectRequestTypedDict(TypedDict):
@@ -23,7 +15,7 @@ class CreateObjectRequestTypedDict(TypedDict):
     r"""Storage key/path prefix of the object, this will be used to retrieve the object from the storage. It's at the root of the object."""
     blobs: NotRequired[List[CreateBlobRequestTypedDict]]
     r"""List of blobs to be created in this object"""
-    metadata: NotRequired[CreateObjectRequestMetadataTypedDict]
+    metadata: NotRequired[Dict[str, Any]]
     r"""Additional metadata for the object, this will be appended in all downstream documents of the your connected collections."""
     skip_duplicates: NotRequired[bool]
     r"""Skip duplicate blobs, if a blob with the same hash already exists, it will be skipped."""
@@ -38,7 +30,7 @@ class CreateObjectRequest(BaseModel):
     blobs: Optional[List[CreateBlobRequest]] = None
     r"""List of blobs to be created in this object"""
 
-    metadata: Optional[CreateObjectRequestMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
     r"""Additional metadata for the object, this will be appended in all downstream documents of the your connected collections."""
 
     skip_duplicates: Optional[bool] = False

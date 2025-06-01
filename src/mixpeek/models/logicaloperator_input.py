@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .filtercondition import FilterCondition, FilterConditionTypedDict
+from .logicaloperatorbase_input import (
+    LogicalOperatorBaseInput,
+    LogicalOperatorBaseInputTypedDict,
+)
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -9,14 +13,33 @@ from typing import List, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+AndTypedDict = TypeAliasType(
+    "AndTypedDict", Union[FilterConditionTypedDict, LogicalOperatorBaseInputTypedDict]
+)
+
+
+And = TypeAliasType("And", Union[FilterCondition, LogicalOperatorBaseInput])
+
+
+OrTypedDict = TypeAliasType(
+    "OrTypedDict", Union[FilterConditionTypedDict, LogicalOperatorBaseInputTypedDict]
+)
+
+
+Or = TypeAliasType("Or", Union[FilterCondition, LogicalOperatorBaseInput])
+
+
+NotTypedDict = TypeAliasType(
+    "NotTypedDict", Union[FilterConditionTypedDict, LogicalOperatorBaseInputTypedDict]
+)
+
+
+Not = TypeAliasType("Not", Union[FilterCondition, LogicalOperatorBaseInput])
+
+
 class LogicalOperatorInputTypedDict(TypedDict):
     r"""Represents a logical operation (AND, OR, NOT) on filter conditions.
-
-    Attributes:
-    AND: List of conditions that must all be true
-    OR: List of conditions where at least one must be true
-    NOT: List of conditions that must all be false
-    case_sensitive: Whether string comparisons are case sensitive
+    Allows one level of nesting to prevent infinite recursion.
     """
 
     and_: NotRequired[Nullable[List[AndTypedDict]]]
@@ -31,12 +54,7 @@ class LogicalOperatorInputTypedDict(TypedDict):
 
 class LogicalOperatorInput(BaseModel):
     r"""Represents a logical operation (AND, OR, NOT) on filter conditions.
-
-    Attributes:
-    AND: List of conditions that must all be true
-    OR: List of conditions where at least one must be true
-    NOT: List of conditions that must all be false
-    case_sensitive: Whether string comparisons are case sensitive
+    Allows one level of nesting to prevent infinite recursion.
     """
 
     and_: Annotated[OptionalNullable[List[And]], pydantic.Field(alias="AND")] = UNSET
@@ -80,27 +98,3 @@ class LogicalOperatorInput(BaseModel):
                 m[k] = val
 
         return m
-
-
-AndTypedDict = TypeAliasType(
-    "AndTypedDict", Union[FilterConditionTypedDict, "LogicalOperatorInputTypedDict"]
-)
-
-
-And = TypeAliasType("And", Union[FilterCondition, "LogicalOperatorInput"])
-
-
-OrTypedDict = TypeAliasType(
-    "OrTypedDict", Union[FilterConditionTypedDict, "LogicalOperatorInputTypedDict"]
-)
-
-
-Or = TypeAliasType("Or", Union[FilterCondition, "LogicalOperatorInput"])
-
-
-NotTypedDict = TypeAliasType(
-    "NotTypedDict", Union[FilterConditionTypedDict, "LogicalOperatorInputTypedDict"]
-)
-
-
-Not = TypeAliasType("Not", Union[FilterCondition, "LogicalOperatorInput"])

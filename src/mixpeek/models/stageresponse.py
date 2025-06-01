@@ -3,22 +3,14 @@
 from __future__ import annotations
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import Any, Dict, List
 from typing_extensions import NotRequired, TypedDict
-
-
-class ResultsTypedDict(TypedDict):
-    pass
-
-
-class Results(BaseModel):
-    pass
 
 
 class StageResponseTypedDict(TypedDict):
     r"""Output from a retriever stage"""
 
-    results: List[ResultsTypedDict]
+    results: List[Dict[str, Any]]
     execution_time: float
     total_results: NotRequired[Nullable[int]]
     r"""Total number of results not filtered by pagination"""
@@ -27,7 +19,7 @@ class StageResponseTypedDict(TypedDict):
 class StageResponse(BaseModel):
     r"""Output from a retriever stage"""
 
-    results: List[Results]
+    results: List[Dict[str, Any]]
 
     execution_time: float
 

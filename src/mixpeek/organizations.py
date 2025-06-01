@@ -6,7 +6,7 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Organizations(BaseSDK):
@@ -63,6 +63,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_organization_v1_organizations_get",
                 oauth2_scopes=[],
@@ -168,6 +169,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_organization_v1_organizations_get",
                 oauth2_scopes=[],
@@ -229,9 +231,7 @@ class Organizations(BaseSDK):
         api_keys: Optional[
             Union[List[models.APIKey], List[models.APIKeyTypedDict]]
         ] = None,
-        metadata: Optional[
-            Union[models.UserModelInputMetadata, models.UserModelInputMetadataTypedDict]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         created_at: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -269,9 +269,7 @@ class Organizations(BaseSDK):
             user_name=user_name,
             email=email,
             api_keys=utils.get_pydantic_model(api_keys, Optional[List[models.APIKey]]),
-            metadata=utils.get_pydantic_model(
-                metadata, Optional[models.UserModelInputMetadata]
-            ),
+            metadata=metadata,
             created_at=created_at,
         )
 
@@ -304,6 +302,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_user_v1_organizations_users_post",
                 oauth2_scopes=[],
@@ -365,9 +364,7 @@ class Organizations(BaseSDK):
         api_keys: Optional[
             Union[List[models.APIKey], List[models.APIKeyTypedDict]]
         ] = None,
-        metadata: Optional[
-            Union[models.UserModelInputMetadata, models.UserModelInputMetadataTypedDict]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         created_at: Optional[datetime] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -405,9 +402,7 @@ class Organizations(BaseSDK):
             user_name=user_name,
             email=email,
             api_keys=utils.get_pydantic_model(api_keys, Optional[List[models.APIKey]]),
-            metadata=utils.get_pydantic_model(
-                metadata, Optional[models.UserModelInputMetadata]
-            ),
+            metadata=metadata,
             created_at=created_at,
         )
 
@@ -440,6 +435,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="add_user_v1_organizations_users_post",
                 oauth2_scopes=[],
@@ -556,6 +552,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
@@ -672,6 +669,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_api_key_v1_organizations_users__user_email__api_keys__key_name__delete",
                 oauth2_scopes=[],
@@ -799,6 +797,7 @@ class Organizations(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],
@@ -926,6 +925,7 @@ class Organizations(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_api_key_v1_organizations_users__user_email__api_keys__key_name__patch",
                 oauth2_scopes=[],

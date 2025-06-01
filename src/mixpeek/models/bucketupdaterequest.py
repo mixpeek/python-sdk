@@ -3,15 +3,8 @@
 from __future__ import annotations
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
+from typing import Any, Dict
 from typing_extensions import NotRequired, TypedDict
-
-
-class MetadataTypedDict(TypedDict):
-    pass
-
-
-class Metadata(BaseModel):
-    pass
 
 
 class BucketUpdateRequestTypedDict(TypedDict):
@@ -21,7 +14,7 @@ class BucketUpdateRequestTypedDict(TypedDict):
     r"""Human-readable name for the bucket"""
     description: NotRequired[Nullable[str]]
     r"""Description of the bucket"""
-    metadata: NotRequired[Nullable[MetadataTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional metadata for the bucket"""
 
 
@@ -34,7 +27,7 @@ class BucketUpdateRequest(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description of the bucket"""
 
-    metadata: OptionalNullable[Metadata] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional metadata for the bucket"""
 
     @model_serializer(mode="wrap")

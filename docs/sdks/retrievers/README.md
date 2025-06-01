@@ -31,12 +31,260 @@ with Mixpeek(
                 type=mixpeek.BucketSchemaFieldType.IMAGE,
             ),
             "key1": mixpeek.RetrieverSchemaFieldInput(
-                type=mixpeek.BucketSchemaFieldType.DENSE_VECTOR,
+                type=mixpeek.BucketSchemaFieldType.IMAGE,
             ),
         },
-    ), collection_ids=[
-        "<value>",
-    ], stages=[])
+    ), collection_ids=[], stages=[
+        mixpeek.StageConfigInput(
+            stage_id="<id>",
+            stage_name="<value>",
+            version="<value>",
+            pre_filters=mixpeek.LogicalOperatorInput(
+                and_=[
+                    mixpeek.FilterCondition(
+                        field="name",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="John",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="age",
+                        operator=mixpeek.FilterOperator.GTE,
+                        value=30,
+                    ),
+                ],
+                or_=[
+                    mixpeek.FilterCondition(
+                        field="status",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="active",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="role",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="admin",
+                    ),
+                ],
+                not_=[
+                    mixpeek.FilterCondition(
+                        field="department",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="HR",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="location",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="remote",
+                    ),
+                ],
+                case_sensitive=True,
+            ),
+            post_filters=mixpeek.LogicalOperatorInput(
+                and_=[
+                    mixpeek.FilterCondition(
+                        field="name",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="John",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="age",
+                        operator=mixpeek.FilterOperator.GTE,
+                        value=30,
+                    ),
+                ],
+                or_=[
+                    mixpeek.FilterCondition(
+                        field="status",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="active",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="role",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="admin",
+                    ),
+                ],
+                not_=[
+                    mixpeek.FilterCondition(
+                        field="department",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="HR",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="location",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="remote",
+                    ),
+                ],
+                case_sensitive=True,
+            ),
+        ),
+        mixpeek.StageConfigInput(
+            stage_id="<id>",
+            stage_name="<value>",
+            version="<value>",
+            pre_filters=mixpeek.LogicalOperatorInput(
+                and_=[
+                    mixpeek.FilterCondition(
+                        field="name",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="John",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="age",
+                        operator=mixpeek.FilterOperator.GTE,
+                        value=30,
+                    ),
+                ],
+                or_=[
+                    mixpeek.FilterCondition(
+                        field="status",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="active",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="role",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="admin",
+                    ),
+                ],
+                not_=[
+                    mixpeek.FilterCondition(
+                        field="department",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="HR",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="location",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="remote",
+                    ),
+                ],
+                case_sensitive=True,
+            ),
+            post_filters=mixpeek.LogicalOperatorInput(
+                and_=[
+                    mixpeek.FilterCondition(
+                        field="name",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="John",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="age",
+                        operator=mixpeek.FilterOperator.GTE,
+                        value=30,
+                    ),
+                ],
+                or_=[
+                    mixpeek.FilterCondition(
+                        field="status",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="active",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="role",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="admin",
+                    ),
+                ],
+                not_=[
+                    mixpeek.FilterCondition(
+                        field="department",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="HR",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="location",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="remote",
+                    ),
+                ],
+                case_sensitive=True,
+            ),
+        ),
+        mixpeek.StageConfigInput(
+            stage_id="<id>",
+            stage_name="<value>",
+            version="<value>",
+            pre_filters=mixpeek.LogicalOperatorInput(
+                and_=[
+                    mixpeek.FilterCondition(
+                        field="name",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="John",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="age",
+                        operator=mixpeek.FilterOperator.GTE,
+                        value=30,
+                    ),
+                ],
+                or_=[
+                    mixpeek.FilterCondition(
+                        field="status",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="active",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="role",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="admin",
+                    ),
+                ],
+                not_=[
+                    mixpeek.FilterCondition(
+                        field="department",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="HR",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="location",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="remote",
+                    ),
+                ],
+                case_sensitive=True,
+            ),
+            post_filters=mixpeek.LogicalOperatorInput(
+                and_=[
+                    mixpeek.FilterCondition(
+                        field="name",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="John",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="age",
+                        operator=mixpeek.FilterOperator.GTE,
+                        value=30,
+                    ),
+                ],
+                or_=[
+                    mixpeek.FilterCondition(
+                        field="status",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="active",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="role",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="admin",
+                    ),
+                ],
+                not_=[
+                    mixpeek.FilterCondition(
+                        field="department",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="HR",
+                    ),
+                    mixpeek.FilterCondition(
+                        field="location",
+                        operator=mixpeek.FilterOperator.EQ,
+                        value="remote",
+                    ),
+                ],
+                case_sensitive=True,
+            ),
+        ),
+    ])
 
     # Handle response
     print(res)
@@ -53,7 +301,7 @@ with Mixpeek(
 | `stages`                                                                                                                                                                              | List[[models.StageConfigInput](../../models/stageconfiginput.md)]                                                                                                                     | :heavy_check_mark:                                                                                                                                                                    | List of stages to execute in order                                                                                                                                                    |
 | `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
 | `description`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Description of the retriever                                                                                                                                                          |
-| `metadata`                                                                                                                                                                            | [Optional[models.CreateRetrieverRequestMetadata]](../../models/createretrieverrequestmetadata.md)                                                                                     | :heavy_minus_sign:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
+| `metadata`                                                                                                                                                                            | Dict[str, *Any*]                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
 | `cache_config`                                                                                                                                                                        | [OptionalNullable[models.RetrieverCacheConfig]](../../models/retrievercacheconfig.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                                    | Configuration for retriever-level caching                                                                                                                                             |
 | `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |
 
@@ -128,12 +376,14 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.retrievers.execute(retriever_id="<id>", inputs={}, filters={
-        "and_": [],
-        "or_": [],
-        "not_": [],
-        "case_sensitive": True,
-    }, sorts=[
+    res = m_client.retrievers.execute(retriever_id="<id>", inputs={
+        "key": "<value>",
+        "key1": "<value>",
+        "key2": "<value>",
+    }, filters=None, sorts=[
+        {
+            "field": "created_at",
+        },
         {
             "field": "created_at",
         },
@@ -152,7 +402,7 @@ with Mixpeek(
 | Parameter                                                                                                                                                                             | Type                                                                                                                                                                                  | Required                                                                                                                                                                              | Description                                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `retriever_id`                                                                                                                                                                        | *str*                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                    | N/A                                                                                                                                                                                   |
-| `inputs`                                                                                                                                                                              | [models.RetrieverQueryRequestInputs](../../models/retrieverqueryrequestinputs.md)                                                                                                     | :heavy_check_mark:                                                                                                                                                                    | Input values for the retriever query. These map to the required inputs defined in the retriever's first stage.                                                                        |
+| `inputs`                                                                                                                                                                              | Dict[str, *Any*]                                                                                                                                                                      | :heavy_check_mark:                                                                                                                                                                    | Input values for the retriever query. These map to the required inputs defined in the retriever's first stage.                                                                        |
 | `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
 | `filters`                                                                                                                                                                             | [OptionalNullable[models.LogicalOperatorInput]](../../models/logicaloperatorinput.md)                                                                                                 | :heavy_minus_sign:                                                                                                                                                                    | Logical operations for filtering results. Can include AND, OR, NOT conditions with field comparisons.                                                                                 |
 | `sorts`                                                                                                                                                                               | List[[models.SortOption](../../models/sortoption.md)]                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                    | Controls the ordering of results. Can sort by score (default) or any other document field. This sorts the results from the last stage.                                                |

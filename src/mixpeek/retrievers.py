@@ -5,7 +5,7 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Retrievers(BaseSDK):
@@ -22,12 +22,7 @@ class Retrievers(BaseSDK):
         ],
         x_namespace: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        metadata: Optional[
-            Union[
-                models.CreateRetrieverRequestMetadata,
-                models.CreateRetrieverRequestMetadataTypedDict,
-            ]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         cache_config: OptionalNullable[
             Union[models.RetrieverCacheConfig, models.RetrieverCacheConfigTypedDict]
         ] = UNSET,
@@ -71,9 +66,7 @@ class Retrievers(BaseSDK):
                 ),
                 collection_ids=collection_ids,
                 stages=utils.get_pydantic_model(stages, List[models.StageConfigInput]),
-                metadata=utils.get_pydantic_model(
-                    metadata, Optional[models.CreateRetrieverRequestMetadata]
-                ),
+                metadata=metadata,
                 cache_config=utils.get_pydantic_model(
                     cache_config, OptionalNullable[models.RetrieverCacheConfig]
                 ),
@@ -113,6 +106,7 @@ class Retrievers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_retriever_v1_retrievers_retrievers_post",
                 oauth2_scopes=[],
@@ -178,12 +172,7 @@ class Retrievers(BaseSDK):
         ],
         x_namespace: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        metadata: Optional[
-            Union[
-                models.CreateRetrieverRequestMetadata,
-                models.CreateRetrieverRequestMetadataTypedDict,
-            ]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         cache_config: OptionalNullable[
             Union[models.RetrieverCacheConfig, models.RetrieverCacheConfigTypedDict]
         ] = UNSET,
@@ -227,9 +216,7 @@ class Retrievers(BaseSDK):
                 ),
                 collection_ids=collection_ids,
                 stages=utils.get_pydantic_model(stages, List[models.StageConfigInput]),
-                metadata=utils.get_pydantic_model(
-                    metadata, Optional[models.CreateRetrieverRequestMetadata]
-                ),
+                metadata=metadata,
                 cache_config=utils.get_pydantic_model(
                     cache_config, OptionalNullable[models.RetrieverCacheConfig]
                 ),
@@ -269,6 +256,7 @@ class Retrievers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_retriever_v1_retrievers_retrievers_post",
                 oauth2_scopes=[],
@@ -381,6 +369,7 @@ class Retrievers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_retriever_v1_retrievers_retrievers__retriever_id__get",
                 oauth2_scopes=[],
@@ -493,6 +482,7 @@ class Retrievers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_retriever_v1_retrievers_retrievers__retriever_id__get",
                 oauth2_scopes=[],
@@ -549,10 +539,7 @@ class Retrievers(BaseSDK):
         self,
         *,
         retriever_id: str,
-        inputs: Union[
-            models.RetrieverQueryRequestInputs,
-            models.RetrieverQueryRequestInputsTypedDict,
-        ],
+        inputs: Dict[str, Any],
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
             Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
@@ -602,9 +589,7 @@ class Retrievers(BaseSDK):
                 retriever_id=retriever_id,
                 x_namespace=x_namespace,
                 retriever_query_request=models.RetrieverQueryRequest(
-                    inputs=utils.get_pydantic_model(
-                        inputs, models.RetrieverQueryRequestInputs
-                    ),
+                    inputs=inputs,
                     filters=utils.get_pydantic_model(
                         filters, OptionalNullable[models.LogicalOperatorInput]
                     ),
@@ -653,6 +638,7 @@ class Retrievers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="execute_retriever_v1_retrievers_retrievers__retriever_id__execute_post",
                 oauth2_scopes=[],
@@ -709,10 +695,7 @@ class Retrievers(BaseSDK):
         self,
         *,
         retriever_id: str,
-        inputs: Union[
-            models.RetrieverQueryRequestInputs,
-            models.RetrieverQueryRequestInputsTypedDict,
-        ],
+        inputs: Dict[str, Any],
         x_namespace: OptionalNullable[str] = UNSET,
         filters: OptionalNullable[
             Union[models.LogicalOperatorInput, models.LogicalOperatorInputTypedDict]
@@ -762,9 +745,7 @@ class Retrievers(BaseSDK):
                 retriever_id=retriever_id,
                 x_namespace=x_namespace,
                 retriever_query_request=models.RetrieverQueryRequest(
-                    inputs=utils.get_pydantic_model(
-                        inputs, models.RetrieverQueryRequestInputs
-                    ),
+                    inputs=inputs,
                     filters=utils.get_pydantic_model(
                         filters, OptionalNullable[models.LogicalOperatorInput]
                     ),
@@ -813,6 +794,7 @@ class Retrievers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="execute_retriever_v1_retrievers_retrievers__retriever_id__execute_post",
                 oauth2_scopes=[],

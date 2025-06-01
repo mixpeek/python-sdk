@@ -72,6 +72,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="kill_task_v1_tasks__task_id__delete",
                 oauth2_scopes=[],
@@ -187,6 +188,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="kill_task_v1_tasks__task_id__delete",
                 oauth2_scopes=[],
@@ -304,6 +306,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_task_v1_tasks__task_id__get",
                 oauth2_scopes=[],
@@ -421,6 +424,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_task_v1_tasks__task_id__get",
                 oauth2_scopes=[],
@@ -538,6 +542,7 @@ class Tasks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_active_tasks_v1_tasks_get",
                 oauth2_scopes=[],
@@ -655,6 +660,7 @@ class Tasks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_active_tasks_v1_tasks_get",
                 oauth2_scopes=[],

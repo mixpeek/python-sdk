@@ -4,16 +4,8 @@ from __future__ import annotations
 from .logicaloperator_input import LogicalOperatorInput, LogicalOperatorInputTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class StageConfigInputParametersTypedDict(TypedDict):
-    r"""Parameters for the stage"""
-
-
-class StageConfigInputParameters(BaseModel):
-    r"""Parameters for the stage"""
 
 
 class StageConfigInputTypedDict(TypedDict):
@@ -24,13 +16,13 @@ class StageConfigInputTypedDict(TypedDict):
     with consistent options.
     """
 
+    stage_id: str
+    r"""Unique identifier for the stage"""
     stage_name: str
     r"""Name of the stage"""
     version: str
     r"""Version of the stage"""
-    module_path: str
-    r"""Python module path for the stage"""
-    parameters: NotRequired[StageConfigInputParametersTypedDict]
+    parameters: NotRequired[Dict[str, Any]]
     r"""Parameters for the stage"""
     pre_filters: NotRequired[Nullable[LogicalOperatorInputTypedDict]]
     r"""Filters to apply before the main search is executed"""
@@ -50,16 +42,16 @@ class StageConfigInput(BaseModel):
     with consistent options.
     """
 
+    stage_id: str
+    r"""Unique identifier for the stage"""
+
     stage_name: str
     r"""Name of the stage"""
 
     version: str
     r"""Version of the stage"""
 
-    module_path: str
-    r"""Python module path for the stage"""
-
-    parameters: Optional[StageConfigInputParameters] = None
+    parameters: Optional[Dict[str, Any]] = None
     r"""Parameters for the stage"""
 
     pre_filters: OptionalNullable[LogicalOperatorInput] = UNSET

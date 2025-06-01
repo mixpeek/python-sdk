@@ -27,20 +27,45 @@ with Mixpeek(
     res = m_client.collections.create(collection_name="<value>", source={
         "type": mixpeek.SourceType.BUCKET,
         "filters": {
-            "and_": [],
-            "or_": [],
-            "not_": [],
+            "and_": [
+                {
+                    "field": "name",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "John",
+                },
+                {
+                    "field": "age",
+                    "operator": mixpeek.FilterOperator.GTE,
+                    "value": 30,
+                },
+            ],
+            "or_": [
+                {
+                    "field": "status",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "active",
+                },
+                {
+                    "field": "role",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "admin",
+                },
+            ],
+            "not_": [
+                {
+                    "field": "department",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "HR",
+                },
+                {
+                    "field": "location",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "remote",
+                },
+            ],
             "case_sensitive": True,
         },
     }, feature_extractors=[
-        {
-            "feature_extractor_name": "<value>",
-            "version": "<value>",
-        },
-        {
-            "feature_extractor_name": "<value>",
-            "version": "<value>",
-        },
         {
             "feature_extractor_name": "<value>",
             "version": "<value>",
@@ -63,7 +88,7 @@ with Mixpeek(
 | `description`                                                                                                                                                                                                   | *OptionalNullable[str]*                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                              | Description for the collection                                                                                                                                                                                  |
 | `taxonomy_applications`                                                                                                                                                                                         | List[[models.TaxonomyApplicationConfig](../../models/taxonomyapplicationconfig.md)]                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                              | List of taxonomy application configurations. there are two options: on ingestion store the taxonomy application results to this collection, or on demand compute the taxonomy application results at query time |
 | `enabled`                                                                                                                                                                                                       | *Optional[bool]*                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                              | Enable or disable processing of this collection                                                                                                                                                                 |
-| `metadata`                                                                                                                                                                                                      | [OptionalNullable[models.CreateCollectionRequestMetadata]](../../models/createcollectionrequestmetadata.md)                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                              | Optional metadata for the collection                                                                                                                                                                            |
+| `metadata`                                                                                                                                                                                                      | Dict[str, *Any*]                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                              | Optional metadata for the collection                                                                                                                                                                            |
 | `document_handling`                                                                                                                                                                                             | [OptionalNullable[models.DocumentHandlingConfig]](../../models/documenthandlingconfig.md)                                                                                                                       | :heavy_minus_sign:                                                                                                                                                                                              | Configuration for how documents are handled by this extractor                                                                                                                                                   |
 | `cache_config`                                                                                                                                                                                                  | [OptionalNullable[models.CollectionCacheConfigInput]](../../models/collectioncacheconfiginput.md)                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                              | Configuration for collection-level caching                                                                                                                                                                      |
 | `retries`                                                                                                                                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                              | Configuration to override the default retry behavior of the client.                                                                                                                                             |
@@ -83,7 +108,7 @@ with Mixpeek(
 
 ## get
 
-Get Collection
+This endpoint allows you to retrieve a collection by ID.
 
 ### Example Usage
 

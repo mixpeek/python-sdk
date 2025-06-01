@@ -18,16 +18,8 @@ from .taxonomyapplicationconfig import (
 )
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class CollectionModelMetadataTypedDict(TypedDict):
-    pass
-
-
-class CollectionModelMetadata(BaseModel):
-    pass
 
 
 class CollectionModelTypedDict(TypedDict):
@@ -47,7 +39,7 @@ class CollectionModelTypedDict(TypedDict):
     r"""Unique identifier for the collection"""
     description: NotRequired[Nullable[str]]
     r"""Description for the collection"""
-    metadata: NotRequired[Nullable[CollectionModelMetadataTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Optional metadata for the collection"""
     enabled: NotRequired[bool]
     r"""Enable or disable processing of this collection"""
@@ -83,7 +75,7 @@ class CollectionModel(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description for the collection"""
 
-    metadata: OptionalNullable[CollectionModelMetadata] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Optional metadata for the collection"""
 
     enabled: Optional[bool] = True

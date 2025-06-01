@@ -5,7 +5,7 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional
 
 
 class RetrieverInteractions(BaseSDK):
@@ -16,12 +16,7 @@ class RetrieverInteractions(BaseSDK):
         interaction_type: List[models.InteractionType],
         x_namespace: OptionalNullable[str] = UNSET,
         position: OptionalNullable[int] = UNSET,
-        metadata: OptionalNullable[
-            Union[
-                models.SearchInteractionMetadata,
-                models.SearchInteractionMetadataTypedDict,
-            ]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         user_id: OptionalNullable[str] = UNSET,
         session_id: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -64,9 +59,7 @@ class RetrieverInteractions(BaseSDK):
                 feature_id=feature_id,
                 interaction_type=interaction_type,
                 position=position,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.SearchInteractionMetadata]
-                ),
+                metadata=metadata,
                 user_id=user_id,
                 session_id=session_id,
             ),
@@ -105,6 +98,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_interaction_v1_retrievers_interactions_post",
                 oauth2_scopes=[],
@@ -164,12 +158,7 @@ class RetrieverInteractions(BaseSDK):
         interaction_type: List[models.InteractionType],
         x_namespace: OptionalNullable[str] = UNSET,
         position: OptionalNullable[int] = UNSET,
-        metadata: OptionalNullable[
-            Union[
-                models.SearchInteractionMetadata,
-                models.SearchInteractionMetadataTypedDict,
-            ]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         user_id: OptionalNullable[str] = UNSET,
         session_id: OptionalNullable[str] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -212,9 +201,7 @@ class RetrieverInteractions(BaseSDK):
                 feature_id=feature_id,
                 interaction_type=interaction_type,
                 position=position,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.SearchInteractionMetadata]
-                ),
+                metadata=metadata,
                 user_id=user_id,
                 session_id=session_id,
             ),
@@ -253,6 +240,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_interaction_v1_retrievers_interactions_post",
                 oauth2_scopes=[],
@@ -382,6 +370,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_interactions_v1_retrievers_interactions_get",
                 oauth2_scopes=[],
@@ -511,6 +500,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_interactions_v1_retrievers_interactions_get",
                 oauth2_scopes=[],
@@ -628,6 +618,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_interaction_v1_retrievers_interactions__interaction_id__get",
                 oauth2_scopes=[],
@@ -745,6 +736,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_interaction_v1_retrievers_interactions__interaction_id__get",
                 oauth2_scopes=[],
@@ -864,6 +856,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_interaction_v1_retrievers_interactions__interaction_id__delete",
                 oauth2_scopes=[],
@@ -983,6 +976,7 @@ class RetrieverInteractions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_interaction_v1_retrievers_interactions__interaction_id__delete",
                 oauth2_scopes=[],

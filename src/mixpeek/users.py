@@ -66,6 +66,7 @@ class Users(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_user_v1_organizations_users__user_email__get",
                 oauth2_scopes=[],
@@ -175,6 +176,7 @@ class Users(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_user_v1_organizations_users__user_email__get",
                 oauth2_scopes=[],
@@ -287,6 +289,7 @@ class Users(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_user_v1_organizations_users__user_email__delete",
                 oauth2_scopes=[],
@@ -399,6 +402,7 @@ class Users(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_user_v1_organizations_users__user_email__delete",
                 oauth2_scopes=[],
@@ -513,6 +517,7 @@ class Users(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_api_key_v1_organizations_users__user_email__api_keys_post",
                 oauth2_scopes=[],
@@ -627,6 +632,7 @@ class Users(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_api_key_v1_organizations_users__user_email__api_keys_post",
                 oauth2_scopes=[],

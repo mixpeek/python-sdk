@@ -3,21 +3,14 @@
 from __future__ import annotations
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
+from typing import Any, Dict
 from typing_extensions import NotRequired, TypedDict
-
-
-class DetailsTypedDict(TypedDict):
-    pass
-
-
-class Details(BaseModel):
-    pass
 
 
 class ErrorDetailTypedDict(TypedDict):
     message: str
     type: str
-    details: NotRequired[Nullable[DetailsTypedDict]]
+    details: NotRequired[Nullable[Dict[str, Any]]]
 
 
 class ErrorDetail(BaseModel):
@@ -25,7 +18,7 @@ class ErrorDetail(BaseModel):
 
     type: str
 
-    details: OptionalNullable[Details] = UNSET
+    details: OptionalNullable[Dict[str, Any]] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -1,12 +1,7 @@
 # LogicalOperatorInput
 
 Represents a logical operation (AND, OR, NOT) on filter conditions.
-
-Attributes:
-    AND: List of conditions that must all be true
-    OR: List of conditions where at least one must be true
-    NOT: List of conditions that must all be false
-    case_sensitive: Whether string comparisons are case sensitive
+Allows one level of nesting to prevent infinite recursion.
 
 
 ## Fields

@@ -6,16 +6,8 @@ from .documentoutputhandling import DocumentOutputHandling
 from .documentoutputtype import DocumentOutputType
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class ParametersTypedDict(TypedDict):
-    r"""Custom parameters for the extractor"""
-
-
-class Parameters(BaseModel):
-    r"""Custom parameters for the extractor"""
 
 
 class FeatureExtractorConfigTypedDict(TypedDict):
@@ -29,7 +21,7 @@ class FeatureExtractorConfigTypedDict(TypedDict):
     r"""Name of the feature extractor"""
     version: str
     r"""Version of the feature extractor"""
-    parameters: NotRequired[ParametersTypedDict]
+    parameters: NotRequired[Dict[str, Any]]
     r"""Custom parameters for the extractor"""
     input_mapping: NotRequired[Dict[str, str]]
     r"""Maps pipeline inputs to extractor inputs (source -> target)"""
@@ -56,7 +48,7 @@ class FeatureExtractorConfig(BaseModel):
     version: str
     r"""Version of the feature extractor"""
 
-    parameters: Optional[Parameters] = None
+    parameters: Optional[Dict[str, Any]] = None
     r"""Custom parameters for the extractor"""
 
     input_mapping: Optional[Dict[str, str]] = None

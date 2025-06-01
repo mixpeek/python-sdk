@@ -68,6 +68,7 @@ class RetrieverStages(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_retriever_stages_v1_retrievers_stages_get",
                 oauth2_scopes=[],
@@ -179,6 +180,7 @@ class RetrieverStages(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_retriever_stages_v1_retrievers_stages_get",
                 oauth2_scopes=[],

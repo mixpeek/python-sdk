@@ -12,73 +12,84 @@ from typing import Any, Dict, List
 from typing_extensions import NotRequired, TypedDict
 
 
-class StageDefinitionDefaultParametersTypedDict(TypedDict):
-    pass
-
-
-class StageDefinitionDefaultParameters(BaseModel):
-    pass
-
-
 class StageDefinitionTypedDict(TypedDict):
     r"""Model for retriever stage definition that describes how to process and search documents."""
 
     stage_name: str
-    r"""Name of the stage"""
+    r"""Unique name identifying the stage type (e.g., 'knn_search', 'face_search')"""
     description: str
+    r"""Human-readable explanation of what the stage does"""
     version: str
-    module_path: str
+    r"""Version string for the stage definition (e.g., '1.0.0')"""
     input_schema: Dict[str, BucketSchemaFieldOutputTypedDict]
+    r"""Defines the data structure required from the retriever's overall input query"""
     output_schema: Dict[str, BucketSchemaFieldOutputTypedDict]
+    r"""Defines the data structure produced by this stage"""
     parameter_schema: Dict[str, BucketSchemaFieldOutputTypedDict]
+    r"""Defines the configurable parameters accepted by this stage instance (e.g., thresholds, limits)"""
     supported_input_types: List[str]
+    r"""List of general data types the stage can process (e.g., ['text', 'vector'])"""
     max_inputs: Dict[str, int]
-    default_parameters: StageDefinitionDefaultParametersTypedDict
+    r"""Specifies the maximum number of inputs allowed per type (e.g., {'text': 1})"""
+    max_total_inputs: NotRequired[Nullable[int]]
+    r"""Specifies the maximum total number of inputs allowed across all types defined in input_schema (e.g., 1 means only one input field can be provided)"""
     required_vector_indexes: NotRequired[Nullable[List[VectorIndexDefinitionTypedDict]]]
+    r"""List of vector index configurations that must exist in the target collections for this stage to function"""
     required_payload_indexes: NotRequired[Nullable[List[Any]]]
+    r"""List of payload index configurations (e.g., for specific field filtering) required in the target collections"""
     supported_filters: NotRequired[Nullable[List[str]]]
-    r"""List of filter operations supported by this stage"""
+    r"""List of filter operations supported by this stage (e.g., ['=', '>', '<'])"""
 
 
 class StageDefinition(BaseModel):
     r"""Model for retriever stage definition that describes how to process and search documents."""
 
     stage_name: str
-    r"""Name of the stage"""
+    r"""Unique name identifying the stage type (e.g., 'knn_search', 'face_search')"""
 
     description: str
+    r"""Human-readable explanation of what the stage does"""
 
     version: str
-
-    module_path: str
+    r"""Version string for the stage definition (e.g., '1.0.0')"""
 
     input_schema: Dict[str, BucketSchemaFieldOutput]
+    r"""Defines the data structure required from the retriever's overall input query"""
 
     output_schema: Dict[str, BucketSchemaFieldOutput]
+    r"""Defines the data structure produced by this stage"""
 
     parameter_schema: Dict[str, BucketSchemaFieldOutput]
+    r"""Defines the configurable parameters accepted by this stage instance (e.g., thresholds, limits)"""
 
     supported_input_types: List[str]
+    r"""List of general data types the stage can process (e.g., ['text', 'vector'])"""
 
     max_inputs: Dict[str, int]
+    r"""Specifies the maximum number of inputs allowed per type (e.g., {'text': 1})"""
 
-    default_parameters: StageDefinitionDefaultParameters
+    max_total_inputs: OptionalNullable[int] = UNSET
+    r"""Specifies the maximum total number of inputs allowed across all types defined in input_schema (e.g., 1 means only one input field can be provided)"""
 
     required_vector_indexes: OptionalNullable[List[VectorIndexDefinition]] = UNSET
+    r"""List of vector index configurations that must exist in the target collections for this stage to function"""
 
     required_payload_indexes: OptionalNullable[List[Any]] = UNSET
+    r"""List of payload index configurations (e.g., for specific field filtering) required in the target collections"""
 
     supported_filters: OptionalNullable[List[str]] = UNSET
-    r"""List of filter operations supported by this stage"""
+    r"""List of filter operations supported by this stage (e.g., ['=', '>', '<'])"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = [
+            "max_total_inputs",
             "required_vector_indexes",
             "required_payload_indexes",
             "supported_filters",
         ]
         nullable_fields = [
+            "max_total_inputs",
             "required_vector_indexes",
             "required_payload_indexes",
             "supported_filters",

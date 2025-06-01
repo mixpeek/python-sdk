@@ -4,16 +4,8 @@ from __future__ import annotations
 from .bucketschema_input import BucketSchemaInput, BucketSchemaInputTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Optional
+from typing import Any, Dict, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class BucketCreateRequestMetadataTypedDict(TypedDict):
-    r"""Additional metadata for the bucket"""
-
-
-class BucketCreateRequestMetadata(BaseModel):
-    r"""Additional metadata for the bucket"""
 
 
 class BucketCreateRequestTypedDict(TypedDict):
@@ -25,7 +17,7 @@ class BucketCreateRequestTypedDict(TypedDict):
     r"""Schema definition for bucket objects"""
     description: NotRequired[Nullable[str]]
     r"""Description of the bucket"""
-    metadata: NotRequired[BucketCreateRequestMetadataTypedDict]
+    metadata: NotRequired[Dict[str, Any]]
     r"""Additional metadata for the bucket"""
 
 
@@ -41,7 +33,7 @@ class BucketCreateRequest(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description of the bucket"""
 
-    metadata: Optional[BucketCreateRequestMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
     r"""Additional metadata for the bucket"""
 
     @model_serializer(mode="wrap")

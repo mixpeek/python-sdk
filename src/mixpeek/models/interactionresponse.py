@@ -4,16 +4,8 @@ from __future__ import annotations
 from .interactiontype import InteractionType
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import Any, Dict, List
 from typing_extensions import NotRequired, TypedDict
-
-
-class InteractionResponseMetadataTypedDict(TypedDict):
-    pass
-
-
-class InteractionResponseMetadata(BaseModel):
-    pass
 
 
 class InteractionResponseTypedDict(TypedDict):
@@ -25,7 +17,7 @@ class InteractionResponseTypedDict(TypedDict):
     r"""Unique identifier for this interaction"""
     position: NotRequired[Nullable[int]]
     r"""Position in search results where interaction occurred"""
-    metadata: NotRequired[Nullable[InteractionResponseMetadataTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Additional context about the interaction"""
     user_id: NotRequired[Nullable[str]]
     r"""Customer's authenticated user identifier - persists across sessions"""
@@ -46,7 +38,7 @@ class InteractionResponse(BaseModel):
     position: OptionalNullable[int] = UNSET
     r"""Position in search results where interaction occurred"""
 
-    metadata: OptionalNullable[InteractionResponseMetadata] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Additional context about the interaction"""
 
     user_id: OptionalNullable[str] = UNSET

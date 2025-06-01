@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 from .filtercondition import FilterCondition, FilterConditionTypedDict
+from .logicaloperatorbase_output import (
+    LogicalOperatorBaseOutput,
+    LogicalOperatorBaseOutputTypedDict,
+)
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 import pydantic
 from pydantic import model_serializer
@@ -9,14 +13,42 @@ from typing import List, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+LogicalOperatorOutputANDTypedDict = TypeAliasType(
+    "LogicalOperatorOutputANDTypedDict",
+    Union[FilterConditionTypedDict, LogicalOperatorBaseOutputTypedDict],
+)
+
+
+LogicalOperatorOutputAND = TypeAliasType(
+    "LogicalOperatorOutputAND", Union[FilterCondition, LogicalOperatorBaseOutput]
+)
+
+
+LogicalOperatorOutputORTypedDict = TypeAliasType(
+    "LogicalOperatorOutputORTypedDict",
+    Union[FilterConditionTypedDict, LogicalOperatorBaseOutputTypedDict],
+)
+
+
+LogicalOperatorOutputOR = TypeAliasType(
+    "LogicalOperatorOutputOR", Union[FilterCondition, LogicalOperatorBaseOutput]
+)
+
+
+LogicalOperatorOutputNOTTypedDict = TypeAliasType(
+    "LogicalOperatorOutputNOTTypedDict",
+    Union[FilterConditionTypedDict, LogicalOperatorBaseOutputTypedDict],
+)
+
+
+LogicalOperatorOutputNOT = TypeAliasType(
+    "LogicalOperatorOutputNOT", Union[FilterCondition, LogicalOperatorBaseOutput]
+)
+
+
 class LogicalOperatorOutputTypedDict(TypedDict):
     r"""Represents a logical operation (AND, OR, NOT) on filter conditions.
-
-    Attributes:
-    AND: List of conditions that must all be true
-    OR: List of conditions where at least one must be true
-    NOT: List of conditions that must all be false
-    case_sensitive: Whether string comparisons are case sensitive
+    Allows one level of nesting to prevent infinite recursion.
     """
 
     and_: NotRequired[Nullable[List[LogicalOperatorOutputANDTypedDict]]]
@@ -31,12 +63,7 @@ class LogicalOperatorOutputTypedDict(TypedDict):
 
 class LogicalOperatorOutput(BaseModel):
     r"""Represents a logical operation (AND, OR, NOT) on filter conditions.
-
-    Attributes:
-    AND: List of conditions that must all be true
-    OR: List of conditions where at least one must be true
-    NOT: List of conditions that must all be false
-    case_sensitive: Whether string comparisons are case sensitive
+    Allows one level of nesting to prevent infinite recursion.
     """
 
     and_: Annotated[
@@ -86,36 +113,3 @@ class LogicalOperatorOutput(BaseModel):
                 m[k] = val
 
         return m
-
-
-LogicalOperatorOutputANDTypedDict = TypeAliasType(
-    "LogicalOperatorOutputANDTypedDict",
-    Union[FilterConditionTypedDict, "LogicalOperatorOutputTypedDict"],
-)
-
-
-LogicalOperatorOutputAND = TypeAliasType(
-    "LogicalOperatorOutputAND", Union[FilterCondition, "LogicalOperatorOutput"]
-)
-
-
-LogicalOperatorOutputORTypedDict = TypeAliasType(
-    "LogicalOperatorOutputORTypedDict",
-    Union[FilterConditionTypedDict, "LogicalOperatorOutputTypedDict"],
-)
-
-
-LogicalOperatorOutputOR = TypeAliasType(
-    "LogicalOperatorOutputOR", Union[FilterCondition, "LogicalOperatorOutput"]
-)
-
-
-LogicalOperatorOutputNOTTypedDict = TypeAliasType(
-    "LogicalOperatorOutputNOTTypedDict",
-    Union[FilterConditionTypedDict, "LogicalOperatorOutputTypedDict"],
-)
-
-
-LogicalOperatorOutputNOT = TypeAliasType(
-    "LogicalOperatorOutputNOT", Union[FilterCondition, "LogicalOperatorOutput"]
-)

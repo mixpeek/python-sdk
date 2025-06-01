@@ -20,16 +20,8 @@ from .taxonomyapplicationconfig import (
 )
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class CreateCollectionRequestMetadataTypedDict(TypedDict):
-    pass
-
-
-class CreateCollectionRequestMetadata(BaseModel):
-    pass
 
 
 class CreateCollectionRequestTypedDict(TypedDict):
@@ -47,7 +39,7 @@ class CreateCollectionRequestTypedDict(TypedDict):
     r"""List of taxonomy application configurations. there are two options: on ingestion store the taxonomy application results to this collection, or on demand compute the taxonomy application results at query time"""
     enabled: NotRequired[bool]
     r"""Enable or disable processing of this collection"""
-    metadata: NotRequired[Nullable[CreateCollectionRequestMetadataTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Optional metadata for the collection"""
     document_handling: NotRequired[Nullable[DocumentHandlingConfigTypedDict]]
     r"""Configuration for how documents are handled by this extractor"""
@@ -76,7 +68,7 @@ class CreateCollectionRequest(BaseModel):
     enabled: Optional[bool] = True
     r"""Enable or disable processing of this collection"""
 
-    metadata: OptionalNullable[CreateCollectionRequestMetadata] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Optional metadata for the collection"""
 
     document_handling: OptionalNullable[DocumentHandlingConfig] = UNSET

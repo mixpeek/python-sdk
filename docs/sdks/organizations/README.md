@@ -68,7 +68,7 @@ with Mixpeek(
     token=os.getenv("MIXPEEK_TOKEN", ""),
 ) as m_client:
 
-    res = m_client.organizations.add_user(email="Caterina_Bartell@yahoo.com")
+    res = m_client.organizations.add_user(email="Annabelle25@hotmail.com")
 
     # Handle response
     print(res)
@@ -77,15 +77,15 @@ with Mixpeek(
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `email`                                                                           | *str*                                                                             | :heavy_check_mark:                                                                | N/A                                                                               |
-| `user_id`                                                                         | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `user_name`                                                                       | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `api_keys`                                                                        | List[[models.APIKey](../../models/apikey.md)]                                     | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `metadata`                                                                        | [Optional[models.UserModelInputMetadata]](../../models/usermodelinputmetadata.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `created_at`                                                                      | [date](https://docs.python.org/3/library/datetime.html#date-objects)              | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `email`                                                              | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `user_id`                                                            | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `user_name`                                                          | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `api_keys`                                                           | List[[models.APIKey](../../models/apikey.md)]                        | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `metadata`                                                           | Dict[str, *Any*]                                                     | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `created_at`                                                         | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `retries`                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)     | :heavy_minus_sign:                                                   | Configuration to override the default retry behavior of the client.  |
 
 ### Response
 

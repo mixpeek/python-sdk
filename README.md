@@ -203,15 +203,6 @@ with Mixpeek(
 * [get_stats](docs/sdks/collectioncache/README.md#get_stats) - Get Cache Stats
 * [cleanup](docs/sdks/collectioncache/README.md#cleanup) - Cleanup Cache
 
-### [collection_documents](docs/sdks/collectiondocuments/README.md)
-
-* [get](docs/sdks/collectiondocuments/README.md#get) - Get Document
-* [update](docs/sdks/collectiondocuments/README.md#update) - Update Document
-* [delete](docs/sdks/collectiondocuments/README.md#delete) - Delete Document
-* [list](docs/sdks/collectiondocuments/README.md#list) - List Documents
-* [batch_update](docs/sdks/collectiondocuments/README.md#batch_update) - Batch Update Documents
-* [batch_delete](docs/sdks/collectiondocuments/README.md#batch_delete) - Batch Delete Documents
-
 ### [collections](docs/sdks/collections/README.md)
 
 * [create](docs/sdks/collections/README.md#create) - Create Collection

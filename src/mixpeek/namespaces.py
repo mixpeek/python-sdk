@@ -13,13 +13,11 @@ class Namespaces(BaseSDK):
         self,
         *,
         namespace_name: str,
+        feature_extractors: Union[
+            List[models.BasicFeatureExtractor],
+            List[models.BasicFeatureExtractorTypedDict],
+        ],
         description: OptionalNullable[str] = UNSET,
-        feature_extractors: Optional[
-            Union[
-                List[models.BasicFeatureExtractor],
-                List[models.BasicFeatureExtractorTypedDict],
-            ]
-        ] = None,
         payload_indexes: OptionalNullable[
             Union[
                 List[models.PayloadIndexConfig],
@@ -33,12 +31,12 @@ class Namespaces(BaseSDK):
     ) -> models.NamespaceResponse:
         r"""Create Namespace
 
-        Creates a new namespace with the specified configuration
+        Creates a new namespace with specified feature extractors and payload indexes.
 
         :param namespace_name: Name of the namespace to create
+        :param feature_extractors: List of feature extractors to use. At least one feature extractor must be provided.
         :param description: Description of the namespace
-        :param feature_extractors: List of feature extractors to use
-        :param payload_indexes: List of payload index configurations
+        :param payload_indexes: Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -58,7 +56,7 @@ class Namespaces(BaseSDK):
             namespace_name=namespace_name,
             description=description,
             feature_extractors=utils.get_pydantic_model(
-                feature_extractors, Optional[List[models.BasicFeatureExtractor]]
+                feature_extractors, List[models.BasicFeatureExtractor]
             ),
             payload_indexes=utils.get_pydantic_model(
                 payload_indexes, OptionalNullable[List[models.PayloadIndexConfig]]
@@ -94,6 +92,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_namespace_v1_namespaces_post",
                 oauth2_scopes=[],
@@ -107,7 +106,7 @@ class Namespaces(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.NamespaceResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
@@ -150,13 +149,11 @@ class Namespaces(BaseSDK):
         self,
         *,
         namespace_name: str,
+        feature_extractors: Union[
+            List[models.BasicFeatureExtractor],
+            List[models.BasicFeatureExtractorTypedDict],
+        ],
         description: OptionalNullable[str] = UNSET,
-        feature_extractors: Optional[
-            Union[
-                List[models.BasicFeatureExtractor],
-                List[models.BasicFeatureExtractorTypedDict],
-            ]
-        ] = None,
         payload_indexes: OptionalNullable[
             Union[
                 List[models.PayloadIndexConfig],
@@ -170,12 +167,12 @@ class Namespaces(BaseSDK):
     ) -> models.NamespaceResponse:
         r"""Create Namespace
 
-        Creates a new namespace with the specified configuration
+        Creates a new namespace with specified feature extractors and payload indexes.
 
         :param namespace_name: Name of the namespace to create
+        :param feature_extractors: List of feature extractors to use. At least one feature extractor must be provided.
         :param description: Description of the namespace
-        :param feature_extractors: List of feature extractors to use
-        :param payload_indexes: List of payload index configurations
+        :param payload_indexes: Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -195,7 +192,7 @@ class Namespaces(BaseSDK):
             namespace_name=namespace_name,
             description=description,
             feature_extractors=utils.get_pydantic_model(
-                feature_extractors, Optional[List[models.BasicFeatureExtractor]]
+                feature_extractors, List[models.BasicFeatureExtractor]
             ),
             payload_indexes=utils.get_pydantic_model(
                 payload_indexes, OptionalNullable[List[models.PayloadIndexConfig]]
@@ -231,6 +228,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_namespace_v1_namespaces_post",
                 oauth2_scopes=[],
@@ -244,7 +242,7 @@ class Namespaces(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.NamespaceResponse)
         if utils.match_response(
             http_res, ["400", "401", "403", "404"], "application/json"
@@ -335,6 +333,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_namespaces_v1_namespaces_get",
                 oauth2_scopes=[],
@@ -439,6 +438,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_namespaces_v1_namespaces_get",
                 oauth2_scopes=[],
@@ -550,6 +550,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_namespace_v1_namespaces__namespace__delete",
                 oauth2_scopes=[],
@@ -661,6 +662,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_namespace_v1_namespaces__namespace__delete",
                 oauth2_scopes=[],
@@ -794,6 +796,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_namespace_v1_namespaces__namespace__put",
                 oauth2_scopes=[],
@@ -927,6 +930,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_namespace_v1_namespaces__namespace__put",
                 oauth2_scopes=[],
@@ -1038,6 +1042,7 @@ class Namespaces(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_namespace_v1_namespaces__namespace__get",
                 oauth2_scopes=[],
@@ -1149,6 +1154,7 @@ class Namespaces(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_namespace_v1_namespaces__namespace__get",
                 oauth2_scopes=[],

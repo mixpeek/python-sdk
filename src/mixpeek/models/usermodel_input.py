@@ -4,16 +4,8 @@ from __future__ import annotations
 from .apikey import APIKey, APIKeyTypedDict
 from datetime import datetime
 from mixpeek.types import BaseModel
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class UserModelInputMetadataTypedDict(TypedDict):
-    pass
-
-
-class UserModelInputMetadata(BaseModel):
-    pass
 
 
 class UserModelInputTypedDict(TypedDict):
@@ -21,7 +13,7 @@ class UserModelInputTypedDict(TypedDict):
     user_id: NotRequired[str]
     user_name: NotRequired[str]
     api_keys: NotRequired[List[APIKeyTypedDict]]
-    metadata: NotRequired[UserModelInputMetadataTypedDict]
+    metadata: NotRequired[Dict[str, Any]]
     created_at: NotRequired[datetime]
 
 
@@ -34,6 +26,6 @@ class UserModelInput(BaseModel):
 
     api_keys: Optional[List[APIKey]] = None
 
-    metadata: Optional[UserModelInputMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
 
     created_at: Optional[datetime] = None

@@ -3,9 +3,12 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `namespace_id`     | *str*              | :heavy_check_mark: | N/A                |
-| `namespace_name`   | *str*              | :heavy_check_mark: | N/A                |
-| `embedding_models` | List[*str*]        | :heavy_check_mark: | N/A                |
-| `payload_indexes`  | List[*Any*]        | :heavy_check_mark: | N/A                |
+| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `namespace_id`                                                           | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
+| `namespace_name`                                                         | *str*                                                                    | :heavy_check_mark:                                                       | N/A                                                                      |
+| `description`                                                            | *Nullable[str]*                                                          | :heavy_check_mark:                                                       | N/A                                                                      |
+| `feature_extractors`                                                     | List[[models.BasicFeatureExtractor](../models/basicfeatureextractor.md)] | :heavy_check_mark:                                                       | N/A                                                                      |
+| `payload_indexes`                                                        | List[*Any*]                                                              | :heavy_check_mark:                                                       | N/A                                                                      |
+| `status`                                                                 | [models.NamespaceStatus](../models/namespacestatus.md)                   | :heavy_check_mark:                                                       | N/A                                                                      |
+| `provisioning_task_id`                                                   | *OptionalNullable[str]*                                                  | :heavy_minus_sign:                                                       | N/A                                                                      |

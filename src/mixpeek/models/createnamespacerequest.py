@@ -5,7 +5,7 @@ from .basicfeatureextractor import BasicFeatureExtractor, BasicFeatureExtractorT
 from .payloadindexconfig import PayloadIndexConfig, PayloadIndexConfigTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import List
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -14,12 +14,12 @@ class CreateNamespaceRequestTypedDict(TypedDict):
 
     namespace_name: str
     r"""Name of the namespace to create"""
+    feature_extractors: List[BasicFeatureExtractorTypedDict]
+    r"""List of feature extractors to use. At least one feature extractor must be provided."""
     description: NotRequired[Nullable[str]]
     r"""Description of the namespace"""
-    feature_extractors: NotRequired[List[BasicFeatureExtractorTypedDict]]
-    r"""List of feature extractors to use"""
     payload_indexes: NotRequired[Nullable[List[PayloadIndexConfigTypedDict]]]
-    r"""List of payload index configurations"""
+    r"""Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically."""
 
 
 class CreateNamespaceRequest(BaseModel):
@@ -28,18 +28,18 @@ class CreateNamespaceRequest(BaseModel):
     namespace_name: str
     r"""Name of the namespace to create"""
 
+    feature_extractors: List[BasicFeatureExtractor]
+    r"""List of feature extractors to use. At least one feature extractor must be provided."""
+
     description: OptionalNullable[str] = UNSET
     r"""Description of the namespace"""
 
-    feature_extractors: Optional[List[BasicFeatureExtractor]] = None
-    r"""List of feature extractors to use"""
-
     payload_indexes: OptionalNullable[List[PayloadIndexConfig]] = UNSET
-    r"""List of payload index configurations"""
+    r"""Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["description", "feature_extractors", "payload_indexes"]
+        optional_fields = ["description", "payload_indexes"]
         nullable_fields = ["description", "payload_indexes"]
         null_default_fields = []
 

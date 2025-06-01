@@ -4,16 +4,8 @@ from __future__ import annotations
 from .createblobrequest import CreateBlobRequest, CreateBlobRequestTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import Any, Dict, List
 from typing_extensions import NotRequired, TypedDict
-
-
-class UpdateObjectRequestMetadataTypedDict(TypedDict):
-    pass
-
-
-class UpdateObjectRequestMetadata(BaseModel):
-    pass
 
 
 class UpdateObjectRequestTypedDict(TypedDict):
@@ -23,7 +15,7 @@ class UpdateObjectRequestTypedDict(TypedDict):
     r"""Updated storage key/path prefix of the object, this will be used to retrieve the object from the storage. It's at the root of the object."""
     blobs: NotRequired[Nullable[List[CreateBlobRequestTypedDict]]]
     r"""List of new or updated blobs for this object"""
-    metadata: NotRequired[Nullable[UpdateObjectRequestMetadataTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Updated metadata for the object, this will be merged with existing metadata."""
     skip_duplicates: NotRequired[Nullable[bool]]
     r"""Skip duplicate blobs, if a blob with the same hash already exists, it will be skipped."""
@@ -38,7 +30,7 @@ class UpdateObjectRequest(BaseModel):
     blobs: OptionalNullable[List[CreateBlobRequest]] = UNSET
     r"""List of new or updated blobs for this object"""
 
-    metadata: OptionalNullable[UpdateObjectRequestMetadata] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Updated metadata for the object, this will be merged with existing metadata."""
 
     skip_duplicates: OptionalNullable[bool] = UNSET

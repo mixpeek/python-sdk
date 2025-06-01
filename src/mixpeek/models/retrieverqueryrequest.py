@@ -5,16 +5,8 @@ from .logicaloperator_input import LogicalOperatorInput, LogicalOperatorInputTyp
 from .sortoption import SortOption, SortOptionTypedDict
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class RetrieverQueryRequestInputsTypedDict(TypedDict):
-    r"""Input values for the retriever query. These map to the required inputs defined in the retriever's first stage."""
-
-
-class RetrieverQueryRequestInputs(BaseModel):
-    r"""Input values for the retriever query. These map to the required inputs defined in the retriever's first stage."""
 
 
 class RetrieverQueryRequestTypedDict(TypedDict):
@@ -25,7 +17,7 @@ class RetrieverQueryRequestTypedDict(TypedDict):
     query inputs, filtering, sorting, pagination, and result formatting.
     """
 
-    inputs: RetrieverQueryRequestInputsTypedDict
+    inputs: Dict[str, Any]
     r"""Input values for the retriever query. These map to the required inputs defined in the retriever's first stage."""
     filters: NotRequired[Nullable[LogicalOperatorInputTypedDict]]
     r"""Logical operations for filtering results. Can include AND, OR, NOT conditions with field comparisons."""
@@ -51,7 +43,7 @@ class RetrieverQueryRequest(BaseModel):
     query inputs, filtering, sorting, pagination, and result formatting.
     """
 
-    inputs: RetrieverQueryRequestInputs
+    inputs: Dict[str, Any]
     r"""Input values for the retriever query. These map to the required inputs defined in the retriever's first stage."""
 
     filters: OptionalNullable[LogicalOperatorInput] = UNSET

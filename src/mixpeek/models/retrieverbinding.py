@@ -3,15 +3,8 @@
 from __future__ import annotations
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
+from typing import Any, Dict
 from typing_extensions import NotRequired, TypedDict
-
-
-class InputsTypedDict(TypedDict):
-    pass
-
-
-class Inputs(BaseModel):
-    pass
 
 
 class RetrieverBindingTypedDict(TypedDict):
@@ -19,7 +12,7 @@ class RetrieverBindingTypedDict(TypedDict):
 
     retriever_id: str
     r"""ID of the retriever to use"""
-    inputs: NotRequired[Nullable[InputsTypedDict]]
+    inputs: NotRequired[Nullable[Dict[str, Any]]]
     r"""Optional inputs to the retriever. If not provided, will use source collection schema"""
 
 
@@ -29,7 +22,7 @@ class RetrieverBinding(BaseModel):
     retriever_id: str
     r"""ID of the retriever to use"""
 
-    inputs: OptionalNullable[Inputs] = UNSET
+    inputs: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Optional inputs to the retriever. If not provided, will use source collection schema"""
 
     @model_serializer(mode="wrap")

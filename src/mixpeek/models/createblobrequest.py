@@ -4,16 +4,8 @@ from __future__ import annotations
 from .bucketschemafieldtype import BucketSchemaFieldType
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import Any
+from typing import Any, Dict
 from typing_extensions import NotRequired, TypedDict
-
-
-class CreateBlobRequestMetadataTypedDict(TypedDict):
-    pass
-
-
-class CreateBlobRequestMetadata(BaseModel):
-    pass
 
 
 class CreateBlobRequestTypedDict(TypedDict):
@@ -27,7 +19,7 @@ class CreateBlobRequestTypedDict(TypedDict):
     r"""Data for the blob, this will only be applied to the documents that use this blob"""
     key_prefix: NotRequired[Nullable[str]]
     r"""Optional prefix for the blob key"""
-    metadata: NotRequired[Nullable[CreateBlobRequestMetadataTypedDict]]
+    metadata: NotRequired[Nullable[Dict[str, Any]]]
     r"""Metadata for the blob, this will only be applied to the documents that use this blob"""
 
 
@@ -46,7 +38,7 @@ class CreateBlobRequest(BaseModel):
     key_prefix: OptionalNullable[str] = UNSET
     r"""Optional prefix for the blob key"""
 
-    metadata: OptionalNullable[CreateBlobRequestMetadata] = UNSET
+    metadata: OptionalNullable[Dict[str, Any]] = UNSET
     r"""Metadata for the blob, this will only be applied to the documents that use this blob"""
 
     @model_serializer(mode="wrap")

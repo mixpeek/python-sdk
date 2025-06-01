@@ -33,7 +33,10 @@ with Mixpeek(
         properties={
 
         },
-    ), description="Bucket for storing user profile information")
+    ), description="Bucket for storing user profile information", metadata={
+        "created_by": "admin",
+        "department": "HR",
+    })
 
     # Handle response
     print(res)
@@ -48,7 +51,7 @@ with Mixpeek(
 | `bucket_schema`                                                                                                                                                                       | [models.BucketSchemaInput](../../models/bucketschemainput.md)                                                                                                                         | :heavy_check_mark:                                                                                                                                                                    | Schema definition for bucket objects                                                                                                                                                  |
 | `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
 | `description`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Description of the bucket                                                                                                                                                             |
-| `metadata`                                                                                                                                                                            | [Optional[models.BucketCreateRequestMetadata]](../../models/bucketcreaterequestmetadata.md)                                                                                           | :heavy_minus_sign:                                                                                                                                                                    | Additional metadata for the bucket                                                                                                                                                    |
+| `metadata`                                                                                                                                                                            | Dict[str, *Any*]                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Additional metadata for the bucket                                                                                                                                                    |
 | `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |
 
 ### Response
@@ -138,7 +141,7 @@ with Mixpeek(
 | `x_namespace`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. |
 | `bucket_name`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Human-readable name for the bucket                                                                                                                                                    |
 | `description`                                                                                                                                                                         | *OptionalNullable[str]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                    | Description of the bucket                                                                                                                                                             |
-| `metadata`                                                                                                                                                                            | [OptionalNullable[models.Metadata]](../../models/metadata.md)                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                    | Additional metadata for the bucket                                                                                                                                                    |
+| `metadata`                                                                                                                                                                            | Dict[str, *Any*]                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Additional metadata for the bucket                                                                                                                                                    |
 | `retries`                                                                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                                                                   |
 
 ### Response
@@ -204,6 +207,7 @@ This endpoint lists buckets with pagination, sorting, and filtering options.
 ### Example Usage
 
 ```python
+import mixpeek
 from mixpeek import Mixpeek
 import os
 
@@ -214,9 +218,42 @@ with Mixpeek(
 
     res = m_client.buckets.list(list_buckets_request={
         "filters": {
-            "and_": [],
-            "or_": [],
-            "not_": [],
+            "and_": [
+                {
+                    "field": "name",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "John",
+                },
+                {
+                    "field": "age",
+                    "operator": mixpeek.FilterOperator.GTE,
+                    "value": 30,
+                },
+            ],
+            "or_": [
+                {
+                    "field": "status",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "active",
+                },
+                {
+                    "field": "role",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "admin",
+                },
+            ],
+            "not_": [
+                {
+                    "field": "department",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "HR",
+                },
+                {
+                    "field": "location",
+                    "operator": mixpeek.FilterOperator.EQ,
+                    "value": "remote",
+                },
+            ],
             "case_sensitive": True,
         },
         "sort": {

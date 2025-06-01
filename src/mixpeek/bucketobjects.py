@@ -5,7 +5,7 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class BucketObjects(BaseSDK):
@@ -20,12 +20,7 @@ class BucketObjects(BaseSDK):
                 List[models.CreateBlobRequest], List[models.CreateBlobRequestTypedDict]
             ]
         ] = None,
-        metadata: Optional[
-            Union[
-                models.CreateObjectRequestMetadata,
-                models.CreateObjectRequestMetadataTypedDict,
-            ]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         skip_duplicates: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -66,9 +61,7 @@ class BucketObjects(BaseSDK):
                 blobs=utils.get_pydantic_model(
                     blobs, Optional[List[models.CreateBlobRequest]]
                 ),
-                metadata=utils.get_pydantic_model(
-                    metadata, Optional[models.CreateObjectRequestMetadata]
-                ),
+                metadata=metadata,
                 skip_duplicates=skip_duplicates,
             ),
         )
@@ -106,6 +99,7 @@ class BucketObjects(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_object_v1_buckets__bucket_identifier__objects_create_post",
                 oauth2_scopes=[],
@@ -169,12 +163,7 @@ class BucketObjects(BaseSDK):
                 List[models.CreateBlobRequest], List[models.CreateBlobRequestTypedDict]
             ]
         ] = None,
-        metadata: Optional[
-            Union[
-                models.CreateObjectRequestMetadata,
-                models.CreateObjectRequestMetadataTypedDict,
-            ]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         skip_duplicates: Optional[bool] = False,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -215,9 +204,7 @@ class BucketObjects(BaseSDK):
                 blobs=utils.get_pydantic_model(
                     blobs, Optional[List[models.CreateBlobRequest]]
                 ),
-                metadata=utils.get_pydantic_model(
-                    metadata, Optional[models.CreateObjectRequestMetadata]
-                ),
+                metadata=metadata,
                 skip_duplicates=skip_duplicates,
             ),
         )
@@ -255,6 +242,7 @@ class BucketObjects(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_object_v1_buckets__bucket_identifier__objects_create_post",
                 oauth2_scopes=[],
@@ -374,6 +362,7 @@ class BucketObjects(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_object_v1_buckets__bucket_identifier__objects__object_identifier__get",
                 oauth2_scopes=[],
@@ -493,6 +482,7 @@ class BucketObjects(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_object_v1_buckets__bucket_identifier__objects__object_identifier__get",
                 oauth2_scopes=[],
@@ -557,12 +547,7 @@ class BucketObjects(BaseSDK):
                 List[models.CreateBlobRequest], List[models.CreateBlobRequestTypedDict]
             ]
         ] = UNSET,
-        metadata: OptionalNullable[
-            Union[
-                models.UpdateObjectRequestMetadata,
-                models.UpdateObjectRequestMetadataTypedDict,
-            ]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         skip_duplicates: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -605,9 +590,7 @@ class BucketObjects(BaseSDK):
                 blobs=utils.get_pydantic_model(
                     blobs, OptionalNullable[List[models.CreateBlobRequest]]
                 ),
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.UpdateObjectRequestMetadata]
-                ),
+                metadata=metadata,
                 skip_duplicates=skip_duplicates,
             ),
         )
@@ -645,6 +628,7 @@ class BucketObjects(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_object_v1_buckets__bucket_identifier__objects__object_identifier__put",
                 oauth2_scopes=[],
@@ -709,12 +693,7 @@ class BucketObjects(BaseSDK):
                 List[models.CreateBlobRequest], List[models.CreateBlobRequestTypedDict]
             ]
         ] = UNSET,
-        metadata: OptionalNullable[
-            Union[
-                models.UpdateObjectRequestMetadata,
-                models.UpdateObjectRequestMetadataTypedDict,
-            ]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         skip_duplicates: OptionalNullable[bool] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -757,9 +736,7 @@ class BucketObjects(BaseSDK):
                 blobs=utils.get_pydantic_model(
                     blobs, OptionalNullable[List[models.CreateBlobRequest]]
                 ),
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.UpdateObjectRequestMetadata]
-                ),
+                metadata=metadata,
                 skip_duplicates=skip_duplicates,
             ),
         )
@@ -797,6 +774,7 @@ class BucketObjects(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_object_v1_buckets__bucket_identifier__objects__object_identifier__put",
                 oauth2_scopes=[],
@@ -914,6 +892,7 @@ class BucketObjects(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_object_v1_buckets__bucket_identifier__objects__object_identifier__delete",
                 oauth2_scopes=[],
@@ -1031,6 +1010,7 @@ class BucketObjects(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_object_v1_buckets__bucket_identifier__objects__object_identifier__delete",
                 oauth2_scopes=[],
@@ -1177,6 +1157,7 @@ class BucketObjects(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_objects_v1_buckets__bucket_identifier__objects_post",
                 oauth2_scopes=[],
@@ -1323,6 +1304,7 @@ class BucketObjects(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_objects_v1_buckets__bucket_identifier__objects_post",
                 oauth2_scopes=[],

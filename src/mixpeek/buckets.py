@@ -5,7 +5,7 @@ from mixpeek import models, utils
 from mixpeek._hooks import HookContext
 from mixpeek.types import OptionalNullable, UNSET
 from mixpeek.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Dict, Mapping, Optional, Union
 
 
 class Buckets(BaseSDK):
@@ -18,12 +18,7 @@ class Buckets(BaseSDK):
         ],
         x_namespace: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        metadata: Optional[
-            Union[
-                models.BucketCreateRequestMetadata,
-                models.BucketCreateRequestMetadataTypedDict,
-            ]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -63,9 +58,7 @@ class Buckets(BaseSDK):
                 bucket_schema=utils.get_pydantic_model(
                     bucket_schema, models.BucketSchemaInput
                 ),
-                metadata=utils.get_pydantic_model(
-                    metadata, Optional[models.BucketCreateRequestMetadata]
-                ),
+                metadata=metadata,
             ),
         )
 
@@ -102,6 +95,7 @@ class Buckets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_bucket_v1_buckets_create_post",
                 oauth2_scopes=[],
@@ -163,12 +157,7 @@ class Buckets(BaseSDK):
         ],
         x_namespace: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        metadata: Optional[
-            Union[
-                models.BucketCreateRequestMetadata,
-                models.BucketCreateRequestMetadataTypedDict,
-            ]
-        ] = None,
+        metadata: Optional[Dict[str, Any]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -208,9 +197,7 @@ class Buckets(BaseSDK):
                 bucket_schema=utils.get_pydantic_model(
                     bucket_schema, models.BucketSchemaInput
                 ),
-                metadata=utils.get_pydantic_model(
-                    metadata, Optional[models.BucketCreateRequestMetadata]
-                ),
+                metadata=metadata,
             ),
         )
 
@@ -247,6 +234,7 @@ class Buckets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create_bucket_v1_buckets_create_post",
                 oauth2_scopes=[],
@@ -361,6 +349,7 @@ class Buckets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_bucket_v1_buckets__bucket_identifier__get",
                 oauth2_scopes=[],
@@ -475,6 +464,7 @@ class Buckets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get_bucket_v1_buckets__bucket_identifier__get",
                 oauth2_scopes=[],
@@ -534,9 +524,7 @@ class Buckets(BaseSDK):
         x_namespace: OptionalNullable[str] = UNSET,
         bucket_name: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        metadata: OptionalNullable[
-            Union[models.Metadata, models.MetadataTypedDict]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -573,9 +561,7 @@ class Buckets(BaseSDK):
             bucket_update_request=models.BucketUpdateRequest(
                 bucket_name=bucket_name,
                 description=description,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.Metadata]
-                ),
+                metadata=metadata,
             ),
         )
 
@@ -612,6 +598,7 @@ class Buckets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_bucket_v1_buckets__bucket_identifier__put",
                 oauth2_scopes=[],
@@ -671,9 +658,7 @@ class Buckets(BaseSDK):
         x_namespace: OptionalNullable[str] = UNSET,
         bucket_name: OptionalNullable[str] = UNSET,
         description: OptionalNullable[str] = UNSET,
-        metadata: OptionalNullable[
-            Union[models.Metadata, models.MetadataTypedDict]
-        ] = UNSET,
+        metadata: OptionalNullable[Dict[str, Any]] = UNSET,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -710,9 +695,7 @@ class Buckets(BaseSDK):
             bucket_update_request=models.BucketUpdateRequest(
                 bucket_name=bucket_name,
                 description=description,
-                metadata=utils.get_pydantic_model(
-                    metadata, OptionalNullable[models.Metadata]
-                ),
+                metadata=metadata,
             ),
         )
 
@@ -749,6 +732,7 @@ class Buckets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update_bucket_v1_buckets__bucket_identifier__put",
                 oauth2_scopes=[],
@@ -863,6 +847,7 @@ class Buckets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_bucket_v1_buckets__bucket_identifier__delete",
                 oauth2_scopes=[],
@@ -977,6 +962,7 @@ class Buckets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete_bucket_v1_buckets__bucket_identifier__delete",
                 oauth2_scopes=[],
@@ -1108,6 +1094,7 @@ class Buckets(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_buckets_v1_buckets_post",
                 oauth2_scopes=[],
@@ -1239,6 +1226,7 @@ class Buckets(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list_buckets_v1_buckets_post",
                 oauth2_scopes=[],

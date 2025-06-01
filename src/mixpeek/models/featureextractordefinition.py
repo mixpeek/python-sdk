@@ -12,38 +12,6 @@ from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class InputSchemaTypedDict(TypedDict):
-    r"""Schema for input data"""
-
-
-class InputSchema(BaseModel):
-    r"""Schema for input data"""
-
-
-class OutputSchemaTypedDict(TypedDict):
-    r"""Schema for output data"""
-
-
-class OutputSchema(BaseModel):
-    r"""Schema for output data"""
-
-
-class ParameterSchemaTypedDict(TypedDict):
-    r"""Schema for parameters"""
-
-
-class ParameterSchema(BaseModel):
-    r"""Schema for parameters"""
-
-
-class DefaultParametersTypedDict(TypedDict):
-    r"""Default parameters"""
-
-
-class DefaultParameters(BaseModel):
-    r"""Default parameters"""
-
-
 class FeatureExtractorDefinitionTypedDict(TypedDict):
     r"""Definition of a feature extractor."""
 
@@ -53,21 +21,21 @@ class FeatureExtractorDefinitionTypedDict(TypedDict):
     r"""Description of the feature extractor"""
     version: str
     r"""Version of the feature extractor"""
-    module_path: str
-    r"""Python module path for the feature extractor"""
     feature_id: NotRequired[str]
     r"""Unique identifier for the feature extractor"""
-    input_schema: NotRequired[InputSchemaTypedDict]
+    module_path: NotRequired[Nullable[str]]
+    r"""Python module path for the feature extractor"""
+    input_schema: NotRequired[Dict[str, Any]]
     r"""Schema for input data"""
-    output_schema: NotRequired[OutputSchemaTypedDict]
+    output_schema: NotRequired[Dict[str, Any]]
     r"""Schema for output data"""
-    parameter_schema: NotRequired[ParameterSchemaTypedDict]
+    parameter_schema: NotRequired[Dict[str, Any]]
     r"""Schema for parameters"""
     supported_input_types: NotRequired[List[str]]
     r"""Supported input types"""
     max_inputs: NotRequired[Dict[str, int]]
     r"""Maximum number of inputs of each type"""
-    default_parameters: NotRequired[DefaultParametersTypedDict]
+    default_parameters: NotRequired[Dict[str, Any]]
     r"""Default parameters"""
     document_output_type: NotRequired[DocumentOutputType]
     r"""Enum for document output types"""
@@ -79,6 +47,8 @@ class FeatureExtractorDefinitionTypedDict(TypedDict):
     r"""Vector indexes required by the extractor"""
     required_payload_indexes: NotRequired[Nullable[List[Any]]]
     r"""Payload indexes required by the extractor"""
+    supported_retriever_stages: NotRequired[Nullable[List[str]]]
+    r"""Retriever stages supported by the extractor"""
 
 
 class FeatureExtractorDefinition(BaseModel):
@@ -98,19 +68,19 @@ class FeatureExtractorDefinition(BaseModel):
     version: str
     r"""Version of the feature extractor"""
 
-    module_path: str
-    r"""Python module path for the feature extractor"""
-
     feature_id: Optional[str] = ""
     r"""Unique identifier for the feature extractor"""
 
-    input_schema: Optional[InputSchema] = None
+    module_path: OptionalNullable[str] = UNSET
+    r"""Python module path for the feature extractor"""
+
+    input_schema: Optional[Dict[str, Any]] = None
     r"""Schema for input data"""
 
-    output_schema: Optional[OutputSchema] = None
+    output_schema: Optional[Dict[str, Any]] = None
     r"""Schema for output data"""
 
-    parameter_schema: Optional[ParameterSchema] = None
+    parameter_schema: Optional[Dict[str, Any]] = None
     r"""Schema for parameters"""
 
     supported_input_types: Optional[List[str]] = None
@@ -119,7 +89,7 @@ class FeatureExtractorDefinition(BaseModel):
     max_inputs: Optional[Dict[str, int]] = None
     r"""Maximum number of inputs of each type"""
 
-    default_parameters: Optional[DefaultParameters] = None
+    default_parameters: Optional[Dict[str, Any]] = None
     r"""Default parameters"""
 
     document_output_type: Optional[DocumentOutputType] = None
@@ -137,6 +107,9 @@ class FeatureExtractorDefinition(BaseModel):
     required_payload_indexes: OptionalNullable[List[Any]] = UNSET
     r"""Payload indexes required by the extractor"""
 
+    supported_retriever_stages: OptionalNullable[List[str]] = UNSET
+    r"""Retriever stages supported by the extractor"""
+
     @property
     def additional_properties(self):
         return self.__pydantic_extra__
@@ -149,6 +122,7 @@ class FeatureExtractorDefinition(BaseModel):
     def serialize_model(self, handler):
         optional_fields = [
             "feature_id",
+            "module_path",
             "input_schema",
             "output_schema",
             "parameter_schema",
@@ -160,8 +134,14 @@ class FeatureExtractorDefinition(BaseModel):
             "document_output_handling",
             "required_vector_indexes",
             "required_payload_indexes",
+            "supported_retriever_stages",
         ]
-        nullable_fields = ["required_vector_indexes", "required_payload_indexes"]
+        nullable_fields = [
+            "module_path",
+            "required_vector_indexes",
+            "required_payload_indexes",
+            "supported_retriever_stages",
+        ]
         null_default_fields = []
 
         serialized = handler(self)

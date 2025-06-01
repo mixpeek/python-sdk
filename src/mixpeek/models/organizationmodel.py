@@ -4,16 +4,8 @@ from __future__ import annotations
 from .usermodel_output import UserModelOutput, UserModelOutputTypedDict
 from datetime import datetime
 from mixpeek.types import BaseModel
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class OrganizationModelMetadataTypedDict(TypedDict):
-    pass
-
-
-class OrganizationModelMetadata(BaseModel):
-    pass
 
 
 class OrganizationModelTypedDict(TypedDict):
@@ -23,7 +15,7 @@ class OrganizationModelTypedDict(TypedDict):
     created_at: NotRequired[datetime]
     account_type: NotRequired[str]
     credit_count: NotRequired[int]
-    metadata: NotRequired[OrganizationModelMetadataTypedDict]
+    metadata: NotRequired[Dict[str, Any]]
     users: NotRequired[List[UserModelOutputTypedDict]]
 
 
@@ -40,6 +32,6 @@ class OrganizationModel(BaseModel):
 
     credit_count: Optional[int] = 1000
 
-    metadata: Optional[OrganizationModelMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
 
     users: Optional[List[UserModelOutput]] = None

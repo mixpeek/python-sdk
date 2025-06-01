@@ -6,16 +6,8 @@ from .taskstatus import TaskStatus
 from datetime import datetime
 from mixpeek.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import Any, Dict, List
 from typing_extensions import NotRequired, TypedDict
-
-
-class ObjectResponseMetadataTypedDict(TypedDict):
-    r"""Additional metadata for the object, appended to downstream documents of connected collections"""
-
-
-class ObjectResponseMetadata(BaseModel):
-    r"""Additional metadata for the object, appended to downstream documents of connected collections"""
 
 
 class ObjectResponseTypedDict(TypedDict):
@@ -28,7 +20,7 @@ class ObjectResponseTypedDict(TypedDict):
     blobs: List[BlobModelTypedDict]
     r"""List of blobs contained in this object"""
     status: TaskStatus
-    metadata: ObjectResponseMetadataTypedDict
+    metadata: Dict[str, Any]
     r"""Additional metadata for the object, appended to downstream documents of connected collections"""
     task_id: NotRequired[Nullable[str]]
     r"""ID of the task that created this object, used to track the object creation progress and status"""
@@ -58,7 +50,7 @@ class ObjectResponse(BaseModel):
 
     status: TaskStatus
 
-    metadata: ObjectResponseMetadata
+    metadata: Dict[str, Any]
     r"""Additional metadata for the object, appended to downstream documents of connected collections"""
 
     task_id: OptionalNullable[str] = UNSET
