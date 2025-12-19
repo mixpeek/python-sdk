@@ -1,0 +1,14 @@
+generatorName: python
+outputDir: .
+inputSpec: https://server-xb24.onrender.com/docs/openapi.json
+additionalProperties:
+  packageName: mixpeek
+  projectName: mixpeek
+  packageVersion: 0.81.0
+  packageUrl: https://github.com/mixpeek/python-sdk
+  library: urllib3
+  generateSourceCodeOnly: false
+templateDir: ""
+apiPackage: mixpeek.api
+modelPackage: mixpeek.models
+

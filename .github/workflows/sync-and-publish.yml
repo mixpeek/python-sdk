@@ -1,0 +1,314 @@
+name: Sync OpenAPI and Publish to PyPI
+
+on:
+  # Trigger when the main server repo pushes changes
+  repository_dispatch:
+    types: [openapi-update]
+  
+  # Manual trigger
+  workflow_dispatch:
+  
+  # Also trigger on push to main (for testing)
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout python-sdk repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install OpenAPI Generator CLI
+        run: npm install -g @openapitools/openapi-generator-cli
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine setuptools wheel
+      
+      - name: Download OpenAPI Spec
+        run: curl -s https://api.mixpeek.com/docs/openapi.json -o openapi.json
+      
+      - name: Extract version from OpenAPI spec
+        id: get-version
+        run: |
+          VERSION=$(python -c "import json; print(json.load(open('openapi.json'))['info']['version'])")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Version: $VERSION"
+      
+      - name: Check if version exists on PyPI
+        id: check-pypi
+        continue-on-error: true
+        run: |
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" https://pypi.org/pypi/mixpeek/${{ steps.get-version.outputs.version }}/json)
+          if [ $RESPONSE -eq 200 ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "⚠️  Version ${{ steps.get-version.outputs.version }} already exists on PyPI"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "✅ Version ${{ steps.get-version.outputs.version }} is new"
+          fi
+      
+      - name: Clean OpenAPI spec
+        if: steps.check-pypi.outputs.exists != 'true'
+        run: |
+          echo "🧼 Cleaning OpenAPI specification..."
+          python3 << 'PYTHON_SCRIPT'
+          import json
+          import re
+          
+          with open('openapi.json', 'r') as f:
+              spec = json.load(f)
+          
+          def clean_schema(schema):
+              """Recursively clean anyOf/oneOf that include null type"""
+              if isinstance(schema, dict):
+                  if 'anyOf' in schema and isinstance(schema['anyOf'], list):
+                      cleaned = [s for s in schema['anyOf'] if s.get('type') != 'null']
+                      if len(cleaned) == 1 and len(schema['anyOf']) > 1:
+                          for key, value in cleaned[0].items():
+                              schema[key] = value
+                          del schema['anyOf']
+                          schema['nullable'] = True
+                      elif len(cleaned) < len(schema['anyOf']):
+                          schema['anyOf'] = cleaned
+                          schema['nullable'] = True
+                  if 'oneOf' in schema and isinstance(schema['oneOf'], list):
+                      cleaned = [s for s in schema['oneOf'] if s.get('type') != 'null']
+                      if len(cleaned) == 1 and len(schema['oneOf']) > 1:
+                          for key, value in cleaned[0].items():
+                              schema[key] = value
+                          del schema['oneOf']
+                          schema['nullable'] = True
+                      elif len(cleaned) < len(schema['oneOf']):
+                          schema['oneOf'] = cleaned
+                          schema['nullable'] = True
+                  for key, value in list(schema.items()):
+                      if isinstance(value, (dict, list)):
+                          clean_schema(value)
+              elif isinstance(schema, list):
+                  for item in schema:
+                      clean_schema(item)
+              return schema
+          
+          def simplify_operation_id(operation_id):
+              """Simplify operation IDs to be more developer-friendly"""
+              if not operation_id:
+                  return operation_id
+              
+              # Remove version prefix (v1, v2, etc.)
+              operation_id = re.sub(r'_v\d+_', '_', operation_id)
+              
+              # Remove HTTP method suffix
+              operation_id = re.sub(r'_(post|get|put|delete|patch)$', '', operation_id)
+              
+              # Remove common path patterns
+              operation_id = re.sub(r'_identifier_', '_', operation_id)
+              operation_id = re.sub(r'__{1,}', '_', operation_id)
+              
+              # Split into parts
+              parts = operation_id.split('_')
+              
+              # Extract action verb
+              action_verbs = ['create', 'get', 'list', 'update', 'delete', 'patch', 'execute', 
+                              'upsert', 'describe', 'add', 'remove', 'set']
+              
+              action = None
+              if parts and parts[0] in action_verbs:
+                  action = parts[0]
+                  parts = parts[1:]
+              
+              # Remove generic/redundant words
+              skip_words = ['route', 'endpoint', 'api', 'private', 'public', 'v1', 'v2', 'v3']
+              
+              # Track singular/plural forms to avoid duplication
+              seen_roots = set()
+              cleaned_parts = []
+              
+              for part in parts:
+                  if part in skip_words:
+                      continue
+                  
+                  # Get root form (simple pluralization check)
+                  root = part.rstrip('s') if part.endswith('s') and len(part) > 3 else part
+                  
+                  # Skip if we've seen this root (or very similar)
+                  if root.lower() in seen_roots:
+                      continue
+                  
+                  cleaned_parts.append(part)
+                  seen_roots.add(root.lower())
+              
+              # Rebuild operation ID
+              if action:
+                  result = action + ('_' + '_'.join(cleaned_parts) if cleaned_parts else '')
+              else:
+                  result = '_'.join(cleaned_parts)
+              
+              # Final cleanup
+              result = result.strip('_')
+              
+              # Remove action duplication at the end
+              for verb in action_verbs:
+                  pattern = f'_{verb}$'
+                  if result.startswith(verb + '_') and result.endswith(f'_{verb}'):
+                      result = re.sub(pattern, '', result)
+              
+              # Remove duplicate nouns
+              parts_to_check = result.split('_')
+              if len(parts_to_check) > 2:
+                  generic_suffixes = ['collections', 'list', 'id', 'identifier', 'document', 'documents']
+                  while len(parts_to_check) > 2 and parts_to_check[-1] in generic_suffixes:
+                      parts_to_check = parts_to_check[:-1]
+                  result = '_'.join(parts_to_check)
+              
+              return result
+          
+          def clean_operation_ids(spec):
+              """Clean all operation IDs in the spec"""
+              if 'paths' not in spec:
+                  return
+              
+              for path, path_item in spec['paths'].items():
+                  if not isinstance(path_item, dict):
+                      continue
+                  
+                  for method in ['get', 'post', 'put', 'delete', 'patch', 'options', 'head']:
+                      if method in path_item and isinstance(path_item[method], dict):
+                          operation = path_item[method]
+                          if 'operationId' in operation:
+                              old_id = operation['operationId']
+                              new_id = simplify_operation_id(old_id)
+                              operation['operationId'] = new_id
+          
+          if 'components' in spec and 'schemas' in spec['components']:
+              clean_schema(spec['components']['schemas'])
+          if 'paths' in spec:
+              clean_schema(spec['paths'])
+          
+          clean_operation_ids(spec)
+          
+          with open('openapi-cleaned.json', 'w') as f:
+              json.dump(spec, f, indent=2)
+          print("✅ Cleaned OpenAPI spec with simplified method names")
+          PYTHON_SCRIPT
+      
+      - name: Generate SDK
+        if: steps.check-pypi.outputs.exists != 'true'
+        run: |
+          echo "🚀 Generating SDK..."
+
+          # Backup custom wrapper code (preserved across regenerations)
+          if [ -d "mixpeek/_client" ]; then
+            echo "📦 Backing up custom wrapper..."
+            cp -r mixpeek/_client /tmp/_client_backup
+          fi
+
+          # Clean previous generation (except important files)
+          rm -rf mixpeek test docs .openapi-generator-ignore .gitlab-ci.yml git_push.sh tox.ini test-requirements.txt .travis.yml || true
+
+          # Generate the SDK
+          openapi-generator-cli generate \
+            -i openapi-cleaned.json \
+            -g python \
+            -o . \
+            --skip-validate-spec \
+            --package-name mixpeek \
+            --additional-properties=projectName=mixpeek,packageVersion=${{ steps.get-version.outputs.version }},packageUrl=https://github.com/mixpeek/python-sdk,library=urllib3
+
+          # Cleanup unnecessary files
+          rm -f .travis.yml git_push.sh .gitlab-ci.yml || true
+
+          # Restore custom wrapper code
+          if [ -d "/tmp/_client_backup" ]; then
+            echo "📦 Restoring custom wrapper..."
+            cp -r /tmp/_client_backup mixpeek/_client
+          fi
+
+      - name: Inject modern client wrapper
+        if: steps.check-pypi.outputs.exists != 'true'
+        run: |
+          echo "🔧 Injecting modern Mixpeek client..."
+          python3 -c "
+          # Read the generated __init__.py
+          with open('mixpeek/__init__.py', 'r') as f:
+              content = f.read()
+
+          # Add Mixpeek to __all__ (at the beginning)
+          content = content.replace(
+              '__all__ = [',
+              '__all__ = [\n    \"Mixpeek\",'
+          )
+
+          # Add the import at the end of the file
+          wrapper_import = '\n# Modern client wrapper (preserved across regenerations)\nfrom mixpeek._client import Mixpeek as Mixpeek\n'
+          if 'from mixpeek._client import Mixpeek' not in content:
+              content += wrapper_import
+
+          with open('mixpeek/__init__.py', 'w') as f:
+              f.write(content)
+
+          print('✅ Injected Mixpeek client wrapper')
+          "
+      
+      - name: Build package
+        if: steps.check-pypi.outputs.exists != 'true'
+        run: python -m build
+      
+      - name: Publish to PyPI
+        if: steps.check-pypi.outputs.exists != 'true'
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          twine upload dist/* --verbose
+      
+      - name: Commit and push changes
+        if: steps.check-pypi.outputs.exists != 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A
+          git diff --staged --quiet || git commit -m "🤖 Auto-generate SDK v${{ steps.get-version.outputs.version }}"
+          git push
+      
+      - name: Create GitHub Release
+        if: steps.check-pypi.outputs.exists != 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.get-version.outputs.version }}
+          release_name: Release v${{ steps.get-version.outputs.version }}
+          body: |
+            🎉 Auto-generated SDK from OpenAPI specification
+            
+            Version: ${{ steps.get-version.outputs.version }}
+            
+            Install via pip:
+            ```bash
+            pip install mixpeek==${{ steps.get-version.outputs.version }}
+            ```
+          draft: false
+          prerelease: false
+      
+      - name: Skip - Version already published
+        if: steps.check-pypi.outputs.exists == 'true'
+        run: |
+          echo "⏭️  Skipping: Version ${{ steps.get-version.outputs.version }} already exists on PyPI"
+

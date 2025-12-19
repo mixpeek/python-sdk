@@ -1,0 +1,38 @@
+# TaxonomyResponse
+
+Response model for a taxonomy.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**taxonomy_id** | **str** | Unique identifier for the taxonomy | [optional] 
+**version** | **int** | Monotonic version number of the taxonomy configuration | [optional] [default to 1]
+**taxonomy_name** | **str** | A unique name for the taxonomy within the namespace. | 
+**description** | **str** | Optional human-readable description. | [optional] 
+**retriever_id** | **str** | Optional taxonomy-level retriever (prefer per-layer). | [optional] 
+**input_mappings** | [**List[InputMapping]**](InputMapping.md) | Optional taxonomy-level inputs (prefer per-layer). | [optional] 
+**config** | [**Config2**](Config2.md) |  | 
+**ready** | **bool** | Whether the taxonomy is ready for use. False for async inference (cluster/LLM) that needs processing. True for flat/explicit hierarchies. | [optional] [default to True]
+**created_at** | **datetime** | Creation timestamp for this taxonomy record | [optional] 
+
+## Example
+
+```python
+from mixpeek.models.taxonomy_response import TaxonomyResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of TaxonomyResponse from a JSON string
+taxonomy_response_instance = TaxonomyResponse.from_json(json)
+# print the JSON string representation of the object
+print(TaxonomyResponse.to_json())
+
+# convert the object into a dict
+taxonomy_response_dict = taxonomy_response_instance.to_dict()
+# create an instance of TaxonomyResponse from a dict
+taxonomy_response_from_dict = TaxonomyResponse.from_dict(taxonomy_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
