@@ -265,7 +265,36 @@ jobs:
 
           print('✅ Injected Mixpeek client wrapper')
           "
-      
+
+      - name: Fix pyproject.toml
+        if: steps.check-pypi.outputs.exists != 'true'
+        run: |
+          echo "🔧 Fixing pyproject.toml..."
+          python3 -c "
+          import re
+          with open('pyproject.toml', 'r') as f:
+              content = f.read()
+
+          # Fix license format (NoLicense -> MIT)
+          content = re.sub(r'license\s*=\s*\"NoLicense\"', 'license = \"MIT\"', content)
+
+          # Fix dependency format - remove parentheses
+          content = re.sub(r'\"([^\"]+)\s+\(([^)]+)\)\"', r'\"\1\2\"', content)
+
+          # Fix repository URL
+          content = re.sub(r'Repository\s*=\s*\"https://github.com/GIT_USER_ID/GIT_REPO_ID\"',
+                          'Repository = \"https://github.com/mixpeek/python-sdk\"', content)
+
+          # Add Homepage and Documentation if not present
+          if 'Homepage' not in content:
+              content = content.replace('[project.urls]', '[project.urls]\nHomepage = \"https://mixpeek.com\"\nDocumentation = \"https://docs.mixpeek.com\"')
+
+          with open('pyproject.toml', 'w') as f:
+              f.write(content)
+
+          print('✅ Fixed pyproject.toml')
+          "
+
       - name: Build package
         if: steps.check-pypi.outputs.exists != 'true'
         run: python -m build
