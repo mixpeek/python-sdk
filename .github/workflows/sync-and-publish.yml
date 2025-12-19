@@ -318,23 +318,19 @@ jobs:
       
       - name: Create GitHub Release
         if: steps.check-pypi.outputs.exists != 'true'
-        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.get-version.outputs.version }}
-          release_name: Release v${{ steps.get-version.outputs.version }}
-          body: |
-            🎉 Auto-generated SDK from OpenAPI specification
-            
-            Version: ${{ steps.get-version.outputs.version }}
-            
-            Install via pip:
-            ```bash
-            pip install mixpeek==${{ steps.get-version.outputs.version }}
-            ```
-          draft: false
-          prerelease: false
+        run: |
+          gh release create "v${{ steps.get-version.outputs.version }}" \
+            --title "Release v${{ steps.get-version.outputs.version }}" \
+            --notes "🎉 Auto-generated SDK from OpenAPI specification
+
+          Version: ${{ steps.get-version.outputs.version }}
+
+          Install via pip:
+          \`\`\`bash
+          pip install mixpeek==${{ steps.get-version.outputs.version }}
+          \`\`\`"
       
       - name: Skip - Version already published
         if: steps.check-pypi.outputs.exists == 'true'
