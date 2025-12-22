@@ -1,0 +1,139 @@
+name: Generate SDK and Publish to PyPI
+
+on:
+  # Triggered by mixpeek/server repo via repository_dispatch
+  repository_dispatch:
+    types: [api-updated]
+
+  # Allow manual triggering for testing
+  workflow_dispatch:
+    inputs:
+      spec_url:
+        description: 'OpenAPI Spec URL (optional override)'
+        required: false
+        default: 'https://api.mixpeek.com/docs/openapi.json'
+
+permissions:
+  contents: write  # Needed to commit generated code and tags
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Fetch all history for proper versioning
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openapi-python-client pyyaml build twine
+
+      - name: Read SDK configuration
+        id: config
+        run: |
+          python -c "
+          import yaml
+          with open('sdk-config.yml', 'r') as f:
+              config = yaml.safe_load(f)
+          spec_url = config['api']['spec_url']
+          print(f'spec_url={spec_url}')
+          " >> $GITHUB_OUTPUT
+
+      - name: Download OpenAPI specification
+        run: |
+          SPEC_URL="${{ github.event.inputs.spec_url || steps.config.outputs.spec_url }}"
+          echo "Downloading OpenAPI spec from: $SPEC_URL"
+          curl -o openapi.json "$SPEC_URL"
+
+      - name: Backup existing custom code
+        run: |
+          # Backup any custom tools or utilities not in OpenAPI spec
+          mkdir -p .backup
+          if [ -d "mixpeek/tools" ]; then
+            cp -r mixpeek/tools .backup/ || true
+          fi
+          if [ -f "mixpeek/exceptions.py" ]; then
+            cp mixpeek/exceptions.py .backup/ || true
+          fi
+
+      - name: Generate Python client
+        run: |
+          # Remove old generated code but keep __init__.py structure
+          rm -rf mixpeek/api mixpeek/models mixpeek/endpoints || true
+
+          # Generate new client
+          openapi-python-client generate \
+            --path openapi.json \
+            --config openapi-config.yml \
+            --output-path . \
+            --overwrite
+
+      - name: Apply method overrides and exclusions
+        run: |
+          python scripts/apply_overrides.py
+
+      - name: Restore custom code
+        run: |
+          # Restore custom tools and exceptions
+          if [ -d ".backup/tools" ]; then
+            cp -r .backup/tools mixpeek/ || true
+          fi
+          if [ -f ".backup/exceptions.py" ]; then
+            cp .backup/exceptions.py mixpeek/ || true
+          fi
+
+      - name: Auto-increment version
+        id: version
+        run: |
+          python scripts/bump_version.py >> $GITHUB_OUTPUT
+
+      - name: Commit generated code
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Auto-generate SDK from OpenAPI spec
+
+          Version: ${{ steps.version.outputs.new_version }}
+          Generated from: ${{ steps.config.outputs.spec_url }}
+          Triggered by: ${{ github.event_name }}
+          "
+          git tag "v${{ steps.version.outputs.new_version }}"
+          git push origin master --tags
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip-existing: true
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.new_version }}
+          release_name: Release v${{ steps.version.outputs.new_version }}
+          body: |
+            Auto-generated SDK release from OpenAPI specification
+
+            **Generated from:** ${{ steps.config.outputs.spec_url }}
+            **Version:** ${{ steps.version.outputs.new_version }}
+            **Trigger:** ${{ github.event_name }}
+
+            Install with: `pip install --upgrade mixpeek`
+          draft: false
+          prerelease: false

@@ -1,0 +1,55 @@
+# Mixpeek Python SDK Generation Configuration
+
+# Method name overrides - map OpenAPI operationIds to custom Python method names
+method_overrides:
+  # Example: override verbose names with shorter, more Pythonic names
+  # "createCollectionDocument": "create_document"
+  # "getCollectionDocumentById": "get_document"
+  # "deleteCollectionDocument": "delete_document"
+
+# Exclude specific operations from SDK generation
+exclude_operations:
+  # Example: exclude admin-only or internal operations
+  # - "adminDeleteOrganization"
+  # - "internalHealthCheck"
+
+# Exclude entire tags (endpoint groups) from generation
+exclude_tags:
+  # Example: exclude private/admin endpoints
+  # - "Organizations (Private/Admin)"
+
+# API Configuration
+api:
+  # OpenAPI spec URL (fetched during generation)
+  spec_url: "https://api.mixpeek.com/docs/openapi.json"
+
+  # Default base URL for generated client
+  base_url: "https://api.mixpeek.com"
+
+# Generated client configuration
+client:
+  # Package name
+  package_name: "mixpeek"
+
+  # Client class name
+  class_name: "Mixpeek"
+
+  # Timeout settings (seconds)
+  timeout: 60
+
+  # Include async client
+  async_client: true
+
+# Code generation options
+generation:
+  # Use Pydantic v2 models
+  use_pydantic: true
+
+  # Include response types
+  response_types: true
+
+  # Follow redirects
+  follow_redirects: true
+
+  # Include docstrings from OpenAPI descriptions
+  include_docstrings: true
