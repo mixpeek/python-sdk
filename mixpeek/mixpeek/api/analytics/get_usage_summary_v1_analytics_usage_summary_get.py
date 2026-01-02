@@ -1,0 +1,384 @@
+import datetime
+from http import HTTPStatus
+from typing import Any
+
+import httpx
+
+from ... import errors
+from ...client import AuthenticatedClient, Client
+from ...models.error_response import ErrorResponse
+from ...models.get_usage_summary_v1_analytics_usage_summary_get_response_get_usage_summary_v1_analytics_usage_summary_get import (
+    GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet,
+)
+from ...models.http_validation_error import HTTPValidationError
+from ...types import UNSET, Response, Unset
+
+
+def _get_kwargs(
+    *,
+    start_date: datetime.datetime | None | Unset = UNSET,
+    end_date: datetime.datetime | None | Unset = UNSET,
+    authorization: str | Unset = UNSET,
+    x_namespace: str | Unset = UNSET,
+) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
+    if not isinstance(authorization, Unset):
+        headers["Authorization"] = authorization
+
+    if not isinstance(x_namespace, Unset):
+        headers["X-Namespace"] = x_namespace
+
+    params: dict[str, Any] = {}
+
+    json_start_date: None | str | Unset
+    if isinstance(start_date, Unset):
+        json_start_date = UNSET
+    elif isinstance(start_date, datetime.datetime):
+        json_start_date = start_date.isoformat()
+    else:
+        json_start_date = start_date
+    params["start_date"] = json_start_date
+
+    json_end_date: None | str | Unset
+    if isinstance(end_date, Unset):
+        json_end_date = UNSET
+    elif isinstance(end_date, datetime.datetime):
+        json_end_date = end_date.isoformat()
+    else:
+        json_end_date = end_date
+    params["end_date"] = json_end_date
+
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
+    _kwargs: dict[str, Any] = {
+        "method": "get",
+        "url": "/v1/analytics/usage/summary",
+        "params": params,
+    }
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> (
+    ErrorResponse
+    | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet
+    | HTTPValidationError
+    | None
+):
+    if response.status_code == 200:
+        response_200 = (
+            GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet.from_dict(
+                response.json()
+            )
+        )
+
+        return response_200
+
+    if response.status_code == 400:
+        response_400 = ErrorResponse.from_dict(response.json())
+
+        return response_400
+
+    if response.status_code == 401:
+        response_401 = ErrorResponse.from_dict(response.json())
+
+        return response_401
+
+    if response.status_code == 403:
+        response_403 = ErrorResponse.from_dict(response.json())
+
+        return response_403
+
+    if response.status_code == 404:
+        response_404 = ErrorResponse.from_dict(response.json())
+
+        return response_404
+
+    if response.status_code == 422:
+        response_422 = HTTPValidationError.from_dict(response.json())
+
+        return response_422
+
+    if response.status_code == 500:
+        response_500 = ErrorResponse.from_dict(response.json())
+
+        return response_500
+
+    if client.raise_on_unexpected_status:
+        raise errors.UnexpectedStatus(response.status_code, response.content)
+    else:
+        return None
+
+
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[
+    ErrorResponse
+    | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet
+    | HTTPValidationError
+]:
+    return Response(
+        status_code=HTTPStatus(response.status_code),
+        content=response.content,
+        headers=response.headers,
+        parsed=_parse_response(client=client, response=response),
+    )
+
+
+def sync_detailed(
+    *,
+    client: AuthenticatedClient | Client,
+    start_date: datetime.datetime | None | Unset = UNSET,
+    end_date: datetime.datetime | None | Unset = UNSET,
+    authorization: str | Unset = UNSET,
+    x_namespace: str | Unset = UNSET,
+) -> Response[
+    ErrorResponse
+    | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet
+    | HTTPValidationError
+]:
+    """Get Usage Summary
+
+     Get usage summary for billing.
+
+    Returns usage statistics for the namespace including:
+    - Total API requests
+    - Compute usage (seconds)
+    - Storage usage (bytes)
+    - Total cost
+
+    **Time Range:**
+    - If both `start_date` and `end_date` are provided, uses that range
+    - If neither provided, defaults to last 30 days
+    - If only one provided, defaults to now as the other bound
+
+    **Example:**
+    ```bash
+    GET /v1/analytics/usage/summary
+    GET /v1/analytics/usage/summary?start_date=2025-01-01T00:00:00Z&end_date=2025-01-31T23:59:59Z
+    ```
+
+    Args:
+        start_date (datetime.datetime | None | Unset): Start date (UTC)
+        end_date (datetime.datetime | None | Unset): End date (UTC)
+        authorization (str | Unset): REQUIRED: Bearer token authentication using your API key.
+            Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under
+            Organization Settings.
+        x_namespace (str | Unset): REQUIRED: Namespace identifier for scoping this request. All
+            resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can
+            provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a
+            custom name like 'my-namespace'
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[ErrorResponse | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet | HTTPValidationError]
+    """
+
+    kwargs = _get_kwargs(
+        start_date=start_date,
+        end_date=end_date,
+        authorization=authorization,
+        x_namespace=x_namespace,
+    )
+
+    response = client.get_httpx_client().request(
+        **kwargs,
+    )
+
+    return _build_response(client=client, response=response)
+
+
+def sync(
+    *,
+    client: AuthenticatedClient | Client,
+    start_date: datetime.datetime | None | Unset = UNSET,
+    end_date: datetime.datetime | None | Unset = UNSET,
+    authorization: str | Unset = UNSET,
+    x_namespace: str | Unset = UNSET,
+) -> (
+    ErrorResponse
+    | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet
+    | HTTPValidationError
+    | None
+):
+    """Get Usage Summary
+
+     Get usage summary for billing.
+
+    Returns usage statistics for the namespace including:
+    - Total API requests
+    - Compute usage (seconds)
+    - Storage usage (bytes)
+    - Total cost
+
+    **Time Range:**
+    - If both `start_date` and `end_date` are provided, uses that range
+    - If neither provided, defaults to last 30 days
+    - If only one provided, defaults to now as the other bound
+
+    **Example:**
+    ```bash
+    GET /v1/analytics/usage/summary
+    GET /v1/analytics/usage/summary?start_date=2025-01-01T00:00:00Z&end_date=2025-01-31T23:59:59Z
+    ```
+
+    Args:
+        start_date (datetime.datetime | None | Unset): Start date (UTC)
+        end_date (datetime.datetime | None | Unset): End date (UTC)
+        authorization (str | Unset): REQUIRED: Bearer token authentication using your API key.
+            Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under
+            Organization Settings.
+        x_namespace (str | Unset): REQUIRED: Namespace identifier for scoping this request. All
+            resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can
+            provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a
+            custom name like 'my-namespace'
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        ErrorResponse | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet | HTTPValidationError
+    """
+
+    return sync_detailed(
+        client=client,
+        start_date=start_date,
+        end_date=end_date,
+        authorization=authorization,
+        x_namespace=x_namespace,
+    ).parsed
+
+
+async def asyncio_detailed(
+    *,
+    client: AuthenticatedClient | Client,
+    start_date: datetime.datetime | None | Unset = UNSET,
+    end_date: datetime.datetime | None | Unset = UNSET,
+    authorization: str | Unset = UNSET,
+    x_namespace: str | Unset = UNSET,
+) -> Response[
+    ErrorResponse
+    | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet
+    | HTTPValidationError
+]:
+    """Get Usage Summary
+
+     Get usage summary for billing.
+
+    Returns usage statistics for the namespace including:
+    - Total API requests
+    - Compute usage (seconds)
+    - Storage usage (bytes)
+    - Total cost
+
+    **Time Range:**
+    - If both `start_date` and `end_date` are provided, uses that range
+    - If neither provided, defaults to last 30 days
+    - If only one provided, defaults to now as the other bound
+
+    **Example:**
+    ```bash
+    GET /v1/analytics/usage/summary
+    GET /v1/analytics/usage/summary?start_date=2025-01-01T00:00:00Z&end_date=2025-01-31T23:59:59Z
+    ```
+
+    Args:
+        start_date (datetime.datetime | None | Unset): Start date (UTC)
+        end_date (datetime.datetime | None | Unset): End date (UTC)
+        authorization (str | Unset): REQUIRED: Bearer token authentication using your API key.
+            Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under
+            Organization Settings.
+        x_namespace (str | Unset): REQUIRED: Namespace identifier for scoping this request. All
+            resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can
+            provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a
+            custom name like 'my-namespace'
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[ErrorResponse | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet | HTTPValidationError]
+    """
+
+    kwargs = _get_kwargs(
+        start_date=start_date,
+        end_date=end_date,
+        authorization=authorization,
+        x_namespace=x_namespace,
+    )
+
+    response = await client.get_async_httpx_client().request(**kwargs)
+
+    return _build_response(client=client, response=response)
+
+
+async def asyncio(
+    *,
+    client: AuthenticatedClient | Client,
+    start_date: datetime.datetime | None | Unset = UNSET,
+    end_date: datetime.datetime | None | Unset = UNSET,
+    authorization: str | Unset = UNSET,
+    x_namespace: str | Unset = UNSET,
+) -> (
+    ErrorResponse
+    | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet
+    | HTTPValidationError
+    | None
+):
+    """Get Usage Summary
+
+     Get usage summary for billing.
+
+    Returns usage statistics for the namespace including:
+    - Total API requests
+    - Compute usage (seconds)
+    - Storage usage (bytes)
+    - Total cost
+
+    **Time Range:**
+    - If both `start_date` and `end_date` are provided, uses that range
+    - If neither provided, defaults to last 30 days
+    - If only one provided, defaults to now as the other bound
+
+    **Example:**
+    ```bash
+    GET /v1/analytics/usage/summary
+    GET /v1/analytics/usage/summary?start_date=2025-01-01T00:00:00Z&end_date=2025-01-31T23:59:59Z
+    ```
+
+    Args:
+        start_date (datetime.datetime | None | Unset): Start date (UTC)
+        end_date (datetime.datetime | None | Unset): End date (UTC)
+        authorization (str | Unset): REQUIRED: Bearer token authentication using your API key.
+            Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under
+            Organization Settings.
+        x_namespace (str | Unset): REQUIRED: Namespace identifier for scoping this request. All
+            resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can
+            provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a
+            custom name like 'my-namespace'
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        ErrorResponse | GetUsageSummaryV1AnalyticsUsageSummaryGetResponseGetUsageSummaryV1AnalyticsUsageSummaryGet | HTTPValidationError
+    """
+
+    return (
+        await asyncio_detailed(
+            client=client,
+            start_date=start_date,
+            end_date=end_date,
+            authorization=authorization,
+            x_namespace=x_namespace,
+        )
+    ).parsed

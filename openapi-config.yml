@@ -1,23 +1,4 @@
 # OpenAPI Python Client Generator Configuration
 # See: https://github.com/openapi-generators/openapi-python-client
-
-# Project info
-project_name_override: "mixpeek"
-package_name_override: "mixpeek"
-
-# Class naming
-class_overrides:
-  Mixpeek: Mixpeek
-
-# Use Pydantic v2 models
-use_pydantic: true
-
-# HTTP client configuration
-http_timeout: 60
-follow_redirects: true
-
-# Code style
-field_prefix: ""
-post_hooks: []
-
-# Include/exclude configuration (will be supplemented by apply_overrides.py script)
+project_name_override: mixpeek
+package_name_override: mixpeek

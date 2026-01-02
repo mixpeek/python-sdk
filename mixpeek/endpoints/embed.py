@@ -1,5 +1,7 @@
 import requests
-#test
+
+
+# test
 class Embed:
     def __init__(self, base_url, headers):
         self.base_url = base_url
@@ -8,12 +10,7 @@ class Embed:
     def video(self, model_id: str, input: str, input_type: str):
         try:
             url = f"{self.base_url}embed/"
-            data = {
-                "modality": "video",
-                "model_id": model_id,
-                "input": input,
-                "input_type": input_type
-            }
+            data = {"modality": "video", "model_id": model_id, "input": input, "input_type": input_type}
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()
             return response.json()
@@ -23,12 +20,7 @@ class Embed:
     def text(self, model_id: str, input: str, input_type: str):
         try:
             url = f"{self.base_url}embed/"
-            data = {
-                "modality": "text",
-                "model_id": model_id,
-                "input": input,
-                "input_type": input_type
-            }
+            data = {"modality": "text", "model_id": model_id, "input": input, "input_type": input_type}
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()
             return response.json()
@@ -38,12 +30,7 @@ class Embed:
     def image(self, model_id: str, input: str, input_type: str):
         try:
             url = f"{self.base_url}embed/"
-            data = {
-                "modality": "image",
-                "model_id": model_id,
-                "input": input,
-                "input_type": input_type
-            }
+            data = {"modality": "image", "model_id": model_id, "input": input, "input_type": input_type}
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()
             return response.json()
@@ -53,12 +40,7 @@ class Embed:
     def audio(self, model_id: str, input: str, input_type: str):
         try:
             url = f"{self.base_url}embed/"
-            data = {
-                "modality": "audio",
-                "model_id": model_id,
-                "input": input,
-                "input_type": input_type
-            }
+            data = {"modality": "audio", "model_id": model_id, "input": input, "input_type": input_type}
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()
             return response.json()

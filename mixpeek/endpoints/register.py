@@ -1,5 +1,7 @@
 import requests
+
 from .tasks import Task
+
 
 class Register:
     def __init__(self, base_url, headers):
@@ -17,11 +19,11 @@ class Register:
         try:
             endpoint = f"{self.base_url}register/faces"
             data = self._prepare_data({"collection_id": collection_id}, metadata, settings)
-            
-            with open(file_path, 'rb') as file:
-                files = [('file', (file.name, file, 'application/octet-stream'))]
+
+            with open(file_path, "rb") as file:
+                files = [("file", (file.name, file, "application/octet-stream"))]
                 response = requests.post(endpoint, headers=self.headers, data=data, files=files)
-            
+
             response.raise_for_status()
             task_id = response.json().get("task_id")
             if task_id:
@@ -30,5 +32,5 @@ class Register:
                 return response.json()
         except requests.RequestException as e:
             return {"error": str(e)}
-        except IOError as e:
+        except OSError as e:
             return {"error": f"File error: {str(e)}"}

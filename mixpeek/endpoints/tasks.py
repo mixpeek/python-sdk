@@ -1,5 +1,7 @@
-import requests
 import time
+
+import requests
+
 
 class Task:
     def __init__(self, base_url, headers, task_id):

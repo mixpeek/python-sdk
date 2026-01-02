@@ -1,11 +1,14 @@
 import requests
 
+
 class Collections:
     def __init__(self, base_url, headers):
         self.base_url = base_url
         self.headers = headers
 
-    def list_files(self, collection_id, randomize=False, page=1, page_size=10, filters=None, sort_by=None, sort_order="asc"):
+    def list_files(
+        self, collection_id, randomize=False, page=1, page_size=10, filters=None, sort_by=None, sort_order="asc"
+    ):
         try:
             url = f"{self.base_url}collections/"
             data = {
@@ -15,7 +18,7 @@ class Collections:
                 "page_size": page_size,
                 "filters": filters,
                 "sort_by": sort_by,
-                "sort_order": sort_order
+                "sort_order": sort_order,
             }
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()
@@ -41,7 +44,7 @@ class Collections:
                 "page": page,
                 "page_size": page_size,
                 "sort_by": sort_by,
-                "sort_order": sort_order
+                "sort_order": sort_order,
             }
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()

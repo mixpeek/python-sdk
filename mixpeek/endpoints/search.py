@@ -1,6 +1,5 @@
 import requests
-import os
-import json
+
 
 class Search:
     def __init__(self, base_url, headers):
@@ -14,10 +13,7 @@ class Search:
                 "query": query,
                 "model_id": model_id,
                 "filters": filters or {},
-                "pagination": {
-                    "page": page,
-                    "page_size": page_size
-                }
+                "pagination": {"page": page, "page_size": page_size},
             }
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()
@@ -32,10 +28,7 @@ class Search:
                 "url": target_url,
                 "model_id": model_id,
                 "filters": filters or {},
-                "pagination": {
-                    "page": page,
-                    "page_size": page_size
-                }
+                "pagination": {"page": page, "page_size": page_size},
             }
             response = requests.post(url, json=data, headers=self.headers)
             response.raise_for_status()

@@ -1,12 +1,14 @@
+import base64
+import io
+import os
 import subprocess
 import tempfile
-import os
-import base64
 from urllib.parse import urlparse
 from urllib.request import urlretrieve
-from tqdm import tqdm
+
 from PIL import Image
-import io
+from tqdm import tqdm
+
 
 class Tools:
     def __init__(self):
@@ -19,7 +21,7 @@ class Tools:
 
         def process(self, image_source: str):
             # Download image if it's a URL
-            if urlparse(image_source).scheme in ('http', 'https'):
+            if urlparse(image_source).scheme in ("http", "https"):
                 with tempfile.NamedTemporaryFile(delete=False) as temp_file:
                     urlretrieve(image_source, temp_file.name)
                     image_source = temp_file.name
@@ -27,16 +29,16 @@ class Tools:
             # Open and process the image
             with Image.open(image_source) as img:
                 # Convert image to RGB mode if it's not already
-                if img.mode != 'RGB':
-                    img = img.convert('RGB')
+                if img.mode != "RGB":
+                    img = img.convert("RGB")
 
                 # Convert image to base64
                 buffered = io.BytesIO()
                 img.save(buffered, format="JPEG")
-                base64_string = base64.b64encode(buffered.getvalue()).decode('utf-8')
+                base64_string = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
             # Remove temporary file if it was created
-            if urlparse(image_source).scheme in ('http', 'https'):
+            if urlparse(image_source).scheme in ("http", "https"):
                 os.unlink(image_source)
 
             return base64_string
@@ -47,12 +49,12 @@ class Tools:
 
         def process(self, video_source: str, chunk_interval: float, resolution: list):
             chunker = VideoChunker(video_source, chunk_interval, resolution)
-            
+
             for chunk in chunker:
                 data = {
                     "base64_chunk": chunk["base64"],
                     "start_time": chunk["start_time"],
-                    "end_time": chunk["end_time"]
+                    "end_time": chunk["end_time"],
                 }
                 yield data
 
@@ -87,16 +89,29 @@ class VideoChunker:
         return chunk
 
     def _initialize_video(self):
-        if urlparse(self.video_source).scheme in ('http', 'https'):
+        if urlparse(self.video_source).scheme in ("http", "https"):
             print("Downloading video...")
-            temp_file = os.path.join(self.temp_dir, 'temp_video')
+            temp_file = os.path.join(self.temp_dir, "temp_video")
             urlretrieve(self.video_source, temp_file)
             self.video_source = temp_file
 
         # Get video duration
-        result = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', self.video_source], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.run(
+            [
+                "ffprobe",
+                "-v",
+                "error",
+                "-show_entries",
+                "format=duration",
+                "-of",
+                "default=noprint_wrappers=1:nokey=1",
+                self.video_source,
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
         self.total_duration = float(result.stdout)
-        
+
         print(f"Total video duration: {self.total_duration:.2f} seconds")
         self.progress_bar = tqdm(total=100, desc="Processing video", unit="%")
 
@@ -109,17 +124,31 @@ class VideoChunker:
 
         # Generate chunk using FFmpeg
         temp_output = os.path.join(self.temp_dir, f"chunk_{self.current_time}.mp4")
-        subprocess.run([
-            'ffmpeg', '-y', '-i', self.video_source,
-            '-ss', str(start_time), '-to', str(end_time),
-            '-vf', f'scale={self.target_resolution}',
-            '-c:v', 'libx264', '-preset', 'ultrafast',
-            temp_output
-        ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-y",
+                "-i",
+                self.video_source,
+                "-ss",
+                str(start_time),
+                "-to",
+                str(end_time),
+                "-vf",
+                f"scale={self.target_resolution}",
+                "-c:v",
+                "libx264",
+                "-preset",
+                "ultrafast",
+                temp_output,
+            ],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
 
         # Convert to base64
-        with open(temp_output, 'rb') as f:
-            base64_string = base64.b64encode(f.read()).decode('utf-8')
+        with open(temp_output, "rb") as f:
+            base64_string = base64.b64encode(f.read()).decode("utf-8")
 
         # Remove temporary file
         os.remove(temp_output)
@@ -131,8 +160,4 @@ class VideoChunker:
 
         self.current_time = end_time
 
-        return {
-            "base64": base64_string,
-            "start_time": start_time,
-            "end_time": end_time
-        }
+        return {"base64": base64_string, "start_time": start_time, "end_time": end_time}
