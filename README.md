@@ -33,7 +33,7 @@ pip install --upgrade mixpeek
 ### Authentication
 
 ```python
-from mixpeek.mixpeek.client import AuthenticatedClient
+from mixpeek import AuthenticatedClient
 
 # Initialize the client
 client = AuthenticatedClient(
@@ -48,7 +48,7 @@ client = AuthenticatedClient(
 Most resource operations require a namespace. Set it via headers:
 
 ```python
-from mixpeek.mixpeek.client import AuthenticatedClient
+from mixpeek import AuthenticatedClient
 
 # Initialize with namespace header
 client = AuthenticatedClient(
@@ -64,7 +64,7 @@ client = AuthenticatedClient(
 ### List Collections
 
 ```python
-from mixpeek.mixpeek.api.collections.list_collections_v1_collections_list_post import sync_detailed
+from mixpeek.api.collections.list_collections_v1_collections_list_post import sync_detailed
 
 response = sync_detailed(client=client)
 if response.status_code == 200:
@@ -75,7 +75,7 @@ if response.status_code == 200:
 ### List Buckets
 
 ```python
-from mixpeek.mixpeek.api.buckets.list_buckets_v1_buckets_list_post import sync_detailed
+from mixpeek.api.buckets.list_buckets_v1_buckets_list_post import sync_detailed
 
 response = sync_detailed(client=client)
 if response.status_code == 200:
@@ -86,7 +86,7 @@ if response.status_code == 200:
 ### List Retrievers
 
 ```python
-from mixpeek.mixpeek.api.retrievers.list_retrievers_v1_retrievers_list_post import sync_detailed
+from mixpeek.api.retrievers.list_retrievers_v1_retrievers_list_post import sync_detailed
 
 response = sync_detailed(client=client)
 if response.status_code == 200:
@@ -97,7 +97,7 @@ if response.status_code == 200:
 ### Get Organization Details
 
 ```python
-from mixpeek.mixpeek.api.organizations.get_organization_v1_organizations_get import sync_detailed
+from mixpeek.api.organizations.get_organization_v1_organizations_get import sync_detailed
 
 response = sync_detailed(client=client)
 if response.status_code == 200:
@@ -110,7 +110,7 @@ if response.status_code == 200:
 All endpoints have async equivalents:
 
 ```python
-from mixpeek.mixpeek.api.collections.list_collections_v1_collections_list_post import asyncio_detailed
+from mixpeek.api.collections.list_collections_v1_collections_list_post import asyncio_detailed
 import asyncio
 
 async def main():

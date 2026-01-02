@@ -5,9 +5,9 @@ description = "A client library for accessing Mixpeek API"
 authors = []
 readme = "README.md"
 packages = [
-    { include = "mixpeek" },
+    { include = "mixpeek_client" },
 ]
-include = ["mixpeek/py.typed"]
+include = ["mixpeek_client/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.10"

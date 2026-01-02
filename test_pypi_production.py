@@ -7,19 +7,19 @@ import os
 import sys
 
 # Import from installed package (not local)
-from mixpeek.mixpeek.client import AuthenticatedClient
+from mixpeek import AuthenticatedClient
 
 # Import all testable API endpoints
-from mixpeek.mixpeek.api.health.healthcheck_v1_health_get import sync_detailed as health_check
-from mixpeek.mixpeek.api.organizations.get_organization_v1_organizations_get import sync_detailed as get_organization
-from mixpeek.mixpeek.api.namespaces.list_namespaces_v1_namespaces_list_post import sync_detailed as list_namespaces
-from mixpeek.mixpeek.api.buckets.list_buckets_v1_buckets_list_post import sync_detailed as list_buckets
-from mixpeek.mixpeek.api.collections.list_collections_v1_collections_list_post import sync_detailed as list_collections
-from mixpeek.mixpeek.api.retrievers.list_retrievers_v1_retrievers_list_post import sync_detailed as list_retrievers
-from mixpeek.mixpeek.api.retriever_stages.list_stages_v1_retrievers_stages_get import sync_detailed as list_retriever_stages
-from mixpeek.mixpeek.api.taxonomies.list_taxonomies_v1_taxonomies_list_post import sync_detailed as list_taxonomies
-from mixpeek.mixpeek.api.clusters.list_clusters_v1_clusters_list_post import sync_detailed as list_clusters
-from mixpeek.mixpeek.api.feature_extractors.list_feature_extractors_v1_collections_features_extractors_get import sync_detailed as list_feature_extractors
+from mixpeek.api.health.healthcheck_v1_health_get import sync_detailed as health_check
+from mixpeek.api.organizations.get_organization_v1_organizations_get import sync_detailed as get_organization
+from mixpeek.api.namespaces.list_namespaces_v1_namespaces_list_post import sync_detailed as list_namespaces
+from mixpeek.api.buckets.list_buckets_v1_buckets_list_post import sync_detailed as list_buckets
+from mixpeek.api.collections.list_collections_v1_collections_list_post import sync_detailed as list_collections
+from mixpeek.api.retrievers.list_retrievers_v1_retrievers_list_post import sync_detailed as list_retrievers
+from mixpeek.api.retriever_stages.list_stages_v1_retrievers_stages_get import sync_detailed as list_retriever_stages
+from mixpeek.api.taxonomies.list_taxonomies_v1_taxonomies_list_post import sync_detailed as list_taxonomies
+from mixpeek.api.clusters.list_clusters_v1_clusters_list_post import sync_detailed as list_clusters
+from mixpeek.api.feature_extractors.list_feature_extractors_v1_collections_features_extractors_get import sync_detailed as list_feature_extractors
 
 # Production Configuration
 PRODUCTION_API_URL = "https://api.mixpeek.com"
@@ -201,7 +201,7 @@ def main():
     print("=" * 80)
     print("Mixpeek Python SDK - PyPI Package Production Tests")
     print("=" * 80)
-    print(f"Package: mixpeek 0.11.3 (from PyPI)")
+    print(f"Package: mixpeek 1.1.0 (from PyPI)")
     print(f"API URL: {PRODUCTION_API_URL}")
     print(f"API Key: {PRODUCTION_API_KEY[:25]}...")
     print(f"Namespace: {NAMESPACE_ID}")

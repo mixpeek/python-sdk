@@ -1,4 +1,4 @@
 # OpenAPI Python Client Generator Configuration
 # See: https://github.com/openapi-generators/openapi-python-client
 project_name_override: mixpeek
-package_name_override: mixpeek
+package_name_override: mixpeek_client
