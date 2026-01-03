@@ -15,6 +15,7 @@ This SDK is automatically generated from the [OpenAPI specification](https://api
 - 🚀 **Async support** - Both sync and async client methods
 - 🎯 **Complete coverage** - 200+ endpoints for all Mixpeek features
 - ✅ **Well-tested** - Comprehensive test suite with 100% pass rate
+- 🎨 **Clean API** - Stripe-like resource interfaces for common operations
 
 ## Installation
 
@@ -61,15 +62,45 @@ client = AuthenticatedClient(
 
 ## Usage Examples
 
-### List Collections
+### Two Ways to Use the SDK
+
+**Option 1: Clean Resource API (Recommended)**
+
+```python
+from mixpeek import AuthenticatedClient, Collections, Buckets, Retrievers
+
+client = AuthenticatedClient(
+    base_url="https://api.mixpeek.com",
+    token="your_api_key",
+    headers={"X-Namespace": "ns_your_namespace_id"}
+)
+
+# Use resource interfaces
+collections = Collections(client)
+response = collections.list(limit=10)
+
+buckets = Buckets(client)
+response = buckets.get("bucket_id")
+```
+
+**Option 2: Direct API Access (Full Control)**
 
 ```python
 from mixpeek.api.collections.list_collections_v1_collections_list_post import sync_detailed
 
-response = sync_detailed(client=client)
+response = sync_detailed(client=client, limit=10)
 if response.status_code == 200:
     collections = response.parsed
     print(f"Found {len(collections)} collections")
+```
+
+### List Collections
+
+```python
+from mixpeek import Collections
+
+collections = Collections(client)
+response = collections.list(limit=10, offset=0)
 ```
 
 ### List Buckets
