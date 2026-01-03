@@ -37,48 +37,90 @@ class TestListClustersResponse(unittest.TestCase):
         if include_optional:
             return ListClustersResponse(
                 results = [
-                    mixpeek.models.cluster_model.ClusterModel(
-                        collection_ids = [
+                    mixpeek.models.cluster_metadata.ClusterMetadata(
+                        cluster_id = '', 
+                        cluster_name = '', 
+                        namespace_id = '', 
+                        input_collections = [
                             ''
                             ], 
-                        cluster_name = '', 
+                        source_bucket_ids = [
+                            ''
+                            ], 
+                        filters = { }, 
                         cluster_type = 'vector', 
-                        vector_config = mixpeek.models.vector_based_config.VectorBasedConfig(
-                            feature_extractor_name = '', 
-                            clustering_method = 'kmeans', 
-                            sample_size = 56, 
-                            kmeans_parameters = null, 
-                            dbscan_parameters = null, 
-                            hdbscan_parameters = null, 
-                            algorithm_params = null, ), 
-                        attribute_config = mixpeek.models.attribute_based_config.AttributeBasedConfig(
-                            attributes = [
-                                ''
-                                ], 
-                            hierarchical_grouping = True, 
-                            aggregation_method = '', ), 
+                        feature_uris = [
+                            ''
+                            ], 
+                        multi_feature_strategy = '', 
+                        learned_weights = {
+                            'key' : 1.337
+                            }, 
+                        learning_quality_score = 1.337, 
+                        effective_feature_method = '', 
+                        clustered_attributes = [
+                            ''
+                            ], 
+                        hierarchical_grouping = True, 
+                        aggregation_method = '', 
+                        output_collection_ids = [
+                            ''
+                            ], 
+                        output_collection_names = [
+                            ''
+                            ], 
+                        algorithm = '', 
+                        algorithm_params = { }, 
+                        enrich_source = True, 
+                        source_enrichment_config = mixpeek.models.source_enrichment_config.SourceEnrichmentConfig(
+                            field_mappings = [
+                                mixpeek.models.enrichment_field_mapping.EnrichmentFieldMapping(
+                                    source_field = '', 
+                                    target_field = '', )
+                                ], ), 
                         llm_labeling = mixpeek.models.llm_labeling.LLMLabeling(
                             enabled = True, 
+                            labeling_inputs = mixpeek.models.llm_labeling_input.LLMLabelingInput(
+                                input_mappings = [
+                                    mixpeek.models.input_mapping.InputMapping(
+                                        input_key = '', 
+                                        source_type = 'payload', 
+                                        path = '', 
+                                        override = null, )
+                                    ], ), 
                             provider = 'openai', 
-                            model_name = '', 
+                            model_name = null, 
                             include_summary = True, 
                             include_keywords = True, 
-                            max_samples_per_cluster = 56, 
+                            max_samples_per_cluster = 1.0, 
+                            sample_text_max_length = 50.0, 
+                            use_embedding_dedup = True, 
+                            embedding_similarity_threshold = 0.5, 
+                            cache_ttl_seconds = 0.0, 
                             custom_prompt = '', 
+                            response_shape = null, 
                             parameters = { }, ), 
-                        cluster_id = '', 
-                        parquet_path = '', 
-                        members_key = '', 
                         num_clusters = 56, 
-                        cluster_stats = mixpeek.models.cluster_stats.ClusterStats(
-                            num_clusters = 56, 
-                            noise_points = 56, 
-                            silhouette_score = 1.337, 
-                            extra = { }, ), 
+                        num_documents_clustered = 56, 
+                        execution_time_seconds = 1.337, 
+                        hierarchy_detected = True, 
+                        parent_cluster_id = '', 
+                        child_cluster_ids = [
+                            ''
+                            ], 
+                        hierarchy_relationships = [
+                            { }
+                            ], 
                         status = 'PENDING', 
-                        task_id = '', 
+                        last_execution_task_id = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        completed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        llm_labeling_errors = [
+                            ''
+                            ], 
+                        metadata = { }, )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -86,53 +128,104 @@ class TestListClustersResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', )
+                    previous_page = '', 
+                    next_cursor = '', ),
+                total_count = 56,
+                stats = mixpeek.models.cluster_list_stats.ClusterListStats(
+                    total_clusters = 56, 
+                    total_documents = 56, 
+                    avg_documents_per_cluster = 1.337, 
+                    clusters_by_status = {
+                        'key' : 56
+                        }, )
             )
         else:
             return ListClustersResponse(
                 results = [
-                    mixpeek.models.cluster_model.ClusterModel(
-                        collection_ids = [
+                    mixpeek.models.cluster_metadata.ClusterMetadata(
+                        cluster_id = '', 
+                        cluster_name = '', 
+                        namespace_id = '', 
+                        input_collections = [
                             ''
                             ], 
-                        cluster_name = '', 
+                        source_bucket_ids = [
+                            ''
+                            ], 
+                        filters = { }, 
                         cluster_type = 'vector', 
-                        vector_config = mixpeek.models.vector_based_config.VectorBasedConfig(
-                            feature_extractor_name = '', 
-                            clustering_method = 'kmeans', 
-                            sample_size = 56, 
-                            kmeans_parameters = null, 
-                            dbscan_parameters = null, 
-                            hdbscan_parameters = null, 
-                            algorithm_params = null, ), 
-                        attribute_config = mixpeek.models.attribute_based_config.AttributeBasedConfig(
-                            attributes = [
-                                ''
-                                ], 
-                            hierarchical_grouping = True, 
-                            aggregation_method = '', ), 
+                        feature_uris = [
+                            ''
+                            ], 
+                        multi_feature_strategy = '', 
+                        learned_weights = {
+                            'key' : 1.337
+                            }, 
+                        learning_quality_score = 1.337, 
+                        effective_feature_method = '', 
+                        clustered_attributes = [
+                            ''
+                            ], 
+                        hierarchical_grouping = True, 
+                        aggregation_method = '', 
+                        output_collection_ids = [
+                            ''
+                            ], 
+                        output_collection_names = [
+                            ''
+                            ], 
+                        algorithm = '', 
+                        algorithm_params = { }, 
+                        enrich_source = True, 
+                        source_enrichment_config = mixpeek.models.source_enrichment_config.SourceEnrichmentConfig(
+                            field_mappings = [
+                                mixpeek.models.enrichment_field_mapping.EnrichmentFieldMapping(
+                                    source_field = '', 
+                                    target_field = '', )
+                                ], ), 
                         llm_labeling = mixpeek.models.llm_labeling.LLMLabeling(
                             enabled = True, 
+                            labeling_inputs = mixpeek.models.llm_labeling_input.LLMLabelingInput(
+                                input_mappings = [
+                                    mixpeek.models.input_mapping.InputMapping(
+                                        input_key = '', 
+                                        source_type = 'payload', 
+                                        path = '', 
+                                        override = null, )
+                                    ], ), 
                             provider = 'openai', 
-                            model_name = '', 
+                            model_name = null, 
                             include_summary = True, 
                             include_keywords = True, 
-                            max_samples_per_cluster = 56, 
+                            max_samples_per_cluster = 1.0, 
+                            sample_text_max_length = 50.0, 
+                            use_embedding_dedup = True, 
+                            embedding_similarity_threshold = 0.5, 
+                            cache_ttl_seconds = 0.0, 
                             custom_prompt = '', 
+                            response_shape = null, 
                             parameters = { }, ), 
-                        cluster_id = '', 
-                        parquet_path = '', 
-                        members_key = '', 
                         num_clusters = 56, 
-                        cluster_stats = mixpeek.models.cluster_stats.ClusterStats(
-                            num_clusters = 56, 
-                            noise_points = 56, 
-                            silhouette_score = 1.337, 
-                            extra = { }, ), 
+                        num_documents_clustered = 56, 
+                        execution_time_seconds = 1.337, 
+                        hierarchy_detected = True, 
+                        parent_cluster_id = '', 
+                        child_cluster_ids = [
+                            ''
+                            ], 
+                        hierarchy_relationships = [
+                            { }
+                            ], 
                         status = 'PENDING', 
-                        task_id = '', 
+                        last_execution_task_id = '', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        completed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        llm_labeling_errors = [
+                            ''
+                            ], 
+                        metadata = { }, )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -140,7 +233,9 @@ class TestListClustersResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
+                total_count = 56,
         )
         """
 

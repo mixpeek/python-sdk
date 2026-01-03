@@ -42,7 +42,9 @@ class TestBucketSchemaFieldInput(unittest.TestCase):
                 properties = {
                     'key' : { }
                     },
-                example = None,
+                examples = [
+                    null
+                    ],
                 description = '',
                 enum = [
                     null

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **default** | **object** |  | [optional] 
 **items** | [**BucketSchemaFieldInput**](BucketSchemaFieldInput.md) |  | [optional] 
 **properties** | [**Dict[str, BucketSchemaFieldInput]**](BucketSchemaFieldInput.md) |  | [optional] 
-**example** | **object** |  | [optional] 
+**examples** | **List[object]** | OPTIONAL. List of example values for this field. Used by Apps to show example inputs in the UI. Provide multiple diverse examples when possible. | [optional] 
 **description** | **str** |  | [optional] 
 **enum** | **List[object]** |  | [optional] 
 **required** | **bool** |  | [optional] [default to False]

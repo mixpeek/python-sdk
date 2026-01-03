@@ -1,6 +1,6 @@
 # CreateCollectionRequest
 
-Request model for creating a new collection.  Collections process data from buckets or other collections using feature extractors.  CRITICAL: To use input_mappings in feature_extractors: 1. Your source bucket MUST have a bucket_schema defined 2. The input_mappings reference fields from that bucket_schema 3. The system validates that mapped fields exist in the source schema  Example workflow: 1. Create bucket with schema: { \"properties\": { \"image\": {\"type\": \"image\"}, \"metadata\": {...} } } 2. Upload objects conforming to that schema 3. Create collection with input_mappings: { \"image\": \"image\", \"text\": \"metadata.title\" } 4. The system validates \"image\" and \"metadata.title\" exist in the bucket schema  Without a bucket_schema, input_mappings will fail with: \"The source field 'X' does not exist in the source schema.\"
+Request model for creating a new collection.  Collections process data from buckets or other collections using a single feature extractor.  KEY ARCHITECTURAL CHANGE: Each collection has EXACTLY ONE feature extractor. - Use field_passthrough to include additional source fields in output documents - Multiple extractors = multiple collections - This simplifies processing and makes output schema deterministic  CRITICAL: To use input_mappings: 1. Your source bucket MUST have a bucket_schema defined 2. The input_mappings reference fields from that bucket_schema 3. The system validates that mapped fields exist in the source schema  Example workflow: 1. Create bucket with schema: { \"properties\": { \"image\": {\"type\": \"image\"}, \"title\": {\"type\": \"string\"} } } 2. Upload objects conforming to that schema 3. Create collection with:    - input_mappings: { \"image\": \"image\" }    - field_passthrough: [{\"source_path\": \"title\"}] 4. Output documents will have both extractor outputs AND passthrough fields  Schema Computation: - output_schema is computed IMMEDIATELY when collection is created - output_schema = field_passthrough fields + extractor output fields - No waiting for documents to be processed!
 
 ## Properties
 
@@ -8,11 +8,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **collection_name** | **str** | Name of the collection to create | 
 **description** | **str** | Description of the collection | [optional] 
-**source** | [**SourceConfig**](SourceConfig.md) | Source configuration (bucket or collection) for this collection | 
+**source** | [**SourceConfigInput**](SourceConfigInput.md) | Source configuration (bucket or collection) for this collection | 
 **input_schema** | [**BucketSchemaInput**](BucketSchemaInput.md) | Input schema for the collection. If not provided, inferred from source bucket&#39;s bucket_schema or source collection&#39;s output_schema. REQUIRED for input_mappings to work - defines what fields can be mapped to feature extractors. | [optional] 
-**feature_extractors** | [**List[FeatureExtractorConfigInput]**](FeatureExtractorConfigInput.md) | Feature extractors to apply. Use input_mappings in each extractor to map source schema fields to extractor inputs. Example: {&#39;image&#39;: &#39;product_image&#39;, &#39;text&#39;: &#39;metadata.title&#39;} | [optional] 
+**feature_extractor** | [**SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput**](SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput.md) | Single feature extractor for this collection. Use field_passthrough within the extractor config to include additional source fields. For multiple extractors, create multiple collections and use collection-to-collection pipelines. | 
 **enabled** | **bool** | Whether the collection is enabled | [optional] [default to True]
 **metadata** | **Dict[str, object]** | Additional metadata for the collection | [optional] 
+**taxonomy_applications** | [**List[TaxonomyApplicationConfigInput]**](TaxonomyApplicationConfigInput.md) | Optional taxonomy applications to automatically enrich documents in this collection. Each taxonomy will classify/enrich documents based on configured retriever matches. | [optional] 
+**cluster_applications** | [**List[ClusterApplicationConfig]**](ClusterApplicationConfig.md) | Optional cluster applications to automatically execute when batch processing completes. Each cluster enriches documents with cluster assignments (cluster_id, cluster_label, etc.). | [optional] 
 
 ## Example
 

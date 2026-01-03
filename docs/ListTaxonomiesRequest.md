@@ -6,8 +6,8 @@ Request model to list taxonomies.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**search** | **str** | Search term to filter taxonomies by name | [optional] 
-**filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Filters to apply to the taxonomy list | [optional] 
+**search** | **str** | Search term for wildcard search across taxonomy_id, taxonomy_name, description, and other text fields | [optional] 
+**filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Filters to apply to the taxonomy list. Supports filtering by taxonomy_id or taxonomy_name. | [optional] 
 **sort** | [**SortOption**](SortOption.md) | Sort configuration for the taxonomy list | [optional] 
 **case_sensitive** | **bool** | If True, filters and search will be case-sensitive | [optional] [default to False]
 

@@ -25,15 +25,16 @@ from typing_extensions import Self
 
 class PaginationResponse(BaseModel):
     """
-    PaginationResponse.
+    PaginationResponse.  Cursor-based pagination response: - Use next_cursor for navigation - Total count fields only populated when include_total=true
     """ # noqa: E501
-    total: StrictInt
-    page: StrictInt
-    page_size: StrictInt
-    total_pages: StrictInt
+    total: Optional[StrictInt] = None
+    page: Optional[StrictInt] = None
+    page_size: Optional[StrictInt] = None
+    total_pages: Optional[StrictInt] = None
     next_page: Optional[StrictStr] = None
     previous_page: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["total", "page", "page_size", "total_pages", "next_page", "previous_page"]
+    next_cursor: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["total", "page", "page_size", "total_pages", "next_page", "previous_page", "next_cursor"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +92,8 @@ class PaginationResponse(BaseModel):
             "page_size": obj.get("page_size"),
             "total_pages": obj.get("total_pages"),
             "next_page": obj.get("next_page"),
-            "previous_page": obj.get("previous_page")
+            "previous_page": obj.get("previous_page"),
+            "next_cursor": obj.get("next_cursor")
         })
         return _obj
 

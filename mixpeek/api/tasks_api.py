@@ -17,10 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
+from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from mixpeek.models.generic_delete_response import GenericDeleteResponse
+from mixpeek.models.list_tasks_request import ListTasksRequest
 from mixpeek.models.list_tasks_response import ListTasksResponse
 from mixpeek.models.task_response import TaskResponse
 
@@ -46,7 +47,7 @@ class TasksApi:
     def get_task(
         self,
         task_id: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,7 +67,7 @@ class TasksApi:
 
         :param task_id: (required)
         :type task_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -123,7 +124,7 @@ class TasksApi:
     def get_task_with_http_info(
         self,
         task_id: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -143,7 +144,7 @@ class TasksApi:
 
         :param task_id: (required)
         :type task_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -200,7 +201,7 @@ class TasksApi:
     def get_task_without_preload_content(
         self,
         task_id: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -220,7 +221,7 @@ class TasksApi:
 
         :param task_id: (required)
         :type task_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -339,7 +340,7 @@ class TasksApi:
     def kill_task(
         self,
         task_id: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -355,11 +356,11 @@ class TasksApi:
     ) -> GenericDeleteResponse:
         """Kill Task
 
-        Kill a task.
+        Kill a task (idempotent - succeeds even if task doesn't exist or is already killed).
 
         :param task_id: (required)
         :type task_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -416,7 +417,7 @@ class TasksApi:
     def kill_task_with_http_info(
         self,
         task_id: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -432,11 +433,11 @@ class TasksApi:
     ) -> ApiResponse[GenericDeleteResponse]:
         """Kill Task
 
-        Kill a task.
+        Kill a task (idempotent - succeeds even if task doesn't exist or is already killed).
 
         :param task_id: (required)
         :type task_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -493,7 +494,7 @@ class TasksApi:
     def kill_task_without_preload_content(
         self,
         task_id: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -509,11 +510,11 @@ class TasksApi:
     ) -> RESTResponseType:
         """Kill Task
 
-        Kill a task.
+        Kill a task (idempotent - succeeds even if task doesn't exist or is already killed).
 
         :param task_id: (required)
         :type task_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -629,11 +630,14 @@ class TasksApi:
 
 
     @validate_call
-    def list_active_tasks(
+    def list_tasks(
         self,
-        page: Optional[StrictInt] = None,
-        page_size: Optional[StrictInt] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        list_tasks_request: Optional[ListTasksRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -647,16 +651,22 @@ class TasksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ListTasksResponse:
-        """List Active Tasks
+        """List Tasks
 
-        Retrieve all tasks that are not in a complete state (IN_PROGRESS, FAILED, CANCELED, or UNKNOWN)
+        List tasks with optional filtering, sorting, and pagination.      **Filter Options**:     - `status`: Filter by specific status (PENDING, IN_PROGRESS, COMPLETED, FAILED, etc.)     - `task_type`: Filter by task type      **Examples**:     - All tasks: `{}`     - Failed tasks only: `{\"status\": \"FAILED\"}`     - Pending batches: `{\"status\": \"PENDING\", \"task_type\": \"API_BUCKETS_UPLOADS_BATCH_CONFIRM\"}`     - In-progress tasks: `{\"status\": \"IN_PROGRESS\"}`
 
-        :param page:
-        :type page: int
-        :param page_size:
-        :type page_size: int
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
+        :param list_tasks_request:
+        :type list_tasks_request: ListTasksRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -679,10 +689,13 @@ class TasksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_active_tasks_serialize(
-            page=page,
-            page_size=page_size,
+        _param = self._list_tasks_serialize(
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
+            list_tasks_request=list_tasks_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -710,11 +723,14 @@ class TasksApi:
 
 
     @validate_call
-    def list_active_tasks_with_http_info(
+    def list_tasks_with_http_info(
         self,
-        page: Optional[StrictInt] = None,
-        page_size: Optional[StrictInt] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        list_tasks_request: Optional[ListTasksRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -728,16 +744,22 @@ class TasksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[ListTasksResponse]:
-        """List Active Tasks
+        """List Tasks
 
-        Retrieve all tasks that are not in a complete state (IN_PROGRESS, FAILED, CANCELED, or UNKNOWN)
+        List tasks with optional filtering, sorting, and pagination.      **Filter Options**:     - `status`: Filter by specific status (PENDING, IN_PROGRESS, COMPLETED, FAILED, etc.)     - `task_type`: Filter by task type      **Examples**:     - All tasks: `{}`     - Failed tasks only: `{\"status\": \"FAILED\"}`     - Pending batches: `{\"status\": \"PENDING\", \"task_type\": \"API_BUCKETS_UPLOADS_BATCH_CONFIRM\"}`     - In-progress tasks: `{\"status\": \"IN_PROGRESS\"}`
 
-        :param page:
-        :type page: int
-        :param page_size:
-        :type page_size: int
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
+        :param list_tasks_request:
+        :type list_tasks_request: ListTasksRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -760,10 +782,13 @@ class TasksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_active_tasks_serialize(
-            page=page,
-            page_size=page_size,
+        _param = self._list_tasks_serialize(
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
+            list_tasks_request=list_tasks_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -791,11 +816,14 @@ class TasksApi:
 
 
     @validate_call
-    def list_active_tasks_without_preload_content(
+    def list_tasks_without_preload_content(
         self,
-        page: Optional[StrictInt] = None,
-        page_size: Optional[StrictInt] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        list_tasks_request: Optional[ListTasksRequest] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -809,16 +837,22 @@ class TasksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List Active Tasks
+        """List Tasks
 
-        Retrieve all tasks that are not in a complete state (IN_PROGRESS, FAILED, CANCELED, or UNKNOWN)
+        List tasks with optional filtering, sorting, and pagination.      **Filter Options**:     - `status`: Filter by specific status (PENDING, IN_PROGRESS, COMPLETED, FAILED, etc.)     - `task_type`: Filter by task type      **Examples**:     - All tasks: `{}`     - Failed tasks only: `{\"status\": \"FAILED\"}`     - Pending batches: `{\"status\": \"PENDING\", \"task_type\": \"API_BUCKETS_UPLOADS_BATCH_CONFIRM\"}`     - In-progress tasks: `{\"status\": \"IN_PROGRESS\"}`
 
-        :param page:
-        :type page: int
-        :param page_size:
-        :type page_size: int
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
+        :param list_tasks_request:
+        :type list_tasks_request: ListTasksRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -841,10 +875,13 @@ class TasksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_active_tasks_serialize(
-            page=page,
-            page_size=page_size,
+        _param = self._list_tasks_serialize(
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
+            list_tasks_request=list_tasks_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -867,11 +904,14 @@ class TasksApi:
         return response_data.response
 
 
-    def _list_active_tasks_serialize(
+    def _list_tasks_serialize(
         self,
-        page,
-        page_size,
+        limit,
+        offset,
+        cursor,
+        include_total,
         authorization,
+        list_tasks_request,
         _request_auth,
         _content_type,
         _headers,
@@ -894,19 +934,29 @@ class TasksApi:
 
         # process the path parameters
         # process the query parameters
-        if page is not None:
+        if limit is not None:
             
-            _query_params.append(('page', page))
+            _query_params.append(('limit', limit))
             
-        if page_size is not None:
+        if offset is not None:
             
-            _query_params.append(('page_size', page_size))
+            _query_params.append(('offset', offset))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        if include_total is not None:
+            
+            _query_params.append(('include_total', include_total))
             
         # process the header parameters
         if authorization is not None:
             _header_params['Authorization'] = authorization
         # process the form parameters
         # process the body parameter
+        if list_tasks_request is not None:
+            _body_params = list_tasks_request
 
 
         # set the HTTP header `Accept`
@@ -917,14 +967,27 @@ class TasksApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v1/tasks/',
+            method='POST',
+            resource_path='/v1/tasks/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

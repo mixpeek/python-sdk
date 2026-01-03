@@ -36,16 +36,18 @@ class TestRetrieverStageDefinition(unittest.TestCase):
         model = RetrieverStageDefinition()
         if include_optional:
             return RetrieverStageDefinition(
-                stage_name = '',
-                version = '',
+                stage_id = '',
                 description = '',
+                category = 'filter',
+                icon = '',
                 parameter_schema = { }
             )
         else:
             return RetrieverStageDefinition(
-                stage_name = '',
-                version = '',
+                stage_id = '',
                 description = '',
+                category = 'filter',
+                icon = '',
         )
         """
 

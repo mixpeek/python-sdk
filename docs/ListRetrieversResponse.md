@@ -1,14 +1,13 @@
 # ListRetrieversResponse
 
-Response for listing retrievers.
+Response from listing retrievers.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**List[RetrieverModelOutput]**](RetrieverModelOutput.md) | List of retrievers matching the query | 
-**pagination** | **Dict[str, object]** | Pagination information for the current window | 
-**total_count** | **int** | Total number of retrievers that match the query | 
+**results** | [**List[RetrieverModelOutput]**](RetrieverModelOutput.md) | List of retrievers in the namespace. | [optional] 
+**total** | **int** | Total number of retrievers. | [optional] [default to 0]
 
 ## Example
 

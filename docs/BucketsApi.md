@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_bucket**](BucketsApi.md#delete_bucket) | **DELETE** /v1/buckets/{bucket_identifier} | Delete Bucket
 [**get_bucket**](BucketsApi.md#get_bucket) | **GET** /v1/buckets/{bucket_identifier} | Get Bucket
 [**list_buckets**](BucketsApi.md#list_buckets) | **POST** /v1/buckets/list | List Buckets
+[**patch_bucket**](BucketsApi.md#patch_bucket) | **PATCH** /v1/buckets/{bucket_identifier} | Partially Update Bucket
 [**update_bucket**](BucketsApi.md#update_bucket) | **PUT** /v1/buckets/{bucket_identifier} | Update Bucket
 
 
@@ -42,8 +43,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.BucketsApi(api_client)
     bucket_create_request = mixpeek.BucketCreateRequest() # BucketCreateRequest | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Bucket
@@ -62,8 +63,8 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bucket_create_request** | [**BucketCreateRequest**](BucketCreateRequest.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
@@ -93,18 +94,37 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_bucket**
-> TaskResponse delete_bucket(bucket_identifier, authorization=authorization, x_namespace=x_namespace)
+> object delete_bucket(bucket_identifier, authorization=authorization, x_namespace=x_namespace)
 
 Delete Bucket
 
-This endpoint deletes a bucket and all its objects.
+This endpoint deletes a bucket and all its resources including:
+    - S3 objects and blobs
+    - Running Ray jobs (cancels active batch processing jobs)
+    - Batch processing artifacts
+    - Upload files
+    - Unique key lookups
+    - MongoDB metadata
+
+    The deletion is performed **asynchronously** via a background task.
+    Returns immediately with a task_id that can be polled via GET /v1/tasks/{task_id}.
+
+    **Response**:
+    - `task_id`: Use this to poll deletion status via GET /v1/tasks/{task_id}
+    - `status`: Initial status (PENDING)
+    - `bucket_id`: The bucket being deleted
+    - `bucket_name`: Name of the bucket
+    - `object_count`: Number of objects that will be deleted
+
+    **Polling**:
+    Poll GET /v1/tasks/{task_id} until status is COMPLETED or FAILED.
+    Use exponential backoff (start 1s, max 30s).
 
 ### Example
 
 
 ```python
 import mixpeek
-from mixpeek.models.task_response import TaskResponse
 from mixpeek.rest import ApiException
 from pprint import pprint
 
@@ -120,8 +140,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.BucketsApi(api_client)
     bucket_identifier = 'bucket_identifier_example' # str | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Bucket
@@ -140,12 +160,12 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bucket_identifier** | **str**|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-[**TaskResponse**](TaskResponse.md)
+**object**
 
 ### Authorization
 
@@ -198,8 +218,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.BucketsApi(api_client)
     bucket_identifier = 'bucket_identifier_example' # str | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket
@@ -218,8 +238,8 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bucket_identifier** | **str**|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
@@ -276,8 +296,8 @@ configuration = mixpeek.Configuration(
 with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.BucketsApi(api_client)
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_buckets_request = mixpeek.ListBucketsRequest() # ListBucketsRequest |  (optional)
 
     try:
@@ -296,13 +316,96 @@ with mixpeek.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_buckets_request** | [**ListBucketsRequest**](ListBucketsRequest.md)|  | [optional] 
 
 ### Return type
 
 [**ListBucketsResponse**](ListBucketsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **patch_bucket**
+> BucketResponse patch_bucket(bucket_identifier, bucket_patch_request, authorization=authorization, x_namespace=x_namespace)
+
+Partially Update Bucket
+
+This endpoint allows you to partially update an existing bucket (PATCH operation).
+    Only provided fields will be updated. At minimum, metadata can always be updated.
+    Immutable fields like bucket_id and timestamps cannot be modified.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.bucket_patch_request import BucketPatchRequest
+from mixpeek.models.bucket_response import BucketResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.BucketsApi(api_client)
+    bucket_identifier = 'bucket_identifier_example' # str | 
+    bucket_patch_request = mixpeek.BucketPatchRequest() # BucketPatchRequest | 
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
+
+    try:
+        # Partially Update Bucket
+        api_response = api_instance.patch_bucket(bucket_identifier, bucket_patch_request, authorization=authorization, x_namespace=x_namespace)
+        print("The response of BucketsApi->patch_bucket:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BucketsApi->patch_bucket: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bucket_identifier** | **str**|  | 
+ **bucket_patch_request** | [**BucketPatchRequest**](BucketPatchRequest.md)|  | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
+
+### Return type
+
+[**BucketResponse**](BucketResponse.md)
 
 ### Authorization
 
@@ -358,8 +461,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.BucketsApi(api_client)
     bucket_identifier = 'bucket_identifier_example' # str | 
     bucket_update_request = mixpeek.BucketUpdateRequest() # BucketUpdateRequest | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Update Bucket
@@ -379,8 +482,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bucket_identifier** | **str**|  | 
  **bucket_update_request** | [**BucketUpdateRequest**](BucketUpdateRequest.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 

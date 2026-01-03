@@ -26,15 +26,15 @@ from typing_extensions import Self
 
 class CreateObjectRequest(BaseModel):
     """
-    Request model for creating a bucket object.
+    Request model for creating a bucket object.  Objects can be created with blobs from two sources: 1. Direct data (URLs, base64) - Use CreateBlobRequest.data field 2. Upload references - Use CreateBlobRequest.upload_id field (from POST /buckets/{id}/uploads)  Upload Reference Workflow:     For large files or client-side uploads, use the presigned URL workflow:     1. POST /buckets/{id}/uploads → Returns {upload_id, presigned_url}     2. User uploads file to presigned_url (client-side)     3. POST /uploads/{upload_id}/confirm → Validates upload     4. POST /buckets/{id}/objects with upload_id in blobs (this endpoint)  Use Cases:     - Single blob with direct data (simple)     - Multiple blobs from presigned uploads (recommended for large files)     - Mix of direct data and upload references     - Combine multiple uploads into one object  See Also:     - CreateBlobRequest for blob field documentation     - POST /buckets/{id}/uploads for presigned URL generation
     """ # noqa: E501
     key_prefix: Optional[StrictStr] = Field(default=None, description="Storage key/path prefix of the object, this will be used to retrieve the object from the storage. It's at the root of the object.")
     blobs: Optional[List[CreateBlobRequest]] = Field(default=None, description="List of blobs to be created in this object")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the object, this will be appended in all downstream documents of the your connected collections.")
     skip_duplicates: Optional[StrictBool] = Field(default=False, description="Skip duplicate blobs, if a blob with the same hash already exists, it will be skipped.")
     canonicalize_source: Optional[StrictBool] = Field(default=True, description="Mirror non-S3 sources into internal S3 and reference canonically.")
     force_remirror: Optional[StrictBool] = Field(default=False, description="Force re-upload to S3 even if a blob with identical content already exists.")
-    __properties: ClassVar[List[str]] = ["key_prefix", "blobs", "metadata", "skip_duplicates", "canonicalize_source", "force_remirror"]
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["key_prefix", "blobs", "skip_duplicates", "canonicalize_source", "force_remirror"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -66,8 +66,10 @@ class CreateObjectRequest(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -82,6 +84,11 @@ class CreateObjectRequest(BaseModel):
                 if _item_blobs:
                     _items.append(_item_blobs.to_dict())
             _dict['blobs'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -96,11 +103,15 @@ class CreateObjectRequest(BaseModel):
         _obj = cls.model_validate({
             "key_prefix": obj.get("key_prefix"),
             "blobs": [CreateBlobRequest.from_dict(_item) for _item in obj["blobs"]] if obj.get("blobs") is not None else None,
-            "metadata": obj.get("metadata"),
             "skip_duplicates": obj.get("skip_duplicates") if obj.get("skip_duplicates") is not None else False,
             "canonicalize_source": obj.get("canonicalize_source") if obj.get("canonicalize_source") is not None else True,
             "force_remirror": obj.get("force_remirror") if obj.get("force_remirror") is not None else False
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

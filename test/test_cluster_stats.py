@@ -44,8 +44,6 @@ class TestClusterStats(unittest.TestCase):
         else:
             return ClusterStats(
                 num_clusters = 56,
-                noise_points = 56,
-                silhouette_score = 1.337,
         )
         """
 

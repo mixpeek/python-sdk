@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **results** | [**List[NamespaceModel]**](NamespaceModel.md) | List of namespaces matching the query | 
 **pagination** | [**PaginationResponse**](PaginationResponse.md) | Pagination information for the current result window | 
 **total_count** | **int** | Total number of namespaces that match the query | 
+**stats** | [**NamespaceListStats**](NamespaceListStats.md) | Aggregate statistics across all namespaces in the result | [optional] 
 
 ## Example
 

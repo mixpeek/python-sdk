@@ -37,35 +37,7 @@ class TestListObjectsResponse(unittest.TestCase):
         if include_optional:
             return ListObjectsResponse(
                 results = [
-                    mixpeek.models.object_response.ObjectResponse(
-                        object_id = '', 
-                        bucket_id = '', 
-                        key_prefix = '', 
-                        content_hash = '', 
-                        blobs = [
-                            mixpeek.models.blob_model.BlobModel(
-                                blob_id = '', 
-                                property = '', 
-                                key_prefix = '', 
-                                type = 'string', 
-                                data = null, 
-                                metadata = { }, 
-                                details = mixpeek.models.blob_details.BlobDetails(
-                                    filename = '', 
-                                    size_bytes = 56, 
-                                    mime_type = '', 
-                                    hash = '', 
-                                    s3_object_key = '', ), )
-                            ], 
-                        source_details = [
-                            mixpeek.models.source_details.SourceDetails(
-                                type = 'bucket', 
-                                source_id = '', )
-                            ], 
-                        metadata = { }, 
-                        status = 'PENDING', 
-                        error = '', 
-                        skip_duplicates = True, )
+                    { }
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -73,40 +45,18 @@ class TestListObjectsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', )
+                    previous_page = '', 
+                    next_cursor = '', ),
+                stats = mixpeek.models.object_list_stats.ObjectListStats(
+                    total_objects = 56, 
+                    total_blobs = 56, 
+                    avg_blobs_per_object = 1.337, 
+                    objects_by_status = { }, )
             )
         else:
             return ListObjectsResponse(
                 results = [
-                    mixpeek.models.object_response.ObjectResponse(
-                        object_id = '', 
-                        bucket_id = '', 
-                        key_prefix = '', 
-                        content_hash = '', 
-                        blobs = [
-                            mixpeek.models.blob_model.BlobModel(
-                                blob_id = '', 
-                                property = '', 
-                                key_prefix = '', 
-                                type = 'string', 
-                                data = null, 
-                                metadata = { }, 
-                                details = mixpeek.models.blob_details.BlobDetails(
-                                    filename = '', 
-                                    size_bytes = 56, 
-                                    mime_type = '', 
-                                    hash = '', 
-                                    s3_object_key = '', ), )
-                            ], 
-                        source_details = [
-                            mixpeek.models.source_details.SourceDetails(
-                                type = 'bucket', 
-                                source_id = '', )
-                            ], 
-                        metadata = { }, 
-                        status = 'PENDING', 
-                        error = '', 
-                        skip_duplicates = True, )
+                    { }
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -114,7 +64,8 @@ class TestListObjectsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
         )
         """
 

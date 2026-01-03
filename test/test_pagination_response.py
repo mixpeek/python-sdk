@@ -41,14 +41,11 @@ class TestPaginationResponse(unittest.TestCase):
                 page_size = 56,
                 total_pages = 56,
                 next_page = '',
-                previous_page = ''
+                previous_page = '',
+                next_cursor = ''
             )
         else:
             return PaginationResponse(
-                total = 56,
-                page = 56,
-                page_size = 56,
-                total_pages = 56,
         )
         """
 

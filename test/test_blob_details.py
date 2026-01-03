@@ -39,8 +39,7 @@ class TestBlobDetails(unittest.TestCase):
                 filename = '',
                 size_bytes = 56,
                 mime_type = '',
-                hash = '',
-                s3_object_key = ''
+                hash = ''
             )
         else:
             return BlobDetails(

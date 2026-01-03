@@ -29,7 +29,7 @@ INPUTMAPPINGS_ANY_OF_SCHEMAS = ["Dict[str, str]", "List[InputMapping]"]
 
 class InputMappings(BaseModel):
     """
-    Mapping from extractor input names to source values. Accepts either a simple dict of target->dot-path, or a list of generic InputMapping (payload/literal).
+    Mapping from extractor input names to source field paths. Tells the extractor which source fields to process. Example: {'image': 'thumbnail_url', 'text': 'description'}
     """
 
     # data type: Dict[str, str]

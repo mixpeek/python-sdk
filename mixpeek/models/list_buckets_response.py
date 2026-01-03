@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.bucket_list_stats import BucketListStats
 from mixpeek.models.bucket_response import BucketResponse
 from mixpeek.models.pagination_response import PaginationResponse
 from typing import Optional, Set
@@ -32,7 +33,8 @@ class ListBucketsResponse(BaseModel):
     results: List[BucketResponse]
     total_count: StrictInt = Field(description="Total number of buckets matching the query")
     pagination: PaginationResponse
-    __properties: ClassVar[List[str]] = ["results", "total_count", "pagination"]
+    stats: Optional[BucketListStats] = Field(default=None, description="Aggregate statistics across all buckets in the result")
+    __properties: ClassVar[List[str]] = ["results", "total_count", "pagination", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +85,9 @@ class ListBucketsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
             _dict['pagination'] = self.pagination.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of stats
+        if self.stats:
+            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -97,7 +102,8 @@ class ListBucketsResponse(BaseModel):
         _obj = cls.model_validate({
             "results": [BucketResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "total_count": obj.get("total_count"),
-            "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
+            "stats": BucketListStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None
         })
         return _obj
 

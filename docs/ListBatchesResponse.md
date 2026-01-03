@@ -6,7 +6,7 @@ The response model for listing batches.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**batches** | [**List[BatchModel]**](BatchModel.md) | A list of batches. | 
+**results** | [**List[BatchModel]**](BatchModel.md) | A list of batches. | 
 **total_count** | **int** | The total number of batches found. | 
 
 ## Example

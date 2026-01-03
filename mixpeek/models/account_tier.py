@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class AccountTier(str, Enum):
     """
-    Account tier.
+    Account tier with monthly credit allocations.  Tiers:     FREE: 1,000 credits/month - Limited modalities, shared compute     PRO: 100,000 credits/month - All modalities, dedicated namespace     TEAM: 1,000,000 credits/month - Shared buckets, retrieval DAGs     ENTERPRISE: Custom credits - Dedicated Ray cluster, SLA
     """
 
     """
@@ -29,6 +29,7 @@ class AccountTier(str, Enum):
     """
     FREE = 'free'
     PRO = 'pro'
+    TEAM = 'team'
     ENTERPRISE = 'enterprise'
 
     @classmethod

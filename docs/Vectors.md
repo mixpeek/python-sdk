@@ -6,7 +6,7 @@ Vector representation of the feature. Can be any supported vector type.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**indices** | [**List[SparseVectorIndicesInner]**](SparseVectorIndicesInner.md) | Indices of non-zero elements | 
+**indices** | [**List[RangeBucketBoundariesInner]**](RangeBucketBoundariesInner.md) | Indices of non-zero elements | 
 **values** | **List[float]** | Values of non-zero elements | 
 
 ## Example

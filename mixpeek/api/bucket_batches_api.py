@@ -17,8 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Optional
+from pydantic import Field, StrictBool, StrictInt, StrictStr
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from mixpeek.models.add_objects_to_batch_request import AddObjectsToBatchRequest
 from mixpeek.models.batch_model import BatchModel
@@ -26,6 +26,9 @@ from mixpeek.models.create_batch_request import CreateBatchRequest
 from mixpeek.models.generic_delete_response import GenericDeleteResponse
 from mixpeek.models.list_batches_request import ListBatchesRequest
 from mixpeek.models.list_batches_response import ListBatchesResponse
+from mixpeek.models.patch_batch_request import PatchBatchRequest
+from mixpeek.models.retry_batch_request import RetryBatchRequest
+from mixpeek.models.submit_batch_request import SubmitBatchRequest
 from mixpeek.models.task_response import TaskResponse
 
 from mixpeek.api_client import ApiClient, RequestSerialized
@@ -52,8 +55,9 @@ class BucketBatchesApi:
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
         add_objects_to_batch_request: AddObjectsToBatchRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        skip_validation: Annotated[Optional[StrictBool], Field(description="Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -77,9 +81,11 @@ class BucketBatchesApi:
         :type batch_id: str
         :param add_objects_to_batch_request: (required)
         :type add_objects_to_batch_request: AddObjectsToBatchRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param skip_validation: Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.
+        :type skip_validation: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -107,6 +113,7 @@ class BucketBatchesApi:
             bucket_identifier=bucket_identifier,
             batch_id=batch_id,
             add_objects_to_batch_request=add_objects_to_batch_request,
+            skip_validation=skip_validation,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -141,8 +148,9 @@ class BucketBatchesApi:
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
         add_objects_to_batch_request: AddObjectsToBatchRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        skip_validation: Annotated[Optional[StrictBool], Field(description="Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -166,9 +174,11 @@ class BucketBatchesApi:
         :type batch_id: str
         :param add_objects_to_batch_request: (required)
         :type add_objects_to_batch_request: AddObjectsToBatchRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param skip_validation: Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.
+        :type skip_validation: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -196,6 +206,7 @@ class BucketBatchesApi:
             bucket_identifier=bucket_identifier,
             batch_id=batch_id,
             add_objects_to_batch_request=add_objects_to_batch_request,
+            skip_validation=skip_validation,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -230,8 +241,9 @@ class BucketBatchesApi:
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
         add_objects_to_batch_request: AddObjectsToBatchRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        skip_validation: Annotated[Optional[StrictBool], Field(description="Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -255,9 +267,11 @@ class BucketBatchesApi:
         :type batch_id: str
         :param add_objects_to_batch_request: (required)
         :type add_objects_to_batch_request: AddObjectsToBatchRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param skip_validation: Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.
+        :type skip_validation: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -285,6 +299,7 @@ class BucketBatchesApi:
             bucket_identifier=bucket_identifier,
             batch_id=batch_id,
             add_objects_to_batch_request=add_objects_to_batch_request,
+            skip_validation=skip_validation,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -314,6 +329,7 @@ class BucketBatchesApi:
         bucket_identifier,
         batch_id,
         add_objects_to_batch_request,
+        skip_validation,
         authorization,
         x_namespace,
         _request_auth,
@@ -342,6 +358,10 @@ class BucketBatchesApi:
         if batch_id is not None:
             _path_params['batch_id'] = batch_id
         # process the query parameters
+        if skip_validation is not None:
+            
+            _query_params.append(('skip_validation', skip_validation))
+            
         # process the header parameters
         if authorization is not None:
             _header_params['Authorization'] = authorization
@@ -402,8 +422,8 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -425,9 +445,9 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -487,8 +507,8 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -510,9 +530,9 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -572,8 +592,8 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -595,9 +615,9 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -725,8 +745,9 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_batch_request: CreateBatchRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        skip_validation: Annotated[Optional[StrictBool], Field(description="Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -748,9 +769,11 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param create_batch_request: (required)
         :type create_batch_request: CreateBatchRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param skip_validation: Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.
+        :type skip_validation: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -777,6 +800,7 @@ class BucketBatchesApi:
         _param = self._create_batch_buckets_batches_serialize(
             bucket_identifier=bucket_identifier,
             create_batch_request=create_batch_request,
+            skip_validation=skip_validation,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -810,8 +834,9 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_batch_request: CreateBatchRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        skip_validation: Annotated[Optional[StrictBool], Field(description="Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -833,9 +858,11 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param create_batch_request: (required)
         :type create_batch_request: CreateBatchRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param skip_validation: Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.
+        :type skip_validation: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -862,6 +889,7 @@ class BucketBatchesApi:
         _param = self._create_batch_buckets_batches_serialize(
             bucket_identifier=bucket_identifier,
             create_batch_request=create_batch_request,
+            skip_validation=skip_validation,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -895,8 +923,9 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_batch_request: CreateBatchRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        skip_validation: Annotated[Optional[StrictBool], Field(description="Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -918,9 +947,11 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param create_batch_request: (required)
         :type create_batch_request: CreateBatchRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param skip_validation: Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly.
+        :type skip_validation: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -947,6 +978,7 @@ class BucketBatchesApi:
         _param = self._create_batch_buckets_batches_serialize(
             bucket_identifier=bucket_identifier,
             create_batch_request=create_batch_request,
+            skip_validation=skip_validation,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -975,6 +1007,7 @@ class BucketBatchesApi:
         self,
         bucket_identifier,
         create_batch_request,
+        skip_validation,
         authorization,
         x_namespace,
         _request_auth,
@@ -1001,6 +1034,10 @@ class BucketBatchesApi:
         if bucket_identifier is not None:
             _path_params['bucket_identifier'] = bucket_identifier
         # process the query parameters
+        if skip_validation is not None:
+            
+            _query_params.append(('skip_validation', skip_validation))
+            
         # process the header parameters
         if authorization is not None:
             _header_params['Authorization'] = authorization
@@ -1061,8 +1098,8 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1084,9 +1121,9 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1146,8 +1183,8 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1169,9 +1206,9 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1231,8 +1268,8 @@ class BucketBatchesApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1254,9 +1291,9 @@ class BucketBatchesApi:
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1380,11 +1417,1065 @@ class BucketBatchesApi:
 
 
     @validate_call
+    def get_batch_buckets_batches(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BatchModel:
+        """Get Batch Configuration
+
+        Retrieve batch configuration and historical data from MongoDB. Status is automatically synchronized from Task API. For real-time monitoring, use GET /v1/tasks/{task_id} (Redis, faster).
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchModel",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_batch_buckets_batches_with_http_info(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BatchModel]:
+        """Get Batch Configuration
+
+        Retrieve batch configuration and historical data from MongoDB. Status is automatically synchronized from Task API. For real-time monitoring, use GET /v1/tasks/{task_id} (Redis, faster).
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchModel",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_batch_buckets_batches_without_preload_content(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Batch Configuration
+
+        Retrieve batch configuration and historical data from MongoDB. Status is automatically synchronized from Task API. For real-time monitoring, use GET /v1/tasks/{task_id} (Redis, faster).
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BatchModel",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_batch_buckets_batches_serialize(
+        self,
+        bucket_identifier,
+        batch_id,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v1/buckets/{bucket_identifier}/batches/{batch_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_batch_logs_buckets_batches(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Annotated[Optional[StrictInt], Field(description="Optional tier number (0-based). If not provided, returns logs for all tiers.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Get Ray Job Logs for Batch
+
+        Retrieve Ray job submission logs for a batch's processing tiers. You can get logs for a specific tier or all tiers. User must have access to the batch to retrieve logs.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num: Optional tier number (0-based). If not provided, returns logs for all tiers.
+        :type tier_num: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_logs_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_batch_logs_buckets_batches_with_http_info(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Annotated[Optional[StrictInt], Field(description="Optional tier number (0-based). If not provided, returns logs for all tiers.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Get Ray Job Logs for Batch
+
+        Retrieve Ray job submission logs for a batch's processing tiers. You can get logs for a specific tier or all tiers. User must have access to the batch to retrieve logs.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num: Optional tier number (0-based). If not provided, returns logs for all tiers.
+        :type tier_num: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_logs_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_batch_logs_buckets_batches_without_preload_content(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Annotated[Optional[StrictInt], Field(description="Optional tier number (0-based). If not provided, returns logs for all tiers.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Ray Job Logs for Batch
+
+        Retrieve Ray job submission logs for a batch's processing tiers. You can get logs for a specific tier or all tiers. User must have access to the batch to retrieve logs.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num: Optional tier number (0-based). If not provided, returns logs for all tiers.
+        :type tier_num: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_batch_logs_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_batch_logs_buckets_batches_serialize(
+        self,
+        bucket_identifier,
+        batch_id,
+        tier_num,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        # process the query parameters
+        if tier_num is not None:
+            
+            _query_params.append(('tier_num', tier_num))
+            
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v1/buckets/{bucket_identifier}/batches/{batch_id}/logs',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_failed_documents_buckets_batches_batch(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Optional[StrictInt] = None,
+        collection_id: Optional[StrictStr] = None,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Dict[str, object]:
+        """Get Failed Documents for Batch
+
+        Retrieve failed documents for a batch, optionally filtered by tier or collection.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num:
+        :type tier_num: int
+        :param collection_id:
+        :type collection_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_failed_documents_buckets_batches_batch_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            collection_id=collection_id,
+            limit=limit,
+            offset=offset,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_failed_documents_buckets_batches_batch_with_http_info(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Optional[StrictInt] = None,
+        collection_id: Optional[StrictStr] = None,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Dict[str, object]]:
+        """Get Failed Documents for Batch
+
+        Retrieve failed documents for a batch, optionally filtered by tier or collection.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num:
+        :type tier_num: int
+        :param collection_id:
+        :type collection_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_failed_documents_buckets_batches_batch_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            collection_id=collection_id,
+            limit=limit,
+            offset=offset,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_failed_documents_buckets_batches_batch_without_preload_content(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Optional[StrictInt] = None,
+        collection_id: Optional[StrictStr] = None,
+        limit: Optional[StrictInt] = None,
+        offset: Optional[StrictInt] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Failed Documents for Batch
+
+        Retrieve failed documents for a batch, optionally filtered by tier or collection.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num:
+        :type tier_num: int
+        :param collection_id:
+        :type collection_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_failed_documents_buckets_batches_batch_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            collection_id=collection_id,
+            limit=limit,
+            offset=offset,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_failed_documents_buckets_batches_batch_serialize(
+        self,
+        bucket_identifier,
+        batch_id,
+        tier_num,
+        collection_id,
+        limit,
+        offset,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        # process the query parameters
+        if tier_num is not None:
+            
+            _query_params.append(('tier_num', tier_num))
+            
+        if collection_id is not None:
+            
+            _query_params.append(('collection_id', collection_id))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v1/buckets/{bucket_identifier}/batches/{batch_id}/failed-documents',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def list_batches_buckets(
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_batches_request: Optional[ListBatchesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1405,9 +2496,9 @@ class BucketBatchesApi:
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_batches_request:
         :type list_batches_request: ListBatchesRequest
@@ -1468,8 +2559,8 @@ class BucketBatchesApi:
     def list_batches_buckets_with_http_info(
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_batches_request: Optional[ListBatchesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1490,9 +2581,9 @@ class BucketBatchesApi:
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_batches_request:
         :type list_batches_request: ListBatchesRequest
@@ -1553,8 +2644,8 @@ class BucketBatchesApi:
     def list_batches_buckets_without_preload_content(
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_batches_request: Optional[ListBatchesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1575,9 +2666,9 @@ class BucketBatchesApi:
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_batches_request:
         :type list_batches_request: ListBatchesRequest
@@ -1716,12 +2807,13 @@ class BucketBatchesApi:
 
 
     @validate_call
-    def submit_batch_buckets_batches(
+    def patch_batch_buckets_batches(
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        patch_batch_request: PatchBatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1734,18 +2826,20 @@ class BucketBatchesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TaskResponse:
-        """Submit Batch for Processing
+    ) -> BatchModel:
+        """Partially Update Batch
 
-        Submit a batch for asynchronous processing. The batch must be in 'pending' status and contain objects.
+        This endpoint partially updates a batch (PATCH operation).     Only provided fields will be updated. At minimum, metadata can always be updated.     Immutable fields like batch_id and timestamps cannot be modified.
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param patch_batch_request: (required)
+        :type patch_batch_request: PatchBatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1769,9 +2863,10 @@ class BucketBatchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_batch_buckets_batches_serialize(
+        _param = self._patch_batch_buckets_batches_serialize(
             bucket_identifier=bucket_identifier,
             batch_id=batch_id,
+            patch_batch_request=patch_batch_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1781,7 +2876,7 @@ class BucketBatchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TaskResponse",
+            '200': "BatchModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1801,12 +2896,13 @@ class BucketBatchesApi:
 
 
     @validate_call
-    def submit_batch_buckets_batches_with_http_info(
+    def patch_batch_buckets_batches_with_http_info(
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        patch_batch_request: PatchBatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1819,18 +2915,20 @@ class BucketBatchesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TaskResponse]:
-        """Submit Batch for Processing
+    ) -> ApiResponse[BatchModel]:
+        """Partially Update Batch
 
-        Submit a batch for asynchronous processing. The batch must be in 'pending' status and contain objects.
+        This endpoint partially updates a batch (PATCH operation).     Only provided fields will be updated. At minimum, metadata can always be updated.     Immutable fields like batch_id and timestamps cannot be modified.
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param patch_batch_request: (required)
+        :type patch_batch_request: PatchBatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1854,9 +2952,10 @@ class BucketBatchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_batch_buckets_batches_serialize(
+        _param = self._patch_batch_buckets_batches_serialize(
             bucket_identifier=bucket_identifier,
             batch_id=batch_id,
+            patch_batch_request=patch_batch_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1866,7 +2965,7 @@ class BucketBatchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TaskResponse",
+            '200': "BatchModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1886,12 +2985,13 @@ class BucketBatchesApi:
 
 
     @validate_call
-    def submit_batch_buckets_batches_without_preload_content(
+    def patch_batch_buckets_batches_without_preload_content(
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        patch_batch_request: PatchBatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1905,17 +3005,19 @@ class BucketBatchesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Submit Batch for Processing
+        """Partially Update Batch
 
-        Submit a batch for asynchronous processing. The batch must be in 'pending' status and contain objects.
+        This endpoint partially updates a batch (PATCH operation).     Only provided fields will be updated. At minimum, metadata can always be updated.     Immutable fields like batch_id and timestamps cannot be modified.
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
         :param batch_id: The unique identifier of the batch. (required)
         :type batch_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param patch_batch_request: (required)
+        :type patch_batch_request: PatchBatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1939,9 +3041,10 @@ class BucketBatchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_batch_buckets_batches_serialize(
+        _param = self._patch_batch_buckets_batches_serialize(
             bucket_identifier=bucket_identifier,
             batch_id=batch_id,
+            patch_batch_request=patch_batch_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1951,7 +3054,7 @@ class BucketBatchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TaskResponse",
+            '200': "BatchModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1966,10 +3069,11 @@ class BucketBatchesApi:
         return response_data.response
 
 
-    def _submit_batch_buckets_batches_serialize(
+    def _patch_batch_buckets_batches_serialize(
         self,
         bucket_identifier,
         batch_id,
+        patch_batch_request,
         authorization,
         x_namespace,
         _request_auth,
@@ -2005,6 +3109,8 @@ class BucketBatchesApi:
             _header_params['X-Namespace'] = x_namespace
         # process the form parameters
         # process the body parameter
+        if patch_batch_request is not None:
+            _body_params = patch_batch_request
 
 
         # set the HTTP header `Accept`
@@ -2015,6 +3121,1059 @@ class BucketBatchesApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/v1/buckets/{bucket_identifier}/batches/{batch_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def retry_batch_buckets_batches(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        retry_batch_request: RetryBatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Dict[str, object]:
+        """Retry Failed Documents
+
+        Retry failed documents in a batch with intelligent filtering by error type and tier.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param retry_batch_request: (required)
+        :type retry_batch_request: RetryBatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._retry_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            retry_batch_request=retry_batch_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def retry_batch_buckets_batches_with_http_info(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        retry_batch_request: RetryBatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Dict[str, object]]:
+        """Retry Failed Documents
+
+        Retry failed documents in a batch with intelligent filtering by error type and tier.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param retry_batch_request: (required)
+        :type retry_batch_request: RetryBatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._retry_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            retry_batch_request=retry_batch_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def retry_batch_buckets_batches_without_preload_content(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        retry_batch_request: RetryBatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Retry Failed Documents
+
+        Retry failed documents in a batch with intelligent filtering by error type and tier.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param retry_batch_request: (required)
+        :type retry_batch_request: RetryBatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._retry_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            retry_batch_request=retry_batch_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _retry_batch_buckets_batches_serialize(
+        self,
+        bucket_identifier,
+        batch_id,
+        retry_batch_request,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if retry_batch_request is not None:
+            _body_params = retry_batch_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/buckets/{bucket_identifier}/batches/{batch_id}/retry',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def retry_qdrant_write_buckets_batches_batch_id_tiers_num(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Annotated[StrictInt, Field(description="The tier number to retry (0-based).")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Dict[str, object]:
+        """Retry Qdrant Write from S3
+
+        Retry Qdrant write by reading processed output from S3. Use when validation detects 'qdrant_write_failed'.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num: The tier number to retry (0-based). (required)
+        :type tier_num: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._retry_qdrant_write_buckets_batches_batch_id_tiers_num_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def retry_qdrant_write_buckets_batches_batch_id_tiers_num_with_http_info(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Annotated[StrictInt, Field(description="The tier number to retry (0-based).")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Dict[str, object]]:
+        """Retry Qdrant Write from S3
+
+        Retry Qdrant write by reading processed output from S3. Use when validation detects 'qdrant_write_failed'.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num: The tier number to retry (0-based). (required)
+        :type tier_num: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._retry_qdrant_write_buckets_batches_batch_id_tiers_num_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def retry_qdrant_write_buckets_batches_batch_id_tiers_num_without_preload_content(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        tier_num: Annotated[StrictInt, Field(description="The tier number to retry (0-based).")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Retry Qdrant Write from S3
+
+        Retry Qdrant write by reading processed output from S3. Use when validation detects 'qdrant_write_failed'.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param tier_num: The tier number to retry (0-based). (required)
+        :type tier_num: int
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._retry_qdrant_write_buckets_batches_batch_id_tiers_num_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            tier_num=tier_num,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Dict[str, object]",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _retry_qdrant_write_buckets_batches_batch_id_tiers_num_serialize(
+        self,
+        bucket_identifier,
+        batch_id,
+        tier_num,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        if tier_num is not None:
+            _path_params['tier_num'] = tier_num
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/buckets/{bucket_identifier}/batches/{batch_id}/tiers/{tier_num}/retry-qdrant-write',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def submit_batch_buckets_batches(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        submit_batch_request: Optional[SubmitBatchRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> TaskResponse:
+        """Submit Batch for Processing
+
+        Submit a batch for asynchronous processing. The batch must be in 'pending' status and contain objects.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param submit_batch_request:
+        :type submit_batch_request: SubmitBatchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._submit_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            submit_batch_request=submit_batch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TaskResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def submit_batch_buckets_batches_with_http_info(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        submit_batch_request: Optional[SubmitBatchRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[TaskResponse]:
+        """Submit Batch for Processing
+
+        Submit a batch for asynchronous processing. The batch must be in 'pending' status and contain objects.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param submit_batch_request:
+        :type submit_batch_request: SubmitBatchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._submit_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            submit_batch_request=submit_batch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TaskResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def submit_batch_buckets_batches_without_preload_content(
+        self,
+        bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
+        batch_id: Annotated[StrictStr, Field(description="The unique identifier of the batch.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        submit_batch_request: Optional[SubmitBatchRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Submit Batch for Processing
+
+        Submit a batch for asynchronous processing. The batch must be in 'pending' status and contain objects.
+
+        :param bucket_identifier: The unique identifier of the bucket. (required)
+        :type bucket_identifier: str
+        :param batch_id: The unique identifier of the batch. (required)
+        :type batch_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param submit_batch_request:
+        :type submit_batch_request: SubmitBatchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._submit_batch_buckets_batches_serialize(
+            bucket_identifier=bucket_identifier,
+            batch_id=batch_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            submit_batch_request=submit_batch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TaskResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _submit_batch_buckets_batches_serialize(
+        self,
+        bucket_identifier,
+        batch_id,
+        authorization,
+        x_namespace,
+        submit_batch_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        if batch_id is not None:
+            _path_params['batch_id'] = batch_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if submit_batch_request is not None:
+            _body_params = submit_batch_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

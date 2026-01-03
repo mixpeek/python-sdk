@@ -39,11 +39,17 @@ class TestBucketCreateRequest(unittest.TestCase):
                 bucket_name = '',
                 description = '',
                 bucket_schema = { },
+                unique_key = mixpeek.models.unique_key_config.UniqueKeyConfig(
+                    fields = [
+                        ''
+                        ], 
+                    default_policy = 'insert', ),
                 metadata = { }
             )
         else:
             return BucketCreateRequest(
                 bucket_name = '',
+                bucket_schema = { },
         )
         """
 

@@ -40,6 +40,7 @@ class TestSourceCollectionOutput(unittest.TestCase):
                 enrichment_fields = [
                     mixpeek.models.enrichment_field.EnrichmentField(
                         field_path = '', 
+                        target_field = '', 
                         merge_mode = 'replace', )
                     ]
             )

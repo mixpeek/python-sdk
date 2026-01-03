@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +29,8 @@ class BaseFeatureExtractorModelInput(BaseModel):
     """ # noqa: E501
     feature_extractor_name: StrictStr = Field(description="Name of the feature extractor")
     version: StrictStr = Field(description="Version of the feature extractor")
-    __properties: ClassVar[List[str]] = ["feature_extractor_name", "version"]
+    params: Optional[Dict[str, Any]] = Field(default=None, description="Optional extractor parameters that affect vector index configuration. Parameters set here are locked at namespace creation and determine vector dimensions in Qdrant. Collections using this extractor must use compatible params. Example: {'model': 'siglip_base'}")
+    __properties: ClassVar[List[str]] = ["feature_extractor_name", "version", "params"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,7 +84,8 @@ class BaseFeatureExtractorModelInput(BaseModel):
 
         _obj = cls.model_validate({
             "feature_extractor_name": obj.get("feature_extractor_name"),
-            "version": obj.get("version")
+            "version": obj.get("version"),
+            "params": obj.get("params")
         })
         return _obj
 

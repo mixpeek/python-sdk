@@ -18,8 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.document_group import DocumentGroup
+from mixpeek.models.document_list_stats import DocumentListStats
 from mixpeek.models.document_response import DocumentResponse
 from mixpeek.models.pagination_response import PaginationResponse
 from typing import Optional, Set
@@ -27,11 +29,14 @@ from typing_extensions import Self
 
 class ListDocumentsResponse(BaseModel):
     """
-    Response model for listing documents.
+    Response model for listing documents.  Supports both regular document lists and grouped results based on the group_by parameter. When group_by is specified, results are returned as groups instead of a flat list.  Pagination strategies: - **Offset-based (default)**: Use `pagination.page` and `pagination.page_size` - **Cursor-based (optional)**: Use `pagination.next_cursor` for efficient deep pagination
     """ # noqa: E501
-    results: List[DocumentResponse]
-    pagination: PaginationResponse
-    __properties: ClassVar[List[str]] = ["results", "pagination"]
+    results: Optional[List[DocumentResponse]] = Field(default=None, description="List of documents when group_by is NOT specified. Contains flat list of documents with pagination applied. Mutually exclusive with 'groups' field.")
+    groups: Optional[List[DocumentGroup]] = Field(default=None, description="List of document groups when group_by IS specified. Each group contains documents sharing the same field value. Pagination applies to groups, not individual documents. Mutually exclusive with 'results' field.")
+    pagination: PaginationResponse = Field(description="Pagination information. Includes next_cursor for cursor-based pagination. When group_by is used, pagination applies to groups (not individual documents). total_count reflects total number of groups, not total documents.")
+    stats: Optional[DocumentListStats] = Field(default=None, description="Aggregate statistics across all documents in the result")
+    group_by_field: Optional[StrictStr] = Field(default=None, description="The field that was used for grouping when group_by was specified. None for non-grouped results. Useful for clients to understand the grouping structure.")
+    __properties: ClassVar[List[str]] = ["results", "groups", "pagination", "stats", "group_by_field"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,9 +84,19 @@ class ListDocumentsResponse(BaseModel):
                 if _item_results:
                     _items.append(_item_results.to_dict())
             _dict['results'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in groups (list)
+        _items = []
+        if self.groups:
+            for _item_groups in self.groups:
+                if _item_groups:
+                    _items.append(_item_groups.to_dict())
+            _dict['groups'] = _items
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
             _dict['pagination'] = self.pagination.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of stats
+        if self.stats:
+            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -95,7 +110,10 @@ class ListDocumentsResponse(BaseModel):
 
         _obj = cls.model_validate({
             "results": [DocumentResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
-            "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "groups": [DocumentGroup.from_dict(_item) for _item in obj["groups"]] if obj.get("groups") is not None else None,
+            "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
+            "stats": DocumentListStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None,
+            "group_by_field": obj.get("group_by_field")
         })
         return _obj
 

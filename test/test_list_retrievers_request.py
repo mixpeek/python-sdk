@@ -36,16 +36,12 @@ class TestListRetrieversRequest(unittest.TestCase):
         model = ListRetrieversRequest()
         if include_optional:
             return ListRetrieversRequest(
+                search = '',
                 filters = { },
                 sorts = [
-                    mixpeek.models.sort_option.SortOption(
-                        field = 'created_at', 
-                        direction = desc, )
+                    { }
                     ],
-                search = '',
-                case_sensitive = True,
-                limit = 1.0,
-                offset = 0.0
+                case_sensitive = True
             )
         else:
             return ListRetrieversRequest(

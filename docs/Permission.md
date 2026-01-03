@@ -1,6 +1,6 @@
 # Permission
 
-Permission.
+Simplified API key permissions.  This four-value enum replaces the legacy 16-permission model. Keep usage simple: prefer the least privileged option that satisfies the workflow.  Hierarchy (strongest -> weakest): ADMIN > DELETE > WRITE > READ.
 
 ## Enum
 
@@ -8,31 +8,9 @@ Permission.
 
 * `WRITE` (value: `'write'`)
 
-* `VIEW` (value: `'view'`)
-
-* `CREATE` (value: `'create'`)
-
-* `UPDATE` (value: `'update'`)
-
 * `DELETE` (value: `'delete'`)
 
-* `SUPER` (value: `'super'`)
-
 * `ADMIN` (value: `'admin'`)
-
-* `MANAGE_USERS` (value: `'manage_users'`)
-
-* `MANAGE_BILLING` (value: `'manage_billing'`)
-
-* `MANAGE_SETTINGS` (value: `'manage_settings'`)
-
-* `READ_PUBLIC` (value: `'read_public'`)
-
-* `READ_PRIVATE` (value: `'read_private'`)
-
-* `WRITE_PUBLIC` (value: `'write_public'`)
-
-* `WRITE_PRIVATE` (value: `'write_private'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

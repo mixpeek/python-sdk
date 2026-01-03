@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **results** | [**List[BucketResponse]**](BucketResponse.md) |  | 
 **total_count** | **int** | Total number of buckets matching the query | 
 **pagination** | [**PaginationResponse**](PaginationResponse.md) |  | 
+**stats** | [**BucketListStats**](BucketListStats.md) | Aggregate statistics across all buckets in the result | [optional] 
 
 ## Example
 

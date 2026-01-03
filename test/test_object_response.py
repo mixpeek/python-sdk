@@ -39,31 +39,28 @@ class TestObjectResponse(unittest.TestCase):
                 object_id = '',
                 bucket_id = '',
                 key_prefix = '',
-                content_hash = '',
                 blobs = [
                     mixpeek.models.blob_model.BlobModel(
                         blob_id = '', 
                         property = '', 
                         key_prefix = '', 
                         type = 'string', 
-                        data = null, 
-                        metadata = { }, 
+                        properties = { }, 
                         details = mixpeek.models.blob_details.BlobDetails(
                             filename = '', 
                             size_bytes = 56, 
                             mime_type = '', 
-                            hash = '', 
-                            s3_object_key = '', ), )
+                            hash = '', ), )
                     ],
                 source_details = [
                     mixpeek.models.source_details.SourceDetails(
                         type = 'bucket', 
                         source_id = '', )
                     ],
-                metadata = { },
                 status = 'PENDING',
                 error = '',
-                skip_duplicates = True
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return ObjectResponse(

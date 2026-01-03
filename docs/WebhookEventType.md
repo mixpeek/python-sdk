@@ -1,10 +1,12 @@
 # WebhookEventType
 
-Enum for webhook event types.  Each event type includes a comment indicating cache invalidation scope: - [KEY] = Invalidate specific document keys - [COLLECTION] = Invalidate collection-level cache - [NAMESPACE] = Invalidate namespace-level cache
+Webhook event types for real-time notifications.  These events are emitted when significant state changes occur in the system. Webhooks subscribe to specific event types and receive notifications via configured channels (email, Slack, HTTP webhooks, SMS).  Event Naming Convention:     {resource}.{action}[.{sub-resource}[.{sub-action}]]  Examples:     - object.created: New object ingested     - collection.documents.written: Documents indexed     - cluster.execution.completed: Cluster job finished  Cache Invalidation Annotations:     Each event type includes a comment indicating recommended cache invalidation scope:     - [KEY] = Invalidate specific document/object keys     - [COLLECTION] = Invalidate collection-level cache     - [NAMESPACE] = Invalidate namespace-level cache  Event Categories:     - Object Lifecycle: Events for individual objects (create, update, delete)     - Collection Lifecycle: Events for collections (create, update, delete, documents written)     - Cluster Lifecycle: Events for clusters (create, update, delete, execution status)     - Trigger Lifecycle: Events for cluster triggers (create, update, fire, execution status)     - Taxonomy Lifecycle: Events for taxonomies (create, update, delete)  Use Cases:     - Real-time sync with external systems     - Audit trail and compliance logging     - Automated workflows triggered by state changes     - Cache invalidation for distributed systems     - Notifications to team members via Slack/email
 
 ## Enum
 
 * `OBJECT_DOT_CREATED` (value: `'object.created'`)
+
+* `OBJECTS_DOT_CREATED_DOT_BATCH` (value: `'objects.created.batch'`)
 
 * `OBJECT_DOT_UPDATED` (value: `'object.updated'`)
 
@@ -15,6 +17,8 @@ Enum for webhook event types.  Each event type includes a comment indicating cac
 * `COLLECTION_DOT_UPDATED` (value: `'collection.updated'`)
 
 * `COLLECTION_DOT_DELETED` (value: `'collection.deleted'`)
+
+* `COLLECTION_DOT_DOCUMENTS_DOT_WRITTEN` (value: `'collection.documents.written'`)
 
 * `CLUSTER_DOT_CREATED` (value: `'cluster.created'`)
 

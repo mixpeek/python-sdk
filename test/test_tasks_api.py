@@ -41,10 +41,10 @@ class TestTasksApi(unittest.TestCase):
         """
         pass
 
-    def test_list_active_tasks(self) -> None:
-        """Test case for list_active_tasks
+    def test_list_tasks(self) -> None:
+        """Test case for list_tasks
 
-        List Active Tasks
+        List Tasks
         """
         pass
 

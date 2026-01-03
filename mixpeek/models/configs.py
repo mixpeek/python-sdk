@@ -32,7 +32,7 @@ CONFIGS_ANY_OF_SCHEMAS = ["EmailConfig", "SlackConfig", "SmsConfig", "WebhookCon
 
 class Configs(BaseModel):
     """
-    Configuration for the selected channel.
+    REQUIRED. Channel-specific configuration for notification delivery. Type depends on the channel field: - EmailConfig for EMAIL channel (recipients, subject template, etc.) - SlackConfig for SLACK channel (workspace, channel, bot token) - WebhookConfig for WEBHOOK channel (URL, headers, auth) - SmsConfig for SMS channel (phone numbers, provider credentials). See respective config models for detailed field requirements.
     """
 
     # data type: EmailConfig

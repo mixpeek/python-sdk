@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**taxonomy** | [**TaxonomyModel**](TaxonomyModel.md) | Full taxonomy model with configuration (fetched from DB by controller) | 
+**taxonomy** | [**TaxonomyModelInput**](TaxonomyModelInput.md) | Full taxonomy model with configuration (fetched from DB by controller) | 
 **retriever** | [**RetrieverModelInput**](RetrieverModelInput.md) | Optional retriever configuration override for testing. If omitted, uses the retriever configured in the taxonomy. | [optional] 
-**source_documents** | **List[Dict[str, object]]** | Optional documents to enrich for testing. If omitted, validates configuration without processing documents. | [optional] 
-**source_collection_id** | **str** | Collection reference (for context/logging only in ON_DEMAND mode) | [optional] 
-**target_collection_id** | **str** | Not used in ON_DEMAND mode. | [optional] 
-**join_mode** | [**JoinMode**](JoinMode.md) | Must be &#x60;on_demand&#x60;. Batch mode is not supported via API. | [optional] 
+**source_documents** | **List[Dict[str, object]]** | Sample documents to test enrichment (typically 1-5 docs). Results are returned immediately, not persisted. ⚠️ Do NOT pass collection_id expecting batch processing! | [optional] 
+**source_collection_id** | **str** | ⚠️ IGNORED IN ON_DEMAND MODE. This field exists for legacy compatibility only. To enrich collections, use taxonomy_applications on the collection. | [optional] 
+**target_collection_id** | **str** | ⚠️ IGNORED IN ON_DEMAND MODE. This field exists for legacy compatibility only. Results are never persisted via this endpoint. | [optional] 
+**join_mode** | [**JoinMode**](JoinMode.md) | Must be &#39;on_demand&#39;. BATCH mode is NOT supported via API. Batch enrichment is automatic (triggered by engine during ingestion). | [optional] 
 **batch_size** | **int** | Batch size for the scroll iterator | [optional] [default to 1000]
 **scroll_filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Additional filters applied to the source collection prior to enrichment. | [optional] 
 

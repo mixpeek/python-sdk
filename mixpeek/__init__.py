@@ -19,24 +19,74 @@ __version__ = "0.81.0"
 
 # Define package exports
 __all__ = [
-    "Mixpeek",
+    "AdhocRetrieversApi",
+    "AgentSessionsApi",
+    "AnalyticsApi",
+    "AnalyticsBucketsApi",
+    "AnalyticsClustersApi",
+    "AnalyticsCollectionsApi",
+    "AnalyticsExtractorsApi",
+    "AnalyticsIndexesApi",
+    "AnalyticsInferenceApi",
+    "AnalyticsNamespacesApi",
+    "AnalyticsPerformanceApi",
+    "AnalyticsRetrieversApi",
+    "AnalyticsTaxonomiesApi",
+    "AnalyticsUsageApi",
     "BucketBatchesApi",
     "BucketObjectsApi",
+    "BucketSyncsApi",
+    "BucketTemplatesApi",
+    "BucketUploadsApi",
     "BucketsApi",
+    "ClusterExecutionsApi",
+    "ClusterTemplatesApi",
     "ClusterTriggersApi",
     "ClustersApi",
     "CollectionDocumentsApi",
+    "CollectionSchemaApi",
+    "CollectionTaxonomiesApi",
+    "CollectionTemplatesApi",
     "CollectionsApi",
+    "DocumentLineageApi",
+    "EvaluationDatasetsApi",
+    "EvaluationsApi",
     "FeatureExtractorsApi",
     "HealthApi",
+    "InferenceApi",
+    "ManifestApi",
+    "NamespaceCloneApi",
+    "NamespaceMigrationsApi",
+    "NamespaceTemplatesApi",
     "NamespacesApi",
+    "NotificationsApi",
+    "OrganizationAPIKeysApi",
+    "OrganizationAuditApi",
+    "OrganizationBillingApi",
+    "OrganizationConnectionsApi",
+    "OrganizationSecretsApi",
+    "OrganizationUsageApi",
+    "OrganizationUsersApi",
     "OrganizationsApi",
-    "OrganizationsPrivateUnauthenticatedUsedToSyncFromPropelApi",
+    "PrivateApi",
+    "PublicRetrieverAPIApi",
+    "PublicScaffoldsApi",
+    "PublicTemplatesAPIApi",
+    "PublishedRetrieversApi",
+    "ResourceSearchApi",
+    "RetrieverEvaluationsApi",
+    "RetrieverInteractionsApi",
     "RetrieverStagesApi",
+    "RetrieverTemplatesApi",
     "RetrieversApi",
+    "ScaffoldTemplatesApi",
     "TasksApi",
     "TaxonomiesApi",
+    "TaxonomyAnalyticsApi",
+    "TaxonomyTemplatesApi",
+    "TemplatesApi",
     "WebhooksApi",
+    "DefaultApi",
     "ApiResponse",
     "ApiClient",
     "Configuration",
@@ -46,270 +96,774 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
-    "APIKey",
-    "APIKeyUpdate",
+    "APIKeyCreateRequest",
+    "APIKeyCreateResponse",
+    "APIKeyModel",
+    "APIKeyUpdateRequest",
     "AccountTier",
+    "AddCreditsRequest",
+    "AddCreditsResponse",
     "AddObjectsToBatchRequest",
     "AddUserToOrganizationRequest",
+    "AdhocExecuteRequest",
+    "AdhocExecutionDetail",
+    "AdhocExecutionSummary",
+    "AgentConfig",
     "AgglomerativeParams",
+    "AggregationFunction",
+    "AggregationOperation",
+    "AggregationResult",
     "AlgorithmParams",
-    "ApiHealthHealthStatus",
+    "AnthropicModel",
+    "ApiAnalyticsBucketsModelsTimeRange",
+    "ApiAnalyticsClustersModelsFailureAnalysisResponse",
+    "ApiAnalyticsClustersModelsTimeRange",
+    "ApiAnalyticsCollectionsModelsFailureAnalysisResponse",
+    "ApiAnalyticsCollectionsModelsTimeRange",
+    "ApiAnalyticsModelsTimeRange",
+    "ApiAnalyticsTaxonomiesModelsTimeRange",
     "ApplyClusterEnrichmentRequest",
+    "ApplyResult",
+    "ApplyTaxonomyRequest",
+    "ApplyTaxonomyResponse",
+    "AssignmentMetric",
+    "AssignmentMetricsResponse",
     "AttributeBasedConfig",
+    "AuditAction",
+    "AuditEventListResponse",
+    "AuditEventResponse",
+    "AuditSettings",
+    "AuditSettingsUpdateRequest",
+    "AutoBillingToggleResponse",
+    "AvailableStepsResponse",
     "BaseFeatureExtractorModelInput",
     "BaseFeatureExtractorModelOutput",
     "BaseRateLimits",
+    "BaseTemplateModel",
+    "BatchConfirmRequest",
+    "BatchConfirmResponse",
+    "BatchDeleteDocumentsRequest",
+    "BatchDeleteDocumentsResponse",
+    "BatchDiagnostics",
+    "BatchDocumentDeleteResult",
+    "BatchDocumentUpdate",
+    "BatchDocumentUpdateResult",
+    "BatchErrorDetail",
     "BatchModel",
+    "BatchOptions",
     "BatchStatistics",
     "BatchType",
+    "BatchUpdateDocumentsRequest",
+    "BatchUpdateDocumentsResponse",
+    "BatchUploadRequest",
+    "BatchUploadResponse",
     "BlobDetails",
+    "BlobMappingEntry",
     "BlobModel",
-    "BlobURLRef",
+    "BlobType",
     "BoolIndexParams",
+    "BottleneckAnalysis",
+    "BottleneckResponse",
     "BucketCreateRequest",
+    "BucketHealthResponse",
+    "BucketListStats",
+    "BucketPatchRequest",
     "BucketResponse",
     "BucketSchemaFieldInput",
     "BucketSchemaFieldOutput",
     "BucketSchemaFieldType",
     "BucketSchemaInput",
     "BucketSchemaOutput",
+    "BucketStorageResponse",
     "BucketUpdateRequest",
+    "BucketUsageResponse",
+    "BudgetLimits",
+    "BulkUpdateDocumentsRequest",
+    "BulkUpdateDocumentsResponse",
+    "CORSConfigurationInfo",
+    "CORSConfigurationResponse",
     "CacheConfig",
+    "CachePerformanceResponse",
     "CacheStatistics",
-    "ClusterCentroid",
-    "ClusterCentroidData",
-    "ClusterDataRequest",
-    "ClusterDataResponse",
-    "ClusterMember",
-    "ClusterMemberData",
+    "CancelMigrationRequest",
+    "CancelMigrationResponse",
+    "ClarificationOption",
+    "CloneCollectionRequest",
+    "CloneCollectionResponse",
+    "CloneNamespaceRequest",
+    "CloneNamespaceResourcesConfig",
+    "CloneNamespaceResponse",
+    "CloneRetrieverRequest",
+    "CloneRetrieverResponse",
+    "CloneTaxonomyRequest",
+    "CloneTaxonomyResponse",
+    "ClonedResourceSummary",
+    "ClusterApplicationConfig",
+    "ClusterExecutionCentroid",
+    "ClusterExecutionListStats",
+    "ClusterExecutionMetric",
+    "ClusterExecutionMetrics",
+    "ClusterExecutionResult",
+    "ClusterListStats",
+    "ClusterMetadata",
     "ClusterModel",
+    "ClusterOptions",
     "ClusterStats",
     "ClusterType",
     "ClusteringAlgorithm",
-    "ClusteringConfig",
     "ClusteringEnrichmentResponse",
     "CollectionDetail",
+    "CollectionDiagnostic",
     "CollectionFeatureDescriptor",
+    "CollectionListStats",
+    "CollectionModel",
+    "CollectionOverviewResponse",
     "CollectionResponse",
+    "ColumnSource",
+    "ComponentsConfig",
+    "CompoundIndexPattern",
+    "CompoundIndexResponse",
+    "ComputeTier",
+    "ConfidenceDistribution",
+    "ConfidenceResponse",
     "Config",
     "Config1",
     "Config2",
     "Configs",
+    "ConfigureCORSRequest",
+    "ConfirmPaymentMethodRequest",
+    "ConfirmPaymentMethodResponse",
+    "ConfirmUploadRequest",
+    "ConfirmUploadResponse",
+    "ConstantSource",
+    "CostBreakdown",
+    "CovariateConfig",
+    "CovariateType",
     "CreateBatchRequest",
     "CreateBlobRequest",
     "CreateClusterRequest",
     "CreateCollectionRequest",
+    "CreateDatasetRequest",
+    "CreateMigrationRequest",
+    "CreateMigrationResponse",
     "CreateNamespaceRequest",
     "CreateObjectRequest",
     "CreateObjectsBatchRequest",
+    "CreateObjectsBatchResponse",
     "CreateOrganizationRequest",
     "CreateRetrieverRequest",
+    "CreateRetrieverResponse",
+    "CreateSecretRequest",
+    "CreateSessionRequest",
+    "CreateSessionResponse",
     "CreateTaxonomyRequest",
-    "CreateTriggerRequest",
+    "CreateTemplateFromResourceRequest",
+    "CreateTemplateFromResourceResponse",
+    "CreateUploadRequest",
     "CreatorInfo",
+    "Credentials",
+    "Credentials1",
+    "Credentials2",
+    "Credentials3",
+    "CurrentUsageResponse",
+    "CursorPaginationParams",
+    "CustomCTA",
     "DBSCANParams",
     "Data",
-    "Data1",
+    "DatasetListResponse",
+    "DatePartUnit",
+    "DateTruncUnit",
     "DatetimeIndexParams",
     "DbscanParameters",
-    "DebugInferenceResponse",
+    "DependencyGraph",
+    "DependencyNode",
     "DescribeCollectionFeaturesResponse",
-    "DimensionalityReduction",
+    "DetectIntentRequest",
+    "DiffItem",
+    "DiffResult",
+    "DisplayConfigInput",
+    "DisplayConfigOutput",
+    "DocumentAggregationRequest",
+    "DocumentAggregationResponse",
     "DocumentCreateRequest",
-    "DocumentInputHandling",
-    "DocumentOutputType",
+    "DocumentGraphExtractorParams",
+    "DocumentGroup",
+    "DocumentListStats",
     "DocumentResponse",
-    "DocumentResult",
-    "DocumentUpdateRequest",
+    "DrivePropertySource",
+    "DurationStats",
     "DynamicValue",
     "EmailConfig",
+    "EnginePerformanceResponse",
+    "EngineStageBreakdownResponse",
     "EnrichmentField",
+    "EnrichmentFieldMapping",
+    "EnrichmentHistoryResponse",
     "EnrichmentMergeMode",
-    "Enrichments",
+    "EnrichmentMetric",
+    "ErrorBreakdown",
+    "ErrorCategory",
     "ErrorDetail",
+    "ErrorMetrics",
     "ErrorResponse",
-    "ExecuteClusterRequest",
-    "ExecuteClusterResponse",
+    "EvaluationConfig",
+    "EvaluationDataset",
+    "EvaluationListResponse",
+    "EvaluationRecord",
+    "EvaluationStatus",
+    "ExecuteRetrieverRequest",
     "ExecuteTaxonomyRequest",
+    "ExecutionDetail",
+    "ExecutionHistoryResponse",
+    "ExplainRetrieverRequest",
+    "ExplainRetrieverResponse",
+    "ExplainStagePlan",
+    "ExternalLink",
+    "ExtractorBreakdownResponse",
+    "ExtractorJobInfo",
+    "ExtractorMetrics",
+    "ExtractorPerformance",
+    "ExtractorPerformanceResponse",
+    "FaceIdentityExtractorParams",
+    "FailedObjectError",
+    "FailureMetric",
     "FeatureAddress",
-    "FeatureExtractorConfigInput",
-    "FeatureExtractorConfigOutput",
     "FeatureExtractorResponseModel",
     "FeatureModel",
-    "FeatureVectorRef",
+    "FieldConfig",
+    "FieldFormatOptions",
+    "FieldFormatType",
+    "FieldMappingEntry",
+    "FieldPassthrough",
+    "FieldPerformanceMetrics",
+    "FieldPerformanceResponse",
+    "FieldQueryMetrics",
     "FieldSchema",
+    "FieldUsageResponse",
+    "FieldUsageStat",
+    "FileFilters",
+    "FileSource",
+    "FilenameRegexSource",
     "FilterCondition",
     "FilterOperator",
     "FlatTaxonomyConfigInput",
     "FlatTaxonomyConfigOutput",
     "FloatIndexParams",
+    "FolderItem",
+    "FolderPathSource",
     "GaussianMixtureParams",
+    "GenerationConfig",
     "GenericDeleteResponse",
     "GenericSuccessResponse",
     "GeoIndexParams",
-    "GroupByOption",
-    "GroupedResultItem",
+    "GetHistoryResponse",
+    "GetMigrationResponse",
+    "GetPaymentMethodResponse",
+    "GetSessionResponse",
+    "GoogleDriveConfig",
+    "GoogleDriveOAuthCredentials",
+    "GoogleDriveServiceAccountCredentials",
+    "GoogleModel",
+    "GroundTruthQuery",
+    "GroupByField",
+    "GrowthMetric",
+    "GrowthMetricsResponse",
     "HDBSCANParams",
     "HTTPValidationError",
+    "HavingCondition",
     "HdbscanParameters",
-    "HealthCheckInput",
-    "HealthCheckOutput",
+    "HealthCheck",
     "HealthCheckResponse",
     "HealthServiceErrors",
     "HealthServiceStatus",
     "HealthStatusInput",
+    "HealthStatusOutput",
     "HierarchicalNodeInput",
     "HierarchicalNodeOutput",
     "HierarchicalTaxonomyConfigInput",
     "HierarchicalTaxonomyConfigOutput",
     "HierarchyInferenceStrategy",
+    "ImageExtractorParams",
     "Index",
-    "InferenceRequest",
+    "IndexRecommendation",
+    "IndexRecommendationsResponse",
+    "IndexSuggestion",
+    "IndexSuggestionsResponse",
     "InputMapping",
     "InputMappings",
+    "InputRenderingConfigInput",
+    "InputRenderingConfigOutput",
     "InputSourceType",
+    "InstantiateBucketTemplateRequest",
+    "InstantiateClusterTemplateRequest",
+    "InstantiateCollectionTemplateRequest",
+    "InstantiateRetrieverTemplateRequest",
+    "InstantiateScaffoldRequest",
+    "InstantiateTaxonomyTemplateRequest",
+    "InstantiateTemplateRequest",
+    "InstantiatedBucketTemplateResponse",
+    "InstantiatedClusterTemplateResponse",
+    "InstantiatedCollectionTemplateResponse",
+    "InstantiatedRetrieverTemplateResponse",
+    "InstantiatedScaffoldResponse",
+    "InstantiatedTaxonomyTemplateResponse",
+    "InstantiatedTemplateResponse",
     "IntegerIndexParams",
+    "IntentClassification",
+    "InteractionResponse",
+    "InteractionTuningRecommendation",
+    "InteractionTuningResponse",
+    "InteractionType",
+    "InternalLineageModel",
+    "InternalPayloadModel",
+    "InternalProcessingModel",
+    "InvoiceInfo",
+    "InvoiceListResponse",
     "JoinMode",
     "JoinResponse",
     "JoinStats",
     "KMeansParams",
+    "KeyStatus",
+    "KeysetPaginationParams",
     "KeywordIndexParams",
     "KmeansParameters",
-    "LLMLabeling",
+    "LLMLabelingInput",
+    "LLMLabelingInputInput",
+    "LLMLabelingInputOutput",
+    "LLMLabelingOutput",
+    "LLMProvider",
+    "LabelDistributionResponse",
+    "LabelMetric",
+    "LatencyMetric",
+    "LatencyResponse",
+    "LayoutConfig",
+    "LineageStep",
+    "ListAdhocExecutionsRequest",
+    "ListAdhocExecutionsResponse",
     "ListBatchesRequest",
     "ListBatchesResponse",
     "ListBucketsRequest",
     "ListBucketsResponse",
+    "ListClusterExecutionsRequest",
+    "ListClusterExecutionsResponse",
     "ListClustersRequest",
     "ListClustersResponse",
     "ListCollectionsRequest",
     "ListCollectionsResponse",
     "ListDocumentsRequest",
     "ListDocumentsResponse",
+    "ListExecutionsRequest",
+    "ListExecutionsResponse",
+    "ListFoldersResponse",
+    "ListInteractionsRequest",
+    "ListInteractionsResponse",
+    "ListMigrationsRequest",
+    "ListMigrationsResponse",
     "ListNamespacesRequest",
     "ListNamespacesResponse",
+    "ListNotificationsRequest",
+    "ListNotificationsResponse",
+    "ListObjectsRequest",
     "ListObjectsResponse",
+    "ListPublicRetrieversResponse",
     "ListRetrieversRequest",
     "ListRetrieversResponse",
+    "ListSessionsRequest",
+    "ListSessionsResponse",
+    "ListStorageConnectionsRequest",
+    "ListSyncConfigurationsRequest",
+    "ListTasksRequest",
     "ListTasksResponse",
     "ListTaxonomiesRequest",
     "ListTaxonomiesResponse",
-    "ListTriggersRequest",
-    "ListTriggersResponse",
+    "ListTemplatesRequest",
+    "ListTemplatesResponse",
+    "ListToolsResponse",
+    "ListUploadsRequest",
+    "ListUploadsResponse",
+    "ListWebhooksRequest",
+    "ListWebhooksResponse",
     "LogicalOperatorInput",
     "LogicalOperatorInputANDInner",
     "LogicalOperatorOutput",
     "LogicalOperatorOutputANDInner",
+    "MappingsValue",
+    "MarkAsReadRequest",
+    "MarkdownContent",
     "MeanShiftParams",
+    "MessageHistoryItem",
+    "MigrationConfig",
+    "MigrationProgress",
+    "MigrationStage",
+    "MigrationStatus",
+    "MigrationType",
+    "ModelName",
+    "MostQueriedFieldsResponse",
     "MultiVectorIndex",
+    "MultimodalExtractorParams",
+    "NamespaceInfrastructure",
+    "NamespaceListStats",
     "NamespaceModel",
-    "NoReduction",
+    "NamespaceOperation",
+    "NamespaceSummaryResponse",
+    "Notification",
     "NotificationChannel",
     "NotificationContentType",
+    "NotificationPriority",
+    "NotificationType",
     "OPTICSParams",
+    "ObjectAggregationRequest",
+    "ObjectAggregationResponse",
+    "ObjectListStats",
     "ObjectResponse",
+    "OffsetPaginationParams",
+    "OpenAIModel",
     "OrganizationAdminUpdateRequest",
+    "OrganizationInfrastructure",
     "OrganizationModelResponse",
+    "OrganizationPublishStatsResponse",
+    "OrganizationUpdateRequest",
+    "Pagination",
+    "PaginationMetadata",
+    "PaginationMethod",
     "PaginationResponse",
-    "ParameterConfig",
-    "ParameterType",
-    "ParametersValue",
+    "Parameters",
+    "PatchBatchRequest",
+    "PatchClusterRequest",
+    "PatchNamespaceRequest",
+    "PatchObjectRequest",
+    "PatchRetrieverRequest",
+    "PatchRetrieverResponse",
+    "PatchSessionRequest",
+    "PatchSessionResponse",
+    "PatchTaxonomyRequest",
+    "PathAnalysisRequest",
+    "PathAnalysisResponse",
     "Payload",
     "PayloadIndexConfigInput",
     "PayloadIndexConfigOutput",
     "PayloadSchemaType",
+    "PaymentMethodInfo",
+    "PerformanceInsight",
+    "PerformanceMetric",
+    "PerformanceSummary",
     "Permission",
-    "PresignedURLModel",
+    "PostgreSQLConfig",
+    "PostgreSQLCredentials",
+    "PredictorLift",
+    "ProviderConfig",
+    "PublicInteractionBatchRequest",
+    "PublicInteractionRequest",
+    "PublicNameAvailabilityResponse",
+    "PublicRetrieverConfigResponse",
+    "PublicRetrieverListItem",
+    "PublicRetrieverListStats",
+    "PublicRetrieverTemplateResponse",
+    "PublishRetrieverRequest",
+    "PublishRetrieverResponse",
+    "PublishedRetrieverResponse",
+    "RangeBucket",
+    "RangeBucketBoundariesInner",
+    "RateLimitConfig",
+    "RateLimitTier",
+    "RawInferenceRequest",
+    "RawInferenceResponse",
+    "ResourceFilter",
+    "ResourceProgress",
+    "ResourceResult",
+    "ResourceResultStatus",
+    "ResourceScopeInput",
+    "ResourceScopeOutput",
+    "ResourceTypeInput",
+    "ResponseShape",
+    "ResponseShape1",
+    "ResponseShape2",
+    "ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost",
+    "ResultCardProperties",
+    "RetrieverConfig",
+    "RetrieverExecutionRequest",
+    "RetrieverExecutionStatistics",
+    "RetrieverExecutionSummary",
+    "RetrieverInputSchemaFieldInput",
+    "RetrieverInputSchemaFieldOutput",
+    "RetrieverInputSchemaFieldType",
+    "RetrieverMetadata",
     "RetrieverModelInput",
     "RetrieverModelOutput",
-    "RetrieverQueryRequest",
-    "RetrieverResponse",
-    "RetrieverResponseFinalResultsInner",
-    "RetrieverSchemaInput",
-    "RetrieverSchemaOutput",
+    "RetrieverOptions",
+    "RetrieverPerformanceResponse",
+    "RetrieverSchema",
+    "RetrieverSignal",
     "RetrieverStageDefinition",
     "RetrieverStatus",
+    "RetryBatchRequest",
     "RevisionHistoryEntry",
-    "SharedRetrieversModelsHealthStatus",
+    "S3AccessKeyCredentials",
+    "S3Config",
+    "S3MetadataSource",
+    "S3RoleCredentials",
+    "S3TagSource",
+    "SEOConfig",
+    "SchemaMappingInput",
+    "SchemaMappingOutput",
+    "SchemaSyncRequest",
+    "SchemaSyncResponse",
+    "SchemaSyncSkippedResponse",
+    "ScrollPaginationParams",
+    "SearchInteraction",
+    "SearchRequest",
+    "SearchResponse",
+    "SearchResultItem",
+    "SecretResponse",
+    "SecretsListResponse",
+    "SendMessageRequest",
+    "SessionQuotas",
+    "SessionStats",
+    "SessionStatus",
+    "SetupPaymentMethodResponse",
+    "SharePointClientCredentials",
+    "SharePointConfig",
+    "SharePointDelegatedCredentials",
+    "SharedClustersTriggersModelsCreateTriggerRequest",
+    "SharedClustersTriggersModelsListTriggersRequest",
+    "SharedClustersTriggersModelsListTriggersResponse",
+    "SharedClustersTriggersModelsTriggerHistoryResponse",
+    "SharedClustersTriggersModelsTriggerModel",
+    "SharedClustersTriggersModelsTriggerStatus",
+    "SharedClustersTriggersModelsTriggerType",
+    "SharedClustersTriggersModelsUpdateTriggerRequest",
+    "SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput",
+    "SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput",
+    "SharedNamespacesMigrationsModelsFeatureExtractorConfig",
+    "SharedNamespacesMigrationsModelsResourceType",
+    "SharedOrganizationsEnumsResourceType",
+    "SharedTriggersModelsCreateTriggerRequest",
+    "SharedTriggersModelsListTriggersRequest",
+    "SharedTriggersModelsListTriggersResponse",
+    "SharedTriggersModelsTriggerHistoryResponse",
+    "SharedTriggersModelsTriggerModel",
+    "SharedTriggersModelsTriggerStatus",
+    "SharedTriggersModelsTriggerType",
+    "SharedTriggersModelsUpdateTriggerRequest",
     "SingleLineageEntry",
     "SlackConfig",
+    "SlowOperation",
+    "SlowOperationsResponse",
+    "SlowQueriesResponse",
+    "SlowQueryDetails",
     "SmsConfig",
+    "SnowflakeConfig",
+    "SnowflakeKeyPairCredentials",
+    "SnowflakeUsernamePasswordCredentials",
     "SortDirection",
     "SortOption",
+    "Source",
+    "Source1",
     "SourceCollectionInput",
     "SourceCollectionOutput",
-    "SourceConfig",
+    "SourceConfigInput",
+    "SourceConfigOutput",
     "SourceDetails",
+    "SourceEnrichmentConfig",
+    "SourceFiltersInput",
+    "SourceFiltersOutput",
     "SourceType",
     "SparseVector",
-    "SparseVectorIndicesInner",
     "SpectralParams",
-    "StageInstanceConfigInput",
-    "StageInstanceConfigOutput",
-    "StagePerformance",
-    "StageResponse",
+    "SpendingCapsResponse",
+    "SplitMethod",
+    "StageBreakdownResponse",
+    "StageCategory",
+    "StageConfig",
+    "StageInstanceConfig",
+    "StagePerformanceInput",
+    "StagePerformanceMetrics",
+    "StagePerformanceOutput",
+    "StageProgress",
+    "StageStatistics",
+    "StageType",
+    "StartEvaluationRequest",
+    "StartEvaluationResponse",
+    "StartMigrationRequest",
+    "StartMigrationResponse",
+    "StepAnalyticsConfigInput",
+    "StepAnalyticsConfigOutput",
+    "StepInfo",
+    "StepKeySource",
+    "StepTransitionRequest",
+    "StepTransitionResponse",
+    "StorageConnectionCreateRequest",
+    "StorageConnectionListResponse",
+    "StorageConnectionModel",
+    "StorageConnectionTestResponse",
+    "StorageConnectionUpdateRequest",
+    "StorageMetric",
+    "StorageProvider",
     "StorageStatistics",
-    "TSNEParams",
+    "StructuredDataConfig",
+    "SubmitBatchRequest",
+    "SubmitFeedbackRequest",
+    "SubmitFeedbackResponse",
+    "SuitableCollection",
+    "SyncComparisonResponse",
+    "SyncConfigMetric",
+    "SyncConfigurationModel",
+    "SyncCreateRequest",
+    "SyncHealthMetric",
+    "SyncListResponse",
+    "SyncMode",
+    "SyncPerformanceResponse",
+    "SyncRunMetric",
+    "SyncUpdateRequest",
+    "TaskProgress",
     "TaskResponse",
     "TaskResponseInputsInner",
     "TaskStatusEnum",
     "TaskType",
-    "TaxonomyApplicationConfig",
-    "TaxonomyAssignment",
+    "TaxonomyApplicationConfigInput",
+    "TaxonomyApplicationConfigOutput",
     "TaxonomyExecutionMode",
-    "TaxonomyModel",
+    "TaxonomyListStats",
+    "TaxonomyModelInput",
+    "TaxonomyModelOutput",
+    "TaxonomyOptions",
     "TaxonomyResponse",
+    "TemplateMode",
+    "TemplateScope",
+    "TemplateType",
+    "TerminateSessionResponse",
+    "TextExtractorParams",
     "TextIndexParams",
+    "TextSplitStrategy",
+    "ThemeConfig",
+    "TierDiagnostic",
+    "TierTaskInfo",
+    "TigrisAccessKeyCredentials",
+    "TigrisConfig",
     "TokenizerType",
+    "ToolInfo",
+    "TransitionPath",
+    "TriggerActionType",
+    "TriggerCollectionRequest",
+    "TriggerCollectionResponse",
     "TriggerExecutionConfig",
+    "TriggerExecutionHistory",
     "TriggerExecutionHistoryItem",
     "TriggerHistoryRequest",
-    "TriggerHistoryResponse",
-    "TriggerModel",
-    "TriggerStatus",
-    "TriggerType",
-    "UMAPParams",
+    "TriggerTierRequest",
+    "UniqueKeyConfig",
     "UpdateNamespaceRequest",
     "UpdateObjectRequest",
-    "UpdateTriggerRequest",
+    "UpdatePreferencesRequest",
+    "UpdatePublishedRetrieverRequest",
+    "UpdateSecretRequest",
+    "UpdateSpendingCapsRequest",
+    "UploadListStats",
+    "UploadPerformanceMetric",
+    "UploadPerformanceResponse",
+    "UploadResponse",
+    "UsageBreakdownResponse",
+    "UsageMetric",
     "UsageStatistics",
-    "UserModelInput",
-    "UserModelOutput",
+    "UserCreateRequest",
+    "UserRole",
+    "UserStatus",
+    "UserUpdateRequest",
     "UuidIndexParams",
+    "ValidateMigrationRequest",
+    "ValidateMigrationResponse",
+    "ValidateResult",
     "ValidationError",
     "ValidationErrorLocInner",
-    "VectorBasedConfig",
+    "ValidationResult",
+    "Value",
+    "VectorBasedConfigInput",
+    "VectorBasedConfigOutput",
     "VectorDataType",
     "VectorIndex",
     "VectorIndexDefinition",
     "VectorType",
     "Vectors",
+    "VerifyPasswordRequest",
+    "VerifyPasswordResponse",
     "WebhookChannelInput",
     "WebhookChannelOutput",
     "WebhookConfig",
     "WebhookEventType",
     "WebhookInput",
     "WebhookOutput",
+    "WeightLearningConfig",
 ]
 
 # import apis into sdk package
+from mixpeek.api.adhoc_retrievers_api import AdhocRetrieversApi as AdhocRetrieversApi
+from mixpeek.api.agent_sessions_api import AgentSessionsApi as AgentSessionsApi
+from mixpeek.api.analytics_api import AnalyticsApi as AnalyticsApi
+from mixpeek.api.analytics_buckets_api import AnalyticsBucketsApi as AnalyticsBucketsApi
+from mixpeek.api.analytics_clusters_api import AnalyticsClustersApi as AnalyticsClustersApi
+from mixpeek.api.analytics_collections_api import AnalyticsCollectionsApi as AnalyticsCollectionsApi
+from mixpeek.api.analytics_extractors_api import AnalyticsExtractorsApi as AnalyticsExtractorsApi
+from mixpeek.api.analytics_indexes_api import AnalyticsIndexesApi as AnalyticsIndexesApi
+from mixpeek.api.analytics_inference_api import AnalyticsInferenceApi as AnalyticsInferenceApi
+from mixpeek.api.analytics_namespaces_api import AnalyticsNamespacesApi as AnalyticsNamespacesApi
+from mixpeek.api.analytics_performance_api import AnalyticsPerformanceApi as AnalyticsPerformanceApi
+from mixpeek.api.analytics_retrievers_api import AnalyticsRetrieversApi as AnalyticsRetrieversApi
+from mixpeek.api.analytics_taxonomies_api import AnalyticsTaxonomiesApi as AnalyticsTaxonomiesApi
+from mixpeek.api.analytics_usage_api import AnalyticsUsageApi as AnalyticsUsageApi
 from mixpeek.api.bucket_batches_api import BucketBatchesApi as BucketBatchesApi
 from mixpeek.api.bucket_objects_api import BucketObjectsApi as BucketObjectsApi
+from mixpeek.api.bucket_syncs_api import BucketSyncsApi as BucketSyncsApi
+from mixpeek.api.bucket_templates_api import BucketTemplatesApi as BucketTemplatesApi
+from mixpeek.api.bucket_uploads_api import BucketUploadsApi as BucketUploadsApi
 from mixpeek.api.buckets_api import BucketsApi as BucketsApi
+from mixpeek.api.cluster_executions_api import ClusterExecutionsApi as ClusterExecutionsApi
+from mixpeek.api.cluster_templates_api import ClusterTemplatesApi as ClusterTemplatesApi
 from mixpeek.api.cluster_triggers_api import ClusterTriggersApi as ClusterTriggersApi
 from mixpeek.api.clusters_api import ClustersApi as ClustersApi
 from mixpeek.api.collection_documents_api import CollectionDocumentsApi as CollectionDocumentsApi
+from mixpeek.api.collection_schema_api import CollectionSchemaApi as CollectionSchemaApi
+from mixpeek.api.collection_taxonomies_api import CollectionTaxonomiesApi as CollectionTaxonomiesApi
+from mixpeek.api.collection_templates_api import CollectionTemplatesApi as CollectionTemplatesApi
 from mixpeek.api.collections_api import CollectionsApi as CollectionsApi
+from mixpeek.api.document_lineage_api import DocumentLineageApi as DocumentLineageApi
+from mixpeek.api.evaluation_datasets_api import EvaluationDatasetsApi as EvaluationDatasetsApi
+from mixpeek.api.evaluations_api import EvaluationsApi as EvaluationsApi
 from mixpeek.api.feature_extractors_api import FeatureExtractorsApi as FeatureExtractorsApi
 from mixpeek.api.health_api import HealthApi as HealthApi
+from mixpeek.api.inference_api import InferenceApi as InferenceApi
+from mixpeek.api.manifest_api import ManifestApi as ManifestApi
+from mixpeek.api.namespace_clone_api import NamespaceCloneApi as NamespaceCloneApi
+from mixpeek.api.namespace_migrations_api import NamespaceMigrationsApi as NamespaceMigrationsApi
+from mixpeek.api.namespace_templates_api import NamespaceTemplatesApi as NamespaceTemplatesApi
 from mixpeek.api.namespaces_api import NamespacesApi as NamespacesApi
+from mixpeek.api.notifications_api import NotificationsApi as NotificationsApi
+from mixpeek.api.organization_api_keys_api import OrganizationAPIKeysApi as OrganizationAPIKeysApi
+from mixpeek.api.organization_audit_api import OrganizationAuditApi as OrganizationAuditApi
+from mixpeek.api.organization_billing_api import OrganizationBillingApi as OrganizationBillingApi
+from mixpeek.api.organization_connections_api import OrganizationConnectionsApi as OrganizationConnectionsApi
+from mixpeek.api.organization_secrets_api import OrganizationSecretsApi as OrganizationSecretsApi
+from mixpeek.api.organization_usage_api import OrganizationUsageApi as OrganizationUsageApi
+from mixpeek.api.organization_users_api import OrganizationUsersApi as OrganizationUsersApi
 from mixpeek.api.organizations_api import OrganizationsApi as OrganizationsApi
-from mixpeek.api.organizations_private_unauthenticated_used_to_sync_from_propel_api import OrganizationsPrivateUnauthenticatedUsedToSyncFromPropelApi as OrganizationsPrivateUnauthenticatedUsedToSyncFromPropelApi
+from mixpeek.api.private_api import PrivateApi as PrivateApi
+from mixpeek.api.public_retriever_api_api import PublicRetrieverAPIApi as PublicRetrieverAPIApi
+from mixpeek.api.public_scaffolds_api import PublicScaffoldsApi as PublicScaffoldsApi
+from mixpeek.api.public_templates_api_api import PublicTemplatesAPIApi as PublicTemplatesAPIApi
+from mixpeek.api.published_retrievers_api import PublishedRetrieversApi as PublishedRetrieversApi
+from mixpeek.api.resource_search_api import ResourceSearchApi as ResourceSearchApi
+from mixpeek.api.retriever_evaluations_api import RetrieverEvaluationsApi as RetrieverEvaluationsApi
+from mixpeek.api.retriever_interactions_api import RetrieverInteractionsApi as RetrieverInteractionsApi
 from mixpeek.api.retriever_stages_api import RetrieverStagesApi as RetrieverStagesApi
+from mixpeek.api.retriever_templates_api import RetrieverTemplatesApi as RetrieverTemplatesApi
 from mixpeek.api.retrievers_api import RetrieversApi as RetrieversApi
+from mixpeek.api.scaffold_templates_api import ScaffoldTemplatesApi as ScaffoldTemplatesApi
 from mixpeek.api.tasks_api import TasksApi as TasksApi
 from mixpeek.api.taxonomies_api import TaxonomiesApi as TaxonomiesApi
+from mixpeek.api.taxonomy_analytics_api import TaxonomyAnalyticsApi as TaxonomyAnalyticsApi
+from mixpeek.api.taxonomy_templates_api import TaxonomyTemplatesApi as TaxonomyTemplatesApi
+from mixpeek.api.templates_api import TemplatesApi as TemplatesApi
 from mixpeek.api.webhooks_api import WebhooksApi as WebhooksApi
+from mixpeek.api.default_api import DefaultApi as DefaultApi
 
 # import ApiClient
 from mixpeek.api_response import ApiResponse as ApiResponse
@@ -323,250 +877,700 @@ from mixpeek.exceptions import ApiAttributeError as ApiAttributeError
 from mixpeek.exceptions import ApiException as ApiException
 
 # import models into sdk package
-from mixpeek.models.api_key import APIKey as APIKey
-from mixpeek.models.api_key_update import APIKeyUpdate as APIKeyUpdate
+from mixpeek.models.api_key_create_request import APIKeyCreateRequest as APIKeyCreateRequest
+from mixpeek.models.api_key_create_response import APIKeyCreateResponse as APIKeyCreateResponse
+from mixpeek.models.api_key_model import APIKeyModel as APIKeyModel
+from mixpeek.models.api_key_update_request import APIKeyUpdateRequest as APIKeyUpdateRequest
 from mixpeek.models.account_tier import AccountTier as AccountTier
+from mixpeek.models.add_credits_request import AddCreditsRequest as AddCreditsRequest
+from mixpeek.models.add_credits_response import AddCreditsResponse as AddCreditsResponse
 from mixpeek.models.add_objects_to_batch_request import AddObjectsToBatchRequest as AddObjectsToBatchRequest
 from mixpeek.models.add_user_to_organization_request import AddUserToOrganizationRequest as AddUserToOrganizationRequest
+from mixpeek.models.adhoc_execute_request import AdhocExecuteRequest as AdhocExecuteRequest
+from mixpeek.models.adhoc_execution_detail import AdhocExecutionDetail as AdhocExecutionDetail
+from mixpeek.models.adhoc_execution_summary import AdhocExecutionSummary as AdhocExecutionSummary
+from mixpeek.models.agent_config import AgentConfig as AgentConfig
 from mixpeek.models.agglomerative_params import AgglomerativeParams as AgglomerativeParams
+from mixpeek.models.aggregation_function import AggregationFunction as AggregationFunction
+from mixpeek.models.aggregation_operation import AggregationOperation as AggregationOperation
+from mixpeek.models.aggregation_result import AggregationResult as AggregationResult
 from mixpeek.models.algorithm_params import AlgorithmParams as AlgorithmParams
-from mixpeek.models.api_health_health_status import ApiHealthHealthStatus as ApiHealthHealthStatus
+from mixpeek.models.anthropic_model import AnthropicModel as AnthropicModel
+from mixpeek.models.api_analytics_buckets_models_time_range import ApiAnalyticsBucketsModelsTimeRange as ApiAnalyticsBucketsModelsTimeRange
+from mixpeek.models.api_analytics_clusters_models_failure_analysis_response import ApiAnalyticsClustersModelsFailureAnalysisResponse as ApiAnalyticsClustersModelsFailureAnalysisResponse
+from mixpeek.models.api_analytics_clusters_models_time_range import ApiAnalyticsClustersModelsTimeRange as ApiAnalyticsClustersModelsTimeRange
+from mixpeek.models.api_analytics_collections_models_failure_analysis_response import ApiAnalyticsCollectionsModelsFailureAnalysisResponse as ApiAnalyticsCollectionsModelsFailureAnalysisResponse
+from mixpeek.models.api_analytics_collections_models_time_range import ApiAnalyticsCollectionsModelsTimeRange as ApiAnalyticsCollectionsModelsTimeRange
+from mixpeek.models.api_analytics_models_time_range import ApiAnalyticsModelsTimeRange as ApiAnalyticsModelsTimeRange
+from mixpeek.models.api_analytics_taxonomies_models_time_range import ApiAnalyticsTaxonomiesModelsTimeRange as ApiAnalyticsTaxonomiesModelsTimeRange
 from mixpeek.models.apply_cluster_enrichment_request import ApplyClusterEnrichmentRequest as ApplyClusterEnrichmentRequest
+from mixpeek.models.apply_result import ApplyResult as ApplyResult
+from mixpeek.models.apply_taxonomy_request import ApplyTaxonomyRequest as ApplyTaxonomyRequest
+from mixpeek.models.apply_taxonomy_response import ApplyTaxonomyResponse as ApplyTaxonomyResponse
+from mixpeek.models.assignment_metric import AssignmentMetric as AssignmentMetric
+from mixpeek.models.assignment_metrics_response import AssignmentMetricsResponse as AssignmentMetricsResponse
 from mixpeek.models.attribute_based_config import AttributeBasedConfig as AttributeBasedConfig
+from mixpeek.models.audit_action import AuditAction as AuditAction
+from mixpeek.models.audit_event_list_response import AuditEventListResponse as AuditEventListResponse
+from mixpeek.models.audit_event_response import AuditEventResponse as AuditEventResponse
+from mixpeek.models.audit_settings import AuditSettings as AuditSettings
+from mixpeek.models.audit_settings_update_request import AuditSettingsUpdateRequest as AuditSettingsUpdateRequest
+from mixpeek.models.auto_billing_toggle_response import AutoBillingToggleResponse as AutoBillingToggleResponse
+from mixpeek.models.available_steps_response import AvailableStepsResponse as AvailableStepsResponse
 from mixpeek.models.base_feature_extractor_model_input import BaseFeatureExtractorModelInput as BaseFeatureExtractorModelInput
 from mixpeek.models.base_feature_extractor_model_output import BaseFeatureExtractorModelOutput as BaseFeatureExtractorModelOutput
 from mixpeek.models.base_rate_limits import BaseRateLimits as BaseRateLimits
+from mixpeek.models.base_template_model import BaseTemplateModel as BaseTemplateModel
+from mixpeek.models.batch_confirm_request import BatchConfirmRequest as BatchConfirmRequest
+from mixpeek.models.batch_confirm_response import BatchConfirmResponse as BatchConfirmResponse
+from mixpeek.models.batch_delete_documents_request import BatchDeleteDocumentsRequest as BatchDeleteDocumentsRequest
+from mixpeek.models.batch_delete_documents_response import BatchDeleteDocumentsResponse as BatchDeleteDocumentsResponse
+from mixpeek.models.batch_diagnostics import BatchDiagnostics as BatchDiagnostics
+from mixpeek.models.batch_document_delete_result import BatchDocumentDeleteResult as BatchDocumentDeleteResult
+from mixpeek.models.batch_document_update import BatchDocumentUpdate as BatchDocumentUpdate
+from mixpeek.models.batch_document_update_result import BatchDocumentUpdateResult as BatchDocumentUpdateResult
+from mixpeek.models.batch_error_detail import BatchErrorDetail as BatchErrorDetail
 from mixpeek.models.batch_model import BatchModel as BatchModel
+from mixpeek.models.batch_options import BatchOptions as BatchOptions
 from mixpeek.models.batch_statistics import BatchStatistics as BatchStatistics
 from mixpeek.models.batch_type import BatchType as BatchType
+from mixpeek.models.batch_update_documents_request import BatchUpdateDocumentsRequest as BatchUpdateDocumentsRequest
+from mixpeek.models.batch_update_documents_response import BatchUpdateDocumentsResponse as BatchUpdateDocumentsResponse
+from mixpeek.models.batch_upload_request import BatchUploadRequest as BatchUploadRequest
+from mixpeek.models.batch_upload_response import BatchUploadResponse as BatchUploadResponse
 from mixpeek.models.blob_details import BlobDetails as BlobDetails
+from mixpeek.models.blob_mapping_entry import BlobMappingEntry as BlobMappingEntry
 from mixpeek.models.blob_model import BlobModel as BlobModel
-from mixpeek.models.blob_url_ref import BlobURLRef as BlobURLRef
+from mixpeek.models.blob_type import BlobType as BlobType
 from mixpeek.models.bool_index_params import BoolIndexParams as BoolIndexParams
+from mixpeek.models.bottleneck_analysis import BottleneckAnalysis as BottleneckAnalysis
+from mixpeek.models.bottleneck_response import BottleneckResponse as BottleneckResponse
 from mixpeek.models.bucket_create_request import BucketCreateRequest as BucketCreateRequest
+from mixpeek.models.bucket_health_response import BucketHealthResponse as BucketHealthResponse
+from mixpeek.models.bucket_list_stats import BucketListStats as BucketListStats
+from mixpeek.models.bucket_patch_request import BucketPatchRequest as BucketPatchRequest
 from mixpeek.models.bucket_response import BucketResponse as BucketResponse
 from mixpeek.models.bucket_schema_field_input import BucketSchemaFieldInput as BucketSchemaFieldInput
 from mixpeek.models.bucket_schema_field_output import BucketSchemaFieldOutput as BucketSchemaFieldOutput
 from mixpeek.models.bucket_schema_field_type import BucketSchemaFieldType as BucketSchemaFieldType
 from mixpeek.models.bucket_schema_input import BucketSchemaInput as BucketSchemaInput
 from mixpeek.models.bucket_schema_output import BucketSchemaOutput as BucketSchemaOutput
+from mixpeek.models.bucket_storage_response import BucketStorageResponse as BucketStorageResponse
 from mixpeek.models.bucket_update_request import BucketUpdateRequest as BucketUpdateRequest
+from mixpeek.models.bucket_usage_response import BucketUsageResponse as BucketUsageResponse
+from mixpeek.models.budget_limits import BudgetLimits as BudgetLimits
+from mixpeek.models.bulk_update_documents_request import BulkUpdateDocumentsRequest as BulkUpdateDocumentsRequest
+from mixpeek.models.bulk_update_documents_response import BulkUpdateDocumentsResponse as BulkUpdateDocumentsResponse
+from mixpeek.models.cors_configuration_info import CORSConfigurationInfo as CORSConfigurationInfo
+from mixpeek.models.cors_configuration_response import CORSConfigurationResponse as CORSConfigurationResponse
 from mixpeek.models.cache_config import CacheConfig as CacheConfig
+from mixpeek.models.cache_performance_response import CachePerformanceResponse as CachePerformanceResponse
 from mixpeek.models.cache_statistics import CacheStatistics as CacheStatistics
-from mixpeek.models.cluster_centroid import ClusterCentroid as ClusterCentroid
-from mixpeek.models.cluster_centroid_data import ClusterCentroidData as ClusterCentroidData
-from mixpeek.models.cluster_data_request import ClusterDataRequest as ClusterDataRequest
-from mixpeek.models.cluster_data_response import ClusterDataResponse as ClusterDataResponse
-from mixpeek.models.cluster_member import ClusterMember as ClusterMember
-from mixpeek.models.cluster_member_data import ClusterMemberData as ClusterMemberData
+from mixpeek.models.cancel_migration_request import CancelMigrationRequest as CancelMigrationRequest
+from mixpeek.models.cancel_migration_response import CancelMigrationResponse as CancelMigrationResponse
+from mixpeek.models.clarification_option import ClarificationOption as ClarificationOption
+from mixpeek.models.clone_collection_request import CloneCollectionRequest as CloneCollectionRequest
+from mixpeek.models.clone_collection_response import CloneCollectionResponse as CloneCollectionResponse
+from mixpeek.models.clone_namespace_request import CloneNamespaceRequest as CloneNamespaceRequest
+from mixpeek.models.clone_namespace_resources_config import CloneNamespaceResourcesConfig as CloneNamespaceResourcesConfig
+from mixpeek.models.clone_namespace_response import CloneNamespaceResponse as CloneNamespaceResponse
+from mixpeek.models.clone_retriever_request import CloneRetrieverRequest as CloneRetrieverRequest
+from mixpeek.models.clone_retriever_response import CloneRetrieverResponse as CloneRetrieverResponse
+from mixpeek.models.clone_taxonomy_request import CloneTaxonomyRequest as CloneTaxonomyRequest
+from mixpeek.models.clone_taxonomy_response import CloneTaxonomyResponse as CloneTaxonomyResponse
+from mixpeek.models.cloned_resource_summary import ClonedResourceSummary as ClonedResourceSummary
+from mixpeek.models.cluster_application_config import ClusterApplicationConfig as ClusterApplicationConfig
+from mixpeek.models.cluster_execution_centroid import ClusterExecutionCentroid as ClusterExecutionCentroid
+from mixpeek.models.cluster_execution_list_stats import ClusterExecutionListStats as ClusterExecutionListStats
+from mixpeek.models.cluster_execution_metric import ClusterExecutionMetric as ClusterExecutionMetric
+from mixpeek.models.cluster_execution_metrics import ClusterExecutionMetrics as ClusterExecutionMetrics
+from mixpeek.models.cluster_execution_result import ClusterExecutionResult as ClusterExecutionResult
+from mixpeek.models.cluster_list_stats import ClusterListStats as ClusterListStats
+from mixpeek.models.cluster_metadata import ClusterMetadata as ClusterMetadata
 from mixpeek.models.cluster_model import ClusterModel as ClusterModel
+from mixpeek.models.cluster_options import ClusterOptions as ClusterOptions
 from mixpeek.models.cluster_stats import ClusterStats as ClusterStats
 from mixpeek.models.cluster_type import ClusterType as ClusterType
 from mixpeek.models.clustering_algorithm import ClusteringAlgorithm as ClusteringAlgorithm
-from mixpeek.models.clustering_config import ClusteringConfig as ClusteringConfig
 from mixpeek.models.clustering_enrichment_response import ClusteringEnrichmentResponse as ClusteringEnrichmentResponse
 from mixpeek.models.collection_detail import CollectionDetail as CollectionDetail
+from mixpeek.models.collection_diagnostic import CollectionDiagnostic as CollectionDiagnostic
 from mixpeek.models.collection_feature_descriptor import CollectionFeatureDescriptor as CollectionFeatureDescriptor
+from mixpeek.models.collection_list_stats import CollectionListStats as CollectionListStats
+from mixpeek.models.collection_model import CollectionModel as CollectionModel
+from mixpeek.models.collection_overview_response import CollectionOverviewResponse as CollectionOverviewResponse
 from mixpeek.models.collection_response import CollectionResponse as CollectionResponse
+from mixpeek.models.column_source import ColumnSource as ColumnSource
+from mixpeek.models.components_config import ComponentsConfig as ComponentsConfig
+from mixpeek.models.compound_index_pattern import CompoundIndexPattern as CompoundIndexPattern
+from mixpeek.models.compound_index_response import CompoundIndexResponse as CompoundIndexResponse
+from mixpeek.models.compute_tier import ComputeTier as ComputeTier
+from mixpeek.models.confidence_distribution import ConfidenceDistribution as ConfidenceDistribution
+from mixpeek.models.confidence_response import ConfidenceResponse as ConfidenceResponse
 from mixpeek.models.config import Config as Config
 from mixpeek.models.config1 import Config1 as Config1
 from mixpeek.models.config2 import Config2 as Config2
 from mixpeek.models.configs import Configs as Configs
+from mixpeek.models.configure_cors_request import ConfigureCORSRequest as ConfigureCORSRequest
+from mixpeek.models.confirm_payment_method_request import ConfirmPaymentMethodRequest as ConfirmPaymentMethodRequest
+from mixpeek.models.confirm_payment_method_response import ConfirmPaymentMethodResponse as ConfirmPaymentMethodResponse
+from mixpeek.models.confirm_upload_request import ConfirmUploadRequest as ConfirmUploadRequest
+from mixpeek.models.confirm_upload_response import ConfirmUploadResponse as ConfirmUploadResponse
+from mixpeek.models.constant_source import ConstantSource as ConstantSource
+from mixpeek.models.cost_breakdown import CostBreakdown as CostBreakdown
+from mixpeek.models.covariate_config import CovariateConfig as CovariateConfig
+from mixpeek.models.covariate_type import CovariateType as CovariateType
 from mixpeek.models.create_batch_request import CreateBatchRequest as CreateBatchRequest
 from mixpeek.models.create_blob_request import CreateBlobRequest as CreateBlobRequest
 from mixpeek.models.create_cluster_request import CreateClusterRequest as CreateClusterRequest
 from mixpeek.models.create_collection_request import CreateCollectionRequest as CreateCollectionRequest
+from mixpeek.models.create_dataset_request import CreateDatasetRequest as CreateDatasetRequest
+from mixpeek.models.create_migration_request import CreateMigrationRequest as CreateMigrationRequest
+from mixpeek.models.create_migration_response import CreateMigrationResponse as CreateMigrationResponse
 from mixpeek.models.create_namespace_request import CreateNamespaceRequest as CreateNamespaceRequest
 from mixpeek.models.create_object_request import CreateObjectRequest as CreateObjectRequest
 from mixpeek.models.create_objects_batch_request import CreateObjectsBatchRequest as CreateObjectsBatchRequest
+from mixpeek.models.create_objects_batch_response import CreateObjectsBatchResponse as CreateObjectsBatchResponse
 from mixpeek.models.create_organization_request import CreateOrganizationRequest as CreateOrganizationRequest
 from mixpeek.models.create_retriever_request import CreateRetrieverRequest as CreateRetrieverRequest
+from mixpeek.models.create_retriever_response import CreateRetrieverResponse as CreateRetrieverResponse
+from mixpeek.models.create_secret_request import CreateSecretRequest as CreateSecretRequest
+from mixpeek.models.create_session_request import CreateSessionRequest as CreateSessionRequest
+from mixpeek.models.create_session_response import CreateSessionResponse as CreateSessionResponse
 from mixpeek.models.create_taxonomy_request import CreateTaxonomyRequest as CreateTaxonomyRequest
-from mixpeek.models.create_trigger_request import CreateTriggerRequest as CreateTriggerRequest
+from mixpeek.models.create_template_from_resource_request import CreateTemplateFromResourceRequest as CreateTemplateFromResourceRequest
+from mixpeek.models.create_template_from_resource_response import CreateTemplateFromResourceResponse as CreateTemplateFromResourceResponse
+from mixpeek.models.create_upload_request import CreateUploadRequest as CreateUploadRequest
 from mixpeek.models.creator_info import CreatorInfo as CreatorInfo
+from mixpeek.models.credentials import Credentials as Credentials
+from mixpeek.models.credentials1 import Credentials1 as Credentials1
+from mixpeek.models.credentials2 import Credentials2 as Credentials2
+from mixpeek.models.credentials3 import Credentials3 as Credentials3
+from mixpeek.models.current_usage_response import CurrentUsageResponse as CurrentUsageResponse
+from mixpeek.models.cursor_pagination_params import CursorPaginationParams as CursorPaginationParams
+from mixpeek.models.custom_cta import CustomCTA as CustomCTA
 from mixpeek.models.dbscan_params import DBSCANParams as DBSCANParams
 from mixpeek.models.data import Data as Data
-from mixpeek.models.data1 import Data1 as Data1
+from mixpeek.models.dataset_list_response import DatasetListResponse as DatasetListResponse
+from mixpeek.models.date_part_unit import DatePartUnit as DatePartUnit
+from mixpeek.models.date_trunc_unit import DateTruncUnit as DateTruncUnit
 from mixpeek.models.datetime_index_params import DatetimeIndexParams as DatetimeIndexParams
 from mixpeek.models.dbscan_parameters import DbscanParameters as DbscanParameters
-from mixpeek.models.debug_inference_response import DebugInferenceResponse as DebugInferenceResponse
+from mixpeek.models.dependency_graph import DependencyGraph as DependencyGraph
+from mixpeek.models.dependency_node import DependencyNode as DependencyNode
 from mixpeek.models.describe_collection_features_response import DescribeCollectionFeaturesResponse as DescribeCollectionFeaturesResponse
-from mixpeek.models.dimensionality_reduction import DimensionalityReduction as DimensionalityReduction
+from mixpeek.models.detect_intent_request import DetectIntentRequest as DetectIntentRequest
+from mixpeek.models.diff_item import DiffItem as DiffItem
+from mixpeek.models.diff_result import DiffResult as DiffResult
+from mixpeek.models.display_config_input import DisplayConfigInput as DisplayConfigInput
+from mixpeek.models.display_config_output import DisplayConfigOutput as DisplayConfigOutput
+from mixpeek.models.document_aggregation_request import DocumentAggregationRequest as DocumentAggregationRequest
+from mixpeek.models.document_aggregation_response import DocumentAggregationResponse as DocumentAggregationResponse
 from mixpeek.models.document_create_request import DocumentCreateRequest as DocumentCreateRequest
-from mixpeek.models.document_input_handling import DocumentInputHandling as DocumentInputHandling
-from mixpeek.models.document_output_type import DocumentOutputType as DocumentOutputType
+from mixpeek.models.document_graph_extractor_params import DocumentGraphExtractorParams as DocumentGraphExtractorParams
+from mixpeek.models.document_group import DocumentGroup as DocumentGroup
+from mixpeek.models.document_list_stats import DocumentListStats as DocumentListStats
 from mixpeek.models.document_response import DocumentResponse as DocumentResponse
-from mixpeek.models.document_result import DocumentResult as DocumentResult
-from mixpeek.models.document_update_request import DocumentUpdateRequest as DocumentUpdateRequest
+from mixpeek.models.drive_property_source import DrivePropertySource as DrivePropertySource
+from mixpeek.models.duration_stats import DurationStats as DurationStats
 from mixpeek.models.dynamic_value import DynamicValue as DynamicValue
 from mixpeek.models.email_config import EmailConfig as EmailConfig
+from mixpeek.models.engine_performance_response import EnginePerformanceResponse as EnginePerformanceResponse
+from mixpeek.models.engine_stage_breakdown_response import EngineStageBreakdownResponse as EngineStageBreakdownResponse
 from mixpeek.models.enrichment_field import EnrichmentField as EnrichmentField
+from mixpeek.models.enrichment_field_mapping import EnrichmentFieldMapping as EnrichmentFieldMapping
+from mixpeek.models.enrichment_history_response import EnrichmentHistoryResponse as EnrichmentHistoryResponse
 from mixpeek.models.enrichment_merge_mode import EnrichmentMergeMode as EnrichmentMergeMode
-from mixpeek.models.enrichments import Enrichments as Enrichments
+from mixpeek.models.enrichment_metric import EnrichmentMetric as EnrichmentMetric
+from mixpeek.models.error_breakdown import ErrorBreakdown as ErrorBreakdown
+from mixpeek.models.error_category import ErrorCategory as ErrorCategory
 from mixpeek.models.error_detail import ErrorDetail as ErrorDetail
+from mixpeek.models.error_metrics import ErrorMetrics as ErrorMetrics
 from mixpeek.models.error_response import ErrorResponse as ErrorResponse
-from mixpeek.models.execute_cluster_request import ExecuteClusterRequest as ExecuteClusterRequest
-from mixpeek.models.execute_cluster_response import ExecuteClusterResponse as ExecuteClusterResponse
+from mixpeek.models.evaluation_config import EvaluationConfig as EvaluationConfig
+from mixpeek.models.evaluation_dataset import EvaluationDataset as EvaluationDataset
+from mixpeek.models.evaluation_list_response import EvaluationListResponse as EvaluationListResponse
+from mixpeek.models.evaluation_record import EvaluationRecord as EvaluationRecord
+from mixpeek.models.evaluation_status import EvaluationStatus as EvaluationStatus
+from mixpeek.models.execute_retriever_request import ExecuteRetrieverRequest as ExecuteRetrieverRequest
 from mixpeek.models.execute_taxonomy_request import ExecuteTaxonomyRequest as ExecuteTaxonomyRequest
+from mixpeek.models.execution_detail import ExecutionDetail as ExecutionDetail
+from mixpeek.models.execution_history_response import ExecutionHistoryResponse as ExecutionHistoryResponse
+from mixpeek.models.explain_retriever_request import ExplainRetrieverRequest as ExplainRetrieverRequest
+from mixpeek.models.explain_retriever_response import ExplainRetrieverResponse as ExplainRetrieverResponse
+from mixpeek.models.explain_stage_plan import ExplainStagePlan as ExplainStagePlan
+from mixpeek.models.external_link import ExternalLink as ExternalLink
+from mixpeek.models.extractor_breakdown_response import ExtractorBreakdownResponse as ExtractorBreakdownResponse
+from mixpeek.models.extractor_job_info import ExtractorJobInfo as ExtractorJobInfo
+from mixpeek.models.extractor_metrics import ExtractorMetrics as ExtractorMetrics
+from mixpeek.models.extractor_performance import ExtractorPerformance as ExtractorPerformance
+from mixpeek.models.extractor_performance_response import ExtractorPerformanceResponse as ExtractorPerformanceResponse
+from mixpeek.models.face_identity_extractor_params import FaceIdentityExtractorParams as FaceIdentityExtractorParams
+from mixpeek.models.failed_object_error import FailedObjectError as FailedObjectError
+from mixpeek.models.failure_metric import FailureMetric as FailureMetric
 from mixpeek.models.feature_address import FeatureAddress as FeatureAddress
-from mixpeek.models.feature_extractor_config_input import FeatureExtractorConfigInput as FeatureExtractorConfigInput
-from mixpeek.models.feature_extractor_config_output import FeatureExtractorConfigOutput as FeatureExtractorConfigOutput
 from mixpeek.models.feature_extractor_response_model import FeatureExtractorResponseModel as FeatureExtractorResponseModel
 from mixpeek.models.feature_model import FeatureModel as FeatureModel
-from mixpeek.models.feature_vector_ref import FeatureVectorRef as FeatureVectorRef
+from mixpeek.models.field_config import FieldConfig as FieldConfig
+from mixpeek.models.field_format_options import FieldFormatOptions as FieldFormatOptions
+from mixpeek.models.field_format_type import FieldFormatType as FieldFormatType
+from mixpeek.models.field_mapping_entry import FieldMappingEntry as FieldMappingEntry
+from mixpeek.models.field_passthrough import FieldPassthrough as FieldPassthrough
+from mixpeek.models.field_performance_metrics import FieldPerformanceMetrics as FieldPerformanceMetrics
+from mixpeek.models.field_performance_response import FieldPerformanceResponse as FieldPerformanceResponse
+from mixpeek.models.field_query_metrics import FieldQueryMetrics as FieldQueryMetrics
 from mixpeek.models.field_schema import FieldSchema as FieldSchema
+from mixpeek.models.field_usage_response import FieldUsageResponse as FieldUsageResponse
+from mixpeek.models.field_usage_stat import FieldUsageStat as FieldUsageStat
+from mixpeek.models.file_filters import FileFilters as FileFilters
+from mixpeek.models.file_source import FileSource as FileSource
+from mixpeek.models.filename_regex_source import FilenameRegexSource as FilenameRegexSource
 from mixpeek.models.filter_condition import FilterCondition as FilterCondition
 from mixpeek.models.filter_operator import FilterOperator as FilterOperator
 from mixpeek.models.flat_taxonomy_config_input import FlatTaxonomyConfigInput as FlatTaxonomyConfigInput
 from mixpeek.models.flat_taxonomy_config_output import FlatTaxonomyConfigOutput as FlatTaxonomyConfigOutput
 from mixpeek.models.float_index_params import FloatIndexParams as FloatIndexParams
+from mixpeek.models.folder_item import FolderItem as FolderItem
+from mixpeek.models.folder_path_source import FolderPathSource as FolderPathSource
 from mixpeek.models.gaussian_mixture_params import GaussianMixtureParams as GaussianMixtureParams
+from mixpeek.models.generation_config import GenerationConfig as GenerationConfig
 from mixpeek.models.generic_delete_response import GenericDeleteResponse as GenericDeleteResponse
 from mixpeek.models.generic_success_response import GenericSuccessResponse as GenericSuccessResponse
 from mixpeek.models.geo_index_params import GeoIndexParams as GeoIndexParams
-from mixpeek.models.group_by_option import GroupByOption as GroupByOption
-from mixpeek.models.grouped_result_item import GroupedResultItem as GroupedResultItem
+from mixpeek.models.get_history_response import GetHistoryResponse as GetHistoryResponse
+from mixpeek.models.get_migration_response import GetMigrationResponse as GetMigrationResponse
+from mixpeek.models.get_payment_method_response import GetPaymentMethodResponse as GetPaymentMethodResponse
+from mixpeek.models.get_session_response import GetSessionResponse as GetSessionResponse
+from mixpeek.models.google_drive_config import GoogleDriveConfig as GoogleDriveConfig
+from mixpeek.models.google_drive_o_auth_credentials import GoogleDriveOAuthCredentials as GoogleDriveOAuthCredentials
+from mixpeek.models.google_drive_service_account_credentials import GoogleDriveServiceAccountCredentials as GoogleDriveServiceAccountCredentials
+from mixpeek.models.google_model import GoogleModel as GoogleModel
+from mixpeek.models.ground_truth_query import GroundTruthQuery as GroundTruthQuery
+from mixpeek.models.group_by_field import GroupByField as GroupByField
+from mixpeek.models.growth_metric import GrowthMetric as GrowthMetric
+from mixpeek.models.growth_metrics_response import GrowthMetricsResponse as GrowthMetricsResponse
 from mixpeek.models.hdbscan_params import HDBSCANParams as HDBSCANParams
 from mixpeek.models.http_validation_error import HTTPValidationError as HTTPValidationError
+from mixpeek.models.having_condition import HavingCondition as HavingCondition
 from mixpeek.models.hdbscan_parameters import HdbscanParameters as HdbscanParameters
-from mixpeek.models.health_check_input import HealthCheckInput as HealthCheckInput
-from mixpeek.models.health_check_output import HealthCheckOutput as HealthCheckOutput
+from mixpeek.models.health_check import HealthCheck as HealthCheck
 from mixpeek.models.health_check_response import HealthCheckResponse as HealthCheckResponse
 from mixpeek.models.health_service_errors import HealthServiceErrors as HealthServiceErrors
 from mixpeek.models.health_service_status import HealthServiceStatus as HealthServiceStatus
 from mixpeek.models.health_status_input import HealthStatusInput as HealthStatusInput
+from mixpeek.models.health_status_output import HealthStatusOutput as HealthStatusOutput
 from mixpeek.models.hierarchical_node_input import HierarchicalNodeInput as HierarchicalNodeInput
 from mixpeek.models.hierarchical_node_output import HierarchicalNodeOutput as HierarchicalNodeOutput
 from mixpeek.models.hierarchical_taxonomy_config_input import HierarchicalTaxonomyConfigInput as HierarchicalTaxonomyConfigInput
 from mixpeek.models.hierarchical_taxonomy_config_output import HierarchicalTaxonomyConfigOutput as HierarchicalTaxonomyConfigOutput
 from mixpeek.models.hierarchy_inference_strategy import HierarchyInferenceStrategy as HierarchyInferenceStrategy
+from mixpeek.models.image_extractor_params import ImageExtractorParams as ImageExtractorParams
 from mixpeek.models.index import Index as Index
-from mixpeek.models.inference_request import InferenceRequest as InferenceRequest
+from mixpeek.models.index_recommendation import IndexRecommendation as IndexRecommendation
+from mixpeek.models.index_recommendations_response import IndexRecommendationsResponse as IndexRecommendationsResponse
+from mixpeek.models.index_suggestion import IndexSuggestion as IndexSuggestion
+from mixpeek.models.index_suggestions_response import IndexSuggestionsResponse as IndexSuggestionsResponse
 from mixpeek.models.input_mapping import InputMapping as InputMapping
 from mixpeek.models.input_mappings import InputMappings as InputMappings
+from mixpeek.models.input_rendering_config_input import InputRenderingConfigInput as InputRenderingConfigInput
+from mixpeek.models.input_rendering_config_output import InputRenderingConfigOutput as InputRenderingConfigOutput
 from mixpeek.models.input_source_type import InputSourceType as InputSourceType
+from mixpeek.models.instantiate_bucket_template_request import InstantiateBucketTemplateRequest as InstantiateBucketTemplateRequest
+from mixpeek.models.instantiate_cluster_template_request import InstantiateClusterTemplateRequest as InstantiateClusterTemplateRequest
+from mixpeek.models.instantiate_collection_template_request import InstantiateCollectionTemplateRequest as InstantiateCollectionTemplateRequest
+from mixpeek.models.instantiate_retriever_template_request import InstantiateRetrieverTemplateRequest as InstantiateRetrieverTemplateRequest
+from mixpeek.models.instantiate_scaffold_request import InstantiateScaffoldRequest as InstantiateScaffoldRequest
+from mixpeek.models.instantiate_taxonomy_template_request import InstantiateTaxonomyTemplateRequest as InstantiateTaxonomyTemplateRequest
+from mixpeek.models.instantiate_template_request import InstantiateTemplateRequest as InstantiateTemplateRequest
+from mixpeek.models.instantiated_bucket_template_response import InstantiatedBucketTemplateResponse as InstantiatedBucketTemplateResponse
+from mixpeek.models.instantiated_cluster_template_response import InstantiatedClusterTemplateResponse as InstantiatedClusterTemplateResponse
+from mixpeek.models.instantiated_collection_template_response import InstantiatedCollectionTemplateResponse as InstantiatedCollectionTemplateResponse
+from mixpeek.models.instantiated_retriever_template_response import InstantiatedRetrieverTemplateResponse as InstantiatedRetrieverTemplateResponse
+from mixpeek.models.instantiated_scaffold_response import InstantiatedScaffoldResponse as InstantiatedScaffoldResponse
+from mixpeek.models.instantiated_taxonomy_template_response import InstantiatedTaxonomyTemplateResponse as InstantiatedTaxonomyTemplateResponse
+from mixpeek.models.instantiated_template_response import InstantiatedTemplateResponse as InstantiatedTemplateResponse
 from mixpeek.models.integer_index_params import IntegerIndexParams as IntegerIndexParams
+from mixpeek.models.intent_classification import IntentClassification as IntentClassification
+from mixpeek.models.interaction_response import InteractionResponse as InteractionResponse
+from mixpeek.models.interaction_tuning_recommendation import InteractionTuningRecommendation as InteractionTuningRecommendation
+from mixpeek.models.interaction_tuning_response import InteractionTuningResponse as InteractionTuningResponse
+from mixpeek.models.interaction_type import InteractionType as InteractionType
+from mixpeek.models.internal_lineage_model import InternalLineageModel as InternalLineageModel
+from mixpeek.models.internal_payload_model import InternalPayloadModel as InternalPayloadModel
+from mixpeek.models.internal_processing_model import InternalProcessingModel as InternalProcessingModel
+from mixpeek.models.invoice_info import InvoiceInfo as InvoiceInfo
+from mixpeek.models.invoice_list_response import InvoiceListResponse as InvoiceListResponse
 from mixpeek.models.join_mode import JoinMode as JoinMode
 from mixpeek.models.join_response import JoinResponse as JoinResponse
 from mixpeek.models.join_stats import JoinStats as JoinStats
 from mixpeek.models.k_means_params import KMeansParams as KMeansParams
+from mixpeek.models.key_status import KeyStatus as KeyStatus
+from mixpeek.models.keyset_pagination_params import KeysetPaginationParams as KeysetPaginationParams
 from mixpeek.models.keyword_index_params import KeywordIndexParams as KeywordIndexParams
 from mixpeek.models.kmeans_parameters import KmeansParameters as KmeansParameters
-from mixpeek.models.llm_labeling import LLMLabeling as LLMLabeling
+from mixpeek.models.llm_labeling_input import LLMLabelingInput as LLMLabelingInput
+from mixpeek.models.llm_labeling_input_input import LLMLabelingInputInput as LLMLabelingInputInput
+from mixpeek.models.llm_labeling_input_output import LLMLabelingInputOutput as LLMLabelingInputOutput
+from mixpeek.models.llm_labeling_output import LLMLabelingOutput as LLMLabelingOutput
+from mixpeek.models.llm_provider import LLMProvider as LLMProvider
+from mixpeek.models.label_distribution_response import LabelDistributionResponse as LabelDistributionResponse
+from mixpeek.models.label_metric import LabelMetric as LabelMetric
+from mixpeek.models.latency_metric import LatencyMetric as LatencyMetric
+from mixpeek.models.latency_response import LatencyResponse as LatencyResponse
+from mixpeek.models.layout_config import LayoutConfig as LayoutConfig
+from mixpeek.models.lineage_step import LineageStep as LineageStep
+from mixpeek.models.list_adhoc_executions_request import ListAdhocExecutionsRequest as ListAdhocExecutionsRequest
+from mixpeek.models.list_adhoc_executions_response import ListAdhocExecutionsResponse as ListAdhocExecutionsResponse
 from mixpeek.models.list_batches_request import ListBatchesRequest as ListBatchesRequest
 from mixpeek.models.list_batches_response import ListBatchesResponse as ListBatchesResponse
 from mixpeek.models.list_buckets_request import ListBucketsRequest as ListBucketsRequest
 from mixpeek.models.list_buckets_response import ListBucketsResponse as ListBucketsResponse
+from mixpeek.models.list_cluster_executions_request import ListClusterExecutionsRequest as ListClusterExecutionsRequest
+from mixpeek.models.list_cluster_executions_response import ListClusterExecutionsResponse as ListClusterExecutionsResponse
 from mixpeek.models.list_clusters_request import ListClustersRequest as ListClustersRequest
 from mixpeek.models.list_clusters_response import ListClustersResponse as ListClustersResponse
 from mixpeek.models.list_collections_request import ListCollectionsRequest as ListCollectionsRequest
 from mixpeek.models.list_collections_response import ListCollectionsResponse as ListCollectionsResponse
 from mixpeek.models.list_documents_request import ListDocumentsRequest as ListDocumentsRequest
 from mixpeek.models.list_documents_response import ListDocumentsResponse as ListDocumentsResponse
+from mixpeek.models.list_executions_request import ListExecutionsRequest as ListExecutionsRequest
+from mixpeek.models.list_executions_response import ListExecutionsResponse as ListExecutionsResponse
+from mixpeek.models.list_folders_response import ListFoldersResponse as ListFoldersResponse
+from mixpeek.models.list_interactions_request import ListInteractionsRequest as ListInteractionsRequest
+from mixpeek.models.list_interactions_response import ListInteractionsResponse as ListInteractionsResponse
+from mixpeek.models.list_migrations_request import ListMigrationsRequest as ListMigrationsRequest
+from mixpeek.models.list_migrations_response import ListMigrationsResponse as ListMigrationsResponse
 from mixpeek.models.list_namespaces_request import ListNamespacesRequest as ListNamespacesRequest
 from mixpeek.models.list_namespaces_response import ListNamespacesResponse as ListNamespacesResponse
+from mixpeek.models.list_notifications_request import ListNotificationsRequest as ListNotificationsRequest
+from mixpeek.models.list_notifications_response import ListNotificationsResponse as ListNotificationsResponse
+from mixpeek.models.list_objects_request import ListObjectsRequest as ListObjectsRequest
 from mixpeek.models.list_objects_response import ListObjectsResponse as ListObjectsResponse
+from mixpeek.models.list_public_retrievers_response import ListPublicRetrieversResponse as ListPublicRetrieversResponse
 from mixpeek.models.list_retrievers_request import ListRetrieversRequest as ListRetrieversRequest
 from mixpeek.models.list_retrievers_response import ListRetrieversResponse as ListRetrieversResponse
+from mixpeek.models.list_sessions_request import ListSessionsRequest as ListSessionsRequest
+from mixpeek.models.list_sessions_response import ListSessionsResponse as ListSessionsResponse
+from mixpeek.models.list_storage_connections_request import ListStorageConnectionsRequest as ListStorageConnectionsRequest
+from mixpeek.models.list_sync_configurations_request import ListSyncConfigurationsRequest as ListSyncConfigurationsRequest
+from mixpeek.models.list_tasks_request import ListTasksRequest as ListTasksRequest
 from mixpeek.models.list_tasks_response import ListTasksResponse as ListTasksResponse
 from mixpeek.models.list_taxonomies_request import ListTaxonomiesRequest as ListTaxonomiesRequest
 from mixpeek.models.list_taxonomies_response import ListTaxonomiesResponse as ListTaxonomiesResponse
-from mixpeek.models.list_triggers_request import ListTriggersRequest as ListTriggersRequest
-from mixpeek.models.list_triggers_response import ListTriggersResponse as ListTriggersResponse
+from mixpeek.models.list_templates_request import ListTemplatesRequest as ListTemplatesRequest
+from mixpeek.models.list_templates_response import ListTemplatesResponse as ListTemplatesResponse
+from mixpeek.models.list_tools_response import ListToolsResponse as ListToolsResponse
+from mixpeek.models.list_uploads_request import ListUploadsRequest as ListUploadsRequest
+from mixpeek.models.list_uploads_response import ListUploadsResponse as ListUploadsResponse
+from mixpeek.models.list_webhooks_request import ListWebhooksRequest as ListWebhooksRequest
+from mixpeek.models.list_webhooks_response import ListWebhooksResponse as ListWebhooksResponse
 from mixpeek.models.logical_operator_input import LogicalOperatorInput as LogicalOperatorInput
 from mixpeek.models.logical_operator_input_and_inner import LogicalOperatorInputANDInner as LogicalOperatorInputANDInner
 from mixpeek.models.logical_operator_output import LogicalOperatorOutput as LogicalOperatorOutput
 from mixpeek.models.logical_operator_output_and_inner import LogicalOperatorOutputANDInner as LogicalOperatorOutputANDInner
+from mixpeek.models.mappings_value import MappingsValue as MappingsValue
+from mixpeek.models.mark_as_read_request import MarkAsReadRequest as MarkAsReadRequest
+from mixpeek.models.markdown_content import MarkdownContent as MarkdownContent
 from mixpeek.models.mean_shift_params import MeanShiftParams as MeanShiftParams
+from mixpeek.models.message_history_item import MessageHistoryItem as MessageHistoryItem
+from mixpeek.models.migration_config import MigrationConfig as MigrationConfig
+from mixpeek.models.migration_progress import MigrationProgress as MigrationProgress
+from mixpeek.models.migration_stage import MigrationStage as MigrationStage
+from mixpeek.models.migration_status import MigrationStatus as MigrationStatus
+from mixpeek.models.migration_type import MigrationType as MigrationType
+from mixpeek.models.model_name import ModelName as ModelName
+from mixpeek.models.most_queried_fields_response import MostQueriedFieldsResponse as MostQueriedFieldsResponse
 from mixpeek.models.multi_vector_index import MultiVectorIndex as MultiVectorIndex
+from mixpeek.models.multimodal_extractor_params import MultimodalExtractorParams as MultimodalExtractorParams
+from mixpeek.models.namespace_infrastructure import NamespaceInfrastructure as NamespaceInfrastructure
+from mixpeek.models.namespace_list_stats import NamespaceListStats as NamespaceListStats
 from mixpeek.models.namespace_model import NamespaceModel as NamespaceModel
-from mixpeek.models.no_reduction import NoReduction as NoReduction
+from mixpeek.models.namespace_operation import NamespaceOperation as NamespaceOperation
+from mixpeek.models.namespace_summary_response import NamespaceSummaryResponse as NamespaceSummaryResponse
+from mixpeek.models.notification import Notification as Notification
 from mixpeek.models.notification_channel import NotificationChannel as NotificationChannel
 from mixpeek.models.notification_content_type import NotificationContentType as NotificationContentType
+from mixpeek.models.notification_priority import NotificationPriority as NotificationPriority
+from mixpeek.models.notification_type import NotificationType as NotificationType
 from mixpeek.models.optics_params import OPTICSParams as OPTICSParams
+from mixpeek.models.object_aggregation_request import ObjectAggregationRequest as ObjectAggregationRequest
+from mixpeek.models.object_aggregation_response import ObjectAggregationResponse as ObjectAggregationResponse
+from mixpeek.models.object_list_stats import ObjectListStats as ObjectListStats
 from mixpeek.models.object_response import ObjectResponse as ObjectResponse
+from mixpeek.models.offset_pagination_params import OffsetPaginationParams as OffsetPaginationParams
+from mixpeek.models.open_ai_model import OpenAIModel as OpenAIModel
 from mixpeek.models.organization_admin_update_request import OrganizationAdminUpdateRequest as OrganizationAdminUpdateRequest
+from mixpeek.models.organization_infrastructure import OrganizationInfrastructure as OrganizationInfrastructure
 from mixpeek.models.organization_model_response import OrganizationModelResponse as OrganizationModelResponse
+from mixpeek.models.organization_publish_stats_response import OrganizationPublishStatsResponse as OrganizationPublishStatsResponse
+from mixpeek.models.organization_update_request import OrganizationUpdateRequest as OrganizationUpdateRequest
+from mixpeek.models.pagination import Pagination as Pagination
+from mixpeek.models.pagination_metadata import PaginationMetadata as PaginationMetadata
+from mixpeek.models.pagination_method import PaginationMethod as PaginationMethod
 from mixpeek.models.pagination_response import PaginationResponse as PaginationResponse
-from mixpeek.models.parameter_config import ParameterConfig as ParameterConfig
-from mixpeek.models.parameter_type import ParameterType as ParameterType
-from mixpeek.models.parameters_value import ParametersValue as ParametersValue
+from mixpeek.models.parameters import Parameters as Parameters
+from mixpeek.models.patch_batch_request import PatchBatchRequest as PatchBatchRequest
+from mixpeek.models.patch_cluster_request import PatchClusterRequest as PatchClusterRequest
+from mixpeek.models.patch_namespace_request import PatchNamespaceRequest as PatchNamespaceRequest
+from mixpeek.models.patch_object_request import PatchObjectRequest as PatchObjectRequest
+from mixpeek.models.patch_retriever_request import PatchRetrieverRequest as PatchRetrieverRequest
+from mixpeek.models.patch_retriever_response import PatchRetrieverResponse as PatchRetrieverResponse
+from mixpeek.models.patch_session_request import PatchSessionRequest as PatchSessionRequest
+from mixpeek.models.patch_session_response import PatchSessionResponse as PatchSessionResponse
+from mixpeek.models.patch_taxonomy_request import PatchTaxonomyRequest as PatchTaxonomyRequest
+from mixpeek.models.path_analysis_request import PathAnalysisRequest as PathAnalysisRequest
+from mixpeek.models.path_analysis_response import PathAnalysisResponse as PathAnalysisResponse
 from mixpeek.models.payload import Payload as Payload
 from mixpeek.models.payload_index_config_input import PayloadIndexConfigInput as PayloadIndexConfigInput
 from mixpeek.models.payload_index_config_output import PayloadIndexConfigOutput as PayloadIndexConfigOutput
 from mixpeek.models.payload_schema_type import PayloadSchemaType as PayloadSchemaType
+from mixpeek.models.payment_method_info import PaymentMethodInfo as PaymentMethodInfo
+from mixpeek.models.performance_insight import PerformanceInsight as PerformanceInsight
+from mixpeek.models.performance_metric import PerformanceMetric as PerformanceMetric
+from mixpeek.models.performance_summary import PerformanceSummary as PerformanceSummary
 from mixpeek.models.permission import Permission as Permission
-from mixpeek.models.presigned_url_model import PresignedURLModel as PresignedURLModel
+from mixpeek.models.postgre_sql_config import PostgreSQLConfig as PostgreSQLConfig
+from mixpeek.models.postgre_sql_credentials import PostgreSQLCredentials as PostgreSQLCredentials
+from mixpeek.models.predictor_lift import PredictorLift as PredictorLift
+from mixpeek.models.provider_config import ProviderConfig as ProviderConfig
+from mixpeek.models.public_interaction_batch_request import PublicInteractionBatchRequest as PublicInteractionBatchRequest
+from mixpeek.models.public_interaction_request import PublicInteractionRequest as PublicInteractionRequest
+from mixpeek.models.public_name_availability_response import PublicNameAvailabilityResponse as PublicNameAvailabilityResponse
+from mixpeek.models.public_retriever_config_response import PublicRetrieverConfigResponse as PublicRetrieverConfigResponse
+from mixpeek.models.public_retriever_list_item import PublicRetrieverListItem as PublicRetrieverListItem
+from mixpeek.models.public_retriever_list_stats import PublicRetrieverListStats as PublicRetrieverListStats
+from mixpeek.models.public_retriever_template_response import PublicRetrieverTemplateResponse as PublicRetrieverTemplateResponse
+from mixpeek.models.publish_retriever_request import PublishRetrieverRequest as PublishRetrieverRequest
+from mixpeek.models.publish_retriever_response import PublishRetrieverResponse as PublishRetrieverResponse
+from mixpeek.models.published_retriever_response import PublishedRetrieverResponse as PublishedRetrieverResponse
+from mixpeek.models.range_bucket import RangeBucket as RangeBucket
+from mixpeek.models.range_bucket_boundaries_inner import RangeBucketBoundariesInner as RangeBucketBoundariesInner
+from mixpeek.models.rate_limit_config import RateLimitConfig as RateLimitConfig
+from mixpeek.models.rate_limit_tier import RateLimitTier as RateLimitTier
+from mixpeek.models.raw_inference_request import RawInferenceRequest as RawInferenceRequest
+from mixpeek.models.raw_inference_response import RawInferenceResponse as RawInferenceResponse
+from mixpeek.models.resource_filter import ResourceFilter as ResourceFilter
+from mixpeek.models.resource_progress import ResourceProgress as ResourceProgress
+from mixpeek.models.resource_result import ResourceResult as ResourceResult
+from mixpeek.models.resource_result_status import ResourceResultStatus as ResourceResultStatus
+from mixpeek.models.resource_scope_input import ResourceScopeInput as ResourceScopeInput
+from mixpeek.models.resource_scope_output import ResourceScopeOutput as ResourceScopeOutput
+from mixpeek.models.resource_type_input import ResourceTypeInput as ResourceTypeInput
+from mixpeek.models.response_shape import ResponseShape as ResponseShape
+from mixpeek.models.response_shape1 import ResponseShape1 as ResponseShape1
+from mixpeek.models.response_shape2 import ResponseShape2 as ResponseShape2
+from mixpeek.models.response_sync_collection_schema_v1_collections_collection_id_sync_schema_post import ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost as ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost
+from mixpeek.models.result_card_properties import ResultCardProperties as ResultCardProperties
+from mixpeek.models.retriever_config import RetrieverConfig as RetrieverConfig
+from mixpeek.models.retriever_execution_request import RetrieverExecutionRequest as RetrieverExecutionRequest
+from mixpeek.models.retriever_execution_statistics import RetrieverExecutionStatistics as RetrieverExecutionStatistics
+from mixpeek.models.retriever_execution_summary import RetrieverExecutionSummary as RetrieverExecutionSummary
+from mixpeek.models.retriever_input_schema_field_input import RetrieverInputSchemaFieldInput as RetrieverInputSchemaFieldInput
+from mixpeek.models.retriever_input_schema_field_output import RetrieverInputSchemaFieldOutput as RetrieverInputSchemaFieldOutput
+from mixpeek.models.retriever_input_schema_field_type import RetrieverInputSchemaFieldType as RetrieverInputSchemaFieldType
+from mixpeek.models.retriever_metadata import RetrieverMetadata as RetrieverMetadata
 from mixpeek.models.retriever_model_input import RetrieverModelInput as RetrieverModelInput
 from mixpeek.models.retriever_model_output import RetrieverModelOutput as RetrieverModelOutput
-from mixpeek.models.retriever_query_request import RetrieverQueryRequest as RetrieverQueryRequest
-from mixpeek.models.retriever_response import RetrieverResponse as RetrieverResponse
-from mixpeek.models.retriever_response_final_results_inner import RetrieverResponseFinalResultsInner as RetrieverResponseFinalResultsInner
-from mixpeek.models.retriever_schema_input import RetrieverSchemaInput as RetrieverSchemaInput
-from mixpeek.models.retriever_schema_output import RetrieverSchemaOutput as RetrieverSchemaOutput
+from mixpeek.models.retriever_options import RetrieverOptions as RetrieverOptions
+from mixpeek.models.retriever_performance_response import RetrieverPerformanceResponse as RetrieverPerformanceResponse
+from mixpeek.models.retriever_schema import RetrieverSchema as RetrieverSchema
+from mixpeek.models.retriever_signal import RetrieverSignal as RetrieverSignal
 from mixpeek.models.retriever_stage_definition import RetrieverStageDefinition as RetrieverStageDefinition
 from mixpeek.models.retriever_status import RetrieverStatus as RetrieverStatus
+from mixpeek.models.retry_batch_request import RetryBatchRequest as RetryBatchRequest
 from mixpeek.models.revision_history_entry import RevisionHistoryEntry as RevisionHistoryEntry
-from mixpeek.models.shared_retrievers_models_health_status import SharedRetrieversModelsHealthStatus as SharedRetrieversModelsHealthStatus
+from mixpeek.models.s3_access_key_credentials import S3AccessKeyCredentials as S3AccessKeyCredentials
+from mixpeek.models.s3_config import S3Config as S3Config
+from mixpeek.models.s3_metadata_source import S3MetadataSource as S3MetadataSource
+from mixpeek.models.s3_role_credentials import S3RoleCredentials as S3RoleCredentials
+from mixpeek.models.s3_tag_source import S3TagSource as S3TagSource
+from mixpeek.models.seo_config import SEOConfig as SEOConfig
+from mixpeek.models.schema_mapping_input import SchemaMappingInput as SchemaMappingInput
+from mixpeek.models.schema_mapping_output import SchemaMappingOutput as SchemaMappingOutput
+from mixpeek.models.schema_sync_request import SchemaSyncRequest as SchemaSyncRequest
+from mixpeek.models.schema_sync_response import SchemaSyncResponse as SchemaSyncResponse
+from mixpeek.models.schema_sync_skipped_response import SchemaSyncSkippedResponse as SchemaSyncSkippedResponse
+from mixpeek.models.scroll_pagination_params import ScrollPaginationParams as ScrollPaginationParams
+from mixpeek.models.search_interaction import SearchInteraction as SearchInteraction
+from mixpeek.models.search_request import SearchRequest as SearchRequest
+from mixpeek.models.search_response import SearchResponse as SearchResponse
+from mixpeek.models.search_result_item import SearchResultItem as SearchResultItem
+from mixpeek.models.secret_response import SecretResponse as SecretResponse
+from mixpeek.models.secrets_list_response import SecretsListResponse as SecretsListResponse
+from mixpeek.models.send_message_request import SendMessageRequest as SendMessageRequest
+from mixpeek.models.session_quotas import SessionQuotas as SessionQuotas
+from mixpeek.models.session_stats import SessionStats as SessionStats
+from mixpeek.models.session_status import SessionStatus as SessionStatus
+from mixpeek.models.setup_payment_method_response import SetupPaymentMethodResponse as SetupPaymentMethodResponse
+from mixpeek.models.share_point_client_credentials import SharePointClientCredentials as SharePointClientCredentials
+from mixpeek.models.share_point_config import SharePointConfig as SharePointConfig
+from mixpeek.models.share_point_delegated_credentials import SharePointDelegatedCredentials as SharePointDelegatedCredentials
+from mixpeek.models.shared_clusters_triggers_models_create_trigger_request import SharedClustersTriggersModelsCreateTriggerRequest as SharedClustersTriggersModelsCreateTriggerRequest
+from mixpeek.models.shared_clusters_triggers_models_list_triggers_request import SharedClustersTriggersModelsListTriggersRequest as SharedClustersTriggersModelsListTriggersRequest
+from mixpeek.models.shared_clusters_triggers_models_list_triggers_response import SharedClustersTriggersModelsListTriggersResponse as SharedClustersTriggersModelsListTriggersResponse
+from mixpeek.models.shared_clusters_triggers_models_trigger_history_response import SharedClustersTriggersModelsTriggerHistoryResponse as SharedClustersTriggersModelsTriggerHistoryResponse
+from mixpeek.models.shared_clusters_triggers_models_trigger_model import SharedClustersTriggersModelsTriggerModel as SharedClustersTriggersModelsTriggerModel
+from mixpeek.models.shared_clusters_triggers_models_trigger_status import SharedClustersTriggersModelsTriggerStatus as SharedClustersTriggersModelsTriggerStatus
+from mixpeek.models.shared_clusters_triggers_models_trigger_type import SharedClustersTriggersModelsTriggerType as SharedClustersTriggersModelsTriggerType
+from mixpeek.models.shared_clusters_triggers_models_update_trigger_request import SharedClustersTriggersModelsUpdateTriggerRequest as SharedClustersTriggersModelsUpdateTriggerRequest
+from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_input import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput as SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput
+from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_output import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput as SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput
+from mixpeek.models.shared_namespaces_migrations_models_feature_extractor_config import SharedNamespacesMigrationsModelsFeatureExtractorConfig as SharedNamespacesMigrationsModelsFeatureExtractorConfig
+from mixpeek.models.shared_namespaces_migrations_models_resource_type import SharedNamespacesMigrationsModelsResourceType as SharedNamespacesMigrationsModelsResourceType
+from mixpeek.models.shared_organizations_enums_resource_type import SharedOrganizationsEnumsResourceType as SharedOrganizationsEnumsResourceType
+from mixpeek.models.shared_triggers_models_create_trigger_request import SharedTriggersModelsCreateTriggerRequest as SharedTriggersModelsCreateTriggerRequest
+from mixpeek.models.shared_triggers_models_list_triggers_request import SharedTriggersModelsListTriggersRequest as SharedTriggersModelsListTriggersRequest
+from mixpeek.models.shared_triggers_models_list_triggers_response import SharedTriggersModelsListTriggersResponse as SharedTriggersModelsListTriggersResponse
+from mixpeek.models.shared_triggers_models_trigger_history_response import SharedTriggersModelsTriggerHistoryResponse as SharedTriggersModelsTriggerHistoryResponse
+from mixpeek.models.shared_triggers_models_trigger_model import SharedTriggersModelsTriggerModel as SharedTriggersModelsTriggerModel
+from mixpeek.models.shared_triggers_models_trigger_status import SharedTriggersModelsTriggerStatus as SharedTriggersModelsTriggerStatus
+from mixpeek.models.shared_triggers_models_trigger_type import SharedTriggersModelsTriggerType as SharedTriggersModelsTriggerType
+from mixpeek.models.shared_triggers_models_update_trigger_request import SharedTriggersModelsUpdateTriggerRequest as SharedTriggersModelsUpdateTriggerRequest
 from mixpeek.models.single_lineage_entry import SingleLineageEntry as SingleLineageEntry
 from mixpeek.models.slack_config import SlackConfig as SlackConfig
+from mixpeek.models.slow_operation import SlowOperation as SlowOperation
+from mixpeek.models.slow_operations_response import SlowOperationsResponse as SlowOperationsResponse
+from mixpeek.models.slow_queries_response import SlowQueriesResponse as SlowQueriesResponse
+from mixpeek.models.slow_query_details import SlowQueryDetails as SlowQueryDetails
 from mixpeek.models.sms_config import SmsConfig as SmsConfig
+from mixpeek.models.snowflake_config import SnowflakeConfig as SnowflakeConfig
+from mixpeek.models.snowflake_key_pair_credentials import SnowflakeKeyPairCredentials as SnowflakeKeyPairCredentials
+from mixpeek.models.snowflake_username_password_credentials import SnowflakeUsernamePasswordCredentials as SnowflakeUsernamePasswordCredentials
 from mixpeek.models.sort_direction import SortDirection as SortDirection
 from mixpeek.models.sort_option import SortOption as SortOption
+from mixpeek.models.source import Source as Source
+from mixpeek.models.source1 import Source1 as Source1
 from mixpeek.models.source_collection_input import SourceCollectionInput as SourceCollectionInput
 from mixpeek.models.source_collection_output import SourceCollectionOutput as SourceCollectionOutput
-from mixpeek.models.source_config import SourceConfig as SourceConfig
+from mixpeek.models.source_config_input import SourceConfigInput as SourceConfigInput
+from mixpeek.models.source_config_output import SourceConfigOutput as SourceConfigOutput
 from mixpeek.models.source_details import SourceDetails as SourceDetails
+from mixpeek.models.source_enrichment_config import SourceEnrichmentConfig as SourceEnrichmentConfig
+from mixpeek.models.source_filters_input import SourceFiltersInput as SourceFiltersInput
+from mixpeek.models.source_filters_output import SourceFiltersOutput as SourceFiltersOutput
 from mixpeek.models.source_type import SourceType as SourceType
 from mixpeek.models.sparse_vector import SparseVector as SparseVector
-from mixpeek.models.sparse_vector_indices_inner import SparseVectorIndicesInner as SparseVectorIndicesInner
 from mixpeek.models.spectral_params import SpectralParams as SpectralParams
-from mixpeek.models.stage_instance_config_input import StageInstanceConfigInput as StageInstanceConfigInput
-from mixpeek.models.stage_instance_config_output import StageInstanceConfigOutput as StageInstanceConfigOutput
-from mixpeek.models.stage_performance import StagePerformance as StagePerformance
-from mixpeek.models.stage_response import StageResponse as StageResponse
+from mixpeek.models.spending_caps_response import SpendingCapsResponse as SpendingCapsResponse
+from mixpeek.models.split_method import SplitMethod as SplitMethod
+from mixpeek.models.stage_breakdown_response import StageBreakdownResponse as StageBreakdownResponse
+from mixpeek.models.stage_category import StageCategory as StageCategory
+from mixpeek.models.stage_config import StageConfig as StageConfig
+from mixpeek.models.stage_instance_config import StageInstanceConfig as StageInstanceConfig
+from mixpeek.models.stage_performance_input import StagePerformanceInput as StagePerformanceInput
+from mixpeek.models.stage_performance_metrics import StagePerformanceMetrics as StagePerformanceMetrics
+from mixpeek.models.stage_performance_output import StagePerformanceOutput as StagePerformanceOutput
+from mixpeek.models.stage_progress import StageProgress as StageProgress
+from mixpeek.models.stage_statistics import StageStatistics as StageStatistics
+from mixpeek.models.stage_type import StageType as StageType
+from mixpeek.models.start_evaluation_request import StartEvaluationRequest as StartEvaluationRequest
+from mixpeek.models.start_evaluation_response import StartEvaluationResponse as StartEvaluationResponse
+from mixpeek.models.start_migration_request import StartMigrationRequest as StartMigrationRequest
+from mixpeek.models.start_migration_response import StartMigrationResponse as StartMigrationResponse
+from mixpeek.models.step_analytics_config_input import StepAnalyticsConfigInput as StepAnalyticsConfigInput
+from mixpeek.models.step_analytics_config_output import StepAnalyticsConfigOutput as StepAnalyticsConfigOutput
+from mixpeek.models.step_info import StepInfo as StepInfo
+from mixpeek.models.step_key_source import StepKeySource as StepKeySource
+from mixpeek.models.step_transition_request import StepTransitionRequest as StepTransitionRequest
+from mixpeek.models.step_transition_response import StepTransitionResponse as StepTransitionResponse
+from mixpeek.models.storage_connection_create_request import StorageConnectionCreateRequest as StorageConnectionCreateRequest
+from mixpeek.models.storage_connection_list_response import StorageConnectionListResponse as StorageConnectionListResponse
+from mixpeek.models.storage_connection_model import StorageConnectionModel as StorageConnectionModel
+from mixpeek.models.storage_connection_test_response import StorageConnectionTestResponse as StorageConnectionTestResponse
+from mixpeek.models.storage_connection_update_request import StorageConnectionUpdateRequest as StorageConnectionUpdateRequest
+from mixpeek.models.storage_metric import StorageMetric as StorageMetric
+from mixpeek.models.storage_provider import StorageProvider as StorageProvider
 from mixpeek.models.storage_statistics import StorageStatistics as StorageStatistics
-from mixpeek.models.tsne_params import TSNEParams as TSNEParams
+from mixpeek.models.structured_data_config import StructuredDataConfig as StructuredDataConfig
+from mixpeek.models.submit_batch_request import SubmitBatchRequest as SubmitBatchRequest
+from mixpeek.models.submit_feedback_request import SubmitFeedbackRequest as SubmitFeedbackRequest
+from mixpeek.models.submit_feedback_response import SubmitFeedbackResponse as SubmitFeedbackResponse
+from mixpeek.models.suitable_collection import SuitableCollection as SuitableCollection
+from mixpeek.models.sync_comparison_response import SyncComparisonResponse as SyncComparisonResponse
+from mixpeek.models.sync_config_metric import SyncConfigMetric as SyncConfigMetric
+from mixpeek.models.sync_configuration_model import SyncConfigurationModel as SyncConfigurationModel
+from mixpeek.models.sync_create_request import SyncCreateRequest as SyncCreateRequest
+from mixpeek.models.sync_health_metric import SyncHealthMetric as SyncHealthMetric
+from mixpeek.models.sync_list_response import SyncListResponse as SyncListResponse
+from mixpeek.models.sync_mode import SyncMode as SyncMode
+from mixpeek.models.sync_performance_response import SyncPerformanceResponse as SyncPerformanceResponse
+from mixpeek.models.sync_run_metric import SyncRunMetric as SyncRunMetric
+from mixpeek.models.sync_update_request import SyncUpdateRequest as SyncUpdateRequest
+from mixpeek.models.task_progress import TaskProgress as TaskProgress
 from mixpeek.models.task_response import TaskResponse as TaskResponse
 from mixpeek.models.task_response_inputs_inner import TaskResponseInputsInner as TaskResponseInputsInner
 from mixpeek.models.task_status_enum import TaskStatusEnum as TaskStatusEnum
 from mixpeek.models.task_type import TaskType as TaskType
-from mixpeek.models.taxonomy_application_config import TaxonomyApplicationConfig as TaxonomyApplicationConfig
-from mixpeek.models.taxonomy_assignment import TaxonomyAssignment as TaxonomyAssignment
+from mixpeek.models.taxonomy_application_config_input import TaxonomyApplicationConfigInput as TaxonomyApplicationConfigInput
+from mixpeek.models.taxonomy_application_config_output import TaxonomyApplicationConfigOutput as TaxonomyApplicationConfigOutput
 from mixpeek.models.taxonomy_execution_mode import TaxonomyExecutionMode as TaxonomyExecutionMode
-from mixpeek.models.taxonomy_model import TaxonomyModel as TaxonomyModel
+from mixpeek.models.taxonomy_list_stats import TaxonomyListStats as TaxonomyListStats
+from mixpeek.models.taxonomy_model_input import TaxonomyModelInput as TaxonomyModelInput
+from mixpeek.models.taxonomy_model_output import TaxonomyModelOutput as TaxonomyModelOutput
+from mixpeek.models.taxonomy_options import TaxonomyOptions as TaxonomyOptions
 from mixpeek.models.taxonomy_response import TaxonomyResponse as TaxonomyResponse
+from mixpeek.models.template_mode import TemplateMode as TemplateMode
+from mixpeek.models.template_scope import TemplateScope as TemplateScope
+from mixpeek.models.template_type import TemplateType as TemplateType
+from mixpeek.models.terminate_session_response import TerminateSessionResponse as TerminateSessionResponse
+from mixpeek.models.text_extractor_params import TextExtractorParams as TextExtractorParams
 from mixpeek.models.text_index_params import TextIndexParams as TextIndexParams
+from mixpeek.models.text_split_strategy import TextSplitStrategy as TextSplitStrategy
+from mixpeek.models.theme_config import ThemeConfig as ThemeConfig
+from mixpeek.models.tier_diagnostic import TierDiagnostic as TierDiagnostic
+from mixpeek.models.tier_task_info import TierTaskInfo as TierTaskInfo
+from mixpeek.models.tigris_access_key_credentials import TigrisAccessKeyCredentials as TigrisAccessKeyCredentials
+from mixpeek.models.tigris_config import TigrisConfig as TigrisConfig
 from mixpeek.models.tokenizer_type import TokenizerType as TokenizerType
+from mixpeek.models.tool_info import ToolInfo as ToolInfo
+from mixpeek.models.transition_path import TransitionPath as TransitionPath
+from mixpeek.models.trigger_action_type import TriggerActionType as TriggerActionType
+from mixpeek.models.trigger_collection_request import TriggerCollectionRequest as TriggerCollectionRequest
+from mixpeek.models.trigger_collection_response import TriggerCollectionResponse as TriggerCollectionResponse
 from mixpeek.models.trigger_execution_config import TriggerExecutionConfig as TriggerExecutionConfig
+from mixpeek.models.trigger_execution_history import TriggerExecutionHistory as TriggerExecutionHistory
 from mixpeek.models.trigger_execution_history_item import TriggerExecutionHistoryItem as TriggerExecutionHistoryItem
 from mixpeek.models.trigger_history_request import TriggerHistoryRequest as TriggerHistoryRequest
-from mixpeek.models.trigger_history_response import TriggerHistoryResponse as TriggerHistoryResponse
-from mixpeek.models.trigger_model import TriggerModel as TriggerModel
-from mixpeek.models.trigger_status import TriggerStatus as TriggerStatus
-from mixpeek.models.trigger_type import TriggerType as TriggerType
-from mixpeek.models.umap_params import UMAPParams as UMAPParams
+from mixpeek.models.trigger_tier_request import TriggerTierRequest as TriggerTierRequest
+from mixpeek.models.unique_key_config import UniqueKeyConfig as UniqueKeyConfig
 from mixpeek.models.update_namespace_request import UpdateNamespaceRequest as UpdateNamespaceRequest
 from mixpeek.models.update_object_request import UpdateObjectRequest as UpdateObjectRequest
-from mixpeek.models.update_trigger_request import UpdateTriggerRequest as UpdateTriggerRequest
+from mixpeek.models.update_preferences_request import UpdatePreferencesRequest as UpdatePreferencesRequest
+from mixpeek.models.update_published_retriever_request import UpdatePublishedRetrieverRequest as UpdatePublishedRetrieverRequest
+from mixpeek.models.update_secret_request import UpdateSecretRequest as UpdateSecretRequest
+from mixpeek.models.update_spending_caps_request import UpdateSpendingCapsRequest as UpdateSpendingCapsRequest
+from mixpeek.models.upload_list_stats import UploadListStats as UploadListStats
+from mixpeek.models.upload_performance_metric import UploadPerformanceMetric as UploadPerformanceMetric
+from mixpeek.models.upload_performance_response import UploadPerformanceResponse as UploadPerformanceResponse
+from mixpeek.models.upload_response import UploadResponse as UploadResponse
+from mixpeek.models.usage_breakdown_response import UsageBreakdownResponse as UsageBreakdownResponse
+from mixpeek.models.usage_metric import UsageMetric as UsageMetric
 from mixpeek.models.usage_statistics import UsageStatistics as UsageStatistics
-from mixpeek.models.user_model_input import UserModelInput as UserModelInput
-from mixpeek.models.user_model_output import UserModelOutput as UserModelOutput
+from mixpeek.models.user_create_request import UserCreateRequest as UserCreateRequest
+from mixpeek.models.user_role import UserRole as UserRole
+from mixpeek.models.user_status import UserStatus as UserStatus
+from mixpeek.models.user_update_request import UserUpdateRequest as UserUpdateRequest
 from mixpeek.models.uuid_index_params import UuidIndexParams as UuidIndexParams
+from mixpeek.models.validate_migration_request import ValidateMigrationRequest as ValidateMigrationRequest
+from mixpeek.models.validate_migration_response import ValidateMigrationResponse as ValidateMigrationResponse
+from mixpeek.models.validate_result import ValidateResult as ValidateResult
 from mixpeek.models.validation_error import ValidationError as ValidationError
 from mixpeek.models.validation_error_loc_inner import ValidationErrorLocInner as ValidationErrorLocInner
-from mixpeek.models.vector_based_config import VectorBasedConfig as VectorBasedConfig
+from mixpeek.models.validation_result import ValidationResult as ValidationResult
+from mixpeek.models.value import Value as Value
+from mixpeek.models.vector_based_config_input import VectorBasedConfigInput as VectorBasedConfigInput
+from mixpeek.models.vector_based_config_output import VectorBasedConfigOutput as VectorBasedConfigOutput
 from mixpeek.models.vector_data_type import VectorDataType as VectorDataType
 from mixpeek.models.vector_index import VectorIndex as VectorIndex
 from mixpeek.models.vector_index_definition import VectorIndexDefinition as VectorIndexDefinition
 from mixpeek.models.vector_type import VectorType as VectorType
 from mixpeek.models.vectors import Vectors as Vectors
+from mixpeek.models.verify_password_request import VerifyPasswordRequest as VerifyPasswordRequest
+from mixpeek.models.verify_password_response import VerifyPasswordResponse as VerifyPasswordResponse
 from mixpeek.models.webhook_channel_input import WebhookChannelInput as WebhookChannelInput
 from mixpeek.models.webhook_channel_output import WebhookChannelOutput as WebhookChannelOutput
 from mixpeek.models.webhook_config import WebhookConfig as WebhookConfig
 from mixpeek.models.webhook_event_type import WebhookEventType as WebhookEventType
 from mixpeek.models.webhook_input import WebhookInput as WebhookInput
 from mixpeek.models.webhook_output import WebhookOutput as WebhookOutput
-
-# Modern client wrapper (preserved across regenerations)
-from mixpeek._client import Mixpeek as Mixpeek
+from mixpeek.models.weight_learning_config import WeightLearningConfig as WeightLearningConfig

@@ -36,9 +36,9 @@ class TestIndex(unittest.TestCase):
         model = Index()
         if include_optional:
             return Index(
-                name = '',
-                description = '',
-                dimensions = 56,
+                name = '0',
+                description = '0123456789',
+                dimensions = 1.0,
                 type = 'dense',
                 distance = 'cosine',
                 datatype = 'float32',
@@ -49,9 +49,9 @@ class TestIndex(unittest.TestCase):
                 inference_name = '',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '', 
-                        description = '', 
-                        dimensions = 56, 
+                        name = '0', 
+                        description = '0123456789', 
+                        dimensions = 1.0, 
                         type = 'dense', 
                         distance = 'cosine', 
                         datatype = 'float32', 
@@ -64,15 +64,14 @@ class TestIndex(unittest.TestCase):
             )
         else:
             return Index(
-                name = '',
-                description = '',
-                dimensions = 56,
+                name = '0',
+                description = '0123456789',
                 type = 'dense',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '', 
-                        description = '', 
-                        dimensions = 56, 
+                        name = '0', 
+                        description = '0123456789', 
+                        dimensions = 1.0, 
                         type = 'dense', 
                         distance = 'cosine', 
                         datatype = 'float32', 

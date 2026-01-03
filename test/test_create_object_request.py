@@ -38,7 +38,6 @@ class TestCreateObjectRequest(unittest.TestCase):
             return CreateObjectRequest(
                 key_prefix = '/contract-2024',
                 blobs = [{data={num_pages=5, title=Service Agreement 2024}, key_prefix=/content.pdf, metadata={author=John Doe, department=Legal}, property=content, type=PDF}],
-                metadata = {category=contracts, status=draft, year=2024},
                 skip_duplicates = True,
                 canonicalize_source = True,
                 force_remirror = True

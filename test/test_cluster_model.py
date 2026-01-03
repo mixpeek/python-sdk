@@ -42,28 +42,66 @@ class TestClusterModel(unittest.TestCase):
                 cluster_name = '',
                 cluster_type = 'vector',
                 vector_config = mixpeek.models.vector_based_config.VectorBasedConfig(
-                    feature_extractor_name = '', 
+                    feature_uri = '', 
+                    feature_uris = [
+                        ''
+                        ], 
                     clustering_method = 'kmeans', 
                     sample_size = 56, 
                     kmeans_parameters = null, 
                     dbscan_parameters = null, 
                     hdbscan_parameters = null, 
-                    algorithm_params = null, ),
+                    algorithm_params = null, 
+                    multi_feature_strategy = 'concatenate', 
+                    normalize_features = True, 
+                    feature_weights = {
+                        'key' : 1.337
+                        }, 
+                    weight_learning_config = mixpeek.models.weight_learning_config.WeightLearningConfig(
+                        method = 'bayesian', 
+                        max_iterations = 5.0, 
+                        metric = 'silhouette', 
+                        sample_size = 100.0, 
+                        random_state = 56, ), 
+                    output_strategy = 'single', 
+                    effective_feature_method = 'mean', 
+                    enrich_source = True, ),
                 attribute_config = mixpeek.models.attribute_based_config.AttributeBasedConfig(
                     attributes = [
                         ''
                         ], 
                     hierarchical_grouping = True, 
                     aggregation_method = '', ),
+                filters = { },
                 llm_labeling = mixpeek.models.llm_labeling.LLMLabeling(
                     enabled = True, 
+                    labeling_inputs = mixpeek.models.llm_labeling_input.LLMLabelingInput(
+                        input_mappings = [
+                            mixpeek.models.input_mapping.InputMapping(
+                                input_key = '', 
+                                source_type = 'payload', 
+                                path = '', 
+                                override = null, )
+                            ], ), 
                     provider = 'openai', 
-                    model_name = '', 
+                    model_name = null, 
                     include_summary = True, 
                     include_keywords = True, 
-                    max_samples_per_cluster = 56, 
+                    max_samples_per_cluster = 1.0, 
+                    sample_text_max_length = 50.0, 
+                    use_embedding_dedup = True, 
+                    embedding_similarity_threshold = 0.5, 
+                    cache_ttl_seconds = 0.0, 
                     custom_prompt = '', 
+                    response_shape = null, 
                     parameters = { }, ),
+                enrich_source_collection = True,
+                source_enrichment_config = mixpeek.models.source_enrichment_config.SourceEnrichmentConfig(
+                    field_mappings = [
+                        mixpeek.models.enrichment_field_mapping.EnrichmentFieldMapping(
+                            source_field = '', 
+                            target_field = '', )
+                        ], ),
                 cluster_id = '',
                 parquet_path = '',
                 members_key = '',
@@ -75,14 +113,13 @@ class TestClusterModel(unittest.TestCase):
                     extra = { }, ),
                 status = 'PENDING',
                 task_id = '',
+                last_run_id = '',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                metadata = { }
             )
         else:
             return ClusterModel(
-                collection_ids = [
-                    ''
-                    ],
         )
         """
 

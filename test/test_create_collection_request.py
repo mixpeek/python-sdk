@@ -40,28 +40,77 @@ class TestCreateCollectionRequest(unittest.TestCase):
                 description = '',
                 source = mixpeek.models.source_config.SourceConfig(
                     type = 'bucket', 
-                    bucket_id = '', 
-                    collection_id = '', ),
+                    bucket_ids = [
+                        ''
+                        ], 
+                    collection_id = '', 
+                    collection_ids = [
+                        ''
+                        ], 
+                    inherited_bucket_ids = [
+                        ''
+                        ], 
+                    source_filters = mixpeek.models.source_filters.SourceFilters(
+                        filters = { }, ), ),
                 input_schema = { },
-                feature_extractors = [
-                    mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
-                        feature_extractor_name = '', 
-                        version = '', 
-                        parameters = {
-                            'key' : null
-                            }, 
-                        input_mappings = null, )
-                    ],
+                feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                    feature_extractor_name = '', 
+                    version = '', 
+                    params = { }, 
+                    parameters = null, 
+                    input_mappings = null, 
+                    field_passthrough = [
+                        mixpeek.models.field_passthrough.FieldPassthrough(
+                            source_path = '', 
+                            target_path = '', 
+                            default = null, 
+                            required = True, )
+                        ], 
+                    include_all_source_fields = True, ),
                 enabled = True,
-                metadata = { }
+                metadata = { },
+                taxonomy_applications = [
+                    { }
+                    ],
+                cluster_applications = [
+                    mixpeek.models.cluster_application_config.ClusterApplicationConfig(
+                        cluster_id = '', 
+                        auto_execute_on_batch = True, 
+                        min_document_threshold = 56, 
+                        cooldown_seconds = 56, )
+                    ]
             )
         else:
             return CreateCollectionRequest(
                 collection_name = '',
                 source = mixpeek.models.source_config.SourceConfig(
                     type = 'bucket', 
-                    bucket_id = '', 
-                    collection_id = '', ),
+                    bucket_ids = [
+                        ''
+                        ], 
+                    collection_id = '', 
+                    collection_ids = [
+                        ''
+                        ], 
+                    inherited_bucket_ids = [
+                        ''
+                        ], 
+                    source_filters = mixpeek.models.source_filters.SourceFilters(
+                        filters = { }, ), ),
+                feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                    feature_extractor_name = '', 
+                    version = '', 
+                    params = { }, 
+                    parameters = null, 
+                    input_mappings = null, 
+                    field_passthrough = [
+                        mixpeek.models.field_passthrough.FieldPassthrough(
+                            source_path = '', 
+                            target_path = '', 
+                            default = null, 
+                            required = True, )
+                        ], 
+                    include_all_source_fields = True, ),
         )
         """
 

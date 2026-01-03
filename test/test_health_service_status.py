@@ -36,21 +36,22 @@ class TestHealthServiceStatus(unittest.TestCase):
         model = HealthServiceStatus()
         if include_optional:
             return HealthServiceStatus(
-                redis = True,
-                mongodb = True,
-                qdrant = True,
-                s3 = True,
-                celery = True,
-                engine = True
+                cache = True,
+                metadata = True,
+                vector_store = True,
+                object_storage = True,
+                task_queue = True,
+                inference = True,
+                analytics = True
             )
         else:
             return HealthServiceStatus(
-                redis = True,
-                mongodb = True,
-                qdrant = True,
-                s3 = True,
-                celery = True,
-                engine = True,
+                cache = True,
+                metadata = True,
+                vector_store = True,
+                object_storage = True,
+                task_queue = True,
+                inference = True,
         )
         """
 

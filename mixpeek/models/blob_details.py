@@ -31,8 +31,7 @@ class BlobDetails(BaseModel):
     size_bytes: Optional[StrictInt] = None
     mime_type: Optional[StrictStr] = None
     hash: Optional[StrictStr] = None
-    s3_object_key: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["filename", "size_bytes", "mime_type", "hash", "s3_object_key"]
+    __properties: ClassVar[List[str]] = ["filename", "size_bytes", "mime_type", "hash"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -88,8 +87,7 @@ class BlobDetails(BaseModel):
             "filename": obj.get("filename"),
             "size_bytes": obj.get("size_bytes"),
             "mime_type": obj.get("mime_type"),
-            "hash": obj.get("hash"),
-            "s3_object_key": obj.get("s3_object_key")
+            "hash": obj.get("hash")
         })
         return _obj
 

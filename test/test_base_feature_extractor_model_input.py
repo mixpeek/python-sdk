@@ -37,7 +37,8 @@ class TestBaseFeatureExtractorModelInput(unittest.TestCase):
         if include_optional:
             return BaseFeatureExtractorModelInput(
                 feature_extractor_name = '',
-                version = ''
+                version = '',
+                params = { }
             )
         else:
             return BaseFeatureExtractorModelInput(

@@ -6,12 +6,13 @@ Status flags for dependent services.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**redis** | **bool** | Connectivity to Redis successful | 
-**mongodb** | **bool** | Connectivity to MongoDB successful | 
-**qdrant** | **bool** | Connectivity to Qdrant successful | 
-**s3** | **bool** | Connectivity to S3 successful | 
-**celery** | **bool** | Celery task execution successful | 
-**engine** | **bool** | Engine HTTP health endpoint responded healthy | 
+**cache** | **bool** | Cache layer connectivity successful | 
+**metadata** | **bool** | Metadata store connectivity successful | 
+**vector_store** | **bool** | Vector database connectivity successful | 
+**object_storage** | **bool** | Object storage connectivity successful | 
+**task_queue** | **bool** | Task queue execution successful | 
+**inference** | **bool** | Inference engine health check successful | 
+**analytics** | **bool** | Analytics backend healthy (optional, None if disabled) | [optional] 
 
 ## Example
 

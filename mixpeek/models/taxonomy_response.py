@@ -40,7 +40,8 @@ class TaxonomyResponse(BaseModel):
     config: Config2
     ready: Optional[StrictBool] = Field(default=True, description="Whether the taxonomy is ready for use. False for async inference (cluster/LLM) that needs processing. True for flat/explicit hierarchies.")
     created_at: Optional[datetime] = Field(default=None, description="Creation timestamp for this taxonomy record")
-    __properties: ClassVar[List[str]] = ["taxonomy_id", "version", "taxonomy_name", "description", "retriever_id", "input_mappings", "config", "ready", "created_at"]
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional user-defined metadata for the taxonomy")
+    __properties: ClassVar[List[str]] = ["taxonomy_id", "version", "taxonomy_name", "description", "retriever_id", "input_mappings", "config", "ready", "created_at", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,7 +112,8 @@ class TaxonomyResponse(BaseModel):
             "input_mappings": [InputMapping.from_dict(_item) for _item in obj["input_mappings"]] if obj.get("input_mappings") is not None else None,
             "config": Config2.from_dict(obj["config"]) if obj.get("config") is not None else None,
             "ready": obj.get("ready") if obj.get("ready") is not None else True,
-            "created_at": obj.get("created_at")
+            "created_at": obj.get("created_at"),
+            "metadata": obj.get("metadata")
         })
         return _obj
 

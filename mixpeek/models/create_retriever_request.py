@@ -18,26 +18,29 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.retriever_schema_input import RetrieverSchemaInput
-from mixpeek.models.stage_instance_config_input import StageInstanceConfigInput
+from typing_extensions import Annotated
+from mixpeek.models.budget_limits import BudgetLimits
+from mixpeek.models.display_config_input import DisplayConfigInput
+from mixpeek.models.retriever_input_schema_field_input import RetrieverInputSchemaFieldInput
+from mixpeek.models.stage_config import StageConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateRetrieverRequest(BaseModel):
     """
-    Request to create a new retriever.
+    Payload for creating a new retriever.
     """ # noqa: E501
-    retriever_name: StrictStr = Field(description="Human-readable retriever name")
-    description: Optional[StrictStr] = Field(default=None, description="Description of the retriever")
-    input_schema: RetrieverSchemaInput = Field(description="Schema defining the expected input format")
-    collection_ids: List[StrictStr] = Field(description="List of collection IDs to search in")
-    stages: List[StageInstanceConfigInput] = Field(description="List of stages to execute in order")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Custom metadata for the retriever")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="Tags for organization and filtering")
-    enabled: Optional[StrictBool] = Field(default=True, description="Whether the retriever should be enabled on creation")
-    __properties: ClassVar[List[str]] = ["retriever_name", "description", "input_schema", "collection_ids", "stages", "metadata", "tags", "enabled"]
+    retriever_name: Annotated[str, Field(min_length=1, strict=True)] = Field(description="Unique retriever name (REQUIRED).")
+    description: Optional[StrictStr] = Field(default=None, description="Human readable retriever description (OPTIONAL).")
+    collection_identifiers: Optional[List[StrictStr]] = Field(default=None, description="Collection identifiers (names or IDs) queried by the retriever (OPTIONAL). Identifiers can be collection names (e.g., 'my_collection') or collection IDs (e.g., 'col_abc123'). The system will resolve names to IDs automatically. Can be empty for inference-only pipelines (e.g., LLM query analysis without document retrieval).")
+    stages: Annotated[List[StageConfig], Field(min_length=1)] = Field(description="Ordered stage configurations (REQUIRED).")
+    input_schema: Optional[Dict[str, RetrieverInputSchemaFieldInput]] = Field(default=None, description="Input schema properties keyed by field name (OPTIONAL). Can be empty for static retrievers with hardcoded stage parameters. Each field can include: type, description, required, default, and examples. The 'examples' field (list) provides sample values that will be shown to users when the retriever is published with include_metadata=true.")
+    budget_limits: Optional[BudgetLimits] = Field(default=None, description="Budget limits for execution (OPTIONAL).")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="Optional retriever tags for search/filters.")
+    display_config: Optional[DisplayConfigInput] = Field(default=None, description="Display configuration for public retriever UI rendering (OPTIONAL). Defines how the search interface should appear when the retriever is published, including input fields, theme, layout, exposed result fields, and field formatting. This configuration is used as the default when publishing the retriever.")
+    __properties: ClassVar[List[str]] = ["retriever_name", "description", "collection_identifiers", "stages", "input_schema", "budget_limits", "tags", "display_config"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,9 +81,6 @@ class CreateRetrieverRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of input_schema
-        if self.input_schema:
-            _dict['input_schema'] = self.input_schema.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in stages (list)
         _items = []
         if self.stages:
@@ -88,6 +88,19 @@ class CreateRetrieverRequest(BaseModel):
                 if _item_stages:
                     _items.append(_item_stages.to_dict())
             _dict['stages'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in input_schema (dict)
+        _field_dict = {}
+        if self.input_schema:
+            for _key_input_schema in self.input_schema:
+                if self.input_schema[_key_input_schema]:
+                    _field_dict[_key_input_schema] = self.input_schema[_key_input_schema].to_dict()
+            _dict['input_schema'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of budget_limits
+        if self.budget_limits:
+            _dict['budget_limits'] = self.budget_limits.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of display_config
+        if self.display_config:
+            _dict['display_config'] = self.display_config.to_dict()
         return _dict
 
     @classmethod
@@ -102,12 +115,17 @@ class CreateRetrieverRequest(BaseModel):
         _obj = cls.model_validate({
             "retriever_name": obj.get("retriever_name"),
             "description": obj.get("description"),
-            "input_schema": RetrieverSchemaInput.from_dict(obj["input_schema"]) if obj.get("input_schema") is not None else None,
-            "collection_ids": obj.get("collection_ids"),
-            "stages": [StageInstanceConfigInput.from_dict(_item) for _item in obj["stages"]] if obj.get("stages") is not None else None,
-            "metadata": obj.get("metadata"),
+            "collection_identifiers": obj.get("collection_identifiers"),
+            "stages": [StageConfig.from_dict(_item) for _item in obj["stages"]] if obj.get("stages") is not None else None,
+            "input_schema": dict(
+                (_k, RetrieverInputSchemaFieldInput.from_dict(_v))
+                for _k, _v in obj["input_schema"].items()
+            )
+            if obj.get("input_schema") is not None
+            else None,
+            "budget_limits": BudgetLimits.from_dict(obj["budget_limits"]) if obj.get("budget_limits") is not None else None,
             "tags": obj.get("tags"),
-            "enabled": obj.get("enabled") if obj.get("enabled") is not None else True
+            "display_config": DisplayConfigInput.from_dict(obj["display_config"]) if obj.get("display_config") is not None else None
         })
         return _obj
 

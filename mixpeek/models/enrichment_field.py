@@ -26,11 +26,12 @@ from typing_extensions import Self
 
 class EnrichmentField(BaseModel):
     """
-    Field-level enrichment behaviour specification.
+    Field-level enrichment behaviour specification.  Defines how to copy fields from taxonomy source nodes to enriched documents. Supports field renaming via target_field parameter.  Examples:     - Copy field as-is: {\"field_path\": \"category\", \"merge_mode\": \"replace\"}     - Rename field: {\"field_path\": \"label\", \"target_field\": \"visual_style\", \"merge_mode\": \"replace\"}     - Append to array: {\"field_path\": \"tags\", \"merge_mode\": \"append\"}
     """ # noqa: E501
     field_path: StrictStr = Field(description="Dot-notation path of the field to copy from the taxonomy node.")
+    target_field: Optional[StrictStr] = Field(default=None, description="Optional target field name in the enriched document. If specified, the source field will be renamed to this name. If not specified, the field_path is used as the target name. Use this to rename fields during enrichment (e.g., label → visual_style).")
     merge_mode: Optional[EnrichmentMergeMode] = Field(default=None, description="Whether to overwrite the target's value or append (for arrays).")
-    __properties: ClassVar[List[str]] = ["field_path", "merge_mode"]
+    __properties: ClassVar[List[str]] = ["field_path", "target_field", "merge_mode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +85,7 @@ class EnrichmentField(BaseModel):
 
         _obj = cls.model_validate({
             "field_path": obj.get("field_path"),
+            "target_field": obj.get("target_field"),
             "merge_mode": obj.get("merge_mode")
         })
         return _obj

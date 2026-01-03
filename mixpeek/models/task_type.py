@@ -21,25 +21,37 @@ from typing_extensions import Self
 
 class TaskType(str, Enum):
     """
-    Types of tasks that can be performed in the system.
+    Types of asynchronous tasks that can be performed in the system.  Task types identify the specific operation being performed. This helps with tracking, debugging, and filtering tasks by operation type.  Categories:     API Tasks: User-initiated operations via API endpoints     Engine Tasks: Background processing tasks     Inference Tasks: Specialized inference operations  API Task Types:     API_NAMESPACES_CREATE: Creating a new namespace     API_NAMESPACES_MIGRATIONS_RUN: Running a namespace migration     API_BUCKETS_OBJECTS_CREATE: Creating objects in a bucket     API_BUCKETS_DELETE: Deleting a bucket and its contents     API_BUCKETS_BATCHES_PROCESS: Processing a batch of objects     API_BUCKETS_BATCHES_SUBMIT: Submitting a batch for processing     API_BUCKETS_UPLOADS_CREATE: Creating an upload session     API_BUCKETS_UPLOADS_CONFIRM: Confirming an upload completion     API_BUCKETS_UPLOADS_BATCH_CONFIRM: Confirming batch upload completion     API_TAXONOMIES_CREATE: Creating a new taxonomy     API_TAXONOMIES_EXECUTE: Executing taxonomy classification     API_TAXONOMIES_MATERIALIZE: Materializing taxonomy results     API_RETRIEVERS_PUBLISH: Publishing retriever assets (OG images, etc.)  Engine Task Types:     ENGINE_FEATURE_EXTRACTOR_RUN: Running feature extraction on data     ENGINE_INFERENCE_RUN: Running inference operations     ENGINE_OBJECT_PROCESSING: Processing object data     ENGINE_CLUSTER_BUILD: Building clusters from data  Inference Task Types:     THUMBNAIL: Generating thumbnails     MATERIALIZE: Materializing processed data  Usage:     Task types are automatically assigned when tasks are created. You can     filter tasks by type when listing or searching for specific operations.
     """
 
     """
     allowed enum values
     """
     API_NAMESPACES_CREATE = 'api_namespaces_create'
+    API_NAMESPACES_DELETE = 'api_namespaces_delete'
+    API_NAMESPACES_MIGRATIONS_RUN = 'api_namespaces_migrations_run'
     API_BUCKETS_OBJECTS_CREATE = 'api_buckets_objects_create'
     API_BUCKETS_DELETE = 'api_buckets_delete'
     API_BUCKETS_BATCHES_PROCESS = 'api_buckets_batches_process'
     API_BUCKETS_BATCHES_SUBMIT = 'api_buckets_batches_submit'
+    API_BUCKETS_UPLOADS_CREATE = 'api_buckets_uploads_create'
+    API_BUCKETS_UPLOADS_CONFIRM = 'api_buckets_uploads_confirm'
+    API_BUCKETS_UPLOADS_BATCH_CONFIRM = 'api_buckets_uploads_batch_confirm'
+    API_COLLECTIONS_DOCUMENTS_CREATE = 'api_collections_documents_create'
+    API_COLLECTIONS_EXTRACTION_ARTIFACTS = 'api_collections_extraction_artifacts'
     API_TAXONOMIES_CREATE = 'api_taxonomies_create'
     API_TAXONOMIES_EXECUTE = 'api_taxonomies_execute'
     API_TAXONOMIES_MATERIALIZE = 'api_taxonomies_materialize'
+    API_EVALUATIONS_RUN = 'api_evaluations_run'
+    API_EVALUATIONS_DATASET_CREATE = 'api_evaluations_dataset_create'
+    API_RETRIEVERS_PUBLISH = 'api_retrievers_publish'
     ENGINE_FEATURE_EXTRACTOR_RUN = 'engine_feature_extractor_run'
     ENGINE_INFERENCE_RUN = 'engine_inference_run'
     ENGINE_OBJECT_PROCESSING = 'engine_object_processing'
     ENGINE_CLUSTER_BUILD = 'engine_cluster_build'
     THUMBNAIL = 'thumbnail'
+    VIDEO_SEGMENT = 'video_segment'
+    AUDIO_SEGMENT = 'audio_segment'
     MATERIALIZE = 'materialize'
 
     @classmethod

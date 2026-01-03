@@ -6,12 +6,13 @@ Optional error messages for dependent services (present when a check fails).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**redis** | **str** | Redis error message, if any | [optional] 
-**mongodb** | **str** | MongoDB error message, if any | [optional] 
-**qdrant** | **str** | Qdrant error message, if any | [optional] 
-**s3** | **str** | S3 error message, if any | [optional] 
-**celery** | **str** | Celery error message, if any | [optional] 
-**engine** | **str** | Engine error message, if any | [optional] 
+**cache** | **str** | Cache layer error message, if any | [optional] 
+**metadata** | **str** | Metadata store error message, if any | [optional] 
+**vector_store** | **str** | Vector database error message, if any | [optional] 
+**object_storage** | **str** | Object storage error message, if any | [optional] 
+**task_queue** | **str** | Task queue error message, if any | [optional] 
+**inference** | **str** | Inference engine error message, if any | [optional] 
+**analytics** | **str** | Analytics backend error message, if any | [optional] 
 
 ## Example
 

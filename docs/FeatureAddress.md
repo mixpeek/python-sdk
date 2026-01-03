@@ -1,6 +1,6 @@
 # FeatureAddress
 
-Canonical feature address: mixpeek://{extractor}@{version}/{output}.  Short form without the output segment is allowed only if the extractor has a single vector output.
+Canonical feature address: mixpeek://{extractor}@{version}/{output}.  The output segment is the inference_name (embedding model identifier), which enables cross-extractor compatibility checking. Two feature URIs with the same inference_name in the output segment produce compatible embeddings that can be compared/fused.  Format examples:     - mixpeek://text_extractor@v1/multilingual_e5_large_instruct_v1     - mixpeek://multimodal_extractor@v1/multilingual_e5_large_instruct_v1  (compatible with above!)     - mixpeek://image_extractor@v1/google_siglip_base_v1  (different model = incompatible)  Short form without the output segment is allowed only if the extractor has a single vector output.
 
 ## Properties
 

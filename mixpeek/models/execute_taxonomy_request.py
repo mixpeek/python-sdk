@@ -24,20 +24,20 @@ from typing_extensions import Annotated
 from mixpeek.models.join_mode import JoinMode
 from mixpeek.models.logical_operator_input import LogicalOperatorInput
 from mixpeek.models.retriever_model_input import RetrieverModelInput
-from mixpeek.models.taxonomy_model import TaxonomyModel
+from mixpeek.models.taxonomy_model_input import TaxonomyModelInput
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ExecuteTaxonomyRequest(BaseModel):
     """
-    Request model for on-demand taxonomy validation and testing.  NOTE: This endpoint only supports ON_DEMAND mode for testing/validation. Batch taxonomy materialization is automatically triggered by the engine after feature extraction completes, based on collection configuration.
+    Request model for on-demand taxonomy validation and testing ONLY.  ⚠️ IMPORTANT: This endpoint is ONLY for testing taxonomy configuration with sample documents.  DO NOT USE THIS FOR BATCH ENRICHMENT: ❌ Do NOT use this to enrich an entire collection ❌ Do NOT use source_collection_id expecting batch processing ❌ Do NOT use target_collection_id expecting persistence  HOW TAXONOMY ENRICHMENT ACTUALLY WORKS: ✅ Automatic during ingestion: Attach taxonomies to collections via `taxonomy_applications` ✅ On-the-fly in retrieval: Add `taxonomy_join` stage to retriever pipelines  This endpoint validates: - Taxonomy configuration is correct - Retriever can find matching taxonomy nodes - Enrichment fields are properly applied  For production enrichment, see: - Collections API: attach taxonomies via `taxonomy_applications` field - Retrievers API: add `taxonomy_join` stage for on-the-fly enrichment
     """ # noqa: E501
-    taxonomy: TaxonomyModel = Field(description="Full taxonomy model with configuration (fetched from DB by controller)")
+    taxonomy: TaxonomyModelInput = Field(description="Full taxonomy model with configuration (fetched from DB by controller)")
     retriever: Optional[RetrieverModelInput] = Field(default=None, description="Optional retriever configuration override for testing. If omitted, uses the retriever configured in the taxonomy.")
-    source_documents: Optional[List[Dict[str, Any]]] = Field(default=None, description="Optional documents to enrich for testing. If omitted, validates configuration without processing documents.")
-    source_collection_id: Optional[StrictStr] = Field(default=None, description="Collection reference (for context/logging only in ON_DEMAND mode)")
-    target_collection_id: Optional[StrictStr] = Field(default=None, description="Not used in ON_DEMAND mode.")
-    join_mode: Optional[JoinMode] = Field(default=None, description="Must be `on_demand`. Batch mode is not supported via API.")
+    source_documents: Optional[List[Dict[str, Any]]] = Field(default=None, description="Sample documents to test enrichment (typically 1-5 docs). Results are returned immediately, not persisted. ⚠️ Do NOT pass collection_id expecting batch processing!")
+    source_collection_id: Optional[StrictStr] = Field(default=None, description="⚠️ IGNORED IN ON_DEMAND MODE. This field exists for legacy compatibility only. To enrich collections, use taxonomy_applications on the collection.")
+    target_collection_id: Optional[StrictStr] = Field(default=None, description="⚠️ IGNORED IN ON_DEMAND MODE. This field exists for legacy compatibility only. Results are never persisted via this endpoint.")
+    join_mode: Optional[JoinMode] = Field(default=None, description="Must be 'on_demand'. BATCH mode is NOT supported via API. Batch enrichment is automatic (triggered by engine during ingestion).")
     batch_size: Optional[Annotated[int, Field(le=10000, strict=True, ge=1)]] = Field(default=1000, description="Batch size for the scroll iterator")
     scroll_filters: Optional[LogicalOperatorInput] = Field(default=None, description="Additional filters applied to the source collection prior to enrichment.")
     __properties: ClassVar[List[str]] = ["taxonomy", "retriever", "source_documents", "source_collection_id", "target_collection_id", "join_mode", "batch_size", "scroll_filters"]
@@ -102,7 +102,7 @@ class ExecuteTaxonomyRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "taxonomy": TaxonomyModel.from_dict(obj["taxonomy"]) if obj.get("taxonomy") is not None else None,
+            "taxonomy": TaxonomyModelInput.from_dict(obj["taxonomy"]) if obj.get("taxonomy") is not None else None,
             "retriever": RetrieverModelInput.from_dict(obj["retriever"]) if obj.get("retriever") is not None else None,
             "source_documents": obj.get("source_documents"),
             "source_collection_id": obj.get("source_collection_id"),

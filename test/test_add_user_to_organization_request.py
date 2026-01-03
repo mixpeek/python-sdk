@@ -37,28 +37,27 @@ class TestAddUserToOrganizationRequest(unittest.TestCase):
         if include_optional:
             return AddUserToOrganizationRequest(
                 organization_identifier = '',
+                logo_url = '',
                 users = [
-                    mixpeek.models.user_model.UserModel(
-                        user_id = '', 
-                        user_name = '', 
+                    mixpeek.models.user_create_request.UserCreateRequest(
                         email = '', 
-                        api_keys = [
-                            mixpeek.models.api_key.APIKey(
-                                key = '', 
-                                name = '', 
-                                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                permissions = [
-                                    'read'
-                                    ], )
-                            ], 
-                        metadata = { }, 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
-                    ],
-                metadata = { }
+                        user_name = '01', 
+                        avatar_url = '', 
+                        role = 'admin', 
+                        metadata = { }, )
+                    ]
             )
         else:
             return AddUserToOrganizationRequest(
                 organization_identifier = '',
+                users = [
+                    mixpeek.models.user_create_request.UserCreateRequest(
+                        email = '', 
+                        user_name = '01', 
+                        avatar_url = '', 
+                        role = 'admin', 
+                        metadata = { }, )
+                    ],
         )
         """
 

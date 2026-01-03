@@ -1,0 +1,15 @@
+# ComputeTier
+
+Available compute tiers for namespace workloads.  Compute tiers determine the infrastructure resources allocated to a namespace for ingestion pipelines, clustering, and other data processing operations.  Tiers:     SHARED: Multi-tenant infrastructure with dynamic resource allocation.         - Best for: Development, testing, low-volume production workloads         - Resources: Shared CPU and memory pool         - Cost: Lowest cost option, pay-per-use credits         - SLA: Best-effort availability      DEDICATED_CPU: Single-tenant CPU compute nodes.         - Best for: Production workloads requiring consistent performance         - Resources: Reserved CPU cores and memory         - Cost: Fixed monthly cost plus usage credits         - SLA: 99.9% uptime guarantee      DEDICATED_GPU: Single-tenant GPU-accelerated compute nodes.         - Best for: Video processing, embedding generation, ML inference         - Resources: Reserved GPU(s), CPU cores, and memory         - Cost: Premium pricing, fixed monthly cost plus usage credits         - SLA: 99.9% uptime guarantee  Examples:     - Use SHARED for development and staging environments     - Use DEDICATED_CPU for production document processing pipelines     - Use DEDICATED_GPU for large-scale video ingestion and analysis
+
+## Enum
+
+* `SHARED` (value: `'shared'`)
+
+* `DEDICATED_CPU` (value: `'dedicated_cpu'`)
+
+* `DEDICATED_GPU` (value: `'dedicated_gpu'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

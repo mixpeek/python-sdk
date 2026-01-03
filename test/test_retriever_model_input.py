@@ -46,7 +46,7 @@ class TestRetrieverModelInput(unittest.TestCase):
                 stages = [
                     mixpeek.models.stage_instance_config.StageInstanceConfig(
                         stage_name = '', 
-                        version = '', 
+                        stage_id = '', 
                         parameters = { }, 
                         pre_filters = { }, 
                         post_filters = { }, 
@@ -59,7 +59,9 @@ class TestRetrieverModelInput(unittest.TestCase):
                 cache_config = mixpeek.models.cache_config.CacheConfig(
                     enabled = True, 
                     ttl_seconds = 0.0, 
-                    stage = 'retrieval', 
+                    cache_stage_names = [
+                        ''
+                        ], 
                     exclude_fields = [
                         ''
                         ], 
@@ -127,7 +129,7 @@ class TestRetrieverModelInput(unittest.TestCase):
                 stages = [
                     mixpeek.models.stage_instance_config.StageInstanceConfig(
                         stage_name = '', 
-                        version = '', 
+                        stage_id = '', 
                         parameters = { }, 
                         pre_filters = { }, 
                         post_filters = { }, 

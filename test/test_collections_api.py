@@ -27,6 +27,13 @@ class TestCollectionsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_clone_collection(self) -> None:
+        """Test case for clone_collection
+
+        Clone Collection
+        """
+        pass
+
     def test_create_collection(self) -> None:
         """Test case for create_collection
 
@@ -59,6 +66,13 @@ class TestCollectionsApi(unittest.TestCase):
         """Test case for list_collections
 
         List Collections
+        """
+        pass
+
+    def test_trigger_collection(self) -> None:
+        """Test case for trigger_collection
+
+        Trigger Collection Processing
         """
         pass
 

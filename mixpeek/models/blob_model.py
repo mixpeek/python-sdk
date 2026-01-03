@@ -22,22 +22,20 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.blob_details import BlobDetails
 from mixpeek.models.bucket_schema_field_type import BucketSchemaFieldType
-from mixpeek.models.data import Data
 from typing import Optional, Set
 from typing_extensions import Self
 
 class BlobModel(BaseModel):
     """
-    Model for a blob within a bucket object.
+    Model for a blob within a bucket object.  Blobs store file references with a flat properties structure. All blob-specific data (formerly in separate 'data' and 'metadata' fields) is now unified in a single 'properties' dictionary.  Example:     {         \"blob_id\": \"blob_xyz123\",         \"property\": \"video\",         \"type\": \"video\",         \"properties\": {             \"url\": \"s3://bucket/video.mp4\",             \"duration\": 120,             \"resolution\": \"1920x1080\",             \"author\": \"John Doe\"  # All data unified here         }     }
     """ # noqa: E501
     blob_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the blob")
     var_property: StrictStr = Field(description="Property name of the blob", alias="property")
     key_prefix: Optional[StrictStr] = Field(default=None, description="Storage key/path of the blob, this will be used to retrieve the blob from the storage. It is similar to a file path. If not provided, it will be placed in the root of the bucket.")
     type: BucketSchemaFieldType = Field(description="The schema field type this blob corresponds to (e.g., IMAGE, PDF, DOCUMENT)")
-    data: Data
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Metadata for the blob, this will only be applied to the documents that use this blob")
-    details: Optional[BlobDetails] = Field(default=None, description="Details of the blob")
-    __properties: ClassVar[List[str]] = ["blob_id", "property", "key_prefix", "type", "data", "metadata", "details"]
+    properties: Optional[Dict[str, Any]] = Field(default=None, description="All blob data and metadata unified (formerly separate 'data' and 'metadata' fields). Contains URLs, dimensions, metadata, and any other blob-specific information.")
+    details: Optional[BlobDetails] = Field(default=None, description="System-generated file details (filename, size, hash, etc.)")
+    __properties: ClassVar[List[str]] = ["blob_id", "property", "key_prefix", "type", "properties", "details"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,9 +76,6 @@ class BlobModel(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict['data'] = self.data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of details
         if self.details:
             _dict['details'] = self.details.to_dict()
@@ -100,8 +95,7 @@ class BlobModel(BaseModel):
             "property": obj.get("property"),
             "key_prefix": obj.get("key_prefix"),
             "type": obj.get("type"),
-            "data": Data.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "metadata": obj.get("metadata"),
+            "properties": obj.get("properties"),
             "details": BlobDetails.from_dict(obj["details"]) if obj.get("details") is not None else None
         })
         return _obj

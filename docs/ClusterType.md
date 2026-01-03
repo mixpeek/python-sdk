@@ -1,6 +1,6 @@
 # ClusterType
 
-Type of clustering to perform.
+Type of clustering to perform.  Determines the clustering approach: - vector: Cluster documents by embedding similarity (semantic clustering) - attribute: Cluster documents by metadata attributes (business logic clustering)  Use Cases:     vector:         - Group semantically similar content         - Find content with similar meaning         - Organize by topic/theme         - Requires vector embeddings      attribute:         - Group by business attributes (category, brand, status, etc.)         - Organize by explicit metadata         - Create hierarchical groupings         - No embeddings required
 
 ## Enum
 

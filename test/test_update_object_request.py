@@ -39,10 +39,11 @@ class TestUpdateObjectRequest(unittest.TestCase):
                 key_prefix = '',
                 blobs = [
                     mixpeek.models.create_blob_request.CreateBlobRequest(
-                        property = '', 
+                        property = '0', 
                         key_prefix = '', 
                         type = 'string', 
                         data = null, 
+                        upload_id = 'upl_z', 
                         metadata = { }, 
                         canonicalize_source = True, 
                         force_remirror = True, )

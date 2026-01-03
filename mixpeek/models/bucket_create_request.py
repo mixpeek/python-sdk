@@ -21,18 +21,20 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.bucket_schema_input import BucketSchemaInput
+from mixpeek.models.unique_key_config import UniqueKeyConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
 class BucketCreateRequest(BaseModel):
     """
-    Request model for creating a new bucket.  CRITICAL: Define a bucket_schema if you plan to create collections that process this bucket's data.  The bucket_schema tells the system what fields your objects will have, enabling: - Collections to map your data fields to feature extractors via input_mappings - Validation of object structure at upload time - Type-safe data pipelines from bucket → collection → retrieval  Without a bucket_schema, you can still store objects, but collections won't be able to use input_mappings to reference your custom fields.
+    Request model for creating a new bucket.  REQUIRED: A bucket_schema must be defined to enable data processing and validation.  The bucket_schema tells the system what fields your objects will have, enabling: - Collections to map your data fields to feature extractors via input_mappings - Validation of object structure at upload time - Type-safe data pipelines from bucket → collection → retrieval  Every bucket must have a schema that defines the structure of objects it will contain.
     """ # noqa: E501
     bucket_name: StrictStr = Field(description="Human-readable name for the bucket")
     description: Optional[StrictStr] = Field(default=None, description="Description of the bucket")
-    bucket_schema: Optional[BucketSchemaInput] = Field(default=None, description="Schema definition for objects in this bucket. REQUIRED if you want collections to use input_mappings. Defines the custom fields your objects will have (blob properties, metadata structure, etc.)")
+    bucket_schema: BucketSchemaInput = Field(description="Schema definition for objects in this bucket (REQUIRED). Defines the custom fields your objects will have (blob properties, metadata structure, etc.)")
+    unique_key: Optional[UniqueKeyConfig] = Field(default=None, description="Unique key configuration for this bucket (OPTIONAL). Enables uniqueness enforcement and upsert operations on specified field(s) from the schema. Cannot be changed after bucket creation.")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the bucket")
-    __properties: ClassVar[List[str]] = ["bucket_name", "description", "bucket_schema", "metadata"]
+    __properties: ClassVar[List[str]] = ["bucket_name", "description", "bucket_schema", "unique_key", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -76,6 +78,9 @@ class BucketCreateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of bucket_schema
         if self.bucket_schema:
             _dict['bucket_schema'] = self.bucket_schema.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of unique_key
+        if self.unique_key:
+            _dict['unique_key'] = self.unique_key.to_dict()
         return _dict
 
     @classmethod
@@ -91,6 +96,7 @@ class BucketCreateRequest(BaseModel):
             "bucket_name": obj.get("bucket_name"),
             "description": obj.get("description"),
             "bucket_schema": BucketSchemaInput.from_dict(obj["bucket_schema"]) if obj.get("bucket_schema") is not None else None,
+            "unique_key": UniqueKeyConfig.from_dict(obj["unique_key"]) if obj.get("unique_key") is not None else None,
             "metadata": obj.get("metadata")
         })
         return _obj

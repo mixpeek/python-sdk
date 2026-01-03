@@ -29,8 +29,8 @@ class ListTaxonomiesRequest(BaseModel):
     """
     Request model to list taxonomies.
     """ # noqa: E501
-    search: Optional[StrictStr] = Field(default=None, description="Search term to filter taxonomies by name")
-    filters: Optional[LogicalOperatorInput] = Field(default=None, description="Filters to apply to the taxonomy list")
+    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across taxonomy_id, taxonomy_name, description, and other text fields")
+    filters: Optional[LogicalOperatorInput] = Field(default=None, description="Filters to apply to the taxonomy list. Supports filtering by taxonomy_id or taxonomy_name.")
     sort: Optional[SortOption] = Field(default=None, description="Sort configuration for the taxonomy list")
     case_sensitive: Optional[StrictBool] = Field(default=False, description="If True, filters and search will be case-sensitive")
     __properties: ClassVar[List[str]] = ["search", "filters", "sort", "case_sensitive"]

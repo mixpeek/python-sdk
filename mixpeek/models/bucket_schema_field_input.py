@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.bucket_schema_field_type import BucketSchemaFieldType
 from typing import Optional, Set
@@ -32,12 +32,12 @@ class BucketSchemaFieldInput(BaseModel):
     default: Optional[Any] = None
     items: Optional[BucketSchemaFieldInput] = None
     properties: Optional[Dict[str, BucketSchemaFieldInput]] = None
-    example: Optional[Any] = None
+    examples: Optional[List[Any]] = Field(default=None, description="OPTIONAL. List of example values for this field. Used by Apps to show example inputs in the UI. Provide multiple diverse examples when possible.")
     description: Optional[StrictStr] = None
     enum: Optional[List[Any]] = None
     required: Optional[StrictBool] = False
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["type", "default", "items", "properties", "example", "description", "enum", "required"]
+    __properties: ClassVar[List[str]] = ["type", "default", "items", "properties", "examples", "description", "enum", "required"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,11 +100,6 @@ class BucketSchemaFieldInput(BaseModel):
         if self.default is None and "default" in self.model_fields_set:
             _dict['default'] = None
 
-        # set to None if example (nullable) is None
-        # and model_fields_set contains the field
-        if self.example is None and "example" in self.model_fields_set:
-            _dict['example'] = None
-
         return _dict
 
     @classmethod
@@ -126,7 +121,7 @@ class BucketSchemaFieldInput(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "example": obj.get("example"),
+            "examples": obj.get("examples"),
             "description": obj.get("description"),
             "enum": obj.get("enum"),
             "required": obj.get("required") if obj.get("required") is not None else False

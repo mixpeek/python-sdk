@@ -18,20 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class BaseRateLimits(BaseModel):
     """
-    Base rate limits.
+    Rate limits by operation type (requests per minute).  The rate limiting system uses 5 categories aligned with actual resource consumption:  Categories:     metadata: Infrastructure and configuration operations (namespaces, collections,              retrievers, taxonomies, clusters CRUD). Zero-credit operations with              highest rate limits.      data: Data operations (objects, documents CRUD). Low-credit operations with           high rate limits.      search: Search and retrieval operations (retriever/taxonomy execution).             Medium-credit operations with moderate rate limits.      upload: File upload operations (credit-intensive: 1 credit/MB). Variable-credit             operations with lower rate limits.      compute: Compute operations (cluster execution, batch processing). High-credit              operations (10 credits/min video) with lowest rate limits.  Rate Limit Strategy:     Higher limits for low-cost operations (metadata, data)     Lower limits for high-cost operations (upload, compute)     This aligns API throttling with actual infrastructure costs  Examples:     - Creating a namespace: Uses 'metadata' category (fast, cheap)     - Uploading a file: Uses 'upload' category (slow, expensive per MB)     - Executing a retriever: Uses 'search' category (moderate cost)     - Running batch processing: Uses 'compute' category (very expensive)
     """ # noqa: E501
-    default: Optional[StrictInt] = 10
-    search: Optional[StrictInt] = 10
-    upload: Optional[StrictInt] = 10
-    delete: Optional[StrictInt] = 10
-    __properties: ClassVar[List[str]] = ["default", "search", "upload", "delete"]
+    metadata: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=10, description="REQUIRED. Rate limit for infrastructure and configuration operations (namespaces, collections, retrievers, taxonomies, clusters CRUD). These are zero-credit operations with highest rate limits since they're cheap to execute. Examples: creating collections, updating retrievers, listing namespaces.")
+    data: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=10, description="REQUIRED. Rate limit for data operations (objects, documents CRUD). Low-credit operations with high rate limits. Examples: creating documents, updating objects, batch document updates.")
+    search: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=10, description="REQUIRED. Rate limit for search and retrieval operations (retriever/taxonomy execution). Medium-credit operations with moderate rate limits. Examples: executing retrievers, running taxonomy matching.")
+    upload: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=10, description="REQUIRED. Rate limit for file upload operations. Credit-intensive (1 credit/MB) with lower rate limits to prevent excessive resource consumption. Examples: uploading files, generating presigned URLs.")
+    compute: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=10, description="REQUIRED. Rate limit for compute operations (cluster execution, batch processing). High-credit operations (10 credits/min video) with lowest rate limits. Examples: submitting batches, executing clusters, triggering syncs.")
+    __properties: ClassVar[List[str]] = ["metadata", "data", "search", "upload", "compute"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,10 +86,11 @@ class BaseRateLimits(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "default": obj.get("default") if obj.get("default") is not None else 10,
+            "metadata": obj.get("metadata") if obj.get("metadata") is not None else 10,
+            "data": obj.get("data") if obj.get("data") is not None else 10,
             "search": obj.get("search") if obj.get("search") is not None else 10,
             "upload": obj.get("upload") if obj.get("upload") is not None else 10,
-            "delete": obj.get("delete") if obj.get("delete") is not None else 10
+            "compute": obj.get("compute") if obj.get("compute") is not None else 10
         })
         return _obj
 

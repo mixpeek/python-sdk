@@ -18,14 +18,14 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from typing import Any, Optional
 from typing_extensions import Annotated
 from mixpeek.models.bucket_create_request import BucketCreateRequest
+from mixpeek.models.bucket_patch_request import BucketPatchRequest
 from mixpeek.models.bucket_response import BucketResponse
 from mixpeek.models.bucket_update_request import BucketUpdateRequest
 from mixpeek.models.list_buckets_request import ListBucketsRequest
 from mixpeek.models.list_buckets_response import ListBucketsResponse
-from mixpeek.models.task_response import TaskResponse
 
 from mixpeek.api_client import ApiClient, RequestSerialized
 from mixpeek.api_response import ApiResponse
@@ -49,8 +49,8 @@ class BucketsApi:
     def create_bucket(
         self,
         bucket_create_request: BucketCreateRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -70,9 +70,9 @@ class BucketsApi:
 
         :param bucket_create_request: (required)
         :type bucket_create_request: BucketCreateRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -130,8 +130,8 @@ class BucketsApi:
     def create_bucket_with_http_info(
         self,
         bucket_create_request: BucketCreateRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -151,9 +151,9 @@ class BucketsApi:
 
         :param bucket_create_request: (required)
         :type bucket_create_request: BucketCreateRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -211,8 +211,8 @@ class BucketsApi:
     def create_bucket_without_preload_content(
         self,
         bucket_create_request: BucketCreateRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -232,9 +232,9 @@ class BucketsApi:
 
         :param bucket_create_request: (required)
         :type bucket_create_request: BucketCreateRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -370,8 +370,8 @@ class BucketsApi:
     def delete_bucket(
         self,
         bucket_identifier: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -384,16 +384,16 @@ class BucketsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TaskResponse:
+    ) -> object:
         """Delete Bucket
 
-        This endpoint deletes a bucket and all its objects.
+        This endpoint deletes a bucket and all its resources including:     - S3 objects and blobs     - Running Ray jobs (cancels active batch processing jobs)     - Batch processing artifacts     - Upload files     - Unique key lookups     - MongoDB metadata      The deletion is performed **asynchronously** via a background task.     Returns immediately with a task_id that can be polled via GET /v1/tasks/{task_id}.      **Response**:     - `task_id`: Use this to poll deletion status via GET /v1/tasks/{task_id}     - `status`: Initial status (PENDING)     - `bucket_id`: The bucket being deleted     - `bucket_name`: Name of the bucket     - `object_count`: Number of objects that will be deleted      **Polling**:     Poll GET /v1/tasks/{task_id} until status is COMPLETED or FAILED.     Use exponential backoff (start 1s, max 30s).
 
         :param bucket_identifier: (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -428,7 +428,7 @@ class BucketsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TaskResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -451,8 +451,8 @@ class BucketsApi:
     def delete_bucket_with_http_info(
         self,
         bucket_identifier: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,16 +465,16 @@ class BucketsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TaskResponse]:
+    ) -> ApiResponse[object]:
         """Delete Bucket
 
-        This endpoint deletes a bucket and all its objects.
+        This endpoint deletes a bucket and all its resources including:     - S3 objects and blobs     - Running Ray jobs (cancels active batch processing jobs)     - Batch processing artifacts     - Upload files     - Unique key lookups     - MongoDB metadata      The deletion is performed **asynchronously** via a background task.     Returns immediately with a task_id that can be polled via GET /v1/tasks/{task_id}.      **Response**:     - `task_id`: Use this to poll deletion status via GET /v1/tasks/{task_id}     - `status`: Initial status (PENDING)     - `bucket_id`: The bucket being deleted     - `bucket_name`: Name of the bucket     - `object_count`: Number of objects that will be deleted      **Polling**:     Poll GET /v1/tasks/{task_id} until status is COMPLETED or FAILED.     Use exponential backoff (start 1s, max 30s).
 
         :param bucket_identifier: (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -509,7 +509,7 @@ class BucketsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TaskResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -532,8 +532,8 @@ class BucketsApi:
     def delete_bucket_without_preload_content(
         self,
         bucket_identifier: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -549,13 +549,13 @@ class BucketsApi:
     ) -> RESTResponseType:
         """Delete Bucket
 
-        This endpoint deletes a bucket and all its objects.
+        This endpoint deletes a bucket and all its resources including:     - S3 objects and blobs     - Running Ray jobs (cancels active batch processing jobs)     - Batch processing artifacts     - Upload files     - Unique key lookups     - MongoDB metadata      The deletion is performed **asynchronously** via a background task.     Returns immediately with a task_id that can be polled via GET /v1/tasks/{task_id}.      **Response**:     - `task_id`: Use this to poll deletion status via GET /v1/tasks/{task_id}     - `status`: Initial status (PENDING)     - `bucket_id`: The bucket being deleted     - `bucket_name`: Name of the bucket     - `object_count`: Number of objects that will be deleted      **Polling**:     Poll GET /v1/tasks/{task_id} until status is COMPLETED or FAILED.     Use exponential backoff (start 1s, max 30s).
 
         :param bucket_identifier: (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -590,7 +590,7 @@ class BucketsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TaskResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -678,8 +678,8 @@ class BucketsApi:
     def get_bucket(
         self,
         bucket_identifier: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -699,9 +699,9 @@ class BucketsApi:
 
         :param bucket_identifier: (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -759,8 +759,8 @@ class BucketsApi:
     def get_bucket_with_http_info(
         self,
         bucket_identifier: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -780,9 +780,9 @@ class BucketsApi:
 
         :param bucket_identifier: (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -840,8 +840,8 @@ class BucketsApi:
     def get_bucket_without_preload_content(
         self,
         bucket_identifier: StrictStr,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -861,9 +861,9 @@ class BucketsApi:
 
         :param bucket_identifier: (required)
         :type bucket_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -985,8 +985,8 @@ class BucketsApi:
     @validate_call
     def list_buckets(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_buckets_request: Optional[ListBucketsRequest] = None,
         _request_timeout: Union[
             None,
@@ -1005,9 +1005,9 @@ class BucketsApi:
 
         This endpoint lists buckets with pagination, sorting, and filtering options.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_buckets_request:
         :type list_buckets_request: ListBucketsRequest
@@ -1066,8 +1066,8 @@ class BucketsApi:
     @validate_call
     def list_buckets_with_http_info(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_buckets_request: Optional[ListBucketsRequest] = None,
         _request_timeout: Union[
             None,
@@ -1086,9 +1086,9 @@ class BucketsApi:
 
         This endpoint lists buckets with pagination, sorting, and filtering options.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_buckets_request:
         :type list_buckets_request: ListBucketsRequest
@@ -1147,8 +1147,8 @@ class BucketsApi:
     @validate_call
     def list_buckets_without_preload_content(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_buckets_request: Optional[ListBucketsRequest] = None,
         _request_timeout: Union[
             None,
@@ -1167,9 +1167,9 @@ class BucketsApi:
 
         This endpoint lists buckets with pagination, sorting, and filtering options.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_buckets_request:
         :type list_buckets_request: ListBucketsRequest
@@ -1304,12 +1304,348 @@ class BucketsApi:
 
 
     @validate_call
+    def patch_bucket(
+        self,
+        bucket_identifier: StrictStr,
+        bucket_patch_request: BucketPatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> BucketResponse:
+        """Partially Update Bucket
+
+        This endpoint allows you to partially update an existing bucket (PATCH operation).     Only provided fields will be updated. At minimum, metadata can always be updated.     Immutable fields like bucket_id and timestamps cannot be modified.
+
+        :param bucket_identifier: (required)
+        :type bucket_identifier: str
+        :param bucket_patch_request: (required)
+        :type bucket_patch_request: BucketPatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_bucket_serialize(
+            bucket_identifier=bucket_identifier,
+            bucket_patch_request=bucket_patch_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BucketResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def patch_bucket_with_http_info(
+        self,
+        bucket_identifier: StrictStr,
+        bucket_patch_request: BucketPatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[BucketResponse]:
+        """Partially Update Bucket
+
+        This endpoint allows you to partially update an existing bucket (PATCH operation).     Only provided fields will be updated. At minimum, metadata can always be updated.     Immutable fields like bucket_id and timestamps cannot be modified.
+
+        :param bucket_identifier: (required)
+        :type bucket_identifier: str
+        :param bucket_patch_request: (required)
+        :type bucket_patch_request: BucketPatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_bucket_serialize(
+            bucket_identifier=bucket_identifier,
+            bucket_patch_request=bucket_patch_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BucketResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def patch_bucket_without_preload_content(
+        self,
+        bucket_identifier: StrictStr,
+        bucket_patch_request: BucketPatchRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Partially Update Bucket
+
+        This endpoint allows you to partially update an existing bucket (PATCH operation).     Only provided fields will be updated. At minimum, metadata can always be updated.     Immutable fields like bucket_id and timestamps cannot be modified.
+
+        :param bucket_identifier: (required)
+        :type bucket_identifier: str
+        :param bucket_patch_request: (required)
+        :type bucket_patch_request: BucketPatchRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_bucket_serialize(
+            bucket_identifier=bucket_identifier,
+            bucket_patch_request=bucket_patch_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "BucketResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _patch_bucket_serialize(
+        self,
+        bucket_identifier,
+        bucket_patch_request,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if bucket_identifier is not None:
+            _path_params['bucket_identifier'] = bucket_identifier
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if bucket_patch_request is not None:
+            _body_params = bucket_patch_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/v1/buckets/{bucket_identifier}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def update_bucket(
         self,
         bucket_identifier: StrictStr,
         bucket_update_request: BucketUpdateRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1331,9 +1667,9 @@ class BucketsApi:
         :type bucket_identifier: str
         :param bucket_update_request: (required)
         :type bucket_update_request: BucketUpdateRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1393,8 +1729,8 @@ class BucketsApi:
         self,
         bucket_identifier: StrictStr,
         bucket_update_request: BucketUpdateRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1416,9 +1752,9 @@ class BucketsApi:
         :type bucket_identifier: str
         :param bucket_update_request: (required)
         :type bucket_update_request: BucketUpdateRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1478,8 +1814,8 @@ class BucketsApi:
         self,
         bucket_identifier: StrictStr,
         bucket_update_request: BucketUpdateRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1501,9 +1837,9 @@ class BucketsApi:
         :type bucket_identifier: str
         :param bucket_update_request: (required)
         :type bucket_update_request: BucketUpdateRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

@@ -38,10 +38,17 @@ class TestOrganizationAdminUpdateRequest(unittest.TestCase):
             return OrganizationAdminUpdateRequest(
                 account_type = 'free',
                 rate_limits = mixpeek.models.base_rate_limits.BaseRateLimits(
-                    default = 56, 
-                    search = 56, 
-                    upload = 56, 
-                    delete = 56, )
+                    metadata = 1.0, 
+                    data = 1.0, 
+                    search = 1.0, 
+                    upload = 1.0, 
+                    compute = 1.0, ),
+                infrastructure = mixpeek.models.organization_infrastructure.OrganizationInfrastructure(
+                    qdrant_url = '', 
+                    qdrant_api_key = '', 
+                    ray_head_node_url = '', 
+                    ray_dashboard_url = '', 
+                    compute_tier = 'shared', )
             )
         else:
             return OrganizationAdminUpdateRequest(

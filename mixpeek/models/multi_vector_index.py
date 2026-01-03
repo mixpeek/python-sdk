@@ -18,19 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from mixpeek.models.vector_index import VectorIndex
 from typing import Optional, Set
 from typing_extensions import Self
 
 class MultiVectorIndex(BaseModel):
     """
-    Configuration for multi-vector indexes.
+    Configuration for multi-vector indexes.  Allows a single extractor to produce multiple named vector outputs in one index. Useful for hybrid search combining different embedding types or multiple models.  Use Cases:     - Hybrid dense + sparse embeddings in one index     - Multiple models for ensemble retrieval     - Different granularities (sentence + paragraph embeddings)  Requirements:     - name: REQUIRED - Full qualified name for the multi-vector index     - description: REQUIRED - Explain what vector combinations are included     - vectors: REQUIRED - Dictionary mapping output names to VectorIndex configs  Note: Currently less common than single VectorIndex. Most extractors use separate VectorIndexDefinitions for each output instead.
     """ # noqa: E501
-    name: StrictStr
-    description: StrictStr
-    vectors: Dict[str, VectorIndex]
+    name: Annotated[str, Field(min_length=1, strict=True)] = Field(description="REQUIRED. Fully-qualified name for the multi-vector index. Format: {extractor}_{version}_{output} (e.g., 'hybrid_extractor_v1_multi'). Must be unique across namespace.")
+    description: Annotated[str, Field(min_length=10, strict=True)] = Field(description="REQUIRED. Human-readable description of the multi-vector index. Explain what vector types are included and their purposes. Describe use cases for this multi-vector configuration.")
+    vectors: Dict[str, VectorIndex] = Field(description="REQUIRED. Dictionary mapping vector output names to their VectorIndex configurations. Each key is a unique identifier for that vector type within this multi-index. Each value is a complete VectorIndex with its own dimensions, type, and inference service. Example keys: 'dense', 'sparse', 'primary', 'secondary'.")
     __properties: ClassVar[List[str]] = ["name", "description", "vectors"]
 
     model_config = ConfigDict(

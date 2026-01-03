@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.taxonomy_list_stats import TaxonomyListStats
 from mixpeek.models.taxonomy_response import TaxonomyResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +32,8 @@ class ListTaxonomiesResponse(BaseModel):
     results: List[TaxonomyResponse]
     pagination: Dict[str, Any]
     total_count: StrictInt
-    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count"]
+    stats: Optional[TaxonomyListStats] = Field(default=None, description="Aggregate statistics across all taxonomies in the result")
+    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +81,9 @@ class ListTaxonomiesResponse(BaseModel):
                 if _item_results:
                     _items.append(_item_results.to_dict())
             _dict['results'] = _items
+        # override the default output from pydantic by calling `to_dict()` of stats
+        if self.stats:
+            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -93,7 +98,8 @@ class ListTaxonomiesResponse(BaseModel):
         _obj = cls.model_validate({
             "results": [TaxonomyResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "pagination": obj.get("pagination"),
-            "total_count": obj.get("total_count")
+            "total_count": obj.get("total_count"),
+            "stats": TaxonomyListStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None
         })
         return _obj
 

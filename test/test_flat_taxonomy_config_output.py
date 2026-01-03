@@ -50,8 +50,24 @@ class TestFlatTaxonomyConfigOutput(unittest.TestCase):
                     enrichment_fields = [
                         mixpeek.models.enrichment_field.EnrichmentField(
                             field_path = '', 
+                            target_field = '', 
                             merge_mode = 'replace', )
-                        ], )
+                        ], ),
+                step_analytics = mixpeek.models.step_analytics_config.StepAnalyticsConfig(
+                    timestamp_field = '', 
+                    sequence_id_field = '', 
+                    step_key_source = 'assignment_label', 
+                    step_key_field_path = '', 
+                    covariates = [
+                        mixpeek.models.covariate_config.CovariateConfig(
+                            field_path = '', 
+                            covariate_type = 'categorical', 
+                            name = '0', 
+                            binning_strategy = 'quartiles', 
+                            clustering_method = 'kmeans', 
+                            n_clusters = 2.0, )
+                        ], 
+                    max_sequence_duration_days = 1.0, )
             )
         else:
             return FlatTaxonomyConfigOutput(
@@ -68,6 +84,7 @@ class TestFlatTaxonomyConfigOutput(unittest.TestCase):
                     enrichment_fields = [
                         mixpeek.models.enrichment_field.EnrichmentField(
                             field_path = '', 
+                            target_field = '', 
                             merge_mode = 'replace', )
                         ], ),
         )

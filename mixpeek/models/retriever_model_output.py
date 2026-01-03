@@ -19,46 +19,37 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.cache_config import CacheConfig
-from mixpeek.models.collection_detail import CollectionDetail
-from mixpeek.models.creator_info import CreatorInfo
-from mixpeek.models.health_check_output import HealthCheckOutput
-from mixpeek.models.retriever_schema_output import RetrieverSchemaOutput
-from mixpeek.models.retriever_status import RetrieverStatus
-from mixpeek.models.revision_history_entry import RevisionHistoryEntry
-from mixpeek.models.stage_instance_config_output import StageInstanceConfigOutput
-from mixpeek.models.usage_statistics import UsageStatistics
+from typing_extensions import Annotated
+from mixpeek.models.budget_limits import BudgetLimits
+from mixpeek.models.feature_address import FeatureAddress
+from mixpeek.models.retriever_input_schema_field_output import RetrieverInputSchemaFieldOutput
+from mixpeek.models.stage_config import StageConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
 class RetrieverModelOutput(BaseModel):
     """
-    Retriever model.
+    Retriever configuration model exposed via API.
     """ # noqa: E501
-    retriever_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the retriever")
-    retriever_name: StrictStr = Field(description="Name of the retriever")
-    description: Optional[StrictStr] = Field(default=None, description="Description of the retriever")
-    input_schema: RetrieverSchemaOutput = Field(description="Input schema for the retriever")
-    collection_ids: List[StrictStr] = Field(description="List of collection IDs")
-    stages: List[StageInstanceConfigOutput] = Field(description="List of stage configurations")
-    cache_config: Optional[CacheConfig] = Field(default=None, description="Cache configuration for this retriever. If not provided, caching is disabled.")
-    created_at: Optional[datetime] = Field(default=None, description="When the retriever was created")
-    updated_at: Optional[datetime] = Field(default=None, description="When the retriever was last modified")
-    last_executed_at: Optional[datetime] = Field(default=None, description="When the retriever was last executed")
-    enabled: Optional[StrictBool] = Field(default=True, description="Whether the retriever is enabled (can be toggled on/off)")
-    status: Optional[RetrieverStatus] = Field(default=None, description="Current operational status")
-    usage_stats: Optional[UsageStatistics] = Field(default=None, description="Usage and performance statistics")
-    collections: Optional[List[CollectionDetail]] = Field(default=None, description="Expanded collection details with names and metadata")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Custom key-value metadata")
-    tags: Optional[List[StrictStr]] = Field(default=None, description="Tags for organization and filtering")
-    created_by: Optional[CreatorInfo] = Field(default=None, description="Information about who created this retriever")
-    updated_by: Optional[CreatorInfo] = Field(default=None, description="Information about who last updated this retriever")
-    version: Optional[StrictInt] = Field(default=1, description="Version number (increments on each update)")
-    revision_history: Optional[List[RevisionHistoryEntry]] = Field(default=None, description="History of changes (optional, last N changes)")
-    health: Optional[HealthCheckOutput] = Field(default=None, description="Health status and diagnostics")
-    __properties: ClassVar[List[str]] = ["retriever_id", "retriever_name", "description", "input_schema", "collection_ids", "stages", "cache_config", "created_at", "updated_at", "last_executed_at", "enabled", "status", "usage_stats", "collections", "metadata", "tags", "created_by", "updated_by", "version", "revision_history", "health"]
+    retriever_id: Optional[StrictStr] = Field(default=None, description="Stable retriever identifier (REQUIRED).")
+    retriever_name: Annotated[str, Field(min_length=1, strict=True)] = Field(description="Unique retriever name within namespace (REQUIRED).")
+    description: Optional[StrictStr] = Field(default=None, description="Detailed description of retriever behaviour (OPTIONAL).")
+    collection_ids: Optional[List[StrictStr]] = Field(default=None, description="Collections queried by the retriever. Can be empty for query-only inference mode.")
+    stages: Annotated[List[StageConfig], Field(min_length=1)] = Field(description="Ordered list of stage configurations (REQUIRED).")
+    input_schema: Optional[Dict[str, RetrieverInputSchemaFieldOutput]] = Field(default=None, description="JSON Schema describing expected user inputs (REQUIRED). Properties must use RetrieverInputSchemaField which supports all bucket types plus document_reference.")
+    budget_limits: Optional[BudgetLimits] = Field(default=None, description="Execution budget limits for the retriever (OPTIONAL).")
+    feature_dependencies: Optional[List[FeatureAddress]] = Field(default=None, description="Feature addresses required by stages (OPTIONAL, aids validation).")
+    tags: Optional[List[StrictStr]] = Field(default=None, description="Arbitrary tags to help organise retrievers (OPTIONAL).")
+    display_config: Optional[Dict[str, Any]] = Field(default=None, description="Display configuration for public retriever UI rendering (OPTIONAL). Defines how the search interface should appear when the retriever is published, including input fields, theme, layout, exposed result fields, and field formatting. This configuration is used as the default when publishing the retriever.")
+    version: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=1, description="Version number that increments on each update (REQUIRED).")
+    created_at: Optional[datetime] = Field(default=None, description="Creation timestamp in UTC (REQUIRED).")
+    updated_at: Optional[datetime] = Field(default=None, description="Last update timestamp in UTC (REQUIRED).")
+    created_by: Optional[StrictStr] = Field(default=None, description="Identifier of the user who created the retriever (OPTIONAL).")
+    updated_by: Optional[StrictStr] = Field(default=None, description="Identifier of the user who last updated the retriever (OPTIONAL).")
+    is_published: Optional[StrictBool] = Field(default=False, description="Whether this retriever is currently published as a public API")
+    __properties: ClassVar[List[str]] = ["retriever_id", "retriever_name", "description", "collection_ids", "stages", "input_schema", "budget_limits", "feature_dependencies", "tags", "display_config", "version", "created_at", "updated_at", "created_by", "updated_by", "is_published"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -99,9 +90,6 @@ class RetrieverModelOutput(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of input_schema
-        if self.input_schema:
-            _dict['input_schema'] = self.input_schema.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in stages (list)
         _items = []
         if self.stages:
@@ -109,35 +97,23 @@ class RetrieverModelOutput(BaseModel):
                 if _item_stages:
                     _items.append(_item_stages.to_dict())
             _dict['stages'] = _items
-        # override the default output from pydantic by calling `to_dict()` of cache_config
-        if self.cache_config:
-            _dict['cache_config'] = self.cache_config.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of usage_stats
-        if self.usage_stats:
-            _dict['usage_stats'] = self.usage_stats.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in collections (list)
+        # override the default output from pydantic by calling `to_dict()` of each value in input_schema (dict)
+        _field_dict = {}
+        if self.input_schema:
+            for _key_input_schema in self.input_schema:
+                if self.input_schema[_key_input_schema]:
+                    _field_dict[_key_input_schema] = self.input_schema[_key_input_schema].to_dict()
+            _dict['input_schema'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of budget_limits
+        if self.budget_limits:
+            _dict['budget_limits'] = self.budget_limits.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in feature_dependencies (list)
         _items = []
-        if self.collections:
-            for _item_collections in self.collections:
-                if _item_collections:
-                    _items.append(_item_collections.to_dict())
-            _dict['collections'] = _items
-        # override the default output from pydantic by calling `to_dict()` of created_by
-        if self.created_by:
-            _dict['created_by'] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of updated_by
-        if self.updated_by:
-            _dict['updated_by'] = self.updated_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in revision_history (list)
-        _items = []
-        if self.revision_history:
-            for _item_revision_history in self.revision_history:
-                if _item_revision_history:
-                    _items.append(_item_revision_history.to_dict())
-            _dict['revision_history'] = _items
-        # override the default output from pydantic by calling `to_dict()` of health
-        if self.health:
-            _dict['health'] = self.health.to_dict()
+        if self.feature_dependencies:
+            for _item_feature_dependencies in self.feature_dependencies:
+                if _item_feature_dependencies:
+                    _items.append(_item_feature_dependencies.to_dict())
+            _dict['feature_dependencies'] = _items
         return _dict
 
     @classmethod
@@ -153,24 +129,24 @@ class RetrieverModelOutput(BaseModel):
             "retriever_id": obj.get("retriever_id"),
             "retriever_name": obj.get("retriever_name"),
             "description": obj.get("description"),
-            "input_schema": RetrieverSchemaOutput.from_dict(obj["input_schema"]) if obj.get("input_schema") is not None else None,
             "collection_ids": obj.get("collection_ids"),
-            "stages": [StageInstanceConfigOutput.from_dict(_item) for _item in obj["stages"]] if obj.get("stages") is not None else None,
-            "cache_config": CacheConfig.from_dict(obj["cache_config"]) if obj.get("cache_config") is not None else None,
+            "stages": [StageConfig.from_dict(_item) for _item in obj["stages"]] if obj.get("stages") is not None else None,
+            "input_schema": dict(
+                (_k, RetrieverInputSchemaFieldOutput.from_dict(_v))
+                for _k, _v in obj["input_schema"].items()
+            )
+            if obj.get("input_schema") is not None
+            else None,
+            "budget_limits": BudgetLimits.from_dict(obj["budget_limits"]) if obj.get("budget_limits") is not None else None,
+            "feature_dependencies": [FeatureAddress.from_dict(_item) for _item in obj["feature_dependencies"]] if obj.get("feature_dependencies") is not None else None,
+            "tags": obj.get("tags"),
+            "display_config": obj.get("display_config"),
+            "version": obj.get("version") if obj.get("version") is not None else 1,
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
-            "last_executed_at": obj.get("last_executed_at"),
-            "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
-            "status": obj.get("status"),
-            "usage_stats": UsageStatistics.from_dict(obj["usage_stats"]) if obj.get("usage_stats") is not None else None,
-            "collections": [CollectionDetail.from_dict(_item) for _item in obj["collections"]] if obj.get("collections") is not None else None,
-            "metadata": obj.get("metadata"),
-            "tags": obj.get("tags"),
-            "created_by": CreatorInfo.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
-            "updated_by": CreatorInfo.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None,
-            "version": obj.get("version") if obj.get("version") is not None else 1,
-            "revision_history": [RevisionHistoryEntry.from_dict(_item) for _item in obj["revision_history"]] if obj.get("revision_history") is not None else None,
-            "health": HealthCheckOutput.from_dict(obj["health"]) if obj.get("health") is not None else None
+            "created_by": obj.get("created_by"),
+            "updated_by": obj.get("updated_by"),
+            "is_published": obj.get("is_published") if obj.get("is_published") is not None else False
         })
         return _obj
 

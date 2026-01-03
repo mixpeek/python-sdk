@@ -18,20 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.user_model_input import UserModelInput
+from typing_extensions import Annotated
+from mixpeek.models.user_create_request import UserCreateRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AddUserToOrganizationRequest(BaseModel):
     """
-    Add User to Organization Request.
+    Payload for adding users to an organization (private/admin endpoint).
     """ # noqa: E501
-    organization_identifier: StrictStr
-    users: Optional[List[UserModelInput]] = None
-    metadata: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["organization_identifier", "users", "metadata"]
+    organization_identifier: StrictStr = Field(description="Organization ID or name to add users to.")
+    logo_url: Optional[StrictStr] = Field(default=None, description="Organization logo URL (e.g., from Google Favicon service). If provided and organization doesn't have a logo, this will be set.")
+    users: Annotated[List[UserCreateRequest], Field(min_length=1)] = Field(description="List of users to add to the organization.")
+    __properties: ClassVar[List[str]] = ["organization_identifier", "logo_url", "users"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +93,8 @@ class AddUserToOrganizationRequest(BaseModel):
 
         _obj = cls.model_validate({
             "organization_identifier": obj.get("organization_identifier"),
-            "users": [UserModelInput.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None,
-            "metadata": obj.get("metadata")
+            "logo_url": obj.get("logo_url"),
+            "users": [UserCreateRequest.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None
         })
         return _obj
 

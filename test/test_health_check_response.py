@@ -38,31 +38,34 @@ class TestHealthCheckResponse(unittest.TestCase):
             return HealthCheckResponse(
                 status = 'OK',
                 data = mixpeek.models.health_service_status.HealthServiceStatus(
-                    redis = True, 
-                    mongodb = True, 
-                    qdrant = True, 
-                    s3 = True, 
-                    celery = True, 
-                    engine = True, ),
+                    cache = True, 
+                    metadata = True, 
+                    vector_store = True, 
+                    object_storage = True, 
+                    task_queue = True, 
+                    inference = True, 
+                    analytics = True, ),
                 errors = mixpeek.models.health_service_errors.HealthServiceErrors(
-                    redis = '', 
-                    mongodb = '', 
-                    qdrant = '', 
-                    s3 = '', 
-                    celery = '', 
-                    engine = '', ),
+                    cache = '', 
+                    metadata = '', 
+                    vector_store = '', 
+                    object_storage = '', 
+                    task_queue = '', 
+                    inference = '', 
+                    analytics = '', ),
                 meta = { }
             )
         else:
             return HealthCheckResponse(
                 status = 'OK',
                 data = mixpeek.models.health_service_status.HealthServiceStatus(
-                    redis = True, 
-                    mongodb = True, 
-                    qdrant = True, 
-                    s3 = True, 
-                    celery = True, 
-                    engine = True, ),
+                    cache = True, 
+                    metadata = True, 
+                    vector_store = True, 
+                    object_storage = True, 
+                    task_queue = True, 
+                    inference = True, 
+                    analytics = True, ),
         )
         """
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **results** | [**List[CollectionResponse]**](CollectionResponse.md) | List of collections | 
 **pagination** | [**PaginationResponse**](PaginationResponse.md) | Pagination information | 
 **total_count** | **int** | Total number of collections matching the query | 
+**stats** | [**CollectionListStats**](CollectionListStats.md) | Aggregate statistics across all collections in the result | [optional] 
 
 ## Example
 

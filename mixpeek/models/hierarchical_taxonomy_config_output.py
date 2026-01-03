@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from mixpeek.models.hierarchical_node_output import HierarchicalNodeOutput
 from mixpeek.models.hierarchy_inference_strategy import HierarchyInferenceStrategy
 from mixpeek.models.input_mapping import InputMapping
+from mixpeek.models.step_analytics_config_output import StepAnalyticsConfigOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,7 +43,8 @@ class HierarchicalTaxonomyConfigOutput(BaseModel):
     cluster_ids: Optional[List[StrictStr]] = Field(default=None, description="Cluster IDs to use for CLUSTER inference strategy")
     cluster_overlap_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=0.7, description="Minimum overlap ratio to establish parent-child relationship between clusters")
     hierarchical_nodes: Optional[List[HierarchicalNodeOutput]] = Field(default=None, description="Explicit node definitions that either: 1) Define the entire hierarchy (when inference_strategy is None), 2) Add additional nodes to an inferred hierarchy, or 3) Override specific relationships in an inferred hierarchy. Supports true hybrid: infer from some collections, manually add others.")
-    __properties: ClassVar[List[str]] = ["taxonomy_type", "retriever_id", "input_mappings", "inference_strategy", "inference_collections", "llm_provider", "llm_model", "llm_prompt_template", "llm_sample_size", "cluster_ids", "cluster_overlap_threshold", "hierarchical_nodes"]
+    step_analytics: Optional[StepAnalyticsConfigOutput] = Field(default=None, description="Optional configuration for step transition analytics. Enables tracking how documents progress through hierarchical taxonomy nodes over time (e.g., content workflow tracking from 'draft' to 'published'). If not provided, only basic assignment events are logged.")
+    __properties: ClassVar[List[str]] = ["taxonomy_type", "retriever_id", "input_mappings", "inference_strategy", "inference_collections", "llm_provider", "llm_model", "llm_prompt_template", "llm_sample_size", "cluster_ids", "cluster_overlap_threshold", "hierarchical_nodes", "step_analytics"]
 
     @field_validator('taxonomy_type')
     def taxonomy_type_validate_enum(cls, value):
@@ -117,6 +119,9 @@ class HierarchicalTaxonomyConfigOutput(BaseModel):
                 if _item_hierarchical_nodes:
                     _items.append(_item_hierarchical_nodes.to_dict())
             _dict['hierarchical_nodes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of step_analytics
+        if self.step_analytics:
+            _dict['step_analytics'] = self.step_analytics.to_dict()
         return _dict
 
     @classmethod
@@ -140,7 +145,8 @@ class HierarchicalTaxonomyConfigOutput(BaseModel):
             "llm_sample_size": obj.get("llm_sample_size") if obj.get("llm_sample_size") is not None else 0,
             "cluster_ids": obj.get("cluster_ids"),
             "cluster_overlap_threshold": obj.get("cluster_overlap_threshold") if obj.get("cluster_overlap_threshold") is not None else 0.7,
-            "hierarchical_nodes": [HierarchicalNodeOutput.from_dict(_item) for _item in obj["hierarchical_nodes"]] if obj.get("hierarchical_nodes") is not None else None
+            "hierarchical_nodes": [HierarchicalNodeOutput.from_dict(_item) for _item in obj["hierarchical_nodes"]] if obj.get("hierarchical_nodes") is not None else None,
+            "step_analytics": StepAnalyticsConfigOutput.from_dict(obj["step_analytics"]) if obj.get("step_analytics") is not None else None
         })
         return _obj
 

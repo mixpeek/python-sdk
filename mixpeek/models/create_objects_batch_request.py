@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from mixpeek.models.create_object_request import CreateObjectRequest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class CreateObjectsBatchRequest(BaseModel):
     """
     Request model for creating multiple bucket objects in a batch.
     """ # noqa: E501
-    objects: List[CreateObjectRequest] = Field(description="List of objects to be created in this batch.")
+    objects: Annotated[List[CreateObjectRequest], Field(max_length=100)] = Field(description="List of objects to be created in this batch (max 100).")
     __properties: ClassVar[List[str]] = ["objects"]
 
     model_config = ConfigDict(

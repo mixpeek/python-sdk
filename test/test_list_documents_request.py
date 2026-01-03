@@ -41,8 +41,13 @@ class TestListDocumentsRequest(unittest.TestCase):
                     field = 'created_at', 
                     direction = desc, ),
                 search = '',
+                cursor = '',
                 return_url = True,
-                return_vectors = True
+                return_vectors = True,
+                group_by = '',
+                select = [
+                    ''
+                    ]
             )
         else:
             return ListDocumentsRequest(

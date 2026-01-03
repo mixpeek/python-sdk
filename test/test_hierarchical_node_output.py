@@ -36,17 +36,18 @@ class TestHierarchicalNodeOutput(unittest.TestCase):
         model = HierarchicalNodeOutput()
         if include_optional:
             return HierarchicalNodeOutput(
-                collection_id = '',
-                parent_collection_id = '',
+                collection_id = 'col_H',
+                parent_collection_id = 'col_H',
                 label = '',
                 summary = '',
                 keywords = [
                     ''
                     ],
-                retriever_id = '',
+                retriever_id = 'ret_H',
                 enrichment_fields = [
                     mixpeek.models.enrichment_field.EnrichmentField(
                         field_path = '', 
+                        target_field = '', 
                         merge_mode = 'replace', )
                     ],
                 input_mappings = [
@@ -59,7 +60,7 @@ class TestHierarchicalNodeOutput(unittest.TestCase):
             )
         else:
             return HierarchicalNodeOutput(
-                collection_id = '',
+                collection_id = 'col_H',
         )
         """
 

@@ -4,15 +4,15 @@ All URIs are relative to *https://api.mixpeek.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**list_stages_retrievers**](RetrieverStagesApi.md#list_stages_retrievers) | **GET** /v1/retrievers/stages | List available retriever stages
+[**list_stages_retrievers**](RetrieverStagesApi.md#list_stages_retrievers) | **GET** /v1/retrievers/stages | List Available Retriever Stages
 
 
 # **list_stages_retrievers**
-> List[RetrieverStageDefinition] list_stages_retrievers(authorization=authorization, x_namespace=x_namespace)
+> List[RetrieverStageDefinition] list_stages_retrievers()
 
-List available retriever stages
+List Available Retriever Stages
 
-List available retriever stages.
+List all registered retriever stages with their configurations. Use this endpoint to discover available stages before creating retrievers. Each stage includes its ID, description, category, and full parameter schema. The parameter_schema field contains complete Pydantic JSON Schema with validation rules, descriptions, and examples for all stage parameters.
 
 ### Example
 
@@ -34,12 +34,10 @@ configuration = mixpeek.Configuration(
 with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.RetrieverStagesApi(api_client)
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
 
     try:
-        # List available retriever stages
-        api_response = api_instance.list_stages_retrievers(authorization=authorization, x_namespace=x_namespace)
+        # List Available Retriever Stages
+        api_response = api_instance.list_stages_retrievers()
         print("The response of RetrieverStagesApi->list_stages_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -50,11 +48,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -73,13 +67,12 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful Response |  -  |
+**200** | List of retriever stage definitions with complete parameter schemas. Each stage includes: - stage_id: Unique identifier to use in retriever configurations - description: Human-readable purpose and behavior - category: Transformation type (filter/sort/reduce/apply) - icon: UI icon identifier - parameter_schema: Full JSON Schema for stage parameters (null if no params) |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
 **500** | Internal Server Error |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -39,31 +39,53 @@ class TestListCollectionsResponse(unittest.TestCase):
                 results = [
                     mixpeek.models.collection_response.CollectionResponse(
                         collection_id = '', 
-                        collection_name = '', 
+                        collection_name = '012', 
                         description = '', 
-                        schema = { }, 
                         input_schema = { }, 
                         output_schema = { }, 
-                        feature_extractors = [
-                            mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
-                                feature_extractor_name = '', 
-                                version = '', 
-                                parameters = {
-                                    'key' : null
-                                    }, 
-                                input_mappings = null, 
-                                feature_extractor_id = '', )
-                            ], 
+                        feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                            feature_extractor_name = '', 
+                            version = '', 
+                            params = { }, 
+                            parameters = null, 
+                            input_mappings = null, 
+                            field_passthrough = [
+                                mixpeek.models.field_passthrough.FieldPassthrough(
+                                    source_path = '', 
+                                    target_path = '', 
+                                    default = null, 
+                                    required = True, )
+                                ], 
+                            include_all_source_fields = True, 
+                            feature_extractor_id = '', ), 
                         source = mixpeek.models.source_config.SourceConfig(
                             type = 'bucket', 
-                            bucket_id = '', 
-                            collection_id = '', ), 
+                            bucket_ids = [
+                                ''
+                                ], 
+                            collection_id = '', 
+                            collection_ids = [
+                                ''
+                                ], 
+                            inherited_bucket_ids = [
+                                ''
+                                ], 
+                            source_filters = mixpeek.models.source_filters.SourceFilters(
+                                filters = { }, ), ), 
+                        source_bucket_schemas = {
+                            'key' : 
+                            }, 
                         source_lineage = [
                             mixpeek.models.single_lineage_entry.SingleLineageEntry(
                                 source_config = mixpeek.models.source_config.SourceConfig(
                                     type = 'bucket', 
-                                    bucket_id = '', 
                                     collection_id = '', ), 
+                                feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                                    feature_extractor_name = '', 
+                                    version = '', 
+                                    params = { }, 
+                                    include_all_source_fields = True, 
+                                    feature_extractor_id = '', ), 
                                 output_schema = , )
                             ], 
                         vector_indexes = [
@@ -74,10 +96,24 @@ class TestListCollectionsResponse(unittest.TestCase):
                             ], 
                         enabled = True, 
                         metadata = { }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        document_count = 56, 
+                        schema_version = 56, 
+                        last_schema_sync = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        schema_sync_enabled = True, 
                         taxonomy_applications = [
                             { }
                             ], 
-                        document_count = 56, )
+                        cluster_applications = [
+                            mixpeek.models.cluster_application_config.ClusterApplicationConfig(
+                                cluster_id = '', 
+                                auto_execute_on_batch = True, 
+                                min_document_threshold = 56, 
+                                cooldown_seconds = 56, )
+                            ], 
+                        taxonomy_count = 56, 
+                        retriever_count = 56, )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -85,39 +121,69 @@ class TestListCollectionsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
-                total_count = 56
+                    previous_page = '', 
+                    next_cursor = '', ),
+                total_count = 56,
+                stats = mixpeek.models.collection_list_stats.CollectionListStats(
+                    total_documents = 56, 
+                    avg_documents_per_collection = 1.337, 
+                    collections_with_taxonomies = 56, 
+                    total_feature_extractors = 56, 
+                    total_taxonomies = 56, 
+                    total_retrievers = 56, )
             )
         else:
             return ListCollectionsResponse(
                 results = [
                     mixpeek.models.collection_response.CollectionResponse(
                         collection_id = '', 
-                        collection_name = '', 
+                        collection_name = '012', 
                         description = '', 
-                        schema = { }, 
                         input_schema = { }, 
                         output_schema = { }, 
-                        feature_extractors = [
-                            mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
-                                feature_extractor_name = '', 
-                                version = '', 
-                                parameters = {
-                                    'key' : null
-                                    }, 
-                                input_mappings = null, 
-                                feature_extractor_id = '', )
-                            ], 
+                        feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                            feature_extractor_name = '', 
+                            version = '', 
+                            params = { }, 
+                            parameters = null, 
+                            input_mappings = null, 
+                            field_passthrough = [
+                                mixpeek.models.field_passthrough.FieldPassthrough(
+                                    source_path = '', 
+                                    target_path = '', 
+                                    default = null, 
+                                    required = True, )
+                                ], 
+                            include_all_source_fields = True, 
+                            feature_extractor_id = '', ), 
                         source = mixpeek.models.source_config.SourceConfig(
                             type = 'bucket', 
-                            bucket_id = '', 
-                            collection_id = '', ), 
+                            bucket_ids = [
+                                ''
+                                ], 
+                            collection_id = '', 
+                            collection_ids = [
+                                ''
+                                ], 
+                            inherited_bucket_ids = [
+                                ''
+                                ], 
+                            source_filters = mixpeek.models.source_filters.SourceFilters(
+                                filters = { }, ), ), 
+                        source_bucket_schemas = {
+                            'key' : 
+                            }, 
                         source_lineage = [
                             mixpeek.models.single_lineage_entry.SingleLineageEntry(
                                 source_config = mixpeek.models.source_config.SourceConfig(
                                     type = 'bucket', 
-                                    bucket_id = '', 
                                     collection_id = '', ), 
+                                feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                                    feature_extractor_name = '', 
+                                    version = '', 
+                                    params = { }, 
+                                    include_all_source_fields = True, 
+                                    feature_extractor_id = '', ), 
                                 output_schema = , )
                             ], 
                         vector_indexes = [
@@ -128,10 +194,24 @@ class TestListCollectionsResponse(unittest.TestCase):
                             ], 
                         enabled = True, 
                         metadata = { }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        document_count = 56, 
+                        schema_version = 56, 
+                        last_schema_sync = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        schema_sync_enabled = True, 
                         taxonomy_applications = [
                             { }
                             ], 
-                        document_count = 56, )
+                        cluster_applications = [
+                            mixpeek.models.cluster_application_config.ClusterApplicationConfig(
+                                cluster_id = '', 
+                                auto_execute_on_batch = True, 
+                                min_document_threshold = 56, 
+                                cooldown_seconds = 56, )
+                            ], 
+                        taxonomy_count = 56, 
+                        retriever_count = 56, )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -139,7 +219,8 @@ class TestListCollectionsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
                 total_count = 56,
         )
         """

@@ -513,7 +513,7 @@ class Configuration:
         return [
             {
                 'url': "https://api.mixpeek.com",
-                'description': "No description provided",
+                'description': "Production",
             }
         ]
 

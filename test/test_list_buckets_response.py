@@ -42,6 +42,11 @@ class TestListBucketsResponse(unittest.TestCase):
                         bucket_name = '', 
                         description = '', 
                         bucket_schema = { }, 
+                        unique_key = mixpeek.models.unique_key_config.UniqueKeyConfig(
+                            fields = [
+                                ''
+                                ], 
+                            default_policy = 'insert', ), 
                         metadata = { }, 
                         object_count = 56, 
                         total_size_bytes = 56, 
@@ -56,6 +61,7 @@ class TestListBucketsResponse(unittest.TestCase):
                             completed = 56, 
                             failed = 56, ), 
                         storage_stats = mixpeek.models.storage_statistics.StorageStatistics(
+                            total_size_bytes = 56, 
                             avg_size_bytes = 56, 
                             max_size_bytes = 56, 
                             min_size_bytes = 56, ), )
@@ -67,7 +73,13 @@ class TestListBucketsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', )
+                    previous_page = '', 
+                    next_cursor = '', ),
+                stats = mixpeek.models.bucket_list_stats.BucketListStats(
+                    total_objects = 56, 
+                    total_size_bytes = 56, 
+                    avg_objects_per_bucket = 1.337, 
+                    avg_size_per_bucket = 1.337, )
             )
         else:
             return ListBucketsResponse(
@@ -77,6 +89,11 @@ class TestListBucketsResponse(unittest.TestCase):
                         bucket_name = '', 
                         description = '', 
                         bucket_schema = { }, 
+                        unique_key = mixpeek.models.unique_key_config.UniqueKeyConfig(
+                            fields = [
+                                ''
+                                ], 
+                            default_policy = 'insert', ), 
                         metadata = { }, 
                         object_count = 56, 
                         total_size_bytes = 56, 
@@ -91,6 +108,7 @@ class TestListBucketsResponse(unittest.TestCase):
                             completed = 56, 
                             failed = 56, ), 
                         storage_stats = mixpeek.models.storage_statistics.StorageStatistics(
+                            total_size_bytes = 56, 
                             avg_size_bytes = 56, 
                             max_size_bytes = 56, 
                             min_size_bytes = 56, ), )
@@ -102,7 +120,8 @@ class TestListBucketsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
         )
         """
 

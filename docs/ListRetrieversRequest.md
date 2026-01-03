@@ -1,17 +1,15 @@
 # ListRetrieversRequest
 
-List of retriever requests.
+Request to list retrievers.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Filters to apply when listing retrievers | [optional] 
-**sorts** | [**List[SortOption]**](SortOption.md) | Sorting options for the retriever list | [optional] 
-**search** | **str** | Search term for wildcard search across all text fields | [optional] 
+**search** | **str** | Search term for wildcard search across retriever_id, retriever_name, description, and other text fields | [optional] 
+**filters** | **Dict[str, object]** | Filters to apply to the retriever list. Supports filtering by retriever_id or retriever_name. | [optional] 
+**sorts** | **List[Dict[str, object]]** | Sort options for the retriever list | [optional] 
 **case_sensitive** | **bool** | If True, filters and search will be case-sensitive | [optional] [default to False]
-**limit** | **int** | Pagination limit | [optional] [default to 10]
-**offset** | **int** | Pagination offset | [optional] [default to 0]
 
 ## Example
 

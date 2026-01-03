@@ -18,10 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
-from mixpeek.models.document_input_handling import DocumentInputHandling
-from mixpeek.models.document_output_type import DocumentOutputType
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.payload_index_config_output import PayloadIndexConfigOutput
 from mixpeek.models.vector_index_definition import VectorIndexDefinition
 from typing import Optional, Set
@@ -29,23 +27,23 @@ from typing_extensions import Self
 
 class FeatureExtractorResponseModel(BaseModel):
     """
-    Feature extractor response model.
+    Feature extractor response model for API responses.
     """ # noqa: E501
     feature_extractor_name: StrictStr
     version: StrictStr
     feature_extractor_id: StrictStr
     description: StrictStr
+    icon: StrictStr
     input_schema: Dict[str, Any]
     output_schema: Dict[str, Any]
     parameter_schema: Dict[str, Any]
     supported_input_types: List[StrictStr]
     max_inputs: Dict[str, StrictInt]
     default_parameters: Dict[str, Any]
-    document_output_type: DocumentOutputType
-    document_input_handling: DocumentInputHandling
     required_vector_indexes: List[VectorIndexDefinition]
     required_payload_indexes: List[PayloadIndexConfigOutput]
-    __properties: ClassVar[List[str]] = ["feature_extractor_name", "version", "feature_extractor_id", "description", "input_schema", "output_schema", "parameter_schema", "supported_input_types", "max_inputs", "default_parameters", "document_output_type", "document_input_handling", "required_vector_indexes", "required_payload_indexes"]
+    position_fields: Optional[List[StrictStr]] = Field(default=None, description="Output fields that uniquely identify each document within a source object. Enables idempotent reprocessing: rerunning a batch produces the same document IDs, so existing documents are updated instead of creating duplicates. Works with bucket `unique_key` to enable fully deterministic document IDs. Empty list means single-output extractor (one document per source). Read-only (set by extractor).")
+    __properties: ClassVar[List[str]] = ["feature_extractor_name", "version", "feature_extractor_id", "description", "icon", "input_schema", "output_schema", "parameter_schema", "supported_input_types", "max_inputs", "default_parameters", "required_vector_indexes", "required_payload_indexes", "position_fields"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -116,16 +114,16 @@ class FeatureExtractorResponseModel(BaseModel):
             "version": obj.get("version"),
             "feature_extractor_id": obj.get("feature_extractor_id"),
             "description": obj.get("description"),
+            "icon": obj.get("icon"),
             "input_schema": obj.get("input_schema"),
             "output_schema": obj.get("output_schema"),
             "parameter_schema": obj.get("parameter_schema"),
             "supported_input_types": obj.get("supported_input_types"),
             "max_inputs": obj.get("max_inputs"),
             "default_parameters": obj.get("default_parameters"),
-            "document_output_type": obj.get("document_output_type"),
-            "document_input_handling": obj.get("document_input_handling"),
             "required_vector_indexes": [VectorIndexDefinition.from_dict(_item) for _item in obj["required_vector_indexes"]] if obj.get("required_vector_indexes") is not None else None,
-            "required_payload_indexes": [PayloadIndexConfigOutput.from_dict(_item) for _item in obj["required_payload_indexes"]] if obj.get("required_payload_indexes") is not None else None
+            "required_payload_indexes": [PayloadIndexConfigOutput.from_dict(_item) for _item in obj["required_payload_indexes"]] if obj.get("required_payload_indexes") is not None else None,
+            "position_fields": obj.get("position_fields")
         })
         return _obj
 

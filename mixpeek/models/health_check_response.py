@@ -20,9 +20,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.api_health_health_status import ApiHealthHealthStatus
 from mixpeek.models.health_service_errors import HealthServiceErrors
 from mixpeek.models.health_service_status import HealthServiceStatus
+from mixpeek.models.health_status_output import HealthStatusOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,10 +30,10 @@ class HealthCheckResponse(BaseModel):
     """
     Health check response model.
     """ # noqa: E501
-    status: ApiHealthHealthStatus = Field(description="Overall API health status")
+    status: HealthStatusOutput = Field(description="Overall API health status")
     data: HealthServiceStatus = Field(description="Per-service health status flags")
     errors: Optional[HealthServiceErrors] = Field(default=None, description="Optional per-service error messages when a service check fails")
-    meta: Optional[Dict[str, Any]] = Field(default=None, description="Optional metadata such as configured S3 bucket/region/endpoint")
+    meta: Optional[Dict[str, Any]] = Field(default=None, description="Optional metadata such as configured object storage bucket/region/endpoint, API URL, and deployment health details (when deep=True)")
     __properties: ClassVar[List[str]] = ["status", "data", "errors", "meta"]
 
     model_config = ConfigDict(

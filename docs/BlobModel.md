@@ -1,6 +1,6 @@
 # BlobModel
 
-Model for a blob within a bucket object.
+Model for a blob within a bucket object.  Blobs store file references with a flat properties structure. All blob-specific data (formerly in separate 'data' and 'metadata' fields) is now unified in a single 'properties' dictionary.  Example:     {         \"blob_id\": \"blob_xyz123\",         \"property\": \"video\",         \"type\": \"video\",         \"properties\": {             \"url\": \"s3://bucket/video.mp4\",             \"duration\": 120,             \"resolution\": \"1920x1080\",             \"author\": \"John Doe\"  # All data unified here         }     }
 
 ## Properties
 
@@ -10,9 +10,8 @@ Name | Type | Description | Notes
 **var_property** | **str** | Property name of the blob | 
 **key_prefix** | **str** | Storage key/path of the blob, this will be used to retrieve the blob from the storage. It is similar to a file path. If not provided, it will be placed in the root of the bucket. | [optional] 
 **type** | [**BucketSchemaFieldType**](BucketSchemaFieldType.md) | The schema field type this blob corresponds to (e.g., IMAGE, PDF, DOCUMENT) | 
-**data** | [**Data**](Data.md) |  | 
-**metadata** | **Dict[str, object]** | Metadata for the blob, this will only be applied to the documents that use this blob | [optional] 
-**details** | [**BlobDetails**](BlobDetails.md) | Details of the blob | [optional] 
+**properties** | **Dict[str, object]** | All blob data and metadata unified (formerly separate &#39;data&#39; and &#39;metadata&#39; fields). Contains URLs, dimensions, metadata, and any other blob-specific information. | [optional] 
+**details** | [**BlobDetails**](BlobDetails.md) | System-generated file details (filename, size, hash, etc.) | [optional] 
 
 ## Example
 

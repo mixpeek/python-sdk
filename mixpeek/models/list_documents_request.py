@@ -27,14 +27,17 @@ from typing_extensions import Self
 
 class ListDocumentsRequest(BaseModel):
     """
-    Request model for listing documents.
+    Request model for listing documents.  Supports two pagination strategies:  **Offset-based (default)**: Use query params `?page=2&page_size=10` - Simple and familiar - Works well for shallow pagination (first ~100 pages) - Less efficient for deep pagination with sorting  **Cursor-based (optional)**: Pass `cursor` from previous response's `next_cursor` - More efficient for deep pagination (page 100+) - Required for consistent results when sorting large datasets - When cursor is provided, offset is ignored
     """ # noqa: E501
     filters: Optional[LogicalOperatorInput] = Field(default=None, description="Filters to apply.")
     sort: Optional[SortOption] = Field(default=None, description="Sort options.")
     search: Optional[StrictStr] = Field(default=None, description="Search term.")
+    cursor: Optional[StrictStr] = Field(default=None, description="OPTIONAL cursor for efficient deep pagination. Pass the 'pagination.next_cursor' value from a previous response to fetch the next page. When cursor is provided, the page/offset query params are ignored. Use cursor-based pagination when: (1) paginating beyond page ~100, (2) sorting large datasets, or (3) you need consistent iteration. Use offset-based pagination (default) for: simple use cases, random page access, or when page numbers are needed in the UI.")
     return_url: Optional[StrictBool] = Field(default=False, description="Whether to return presigned URLs for object keys.")
     return_vectors: Optional[StrictBool] = Field(default=False, description="Whether to return vector embeddings in the document results.")
-    __properties: ClassVar[List[str]] = ["filters", "sort", "search", "return_url", "return_vectors"]
+    group_by: Optional[StrictStr] = Field(default=None, description="OPTIONAL. Field to group documents by. Supports dot notation for nested fields (e.g., 'metadata.category', 'source_type'). When specified, documents are grouped by the field value and returned as grouped results. Requires a payload index on the field in Qdrant for optimal performance. If no index exists, the operation will fail with a validation error. Common groupable fields: 'source_object_id', 'root_object_id', 'collection_id', 'metadata.category'.")
+    select: Optional[List[StrictStr]] = Field(default=None, description="OPTIONAL. List of fields to include in the response. Supports dot notation for nested fields (e.g., 'metadata.title', 'content'). When specified, only the selected fields will be returned in the document results, reducing response size. System fields like '_id' and 'document_id' are always included. Use this to optimize response size when working with large documents.")
+    __properties: ClassVar[List[str]] = ["filters", "sort", "search", "cursor", "return_url", "return_vectors", "group_by", "select"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,8 +99,11 @@ class ListDocumentsRequest(BaseModel):
             "filters": LogicalOperatorInput.from_dict(obj["filters"]) if obj.get("filters") is not None else None,
             "sort": SortOption.from_dict(obj["sort"]) if obj.get("sort") is not None else None,
             "search": obj.get("search"),
+            "cursor": obj.get("cursor"),
             "return_url": obj.get("return_url") if obj.get("return_url") is not None else False,
-            "return_vectors": obj.get("return_vectors") if obj.get("return_vectors") is not None else False
+            "return_vectors": obj.get("return_vectors") if obj.get("return_vectors") is not None else False,
+            "group_by": obj.get("group_by"),
+            "select": obj.get("select")
         })
         return _obj
 

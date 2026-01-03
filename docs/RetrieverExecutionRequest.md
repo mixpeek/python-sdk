@@ -1,0 +1,32 @@
+# RetrieverExecutionRequest
+
+Request payload for executing a retriever.  Executes a predefined retriever with runtime inputs. The retriever uses the collections it was created with - collection overrides are not supported at execution time to ensure feature_uri and schema validation integrity.  All filtering, pagination, and result shaping is handled by the individual stages based on the inputs provided.  Use Cases:     - Execute retriever with its configured collections     - Pass inputs that stages use to determine filtering/pagination behavior  Design Philosophy:     - Retrievers are validated at creation time against their collections     - Feature URIs, input schemas, and stage configs are tightly coupled to collections     - Filters, limits, and offsets are NOT top-level request fields     - These are handled by stages when they receive inputs     - Example: A stage might read {INPUT.top_k} to determine result limit  Examples:     Simple query:         {\"inputs\": {\"query\": \"AI\", \"top_k\": 50}}      Different inputs for stage behavior:         {\"inputs\": {             \"query\": \"machine learning\",             \"top_k\": 100,             \"min_score\": 0.7,             \"published_after\": \"2024-01-01\"          }}
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**inputs** | **Dict[str, object]** | Runtime inputs for the retriever mapped to the input schema. Keys must match the retriever&#39;s input_schema field names. Values depend on field types (text, vector, filters, etc.). REQUIRED unless all retriever inputs have defaults.   Common input keys: - &#39;query&#39;: Text search query - &#39;embedding&#39;: Pre-computed vector for search - &#39;top_k&#39;: Number of results to return - &#39;min_score&#39;: Minimum relevance threshold - Any custom fields defined in input_schema   **Template Syntax** (Jinja2):  Namespaces (uppercase or lowercase): - &#x60;INPUT&#x60; / &#x60;input&#x60;: Query inputs (e.g., &#x60;{{INPUT.query}}&#x60;) - &#x60;DOC&#x60; / &#x60;doc&#x60;: Document fields (e.g., &#x60;{{DOC.payload.title}}&#x60;) - &#x60;CONTEXT&#x60; / &#x60;context&#x60;: Execution context - &#x60;STAGE&#x60; / &#x60;stage&#x60;: Stage configuration - &#x60;SECRET&#x60; / &#x60;secret&#x60;: Vault secrets (e.g., &#x60;{{SECRET.api_key}}&#x60;)  Accessing Data: - Dot notation: &#x60;{{DOC.payload.metadata.title}}&#x60; - Bracket notation: &#x60;{{DOC.payload[&#39;special-key&#39;]}}&#x60; - Array index: &#x60;{{DOC.items[0]}}&#x60;, &#x60;{{DOC.tags[2]}}&#x60; - Array first/last: &#x60;{{DOC.items | first}}&#x60;, &#x60;{{DOC.items | last}}&#x60;  Array Operations: - Iterate: &#x60;{% for item in DOC.tags %}{{item}}{% endfor %}&#x60; - Extract key: &#x60;{{DOC.items | map(attribute&#x3D;&#39;name&#39;) | list}}&#x60; - Join: &#x60;{{DOC.tags | join(&#39;, &#39;)}}&#x60; - Length: &#x60;{{DOC.items | length}}&#x60; - Slice: &#x60;{{DOC.items[:5]}}&#x60;  Conditionals: - If: &#x60;{% if DOC.status &#x3D;&#x3D; &#39;active&#39; %}...{% endif %}&#x60; - If-else: &#x60;{% if DOC.score &gt; 0.8 %}high{% else %}low{% endif %}&#x60; - Ternary: &#x60;{{&#39;yes&#39; if DOC.enabled else &#39;no&#39;}}&#x60;  Built-in Functions: &#x60;max&#x60;, &#x60;min&#x60;, &#x60;abs&#x60;, &#x60;round&#x60;, &#x60;ceil&#x60;, &#x60;floor&#x60; Custom Filters: &#x60;slugify&#x60; (URL-safe), &#x60;bool&#x60; (truthy coercion), &#x60;tojson&#x60; (JSON encode)  S3 URLs: Internal S3 URLs (s3://bucket/key) are automatically presigned when accessed via DOC namespace. | [optional] 
+**pagination** | [**Pagination**](Pagination.md) |  | [optional] 
+**stream** | **bool** | Enable streaming execution to receive real-time stage updates via Server-Sent Events (SSE). NOT REQUIRED - defaults to False for standard execution.   When stream&#x3D;True: - Response uses text/event-stream content type - Each stage completion emits a StreamStageEvent - Events include: stage_start, stage_complete, stage_error, execution_complete - Clients receive intermediate results and statistics as stages execute - Useful for progress tracking, debugging, and partial result display   When stream&#x3D;False (default): - Response returns after all stages complete - Returns a single RetrieverExecutionResponse with final results - Lower overhead for simple queries   Use streaming when: - You want to show real-time progress to users - You need to display intermediate results - Pipeline has many stages or long-running operations - Debugging or monitoring pipeline performance   Example streaming client (JavaScript): &#x60;&#x60;&#x60;javascript const eventSource &#x3D; new EventSource(&#39;/v1/retrievers/ret_123/execute?stream&#x3D;true&#39;); eventSource.onmessage &#x3D; (event) &#x3D;&gt; {   const stageEvent &#x3D; JSON.parse(event.data);   if (stageEvent.event_type &#x3D;&#x3D;&#x3D; &#39;stage_complete&#39;) {     console.log(&#x60;Stage ${stageEvent.stage_name} completed&#x60;);     console.log(&#x60;Documents: ${stageEvent.documents.length}&#x60;);   } }; &#x60;&#x60;&#x60;   Example streaming client (Python): &#x60;&#x60;&#x60;python import requests response &#x3D; requests.post(&#39;/v1/retrievers/ret_123/execute&#39;,                         json&#x3D;{&#39;inputs&#39;: {...}, &#39;stream&#39;: True},                         stream&#x3D;True) for line in response.iter_lines():     if line.startswith(b&#39;data: &#39;):         event &#x3D; json.loads(line[6:])         print(f\&quot;Stage {event[&#39;stage_name&#39;]}: {event[&#39;event_type&#39;]}\&quot;) &#x60;&#x60;&#x60; | [optional] [default to False]
+
+## Example
+
+```python
+from mixpeek.models.retriever_execution_request import RetrieverExecutionRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RetrieverExecutionRequest from a JSON string
+retriever_execution_request_instance = RetrieverExecutionRequest.from_json(json)
+# print the JSON string representation of the object
+print(RetrieverExecutionRequest.to_json())
+
+# convert the object into a dict
+retriever_execution_request_dict = retriever_execution_request_instance.to_dict()
+# create an instance of RetrieverExecutionRequest from a dict
+retriever_execution_request_from_dict = RetrieverExecutionRequest.from_dict(retriever_execution_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

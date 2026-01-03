@@ -27,6 +27,34 @@ class TestCollectionDocumentsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_aggregate_documents(self) -> None:
+        """Test case for aggregate_documents
+
+        Aggregate Documents
+        """
+        pass
+
+    def test_batch_delete(self) -> None:
+        """Test case for batch_delete
+
+        Batch Delete Documents
+        """
+        pass
+
+    def test_batch_update(self) -> None:
+        """Test case for batch_update
+
+        Batch Update Documents
+        """
+        pass
+
+    def test_bulk_update(self) -> None:
+        """Test case for bulk_update
+
+        Bulk Update Documents
+        """
+        pass
+
     def test_create_document(self) -> None:
         """Test case for create_document
 
@@ -52,6 +80,13 @@ class TestCollectionDocumentsApi(unittest.TestCase):
         """Test case for list_documents
 
         List documents.
+        """
+        pass
+
+    def test_patch_document(self) -> None:
+        """Test case for patch_document
+
+        Patch Document
         """
         pass
 

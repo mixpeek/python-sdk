@@ -24,11 +24,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.cache_config import CacheConfig
 from mixpeek.models.collection_detail import CollectionDetail
 from mixpeek.models.creator_info import CreatorInfo
-from mixpeek.models.health_check_input import HealthCheckInput
-from mixpeek.models.retriever_schema_input import RetrieverSchemaInput
+from mixpeek.models.health_check import HealthCheck
+from mixpeek.models.retriever_schema import RetrieverSchema
 from mixpeek.models.retriever_status import RetrieverStatus
 from mixpeek.models.revision_history_entry import RevisionHistoryEntry
-from mixpeek.models.stage_instance_config_input import StageInstanceConfigInput
+from mixpeek.models.stage_instance_config import StageInstanceConfig
 from mixpeek.models.usage_statistics import UsageStatistics
 from typing import Optional, Set
 from typing_extensions import Self
@@ -40,9 +40,9 @@ class RetrieverModelInput(BaseModel):
     retriever_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the retriever")
     retriever_name: StrictStr = Field(description="Name of the retriever")
     description: Optional[StrictStr] = Field(default=None, description="Description of the retriever")
-    input_schema: RetrieverSchemaInput = Field(description="Input schema for the retriever")
+    input_schema: RetrieverSchema = Field(description="Input schema for the retriever")
     collection_ids: List[StrictStr] = Field(description="List of collection IDs")
-    stages: List[StageInstanceConfigInput] = Field(description="List of stage configurations")
+    stages: List[StageInstanceConfig] = Field(description="List of stage configurations")
     cache_config: Optional[CacheConfig] = Field(default=None, description="Cache configuration for this retriever. If not provided, caching is disabled.")
     created_at: Optional[datetime] = Field(default=None, description="When the retriever was created")
     updated_at: Optional[datetime] = Field(default=None, description="When the retriever was last modified")
@@ -57,7 +57,7 @@ class RetrieverModelInput(BaseModel):
     updated_by: Optional[CreatorInfo] = Field(default=None, description="Information about who last updated this retriever")
     version: Optional[StrictInt] = Field(default=1, description="Version number (increments on each update)")
     revision_history: Optional[List[RevisionHistoryEntry]] = Field(default=None, description="History of changes (optional, last N changes)")
-    health: Optional[HealthCheckInput] = Field(default=None, description="Health status and diagnostics")
+    health: Optional[HealthCheck] = Field(default=None, description="Health status and diagnostics")
     __properties: ClassVar[List[str]] = ["retriever_id", "retriever_name", "description", "input_schema", "collection_ids", "stages", "cache_config", "created_at", "updated_at", "last_executed_at", "enabled", "status", "usage_stats", "collections", "metadata", "tags", "created_by", "updated_by", "version", "revision_history", "health"]
 
     model_config = ConfigDict(
@@ -153,9 +153,9 @@ class RetrieverModelInput(BaseModel):
             "retriever_id": obj.get("retriever_id"),
             "retriever_name": obj.get("retriever_name"),
             "description": obj.get("description"),
-            "input_schema": RetrieverSchemaInput.from_dict(obj["input_schema"]) if obj.get("input_schema") is not None else None,
+            "input_schema": RetrieverSchema.from_dict(obj["input_schema"]) if obj.get("input_schema") is not None else None,
             "collection_ids": obj.get("collection_ids"),
-            "stages": [StageInstanceConfigInput.from_dict(_item) for _item in obj["stages"]] if obj.get("stages") is not None else None,
+            "stages": [StageInstanceConfig.from_dict(_item) for _item in obj["stages"]] if obj.get("stages") is not None else None,
             "cache_config": CacheConfig.from_dict(obj["cache_config"]) if obj.get("cache_config") is not None else None,
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
@@ -170,7 +170,7 @@ class RetrieverModelInput(BaseModel):
             "updated_by": CreatorInfo.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None,
             "version": obj.get("version") if obj.get("version") is not None else 1,
             "revision_history": [RevisionHistoryEntry.from_dict(_item) for _item in obj["revision_history"]] if obj.get("revision_history") is not None else None,
-            "health": HealthCheckInput.from_dict(obj["health"]) if obj.get("health") is not None else None
+            "health": HealthCheck.from_dict(obj["health"]) if obj.get("health") is not None else None
         })
         return _obj
 

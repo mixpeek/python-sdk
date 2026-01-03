@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **config** | [**Config2**](Config2.md) |  | 
 **ready** | **bool** | Whether the taxonomy is ready for use. False for async inference (cluster/LLM) that needs processing. True for flat/explicit hierarchies. | [optional] [default to True]
 **created_at** | **datetime** | Creation timestamp for this taxonomy record | [optional] 
+**metadata** | **Dict[str, object]** | Additional user-defined metadata for the taxonomy | [optional] 
 
 ## Example
 

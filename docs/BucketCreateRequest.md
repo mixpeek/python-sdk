@@ -1,6 +1,6 @@
 # BucketCreateRequest
 
-Request model for creating a new bucket.  CRITICAL: Define a bucket_schema if you plan to create collections that process this bucket's data.  The bucket_schema tells the system what fields your objects will have, enabling: - Collections to map your data fields to feature extractors via input_mappings - Validation of object structure at upload time - Type-safe data pipelines from bucket → collection → retrieval  Without a bucket_schema, you can still store objects, but collections won't be able to use input_mappings to reference your custom fields.
+Request model for creating a new bucket.  REQUIRED: A bucket_schema must be defined to enable data processing and validation.  The bucket_schema tells the system what fields your objects will have, enabling: - Collections to map your data fields to feature extractors via input_mappings - Validation of object structure at upload time - Type-safe data pipelines from bucket → collection → retrieval  Every bucket must have a schema that defines the structure of objects it will contain.
 
 ## Properties
 
@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bucket_name** | **str** | Human-readable name for the bucket | 
 **description** | **str** | Description of the bucket | [optional] 
-**bucket_schema** | [**BucketSchemaInput**](BucketSchemaInput.md) | Schema definition for objects in this bucket. REQUIRED if you want collections to use input_mappings. Defines the custom fields your objects will have (blob properties, metadata structure, etc.) | [optional] 
+**bucket_schema** | [**BucketSchemaInput**](BucketSchemaInput.md) | Schema definition for objects in this bucket (REQUIRED). Defines the custom fields your objects will have (blob properties, metadata structure, etc.) | 
+**unique_key** | [**UniqueKeyConfig**](UniqueKeyConfig.md) | Unique key configuration for this bucket (OPTIONAL). Enables uniqueness enforcement and upsert operations on specified field(s) from the schema. Cannot be changed after bucket creation. | [optional] 
 **metadata** | **Dict[str, object]** | Additional metadata for the bucket | [optional] 
 
 ## Example

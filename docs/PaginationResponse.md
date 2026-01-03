@@ -1,17 +1,18 @@
 # PaginationResponse
 
-PaginationResponse.
+PaginationResponse.  Cursor-based pagination response: - Use next_cursor for navigation - Total count fields only populated when include_total=true
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**total** | **int** |  | 
-**page** | **int** |  | 
-**page_size** | **int** |  | 
-**total_pages** | **int** |  | 
+**total** | **int** |  | [optional] 
+**page** | **int** |  | [optional] 
+**page_size** | **int** |  | [optional] 
+**total_pages** | **int** |  | [optional] 
 **next_page** | **str** |  | [optional] 
 **previous_page** | **str** |  | [optional] 
+**next_cursor** | **str** |  | [optional] 
 
 ## Example
 

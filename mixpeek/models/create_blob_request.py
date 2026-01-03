@@ -18,25 +18,37 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from mixpeek.models.bucket_schema_field_type import BucketSchemaFieldType
-from mixpeek.models.data1 import Data1
+from mixpeek.models.data import Data
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateBlobRequest(BaseModel):
     """
-    Request model for creating a new blob.
+    Request model for creating a new blob.  ⚠️  IMPORTANT: For presigned URL uploads, use the existing /buckets/{id}/uploads system!     DO NOT create a new presigned upload endpoint - one already exists.  Supports two modes:  Mode 1: Direct Data Upload     - Provide 'data' field with URL or base64 content     - File is processed immediately during object creation     - Use for: Small files, public URLs, inline data  Mode 2: Upload Reference (Recommended for large files)     - First: POST /buckets/{id}/uploads → Returns presigned_url + upload_id     - User uploads file directly to S3 via presigned_url     - Then: POST /uploads/{upload_id}/confirm → Validates upload     - Finally: Reference upload_id in this blob request     - Use for: Large files, client-side uploads, multi-blob objects  Why upload_id?     - Combine multiple uploads into one object     - Upload files in parallel, create object later     - Reuse uploads across multiple objects     - Better UX: upload progress, retry logic, validation  Related Endpoints:     - POST /buckets/{id}/uploads - Generate presigned URLs (EXISTING SYSTEM)     - POST /uploads/{id}/confirm - Confirm upload completed     - See: api/buckets/uploads/services.py for full upload workflow  Examples:     # Direct data (simple)     {       \"property\": \"thumbnail\",       \"type\": \"IMAGE\",       \"data\": \"https://example.com/image.jpg\"     }      # Upload reference (recommended)     {       \"property\": \"video\",       \"type\": \"VIDEO\",       \"upload_id\": \"upl_abc123\"  # From /uploads endpoint     }      # Multiple uploads → one object     {       \"blobs\": [         {\"property\": \"video\", \"upload_id\": \"upl_video123\"},         {\"property\": \"thumbnail\", \"upload_id\": \"upl_thumb456\"},         {\"property\": \"transcript\", \"upload_id\": \"upl_trans789\"}       ]     }
     """ # noqa: E501
-    var_property: StrictStr = Field(description="Property name in the schema that this blob belongs to", alias="property")
-    key_prefix: Optional[StrictStr] = Field(default=None, description="Optional prefix for the blob key")
-    type: BucketSchemaFieldType = Field(description="The schema field type this blob corresponds to (e.g., IMAGE, PDF, DOCUMENT)")
-    data: Data1
+    var_property: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="REQUIRED. Property name from the bucket schema that this blob belongs to. Must match a field defined in the bucket's schema. Used to validate blob type compatibility and determine storage path. Common values: 'video', 'thumbnail', 'transcript', 'document', 'image'", alias="property")
+    key_prefix: Optional[StrictStr] = Field(default=None, description="OPTIONAL. Storage path prefix for organizing blobs within the bucket. If not provided, uses default bucket organization. Use for: grouping blobs by campaign, date, category, etc. Example: 'campaigns/summer_2025' or 'products/electronics'")
+    type: BucketSchemaFieldType = Field(description="REQUIRED. The schema field type for this blob. Must match the bucket schema definition for the property. Determines validation rules and processing pipeline. Common types: IMAGE, VIDEO, AUDIO, PDF, DOCUMENT, TEXT")
+    data: Optional[Data] = None
+    upload_id: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="EITHER upload_id OR data must be provided. Reference to an existing upload from the presigned URL workflow.   ⚠️  PRESIGNED URLS: Use existing POST /buckets/{id}/uploads endpoint! It already handles presigned URL generation, upload tracking, and validation. DO NOT create a new /presigned-upload endpoint - it's redundant.   Workflow: 1. POST /buckets/{id}/uploads → {upload_id, presigned_url} 2. User uploads file to presigned_url 3. POST /uploads/{upload_id}/confirm → Validates upload 4. Use upload_id here to reference the uploaded file   The upload must be in CONFIRMED or ACTIVE status. Format: 'upl_' prefix followed by alphanumeric characters.   Use Cases: - Combine multiple uploads into one object - Upload files in parallel, create object later - Reuse same upload across multiple objects   See: api/buckets/uploads/ for the complete upload system")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Metadata for the blob, this will only be applied to the documents that use this blob")
     canonicalize_source: Optional[StrictBool] = Field(default=None, description="If set, override object-level default to control source canonicalization for this blob.")
     force_remirror: Optional[StrictBool] = Field(default=None, description="If set, override object-level default to force re-upload even if an identical blob exists.")
-    __properties: ClassVar[List[str]] = ["property", "key_prefix", "type", "data", "metadata", "canonicalize_source", "force_remirror"]
+    __properties: ClassVar[List[str]] = ["property", "key_prefix", "type", "data", "upload_id", "metadata", "canonicalize_source", "force_remirror"]
+
+    @field_validator('upload_id')
+    def upload_id_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^upl_[a-zA-Z0-9_-]+$", value):
+            raise ValueError(r"must validate the regular expression /^upl_[a-zA-Z0-9_-]+$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +107,8 @@ class CreateBlobRequest(BaseModel):
             "property": obj.get("property"),
             "key_prefix": obj.get("key_prefix"),
             "type": obj.get("type"),
-            "data": Data1.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "data": Data.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "upload_id": obj.get("upload_id"),
             "metadata": obj.get("metadata"),
             "canonicalize_source": obj.get("canonicalize_source"),
             "force_remirror": obj.get("force_remirror")

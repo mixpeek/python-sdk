@@ -38,13 +38,17 @@ class TestListTasksResponse(unittest.TestCase):
             return ListTasksResponse(
                 results = [
                     mixpeek.models.task_response.TaskResponse(
-                        task_id = 'task_123', 
-                        task_type = api_namespaces_create, 
-                        status = IN_PROGRESS, 
-                        inputs = [file1.pdf, {config={key=value}}], 
-                        outputs = [processed_file1.pdf, {result=success}], 
-                        additional_data = {priority=high, user_id=user_456}, 
-                        error_message = '', )
+                        task_id = '', 
+                        task_type = 'api_namespaces_create', 
+                        status = 'PENDING', 
+                        inputs = [
+                            null
+                            ], 
+                        outputs = [
+                            null
+                            ], 
+                        additional_data = { }, 
+                        error = '', )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -52,19 +56,24 @@ class TestListTasksResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', )
+                    previous_page = '', 
+                    next_cursor = '', )
             )
         else:
             return ListTasksResponse(
                 results = [
                     mixpeek.models.task_response.TaskResponse(
-                        task_id = 'task_123', 
-                        task_type = api_namespaces_create, 
-                        status = IN_PROGRESS, 
-                        inputs = [file1.pdf, {config={key=value}}], 
-                        outputs = [processed_file1.pdf, {result=success}], 
-                        additional_data = {priority=high, user_id=user_456}, 
-                        error_message = '', )
+                        task_id = '', 
+                        task_type = 'api_namespaces_create', 
+                        status = 'PENDING', 
+                        inputs = [
+                            null
+                            ], 
+                        outputs = [
+                            null
+                            ], 
+                        additional_data = { }, 
+                        error = '', )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -72,7 +81,8 @@ class TestListTasksResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
         )
         """
 

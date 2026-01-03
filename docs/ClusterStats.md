@@ -7,8 +7,8 @@ Basic clustering quality metrics.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **num_clusters** | **int** |  | 
-**noise_points** | **int** |  | 
-**silhouette_score** | **float** |  | 
+**noise_points** | **int** | Number of noise points (for DBSCAN, etc.) | [optional] 
+**silhouette_score** | **float** | Silhouette score (-1 to 1, higher is better) | [optional] 
 **extra** | **Dict[str, object]** |  | [optional] 
 
 ## Example

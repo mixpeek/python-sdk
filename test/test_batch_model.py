@@ -46,13 +46,91 @@ class TestBatchModel(unittest.TestCase):
                     ''
                     ],
                 error = '',
+                error_summary = {
+                    'key' : 56
+                    },
                 type = 'BUCKET',
                 manifest_key = '',
                 task_id = '',
                 loaded_object_ids = [
                     ''
                     ],
-                internal_metadata = { }
+                internal_metadata = { },
+                metadata = { },
+                tier_tasks = [
+                    mixpeek.models.tier_task_info.TierTaskInfo(
+                        tier_num = 0.0, 
+                        task_id = '', 
+                        status = 'PENDING', 
+                        collection_ids = [
+                            ''
+                            ], 
+                        extractor_jobs = [
+                            mixpeek.models.extractor_job_info.ExtractorJobInfo(
+                                extractor_type = '', 
+                                ray_job_id = '', 
+                                celery_task_id = '', 
+                                started_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                completed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                duration_ms = 1.337, 
+                                documents_written = 56, 
+                                errors = [
+                                    mixpeek.models.batch_error_detail.BatchErrorDetail(
+                                        error_type = 'dependency', 
+                                        message = '', 
+                                        component = '', 
+                                        stage = '', 
+                                        traceback = '', 
+                                        timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                        affected_document_ids = [
+                                            ''
+                                            ], 
+                                        affected_count = 1.0, 
+                                        recovery_suggestion = '', 
+                                        metadata = { }, )
+                                    ], )
+                            ], 
+                        source_type = '', 
+                        source_collection_ids = [
+                            ''
+                            ], 
+                        parent_task_id = '', 
+                        started_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        completed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        duration_ms = 1.337, 
+                        errors = [
+                            mixpeek.models.batch_error_detail.BatchErrorDetail(
+                                error_type = 'dependency', 
+                                message = '', 
+                                component = '', 
+                                stage = '', 
+                                traceback = '', 
+                                timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                                affected_count = 1.0, 
+                                recovery_suggestion = '', 
+                                metadata = { }, )
+                            ], 
+                        error_summary = {
+                            'key' : 56
+                            }, 
+                        performance = { }, 
+                        ray_job_id = '', 
+                        celery_task_id = '', 
+                        source_documents_fetched = 56, 
+                        documents_after_source_filter = 56, 
+                        documents_missing_input_fields = 56, 
+                        documents_submitted_to_engine = 56, 
+                        documents_written = 56, )
+                    ],
+                current_tier = 0.0,
+                total_tiers = 1.0,
+                dag_tiers = [
+                    [
+                        ''
+                        ]
+                    ],
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
             return BatchModel(

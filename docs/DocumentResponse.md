@@ -1,22 +1,14 @@
 # DocumentResponse
 
-Response model for a single document.
+Response model for a single document.  This is the standard response format when fetching documents via API endpoints. Contains all document data plus optional presigned URLs for S3 blobs.  The document payload structure follows native Qdrant format:     - System fields are stored in `_internal` (lineage, metadata, blobs, etc.)     - User fields are at root level (brand_name, thumbnail_url, etc.)     - Only document_id and collection_id are Mixpeek IDs at root level     - No duplication between root and _internal  Query Parameters Affecting Response:     - return_url=true: Adds presigned_url to each document_blobs entry     - return_vectors=true: Includes embedding arrays in response  Use Cases:     - Display document details in UI     - Download source files or generated artifacts     - Understand document provenance and processing     - Access enrichment fields (flat) for filtering/display
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document_id** | **str** | ID of the document | 
-**collection_id** | **str** | ID of the collection | 
-**object_id** | **str** | ID of the source object for this document | 
-**enrichments** | [**Enrichments**](Enrichments.md) | Enrichments from clusters, taxonomies, joins, etc. | [optional] 
-**source_blobs** | **List[Dict[str, object]]** | A list of the source blobs for the object. | [optional] 
-**internal_metadata** | **Dict[str, object]** | Internal metadata calculated during processing. | [optional] 
-**metadata** | **Dict[str, object]** | Metadata associated with the document | [optional] 
-**vector** | **List[float]** | Vector embedding for the document | [optional] 
-**presigned_url** | **str** | Deprecated. Use &#39;presigned_urls&#39; or document_blobs[*].presigned_url. | [optional] 
-**document_blobs** | [**List[BlobURLRef]**](BlobURLRef.md) | Related blobs for this document (e.g., thumbnails, source). When return_url&#x3D;true, each BlobURLRef.presigned_url will be populated alongside the canonical url. | [optional] 
-**presigned_urls** | [**List[PresignedURLModel]**](PresignedURLModel.md) | Aggregated presigned URLs keyed by logical name or filename. | [optional] 
+**document_id** | **str** | REQUIRED. Unique identifier for the document. Format: &#39;doc_&#39; prefix + alphanumeric characters. Use for: API queries, references, filtering. | 
+**collection_id** | **str** | REQUIRED. ID of the collection this document belongs to. Format: &#39;col_&#39; prefix + alphanumeric characters. Use for: Collection-scoped queries, filtering. | 
+**internal** | [**InternalPayloadModel**](InternalPayloadModel.md) | System-managed internal fields. Contains all Mixpeek-managed metadata including lineage, processing info, timestamps, and blob references. User-defined fields appear at root level alongside document_id and collection_id. | [optional] 
 
 ## Example
 

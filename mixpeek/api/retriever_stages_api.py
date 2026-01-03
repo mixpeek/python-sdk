@@ -17,9 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import List, Optional
-from typing_extensions import Annotated
+from typing import List
 from mixpeek.models.retriever_stage_definition import RetrieverStageDefinition
 
 from mixpeek.api_client import ApiClient, RequestSerialized
@@ -43,8 +41,6 @@ class RetrieverStagesApi:
     @validate_call
     def list_stages_retrievers(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,14 +54,10 @@ class RetrieverStagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> List[RetrieverStageDefinition]:
-        """List available retriever stages
+        """List Available Retriever Stages
 
-        List available retriever stages.
+        List all registered retriever stages with their configurations. Use this endpoint to discover available stages before creating retrievers. Each stage includes its ID, description, category, and full parameter schema. The parameter_schema field contains complete Pydantic JSON Schema with validation rules, descriptions, and examples for all stage parameters.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
-        :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,8 +81,6 @@ class RetrieverStagesApi:
         """ # noqa: E501
 
         _param = self._list_stages_retrievers_serialize(
-            authorization=authorization,
-            x_namespace=x_namespace,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -104,7 +94,6 @@ class RetrieverStagesApi:
             '403': "ErrorResponse",
             '404': "ErrorResponse",
             '500': "ErrorResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -120,8 +109,6 @@ class RetrieverStagesApi:
     @validate_call
     def list_stages_retrievers_with_http_info(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -135,14 +122,10 @@ class RetrieverStagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[List[RetrieverStageDefinition]]:
-        """List available retriever stages
+        """List Available Retriever Stages
 
-        List available retriever stages.
+        List all registered retriever stages with their configurations. Use this endpoint to discover available stages before creating retrievers. Each stage includes its ID, description, category, and full parameter schema. The parameter_schema field contains complete Pydantic JSON Schema with validation rules, descriptions, and examples for all stage parameters.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
-        :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -166,8 +149,6 @@ class RetrieverStagesApi:
         """ # noqa: E501
 
         _param = self._list_stages_retrievers_serialize(
-            authorization=authorization,
-            x_namespace=x_namespace,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -181,7 +162,6 @@ class RetrieverStagesApi:
             '403': "ErrorResponse",
             '404': "ErrorResponse",
             '500': "ErrorResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -197,8 +177,6 @@ class RetrieverStagesApi:
     @validate_call
     def list_stages_retrievers_without_preload_content(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -212,14 +190,10 @@ class RetrieverStagesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """List available retriever stages
+        """List Available Retriever Stages
 
-        List available retriever stages.
+        List all registered retriever stages with their configurations. Use this endpoint to discover available stages before creating retrievers. Each stage includes its ID, description, category, and full parameter schema. The parameter_schema field contains complete Pydantic JSON Schema with validation rules, descriptions, and examples for all stage parameters.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
-        :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -243,8 +217,6 @@ class RetrieverStagesApi:
         """ # noqa: E501
 
         _param = self._list_stages_retrievers_serialize(
-            authorization=authorization,
-            x_namespace=x_namespace,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -258,7 +230,6 @@ class RetrieverStagesApi:
             '403': "ErrorResponse",
             '404': "ErrorResponse",
             '500': "ErrorResponse",
-            '422': "HTTPValidationError",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -269,8 +240,6 @@ class RetrieverStagesApi:
 
     def _list_stages_retrievers_serialize(
         self,
-        authorization,
-        x_namespace,
         _request_auth,
         _content_type,
         _headers,
@@ -294,10 +263,6 @@ class RetrieverStagesApi:
         # process the path parameters
         # process the query parameters
         # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
-        if x_namespace is not None:
-            _header_params['X-Namespace'] = x_namespace
         # process the form parameters
         # process the body parameter
 

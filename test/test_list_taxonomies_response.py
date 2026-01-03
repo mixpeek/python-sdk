@@ -52,10 +52,16 @@ class TestListTaxonomiesResponse(unittest.TestCase):
                             ], 
                         config = null, 
                         ready = True, 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        metadata = { }, )
                     ],
                 pagination = { },
-                total_count = 56
+                total_count = 56,
+                stats = mixpeek.models.taxonomy_list_stats.TaxonomyListStats(
+                    total_taxonomies = 56, 
+                    flat_taxonomies = 56, 
+                    hierarchical_taxonomies = 56, 
+                    taxonomies_with_retrievers = 56, )
             )
         else:
             return ListTaxonomiesResponse(
@@ -75,7 +81,8 @@ class TestListTaxonomiesResponse(unittest.TestCase):
                             ], 
                         config = null, 
                         ready = True, 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        metadata = { }, )
                     ],
                 pagination = { },
                 total_count = 56,

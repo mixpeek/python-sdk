@@ -36,65 +36,39 @@ class TestOrganizationModelResponse(unittest.TestCase):
         model = OrganizationModelResponse()
         if include_optional:
             return OrganizationModelResponse(
-                internal_id = '',
-                organization_name = '',
                 organization_id = '',
+                organization_name = '',
+                logo_url = '',
                 account_type = 'free',
                 credit_count = 56,
                 metadata = { },
-                users = [
-                    mixpeek.models.user_model.UserModel(
-                        user_id = '', 
-                        user_name = '', 
-                        email = '', 
-                        api_keys = [
-                            mixpeek.models.api_key.APIKey(
-                                key = '', 
-                                name = '', 
-                                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                permissions = [
-                                    'read'
-                                    ], )
-                            ], 
-                        metadata = { }, 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
-                    ],
+                billing_email = '',
                 rate_limits = mixpeek.models.base_rate_limits.BaseRateLimits(
-                    default = 56, 
-                    search = 56, 
-                    upload = 56, 
-                    delete = 56, )
+                    metadata = 1.0, 
+                    data = 1.0, 
+                    search = 1.0, 
+                    upload = 1.0, 
+                    compute = 1.0, ),
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                users = [
+                    { }
+                    ]
             )
         else:
             return OrganizationModelResponse(
-                internal_id = '',
-                organization_name = '',
                 organization_id = '',
+                organization_name = '',
                 account_type = 'free',
                 credit_count = 56,
-                metadata = { },
-                users = [
-                    mixpeek.models.user_model.UserModel(
-                        user_id = '', 
-                        user_name = '', 
-                        email = '', 
-                        api_keys = [
-                            mixpeek.models.api_key.APIKey(
-                                key = '', 
-                                name = '', 
-                                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                permissions = [
-                                    'read'
-                                    ], )
-                            ], 
-                        metadata = { }, 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
-                    ],
                 rate_limits = mixpeek.models.base_rate_limits.BaseRateLimits(
-                    default = 56, 
-                    search = 56, 
-                    upload = 56, 
-                    delete = 56, ),
+                    metadata = 1.0, 
+                    data = 1.0, 
+                    search = 1.0, 
+                    upload = 1.0, 
+                    compute = 1.0, ),
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

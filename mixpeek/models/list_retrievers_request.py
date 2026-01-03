@@ -20,23 +20,18 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from mixpeek.models.logical_operator_input import LogicalOperatorInput
-from mixpeek.models.sort_option import SortOption
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ListRetrieversRequest(BaseModel):
     """
-    List of retriever requests.
+    Request to list retrievers.
     """ # noqa: E501
-    filters: Optional[LogicalOperatorInput] = Field(default=None, description="Filters to apply when listing retrievers")
-    sorts: Optional[List[SortOption]] = Field(default=None, description="Sorting options for the retriever list")
-    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across all text fields")
+    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across retriever_id, retriever_name, description, and other text fields")
+    filters: Optional[Dict[str, Any]] = Field(default=None, description="Filters to apply to the retriever list. Supports filtering by retriever_id or retriever_name.")
+    sorts: Optional[List[Dict[str, Any]]] = Field(default=None, description="Sort options for the retriever list")
     case_sensitive: Optional[StrictBool] = Field(default=False, description="If True, filters and search will be case-sensitive")
-    limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=10, description="Pagination limit")
-    offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=0, description="Pagination offset")
-    __properties: ClassVar[List[str]] = ["filters", "sorts", "search", "case_sensitive", "limit", "offset"]
+    __properties: ClassVar[List[str]] = ["search", "filters", "sorts", "case_sensitive"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,16 +72,6 @@ class ListRetrieversRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of filters
-        if self.filters:
-            _dict['filters'] = self.filters.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in sorts (list)
-        _items = []
-        if self.sorts:
-            for _item_sorts in self.sorts:
-                if _item_sorts:
-                    _items.append(_item_sorts.to_dict())
-            _dict['sorts'] = _items
         return _dict
 
     @classmethod
@@ -99,12 +84,10 @@ class ListRetrieversRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "filters": LogicalOperatorInput.from_dict(obj["filters"]) if obj.get("filters") is not None else None,
-            "sorts": [SortOption.from_dict(_item) for _item in obj["sorts"]] if obj.get("sorts") is not None else None,
             "search": obj.get("search"),
-            "case_sensitive": obj.get("case_sensitive") if obj.get("case_sensitive") is not None else False,
-            "limit": obj.get("limit") if obj.get("limit") is not None else 10,
-            "offset": obj.get("offset") if obj.get("offset") is not None else 0
+            "filters": obj.get("filters"),
+            "sorts": obj.get("sorts"),
+            "case_sensitive": obj.get("case_sensitive") if obj.get("case_sensitive") is not None else False
         })
         return _obj
 

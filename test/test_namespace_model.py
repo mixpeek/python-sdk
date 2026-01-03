@@ -38,19 +38,44 @@ class TestNamespaceModel(unittest.TestCase):
             return NamespaceModel(
                 namespace_id = '',
                 namespace_name = 'spotify_playlists_dev',
+                infrastructure = mixpeek.models.namespace_infrastructure.NamespaceInfrastructure(
+                    ray_cluster_id = 'ray_HqXzyCBw3_uufVPIPFhB9JcGRYnua_cdyyvLY8IzLpul9', 
+                    ray_head_node_url = '', 
+                    ray_dashboard_url = '', 
+                    qdrant_url = '', 
+                    qdrant_api_key = '', 
+                    qdrant_collection = '012', 
+                    compute_tier = 'shared', 
+                    max_concurrent_jobs = 1.0, 
+                    autoscaling_enabled = True, 
+                    min_workers = 0.0, 
+                    max_workers = 1.0, 
+                    gpu_type = '', 
+                    gpus_per_worker = 0.0, ),
+                cluster_id = '',
                 description = '',
                 feature_extractors = [
                     mixpeek.models.base_feature_extractor_model.BaseFeatureExtractorModel(
                         feature_extractor_name = '', 
                         version = '', 
+                        params = { }, 
                         feature_extractor_id = '', )
                     ],
                 payload_indexes = [
                     mixpeek.models.payload_index_config.PayloadIndexConfig(
-                        field_name = '', 
+                        field_name = '0', 
                         type = 'keyword', 
-                        field_schema = null, )
+                        field_schema = null, 
+                        is_protected = True, )
                     ],
+                document_count = 56,
+                bucket_count = 56,
+                collection_count = 56,
+                object_count = 56,
+                auto_create_indexes = True,
+                vector_inference_map = {
+                    'key' : ''
+                    },
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )

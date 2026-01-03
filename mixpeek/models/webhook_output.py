@@ -19,8 +19,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from mixpeek.models.webhook_channel_output import WebhookChannelOutput
 from mixpeek.models.webhook_event_type import WebhookEventType
 from typing import Optional, Set
@@ -28,16 +29,26 @@ from typing_extensions import Self
 
 class WebhookOutput(BaseModel):
     """
-    Represents a configured webhook for an organization.
+    Configured webhook subscription for organization event notifications.  Webhooks enable real-time notifications when events occur in the system. Each webhook subscribes to specific event types and delivers notifications via one or more configured channels (Slack, email, HTTP, SMS).  Webhook Lifecycle:     1. Created with event_types and channels configured     2. is_active=True enables notification delivery     3. Events matching event_types trigger notifications to all channels     4. is_active=False temporarily pauses notifications without deletion     5. Webhook can be updated to add/remove event types or channels     6. Permanent deletion removes the webhook configuration  Use Cases:     - Integrate Mixpeek events with external systems via HTTP webhooks     - Notify teams in Slack when ingestion jobs complete     - Send email alerts when critical failures occur     - Trigger automated workflows based on state changes     - Maintain audit trails by forwarding events to SIEM systems  Best Practices:     - Subscribe only to events you need (reduces noise)     - Use descriptive webhook_name for identification     - Configure multiple channels for critical events (redundancy)     - Set is_active=False to temporarily disable without losing config     - Monitor webhook delivery failures via last_error tracking
     """ # noqa: E501
-    webhook_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the webhook.")
-    webhook_name: StrictStr = Field(description="Human-readable name for the webhook.")
-    event_types: List[WebhookEventType] = Field(description="A list of event types that this webhook subscribes to.")
-    channels: List[WebhookChannelOutput] = Field(description="A list of channels to notify for the subscribed events.")
-    is_active: Optional[StrictBool] = Field(default=True, description="Whether the webhook is currently active and should send notifications.")
-    created_at: Optional[datetime] = Field(default=None, description="Timestamp of when the webhook was created.")
-    updated_at: Optional[datetime] = Field(default=None, description="Timestamp of the last update.")
+    webhook_id: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Unique identifier for the webhook. Auto-generated with 'wh_' prefix followed by secure random token. Format: wh_{10-character alphanumeric}. Used for API operations and event tracking.")
+    webhook_name: Annotated[str, Field(min_length=1, strict=True, max_length=200)] = Field(description="REQUIRED. Human-readable name for the webhook. Displayed in dashboards, logs, and notification metadata. Should describe the webhook's purpose or destination. Format: 1-200 characters.")
+    event_types: Annotated[List[WebhookEventType], Field(min_length=1)] = Field(description="REQUIRED. List of event types that trigger this webhook. When any of these events occur, notifications are sent to all channels. Must contain at least one event type. Common patterns: - ['object.created', 'object.updated'] for object lifecycle tracking - ['cluster.execution.completed', 'cluster.execution.failed'] for job monitoring - ['*'] for all events (use cautiously, high volume)")
+    channels: Annotated[List[WebhookChannelOutput], Field(min_length=1)] = Field(description="REQUIRED. List of notification channels for event delivery. When an event occurs, notifications are sent to ALL configured channels. Must contain at least one channel. Multiple channels provide redundancy and multi-audience delivery. Example: Send to both Slack (team) and email (manager) for critical events.")
+    is_active: Optional[StrictBool] = Field(default=True, description="Whether the webhook is currently active and should send notifications. True: Events trigger notifications to channels. False: Webhook is paused, no notifications sent but config preserved. Use to temporarily disable webhooks without losing configuration. Default: True")
+    created_at: Optional[datetime] = Field(default=None, description="UTC timestamp when the webhook was created. Auto-generated at creation time. Immutable after creation. Format: ISO 8601 datetime.")
+    updated_at: Optional[datetime] = Field(default=None, description="UTC timestamp of the most recent webhook update. Updated automatically when event_types, channels, or is_active changes. Tracks configuration modifications. Format: ISO 8601 datetime.")
     __properties: ClassVar[List[str]] = ["webhook_id", "webhook_name", "event_types", "channels", "is_active", "created_at", "updated_at"]
+
+    @field_validator('webhook_id')
+    def webhook_id_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if not re.match(r"^wh_[a-zA-Z0-9]{10}$", value):
+            raise ValueError(r"must validate the regular expression /^wh_[a-zA-Z0-9]{10}$/")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

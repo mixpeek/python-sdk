@@ -18,9 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
-from mixpeek.models.cluster_model import ClusterModel
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.cluster_list_stats import ClusterListStats
+from mixpeek.models.cluster_metadata import ClusterMetadata
 from mixpeek.models.pagination_response import PaginationResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +30,11 @@ class ListClustersResponse(BaseModel):
     """
     Response model for listing clusters.
     """ # noqa: E501
-    results: List[ClusterModel] = Field(description="List of cluster models")
+    results: List[ClusterMetadata] = Field(description="List of cluster metadata")
     pagination: PaginationResponse = Field(description="Pagination information")
-    __properties: ClassVar[List[str]] = ["results", "pagination"]
+    total_count: StrictInt = Field(description="Total number of clusters matching the query")
+    stats: Optional[ClusterListStats] = Field(default=None, description="Aggregate statistics across all clusters in the result")
+    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -82,6 +85,9 @@ class ListClustersResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
             _dict['pagination'] = self.pagination.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of stats
+        if self.stats:
+            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -94,8 +100,10 @@ class ListClustersResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [ClusterModel.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
-            "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None
+            "results": [ClusterMetadata.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
+            "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
+            "total_count": obj.get("total_count"),
+            "stats": ClusterListStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None
         })
         return _obj
 

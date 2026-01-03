@@ -36,15 +36,16 @@ class TestVectorIndexDefinition(unittest.TestCase):
         model = VectorIndexDefinition()
         if include_optional:
             return VectorIndexDefinition(
-                name = '',
-                description = '',
+                feature_uri = '',
+                name = '0',
+                description = '0123456789',
                 type = 'single',
                 index = None
             )
         else:
             return VectorIndexDefinition(
-                name = '',
-                description = '',
+                name = '0',
+                description = '0123456789',
                 type = 'single',
                 index = None,
         )

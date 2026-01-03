@@ -28,9 +28,9 @@ class ListBatchesResponse(BaseModel):
     """
     The response model for listing batches.
     """ # noqa: E501
-    batches: List[BatchModel] = Field(description="A list of batches.")
+    results: List[BatchModel] = Field(description="A list of batches.")
     total_count: StrictInt = Field(description="The total number of batches found.")
-    __properties: ClassVar[List[str]] = ["batches", "total_count"]
+    __properties: ClassVar[List[str]] = ["results", "total_count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -71,13 +71,13 @@ class ListBatchesResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in batches (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in results (list)
         _items = []
-        if self.batches:
-            for _item_batches in self.batches:
-                if _item_batches:
-                    _items.append(_item_batches.to_dict())
-            _dict['batches'] = _items
+        if self.results:
+            for _item_results in self.results:
+                if _item_results:
+                    _items.append(_item_results.to_dict())
+            _dict['results'] = _items
         return _dict
 
     @classmethod
@@ -90,7 +90,7 @@ class ListBatchesResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "batches": [BatchModel.from_dict(_item) for _item in obj["batches"]] if obj.get("batches") is not None else None,
+            "results": [BatchModel.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "total_count": obj.get("total_count")
         })
         return _obj

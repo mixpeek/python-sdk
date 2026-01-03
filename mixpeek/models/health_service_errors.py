@@ -27,13 +27,14 @@ class HealthServiceErrors(BaseModel):
     """
     Optional error messages for dependent services (present when a check fails).
     """ # noqa: E501
-    redis: Optional[StrictStr] = Field(default=None, description="Redis error message, if any")
-    mongodb: Optional[StrictStr] = Field(default=None, description="MongoDB error message, if any")
-    qdrant: Optional[StrictStr] = Field(default=None, description="Qdrant error message, if any")
-    s3: Optional[StrictStr] = Field(default=None, description="S3 error message, if any")
-    celery: Optional[StrictStr] = Field(default=None, description="Celery error message, if any")
-    engine: Optional[StrictStr] = Field(default=None, description="Engine error message, if any")
-    __properties: ClassVar[List[str]] = ["redis", "mongodb", "qdrant", "s3", "celery", "engine"]
+    cache: Optional[StrictStr] = Field(default=None, description="Cache layer error message, if any")
+    metadata: Optional[StrictStr] = Field(default=None, description="Metadata store error message, if any")
+    vector_store: Optional[StrictStr] = Field(default=None, description="Vector database error message, if any")
+    object_storage: Optional[StrictStr] = Field(default=None, description="Object storage error message, if any")
+    task_queue: Optional[StrictStr] = Field(default=None, description="Task queue error message, if any")
+    inference: Optional[StrictStr] = Field(default=None, description="Inference engine error message, if any")
+    analytics: Optional[StrictStr] = Field(default=None, description="Analytics backend error message, if any")
+    __properties: ClassVar[List[str]] = ["cache", "metadata", "vector_store", "object_storage", "task_queue", "inference", "analytics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,12 +87,13 @@ class HealthServiceErrors(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "redis": obj.get("redis"),
-            "mongodb": obj.get("mongodb"),
-            "qdrant": obj.get("qdrant"),
-            "s3": obj.get("s3"),
-            "celery": obj.get("celery"),
-            "engine": obj.get("engine")
+            "cache": obj.get("cache"),
+            "metadata": obj.get("metadata"),
+            "vector_store": obj.get("vector_store"),
+            "object_storage": obj.get("object_storage"),
+            "task_queue": obj.get("task_queue"),
+            "inference": obj.get("inference"),
+            "analytics": obj.get("analytics")
         })
         return _obj
 

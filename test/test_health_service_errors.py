@@ -36,12 +36,13 @@ class TestHealthServiceErrors(unittest.TestCase):
         model = HealthServiceErrors()
         if include_optional:
             return HealthServiceErrors(
-                redis = '',
-                mongodb = '',
-                qdrant = '',
-                s3 = '',
-                celery = '',
-                engine = ''
+                cache = '',
+                metadata = '',
+                vector_store = '',
+                object_storage = '',
+                task_queue = '',
+                inference = '',
+                analytics = ''
             )
         else:
             return HealthServiceErrors(

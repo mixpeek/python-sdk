@@ -36,13 +36,14 @@ class TestPayloadIndexConfigOutput(unittest.TestCase):
         model = PayloadIndexConfigOutput()
         if include_optional:
             return PayloadIndexConfigOutput(
-                field_name = '',
+                field_name = '0',
                 type = 'keyword',
-                field_schema = None
+                field_schema = None,
+                is_protected = True
             )
         else:
             return PayloadIndexConfigOutput(
-                field_name = '',
+                field_name = '0',
                 type = 'keyword',
         )
         """

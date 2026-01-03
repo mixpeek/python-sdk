@@ -1,6 +1,6 @@
 # BucketSchemaFieldType
 
-Enum for field types in bucket schemas.
+Supported data types for bucket schema fields.  Types fall into two categories:  1. **Metadata Types** (JSON types):    - Stored as object metadata    - Standard JSON-compatible types    - Not processed by extractors (unless explicitly mapped)    - Examples: string, number, boolean, date  2. **File Types** (blobs):    - Stored as files/blobs    - Processed by extractors    - Require file content (URL or base64)    - Examples: text, image, video, pdf  **GIF Special Handling**:     GIF files can be declared as either IMAGE or VIDEO type:      - As IMAGE: GIF is embedded as a single static image (first frame)     - As VIDEO: GIF is decomposed frame-by-frame with embeddings per frame      The multimodal extractor detects GIFs via MIME type (image/gif) and routes     them based on your schema declaration. Use VIDEO for animated GIFs where     frame-level search is needed, IMAGE for static/thumbnail use cases.  NOTE: For retriever input schemas that need to accept document references (e.g., \"find similar documents\"), use RetrieverInputSchemaFieldType instead, which includes all bucket types plus document_reference.
 
 ## Enum
 
@@ -22,10 +22,6 @@ Enum for field types in bucket schemas.
 
 * `DATETIME` (value: `'datetime'`)
 
-* `JSON` (value: `'json'`)
-
-* `FILE` (value: `'file'`)
-
 * `TEXT` (value: `'text'`)
 
 * `IMAGE` (value: `'image'`)
@@ -36,17 +32,7 @@ Enum for field types in bucket schemas.
 
 * `PDF` (value: `'pdf'`)
 
-* `DOCUMENT` (value: `'document'`)
-
-* `SPREADSHEET` (value: `'spreadsheet'`)
-
-* `PRESENTATION` (value: `'presentation'`)
-
-* `DENSE_VECTOR` (value: `'dense_vector'`)
-
-* `SPARSE_VECTOR` (value: `'sparse_vector'`)
-
-* `INT8_VECTOR` (value: `'int8_vector'`)
+* `EXCEL` (value: `'excel'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -17,13 +17,14 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
+from pydantic import Field, StrictBool, StrictStr
+from typing import Any, Optional
 from typing_extensions import Annotated
 from mixpeek.models.create_namespace_request import CreateNamespaceRequest
 from mixpeek.models.list_namespaces_request import ListNamespacesRequest
 from mixpeek.models.list_namespaces_response import ListNamespacesResponse
 from mixpeek.models.namespace_model import NamespaceModel
+from mixpeek.models.patch_namespace_request import PatchNamespaceRequest
 from mixpeek.models.update_namespace_request import UpdateNamespaceRequest
 
 from mixpeek.api_client import ApiClient, RequestSerialized
@@ -48,7 +49,7 @@ class NamespacesApi:
     def create_namespace(
         self,
         create_namespace_request: CreateNamespaceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -68,7 +69,7 @@ class NamespacesApi:
 
         :param create_namespace_request: (required)
         :type create_namespace_request: CreateNamespaceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -125,7 +126,7 @@ class NamespacesApi:
     def create_namespace_with_http_info(
         self,
         create_namespace_request: CreateNamespaceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -145,7 +146,7 @@ class NamespacesApi:
 
         :param create_namespace_request: (required)
         :type create_namespace_request: CreateNamespaceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -202,7 +203,7 @@ class NamespacesApi:
     def create_namespace_without_preload_content(
         self,
         create_namespace_request: CreateNamespaceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -222,7 +223,7 @@ class NamespacesApi:
 
         :param create_namespace_request: (required)
         :type create_namespace_request: CreateNamespaceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -354,7 +355,7 @@ class NamespacesApi:
     def delete_namespace(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -367,14 +368,14 @@ class NamespacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> object:
         """Delete Namespace
 
-        Deletes an existing namespace using either its name or ID
+        This endpoint deletes a namespace and ALL its resources including:     - All buckets (with S3 objects, batches, uploads)     - All collections (with Qdrant points, cache, webhooks)     - All clusters (with Ray jobs, executions, triggers, S3 artifacts)     - All retrievers (with executions, evaluations, interactions, cache)     - Remaining MongoDB collections (tasks, uploads, taxonomies, API keys, etc.)     - All S3 objects with namespace prefix     - Qdrant collection (namespace's vector database)     - All namespace cache (across all scopes)     - Analytics data (ClickHouse tables)     - Namespace metadata      The deletion is performed asynchronously. Returns a task_id that can be used     to poll for deletion progress via GET /v1/tasks/{task_id}.      ⚠️  WARNING: This operation is irreversible and will delete ALL data in the namespace!
 
         :param namespace_identifier: Either the namespace name or namespace ID (required)
         :type namespace_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -408,7 +409,7 @@ class NamespacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -431,7 +432,7 @@ class NamespacesApi:
     def delete_namespace_with_http_info(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -444,14 +445,14 @@ class NamespacesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[object]:
         """Delete Namespace
 
-        Deletes an existing namespace using either its name or ID
+        This endpoint deletes a namespace and ALL its resources including:     - All buckets (with S3 objects, batches, uploads)     - All collections (with Qdrant points, cache, webhooks)     - All clusters (with Ray jobs, executions, triggers, S3 artifacts)     - All retrievers (with executions, evaluations, interactions, cache)     - Remaining MongoDB collections (tasks, uploads, taxonomies, API keys, etc.)     - All S3 objects with namespace prefix     - Qdrant collection (namespace's vector database)     - All namespace cache (across all scopes)     - Analytics data (ClickHouse tables)     - Namespace metadata      The deletion is performed asynchronously. Returns a task_id that can be used     to poll for deletion progress via GET /v1/tasks/{task_id}.      ⚠️  WARNING: This operation is irreversible and will delete ALL data in the namespace!
 
         :param namespace_identifier: Either the namespace name or namespace ID (required)
         :type namespace_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -485,7 +486,7 @@ class NamespacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -508,7 +509,7 @@ class NamespacesApi:
     def delete_namespace_without_preload_content(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -524,11 +525,11 @@ class NamespacesApi:
     ) -> RESTResponseType:
         """Delete Namespace
 
-        Deletes an existing namespace using either its name or ID
+        This endpoint deletes a namespace and ALL its resources including:     - All buckets (with S3 objects, batches, uploads)     - All collections (with Qdrant points, cache, webhooks)     - All clusters (with Ray jobs, executions, triggers, S3 artifacts)     - All retrievers (with executions, evaluations, interactions, cache)     - Remaining MongoDB collections (tasks, uploads, taxonomies, API keys, etc.)     - All S3 objects with namespace prefix     - Qdrant collection (namespace's vector database)     - All namespace cache (across all scopes)     - Analytics data (ClickHouse tables)     - Namespace metadata      The deletion is performed asynchronously. Returns a task_id that can be used     to poll for deletion progress via GET /v1/tasks/{task_id}.      ⚠️  WARNING: This operation is irreversible and will delete ALL data in the namespace!
 
         :param namespace_identifier: Either the namespace name or namespace ID (required)
         :type namespace_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -562,7 +563,7 @@ class NamespacesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -647,7 +648,7 @@ class NamespacesApi:
     def get_namespace(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -667,7 +668,7 @@ class NamespacesApi:
 
         :param namespace_identifier: Either the namespace name or namespace ID (required)
         :type namespace_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -724,7 +725,7 @@ class NamespacesApi:
     def get_namespace_with_http_info(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -744,7 +745,7 @@ class NamespacesApi:
 
         :param namespace_identifier: Either the namespace name or namespace ID (required)
         :type namespace_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -801,7 +802,7 @@ class NamespacesApi:
     def get_namespace_without_preload_content(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -821,7 +822,7 @@ class NamespacesApi:
 
         :param namespace_identifier: Either the namespace name or namespace ID (required)
         :type namespace_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -939,9 +940,11 @@ class NamespacesApi:
     @validate_call
     def list_namespaces(
         self,
-        limit: Optional[StrictInt] = None,
-        offset: Optional[StrictInt] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         list_namespaces_request: Optional[ListNamespacesRequest] = None,
         _request_timeout: Union[
             None,
@@ -964,7 +967,11 @@ class NamespacesApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param list_namespaces_request:
         :type list_namespaces_request: ListNamespacesRequest
@@ -993,6 +1000,8 @@ class NamespacesApi:
         _param = self._list_namespaces_serialize(
             limit=limit,
             offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
             list_namespaces_request=list_namespaces_request,
             _request_auth=_request_auth,
@@ -1024,9 +1033,11 @@ class NamespacesApi:
     @validate_call
     def list_namespaces_with_http_info(
         self,
-        limit: Optional[StrictInt] = None,
-        offset: Optional[StrictInt] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         list_namespaces_request: Optional[ListNamespacesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1049,7 +1060,11 @@ class NamespacesApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param list_namespaces_request:
         :type list_namespaces_request: ListNamespacesRequest
@@ -1078,6 +1093,8 @@ class NamespacesApi:
         _param = self._list_namespaces_serialize(
             limit=limit,
             offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
             list_namespaces_request=list_namespaces_request,
             _request_auth=_request_auth,
@@ -1109,9 +1126,11 @@ class NamespacesApi:
     @validate_call
     def list_namespaces_without_preload_content(
         self,
-        limit: Optional[StrictInt] = None,
-        offset: Optional[StrictInt] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         list_namespaces_request: Optional[ListNamespacesRequest] = None,
         _request_timeout: Union[
             None,
@@ -1134,7 +1153,11 @@ class NamespacesApi:
         :type limit: int
         :param offset:
         :type offset: int
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param list_namespaces_request:
         :type list_namespaces_request: ListNamespacesRequest
@@ -1163,6 +1186,8 @@ class NamespacesApi:
         _param = self._list_namespaces_serialize(
             limit=limit,
             offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
             list_namespaces_request=list_namespaces_request,
             _request_auth=_request_auth,
@@ -1191,6 +1216,8 @@ class NamespacesApi:
         self,
         limit,
         offset,
+        cursor,
+        include_total,
         authorization,
         list_namespaces_request,
         _request_auth,
@@ -1222,6 +1249,14 @@ class NamespacesApi:
         if offset is not None:
             
             _query_params.append(('offset', offset))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        if include_total is not None:
+            
+            _query_params.append(('include_total', include_total))
             
         # process the header parameters
         if authorization is not None:
@@ -1277,11 +1312,332 @@ class NamespacesApi:
 
 
     @validate_call
+    def patch_namespace(
+        self,
+        namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
+        patch_namespace_request: PatchNamespaceRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> NamespaceModel:
+        """Partially Update Namespace
+
+        Partially updates an existing namespace (PATCH operation)
+
+        :param namespace_identifier: Either the namespace name or namespace ID (required)
+        :type namespace_identifier: str
+        :param patch_namespace_request: (required)
+        :type patch_namespace_request: PatchNamespaceRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_namespace_serialize(
+            namespace_identifier=namespace_identifier,
+            patch_namespace_request=patch_namespace_request,
+            authorization=authorization,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NamespaceModel",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def patch_namespace_with_http_info(
+        self,
+        namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
+        patch_namespace_request: PatchNamespaceRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[NamespaceModel]:
+        """Partially Update Namespace
+
+        Partially updates an existing namespace (PATCH operation)
+
+        :param namespace_identifier: Either the namespace name or namespace ID (required)
+        :type namespace_identifier: str
+        :param patch_namespace_request: (required)
+        :type patch_namespace_request: PatchNamespaceRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_namespace_serialize(
+            namespace_identifier=namespace_identifier,
+            patch_namespace_request=patch_namespace_request,
+            authorization=authorization,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NamespaceModel",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def patch_namespace_without_preload_content(
+        self,
+        namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
+        patch_namespace_request: PatchNamespaceRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Partially Update Namespace
+
+        Partially updates an existing namespace (PATCH operation)
+
+        :param namespace_identifier: Either the namespace name or namespace ID (required)
+        :type namespace_identifier: str
+        :param patch_namespace_request: (required)
+        :type patch_namespace_request: PatchNamespaceRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_namespace_serialize(
+            namespace_identifier=namespace_identifier,
+            patch_namespace_request=patch_namespace_request,
+            authorization=authorization,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "NamespaceModel",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _patch_namespace_serialize(
+        self,
+        namespace_identifier,
+        patch_namespace_request,
+        authorization,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if namespace_identifier is not None:
+            _path_params['namespace_identifier'] = namespace_identifier
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        # process the form parameters
+        # process the body parameter
+        if patch_namespace_request is not None:
+            _body_params = patch_namespace_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/v1/namespaces/{namespace_identifier}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def update_namespace(
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
         update_namespace_request: UpdateNamespaceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1303,7 +1659,7 @@ class NamespacesApi:
         :type namespace_identifier: str
         :param update_namespace_request: (required)
         :type update_namespace_request: UpdateNamespaceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1362,7 +1718,7 @@ class NamespacesApi:
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
         update_namespace_request: UpdateNamespaceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1384,7 +1740,7 @@ class NamespacesApi:
         :type namespace_identifier: str
         :param update_namespace_request: (required)
         :type update_namespace_request: UpdateNamespaceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1443,7 +1799,7 @@ class NamespacesApi:
         self,
         namespace_identifier: Annotated[StrictStr, Field(description="Either the namespace name or namespace ID")],
         update_namespace_request: UpdateNamespaceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1465,7 +1821,7 @@ class NamespacesApi:
         :type namespace_identifier: str
         :param update_namespace_request: (required)
         :type update_namespace_request: UpdateNamespaceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

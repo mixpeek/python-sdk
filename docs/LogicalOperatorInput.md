@@ -1,6 +1,6 @@
 # LogicalOperatorInput
 
-Represents a logical operation (AND, OR, NOT) on filter conditions.  Allows nesting with a defined depth limit.
+Represents a logical operation (AND, OR, NOT) on filter conditions.  Allows nesting with a defined depth limit.  Also supports shorthand syntax where field names can be passed directly as key-value pairs for equality filtering (e.g., {\"metadata.title\": \"value\"}).
 
 ## Properties
 

@@ -1,13 +1,16 @@
 # ListDocumentsResponse
 
-Response model for listing documents.
+Response model for listing documents.  Supports both regular document lists and grouped results based on the group_by parameter. When group_by is specified, results are returned as groups instead of a flat list.  Pagination strategies: - **Offset-based (default)**: Use `pagination.page` and `pagination.page_size` - **Cursor-based (optional)**: Use `pagination.next_cursor` for efficient deep pagination
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**List[DocumentResponse]**](DocumentResponse.md) |  | 
-**pagination** | [**PaginationResponse**](PaginationResponse.md) |  | 
+**results** | [**List[DocumentResponse]**](DocumentResponse.md) | List of documents when group_by is NOT specified. Contains flat list of documents with pagination applied. Mutually exclusive with &#39;groups&#39; field. | [optional] 
+**groups** | [**List[DocumentGroup]**](DocumentGroup.md) | List of document groups when group_by IS specified. Each group contains documents sharing the same field value. Pagination applies to groups, not individual documents. Mutually exclusive with &#39;results&#39; field. | [optional] 
+**pagination** | [**PaginationResponse**](PaginationResponse.md) | Pagination information. Includes next_cursor for cursor-based pagination. When group_by is used, pagination applies to groups (not individual documents). total_count reflects total number of groups, not total documents. | 
+**stats** | [**DocumentListStats**](DocumentListStats.md) | Aggregate statistics across all documents in the result | [optional] 
+**group_by_field** | **str** | The field that was used for grouping when group_by was specified. None for non-grouped results. Useful for clients to understand the grouping structure. | [optional] 
 
 ## Example
 

@@ -50,8 +50,24 @@ class TestConfig(unittest.TestCase):
                     enrichment_fields = [
                         mixpeek.models.enrichment_field.EnrichmentField(
                             field_path = '', 
+                            target_field = '', 
                             merge_mode = 'replace', )
                         ], ),
+                step_analytics = mixpeek.models.step_analytics_config.StepAnalyticsConfig(
+                    timestamp_field = '', 
+                    sequence_id_field = '', 
+                    step_key_source = 'assignment_label', 
+                    step_key_field_path = '', 
+                    covariates = [
+                        mixpeek.models.covariate_config.CovariateConfig(
+                            field_path = '', 
+                            covariate_type = 'categorical', 
+                            name = '0', 
+                            binning_strategy = 'quartiles', 
+                            clustering_method = 'kmeans', 
+                            n_clusters = 2.0, )
+                        ], 
+                    max_sequence_duration_days = 1.0, ),
                 inference_strategy = 'schema',
                 inference_collections = [
                     ''
@@ -66,17 +82,18 @@ class TestConfig(unittest.TestCase):
                 cluster_overlap_threshold = 1.337,
                 hierarchical_nodes = [
                     mixpeek.models.hierarchical_node.HierarchicalNode(
-                        collection_id = '', 
-                        parent_collection_id = '', 
+                        collection_id = 'col_H', 
+                        parent_collection_id = 'col_H', 
                         label = '', 
                         summary = '', 
                         keywords = [
                             ''
                             ], 
-                        retriever_id = '', 
+                        retriever_id = 'ret_H', 
                         enrichment_fields = [
                             mixpeek.models.enrichment_field.EnrichmentField(
                                 field_path = '', 
+                                target_field = '', 
                                 merge_mode = 'replace', )
                             ], 
                         input_mappings = [
@@ -103,6 +120,7 @@ class TestConfig(unittest.TestCase):
                     enrichment_fields = [
                         mixpeek.models.enrichment_field.EnrichmentField(
                             field_path = '', 
+                            target_field = '', 
                             merge_mode = 'replace', )
                         ], ),
         )

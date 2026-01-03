@@ -1,12 +1,13 @@
 # EnrichmentField
 
-Field-level enrichment behaviour specification.
+Field-level enrichment behaviour specification.  Defines how to copy fields from taxonomy source nodes to enriched documents. Supports field renaming via target_field parameter.  Examples:     - Copy field as-is: {\"field_path\": \"category\", \"merge_mode\": \"replace\"}     - Rename field: {\"field_path\": \"label\", \"target_field\": \"visual_style\", \"merge_mode\": \"replace\"}     - Append to array: {\"field_path\": \"tags\", \"merge_mode\": \"append\"}
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **field_path** | **str** | Dot-notation path of the field to copy from the taxonomy node. | 
+**target_field** | **str** | Optional target field name in the enriched document. If specified, the source field will be renamed to this name. If not specified, the field_path is used as the target name. Use this to rename fields during enrichment (e.g., label → visual_style). | [optional] 
 **merge_mode** | [**EnrichmentMergeMode**](EnrichmentMergeMode.md) | Whether to overwrite the target&#39;s value or append (for arrays). | [optional] 
 
 ## Example

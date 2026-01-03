@@ -18,17 +18,23 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictStr
-from typing import Optional
+from typing import Any, Optional
 from typing_extensions import Annotated
+from mixpeek.models.clone_retriever_request import CloneRetrieverRequest
+from mixpeek.models.clone_retriever_response import CloneRetrieverResponse
 from mixpeek.models.create_retriever_request import CreateRetrieverRequest
-from mixpeek.models.debug_inference_response import DebugInferenceResponse
-from mixpeek.models.generic_delete_response import GenericDeleteResponse
-from mixpeek.models.inference_request import InferenceRequest
+from mixpeek.models.create_retriever_response import CreateRetrieverResponse
+from mixpeek.models.execute_retriever_request import ExecuteRetrieverRequest
+from mixpeek.models.execution_detail import ExecutionDetail
+from mixpeek.models.explain_retriever_request import ExplainRetrieverRequest
+from mixpeek.models.explain_retriever_response import ExplainRetrieverResponse
+from mixpeek.models.list_executions_request import ListExecutionsRequest
+from mixpeek.models.list_executions_response import ListExecutionsResponse
 from mixpeek.models.list_retrievers_request import ListRetrieversRequest
 from mixpeek.models.list_retrievers_response import ListRetrieversResponse
+from mixpeek.models.patch_retriever_request import PatchRetrieverRequest
+from mixpeek.models.patch_retriever_response import PatchRetrieverResponse
 from mixpeek.models.retriever_model_output import RetrieverModelOutput
-from mixpeek.models.retriever_query_request import RetrieverQueryRequest
-from mixpeek.models.retriever_response import RetrieverResponse
 
 from mixpeek.api_client import ApiClient, RequestSerialized
 from mixpeek.api_response import ApiResponse
@@ -49,11 +55,12 @@ class RetrieversApi:
 
 
     @validate_call
-    def create_retriever(
+    def clone_retriever(
         self,
-        create_retriever_request: CreateRetrieverRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Source retriever ID or name to clone.")],
+        clone_retriever_request: CloneRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,16 +73,351 @@ class RetrieversApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RetrieverModelOutput:
+    ) -> CloneRetrieverResponse:
+        """Clone Retriever
+
+        Clone a retriever with optional modifications.  **Purpose:** Creates a NEW retriever (with new ID) based on an existing one. This is the recommended way to iterate on retriever designs when you need to modify core logic that PATCH doesn't allow (stages, input_schema, collections).  **Clone vs PATCH vs Template:** - **PATCH**: Update metadata only (name, description, tags, display_config) - **Clone**: Copy and modify core logic (stages, input_schema, collections) - **Template**: Start from a pre-configured pattern (for new projects)  **Common Use Cases:** - Fix a typo in a stage name - Add or remove stages - Change target collections - Create variants (e.g., \"strict\" vs \"relaxed\" versions) - Test modifications before replacing production retriever  **How it works:** 1. Source retriever is copied 2. You provide a new name (REQUIRED) 3. Optionally override any other fields 4. A new retriever is created with a new ID 5. Original retriever remains unchanged  **All fields except retriever_name are OPTIONAL:** - Omit a field to copy from source - Provide a field to override the source value
+
+        :param retriever_id: Source retriever ID or name to clone. (required)
+        :type retriever_id: str
+        :param clone_retriever_request: (required)
+        :type clone_retriever_request: CloneRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._clone_retriever_serialize(
+            retriever_id=retriever_id,
+            clone_retriever_request=clone_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CloneRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def clone_retriever_with_http_info(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Source retriever ID or name to clone.")],
+        clone_retriever_request: CloneRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CloneRetrieverResponse]:
+        """Clone Retriever
+
+        Clone a retriever with optional modifications.  **Purpose:** Creates a NEW retriever (with new ID) based on an existing one. This is the recommended way to iterate on retriever designs when you need to modify core logic that PATCH doesn't allow (stages, input_schema, collections).  **Clone vs PATCH vs Template:** - **PATCH**: Update metadata only (name, description, tags, display_config) - **Clone**: Copy and modify core logic (stages, input_schema, collections) - **Template**: Start from a pre-configured pattern (for new projects)  **Common Use Cases:** - Fix a typo in a stage name - Add or remove stages - Change target collections - Create variants (e.g., \"strict\" vs \"relaxed\" versions) - Test modifications before replacing production retriever  **How it works:** 1. Source retriever is copied 2. You provide a new name (REQUIRED) 3. Optionally override any other fields 4. A new retriever is created with a new ID 5. Original retriever remains unchanged  **All fields except retriever_name are OPTIONAL:** - Omit a field to copy from source - Provide a field to override the source value
+
+        :param retriever_id: Source retriever ID or name to clone. (required)
+        :type retriever_id: str
+        :param clone_retriever_request: (required)
+        :type clone_retriever_request: CloneRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._clone_retriever_serialize(
+            retriever_id=retriever_id,
+            clone_retriever_request=clone_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CloneRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def clone_retriever_without_preload_content(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Source retriever ID or name to clone.")],
+        clone_retriever_request: CloneRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Clone Retriever
+
+        Clone a retriever with optional modifications.  **Purpose:** Creates a NEW retriever (with new ID) based on an existing one. This is the recommended way to iterate on retriever designs when you need to modify core logic that PATCH doesn't allow (stages, input_schema, collections).  **Clone vs PATCH vs Template:** - **PATCH**: Update metadata only (name, description, tags, display_config) - **Clone**: Copy and modify core logic (stages, input_schema, collections) - **Template**: Start from a pre-configured pattern (for new projects)  **Common Use Cases:** - Fix a typo in a stage name - Add or remove stages - Change target collections - Create variants (e.g., \"strict\" vs \"relaxed\" versions) - Test modifications before replacing production retriever  **How it works:** 1. Source retriever is copied 2. You provide a new name (REQUIRED) 3. Optionally override any other fields 4. A new retriever is created with a new ID 5. Original retriever remains unchanged  **All fields except retriever_name are OPTIONAL:** - Omit a field to copy from source - Provide a field to override the source value
+
+        :param retriever_id: Source retriever ID or name to clone. (required)
+        :type retriever_id: str
+        :param clone_retriever_request: (required)
+        :type clone_retriever_request: CloneRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._clone_retriever_serialize(
+            retriever_id=retriever_id,
+            clone_retriever_request=clone_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "CloneRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _clone_retriever_serialize(
+        self,
+        retriever_id,
+        clone_retriever_request,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if clone_retriever_request is not None:
+            _body_params = clone_retriever_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/retrievers/{retriever_id}/clone',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def create_retriever(
+        self,
+        create_retriever_request: CreateRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CreateRetrieverResponse:
         """Create Retriever
 
-        Create retriever.
+        Create a new retriever.  A retriever executes a series of stages to find and process documents from one or more collections.
 
         :param create_retriever_request: (required)
         :type create_retriever_request: CreateRetrieverRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -110,7 +452,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RetrieverModelOutput",
+            '200': "CreateRetrieverResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -133,8 +475,8 @@ class RetrieversApi:
     def create_retriever_with_http_info(
         self,
         create_retriever_request: CreateRetrieverRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -147,16 +489,16 @@ class RetrieversApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RetrieverModelOutput]:
+    ) -> ApiResponse[CreateRetrieverResponse]:
         """Create Retriever
 
-        Create retriever.
+        Create a new retriever.  A retriever executes a series of stages to find and process documents from one or more collections.
 
         :param create_retriever_request: (required)
         :type create_retriever_request: CreateRetrieverRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -191,7 +533,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RetrieverModelOutput",
+            '200': "CreateRetrieverResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -214,8 +556,8 @@ class RetrieversApi:
     def create_retriever_without_preload_content(
         self,
         create_retriever_request: CreateRetrieverRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -231,13 +573,13 @@ class RetrieversApi:
     ) -> RESTResponseType:
         """Create Retriever
 
-        Create retriever.
+        Create a new retriever.  A retriever executes a series of stages to find and process documents from one or more collections.
 
         :param create_retriever_request: (required)
         :type create_retriever_request: CreateRetrieverRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -272,7 +614,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RetrieverModelOutput",
+            '200': "CreateRetrieverResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -370,332 +712,11 @@ class RetrieversApi:
 
 
     @validate_call
-    def debug_inference_retrievers(
-        self,
-        inference_request: InferenceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DebugInferenceResponse:
-        """Debug Inference
-
-        Debug inference by directly calling the inference API.
-
-        :param inference_request: (required)
-        :type inference_request: InferenceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
-        :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :type x_namespace: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._debug_inference_retrievers_serialize(
-            inference_request=inference_request,
-            authorization=authorization,
-            x_namespace=x_namespace,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DebugInferenceResponse",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '500': "ErrorResponse",
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def debug_inference_retrievers_with_http_info(
-        self,
-        inference_request: InferenceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DebugInferenceResponse]:
-        """Debug Inference
-
-        Debug inference by directly calling the inference API.
-
-        :param inference_request: (required)
-        :type inference_request: InferenceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
-        :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :type x_namespace: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._debug_inference_retrievers_serialize(
-            inference_request=inference_request,
-            authorization=authorization,
-            x_namespace=x_namespace,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DebugInferenceResponse",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '500': "ErrorResponse",
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def debug_inference_retrievers_without_preload_content(
-        self,
-        inference_request: InferenceRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Debug Inference
-
-        Debug inference by directly calling the inference API.
-
-        :param inference_request: (required)
-        :type inference_request: InferenceRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
-        :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
-        :type x_namespace: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._debug_inference_retrievers_serialize(
-            inference_request=inference_request,
-            authorization=authorization,
-            x_namespace=x_namespace,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DebugInferenceResponse",
-            '400': "ErrorResponse",
-            '401': "ErrorResponse",
-            '403': "ErrorResponse",
-            '404': "ErrorResponse",
-            '500': "ErrorResponse",
-            '422': "HTTPValidationError",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _debug_inference_retrievers_serialize(
-        self,
-        inference_request,
-        authorization,
-        x_namespace,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        if authorization is not None:
-            _header_params['Authorization'] = authorization
-        if x_namespace is not None:
-            _header_params['X-Namespace'] = x_namespace
-        # process the form parameters
-        # process the body parameter
-        if inference_request is not None:
-            _body_params = inference_request
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v1/retrievers/debug-inference',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
     def delete_retriever(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -708,16 +729,16 @@ class RetrieversApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GenericDeleteResponse:
+    ) -> object:
         """Delete Retriever
 
-        This endpoint allows you to delete a retriever by ID or name.
+        Delete a retriever and all its resources comprehensively.  Deletes: - Published retrievers - Execution history - Interactions (user feedback) - Evaluations - Cache entries - Retriever metadata  The deletion is performed synchronously and returns when complete.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -742,7 +763,7 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._delete_retriever_serialize(
-            retriever_identifier=retriever_identifier,
+            retriever_id=retriever_id,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -752,7 +773,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericDeleteResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -774,9 +795,9 @@ class RetrieversApi:
     @validate_call
     def delete_retriever_with_http_info(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -789,16 +810,16 @@ class RetrieversApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GenericDeleteResponse]:
+    ) -> ApiResponse[object]:
         """Delete Retriever
 
-        This endpoint allows you to delete a retriever by ID or name.
+        Delete a retriever and all its resources comprehensively.  Deletes: - Published retrievers - Execution history - Interactions (user feedback) - Evaluations - Cache entries - Retriever metadata  The deletion is performed synchronously and returns when complete.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -823,7 +844,7 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._delete_retriever_serialize(
-            retriever_identifier=retriever_identifier,
+            retriever_id=retriever_id,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -833,7 +854,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericDeleteResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -855,9 +876,9 @@ class RetrieversApi:
     @validate_call
     def delete_retriever_without_preload_content(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -873,13 +894,13 @@ class RetrieversApi:
     ) -> RESTResponseType:
         """Delete Retriever
 
-        This endpoint allows you to delete a retriever by ID or name.
+        Delete a retriever and all its resources comprehensively.  Deletes: - Published retrievers - Execution history - Interactions (user feedback) - Evaluations - Cache entries - Retriever metadata  The deletion is performed synchronously and returns when complete.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -904,7 +925,7 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._delete_retriever_serialize(
-            retriever_identifier=retriever_identifier,
+            retriever_id=retriever_id,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -914,7 +935,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericDeleteResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -931,7 +952,7 @@ class RetrieversApi:
 
     def _delete_retriever_serialize(
         self,
-        retriever_identifier,
+        retriever_id,
         authorization,
         x_namespace,
         _request_auth,
@@ -955,8 +976,8 @@ class RetrieversApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if retriever_identifier is not None:
-            _path_params['retriever_identifier'] = retriever_identifier
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
         # process the query parameters
         # process the header parameters
         if authorization is not None:
@@ -982,7 +1003,7 @@ class RetrieversApi:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v1/retrievers/{retriever_identifier}',
+            resource_path='/v1/retrievers/{retriever_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1001,11 +1022,12 @@ class RetrieversApi:
     @validate_call
     def execute_retriever(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        retriever_query_request: RetrieverQueryRequest,
-        if_none_match: Annotated[Optional[StrictStr], Field(description="ETag for cache validation")] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name. Pipeline will be automatically optimized before execution.")],
+        execute_retriever_request: ExecuteRetrieverRequest,
+        return_presigned_urls: Optional[StrictBool] = None,
+        return_vectors: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1018,20 +1040,22 @@ class RetrieversApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RetrieverResponse:
-        """Execute Retriever
+    ) -> object:
+        """Execute Retriever (Auto-Optimized)
 
-        Execute retriever with caching support.
+        Execute a retriever and return matching documents. The pipeline is automatically optimized before execution for best performance.  **Automatic Optimization:** Your pipeline stages are automatically transformed for optimal performance: - Filters pushed down to reduce expensive operations - Redundant stages merged or eliminated - Grouping operations pushed to database layer (10-100x faster) - Operations reordered for efficiency  **Streaming Support:** Set stream=true in the request body to receive real-time stage updates via SSE: - Response uses text/event-stream content type - Each stage emits stage_start and stage_complete events - Final event contains complete results and pagination - Useful for progress tracking and debugging  **Response Includes (when stream=false):** - documents: Final matching documents - pagination: Pagination metadata - stage_statistics: Per-stage execution metrics - budget: Credit/time consumption - optimization_applied: Whether optimizations were applied - optimization_summary: Details about transformations (when applied)  **Optimization Summary Example:** ```json {   \"optimization_applied\": true,   \"optimization_summary\": {     \"original_stage_count\": 5,     \"optimized_stage_count\": 3,     \"optimization_time_ms\": 8.2,     \"rules_applied\": [\"push_down_filters\", \"group_by_push_down\"],     \"stage_reduction_pct\": 40.0   } } ```  Use the /explain endpoint to see the optimized execution plan before running.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param retriever_query_request: (required)
-        :type retriever_query_request: RetrieverQueryRequest
-        :param if_none_match: ETag for cache validation
-        :type if_none_match: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. Pipeline will be automatically optimized before execution. (required)
+        :type retriever_id: str
+        :param execute_retriever_request: (required)
+        :type execute_retriever_request: ExecuteRetrieverRequest
+        :param return_presigned_urls:
+        :type return_presigned_urls: bool
+        :param return_vectors:
+        :type return_vectors: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1056,9 +1080,10 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._execute_retriever_serialize(
-            retriever_identifier=retriever_identifier,
-            retriever_query_request=retriever_query_request,
-            if_none_match=if_none_match,
+            retriever_id=retriever_id,
+            execute_retriever_request=execute_retriever_request,
+            return_presigned_urls=return_presigned_urls,
+            return_vectors=return_vectors,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1068,7 +1093,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RetrieverResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1090,11 +1115,12 @@ class RetrieversApi:
     @validate_call
     def execute_retriever_with_http_info(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        retriever_query_request: RetrieverQueryRequest,
-        if_none_match: Annotated[Optional[StrictStr], Field(description="ETag for cache validation")] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name. Pipeline will be automatically optimized before execution.")],
+        execute_retriever_request: ExecuteRetrieverRequest,
+        return_presigned_urls: Optional[StrictBool] = None,
+        return_vectors: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1107,20 +1133,22 @@ class RetrieversApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RetrieverResponse]:
-        """Execute Retriever
+    ) -> ApiResponse[object]:
+        """Execute Retriever (Auto-Optimized)
 
-        Execute retriever with caching support.
+        Execute a retriever and return matching documents. The pipeline is automatically optimized before execution for best performance.  **Automatic Optimization:** Your pipeline stages are automatically transformed for optimal performance: - Filters pushed down to reduce expensive operations - Redundant stages merged or eliminated - Grouping operations pushed to database layer (10-100x faster) - Operations reordered for efficiency  **Streaming Support:** Set stream=true in the request body to receive real-time stage updates via SSE: - Response uses text/event-stream content type - Each stage emits stage_start and stage_complete events - Final event contains complete results and pagination - Useful for progress tracking and debugging  **Response Includes (when stream=false):** - documents: Final matching documents - pagination: Pagination metadata - stage_statistics: Per-stage execution metrics - budget: Credit/time consumption - optimization_applied: Whether optimizations were applied - optimization_summary: Details about transformations (when applied)  **Optimization Summary Example:** ```json {   \"optimization_applied\": true,   \"optimization_summary\": {     \"original_stage_count\": 5,     \"optimized_stage_count\": 3,     \"optimization_time_ms\": 8.2,     \"rules_applied\": [\"push_down_filters\", \"group_by_push_down\"],     \"stage_reduction_pct\": 40.0   } } ```  Use the /explain endpoint to see the optimized execution plan before running.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param retriever_query_request: (required)
-        :type retriever_query_request: RetrieverQueryRequest
-        :param if_none_match: ETag for cache validation
-        :type if_none_match: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. Pipeline will be automatically optimized before execution. (required)
+        :type retriever_id: str
+        :param execute_retriever_request: (required)
+        :type execute_retriever_request: ExecuteRetrieverRequest
+        :param return_presigned_urls:
+        :type return_presigned_urls: bool
+        :param return_vectors:
+        :type return_vectors: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1145,9 +1173,10 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._execute_retriever_serialize(
-            retriever_identifier=retriever_identifier,
-            retriever_query_request=retriever_query_request,
-            if_none_match=if_none_match,
+            retriever_id=retriever_id,
+            execute_retriever_request=execute_retriever_request,
+            return_presigned_urls=return_presigned_urls,
+            return_vectors=return_vectors,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1157,7 +1186,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RetrieverResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1179,11 +1208,12 @@ class RetrieversApi:
     @validate_call
     def execute_retriever_without_preload_content(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        retriever_query_request: RetrieverQueryRequest,
-        if_none_match: Annotated[Optional[StrictStr], Field(description="ETag for cache validation")] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name. Pipeline will be automatically optimized before execution.")],
+        execute_retriever_request: ExecuteRetrieverRequest,
+        return_presigned_urls: Optional[StrictBool] = None,
+        return_vectors: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1197,19 +1227,21 @@ class RetrieversApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Execute Retriever
+        """Execute Retriever (Auto-Optimized)
 
-        Execute retriever with caching support.
+        Execute a retriever and return matching documents. The pipeline is automatically optimized before execution for best performance.  **Automatic Optimization:** Your pipeline stages are automatically transformed for optimal performance: - Filters pushed down to reduce expensive operations - Redundant stages merged or eliminated - Grouping operations pushed to database layer (10-100x faster) - Operations reordered for efficiency  **Streaming Support:** Set stream=true in the request body to receive real-time stage updates via SSE: - Response uses text/event-stream content type - Each stage emits stage_start and stage_complete events - Final event contains complete results and pagination - Useful for progress tracking and debugging  **Response Includes (when stream=false):** - documents: Final matching documents - pagination: Pagination metadata - stage_statistics: Per-stage execution metrics - budget: Credit/time consumption - optimization_applied: Whether optimizations were applied - optimization_summary: Details about transformations (when applied)  **Optimization Summary Example:** ```json {   \"optimization_applied\": true,   \"optimization_summary\": {     \"original_stage_count\": 5,     \"optimized_stage_count\": 3,     \"optimization_time_ms\": 8.2,     \"rules_applied\": [\"push_down_filters\", \"group_by_push_down\"],     \"stage_reduction_pct\": 40.0   } } ```  Use the /explain endpoint to see the optimized execution plan before running.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param retriever_query_request: (required)
-        :type retriever_query_request: RetrieverQueryRequest
-        :param if_none_match: ETag for cache validation
-        :type if_none_match: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. Pipeline will be automatically optimized before execution. (required)
+        :type retriever_id: str
+        :param execute_retriever_request: (required)
+        :type execute_retriever_request: ExecuteRetrieverRequest
+        :param return_presigned_urls:
+        :type return_presigned_urls: bool
+        :param return_vectors:
+        :type return_vectors: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1234,9 +1266,10 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._execute_retriever_serialize(
-            retriever_identifier=retriever_identifier,
-            retriever_query_request=retriever_query_request,
-            if_none_match=if_none_match,
+            retriever_id=retriever_id,
+            execute_retriever_request=execute_retriever_request,
+            return_presigned_urls=return_presigned_urls,
+            return_vectors=return_vectors,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1246,7 +1279,7 @@ class RetrieversApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "RetrieverResponse",
+            '200': "object",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1263,9 +1296,10 @@ class RetrieversApi:
 
     def _execute_retriever_serialize(
         self,
-        retriever_identifier,
-        retriever_query_request,
-        if_none_match,
+        retriever_id,
+        execute_retriever_request,
+        return_presigned_urls,
+        return_vectors,
         authorization,
         x_namespace,
         _request_auth,
@@ -1289,20 +1323,26 @@ class RetrieversApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if retriever_identifier is not None:
-            _path_params['retriever_identifier'] = retriever_identifier
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
         # process the query parameters
+        if return_presigned_urls is not None:
+            
+            _query_params.append(('return_presigned_urls', return_presigned_urls))
+            
+        if return_vectors is not None:
+            
+            _query_params.append(('return_vectors', return_vectors))
+            
         # process the header parameters
-        if if_none_match is not None:
-            _header_params['if-none-match'] = if_none_match
         if authorization is not None:
             _header_params['Authorization'] = authorization
         if x_namespace is not None:
             _header_params['X-Namespace'] = x_namespace
         # process the form parameters
         # process the body parameter
-        if retriever_query_request is not None:
-            _body_params = retriever_query_request
+        if execute_retriever_request is not None:
+            _body_params = execute_retriever_request
 
 
         # set the HTTP header `Accept`
@@ -1333,7 +1373,666 @@ class RetrieversApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v1/retrievers/{retriever_identifier}/execute',
+            resource_path='/v1/retrievers/{retriever_id}/execute',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def explain_retriever_execution_id_execute(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name to explain. The execution plan will show the OPTIMIZED version after automatic transformations.")],
+        explain_retriever_request: ExplainRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ExplainRetrieverResponse:
+        """Explain Retriever Execution Plan
+
+        Get a detailed execution plan for a retriever without actually executing it. Similar to MongoDB's explain plan or SQL's EXPLAIN command, this endpoint helps you understand performance characteristics, identify bottlenecks, estimate costs, and troubleshoot retrieval issues before running expensive queries.  **What This Returns:** - Stage-by-stage execution plan (AFTER automatic optimizations) - Estimated costs (credits + time per stage) - Document flow projections (input/output counts per stage) - Efficiency metrics (selectivity ratios, cache likelihood) - Bottleneck identification (slowest/most expensive stages) - Optimization details (transformations applied by the optimizer) - Performance warnings and improvement suggestions   **Key Features:** - **Cost Estimation**: See how many credits and milliseconds each stage will consume - **Bottleneck Detection**: Identify which stages dominate execution time - **Optimization Transparency**: Understand how your pipeline was optimized - **Cache Analysis**: See which stages are likely to hit cache - **Accuracy Troubleshooting**: Analyze stage efficiency and document flow - **Latency Analysis**: Break down estimated duration by stage   **Important:** The execution_plan shows OPTIMIZED stages (after automatic transformations like filter push-down, stage fusion, and grouping optimization). Check optimization_details to understand what changed from your original configuration.   **Use Cases:** - Debug slow retrievers by identifying bottleneck stages - Estimate costs before running expensive queries - Understand how the optimizer transformed your pipeline - Troubleshoot accuracy issues by analyzing stage selectivity - Compare different retriever configurations - Plan budget allocation for production workloads   **Example Response:** ```json {   \"retriever_id\": \"ret_abc123\",   \"retriever_name\": \"product_search\",   \"execution_plan\": [     {       \"stage_index\": 0,       \"stage_name\": \"attribute_filter\",       \"stage_type\": \"filter\",       \"estimated_input\": 10000,       \"estimated_output\": 5000,       \"estimated_efficiency\": 0.5,       \"estimated_cost_credits\": 0.01,       \"estimated_duration_ms\": 20,       \"cache_likely\": true,       \"optimization_notes\": [\"Pushed down from stage 2\"],       \"warnings\": []     },     {       \"stage_index\": 1,       \"stage_name\": \"semantic_search\",       \"stage_type\": \"filter\",       \"estimated_input\": 5000,       \"estimated_output\": 100,       \"estimated_efficiency\": 0.02,       \"estimated_cost_credits\": 0.5,       \"estimated_duration_ms\": 200,       \"cache_likely\": false,       \"optimization_notes\": [],       \"warnings\": [\"High cost stage - consider reducing limit\"]     }   ],   \"estimated_cost\": {     \"total_credits\": 0.51,     \"total_duration_ms\": 220   },   \"bottleneck_stages\": [\"semantic_search\"],   \"optimization_applied\": true,   \"optimization_details\": {     \"original_stage_count\": 3,     \"optimized_stage_count\": 2,     \"optimization_time_ms\": 8.2,     \"stage_reduction_pct\": 33.3,     \"decisions\": [       {         \"rule_type\": \"push_down_filters\",         \"applied\": true,         \"reason\": \"Moved attribute_filter before semantic_search to reduce search scope\"       }     ]   },   \"optimization_suggestions\": [     {       \"type\": \"reduce_limit\",       \"stage\": \"semantic_search\",       \"message\": \"Consider reducing limit to improve latency\"     }   ] } ```
+
+        :param retriever_id: Retriever ID or name to explain. The execution plan will show the OPTIMIZED version after automatic transformations. (required)
+        :type retriever_id: str
+        :param explain_retriever_request: (required)
+        :type explain_retriever_request: ExplainRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._explain_retriever_execution_id_execute_serialize(
+            retriever_id=retriever_id,
+            explain_retriever_request=explain_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExplainRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def explain_retriever_execution_id_execute_with_http_info(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name to explain. The execution plan will show the OPTIMIZED version after automatic transformations.")],
+        explain_retriever_request: ExplainRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ExplainRetrieverResponse]:
+        """Explain Retriever Execution Plan
+
+        Get a detailed execution plan for a retriever without actually executing it. Similar to MongoDB's explain plan or SQL's EXPLAIN command, this endpoint helps you understand performance characteristics, identify bottlenecks, estimate costs, and troubleshoot retrieval issues before running expensive queries.  **What This Returns:** - Stage-by-stage execution plan (AFTER automatic optimizations) - Estimated costs (credits + time per stage) - Document flow projections (input/output counts per stage) - Efficiency metrics (selectivity ratios, cache likelihood) - Bottleneck identification (slowest/most expensive stages) - Optimization details (transformations applied by the optimizer) - Performance warnings and improvement suggestions   **Key Features:** - **Cost Estimation**: See how many credits and milliseconds each stage will consume - **Bottleneck Detection**: Identify which stages dominate execution time - **Optimization Transparency**: Understand how your pipeline was optimized - **Cache Analysis**: See which stages are likely to hit cache - **Accuracy Troubleshooting**: Analyze stage efficiency and document flow - **Latency Analysis**: Break down estimated duration by stage   **Important:** The execution_plan shows OPTIMIZED stages (after automatic transformations like filter push-down, stage fusion, and grouping optimization). Check optimization_details to understand what changed from your original configuration.   **Use Cases:** - Debug slow retrievers by identifying bottleneck stages - Estimate costs before running expensive queries - Understand how the optimizer transformed your pipeline - Troubleshoot accuracy issues by analyzing stage selectivity - Compare different retriever configurations - Plan budget allocation for production workloads   **Example Response:** ```json {   \"retriever_id\": \"ret_abc123\",   \"retriever_name\": \"product_search\",   \"execution_plan\": [     {       \"stage_index\": 0,       \"stage_name\": \"attribute_filter\",       \"stage_type\": \"filter\",       \"estimated_input\": 10000,       \"estimated_output\": 5000,       \"estimated_efficiency\": 0.5,       \"estimated_cost_credits\": 0.01,       \"estimated_duration_ms\": 20,       \"cache_likely\": true,       \"optimization_notes\": [\"Pushed down from stage 2\"],       \"warnings\": []     },     {       \"stage_index\": 1,       \"stage_name\": \"semantic_search\",       \"stage_type\": \"filter\",       \"estimated_input\": 5000,       \"estimated_output\": 100,       \"estimated_efficiency\": 0.02,       \"estimated_cost_credits\": 0.5,       \"estimated_duration_ms\": 200,       \"cache_likely\": false,       \"optimization_notes\": [],       \"warnings\": [\"High cost stage - consider reducing limit\"]     }   ],   \"estimated_cost\": {     \"total_credits\": 0.51,     \"total_duration_ms\": 220   },   \"bottleneck_stages\": [\"semantic_search\"],   \"optimization_applied\": true,   \"optimization_details\": {     \"original_stage_count\": 3,     \"optimized_stage_count\": 2,     \"optimization_time_ms\": 8.2,     \"stage_reduction_pct\": 33.3,     \"decisions\": [       {         \"rule_type\": \"push_down_filters\",         \"applied\": true,         \"reason\": \"Moved attribute_filter before semantic_search to reduce search scope\"       }     ]   },   \"optimization_suggestions\": [     {       \"type\": \"reduce_limit\",       \"stage\": \"semantic_search\",       \"message\": \"Consider reducing limit to improve latency\"     }   ] } ```
+
+        :param retriever_id: Retriever ID or name to explain. The execution plan will show the OPTIMIZED version after automatic transformations. (required)
+        :type retriever_id: str
+        :param explain_retriever_request: (required)
+        :type explain_retriever_request: ExplainRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._explain_retriever_execution_id_execute_serialize(
+            retriever_id=retriever_id,
+            explain_retriever_request=explain_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExplainRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def explain_retriever_execution_id_execute_without_preload_content(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name to explain. The execution plan will show the OPTIMIZED version after automatic transformations.")],
+        explain_retriever_request: ExplainRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Explain Retriever Execution Plan
+
+        Get a detailed execution plan for a retriever without actually executing it. Similar to MongoDB's explain plan or SQL's EXPLAIN command, this endpoint helps you understand performance characteristics, identify bottlenecks, estimate costs, and troubleshoot retrieval issues before running expensive queries.  **What This Returns:** - Stage-by-stage execution plan (AFTER automatic optimizations) - Estimated costs (credits + time per stage) - Document flow projections (input/output counts per stage) - Efficiency metrics (selectivity ratios, cache likelihood) - Bottleneck identification (slowest/most expensive stages) - Optimization details (transformations applied by the optimizer) - Performance warnings and improvement suggestions   **Key Features:** - **Cost Estimation**: See how many credits and milliseconds each stage will consume - **Bottleneck Detection**: Identify which stages dominate execution time - **Optimization Transparency**: Understand how your pipeline was optimized - **Cache Analysis**: See which stages are likely to hit cache - **Accuracy Troubleshooting**: Analyze stage efficiency and document flow - **Latency Analysis**: Break down estimated duration by stage   **Important:** The execution_plan shows OPTIMIZED stages (after automatic transformations like filter push-down, stage fusion, and grouping optimization). Check optimization_details to understand what changed from your original configuration.   **Use Cases:** - Debug slow retrievers by identifying bottleneck stages - Estimate costs before running expensive queries - Understand how the optimizer transformed your pipeline - Troubleshoot accuracy issues by analyzing stage selectivity - Compare different retriever configurations - Plan budget allocation for production workloads   **Example Response:** ```json {   \"retriever_id\": \"ret_abc123\",   \"retriever_name\": \"product_search\",   \"execution_plan\": [     {       \"stage_index\": 0,       \"stage_name\": \"attribute_filter\",       \"stage_type\": \"filter\",       \"estimated_input\": 10000,       \"estimated_output\": 5000,       \"estimated_efficiency\": 0.5,       \"estimated_cost_credits\": 0.01,       \"estimated_duration_ms\": 20,       \"cache_likely\": true,       \"optimization_notes\": [\"Pushed down from stage 2\"],       \"warnings\": []     },     {       \"stage_index\": 1,       \"stage_name\": \"semantic_search\",       \"stage_type\": \"filter\",       \"estimated_input\": 5000,       \"estimated_output\": 100,       \"estimated_efficiency\": 0.02,       \"estimated_cost_credits\": 0.5,       \"estimated_duration_ms\": 200,       \"cache_likely\": false,       \"optimization_notes\": [],       \"warnings\": [\"High cost stage - consider reducing limit\"]     }   ],   \"estimated_cost\": {     \"total_credits\": 0.51,     \"total_duration_ms\": 220   },   \"bottleneck_stages\": [\"semantic_search\"],   \"optimization_applied\": true,   \"optimization_details\": {     \"original_stage_count\": 3,     \"optimized_stage_count\": 2,     \"optimization_time_ms\": 8.2,     \"stage_reduction_pct\": 33.3,     \"decisions\": [       {         \"rule_type\": \"push_down_filters\",         \"applied\": true,         \"reason\": \"Moved attribute_filter before semantic_search to reduce search scope\"       }     ]   },   \"optimization_suggestions\": [     {       \"type\": \"reduce_limit\",       \"stage\": \"semantic_search\",       \"message\": \"Consider reducing limit to improve latency\"     }   ] } ```
+
+        :param retriever_id: Retriever ID or name to explain. The execution plan will show the OPTIMIZED version after automatic transformations. (required)
+        :type retriever_id: str
+        :param explain_retriever_request: (required)
+        :type explain_retriever_request: ExplainRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._explain_retriever_execution_id_execute_serialize(
+            retriever_id=retriever_id,
+            explain_retriever_request=explain_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExplainRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _explain_retriever_execution_id_execute_serialize(
+        self,
+        retriever_id,
+        explain_retriever_request,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if explain_retriever_request is not None:
+            _body_params = explain_retriever_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/retrievers/{retriever_id}/execute/explain',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_execution_retrievers(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        execution_id: Annotated[StrictStr, Field(description="Execution identifier.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ExecutionDetail:
+        """Get Execution
+
+        Get execution details and statistics.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param execution_id: Execution identifier. (required)
+        :type execution_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_execution_retrievers_serialize(
+            retriever_id=retriever_id,
+            execution_id=execution_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExecutionDetail",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_execution_retrievers_with_http_info(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        execution_id: Annotated[StrictStr, Field(description="Execution identifier.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ExecutionDetail]:
+        """Get Execution
+
+        Get execution details and statistics.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param execution_id: Execution identifier. (required)
+        :type execution_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_execution_retrievers_serialize(
+            retriever_id=retriever_id,
+            execution_id=execution_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExecutionDetail",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_execution_retrievers_without_preload_content(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        execution_id: Annotated[StrictStr, Field(description="Execution identifier.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get Execution
+
+        Get execution details and statistics.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param execution_id: Execution identifier. (required)
+        :type execution_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_execution_retrievers_serialize(
+            retriever_id=retriever_id,
+            execution_id=execution_id,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ExecutionDetail",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_execution_retrievers_serialize(
+        self,
+        retriever_id,
+        execution_id,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
+        if execution_id is not None:
+            _path_params['execution_id'] = execution_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v1/retrievers/{retriever_id}/executions/{execution_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1352,10 +2051,9 @@ class RetrieversApi:
     @validate_call
     def get_retriever(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        expand_collections: Optional[StrictBool] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1371,15 +2069,13 @@ class RetrieversApi:
     ) -> RetrieverModelOutput:
         """Get Retriever
 
-        Get retriever with optional expanded collection details.
+        Get a retriever by ID or name.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param expand_collections:
-        :type expand_collections: bool
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1404,8 +2100,7 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._get_retriever_serialize(
-            retriever_identifier=retriever_identifier,
-            expand_collections=expand_collections,
+            retriever_id=retriever_id,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1437,10 +2132,9 @@ class RetrieversApi:
     @validate_call
     def get_retriever_with_http_info(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        expand_collections: Optional[StrictBool] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1456,15 +2150,13 @@ class RetrieversApi:
     ) -> ApiResponse[RetrieverModelOutput]:
         """Get Retriever
 
-        Get retriever with optional expanded collection details.
+        Get a retriever by ID or name.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param expand_collections:
-        :type expand_collections: bool
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1489,8 +2181,7 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._get_retriever_serialize(
-            retriever_identifier=retriever_identifier,
-            expand_collections=expand_collections,
+            retriever_id=retriever_id,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1522,10 +2213,9 @@ class RetrieversApi:
     @validate_call
     def get_retriever_without_preload_content(
         self,
-        retriever_identifier: Annotated[StrictStr, Field(description="The ID or name of the retriever.")],
-        expand_collections: Optional[StrictBool] = None,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1541,15 +2231,13 @@ class RetrieversApi:
     ) -> RESTResponseType:
         """Get Retriever
 
-        Get retriever with optional expanded collection details.
+        Get a retriever by ID or name.
 
-        :param retriever_identifier: The ID or name of the retriever. (required)
-        :type retriever_identifier: str
-        :param expand_collections:
-        :type expand_collections: bool
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1574,8 +2262,7 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._get_retriever_serialize(
-            retriever_identifier=retriever_identifier,
-            expand_collections=expand_collections,
+            retriever_id=retriever_id,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1602,8 +2289,7 @@ class RetrieversApi:
 
     def _get_retriever_serialize(
         self,
-        retriever_identifier,
-        expand_collections,
+        retriever_id,
         authorization,
         x_namespace,
         _request_auth,
@@ -1627,13 +2313,9 @@ class RetrieversApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if retriever_identifier is not None:
-            _path_params['retriever_identifier'] = retriever_identifier
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
         # process the query parameters
-        if expand_collections is not None:
-            
-            _query_params.append(('expand_collections', expand_collections))
-            
         # process the header parameters
         if authorization is not None:
             _header_params['Authorization'] = authorization
@@ -1658,7 +2340,411 @@ class RetrieversApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v1/retrievers/{retriever_identifier}',
+            resource_path='/v1/retrievers/{retriever_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def list_executions_retrievers(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        list_executions_request: Optional[ListExecutionsRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListExecutionsResponse:
+        """List Executions
+
+        List execution history for a retriever.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param list_executions_request:
+        :type list_executions_request: ListExecutionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_executions_retrievers_serialize(
+            retriever_id=retriever_id,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            list_executions_request=list_executions_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListExecutionsResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_executions_retrievers_with_http_info(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        list_executions_request: Optional[ListExecutionsRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListExecutionsResponse]:
+        """List Executions
+
+        List execution history for a retriever.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param list_executions_request:
+        :type list_executions_request: ListExecutionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_executions_retrievers_serialize(
+            retriever_id=retriever_id,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            list_executions_request=list_executions_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListExecutionsResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_executions_retrievers_without_preload_content(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        list_executions_request: Optional[ListExecutionsRequest] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List Executions
+
+        List execution history for a retriever.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param list_executions_request:
+        :type list_executions_request: ListExecutionsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_executions_retrievers_serialize(
+            retriever_id=retriever_id,
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            list_executions_request=list_executions_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListExecutionsResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_executions_retrievers_serialize(
+        self,
+        retriever_id,
+        limit,
+        offset,
+        cursor,
+        include_total,
+        authorization,
+        x_namespace,
+        list_executions_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
+        # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        if include_total is not None:
+            
+            _query_params.append(('include_total', include_total))
+            
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if list_executions_request is not None:
+            _body_params = list_executions_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/retrievers/{retriever_id}/executions/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1677,8 +2763,12 @@ class RetrieversApi:
     @validate_call
     def list_retrievers(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_retrievers_request: Optional[ListRetrieversRequest] = None,
         _request_timeout: Union[
             None,
@@ -1695,11 +2785,19 @@ class RetrieversApi:
     ) -> ListRetrieversResponse:
         """List Retrievers
 
-        This endpoint allows you to list retrievers.
+        List all retrievers in the namespace.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_retrievers_request:
         :type list_retrievers_request: ListRetrieversRequest
@@ -1726,6 +2824,10 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._list_retrievers_serialize(
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
             x_namespace=x_namespace,
             list_retrievers_request=list_retrievers_request,
@@ -1758,8 +2860,12 @@ class RetrieversApi:
     @validate_call
     def list_retrievers_with_http_info(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_retrievers_request: Optional[ListRetrieversRequest] = None,
         _request_timeout: Union[
             None,
@@ -1776,11 +2882,19 @@ class RetrieversApi:
     ) -> ApiResponse[ListRetrieversResponse]:
         """List Retrievers
 
-        This endpoint allows you to list retrievers.
+        List all retrievers in the namespace.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_retrievers_request:
         :type list_retrievers_request: ListRetrieversRequest
@@ -1807,6 +2921,10 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._list_retrievers_serialize(
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
             x_namespace=x_namespace,
             list_retrievers_request=list_retrievers_request,
@@ -1839,8 +2957,12 @@ class RetrieversApi:
     @validate_call
     def list_retrievers_without_preload_content(
         self,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = None,
+        offset: Optional[Annotated[int, Field(le=10000, strict=True, ge=0)]] = None,
+        cursor: Optional[StrictStr] = None,
+        include_total: Optional[StrictBool] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         list_retrievers_request: Optional[ListRetrieversRequest] = None,
         _request_timeout: Union[
             None,
@@ -1857,11 +2979,19 @@ class RetrieversApi:
     ) -> RESTResponseType:
         """List Retrievers
 
-        This endpoint allows you to list retrievers.
+        List all retrievers in the namespace.
 
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param limit:
+        :type limit: int
+        :param offset:
+        :type offset: int
+        :param cursor:
+        :type cursor: str
+        :param include_total:
+        :type include_total: bool
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param list_retrievers_request:
         :type list_retrievers_request: ListRetrieversRequest
@@ -1888,6 +3018,10 @@ class RetrieversApi:
         """ # noqa: E501
 
         _param = self._list_retrievers_serialize(
+            limit=limit,
+            offset=offset,
+            cursor=cursor,
+            include_total=include_total,
             authorization=authorization,
             x_namespace=x_namespace,
             list_retrievers_request=list_retrievers_request,
@@ -1915,6 +3049,10 @@ class RetrieversApi:
 
     def _list_retrievers_serialize(
         self,
+        limit,
+        offset,
+        cursor,
+        include_total,
         authorization,
         x_namespace,
         list_retrievers_request,
@@ -1940,6 +3078,22 @@ class RetrieversApi:
 
         # process the path parameters
         # process the query parameters
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if offset is not None:
+            
+            _query_params.append(('offset', offset))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        if include_total is not None:
+            
+            _query_params.append(('include_total', include_total))
+            
         # process the header parameters
         if authorization is not None:
             _header_params['Authorization'] = authorization
@@ -1980,6 +3134,342 @@ class RetrieversApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v1/retrievers/list',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def patch_retriever(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        patch_retriever_request: PatchRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> PatchRetrieverResponse:
+        """Patch Retriever
+
+        Update a retriever's metadata.  Only metadata fields can be updated: - name: Rename the retriever - description: Update the description - tags: Update tags for organization - display_config: Update display configuration  Core logic (input_schema, stages, collection_ids) is immutable. To modify core logic, use POST /{retriever_id}/clone instead.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param patch_retriever_request: (required)
+        :type patch_retriever_request: PatchRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_retriever_serialize(
+            retriever_id=retriever_id,
+            patch_retriever_request=patch_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PatchRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def patch_retriever_with_http_info(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        patch_retriever_request: PatchRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[PatchRetrieverResponse]:
+        """Patch Retriever
+
+        Update a retriever's metadata.  Only metadata fields can be updated: - name: Rename the retriever - description: Update the description - tags: Update tags for organization - display_config: Update display configuration  Core logic (input_schema, stages, collection_ids) is immutable. To modify core logic, use POST /{retriever_id}/clone instead.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param patch_retriever_request: (required)
+        :type patch_retriever_request: PatchRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_retriever_serialize(
+            retriever_id=retriever_id,
+            patch_retriever_request=patch_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PatchRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def patch_retriever_without_preload_content(
+        self,
+        retriever_id: Annotated[StrictStr, Field(description="Retriever ID or name.")],
+        patch_retriever_request: PatchRetrieverRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Patch Retriever
+
+        Update a retriever's metadata.  Only metadata fields can be updated: - name: Rename the retriever - description: Update the description - tags: Update tags for organization - display_config: Update display configuration  Core logic (input_schema, stages, collection_ids) is immutable. To modify core logic, use POST /{retriever_id}/clone instead.
+
+        :param retriever_id: Retriever ID or name. (required)
+        :type retriever_id: str
+        :param patch_retriever_request: (required)
+        :type patch_retriever_request: PatchRetrieverRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._patch_retriever_serialize(
+            retriever_id=retriever_id,
+            patch_retriever_request=patch_retriever_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PatchRetrieverResponse",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _patch_retriever_serialize(
+        self,
+        retriever_id,
+        patch_retriever_request,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if retriever_id is not None:
+            _path_params['retriever_id'] = retriever_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if patch_retriever_request is not None:
+            _body_params = patch_retriever_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PATCH',
+            resource_path='/v1/retrievers/{retriever_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

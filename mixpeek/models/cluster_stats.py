@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +28,8 @@ class ClusterStats(BaseModel):
     Basic clustering quality metrics.
     """ # noqa: E501
     num_clusters: StrictInt
-    noise_points: StrictInt
-    silhouette_score: Union[StrictFloat, StrictInt]
+    noise_points: Optional[StrictInt] = Field(default=None, description="Number of noise points (for DBSCAN, etc.)")
+    silhouette_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Silhouette score (-1 to 1, higher is better)")
     extra: Optional[Dict[str, Any]] = None
     __properties: ClassVar[List[str]] = ["num_clusters", "noise_points", "silhouette_score", "extra"]
 

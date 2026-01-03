@@ -37,105 +37,53 @@ class TestRetrieverModelOutput(unittest.TestCase):
         if include_optional:
             return RetrieverModelOutput(
                 retriever_id = '',
-                retriever_name = '',
+                retriever_name = '0',
                 description = '',
-                input_schema = { },
                 collection_ids = [
                     ''
                     ],
                 stages = [
-                    mixpeek.models.stage_instance_config.StageInstanceConfig(
-                        stage_name = '', 
+                    mixpeek.models.stage_config.StageConfig(
+                        stage_name = '0', 
+                        stage_type = 'filter', 
+                        config = { }, 
+                        batch_size = '', 
+                        description = '', )
+                    ],
+                input_schema = {
+                    'key' : { }
+                    },
+                budget_limits = mixpeek.models.budget_limits.BudgetLimits(
+                    max_credits = 0.0, 
+                    max_time_ms = 0.0, ),
+                feature_dependencies = [
+                    mixpeek.models.feature_address.FeatureAddress(
+                        scheme = 'mixpeek', 
+                        extractor = '', 
                         version = '', 
-                        parameters = { }, 
-                        pre_filters = { }, 
-                        post_filters = { }, 
-                        stats = mixpeek.models.stage_performance.StagePerformance(
-                            avg_execution_ms = 1.337, 
-                            execution_count = 56, 
-                            error_count = 56, 
-                            last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), )
+                        output = '', )
                     ],
-                cache_config = mixpeek.models.cache_config.CacheConfig(
-                    enabled = True, 
-                    ttl_seconds = 0.0, 
-                    stage = 'retrieval', 
-                    exclude_fields = [
-                        ''
-                        ], 
-                    stats = mixpeek.models.cache_statistics.CacheStatistics(
-                        hit_count = 56, 
-                        miss_count = 56, 
-                        hit_rate = 0.0, 
-                        size_bytes = 56, 
-                        entry_count = 56, 
-                        last_invalidated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), ),
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                enabled = True,
-                status = 'active',
-                usage_stats = mixpeek.models.usage_statistics.UsageStatistics(
-                    total_queries = 56, 
-                    queries_last_24h = 56, 
-                    avg_latency_ms = 1.337, 
-                    error_rate = 0.0, 
-                    last_error = '', 
-                    cache_hit_rate = 0.0, ),
-                collections = [
-                    mixpeek.models.collection_detail.CollectionDetail(
-                        collection_id = '', 
-                        collection_name = '', 
-                        document_count = 56, 
-                        enabled = True, 
-                        last_indexed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
-                    ],
-                metadata = { },
                 tags = [
                     ''
                     ],
-                created_by = mixpeek.models.creator_info.CreatorInfo(
-                    user_id = '', 
-                    email = '', 
-                    name = '', ),
-                updated_by = mixpeek.models.creator_info.CreatorInfo(
-                    user_id = '', 
-                    email = '', 
-                    name = '', ),
-                version = 56,
-                revision_history = [
-                    mixpeek.models.revision_history_entry.RevisionHistoryEntry(
-                        version = 56, 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_by = '', 
-                        changes = '', )
-                    ],
-                health = mixpeek.models.health_check.HealthCheck(
-                    status = 'healthy', 
-                    last_check = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                    issues = [
-                        ''
-                        ], )
+                display_config = { },
+                version = 1.0,
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                created_by = '',
+                updated_by = '',
+                is_published = True
             )
         else:
             return RetrieverModelOutput(
-                retriever_name = '',
-                input_schema = { },
-                collection_ids = [
-                    ''
-                    ],
+                retriever_name = '0',
                 stages = [
-                    mixpeek.models.stage_instance_config.StageInstanceConfig(
-                        stage_name = '', 
-                        version = '', 
-                        parameters = { }, 
-                        pre_filters = { }, 
-                        post_filters = { }, 
-                        stats = mixpeek.models.stage_performance.StagePerformance(
-                            avg_execution_ms = 1.337, 
-                            execution_count = 56, 
-                            error_count = 56, 
-                            last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), )
+                    mixpeek.models.stage_config.StageConfig(
+                        stage_name = '0', 
+                        stage_type = 'filter', 
+                        config = { }, 
+                        batch_size = '', 
+                        description = '', )
                     ],
         )
         """

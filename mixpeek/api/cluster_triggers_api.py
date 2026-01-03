@@ -20,13 +20,13 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from mixpeek.models.create_trigger_request import CreateTriggerRequest
-from mixpeek.models.list_triggers_request import ListTriggersRequest
-from mixpeek.models.list_triggers_response import ListTriggersResponse
+from mixpeek.models.shared_clusters_triggers_models_create_trigger_request import SharedClustersTriggersModelsCreateTriggerRequest
+from mixpeek.models.shared_clusters_triggers_models_list_triggers_request import SharedClustersTriggersModelsListTriggersRequest
+from mixpeek.models.shared_clusters_triggers_models_list_triggers_response import SharedClustersTriggersModelsListTriggersResponse
+from mixpeek.models.shared_clusters_triggers_models_trigger_history_response import SharedClustersTriggersModelsTriggerHistoryResponse
+from mixpeek.models.shared_clusters_triggers_models_trigger_model import SharedClustersTriggersModelsTriggerModel
+from mixpeek.models.shared_clusters_triggers_models_update_trigger_request import SharedClustersTriggersModelsUpdateTriggerRequest
 from mixpeek.models.trigger_history_request import TriggerHistoryRequest
-from mixpeek.models.trigger_history_response import TriggerHistoryResponse
-from mixpeek.models.trigger_model import TriggerModel
-from mixpeek.models.update_trigger_request import UpdateTriggerRequest
 
 from mixpeek.api_client import ApiClient, RequestSerialized
 from mixpeek.api_response import ApiResponse
@@ -49,9 +49,9 @@ class ClusterTriggersApi:
     @validate_call
     def create_trigger_clusters(
         self,
-        create_trigger_request: CreateTriggerRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_create_trigger_request: SharedClustersTriggersModelsCreateTriggerRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -64,16 +64,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TriggerModel:
+    ) -> SharedClustersTriggersModelsTriggerModel:
         """Create Cluster Trigger
 
         Create a new trigger for automated cluster execution.      Supports multiple trigger types:     - **cron**: Execute at specific times using cron expressions     - **interval**: Execute at fixed intervals     - **event**: Execute when specific events occur (e.g., documents added)     - **conditional**: Execute when conditions are met (e.g., drift threshold)
 
-        :param create_trigger_request: (required)
-        :type create_trigger_request: CreateTriggerRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_create_trigger_request: (required)
+        :type shared_clusters_triggers_models_create_trigger_request: SharedClustersTriggersModelsCreateTriggerRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -98,7 +98,7 @@ class ClusterTriggersApi:
         """ # noqa: E501
 
         _param = self._create_trigger_clusters_serialize(
-            create_trigger_request=create_trigger_request,
+            shared_clusters_triggers_models_create_trigger_request=shared_clusters_triggers_models_create_trigger_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -108,7 +108,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TriggerModel",
+            '201': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -130,9 +130,9 @@ class ClusterTriggersApi:
     @validate_call
     def create_trigger_clusters_with_http_info(
         self,
-        create_trigger_request: CreateTriggerRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_create_trigger_request: SharedClustersTriggersModelsCreateTriggerRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -145,16 +145,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TriggerModel]:
+    ) -> ApiResponse[SharedClustersTriggersModelsTriggerModel]:
         """Create Cluster Trigger
 
         Create a new trigger for automated cluster execution.      Supports multiple trigger types:     - **cron**: Execute at specific times using cron expressions     - **interval**: Execute at fixed intervals     - **event**: Execute when specific events occur (e.g., documents added)     - **conditional**: Execute when conditions are met (e.g., drift threshold)
 
-        :param create_trigger_request: (required)
-        :type create_trigger_request: CreateTriggerRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_create_trigger_request: (required)
+        :type shared_clusters_triggers_models_create_trigger_request: SharedClustersTriggersModelsCreateTriggerRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -179,7 +179,7 @@ class ClusterTriggersApi:
         """ # noqa: E501
 
         _param = self._create_trigger_clusters_serialize(
-            create_trigger_request=create_trigger_request,
+            shared_clusters_triggers_models_create_trigger_request=shared_clusters_triggers_models_create_trigger_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -189,7 +189,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TriggerModel",
+            '201': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -211,9 +211,9 @@ class ClusterTriggersApi:
     @validate_call
     def create_trigger_clusters_without_preload_content(
         self,
-        create_trigger_request: CreateTriggerRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_create_trigger_request: SharedClustersTriggersModelsCreateTriggerRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -231,11 +231,11 @@ class ClusterTriggersApi:
 
         Create a new trigger for automated cluster execution.      Supports multiple trigger types:     - **cron**: Execute at specific times using cron expressions     - **interval**: Execute at fixed intervals     - **event**: Execute when specific events occur (e.g., documents added)     - **conditional**: Execute when conditions are met (e.g., drift threshold)
 
-        :param create_trigger_request: (required)
-        :type create_trigger_request: CreateTriggerRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_create_trigger_request: (required)
+        :type shared_clusters_triggers_models_create_trigger_request: SharedClustersTriggersModelsCreateTriggerRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -260,7 +260,7 @@ class ClusterTriggersApi:
         """ # noqa: E501
 
         _param = self._create_trigger_clusters_serialize(
-            create_trigger_request=create_trigger_request,
+            shared_clusters_triggers_models_create_trigger_request=shared_clusters_triggers_models_create_trigger_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -270,7 +270,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TriggerModel",
+            '201': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -287,7 +287,7 @@ class ClusterTriggersApi:
 
     def _create_trigger_clusters_serialize(
         self,
-        create_trigger_request,
+        shared_clusters_triggers_models_create_trigger_request,
         authorization,
         x_namespace,
         _request_auth,
@@ -319,8 +319,8 @@ class ClusterTriggersApi:
             _header_params['X-Namespace'] = x_namespace
         # process the form parameters
         # process the body parameter
-        if create_trigger_request is not None:
-            _body_params = create_trigger_request
+        if shared_clusters_triggers_models_create_trigger_request is not None:
+            _body_params = shared_clusters_triggers_models_create_trigger_request
 
 
         # set the HTTP header `Accept`
@@ -371,8 +371,8 @@ class ClusterTriggersApi:
     def delete_trigger_clusters(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -392,9 +392,9 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -452,8 +452,8 @@ class ClusterTriggersApi:
     def delete_trigger_clusters_with_http_info(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -473,9 +473,9 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -533,8 +533,8 @@ class ClusterTriggersApi:
     def delete_trigger_clusters_without_preload_content(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -554,9 +554,9 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -679,8 +679,8 @@ class ClusterTriggersApi:
     def get_trigger_clusters(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -693,16 +693,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TriggerModel:
+    ) -> SharedClustersTriggersModelsTriggerModel:
         """Get Cluster Trigger
 
         Get a cluster trigger by ID.
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -737,7 +737,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -760,8 +760,8 @@ class ClusterTriggersApi:
     def get_trigger_clusters_with_http_info(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -774,16 +774,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TriggerModel]:
+    ) -> ApiResponse[SharedClustersTriggersModelsTriggerModel]:
         """Get Cluster Trigger
 
         Get a cluster trigger by ID.
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -818,7 +818,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -841,8 +841,8 @@ class ClusterTriggersApi:
     def get_trigger_clusters_without_preload_content(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -862,9 +862,9 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -899,7 +899,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -988,8 +988,8 @@ class ClusterTriggersApi:
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
         trigger_history_request: TriggerHistoryRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1002,7 +1002,7 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TriggerHistoryResponse:
+    ) -> SharedClustersTriggersModelsTriggerHistoryResponse:
         """Get Trigger Execution History
 
         Get execution history for a trigger with pagination.
@@ -1011,9 +1011,9 @@ class ClusterTriggersApi:
         :type trigger_id: str
         :param trigger_history_request: (required)
         :type trigger_history_request: TriggerHistoryRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1049,7 +1049,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerHistoryResponse",
+            '200': "SharedClustersTriggersModelsTriggerHistoryResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1073,8 +1073,8 @@ class ClusterTriggersApi:
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
         trigger_history_request: TriggerHistoryRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1087,7 +1087,7 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TriggerHistoryResponse]:
+    ) -> ApiResponse[SharedClustersTriggersModelsTriggerHistoryResponse]:
         """Get Trigger Execution History
 
         Get execution history for a trigger with pagination.
@@ -1096,9 +1096,9 @@ class ClusterTriggersApi:
         :type trigger_id: str
         :param trigger_history_request: (required)
         :type trigger_history_request: TriggerHistoryRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1134,7 +1134,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerHistoryResponse",
+            '200': "SharedClustersTriggersModelsTriggerHistoryResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1158,8 +1158,8 @@ class ClusterTriggersApi:
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
         trigger_history_request: TriggerHistoryRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1181,9 +1181,9 @@ class ClusterTriggersApi:
         :type trigger_id: str
         :param trigger_history_request: (required)
         :type trigger_history_request: TriggerHistoryRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1219,7 +1219,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerHistoryResponse",
+            '200': "SharedClustersTriggersModelsTriggerHistoryResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1322,9 +1322,9 @@ class ClusterTriggersApi:
     @validate_call
     def list_triggers_clusters(
         self,
-        list_triggers_request: ListTriggersRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_list_triggers_request: SharedClustersTriggersModelsListTriggersRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1337,16 +1337,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ListTriggersResponse:
+    ) -> SharedClustersTriggersModelsListTriggersResponse:
         """List Cluster Triggers
 
         List cluster triggers with filters and pagination.
 
-        :param list_triggers_request: (required)
-        :type list_triggers_request: ListTriggersRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_list_triggers_request: (required)
+        :type shared_clusters_triggers_models_list_triggers_request: SharedClustersTriggersModelsListTriggersRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1371,7 +1371,7 @@ class ClusterTriggersApi:
         """ # noqa: E501
 
         _param = self._list_triggers_clusters_serialize(
-            list_triggers_request=list_triggers_request,
+            shared_clusters_triggers_models_list_triggers_request=shared_clusters_triggers_models_list_triggers_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1381,7 +1381,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTriggersResponse",
+            '200': "SharedClustersTriggersModelsListTriggersResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1403,9 +1403,9 @@ class ClusterTriggersApi:
     @validate_call
     def list_triggers_clusters_with_http_info(
         self,
-        list_triggers_request: ListTriggersRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_list_triggers_request: SharedClustersTriggersModelsListTriggersRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1418,16 +1418,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ListTriggersResponse]:
+    ) -> ApiResponse[SharedClustersTriggersModelsListTriggersResponse]:
         """List Cluster Triggers
 
         List cluster triggers with filters and pagination.
 
-        :param list_triggers_request: (required)
-        :type list_triggers_request: ListTriggersRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_list_triggers_request: (required)
+        :type shared_clusters_triggers_models_list_triggers_request: SharedClustersTriggersModelsListTriggersRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1452,7 +1452,7 @@ class ClusterTriggersApi:
         """ # noqa: E501
 
         _param = self._list_triggers_clusters_serialize(
-            list_triggers_request=list_triggers_request,
+            shared_clusters_triggers_models_list_triggers_request=shared_clusters_triggers_models_list_triggers_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1462,7 +1462,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTriggersResponse",
+            '200': "SharedClustersTriggersModelsListTriggersResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1484,9 +1484,9 @@ class ClusterTriggersApi:
     @validate_call
     def list_triggers_clusters_without_preload_content(
         self,
-        list_triggers_request: ListTriggersRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_list_triggers_request: SharedClustersTriggersModelsListTriggersRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1504,11 +1504,11 @@ class ClusterTriggersApi:
 
         List cluster triggers with filters and pagination.
 
-        :param list_triggers_request: (required)
-        :type list_triggers_request: ListTriggersRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_list_triggers_request: (required)
+        :type shared_clusters_triggers_models_list_triggers_request: SharedClustersTriggersModelsListTriggersRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1533,7 +1533,7 @@ class ClusterTriggersApi:
         """ # noqa: E501
 
         _param = self._list_triggers_clusters_serialize(
-            list_triggers_request=list_triggers_request,
+            shared_clusters_triggers_models_list_triggers_request=shared_clusters_triggers_models_list_triggers_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -1543,7 +1543,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListTriggersResponse",
+            '200': "SharedClustersTriggersModelsListTriggersResponse",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1560,7 +1560,7 @@ class ClusterTriggersApi:
 
     def _list_triggers_clusters_serialize(
         self,
-        list_triggers_request,
+        shared_clusters_triggers_models_list_triggers_request,
         authorization,
         x_namespace,
         _request_auth,
@@ -1592,8 +1592,8 @@ class ClusterTriggersApi:
             _header_params['X-Namespace'] = x_namespace
         # process the form parameters
         # process the body parameter
-        if list_triggers_request is not None:
-            _body_params = list_triggers_request
+        if shared_clusters_triggers_models_list_triggers_request is not None:
+            _body_params = shared_clusters_triggers_models_list_triggers_request
 
 
         # set the HTTP header `Accept`
@@ -1644,8 +1644,8 @@ class ClusterTriggersApi:
     def pause_trigger_clusters(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1658,16 +1658,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TriggerModel:
+    ) -> SharedClustersTriggersModelsTriggerModel:
         """Pause Cluster Trigger
 
         Pause trigger execution. Paused triggers retain configuration but do not execute.
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1702,7 +1702,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1725,8 +1725,8 @@ class ClusterTriggersApi:
     def pause_trigger_clusters_with_http_info(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1739,16 +1739,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TriggerModel]:
+    ) -> ApiResponse[SharedClustersTriggersModelsTriggerModel]:
         """Pause Cluster Trigger
 
         Pause trigger execution. Paused triggers retain configuration but do not execute.
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1783,7 +1783,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1806,8 +1806,8 @@ class ClusterTriggersApi:
     def pause_trigger_clusters_without_preload_content(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1827,9 +1827,9 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1864,7 +1864,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -1952,8 +1952,8 @@ class ClusterTriggersApi:
     def resume_trigger_clusters(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1966,16 +1966,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TriggerModel:
+    ) -> SharedClustersTriggersModelsTriggerModel:
         """Resume Cluster Trigger
 
         Resume paused trigger. Next execution time is recalculated from current time.
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2010,7 +2010,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2033,8 +2033,8 @@ class ClusterTriggersApi:
     def resume_trigger_clusters_with_http_info(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2047,16 +2047,16 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TriggerModel]:
+    ) -> ApiResponse[SharedClustersTriggersModelsTriggerModel]:
         """Resume Cluster Trigger
 
         Resume paused trigger. Next execution time is recalculated from current time.
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2091,7 +2091,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2114,8 +2114,8 @@ class ClusterTriggersApi:
     def resume_trigger_clusters_without_preload_content(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2135,9 +2135,9 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2172,7 +2172,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2260,9 +2260,9 @@ class ClusterTriggersApi:
     def update_trigger_clusters(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        update_trigger_request: UpdateTriggerRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_update_trigger_request: SharedClustersTriggersModelsUpdateTriggerRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2275,18 +2275,18 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TriggerModel:
+    ) -> SharedClustersTriggersModelsTriggerModel:
         """Update Cluster Trigger
 
         Update a cluster trigger.      Allowed updates:     - schedule_config: Modify trigger schedule     - description: Update description     - status: Change status (use pause/resume endpoints instead)      Not allowed:     - trigger_type: Must delete and recreate     - cluster_id: Immutable     - execution_config: Immutable
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param update_trigger_request: (required)
-        :type update_trigger_request: UpdateTriggerRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_update_trigger_request: (required)
+        :type shared_clusters_triggers_models_update_trigger_request: SharedClustersTriggersModelsUpdateTriggerRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2312,7 +2312,7 @@ class ClusterTriggersApi:
 
         _param = self._update_trigger_clusters_serialize(
             trigger_id=trigger_id,
-            update_trigger_request=update_trigger_request,
+            shared_clusters_triggers_models_update_trigger_request=shared_clusters_triggers_models_update_trigger_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -2322,7 +2322,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2345,9 +2345,9 @@ class ClusterTriggersApi:
     def update_trigger_clusters_with_http_info(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        update_trigger_request: UpdateTriggerRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_update_trigger_request: SharedClustersTriggersModelsUpdateTriggerRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2360,18 +2360,18 @@ class ClusterTriggersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TriggerModel]:
+    ) -> ApiResponse[SharedClustersTriggersModelsTriggerModel]:
         """Update Cluster Trigger
 
         Update a cluster trigger.      Allowed updates:     - schedule_config: Modify trigger schedule     - description: Update description     - status: Change status (use pause/resume endpoints instead)      Not allowed:     - trigger_type: Must delete and recreate     - cluster_id: Immutable     - execution_config: Immutable
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param update_trigger_request: (required)
-        :type update_trigger_request: UpdateTriggerRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_update_trigger_request: (required)
+        :type shared_clusters_triggers_models_update_trigger_request: SharedClustersTriggersModelsUpdateTriggerRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2397,7 +2397,7 @@ class ClusterTriggersApi:
 
         _param = self._update_trigger_clusters_serialize(
             trigger_id=trigger_id,
-            update_trigger_request=update_trigger_request,
+            shared_clusters_triggers_models_update_trigger_request=shared_clusters_triggers_models_update_trigger_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -2407,7 +2407,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2430,9 +2430,9 @@ class ClusterTriggersApi:
     def update_trigger_clusters_without_preload_content(
         self,
         trigger_id: Annotated[StrictStr, Field(description="Trigger ID")],
-        update_trigger_request: UpdateTriggerRequest,
-        authorization: Annotated[Optional[StrictStr], Field(description="Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'")] = None,
-        x_namespace: Annotated[Optional[StrictStr], Field(description="Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.")] = None,
+        shared_clusters_triggers_models_update_trigger_request: SharedClustersTriggersModelsUpdateTriggerRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2452,11 +2452,11 @@ class ClusterTriggersApi:
 
         :param trigger_id: Trigger ID (required)
         :type trigger_id: str
-        :param update_trigger_request: (required)
-        :type update_trigger_request: UpdateTriggerRequest
-        :param authorization: Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef'
+        :param shared_clusters_triggers_models_update_trigger_request: (required)
+        :type shared_clusters_triggers_models_update_trigger_request: SharedClustersTriggersModelsUpdateTriggerRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
-        :param x_namespace: Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint.
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
         :type x_namespace: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -2482,7 +2482,7 @@ class ClusterTriggersApi:
 
         _param = self._update_trigger_clusters_serialize(
             trigger_id=trigger_id,
-            update_trigger_request=update_trigger_request,
+            shared_clusters_triggers_models_update_trigger_request=shared_clusters_triggers_models_update_trigger_request,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -2492,7 +2492,7 @@ class ClusterTriggersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TriggerModel",
+            '200': "SharedClustersTriggersModelsTriggerModel",
             '400': "ErrorResponse",
             '401': "ErrorResponse",
             '403': "ErrorResponse",
@@ -2510,7 +2510,7 @@ class ClusterTriggersApi:
     def _update_trigger_clusters_serialize(
         self,
         trigger_id,
-        update_trigger_request,
+        shared_clusters_triggers_models_update_trigger_request,
         authorization,
         x_namespace,
         _request_auth,
@@ -2544,8 +2544,8 @@ class ClusterTriggersApi:
             _header_params['X-Namespace'] = x_namespace
         # process the form parameters
         # process the body parameter
-        if update_trigger_request is not None:
-            _body_params = update_trigger_request
+        if shared_clusters_triggers_models_update_trigger_request is not None:
+            _body_params = shared_clusters_triggers_models_update_trigger_request
 
 
         # set the HTTP header `Accept`

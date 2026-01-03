@@ -27,7 +27,6 @@ class TaxonomyExecutionMode(str, Enum):
     """
     allowed enum values
     """
-    ON_DEMAND = 'on_demand'
     MATERIALIZE = 'materialize'
 
     @classmethod

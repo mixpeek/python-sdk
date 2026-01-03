@@ -1,6 +1,6 @@
 # Config
 
-Configuration specific to the taxonomy type.
+OPTIONAL. Override taxonomy configuration. If omitted, copies from source taxonomy. This allows you to change retriever_id, input_mappings, enrichment_fields, or collection hierarchy.
 
 ## Properties
 
@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | Default retriever to use for all nodes unless overridden per-node. | 
 **input_mappings** | [**List[InputMapping]**](InputMapping.md) | Default input mappings for all nodes unless overridden per-node. | 
 **source_collection** | [**SourceCollectionInput**](SourceCollectionInput.md) | The single source collection for this flat taxonomy. | 
+**step_analytics** | [**StepAnalyticsConfigInput**](StepAnalyticsConfigInput.md) | Optional configuration for step transition analytics. Enables tracking how documents progress through hierarchical taxonomy nodes over time (e.g., content workflow tracking from &#39;draft&#39; to &#39;published&#39;). If not provided, only basic assignment events are logged. | [optional] 
 **inference_strategy** | [**HierarchyInferenceStrategy**](HierarchyInferenceStrategy.md) | Strategy for inferring hierarchy structure from collections. Can be &#39;schema&#39; (overlap-based), &#39;cluster&#39; (clustering-based), or &#39;llm&#39; (AI-based). When set, will infer relationships from inference_collections. | [optional] 
 **inference_collections** | **List[str]** | Collection IDs to use for hierarchy inference. The inference_strategy will analyze these collections to discover relationships. Can be combined with hierarchical_nodes for hybrid configuration. | [optional] 
 **llm_provider** | **str** | LLM provider to use for hierarchy inference (default openai_chat_v1) | [optional] 

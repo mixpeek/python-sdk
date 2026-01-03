@@ -18,29 +18,40 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from mixpeek.models.batch_type import BatchType
 from mixpeek.models.task_status_enum import TaskStatusEnum
+from mixpeek.models.tier_task_info import TierTaskInfo
 from typing import Optional, Set
 from typing_extensions import Self
 
 class BatchModel(BaseModel):
     """
-    The base model for a batch.
+    Model representing a batch of objects for processing through collections.  A batch groups bucket objects together for processing through one or more collections. Batches support multi-tier processing where collections are processed in dependency order (e.g., bucket → chunks → frames → scenes). Each tier has independent task tracking.  Use Cases:     - Process multiple objects through collections in a single batch     - Track progress of multi-tier decomposition pipelines     - Monitor and retry individual processing tiers     - Query batch status and tier-specific task information  Lifecycle:     1. Created in DRAFT status with object_ids     2. Submitted for processing → status changes to PENDING     3. Each tier processes sequentially (tier 0 → tier 1 → ... → tier N)     4. Batch completes when all tiers finish (status=COMPLETED) or any tier fails (status=FAILED)  Multi-Tier Processing:     - Tier 0: Bucket objects → Collections (bucket as source)     - Tier N (N > 0): Collection documents → Collections (upstream collection as source)     - Each tier gets independent task tracking via tier_tasks array     - Processing proceeds tier-by-tier with automatic chaining  Requirements:     - batch_id: OPTIONAL (auto-generated if not provided)     - bucket_id: REQUIRED     - status: OPTIONAL (defaults to DRAFT)     - object_ids: REQUIRED for processing (must have at least 1 object)     - collection_ids: OPTIONAL (discovered via DAG resolution)     - tier_tasks: OPTIONAL (populated during processing)     - current_tier: OPTIONAL (set during processing)     - total_tiers: OPTIONAL (defaults to 1, set during DAG resolution)     - dag_tiers: OPTIONAL (populated during DAG resolution)
     """ # noqa: E501
-    batch_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the batch.")
-    bucket_id: StrictStr = Field(description="The unique identifier of the bucket.")
-    status: Optional[TaskStatusEnum] = Field(default=None, description="The current status of the batch.")
-    object_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of object IDs included in the batch.")
-    collection_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of collection IDs that this batch is connected to for processing.")
-    error: Optional[StrictStr] = Field(default=None, description="The error message if the batch failed to process.")
-    type: Optional[BatchType] = Field(default=None, description="The type of the batch.")
-    manifest_key: Optional[StrictStr] = Field(default=None, description="The S3 manifest key for the batch.")
-    task_id: Optional[StrictStr] = Field(default=None, description="The task ID of the batch.")
-    loaded_object_ids: Optional[List[StrictStr]] = Field(default=None, description="A list of object IDs that were successfully loaded into the batch.")
-    internal_metadata: Optional[Dict[str, Any]] = Field(default=None, description="Internal engine/job metadata (e.g., job_id for provider).")
-    __properties: ClassVar[List[str]] = ["batch_id", "bucket_id", "status", "object_ids", "collection_ids", "error", "type", "manifest_key", "task_id", "loaded_object_ids", "internal_metadata"]
+    batch_id: Optional[StrictStr] = Field(default=None, description="OPTIONAL (auto-generated if not provided). Unique identifier for this batch. Format: 'btch_' prefix followed by 12-character secure token. Generated using generate_secure_token() from shared.utilities.helpers. Used to query batch status and track processing across tiers. Immutable after creation.")
+    bucket_id: StrictStr = Field(description="REQUIRED. Unique identifier of the bucket containing the objects to process. Must be a valid bucket ID that exists in the system. All object_ids must belong to this bucket. Format: Bucket ID as defined when bucket was created.")
+    status: Optional[TaskStatusEnum] = Field(default=None, description="OPTIONAL (defaults to DRAFT). Current processing status of the batch. Lifecycle: DRAFT → PENDING → IN_PROGRESS → COMPLETED/FAILED. DRAFT: Batch created but not yet submitted. PENDING: Batch submitted and queued for processing. IN_PROGRESS: Batch currently processing (one or more tiers active). COMPLETED: All tiers successfully completed. FAILED: One or more tiers failed. Aggregated from tier_tasks statuses during multi-tier processing.")
+    object_ids: Optional[Annotated[List[StrictStr], Field(min_length=1)]] = Field(default=None, description="REQUIRED for processing (must have at least 1). List of object IDs to include in this batch. All objects must exist in the specified bucket_id. These objects are the source data for tier 0 processing. Minimum 1 object, no maximum limit. Objects are processed in parallel within each tier.")
+    collection_ids: Optional[List[StrictStr]] = Field(default=None, description="OPTIONAL. List of all collection IDs involved in this batch's processing. Automatically populated during DAG resolution from dag_tiers. Includes collections from all tiers (flattened view of dag_tiers). Used for quick lookups without traversing tier structure. Format: List of collection IDs across all tiers.")
+    error: Optional[StrictStr] = Field(default=None, description="OPTIONAL. Legacy error message field for backward compatibility. None if batch succeeded or is still processing. Contains human-readable error description from first failed tier. DEPRECATED: Use tier_tasks[].errors for detailed error information. For multi-tier batches, typically contains the error from the first failed tier. Check tier_tasks array for tier-specific error details and error_summary for aggregation.")
+    error_summary: Optional[Dict[str, StrictInt]] = Field(default=None, description="OPTIONAL. Aggregated summary of errors across ALL tiers in the batch. None if batch succeeded or is still processing. Maps error_type (category) to total count of affected documents across all tiers. Provides quick batch-wide overview of error distribution. Example: {'dependency': 15, 'authentication': 25, 'validation': 5} means across all tiers, 15 documents failed with dependency errors, 25 with auth errors, 5 with validation errors. Automatically aggregated from tier_tasks[].error_summary. Used for batch health dashboard and error trend analysis.")
+    type: Optional[BatchType] = Field(default=None, description="OPTIONAL (defaults to BUCKET). Type of batch. BUCKET: Standard batch processing bucket objects through collections. COLLECTION: Reserved for future collection-only batch processing. Currently only BUCKET type is supported.")
+    manifest_key: Optional[StrictStr] = Field(default=None, description="OPTIONAL. S3 key where the batch manifest is stored. Contains metadata and row data (Parquet) for Engine processing. For tier 0, points to bucket object manifest. For tier N+, points to collection document manifest. Format: S3 path (e.g., 'namespace_id/internal_id/manifests/tier_0.parquet'). Generated during batch submission.")
+    task_id: Optional[StrictStr] = Field(default=None, description="OPTIONAL. Primary task ID for the batch (typically tier 0 task). Used for backward compatibility with single-tier batch tracking. For multi-tier batches, prefer querying tier_tasks array for granular tracking. Format: Task ID as generated for tier 0.")
+    loaded_object_ids: Optional[List[StrictStr]] = Field(default=None, description="OPTIONAL. List of object IDs that were successfully validated and loaded into the batch. Subset of object_ids that passed validation. Used to track which objects are ready for processing. None if batch hasn't been validated yet.")
+    internal_metadata: Optional[Dict[str, Any]] = Field(default=None, description="OPTIONAL. Internal engine/job metadata for system use. May contain: job_id (provider-specific), engine_version, processing hints, last_health_check. last_health_check: Most recent health check results with health_status, enriched_documents, vector_populated_count, stall_duration_seconds, recommendations, missing_features. Populated asynchronously via Celery task (non-blocking, best-effort). Used for troubleshooting batch processing issues via API. NOTE: In MongoDB, this is stored under '_internal.processing' path.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="OPTIONAL. User-defined metadata for the batch. Arbitrary key-value pairs for user tracking and organization. Persisted with the batch and returned in API responses. Not used by the system for processing logic. Examples: campaign_id, user_email, processing_notes.")
+    tier_tasks: Optional[List[TierTaskInfo]] = Field(default=None, description="OPTIONAL. List of tier task tracking information for multi-tier processing. Each element represents one tier in the processing pipeline. Empty array for simple single-tier batches. Populated during batch submission with tier 0 info, then appended as tiers progress. Each TierTaskInfo contains: tier_num, task_id, status, collection_ids, timestamps. Used for granular monitoring: 'Show me status of tier 2' or 'Retry tier 1'. Array index typically matches tier_num (tier_tasks[0] = tier 0, tier_tasks[1] = tier 1, etc.).")
+    current_tier: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="OPTIONAL. Zero-based index of the currently processing tier. None if batch hasn't started processing (status=DRAFT or PENDING). Updated as batch progresses through tiers. Used to show processing progress: 'Processing tier 2 of 5'. Set to last tier number when batch completes. Example: If processing tier 1 (frames), current_tier=1.")
+    total_tiers: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=1, description="OPTIONAL (defaults to 1). Total number of tiers in the collection DAG. Minimum 1 (tier 0 only = bucket → collection). Set during DAG resolution when batch is submitted. Equals len(dag_tiers) if dag_tiers is populated. Used to calculate progress: current_tier / total_tiers. Example: 5-tier pipeline (bucket → chunks → frames → scenes → summaries) has total_tiers=5.")
+    dag_tiers: Optional[List[List[StrictStr]]] = Field(default=None, description="OPTIONAL. Complete DAG tier structure for this batch. List of tiers, where each tier is a list of collection IDs to process at that stage. Tier 0 = bucket-sourced collections. Tier N (N > 0) = collection-sourced collections. Collections within same tier have no dependencies (can run in parallel). Collections in tier N+1 depend on collections in tier N. Populated during DAG resolution at batch submission. Used for tier-by-tier processing orchestration. Example: [['col_chunks'], ['col_frames', 'col_objects'], ['col_scenes']] = 3 tiers where frames and objects run in parallel at tier 1.")
+    created_at: Optional[datetime] = Field(default=None, description="OPTIONAL (auto-set on creation). ISO 8601 timestamp when batch was created. Set using current_time() from shared.utilities.helpers. Immutable after creation. Used for batch age tracking and cleanup of old batches.")
+    updated_at: Optional[datetime] = Field(default=None, description="OPTIONAL (auto-updated). ISO 8601 timestamp when batch was last modified. Updated using current_time() whenever batch status or tier_tasks change. Used to track batch activity and identify stale batches.")
+    __properties: ClassVar[List[str]] = ["batch_id", "bucket_id", "status", "object_ids", "collection_ids", "error", "error_summary", "type", "manifest_key", "task_id", "loaded_object_ids", "internal_metadata", "metadata", "tier_tasks", "current_tier", "total_tiers", "dag_tiers", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,6 +92,13 @@ class BatchModel(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in tier_tasks (list)
+        _items = []
+        if self.tier_tasks:
+            for _item_tier_tasks in self.tier_tasks:
+                if _item_tier_tasks:
+                    _items.append(_item_tier_tasks.to_dict())
+            _dict['tier_tasks'] = _items
         return _dict
 
     @classmethod
@@ -99,11 +117,19 @@ class BatchModel(BaseModel):
             "object_ids": obj.get("object_ids"),
             "collection_ids": obj.get("collection_ids"),
             "error": obj.get("error"),
+            "error_summary": obj.get("error_summary"),
             "type": obj.get("type"),
             "manifest_key": obj.get("manifest_key"),
             "task_id": obj.get("task_id"),
             "loaded_object_ids": obj.get("loaded_object_ids"),
-            "internal_metadata": obj.get("internal_metadata")
+            "internal_metadata": obj.get("internal_metadata"),
+            "metadata": obj.get("metadata"),
+            "tier_tasks": [TierTaskInfo.from_dict(_item) for _item in obj["tier_tasks"]] if obj.get("tier_tasks") is not None else None,
+            "current_tier": obj.get("current_tier"),
+            "total_tiers": obj.get("total_tiers") if obj.get("total_tiers") is not None else 1,
+            "dag_tiers": obj.get("dag_tiers"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

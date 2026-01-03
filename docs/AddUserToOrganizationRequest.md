@@ -1,14 +1,14 @@
 # AddUserToOrganizationRequest
 
-Add User to Organization Request.
+Payload for adding users to an organization (private/admin endpoint).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**organization_identifier** | **str** |  | 
-**users** | [**List[UserModelInput]**](UserModelInput.md) |  | [optional] 
-**metadata** | **Dict[str, object]** |  | [optional] 
+**organization_identifier** | **str** | Organization ID or name to add users to. | 
+**logo_url** | **str** | Organization logo URL (e.g., from Google Favicon service). If provided and organization doesn&#39;t have a logo, this will be set. | [optional] 
+**users** | [**List[UserCreateRequest]**](UserCreateRequest.md) | List of users to add to the organization. | 
 
 ## Example
 

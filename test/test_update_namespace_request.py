@@ -37,7 +37,7 @@ class TestUpdateNamespaceRequest(unittest.TestCase):
         if include_optional:
             return UpdateNamespaceRequest(
                 namespace_name = 'spotify_playlists_dev',
-                payload_indexes = [{field_name=metadata.title, field_schema={lowercase=true, max_token_len=15, min_token_len=2, tokenizer=word, type=text}, type=text}, {field_name=metadata.description, field_schema={is_tenant=false, type=keyword}, type=keyword}]
+                payload_indexes = [{field_name=metadata.title, field_schema={lowercase=true, max_token_len=15, min_token_len=2, tokenizer=word, type=text}, is_protected=false, type=text}, {field_name=metadata.description, field_schema={is_tenant=false, type=keyword}, is_protected=false, type=keyword}]
             )
         else:
             return UpdateNamespaceRequest(

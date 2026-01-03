@@ -37,13 +37,13 @@ class TestCreateObjectsBatchRequest(unittest.TestCase):
         if include_optional:
             return CreateObjectsBatchRequest(
                 objects = [
-                    {"blobs":[{"data":{"num_pages":5,"title":"Service Agreement 2024"},"key_prefix":"/contract-2024/content.pdf","metadata":{"author":"John Doe","department":"Legal"},"property":"content","type":"json"},{"data":{"filename":"https://example.com/images/smartphone-x1.jpg","mime_type":"image/jpeg"},"key_prefix":"/contract-2024/thumbnail.jpg","metadata":{"height":300,"width":200},"property":"thumbnail","type":"image"}],"key_prefix":"/documents","metadata":{"category":"contracts","status":"draft","year":2024}}
+                    {blobs=[{data={num_pages=5, title=Service Agreement 2024}, key_prefix=/contract-2024/content.pdf, metadata={author=John Doe, department=Legal}, property=content, type=json}, {data={filename=https://example.com/images/smartphone-x1.jpg, mime_type=image/jpeg}, key_prefix=/contract-2024/thumbnail.jpg, metadata={height=300, width=200}, property=thumbnail, type=image}], key_prefix=/documents, metadata={category=contracts, status=draft, year=2024}}
                     ]
             )
         else:
             return CreateObjectsBatchRequest(
                 objects = [
-                    {"blobs":[{"data":{"num_pages":5,"title":"Service Agreement 2024"},"key_prefix":"/contract-2024/content.pdf","metadata":{"author":"John Doe","department":"Legal"},"property":"content","type":"json"},{"data":{"filename":"https://example.com/images/smartphone-x1.jpg","mime_type":"image/jpeg"},"key_prefix":"/contract-2024/thumbnail.jpg","metadata":{"height":300,"width":200},"property":"thumbnail","type":"image"}],"key_prefix":"/documents","metadata":{"category":"contracts","status":"draft","year":2024}}
+                    {blobs=[{data={num_pages=5, title=Service Agreement 2024}, key_prefix=/contract-2024/content.pdf, metadata={author=John Doe, department=Legal}, property=content, type=json}, {data={filename=https://example.com/images/smartphone-x1.jpg, mime_type=image/jpeg}, key_prefix=/contract-2024/thumbnail.jpg, metadata={height=300, width=200}, property=thumbnail, type=image}], key_prefix=/documents, metadata={category=contracts, status=draft, year=2024}}
                     ],
         )
         """

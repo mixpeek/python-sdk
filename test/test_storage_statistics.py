@@ -36,6 +36,7 @@ class TestStorageStatistics(unittest.TestCase):
         model = StorageStatistics()
         if include_optional:
             return StorageStatistics(
+                total_size_bytes = 56,
                 avg_size_bytes = 56,
                 max_size_bytes = 56,
                 min_size_bytes = 56

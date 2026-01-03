@@ -36,9 +36,9 @@ class TestListNamespacesRequest(unittest.TestCase):
         model = ListNamespacesRequest()
         if include_optional:
             return ListNamespacesRequest(
-                filters = {description=test, namespace_name={$regex=^my_namespace}},
+                filters = {namespace_id=ns_abc123, namespace_name={$regex=^my_namespace}},
                 sort = {direction=asc, field=namespace_name},
-                search = 'production',
+                search = 'ns_abc123',
                 case_sensitive = True
             )
         else:

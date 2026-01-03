@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | The retriever to use for matching against the source collection. | 
 **input_mappings** | [**List[InputMapping]**](InputMapping.md) | Input mappings defining how to construct retriever inputs. | 
 **source_collection** | [**SourceCollectionOutput**](SourceCollectionOutput.md) | The single source collection for this flat taxonomy. | 
+**step_analytics** | [**StepAnalyticsConfigOutput**](StepAnalyticsConfigOutput.md) | Optional configuration for step transition analytics. Enables tracking how documents progress through taxonomy labels over time (e.g., email thread progression from &#39;inquiry&#39; to &#39;closed_won&#39;). If not provided, only basic assignment events are logged. | [optional] 
 
 ## Example
 

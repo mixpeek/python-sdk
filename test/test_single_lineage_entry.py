@@ -38,26 +38,66 @@ class TestSingleLineageEntry(unittest.TestCase):
             return SingleLineageEntry(
                 source_config = mixpeek.models.source_config.SourceConfig(
                     type = 'bucket', 
-                    bucket_id = '', 
-                    collection_id = '', ),
-                feature_extractors = [
-                    mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
-                        feature_extractor_name = '', 
-                        version = '', 
-                        parameters = {
-                            'key' : null
-                            }, 
-                        input_mappings = null, 
-                        feature_extractor_id = '', )
-                    ],
+                    bucket_ids = [
+                        ''
+                        ], 
+                    collection_id = '', 
+                    collection_ids = [
+                        ''
+                        ], 
+                    inherited_bucket_ids = [
+                        ''
+                        ], 
+                    source_filters = mixpeek.models.source_filters.SourceFilters(
+                        filters = { }, ), ),
+                feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                    feature_extractor_name = '', 
+                    version = '', 
+                    params = { }, 
+                    parameters = null, 
+                    input_mappings = null, 
+                    field_passthrough = [
+                        mixpeek.models.field_passthrough.FieldPassthrough(
+                            source_path = '', 
+                            target_path = '', 
+                            default = null, 
+                            required = True, )
+                        ], 
+                    include_all_source_fields = True, 
+                    feature_extractor_id = '', ),
                 output_schema = { }
             )
         else:
             return SingleLineageEntry(
                 source_config = mixpeek.models.source_config.SourceConfig(
                     type = 'bucket', 
-                    bucket_id = '', 
-                    collection_id = '', ),
+                    bucket_ids = [
+                        ''
+                        ], 
+                    collection_id = '', 
+                    collection_ids = [
+                        ''
+                        ], 
+                    inherited_bucket_ids = [
+                        ''
+                        ], 
+                    source_filters = mixpeek.models.source_filters.SourceFilters(
+                        filters = { }, ), ),
+                feature_extractor = mixpeek.models.feature_extractor_config.FeatureExtractorConfig(
+                    feature_extractor_name = '', 
+                    version = '', 
+                    params = { }, 
+                    parameters = null, 
+                    input_mappings = null, 
+                    field_passthrough = [
+                        mixpeek.models.field_passthrough.FieldPassthrough(
+                            source_path = '', 
+                            target_path = '', 
+                            default = null, 
+                            required = True, )
+                        ], 
+                    include_all_source_fields = True, 
+                    feature_extractor_id = '', ),
                 output_schema = { },
         )
         """

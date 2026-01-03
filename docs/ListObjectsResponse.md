@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**List[ObjectResponse]**](ObjectResponse.md) | List of objects matching the query | 
 **pagination** | [**PaginationResponse**](PaginationResponse.md) | Pagination information | 
+**stats** | [**ObjectListStats**](ObjectListStats.md) | Aggregate statistics across all objects in the result | [optional] 
 
 ## Example
 

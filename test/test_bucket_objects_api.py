@@ -27,6 +27,13 @@ class TestBucketObjectsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_aggregate_objects_buckets(self) -> None:
+        """Test case for aggregate_objects_buckets
+
+        Aggregate Objects
+        """
+        pass
+
     def test_create_object_buckets(self) -> None:
         """Test case for create_object_buckets
 
@@ -59,6 +66,13 @@ class TestBucketObjectsApi(unittest.TestCase):
         """Test case for list_objects_buckets
 
         List Objects
+        """
+        pass
+
+    def test_patch_object_buckets(self) -> None:
+        """Test case for patch_object_buckets
+
+        Partially Update Object
         """
         pass
 

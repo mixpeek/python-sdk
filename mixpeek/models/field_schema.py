@@ -36,7 +36,7 @@ FIELDSCHEMA_ANY_OF_SCHEMAS = ["BoolIndexParams", "DatetimeIndexParams", "FloatIn
 
 class FieldSchema(BaseModel):
     """
-    FieldSchema
+    Optional schema configuration for the index. If not provided, uses default parameters for the specified type. Different types support different parameters (e.g., KeywordIndexParams.is_tenant).
     """
 
     # data type: TextIndexParams

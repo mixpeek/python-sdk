@@ -40,20 +40,17 @@ class TestBlobModel(unittest.TestCase):
                 var_property = '',
                 key_prefix = '',
                 type = 'string',
-                data = None,
-                metadata = { },
+                properties = { },
                 details = mixpeek.models.blob_details.BlobDetails(
                     filename = '', 
                     size_bytes = 56, 
                     mime_type = '', 
-                    hash = '', 
-                    s3_object_key = '', )
+                    hash = '', )
             )
         else:
             return BlobModel(
                 var_property = '',
                 type = 'string',
-                data = None,
         )
         """
 

@@ -51,7 +51,8 @@ class TestExecuteTaxonomyRequest(unittest.TestCase):
                         ], 
                     config = null, 
                     ready = True, 
-                    created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
+                    created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    metadata = { }, ),
                 retriever = mixpeek.models.retriever_model.RetrieverModel(
                     retriever_id = '', 
                     retriever_name = '', 
@@ -63,7 +64,7 @@ class TestExecuteTaxonomyRequest(unittest.TestCase):
                     stages = [
                         mixpeek.models.stage_instance_config.StageInstanceConfig(
                             stage_name = '', 
-                            version = '', 
+                            stage_id = '', 
                             parameters = { }, 
                             pre_filters = { }, 
                             post_filters = { }, 
@@ -76,7 +77,9 @@ class TestExecuteTaxonomyRequest(unittest.TestCase):
                     cache_config = mixpeek.models.cache_config.CacheConfig(
                         enabled = True, 
                         ttl_seconds = 0.0, 
-                        stage = 'retrieval', 
+                        cache_stage_names = [
+                            ''
+                            ], 
                         exclude_fields = [
                             ''
                             ], ), 
@@ -150,7 +153,8 @@ class TestExecuteTaxonomyRequest(unittest.TestCase):
                         ], 
                     config = null, 
                     ready = True, 
-                    created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ),
+                    created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    metadata = { }, ),
         )
         """
 

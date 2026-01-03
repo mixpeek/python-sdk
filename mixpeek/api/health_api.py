@@ -17,8 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictBool
+from pydantic import Field, StrictBool
 from typing import Optional
+from typing_extensions import Annotated
 from mixpeek.models.health_check_response import HealthCheckResponse
 
 from mixpeek.api_client import ApiClient, RequestSerialized
@@ -43,6 +44,7 @@ class HealthApi:
     def healthcheck_health(
         self,
         deep: Optional[StrictBool] = None,
+        metrics: Annotated[Optional[StrictBool], Field(description="Include Layer 2 protection metrics")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -62,6 +64,8 @@ class HealthApi:
 
         :param deep:
         :type deep: bool
+        :param metrics: Include Layer 2 protection metrics
+        :type metrics: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -86,6 +90,7 @@ class HealthApi:
 
         _param = self._healthcheck_health_serialize(
             deep=deep,
+            metrics=metrics,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -116,6 +121,7 @@ class HealthApi:
     def healthcheck_health_with_http_info(
         self,
         deep: Optional[StrictBool] = None,
+        metrics: Annotated[Optional[StrictBool], Field(description="Include Layer 2 protection metrics")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -135,6 +141,8 @@ class HealthApi:
 
         :param deep:
         :type deep: bool
+        :param metrics: Include Layer 2 protection metrics
+        :type metrics: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -159,6 +167,7 @@ class HealthApi:
 
         _param = self._healthcheck_health_serialize(
             deep=deep,
+            metrics=metrics,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -189,6 +198,7 @@ class HealthApi:
     def healthcheck_health_without_preload_content(
         self,
         deep: Optional[StrictBool] = None,
+        metrics: Annotated[Optional[StrictBool], Field(description="Include Layer 2 protection metrics")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -208,6 +218,8 @@ class HealthApi:
 
         :param deep:
         :type deep: bool
+        :param metrics: Include Layer 2 protection metrics
+        :type metrics: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -232,6 +244,7 @@ class HealthApi:
 
         _param = self._healthcheck_health_serialize(
             deep=deep,
+            metrics=metrics,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -257,6 +270,7 @@ class HealthApi:
     def _healthcheck_health_serialize(
         self,
         deep,
+        metrics,
         _request_auth,
         _content_type,
         _headers,
@@ -282,6 +296,10 @@ class HealthApi:
         if deep is not None:
             
             _query_params.append(('deep', deep))
+            
+        if metrics is not None:
+            
+            _query_params.append(('metrics', metrics))
             
         # process the header parameters
         # process the form parameters
@@ -323,6 +341,7 @@ class HealthApi:
     def healthcheck_health_0(
         self,
         deep: Optional[StrictBool] = None,
+        metrics: Annotated[Optional[StrictBool], Field(description="Include Layer 2 protection metrics")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -342,6 +361,8 @@ class HealthApi:
 
         :param deep:
         :type deep: bool
+        :param metrics: Include Layer 2 protection metrics
+        :type metrics: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -366,6 +387,7 @@ class HealthApi:
 
         _param = self._healthcheck_health_0_serialize(
             deep=deep,
+            metrics=metrics,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -396,6 +418,7 @@ class HealthApi:
     def healthcheck_health_0_with_http_info(
         self,
         deep: Optional[StrictBool] = None,
+        metrics: Annotated[Optional[StrictBool], Field(description="Include Layer 2 protection metrics")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -415,6 +438,8 @@ class HealthApi:
 
         :param deep:
         :type deep: bool
+        :param metrics: Include Layer 2 protection metrics
+        :type metrics: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -439,6 +464,7 @@ class HealthApi:
 
         _param = self._healthcheck_health_0_serialize(
             deep=deep,
+            metrics=metrics,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -469,6 +495,7 @@ class HealthApi:
     def healthcheck_health_0_without_preload_content(
         self,
         deep: Optional[StrictBool] = None,
+        metrics: Annotated[Optional[StrictBool], Field(description="Include Layer 2 protection metrics")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -488,6 +515,8 @@ class HealthApi:
 
         :param deep:
         :type deep: bool
+        :param metrics: Include Layer 2 protection metrics
+        :type metrics: bool
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -512,6 +541,7 @@ class HealthApi:
 
         _param = self._healthcheck_health_0_serialize(
             deep=deep,
+            metrics=metrics,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -537,6 +567,7 @@ class HealthApi:
     def _healthcheck_health_0_serialize(
         self,
         deep,
+        metrics,
         _request_auth,
         _content_type,
         _headers,
@@ -562,6 +593,10 @@ class HealthApi:
         if deep is not None:
             
             _query_params.append(('deep', deep))
+            
+        if metrics is not None:
+            
+            _query_params.append(('metrics', metrics))
             
         # process the header parameters
         # process the form parameters

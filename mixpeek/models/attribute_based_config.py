@@ -20,16 +20,17 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class AttributeBasedConfig(BaseModel):
     """
-    Configuration for attribute-based clustering.
+    Configuration for attribute-based clustering.  Attribute-based clustering groups documents by metadata attributes (e.g., category, brand, status) instead of vector similarity. This is useful for organizing content by business logic rather than semantic similarity.  Examples:     - Group products by category and brand     - Organize orders by status and priority     - Cluster content by author and topic
     """ # noqa: E501
-    attributes: List[StrictStr] = Field(description="Attributes to use for clustering")
-    hierarchical_grouping: Optional[StrictBool] = Field(default=False, description="Whether to create hierarchical groups")
-    aggregation_method: Optional[StrictStr] = Field(default=None, description="Method for aggregating attributes")
+    attributes: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="List of attribute field names to use for clustering. Documents will be grouped by unique combinations of these attribute values. Supports dot-notation for nested fields (e.g., 'metadata.category'). Order matters for hierarchical grouping: first attribute is top-level, subsequent are nested.")
+    hierarchical_grouping: Optional[StrictBool] = Field(default=False, description="Whether to create hierarchical clusters based on attribute order. When True: Creates parent clusters for each unique value of the first attribute, then child clusters for subsequent attributes within each parent. When False: Creates flat clusters for each unique combination of all attributes. Example with ['category', 'brand']:   hierarchical=True → 'Electronics' (parent) → 'Apple', 'Samsung' (children).   hierarchical=False → 'Electronics_Apple', 'Electronics_Samsung' (flat).")
+    aggregation_method: Optional[StrictStr] = Field(default=None, description="Method for aggregating attribute values when creating cluster centroids. Options: 'most_frequent' (default), 'first', 'last'. Most use cases should use the default.")
     __properties: ClassVar[List[str]] = ["attributes", "hierarchical_grouping", "aggregation_method"]
 
     model_config = ConfigDict(

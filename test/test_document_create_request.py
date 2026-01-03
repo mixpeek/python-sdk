@@ -37,7 +37,21 @@ class TestDocumentCreateRequest(unittest.TestCase):
         if include_optional:
             return DocumentCreateRequest(
                 collection_id = 'collection_123',
-                object_id = '',
+                root_object_id = '',
+                root_bucket_id = '',
+                source_type = 'bucket',
+                source_collection_id = '',
+                source_document_id = '',
+                source_object_id = '',
+                lineage_path = '',
+                lineage_chain = [
+                    mixpeek.models.lineage_step.LineageStep(
+                        collection_id = '', 
+                        feature_extractor_id = '', 
+                        document_id = '', 
+                        timestamp = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
+                    ],
+                document_schema_version = '',
                 metadata = { },
                 features = [
                     {
@@ -48,7 +62,6 @@ class TestDocumentCreateRequest(unittest.TestCase):
         else:
             return DocumentCreateRequest(
                 collection_id = 'collection_123',
-                object_id = '',
         )
         """
 

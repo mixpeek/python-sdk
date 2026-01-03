@@ -30,7 +30,7 @@ class TestRetrieverStagesApi(unittest.TestCase):
     def test_list_stages_retrievers(self) -> None:
         """Test case for list_stages_retrievers
 
-        List available retriever stages
+        List Available Retriever Stages
         """
         pass
 

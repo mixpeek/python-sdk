@@ -55,6 +55,13 @@ class TestNamespacesApi(unittest.TestCase):
         """
         pass
 
+    def test_patch_namespace(self) -> None:
+        """Test case for patch_namespace
+
+        Partially Update Namespace
+        """
+        pass
+
     def test_update_namespace(self) -> None:
         """Test case for update_namespace
 

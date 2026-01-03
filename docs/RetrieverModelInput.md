@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | Unique identifier for the retriever | [optional] 
 **retriever_name** | **str** | Name of the retriever | 
 **description** | **str** | Description of the retriever | [optional] 
-**input_schema** | [**RetrieverSchemaInput**](RetrieverSchemaInput.md) | Input schema for the retriever | 
+**input_schema** | [**RetrieverSchema**](RetrieverSchema.md) | Input schema for the retriever | 
 **collection_ids** | **List[str]** | List of collection IDs | 
-**stages** | [**List[StageInstanceConfigInput]**](StageInstanceConfigInput.md) | List of stage configurations | 
+**stages** | [**List[StageInstanceConfig]**](StageInstanceConfig.md) | List of stage configurations | 
 **cache_config** | [**CacheConfig**](CacheConfig.md) | Cache configuration for this retriever. If not provided, caching is disabled. | [optional] 
 **created_at** | **datetime** | When the retriever was created | [optional] 
 **updated_at** | **datetime** | When the retriever was last modified | [optional] 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **updated_by** | [**CreatorInfo**](CreatorInfo.md) | Information about who last updated this retriever | [optional] 
 **version** | **int** | Version number (increments on each update) | [optional] [default to 1]
 **revision_history** | [**List[RevisionHistoryEntry]**](RevisionHistoryEntry.md) | History of changes (optional, last N changes) | [optional] 
-**health** | [**HealthCheckInput**](HealthCheckInput.md) | Health status and diagnostics | [optional] 
+**health** | [**HealthCheck**](HealthCheck.md) | Health status and diagnostics | [optional] 
 
 ## Example
 

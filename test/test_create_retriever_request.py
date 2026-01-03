@@ -36,50 +36,42 @@ class TestCreateRetrieverRequest(unittest.TestCase):
         model = CreateRetrieverRequest()
         if include_optional:
             return CreateRetrieverRequest(
-                retriever_name = '',
+                retriever_name = '0',
                 description = '',
-                input_schema = { },
-                collection_ids = [
+                collection_identifiers = [
                     ''
                     ],
                 stages = [
-                    mixpeek.models.stage_instance_config.StageInstanceConfig(
-                        stage_name = '', 
-                        version = '', 
-                        parameters = { }, 
-                        pre_filters = { }, 
-                        post_filters = { }, 
-                        stats = mixpeek.models.stage_performance.StagePerformance(
-                            avg_execution_ms = 1.337, 
-                            execution_count = 56, 
-                            error_count = 56, 
-                            last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), )
+                    mixpeek.models.stage_config.StageConfig(
+                        stage_name = '0', 
+                        stage_type = 'filter', 
+                        config = { }, 
+                        batch_size = '', 
+                        description = '', )
                     ],
-                metadata = { },
+                input_schema = {
+                    'key' : { }
+                    },
+                budget_limits = mixpeek.models.budget_limits.BudgetLimits(
+                    max_credits = 0.0, 
+                    max_time_ms = 0.0, ),
                 tags = [
                     ''
                     ],
-                enabled = True
+                display_config = {
+                    'key' : null
+                    }
             )
         else:
             return CreateRetrieverRequest(
-                retriever_name = '',
-                input_schema = { },
-                collection_ids = [
-                    ''
-                    ],
+                retriever_name = '0',
                 stages = [
-                    mixpeek.models.stage_instance_config.StageInstanceConfig(
-                        stage_name = '', 
-                        version = '', 
-                        parameters = { }, 
-                        pre_filters = { }, 
-                        post_filters = { }, 
-                        stats = mixpeek.models.stage_performance.StagePerformance(
-                            avg_execution_ms = 1.337, 
-                            execution_count = 56, 
-                            error_count = 56, 
-                            last_executed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), )
+                    mixpeek.models.stage_config.StageConfig(
+                        stage_name = '0', 
+                        stage_type = 'filter', 
+                        config = { }, 
+                        batch_size = '', 
+                        description = '', )
                     ],
         )
         """

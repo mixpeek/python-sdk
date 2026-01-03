@@ -38,6 +38,7 @@ class TestBaseFeatureExtractorModelOutput(unittest.TestCase):
             return BaseFeatureExtractorModelOutput(
                 feature_extractor_name = '',
                 version = '',
+                params = { },
                 feature_extractor_id = ''
             )
         else:

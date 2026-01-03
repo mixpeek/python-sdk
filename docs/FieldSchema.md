@@ -1,5 +1,6 @@
 # FieldSchema
 
+Optional schema configuration for the index. If not provided, uses default parameters for the specified type. Different types support different parameters (e.g., KeywordIndexParams.is_tenant).
 
 ## Properties
 

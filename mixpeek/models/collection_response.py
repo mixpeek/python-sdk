@@ -18,13 +18,16 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from mixpeek.models.bucket_schema_output import BucketSchemaOutput
-from mixpeek.models.feature_extractor_config_output import FeatureExtractorConfigOutput
+from mixpeek.models.cluster_application_config import ClusterApplicationConfig
+from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_output import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput
 from mixpeek.models.single_lineage_entry import SingleLineageEntry
-from mixpeek.models.source_config import SourceConfig
-from mixpeek.models.taxonomy_application_config import TaxonomyApplicationConfig
+from mixpeek.models.source_config_output import SourceConfigOutput
+from mixpeek.models.taxonomy_application_config_output import TaxonomyApplicationConfigOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,22 +35,30 @@ class CollectionResponse(BaseModel):
     """
     Response model for collection endpoints.
     """ # noqa: E501
-    collection_id: Optional[StrictStr] = Field(default=None, description="Unique collection identifier")
-    collection_name: StrictStr = Field(description="Collection name")
-    description: Optional[StrictStr] = Field(default=None, description="Collection description")
-    var_schema: Optional[Dict[str, Any]] = Field(default=None, description="Collection schema", alias="schema")
-    input_schema: Optional[BucketSchemaOutput] = Field(default=None, description="Input schema for the collection")
-    output_schema: Optional[BucketSchemaOutput] = Field(default=None, description="Output schema after feature extraction")
-    feature_extractors: Optional[List[FeatureExtractorConfigOutput]] = Field(default=None, description="Feature extractors applied to this collection")
-    source: SourceConfig = Field(description="Primary source configuration for this collection")
-    source_lineage: Optional[List[SingleLineageEntry]] = Field(default=None, description="Lineage chain showing the processing history")
-    vector_indexes: Optional[List[Any]] = Field(default=None, description="Vector indexes for this collection")
-    payload_indexes: Optional[List[Any]] = Field(default=None, description="Payload indexes for this collection")
-    enabled: Optional[StrictBool] = Field(default=True, description="Whether the collection is enabled")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the collection")
-    taxonomy_applications: Optional[List[TaxonomyApplicationConfig]] = Field(default=None, description="List of taxonomies applied to this collection")
+    collection_id: Optional[StrictStr] = Field(default=None, description="NOT REQUIRED (auto-generated). Unique identifier for this collection. Used for: API paths, document queries, pipeline references. Format: 'col_' prefix + 10 random alphanumeric characters. Stable after creation - use for all collection references.")
+    collection_name: Annotated[str, Field(min_length=3, strict=True, max_length=100)] = Field(description="REQUIRED. Human-readable name for the collection. Must be unique within the namespace. Used for: Display, lookups (can query by name or ID), organization. Format: Alphanumeric with underscores/hyphens, 3-100 characters. Examples: 'product_embeddings', 'video_frames', 'customer_documents'.")
+    description: Optional[StrictStr] = Field(default=None, description="NOT REQUIRED. Human-readable description of the collection's purpose. Use for: Documentation, team communication, UI display. Common pattern: Describe what the collection contains and what processing is applied.")
+    input_schema: BucketSchemaOutput = Field(description="REQUIRED (auto-computed from source). Input schema defining fields available to the feature extractor. Source: bucket.bucket_schema (if source.type='bucket') OR upstream_collection.output_schema (if source.type='collection'). Determines: Which fields can be used in input_mappings and field_passthrough. This is the 'left side' of the transformation - what data goes IN. Format: BucketSchema with properties dict. Use for: Validating input_mappings, configuring field_passthrough.")
+    output_schema: BucketSchemaOutput = Field(description="REQUIRED (auto-computed at creation). Output schema defining fields in final documents. Computed as: field_passthrough fields + extractor output fields (deterministic). Known IMMEDIATELY when collection is created - no waiting for documents! This is the 'right side' of the transformation - what data comes OUT. Use for: Understanding document structure, building queries, schema validation. Example: {title (passthrough), embedding (extractor output)} = output_schema.")
+    feature_extractor: SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput = Field(description="REQUIRED. Single feature extractor configuration for this collection. Defines: extractor name/version, input_mappings, field_passthrough, parameters. Task 9 change: ONE extractor per collection (previously supported multiple). For multiple extractors: Create multiple collections and use collection-to-collection pipelines. Use field_passthrough to include additional source fields beyond extractor outputs.")
+    source: SourceConfigOutput = Field(description="REQUIRED. Source configuration defining where data comes from. Type 'bucket': Process objects from one or more buckets (tier 1). Type 'collection': Process documents from upstream collection(s) (tier 2+). For multi-bucket sources, all buckets must have compatible schemas. For multi-collection sources, all collections must have compatible schemas. Determines input_schema and enables decomposition trees.")
+    source_bucket_schemas: Optional[Dict[str, BucketSchemaOutput]] = Field(default=None, description="NOT REQUIRED (auto-computed). Snapshot of bucket schemas at collection creation. Only populated for multi-bucket collections (source.type='bucket' with multiple bucket_ids). Key: bucket_id, Value: BucketSchema at time of collection creation. Used for: Schema compatibility validation, document lineage, debugging. Schema snapshot is immutable - bucket schema changes after collection creation do not affect this. Single-bucket collections may omit this field (schema in input_schema is sufficient).")
+    source_lineage: Optional[List[SingleLineageEntry]] = Field(default=None, description="NOT REQUIRED (auto-computed). Lineage chain showing complete processing history. Each entry contains: source_config, feature_extractor, output_schema for one tier. Length indicates processing depth (1 = tier 1, 2 = tier 2, etc.). Use for: Understanding multi-tier pipelines, visualizing decomposition trees.")
+    vector_indexes: Optional[List[Any]] = Field(default=None, description="NOT REQUIRED (auto-computed from extractor). Vector indexes for semantic search. Populated from feature_extractor.required_vector_indexes. Defines: Which embeddings are indexed, dimensions, distance metrics. Use for: Understanding search capabilities, debugging vector queries.")
+    payload_indexes: Optional[List[Any]] = Field(default=None, description="NOT REQUIRED (auto-computed from extractor + namespace). Payload indexes for filtering. Enables efficient filtering on metadata fields, timestamps, IDs. Populated from: extractor requirements + namespace defaults. Use for: Understanding which fields support fast filtering.")
+    enabled: Optional[StrictBool] = Field(default=True, description="NOT REQUIRED (defaults to True). Whether the collection accepts new documents. False: Collection exists but won't process new objects. True: Active and processing. Use for: Temporarily disabling collections without deletion.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="NOT REQUIRED. Additional user-defined metadata for the collection. Arbitrary key-value pairs for custom organization, tracking, configuration. Not used by the platform - purely for user purposes. Common uses: team ownership, project tags, deployment environment.")
+    created_at: Optional[datetime] = Field(default=None, description="Timestamp when the collection was created. Automatically set by the system when the collection is first saved to the database.")
+    updated_at: Optional[datetime] = Field(default=None, description="Timestamp when the collection was last updated. Automatically updated by the system whenever the collection is modified.")
     document_count: Optional[StrictInt] = Field(default=None, description="Number of documents in the collection")
-    __properties: ClassVar[List[str]] = ["collection_id", "collection_name", "description", "schema", "input_schema", "output_schema", "feature_extractors", "source", "source_lineage", "vector_indexes", "payload_indexes", "enabled", "metadata", "taxonomy_applications", "document_count"]
+    schema_version: Optional[StrictInt] = Field(default=1, description="Version number for the output_schema. Increments automatically when schema is updated via document sampling. Used to track schema evolution and trigger downstream collection schema updates.")
+    last_schema_sync: Optional[datetime] = Field(default=None, description="Timestamp of last automatic schema sync from document sampling. Used to debounce schema updates (prevents thrashing).")
+    schema_sync_enabled: Optional[StrictBool] = Field(default=True, description="Whether automatic schema discovery and sync is enabled for this collection. When True, schema is periodically updated by sampling documents. When False, schema remains fixed at creation time.")
+    taxonomy_applications: Optional[List[TaxonomyApplicationConfigOutput]] = Field(default=None, description="NOT REQUIRED. List of taxonomies to apply to documents in this collection. Each entry specifies: taxonomy_id, optional target_collection_id, optional filters. Enrichments are materialized (persisted to documents) during ingestion. Empty/null if no taxonomies attached. Use for: Categorization, hierarchical classification.")
+    cluster_applications: Optional[List[ClusterApplicationConfig]] = Field(default=None, description="NOT REQUIRED. List of clusters to automatically execute when batch processing completes. Each entry specifies: cluster_id, auto_execute_on_batch, min_document_threshold, cooldown_seconds. Clusters enrich source documents with cluster assignments (cluster_id, cluster_label, etc.). Empty/null if no clusters attached. Use for: Segmentation, grouping, pattern discovery.")
+    taxonomy_count: Optional[StrictInt] = Field(default=None, description="Number of taxonomies connected to this collection")
+    retriever_count: Optional[StrictInt] = Field(default=None, description="Number of retrievers connected to this collection")
+    __properties: ClassVar[List[str]] = ["collection_id", "collection_name", "description", "input_schema", "output_schema", "feature_extractor", "source", "source_bucket_schemas", "source_lineage", "vector_indexes", "payload_indexes", "enabled", "metadata", "created_at", "updated_at", "document_count", "schema_version", "last_schema_sync", "schema_sync_enabled", "taxonomy_applications", "cluster_applications", "taxonomy_count", "retriever_count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,16 +105,19 @@ class CollectionResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of output_schema
         if self.output_schema:
             _dict['output_schema'] = self.output_schema.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in feature_extractors (list)
-        _items = []
-        if self.feature_extractors:
-            for _item_feature_extractors in self.feature_extractors:
-                if _item_feature_extractors:
-                    _items.append(_item_feature_extractors.to_dict())
-            _dict['feature_extractors'] = _items
+        # override the default output from pydantic by calling `to_dict()` of feature_extractor
+        if self.feature_extractor:
+            _dict['feature_extractor'] = self.feature_extractor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of source
         if self.source:
             _dict['source'] = self.source.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in source_bucket_schemas (dict)
+        _field_dict = {}
+        if self.source_bucket_schemas:
+            for _key_source_bucket_schemas in self.source_bucket_schemas:
+                if self.source_bucket_schemas[_key_source_bucket_schemas]:
+                    _field_dict[_key_source_bucket_schemas] = self.source_bucket_schemas[_key_source_bucket_schemas].to_dict()
+            _dict['source_bucket_schemas'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in source_lineage (list)
         _items = []
         if self.source_lineage:
@@ -118,6 +132,13 @@ class CollectionResponse(BaseModel):
                 if _item_taxonomy_applications:
                     _items.append(_item_taxonomy_applications.to_dict())
             _dict['taxonomy_applications'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cluster_applications (list)
+        _items = []
+        if self.cluster_applications:
+            for _item_cluster_applications in self.cluster_applications:
+                if _item_cluster_applications:
+                    _items.append(_item_cluster_applications.to_dict())
+            _dict['cluster_applications'] = _items
         return _dict
 
     @classmethod
@@ -133,18 +154,31 @@ class CollectionResponse(BaseModel):
             "collection_id": obj.get("collection_id"),
             "collection_name": obj.get("collection_name"),
             "description": obj.get("description"),
-            "schema": obj.get("schema"),
             "input_schema": BucketSchemaOutput.from_dict(obj["input_schema"]) if obj.get("input_schema") is not None else None,
             "output_schema": BucketSchemaOutput.from_dict(obj["output_schema"]) if obj.get("output_schema") is not None else None,
-            "feature_extractors": [FeatureExtractorConfigOutput.from_dict(_item) for _item in obj["feature_extractors"]] if obj.get("feature_extractors") is not None else None,
-            "source": SourceConfig.from_dict(obj["source"]) if obj.get("source") is not None else None,
+            "feature_extractor": SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput.from_dict(obj["feature_extractor"]) if obj.get("feature_extractor") is not None else None,
+            "source": SourceConfigOutput.from_dict(obj["source"]) if obj.get("source") is not None else None,
+            "source_bucket_schemas": dict(
+                (_k, BucketSchemaOutput.from_dict(_v))
+                for _k, _v in obj["source_bucket_schemas"].items()
+            )
+            if obj.get("source_bucket_schemas") is not None
+            else None,
             "source_lineage": [SingleLineageEntry.from_dict(_item) for _item in obj["source_lineage"]] if obj.get("source_lineage") is not None else None,
             "vector_indexes": obj.get("vector_indexes"),
             "payload_indexes": obj.get("payload_indexes"),
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
             "metadata": obj.get("metadata"),
-            "taxonomy_applications": [TaxonomyApplicationConfig.from_dict(_item) for _item in obj["taxonomy_applications"]] if obj.get("taxonomy_applications") is not None else None,
-            "document_count": obj.get("document_count")
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
+            "document_count": obj.get("document_count"),
+            "schema_version": obj.get("schema_version") if obj.get("schema_version") is not None else 1,
+            "last_schema_sync": obj.get("last_schema_sync"),
+            "schema_sync_enabled": obj.get("schema_sync_enabled") if obj.get("schema_sync_enabled") is not None else True,
+            "taxonomy_applications": [TaxonomyApplicationConfigOutput.from_dict(_item) for _item in obj["taxonomy_applications"]] if obj.get("taxonomy_applications") is not None else None,
+            "cluster_applications": [ClusterApplicationConfig.from_dict(_item) for _item in obj["cluster_applications"]] if obj.get("cluster_applications") is not None else None,
+            "taxonomy_count": obj.get("taxonomy_count"),
+            "retriever_count": obj.get("retriever_count")
         })
         return _obj
 

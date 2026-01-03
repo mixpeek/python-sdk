@@ -28,11 +28,11 @@ class ListBucketsRequest(BaseModel):
     """
     Request model for listing buckets.
     """ # noqa: E501
-    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across all text fields")
-    filters: Optional[Dict[str, Any]] = Field(default=None, description="Filters to apply to the bucket list")
+    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across bucket_id, bucket_name, description, and other text fields")
+    filters: Optional[Dict[str, Any]] = Field(default=None, description="Filters to apply to the bucket list. Supports filtering by bucket_id or bucket_name.")
     sort: Optional[Dict[str, Any]] = Field(default=None, description="Sort options for the bucket list")
     case_sensitive: Optional[StrictBool] = Field(default=False, description="If True, filters and search will be case-sensitive")
-    limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=10, description="Number of results to return")
+    limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=10, description="Number of results to return")
     offset: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=0, description="Number of results to skip")
     __properties: ClassVar[List[str]] = ["search", "filters", "sort", "case_sensitive", "limit", "offset"]
 

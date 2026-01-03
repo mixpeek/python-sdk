@@ -1,12 +1,12 @@
 # CreateBatchRequest
 
-The request model for creating a new batch.
+Request model for creating a new batch.  Batches group bucket objects for processing into collections. When you submit a batch, all objects in the batch are processed through the collections associated with the bucket.  - object_ids: REQUIRED. List of object IDs that exist in the bucket - Collections are auto-discovered from the bucket at batch creation time  Batch Processing Flow: 1. Create batch with object_ids → Batch created in DRAFT status, collections auto-discovered 2. Submit batch → Processing begins for discovered collections 3. Collections with collection sources (tier 2/3) are processed automatically 4. Processing happens in topological order based on collection dependencies  Examples:     Single object batch:     {\"object_ids\": [\"obj_123\"]}      Multiple objects batch:     {\"object_ids\": [\"obj_123\", \"obj_456\", \"obj_789\"]}
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**object_ids** | **List[str]** | A list of object IDs to add to the batch. | 
+**object_ids** | **List[str]** | REQUIRED. List of object IDs to include in the batch. Objects must exist in the bucket where the batch is created. Minimum 1 object, no maximum limit. All objects will be processed when the batch is submitted. Collections with collection sources (decomposition trees) are processed automatically via DAG resolution - no need to create separate batches. | 
 
 ## Example
 

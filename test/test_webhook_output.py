@@ -36,8 +36,8 @@ class TestWebhookOutput(unittest.TestCase):
         model = WebhookOutput()
         if include_optional:
             return WebhookOutput(
-                webhook_id = '',
-                webhook_name = '',
+                webhook_id = 'wh_gCu2LC4aWw',
+                webhook_name = '0',
                 event_types = [
                     'object.created'
                     ],
@@ -52,7 +52,7 @@ class TestWebhookOutput(unittest.TestCase):
             )
         else:
             return WebhookOutput(
-                webhook_name = '',
+                webhook_name = '0',
                 event_types = [
                     'object.created'
                     ],

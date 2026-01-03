@@ -18,20 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.account_tier import AccountTier
 from mixpeek.models.base_rate_limits import BaseRateLimits
+from mixpeek.models.organization_infrastructure import OrganizationInfrastructure
 from typing import Optional, Set
 from typing_extensions import Self
 
 class OrganizationAdminUpdateRequest(BaseModel):
     """
-    Admin-only update request for organizations.  Allows changing the account tier and overriding rate limits.
+    Admin-only update payload for organization.  Security: This model is ONLY used by private admin endpoints that require MIXPEEK_PRIVATE_TOKEN authentication. Regular users cannot access or modify these fields, especially infrastructure configuration.
     """ # noqa: E501
-    account_type: Optional[AccountTier] = None
-    rate_limits: Optional[BaseRateLimits] = None
-    __properties: ClassVar[List[str]] = ["account_type", "rate_limits"]
+    account_type: Optional[AccountTier] = Field(default=None, description="Update organization billing tier.")
+    rate_limits: Optional[BaseRateLimits] = Field(default=None, description="Override rate limits for the organization.")
+    infrastructure: Optional[OrganizationInfrastructure] = Field(default=None, description="🔒 ADMIN ONLY: Configure dedicated infrastructure (Qdrant/Ray). This field is ONLY accessible via private admin endpoints with MIXPEEK_PRIVATE_TOKEN. NOT exposed in public API responses. NOT modifiable by organization users. Used for ENTERPRISE customers with dedicated infrastructure.")
+    __properties: ClassVar[List[str]] = ["account_type", "rate_limits", "infrastructure"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -75,6 +77,9 @@ class OrganizationAdminUpdateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of rate_limits
         if self.rate_limits:
             _dict['rate_limits'] = self.rate_limits.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of infrastructure
+        if self.infrastructure:
+            _dict['infrastructure'] = self.infrastructure.to_dict()
         return _dict
 
     @classmethod
@@ -88,7 +93,8 @@ class OrganizationAdminUpdateRequest(BaseModel):
 
         _obj = cls.model_validate({
             "account_type": obj.get("account_type"),
-            "rate_limits": BaseRateLimits.from_dict(obj["rate_limits"]) if obj.get("rate_limits") is not None else None
+            "rate_limits": BaseRateLimits.from_dict(obj["rate_limits"]) if obj.get("rate_limits") is not None else None,
+            "infrastructure": OrganizationInfrastructure.from_dict(obj["infrastructure"]) if obj.get("infrastructure") is not None else None
         })
         return _obj
 

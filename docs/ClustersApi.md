@@ -7,12 +7,10 @@ Method | HTTP request | Description
 [**apply_cluster_enrichment_enrich**](ClustersApi.md#apply_cluster_enrichment_enrich) | **POST** /v1/clusters/enrich | Apply Cluster Enrichment
 [**create_cluster**](ClustersApi.md#create_cluster) | **POST** /v1/clusters | Create Cluster
 [**delete_cluster**](ClustersApi.md#delete_cluster) | **DELETE** /v1/clusters/{cluster_id} | Delete Cluster
-[**execute_clustering_clusters**](ClustersApi.md#execute_clustering_clusters) | **POST** /v1/clusters/execute | Execute Clustering
+[**execute_clustering_clusters**](ClustersApi.md#execute_clustering_clusters) | **POST** /v1/clusters/{cluster_id}/execute | Execute Clustering
 [**get_cluster**](ClustersApi.md#get_cluster) | **GET** /v1/clusters/{cluster_identifier} | Get Cluster
-[**get_cluster_artifacts**](ClustersApi.md#get_cluster_artifacts) | **GET** /v1/clusters/{cluster_id}/artifacts | Get Cluster Artifacts
 [**list_clusters**](ClustersApi.md#list_clusters) | **POST** /v1/clusters/list | List Clusters
-[**stream_cluster_data**](ClustersApi.md#stream_cluster_data) | **POST** /v1/clusters/{cluster_id}/data | Stream Cluster Data
-[**submit_clustering_job_clusters**](ClustersApi.md#submit_clustering_job_clusters) | **POST** /v1/clusters/jobs/submit | Submit Clustering Job
+[**patch_cluster**](ClustersApi.md#patch_cluster) | **PATCH** /v1/clusters/{cluster_identifier} | Partially Update Cluster
 
 
 # **apply_cluster_enrichment_enrich**
@@ -44,8 +42,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.ClustersApi(api_client)
     apply_cluster_enrichment_request = mixpeek.ApplyClusterEnrichmentRequest() # ApplyClusterEnrichmentRequest | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Apply Cluster Enrichment
@@ -64,8 +62,8 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **apply_cluster_enrichment_request** | [**ApplyClusterEnrichmentRequest**](ApplyClusterEnrichmentRequest.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
@@ -95,18 +93,25 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_cluster**
-> ClusterModel create_cluster(create_cluster_request, authorization=authorization, x_namespace=x_namespace)
+> ClusterMetadata create_cluster(create_cluster_request, authorization=authorization, x_namespace=x_namespace)
 
 Create Cluster
 
-This endpoint allows you to create a new cluster configuration.
+Create a new cluster configuration and output collection.
+
+    This endpoint:
+    1. Creates cluster metadata
+    2. Creates output collection for cluster documents
+    3. Returns cluster metadata with output_collection_id
+
+    The cluster can then be executed via POST /v1/clusters/{id}/execute
 
 ### Example
 
 
 ```python
 import mixpeek
-from mixpeek.models.cluster_model import ClusterModel
+from mixpeek.models.cluster_metadata import ClusterMetadata
 from mixpeek.models.create_cluster_request import CreateClusterRequest
 from mixpeek.rest import ApiException
 from pprint import pprint
@@ -123,8 +128,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.ClustersApi(api_client)
     create_cluster_request = mixpeek.CreateClusterRequest() # CreateClusterRequest | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Cluster
@@ -143,12 +148,12 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_cluster_request** | [**CreateClusterRequest**](CreateClusterRequest.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-[**ClusterModel**](ClusterModel.md)
+[**ClusterMetadata**](ClusterMetadata.md)
 
 ### Authorization
 
@@ -174,11 +179,23 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_cluster**
-> delete_cluster(cluster_id, authorization=authorization, x_namespace=x_namespace)
+> object delete_cluster(cluster_id, authorization=authorization, x_namespace=x_namespace)
 
 Delete Cluster
 
-This endpoint allows you to delete a cluster by ID.
+This endpoint deletes a cluster and all its resources including:
+    - Running Ray jobs (cancels active jobs)
+    - Cluster triggers
+    - Execution history (clustering_results)
+    - S3 artifacts (parquet files, documents, members)
+    - Related tasks
+    - Clustering jobs
+    - MongoDB cluster metadata
+
+    Note: Output collections created by the cluster are NOT deleted as they
+    contain user data and should persist independently.
+
+    The deletion is performed synchronously and returns when complete.
 
 ### Example
 
@@ -200,12 +217,14 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.ClustersApi(api_client)
     cluster_id = 'cluster_id_example' # str | Cluster ID
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Cluster
-        api_instance.delete_cluster(cluster_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.delete_cluster(cluster_id, authorization=authorization, x_namespace=x_namespace)
+        print("The response of ClustersApi->delete_cluster:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ClustersApi->delete_cluster: %s\n" % e)
 ```
@@ -218,12 +237,12 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cluster_id** | **str**| Cluster ID | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-void (empty response body)
+**object**
 
 ### Authorization
 
@@ -238,7 +257,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | Successful Response |  -  |
+**200** | Successful Response |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
@@ -249,20 +268,33 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **execute_clustering_clusters**
-> ExecuteClusterResponse execute_clustering_clusters(execute_cluster_request, authorization=authorization, x_namespace=x_namespace)
+> TaskResponse execute_clustering_clusters(cluster_id, authorization=authorization, x_namespace=x_namespace)
 
 Execute Clustering
 
-Execute clustering on a collection using the specified algorithm and parameters.
-    This endpoint triggers real-time clustering computation on the engine.
+Execute clustering on a specific cluster.
+
+    This endpoint:
+    1. Validates the cluster exists
+    2. Queues clustering job via Celery
+    3. Returns task_id immediately (non-blocking)
+    4. Celery prepares data and submits to Engine
+    5. Monitor progress via GET /v1/tasks/{task_id}
+
+    Flow:
+    - API: Receives request
+    - Celery: Fetches documents, creates parquet, uploads to S3
+    - Engine: Runs Ray job on parquet data
+    - Status: Automatically updates cluster when complete
+
+    Use GET /v1/clusters/{id}/executions to retrieve results.
 
 ### Example
 
 
 ```python
 import mixpeek
-from mixpeek.models.execute_cluster_request import ExecuteClusterRequest
-from mixpeek.models.execute_cluster_response import ExecuteClusterResponse
+from mixpeek.models.task_response import TaskResponse
 from mixpeek.rest import ApiException
 from pprint import pprint
 
@@ -277,13 +309,13 @@ configuration = mixpeek.Configuration(
 with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.ClustersApi(api_client)
-    execute_cluster_request = mixpeek.ExecuteClusterRequest() # ExecuteClusterRequest | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    cluster_id = 'cluster_id_example' # str | Cluster ID to execute
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Execute Clustering
-        api_response = api_instance.execute_clustering_clusters(execute_cluster_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.execute_clustering_clusters(cluster_id, authorization=authorization, x_namespace=x_namespace)
         print("The response of ClustersApi->execute_clustering_clusters:\n")
         pprint(api_response)
     except Exception as e:
@@ -297,13 +329,13 @@ with mixpeek.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **execute_cluster_request** | [**ExecuteClusterRequest**](ExecuteClusterRequest.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **cluster_id** | **str**| Cluster ID to execute | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-[**ExecuteClusterResponse**](ExecuteClusterResponse.md)
+[**TaskResponse**](TaskResponse.md)
 
 ### Authorization
 
@@ -311,7 +343,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -329,18 +361,24 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cluster**
-> ClusterModel get_cluster(cluster_identifier, authorization=authorization, x_namespace=x_namespace)
+> ClusterMetadata get_cluster(cluster_identifier, authorization=authorization, x_namespace=x_namespace)
 
 Get Cluster
 
-This endpoint allows you to retrieve a cluster by ID or name.
+Retrieve a cluster by ID or name.
+
+    Returns cluster metadata including:
+    - Configuration (cluster_type, algorithm, parameters)
+    - Output collection information (output_collection_id, output_collection_name)
+    - Execution results (num_clusters, num_documents_clustered, status)
+    - Timestamps and metadata
 
 ### Example
 
 
 ```python
 import mixpeek
-from mixpeek.models.cluster_model import ClusterModel
+from mixpeek.models.cluster_metadata import ClusterMetadata
 from mixpeek.rest import ApiException
 from pprint import pprint
 
@@ -356,8 +394,8 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.ClustersApi(api_client)
     cluster_identifier = 'cluster_identifier_example' # str | Cluster ID or name
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Cluster
@@ -376,87 +414,12 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cluster_identifier** | **str**| Cluster ID or name | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-[**ClusterModel**](ClusterModel.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_cluster_artifacts**
-> Dict[str, object] get_cluster_artifacts(cluster_id, authorization=authorization, x_namespace=x_namespace)
-
-Get Cluster Artifacts
-
-### Example
-
-
-```python
-import mixpeek
-from mixpeek.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.mixpeek.com
-# See configuration.py for a list of all supported configuration parameters.
-configuration = mixpeek.Configuration(
-    host = "https://api.mixpeek.com"
-)
-
-
-# Enter a context with an instance of the API client
-with mixpeek.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = mixpeek.ClustersApi(api_client)
-    cluster_id = 'cluster_id_example' # str | Cluster ID
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
-
-    try:
-        # Get Cluster Artifacts
-        api_response = api_instance.get_cluster_artifacts(cluster_id, authorization=authorization, x_namespace=x_namespace)
-        print("The response of ClustersApi->get_cluster_artifacts:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ClustersApi->get_cluster_artifacts: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **cluster_id** | **str**| Cluster ID | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
-
-### Return type
-
-**Dict[str, object]**
+[**ClusterMetadata**](ClusterMetadata.md)
 
 ### Authorization
 
@@ -482,7 +445,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_clusters**
-> ListClustersResponse list_clusters(limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace, list_clusters_request=list_clusters_request)
+> ListClustersResponse list_clusters(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_clusters_request=list_clusters_request)
 
 List Clusters
 
@@ -511,13 +474,15 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.ClustersApi(api_client)
     limit = 56 # int |  (optional)
     offset = 56 # int |  (optional)
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    cursor = 'cursor_example' # str |  (optional)
+    include_total = False # bool |  (optional) (default to False)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_clusters_request = mixpeek.ListClustersRequest() # ListClustersRequest |  (optional)
 
     try:
         # List Clusters
-        api_response = api_instance.list_clusters(limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace, list_clusters_request=list_clusters_request)
+        api_response = api_instance.list_clusters(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_clusters_request=list_clusters_request)
         print("The response of ClustersApi->list_clusters:\n")
         pprint(api_response)
     except Exception as e:
@@ -533,8 +498,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**|  | [optional] 
  **offset** | **int**|  | [optional] 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **cursor** | **str**|  | [optional] 
+ **include_total** | **bool**|  | [optional] [default to False]
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_clusters_request** | [**ListClustersRequest**](ListClustersRequest.md)|  | [optional] 
 
 ### Return type
@@ -564,20 +531,22 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **stream_cluster_data**
-> ClusterDataResponse stream_cluster_data(cluster_id, cluster_data_request, authorization=authorization, x_namespace=x_namespace)
+# **patch_cluster**
+> ClusterModel patch_cluster(cluster_identifier, patch_cluster_request, authorization=authorization, x_namespace=x_namespace)
 
-Stream Cluster Data
+Partially Update Cluster
 
-Stream cluster data from S3 parquet files.
+This endpoint partially updates a cluster (PATCH operation).
+    Only provided fields will be updated. At minimum, metadata can always be updated.
+    Immutable fields like cluster_id, status, and computed fields cannot be modified.
 
 ### Example
 
 
 ```python
 import mixpeek
-from mixpeek.models.cluster_data_request import ClusterDataRequest
-from mixpeek.models.cluster_data_response import ClusterDataResponse
+from mixpeek.models.cluster_model import ClusterModel
+from mixpeek.models.patch_cluster_request import PatchClusterRequest
 from mixpeek.rest import ApiException
 from pprint import pprint
 
@@ -592,18 +561,18 @@ configuration = mixpeek.Configuration(
 with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.ClustersApi(api_client)
-    cluster_id = 'cluster_id_example' # str | Cluster ID
-    cluster_data_request = mixpeek.ClusterDataRequest() # ClusterDataRequest | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
+    cluster_identifier = 'cluster_identifier_example' # str | Cluster ID or name
+    patch_cluster_request = mixpeek.PatchClusterRequest() # PatchClusterRequest | 
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
-        # Stream Cluster Data
-        api_response = api_instance.stream_cluster_data(cluster_id, cluster_data_request, authorization=authorization, x_namespace=x_namespace)
-        print("The response of ClustersApi->stream_cluster_data:\n")
+        # Partially Update Cluster
+        api_response = api_instance.patch_cluster(cluster_identifier, patch_cluster_request, authorization=authorization, x_namespace=x_namespace)
+        print("The response of ClustersApi->patch_cluster:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling ClustersApi->stream_cluster_data: %s\n" % e)
+        print("Exception when calling ClustersApi->patch_cluster: %s\n" % e)
 ```
 
 
@@ -613,95 +582,14 @@ with mixpeek.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cluster_id** | **str**| Cluster ID | 
- **cluster_data_request** | [**ClusterDataRequest**](ClusterDataRequest.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
+ **cluster_identifier** | **str**| Cluster ID or name | 
+ **patch_cluster_request** | [**PatchClusterRequest**](PatchClusterRequest.md)|  | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-[**ClusterDataResponse**](ClusterDataResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **submit_clustering_job_clusters**
-> TaskResponse submit_clustering_job_clusters(execute_cluster_request, cluster_id=cluster_id, authorization=authorization, x_namespace=x_namespace)
-
-Submit Clustering Job
-
-Submit an asynchronous clustering job processed by the engine poller.
-
-### Example
-
-
-```python
-import mixpeek
-from mixpeek.models.execute_cluster_request import ExecuteClusterRequest
-from mixpeek.models.task_response import TaskResponse
-from mixpeek.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.mixpeek.com
-# See configuration.py for a list of all supported configuration parameters.
-configuration = mixpeek.Configuration(
-    host = "https://api.mixpeek.com"
-)
-
-
-# Enter a context with an instance of the API client
-with mixpeek.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = mixpeek.ClustersApi(api_client)
-    execute_cluster_request = mixpeek.ExecuteClusterRequest() # ExecuteClusterRequest | 
-    cluster_id = 'cluster_id_example' # str | Optional cluster_id to link job to cluster doc (optional)
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
-    x_namespace = 'x_namespace_example' # str | Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: 'netflix_prod' or 'ns_1234567890'. To create a namespace, use the /namespaces endpoint. (optional)
-
-    try:
-        # Submit Clustering Job
-        api_response = api_instance.submit_clustering_job_clusters(execute_cluster_request, cluster_id=cluster_id, authorization=authorization, x_namespace=x_namespace)
-        print("The response of ClustersApi->submit_clustering_job_clusters:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling ClustersApi->submit_clustering_job_clusters: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **execute_cluster_request** | [**ExecuteClusterRequest**](ExecuteClusterRequest.md)|  | 
- **cluster_id** | **str**| Optional cluster_id to link job to cluster doc | [optional] 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
- **x_namespace** | **str**| Optional namespace for data isolation. This can be a namespace name or namespace ID. Example: &#39;netflix_prod&#39; or &#39;ns_1234567890&#39;. To create a namespace, use the /namespaces endpoint. | [optional] 
-
-### Return type
-
-[**TaskResponse**](TaskResponse.md)
+[**ClusterModel**](ClusterModel.md)
 
 ### Authorization
 

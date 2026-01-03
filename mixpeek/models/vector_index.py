@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from mixpeek.models.bucket_schema_field_type import BucketSchemaFieldType
 from mixpeek.models.vector_data_type import VectorDataType
 from mixpeek.models.vector_type import VectorType
@@ -28,17 +29,17 @@ from typing_extensions import Self
 
 class VectorIndex(BaseModel):
     """
-    Base configuration for vector indexes.
+    Configuration for a single vector index in Qdrant.  Defines the fully-qualified vector index including storage name, dimensions, distance metric, and inference service. This is the actual index that gets created in Qdrant and used for vector similarity search.  Key Concepts:     - The `name` field is the FULL qualified name used as the Qdrant collection name     - Format: {extractor}_{version}_{output} (e.g., \"text_extractor_v1_embedding\")     - This ensures namespace isolation between extractors and versions     - Different from VectorIndexDefinition.name which is the short user-facing name  Use Cases:     - Define vector storage configuration for feature extractors     - Specify inference service and model parameters     - Configure distance metrics for similarity search     - Set storage optimization (on-disk for large vectors)  Requirements:     - name: REQUIRED - Must be unique across all extractors in namespace     - description: REQUIRED - Explain what this vector represents     - dimensions: REQUIRED for DENSE vectors, OPTIONAL for SPARSE     - type: REQUIRED - Must match VectorType enum     - inference_name: REQUIRED - Must reference a valid inference service
     """ # noqa: E501
-    name: StrictStr
-    description: StrictStr
-    dimensions: StrictInt
-    type: VectorType
-    distance: Optional[StrictStr] = 'cosine'
-    datatype: Optional[VectorDataType] = Field(default=None, description="Data type of the vector.")
-    on_disk: Optional[StrictBool] = Field(default=None, description="If true, vectors will be stored on disk. Use for large vectors.")
-    supported_inputs: Optional[List[BucketSchemaFieldType]] = None
-    inference_name: Optional[StrictStr] = Field(default=None, description="The path to the embedding model service to use for this vector index.")
+    name: Annotated[str, Field(min_length=1, strict=True)] = Field(description="REQUIRED. Fully-qualified vector index name (Qdrant collection name). Format: {extractor}_{version}_{output} (e.g., 'text_extractor_v1_embedding'). This is the STORAGE name used internally in Qdrant, NOT the user-facing short name. Must be unique across all extractors in the namespace to prevent collisions. Different versions of same extractor use different names for isolation.")
+    description: Annotated[str, Field(min_length=10, strict=True)] = Field(description="REQUIRED. Human-readable description of what this vector index represents. Explain the content type, use cases, and search characteristics. Shown in API documentation and collection metadata. Be specific about what embeddings are stored here.")
+    dimensions: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Number of vector dimensions. REQUIRED for DENSE vectors (e.g., 1024 for E5-Large, 1408 for multimodal). NOT REQUIRED for SPARSE vectors (dimensions determined dynamically). Must match the output dimensions of the inference service. Cannot be changed after index creation without recreating the collection.")
+    type: VectorType = Field(description="REQUIRED. Vector storage format type. Determines how vectors are stored and searched in Qdrant. Use DENSE for traditional embeddings (most common), SPARSE for keyword-based models like SPLADE, MULTI_DENSE for late-interaction models like ColBERT. Must match the output format of your inference service.")
+    distance: Optional[StrictStr] = Field(default='cosine', description="Distance metric for similarity search. OPTIONAL - defaults to 'cosine' (normalized dot product). Options: 'cosine' (most common, normalized), 'dot' (raw dot product), 'euclidean' (L2 distance), 'manhattan' (L1 distance). Cosine recommended for most embeddings as it's scale-invariant. Must match the metric your model was trained with.")
+    datatype: Optional[VectorDataType] = Field(default=None, description="Data type for storing vector values. OPTIONAL - defaults to FLOAT32 (standard precision). Use FLOAT32 for general use (4 bytes per dimension). Use FLOAT16 to save 50% storage with minimal quality loss. Use UINT8 for maximum compression (quantization, ~2% quality loss). Lower precision = smaller storage + faster search, slightly lower accuracy.")
+    on_disk: Optional[StrictBool] = Field(default=None, description="OPTIONAL. If true, vectors stored on disk instead of RAM. Use for very large vectors (>2GB total) to save memory. Trade-off: ~10x slower search, but unlimited capacity. Defaults to false (RAM storage) for fast search. Enable for: massive datasets, high-dimensional vectors (>2048 dims), or when RAM is constrained. Recommended for ColBERT (500KB/doc).")
+    supported_inputs: Optional[List[BucketSchemaFieldType]] = Field(default=None, description="OPTIONAL. List of bucket schema field types this vector can process. Validates that input fields are compatible with this index. Examples: TEXT and STRING for text embeddings, VIDEO and IMAGE for multimodal embeddings, DOCUMENT for PDF extractors. Used for validation during collection creation.")
+    inference_name: Optional[StrictStr] = Field(default=None, description="REQUIRED. Identifier of the inference service to generate embeddings. Must reference a valid inference service registered in the system. Examples: 'multilingual_e5_large_instruct_v1' for text, 'vertex_multimodal_embedding' for video, 'laion_clip_vit_l_14_v1' for images. This determines which model creates the vectors during ingestion. Cannot be changed after collection creation.")
     __properties: ClassVar[List[str]] = ["name", "description", "dimensions", "type", "distance", "datatype", "on_disk", "supported_inputs", "inference_name"]
 
     model_config = ConfigDict(

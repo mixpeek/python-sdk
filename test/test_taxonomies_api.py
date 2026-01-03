@@ -27,6 +27,13 @@ class TestTaxonomiesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_clone_taxonomy_taxonomies(self) -> None:
+        """Test case for clone_taxonomy_taxonomies
+
+        Clone Taxonomy
+        """
+        pass
+
     def test_create_taxonomy_taxonomies(self) -> None:
         """Test case for create_taxonomy_taxonomies
 
@@ -51,7 +58,7 @@ class TestTaxonomiesApi(unittest.TestCase):
     def test_execute_taxonomy_taxonomies(self) -> None:
         """Test case for execute_taxonomy_taxonomies
 
-        Execute Taxonomy
+        Test taxonomy configuration (validation only)
         """
         pass
 
@@ -73,6 +80,13 @@ class TestTaxonomiesApi(unittest.TestCase):
         """Test case for list_taxonomy_versions_taxonomies
 
         List Taxonomy Versions
+        """
+        pass
+
+    def test_patch_taxonomy_taxonomies(self) -> None:
+        """Test case for patch_taxonomy_taxonomies
+
+        Partially Update Taxonomy
         """
         pass
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **taxonomy_name** | **str** | A unique name for the taxonomy within the namespace. | 
 **description** | **str** | An optional description of the taxonomy. | [optional] 
-**config** | [**Config**](Config.md) |  | 
+**config** | [**Config1**](Config1.md) |  | 
 
 ## Example
 

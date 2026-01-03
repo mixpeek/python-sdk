@@ -38,7 +38,9 @@ class TestCacheConfig(unittest.TestCase):
             return CacheConfig(
                 enabled = True,
                 ttl_seconds = 0.0,
-                stage = 'retrieval',
+                cache_stage_names = [
+                    ''
+                    ],
                 exclude_fields = [
                     ''
                     ],

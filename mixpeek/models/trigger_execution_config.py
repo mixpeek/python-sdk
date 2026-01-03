@@ -20,15 +20,16 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class TriggerExecutionConfig(BaseModel):
     """
-    Configuration for cluster execution when trigger fires.
+    Configuration for cluster execution when trigger fires.  Defines what clustering algorithm and parameters to use when the trigger executes.  Examples:     K-means clustering on 3 collections:         {             \"collection_ids\": [\"col_abc123\", \"col_def456\", \"col_ghi789\"],             \"config\": {                 \"algorithm\": \"kmeans\",                 \"n_clusters\": 5,                 \"min_cluster_size\": 2             }         }      HDBSCAN clustering on single collection:         {             \"collection_ids\": [\"col_products\"],             \"config\": {                 \"algorithm\": \"hdbscan\",                 \"min_cluster_size\": 10,                 \"min_samples\": 5             }         }
     """ # noqa: E501
-    collection_ids: List[StrictStr] = Field(description="Collections to cluster")
-    config: Dict[str, Any] = Field(description="ClusteringConfig as dict")
+    collection_ids: Annotated[List[StrictStr], Field(min_length=1)] = Field(description="REQUIRED. List of collection IDs to cluster when trigger fires. Must contain at least one collection ID. All collections will be clustered together using the specified algorithm.")
+    config: Dict[str, Any] = Field(description="REQUIRED. Clustering algorithm configuration. Must include 'algorithm' field ('kmeans', 'hdbscan', 'hierarchical'). Additional fields depend on algorithm choice. K-means requires 'n_clusters'. HDBSCAN requires 'min_cluster_size'.")
     __properties: ClassVar[List[str]] = ["collection_ids", "config"]
 
     model_config = ConfigDict(

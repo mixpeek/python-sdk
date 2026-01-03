@@ -14,38 +14,36 @@
 
 
 from __future__ import annotations
-from inspect import getfullargspec
 import json
 import pprint
-import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Optional
+from typing import Any, List, Optional
 from mixpeek.models.flat_taxonomy_config_output import FlatTaxonomyConfigOutput
 from mixpeek.models.hierarchical_taxonomy_config_output import HierarchicalTaxonomyConfigOutput
-from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
+from pydantic import StrictStr, Field
+from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
-from pydantic import Field
 
-CONFIG2_ANY_OF_SCHEMAS = ["FlatTaxonomyConfigOutput", "HierarchicalTaxonomyConfigOutput"]
+CONFIG2_ONE_OF_SCHEMAS = ["FlatTaxonomyConfigOutput", "HierarchicalTaxonomyConfigOutput"]
 
 class Config2(BaseModel):
     """
     Configuration specific to the taxonomy type.
     """
-
     # data type: FlatTaxonomyConfigOutput
-    anyof_schema_1_validator: Optional[FlatTaxonomyConfigOutput] = None
+    oneof_schema_1_validator: Optional[FlatTaxonomyConfigOutput] = None
     # data type: HierarchicalTaxonomyConfigOutput
-    anyof_schema_2_validator: Optional[HierarchicalTaxonomyConfigOutput] = None
-    if TYPE_CHECKING:
-        actual_instance: Optional[Union[FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput]] = None
-    else:
-        actual_instance: Any = None
-    any_of_schemas: Set[str] = { "FlatTaxonomyConfigOutput", "HierarchicalTaxonomyConfigOutput" }
+    oneof_schema_2_validator: Optional[HierarchicalTaxonomyConfigOutput] = None
+    actual_instance: Optional[Union[FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput]] = None
+    one_of_schemas: Set[str] = { "FlatTaxonomyConfigOutput", "HierarchicalTaxonomyConfigOutput" }
 
-    model_config = {
-        "validate_assignment": True,
-        "protected_namespaces": (),
+    model_config = ConfigDict(
+        validate_assignment=True,
+        protected_namespaces=(),
+    )
+
+
+    discriminator_value_class_map: Dict[str, str] = {
     }
 
     def __init__(self, *args, **kwargs) -> None:
@@ -59,29 +57,31 @@ class Config2(BaseModel):
             super().__init__(**kwargs)
 
     @field_validator('actual_instance')
-    def actual_instance_must_validate_anyof(cls, v):
+    def actual_instance_must_validate_oneof(cls, v):
         instance = Config2.model_construct()
         error_messages = []
+        match = 0
         # validate data type: FlatTaxonomyConfigOutput
         if not isinstance(v, FlatTaxonomyConfigOutput):
             error_messages.append(f"Error! Input type `{type(v)}` is not `FlatTaxonomyConfigOutput`")
         else:
-            return v
-
+            match += 1
         # validate data type: HierarchicalTaxonomyConfigOutput
         if not isinstance(v, HierarchicalTaxonomyConfigOutput):
             error_messages.append(f"Error! Input type `{type(v)}` is not `HierarchicalTaxonomyConfigOutput`")
         else:
-            return v
-
-        if error_messages:
+            match += 1
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in Config2 with oneOf schemas: FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput. Details: " + ", ".join(error_messages))
+        elif match == 0:
             # no match
-            raise ValueError("No match found when setting the actual_instance in Config2 with anyOf schemas: FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Config2 with oneOf schemas: FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput. Details: " + ", ".join(error_messages))
         else:
             return v
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Self:
+    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
         return cls.from_json(json.dumps(obj))
 
     @classmethod
@@ -89,22 +89,27 @@ class Config2(BaseModel):
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
-        # anyof_schema_1_validator: Optional[FlatTaxonomyConfigOutput] = None
+        match = 0
+
+        # deserialize data into FlatTaxonomyConfigOutput
         try:
             instance.actual_instance = FlatTaxonomyConfigOutput.from_json(json_str)
-            return instance
+            match += 1
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[HierarchicalTaxonomyConfigOutput] = None
+            error_messages.append(str(e))
+        # deserialize data into HierarchicalTaxonomyConfigOutput
         try:
             instance.actual_instance = HierarchicalTaxonomyConfigOutput.from_json(json_str)
-            return instance
+            match += 1
         except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
+            error_messages.append(str(e))
 
-        if error_messages:
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into Config2 with oneOf schemas: FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput. Details: " + ", ".join(error_messages))
+        elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Config2 with anyOf schemas: FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Config2 with oneOf schemas: FlatTaxonomyConfigOutput, HierarchicalTaxonomyConfigOutput. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -126,6 +131,7 @@ class Config2(BaseModel):
         if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
+            # primitive type
             return self.actual_instance
 
     def to_str(self) -> str:

@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,13 +27,14 @@ class HealthServiceStatus(BaseModel):
     """
     Status flags for dependent services.
     """ # noqa: E501
-    redis: StrictBool = Field(description="Connectivity to Redis successful")
-    mongodb: StrictBool = Field(description="Connectivity to MongoDB successful")
-    qdrant: StrictBool = Field(description="Connectivity to Qdrant successful")
-    s3: StrictBool = Field(description="Connectivity to S3 successful")
-    celery: StrictBool = Field(description="Celery task execution successful")
-    engine: StrictBool = Field(description="Engine HTTP health endpoint responded healthy")
-    __properties: ClassVar[List[str]] = ["redis", "mongodb", "qdrant", "s3", "celery", "engine"]
+    cache: StrictBool = Field(description="Cache layer connectivity successful")
+    metadata: StrictBool = Field(description="Metadata store connectivity successful")
+    vector_store: StrictBool = Field(description="Vector database connectivity successful")
+    object_storage: StrictBool = Field(description="Object storage connectivity successful")
+    task_queue: StrictBool = Field(description="Task queue execution successful")
+    inference: StrictBool = Field(description="Inference engine health check successful")
+    analytics: Optional[StrictBool] = Field(default=None, description="Analytics backend healthy (optional, None if disabled)")
+    __properties: ClassVar[List[str]] = ["cache", "metadata", "vector_store", "object_storage", "task_queue", "inference", "analytics"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,12 +87,13 @@ class HealthServiceStatus(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "redis": obj.get("redis"),
-            "mongodb": obj.get("mongodb"),
-            "qdrant": obj.get("qdrant"),
-            "s3": obj.get("s3"),
-            "celery": obj.get("celery"),
-            "engine": obj.get("engine")
+            "cache": obj.get("cache"),
+            "metadata": obj.get("metadata"),
+            "vector_store": obj.get("vector_store"),
+            "object_storage": obj.get("object_storage"),
+            "task_queue": obj.get("task_queue"),
+            "inference": obj.get("inference"),
+            "analytics": obj.get("analytics")
         })
         return _obj
 

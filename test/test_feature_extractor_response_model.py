@@ -40,6 +40,7 @@ class TestFeatureExtractorResponseModel(unittest.TestCase):
                 version = '',
                 feature_extractor_id = '',
                 description = '',
+                icon = '',
                 input_schema = { },
                 output_schema = { },
                 parameter_schema = { },
@@ -50,20 +51,23 @@ class TestFeatureExtractorResponseModel(unittest.TestCase):
                     'key' : 56
                     },
                 default_parameters = { },
-                document_output_type = 'single',
-                document_input_handling = 'individual',
                 required_vector_indexes = [
                     mixpeek.models.vector_index_definition.VectorIndexDefinition(
-                        name = '', 
-                        description = '', 
+                        feature_uri = '', 
+                        name = '0', 
+                        description = '0123456789', 
                         type = 'single', 
                         index = null, )
                     ],
                 required_payload_indexes = [
                     mixpeek.models.payload_index_config.PayloadIndexConfig(
-                        field_name = '', 
+                        field_name = '0', 
                         type = 'keyword', 
-                        field_schema = null, )
+                        field_schema = null, 
+                        is_protected = True, )
+                    ],
+                position_fields = [
+                    ''
                     ]
             )
         else:
@@ -72,6 +76,7 @@ class TestFeatureExtractorResponseModel(unittest.TestCase):
                 version = '',
                 feature_extractor_id = '',
                 description = '',
+                icon = '',
                 input_schema = { },
                 output_schema = { },
                 parameter_schema = { },
@@ -82,20 +87,20 @@ class TestFeatureExtractorResponseModel(unittest.TestCase):
                     'key' : 56
                     },
                 default_parameters = { },
-                document_output_type = 'single',
-                document_input_handling = 'individual',
                 required_vector_indexes = [
                     mixpeek.models.vector_index_definition.VectorIndexDefinition(
-                        name = '', 
-                        description = '', 
+                        feature_uri = '', 
+                        name = '0', 
+                        description = '0123456789', 
                         type = 'single', 
                         index = null, )
                     ],
                 required_payload_indexes = [
                     mixpeek.models.payload_index_config.PayloadIndexConfig(
-                        field_name = '', 
+                        field_name = '0', 
                         type = 'keyword', 
-                        field_schema = null, )
+                        field_schema = null, 
+                        is_protected = True, )
                     ],
         )
         """

@@ -36,13 +36,13 @@ class TestMultiVectorIndex(unittest.TestCase):
         model = MultiVectorIndex()
         if include_optional:
             return MultiVectorIndex(
-                name = '',
-                description = '',
+                name = '0',
+                description = '0123456789',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '', 
-                        description = '', 
-                        dimensions = 56, 
+                        name = '0', 
+                        description = '0123456789', 
+                        dimensions = 1.0, 
                         type = 'dense', 
                         distance = 'cosine', 
                         datatype = 'float32', 
@@ -55,13 +55,13 @@ class TestMultiVectorIndex(unittest.TestCase):
             )
         else:
             return MultiVectorIndex(
-                name = '',
-                description = '',
+                name = '0',
+                description = '0123456789',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '', 
-                        description = '', 
-                        dimensions = 56, 
+                        name = '0', 
+                        description = '0123456789', 
+                        dimensions = 1.0, 
                         type = 'dense', 
                         distance = 'cosine', 
                         datatype = 'float32', 

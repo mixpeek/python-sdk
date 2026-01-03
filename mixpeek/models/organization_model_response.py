@@ -18,27 +18,30 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.account_tier import AccountTier
 from mixpeek.models.base_rate_limits import BaseRateLimits
-from mixpeek.models.user_model_output import UserModelOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
 class OrganizationModelResponse(BaseModel):
     """
-    Organization Model.
+    Response model for organization endpoints.  SECURITY: Does NOT expose internal_id to prevent leakage of high-entropy secrets. Only organization_id (public identifier) is included in API responses.
     """ # noqa: E501
-    internal_id: StrictStr
-    organization_name: StrictStr
     organization_id: StrictStr
+    organization_name: StrictStr
+    logo_url: Optional[StrictStr] = None
     account_type: AccountTier
     credit_count: StrictInt
-    metadata: Dict[str, Any]
-    users: List[UserModelOutput]
+    metadata: Optional[Dict[str, Any]] = None
+    billing_email: Optional[StrictStr] = None
     rate_limits: BaseRateLimits
-    __properties: ClassVar[List[str]] = ["internal_id", "organization_name", "organization_id", "account_type", "credit_count", "metadata", "users", "rate_limits"]
+    created_at: datetime
+    updated_at: datetime
+    users: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["organization_id", "organization_name", "logo_url", "account_type", "credit_count", "metadata", "billing_email", "rate_limits", "created_at", "updated_at", "users"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,13 +82,6 @@ class OrganizationModelResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in users (list)
-        _items = []
-        if self.users:
-            for _item_users in self.users:
-                if _item_users:
-                    _items.append(_item_users.to_dict())
-            _dict['users'] = _items
         # override the default output from pydantic by calling `to_dict()` of rate_limits
         if self.rate_limits:
             _dict['rate_limits'] = self.rate_limits.to_dict()
@@ -101,14 +97,17 @@ class OrganizationModelResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "internal_id": obj.get("internal_id"),
-            "organization_name": obj.get("organization_name"),
             "organization_id": obj.get("organization_id"),
+            "organization_name": obj.get("organization_name"),
+            "logo_url": obj.get("logo_url"),
             "account_type": obj.get("account_type"),
             "credit_count": obj.get("credit_count"),
             "metadata": obj.get("metadata"),
-            "users": [UserModelOutput.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None,
-            "rate_limits": BaseRateLimits.from_dict(obj["rate_limits"]) if obj.get("rate_limits") is not None else None
+            "billing_email": obj.get("billing_email"),
+            "rate_limits": BaseRateLimits.from_dict(obj["rate_limits"]) if obj.get("rate_limits") is not None else None,
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
+            "users": obj.get("users")
         })
         return _obj
 

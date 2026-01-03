@@ -18,7 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.blob_model import BlobModel
 from mixpeek.models.source_details import SourceDetails
@@ -33,14 +34,14 @@ class ObjectResponse(BaseModel):
     object_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the object")
     bucket_id: StrictStr = Field(description="ID of the bucket this object belongs to")
     key_prefix: Optional[StrictStr] = Field(default=None, description="Storage key/path of the object, this will be used to retrieve the object from the storage. It is similar to a file path. If not provided, it will be placed in the root of the bucket.")
-    content_hash: Optional[StrictStr] = Field(default=None, description="SHA256 hash of the object's content, used for de-duplication.")
     blobs: Optional[List[BlobModel]] = Field(default=None, description="List of blobs contained in this object")
     source_details: Optional[List[SourceDetails]] = Field(default=None, description="Lineage/source details for this object; used for downstream references.")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the object, this will be appended in all downstream documents of the your connected collections.")
     status: Optional[TaskStatusEnum] = Field(default=None, description="The current status of the object.")
     error: Optional[StrictStr] = Field(default=None, description="The error message if the object failed to process.")
-    skip_duplicates: Optional[StrictBool] = Field(default=False, description="Skip duplicate blobs, if a blob with the same hash already exists, it will be skipped.")
-    __properties: ClassVar[List[str]] = ["object_id", "bucket_id", "key_prefix", "content_hash", "blobs", "source_details", "metadata", "status", "error", "skip_duplicates"]
+    created_at: Optional[datetime] = Field(default=None, description="Timestamp when the object was created. Automatically populated by the system.")
+    updated_at: Optional[datetime] = Field(default=None, description="Timestamp when the object was last updated. Automatically populated by the system.")
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["object_id", "bucket_id", "key_prefix", "blobs", "source_details", "status", "error", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,8 +73,10 @@ class ObjectResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -95,6 +98,11 @@ class ObjectResponse(BaseModel):
                 if _item_source_details:
                     _items.append(_item_source_details.to_dict())
             _dict['source_details'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -110,14 +118,18 @@ class ObjectResponse(BaseModel):
             "object_id": obj.get("object_id"),
             "bucket_id": obj.get("bucket_id"),
             "key_prefix": obj.get("key_prefix"),
-            "content_hash": obj.get("content_hash"),
             "blobs": [BlobModel.from_dict(_item) for _item in obj["blobs"]] if obj.get("blobs") is not None else None,
             "source_details": [SourceDetails.from_dict(_item) for _item in obj["source_details"]] if obj.get("source_details") is not None else None,
-            "metadata": obj.get("metadata"),
             "status": obj.get("status"),
             "error": obj.get("error"),
-            "skip_duplicates": obj.get("skip_duplicates") if obj.get("skip_duplicates") is not None else False
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

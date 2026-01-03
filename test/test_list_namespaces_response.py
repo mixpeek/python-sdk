@@ -40,19 +40,44 @@ class TestListNamespacesResponse(unittest.TestCase):
                     mixpeek.models.namespace_model.NamespaceModel(
                         namespace_id = '', 
                         namespace_name = 'spotify_playlists_dev', 
+                        infrastructure = mixpeek.models.namespace_infrastructure.NamespaceInfrastructure(
+                            ray_cluster_id = 'ray_HqXzyCBw3_uufVPIPFhB9JcGRYnua_cdyyvLY8IzLpul9', 
+                            ray_head_node_url = '', 
+                            ray_dashboard_url = '', 
+                            qdrant_url = '', 
+                            qdrant_api_key = '', 
+                            qdrant_collection = '012', 
+                            compute_tier = 'shared', 
+                            max_concurrent_jobs = 1.0, 
+                            autoscaling_enabled = True, 
+                            min_workers = 0.0, 
+                            max_workers = 1.0, 
+                            gpu_type = '', 
+                            gpus_per_worker = 0.0, ), 
+                        cluster_id = '', 
                         description = '', 
                         feature_extractors = [
                             mixpeek.models.base_feature_extractor_model.BaseFeatureExtractorModel(
                                 feature_extractor_name = '', 
                                 version = '', 
+                                params = { }, 
                                 feature_extractor_id = '', )
                             ], 
                         payload_indexes = [
                             mixpeek.models.payload_index_config.PayloadIndexConfig(
-                                field_name = '', 
+                                field_name = '0', 
                                 type = 'keyword', 
-                                field_schema = null, )
+                                field_schema = null, 
+                                is_protected = True, )
                             ], 
+                        document_count = 56, 
+                        bucket_count = 56, 
+                        collection_count = 56, 
+                        object_count = 56, 
+                        auto_create_indexes = True, 
+                        vector_inference_map = {
+                            'key' : ''
+                            }, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
@@ -62,8 +87,22 @@ class TestListNamespacesResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
-                total_count = 56
+                    previous_page = '', 
+                    next_cursor = '', ),
+                total_count = 56,
+                stats = mixpeek.models.namespace_list_stats.NamespaceListStats(
+                    total_feature_extractors = 56, 
+                    total_payload_indexes = 56, 
+                    total_documents = 56, 
+                    total_buckets = 56, 
+                    total_collections = 56, 
+                    total_objects = 56, 
+                    avg_feature_extractors_per_namespace = 1.337, 
+                    avg_payload_indexes_per_namespace = 1.337, 
+                    avg_documents_per_namespace = 1.337, 
+                    avg_buckets_per_namespace = 1.337, 
+                    avg_collections_per_namespace = 1.337, 
+                    avg_objects_per_namespace = 1.337, )
             )
         else:
             return ListNamespacesResponse(
@@ -71,19 +110,44 @@ class TestListNamespacesResponse(unittest.TestCase):
                     mixpeek.models.namespace_model.NamespaceModel(
                         namespace_id = '', 
                         namespace_name = 'spotify_playlists_dev', 
+                        infrastructure = mixpeek.models.namespace_infrastructure.NamespaceInfrastructure(
+                            ray_cluster_id = 'ray_HqXzyCBw3_uufVPIPFhB9JcGRYnua_cdyyvLY8IzLpul9', 
+                            ray_head_node_url = '', 
+                            ray_dashboard_url = '', 
+                            qdrant_url = '', 
+                            qdrant_api_key = '', 
+                            qdrant_collection = '012', 
+                            compute_tier = 'shared', 
+                            max_concurrent_jobs = 1.0, 
+                            autoscaling_enabled = True, 
+                            min_workers = 0.0, 
+                            max_workers = 1.0, 
+                            gpu_type = '', 
+                            gpus_per_worker = 0.0, ), 
+                        cluster_id = '', 
                         description = '', 
                         feature_extractors = [
                             mixpeek.models.base_feature_extractor_model.BaseFeatureExtractorModel(
                                 feature_extractor_name = '', 
                                 version = '', 
+                                params = { }, 
                                 feature_extractor_id = '', )
                             ], 
                         payload_indexes = [
                             mixpeek.models.payload_index_config.PayloadIndexConfig(
-                                field_name = '', 
+                                field_name = '0', 
                                 type = 'keyword', 
-                                field_schema = null, )
+                                field_schema = null, 
+                                is_protected = True, )
                             ], 
+                        document_count = 56, 
+                        bucket_count = 56, 
+                        collection_count = 56, 
+                        object_count = 56, 
+                        auto_create_indexes = True, 
+                        vector_inference_map = {
+                            'key' : ''
+                            }, 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
@@ -93,7 +157,8 @@ class TestListNamespacesResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
                 total_count = 56,
         )
         """

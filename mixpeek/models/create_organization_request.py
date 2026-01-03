@@ -18,20 +18,24 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.user_model_input import UserModelInput
+from typing_extensions import Annotated
+from mixpeek.models.user_create_request import UserCreateRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateOrganizationRequest(BaseModel):
     """
-    Create Organization Request.
+    Payload for creating a new organization (private/admin endpoint).
     """ # noqa: E501
-    organization_name: StrictStr
-    users: Optional[List[UserModelInput]] = None
-    metadata: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["organization_name", "users", "metadata"]
+    organization_name: Annotated[str, Field(min_length=1, strict=True, max_length=100)] = Field(description="Display name for the organization.")
+    logo_url: Optional[StrictStr] = Field(default=None, description="Organization logo URL (e.g., from Google Favicon service). If not provided, will be auto-generated from first user's email domain.")
+    users: Optional[List[UserCreateRequest]] = Field(default=None, description="Initial users to create with the organization.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Custom metadata for the organization.")
+    credit_count: Optional[StrictInt] = Field(default=None, description="Initial credit count for the organization. Defaults to 1000 if not provided.")
+    account_type: Optional[StrictStr] = Field(default=None, description="Account type for the organization (free, pro, team, enterprise). Defaults to 'free'.")
+    __properties: ClassVar[List[str]] = ["organization_name", "logo_url", "users", "metadata", "credit_count", "account_type"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +96,11 @@ class CreateOrganizationRequest(BaseModel):
 
         _obj = cls.model_validate({
             "organization_name": obj.get("organization_name"),
-            "users": [UserModelInput.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None,
-            "metadata": obj.get("metadata")
+            "logo_url": obj.get("logo_url"),
+            "users": [UserCreateRequest.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None,
+            "metadata": obj.get("metadata"),
+            "credit_count": obj.get("credit_count"),
+            "account_type": obj.get("account_type")
         })
         return _obj
 

@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class Permission(str, Enum):
     """
-    Permission.
+    Simplified API key permissions.  This four-value enum replaces the legacy 16-permission model. Keep usage simple: prefer the least privileged option that satisfies the workflow.  Hierarchy (strongest -> weakest): ADMIN > DELETE > WRITE > READ.
     """
 
     """
@@ -29,19 +29,8 @@ class Permission(str, Enum):
     """
     READ = 'read'
     WRITE = 'write'
-    VIEW = 'view'
-    CREATE = 'create'
-    UPDATE = 'update'
     DELETE = 'delete'
-    SUPER = 'super'
     ADMIN = 'admin'
-    MANAGE_USERS = 'manage_users'
-    MANAGE_BILLING = 'manage_billing'
-    MANAGE_SETTINGS = 'manage_settings'
-    READ_PUBLIC = 'read_public'
-    READ_PRIVATE = 'read_private'
-    WRITE_PUBLIC = 'write_public'
-    WRITE_PRIVATE = 'write_private'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

@@ -36,19 +36,19 @@ class TestCreateBlobRequest(unittest.TestCase):
         model = CreateBlobRequest()
         if include_optional:
             return CreateBlobRequest(
-                var_property = '',
+                var_property = '0',
                 key_prefix = '',
                 type = 'string',
                 data = None,
+                upload_id = 'upl_z',
                 metadata = { },
                 canonicalize_source = True,
                 force_remirror = True
             )
         else:
             return CreateBlobRequest(
-                var_property = '',
+                var_property = '0',
                 type = 'string',
-                data = None,
         )
         """
 

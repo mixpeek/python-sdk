@@ -55,6 +55,13 @@ class TestBucketsApi(unittest.TestCase):
         """
         pass
 
+    def test_patch_bucket(self) -> None:
+        """Test case for patch_bucket
+
+        Partially Update Bucket
+        """
+        pass
+
     def test_update_bucket(self) -> None:
         """Test case for update_bucket
 

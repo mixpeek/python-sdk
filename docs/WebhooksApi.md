@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**create_webhook_organizations**](WebhooksApi.md#create_webhook_organizations) | **POST** /v1/organizations/webhooks/ | Create Webhook
 [**delete_webhook_organizations**](WebhooksApi.md#delete_webhook_organizations) | **DELETE** /v1/organizations/webhooks/{identifier} | Delete Webhook
 [**get_webhook_organizations**](WebhooksApi.md#get_webhook_organizations) | **GET** /v1/organizations/webhooks/{identifier} | Get Webhook
-[**list_webhooks_organizations**](WebhooksApi.md#list_webhooks_organizations) | **GET** /v1/organizations/webhooks/ | List Webhooks
+[**list_webhooks_organizations**](WebhooksApi.md#list_webhooks_organizations) | **POST** /v1/organizations/webhooks/list | List Webhooks
 [**update_webhook_organizations**](WebhooksApi.md#update_webhook_organizations) | **PUT** /v1/organizations/webhooks/{identifier} | Update Webhook
 
 
@@ -40,7 +40,7 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.WebhooksApi(api_client)
     webhook_input = mixpeek.WebhookInput() # WebhookInput | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
 
     try:
         # Create Webhook
@@ -59,7 +59,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **webhook_input** | [**WebhookInput**](WebhookInput.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
 
 ### Return type
 
@@ -93,7 +93,7 @@ No authorization required
 
 Delete Webhook
 
-Delete a webhook.
+Delete a webhook (idempotent - succeeds even if already deleted).
 
 ### Example
 
@@ -115,7 +115,7 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.WebhooksApi(api_client)
     identifier = 'identifier_example' # str | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
 
     try:
         # Delete Webhook
@@ -132,7 +132,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier** | **str**|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
 
 ### Return type
 
@@ -189,7 +189,7 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.WebhooksApi(api_client)
     identifier = 'identifier_example' # str | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
 
     try:
         # Get Webhook
@@ -208,7 +208,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier** | **str**|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
 
 ### Return type
 
@@ -238,7 +238,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_webhooks_organizations**
-> List[WebhookOutput] list_webhooks_organizations(authorization=authorization)
+> ListWebhooksResponse list_webhooks_organizations(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, list_webhooks_request=list_webhooks_request)
 
 List Webhooks
 
@@ -249,7 +249,8 @@ List all webhooks for the user's organization.
 
 ```python
 import mixpeek
-from mixpeek.models.webhook_output import WebhookOutput
+from mixpeek.models.list_webhooks_request import ListWebhooksRequest
+from mixpeek.models.list_webhooks_response import ListWebhooksResponse
 from mixpeek.rest import ApiException
 from pprint import pprint
 
@@ -264,11 +265,16 @@ configuration = mixpeek.Configuration(
 with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.WebhooksApi(api_client)
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
+    limit = 56 # int |  (optional)
+    offset = 56 # int |  (optional)
+    cursor = 'cursor_example' # str |  (optional)
+    include_total = False # bool |  (optional) (default to False)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    list_webhooks_request = mixpeek.ListWebhooksRequest() # ListWebhooksRequest |  (optional)
 
     try:
         # List Webhooks
-        api_response = api_instance.list_webhooks_organizations(authorization=authorization)
+        api_response = api_instance.list_webhooks_organizations(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, list_webhooks_request=list_webhooks_request)
         print("The response of WebhooksApi->list_webhooks_organizations:\n")
         pprint(api_response)
     except Exception as e:
@@ -282,11 +288,16 @@ with mixpeek.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
+ **limit** | **int**|  | [optional] 
+ **offset** | **int**|  | [optional] 
+ **cursor** | **str**|  | [optional] 
+ **include_total** | **bool**|  | [optional] [default to False]
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **list_webhooks_request** | [**ListWebhooksRequest**](ListWebhooksRequest.md)|  | [optional] 
 
 ### Return type
 
-[**List[WebhookOutput]**](WebhookOutput.md)
+[**ListWebhooksResponse**](ListWebhooksResponse.md)
 
 ### Authorization
 
@@ -294,7 +305,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
@@ -341,7 +352,7 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.WebhooksApi(api_client)
     identifier = 'identifier_example' # str | 
     webhook_input = mixpeek.WebhookInput() # WebhookInput | 
-    authorization = 'authorization_example' # str | Bearer token authentication using your API key. Format: 'Bearer your_api_key'. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: 'Bearer sk_1234567890abcdef' (optional)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
 
     try:
         # Update Webhook
@@ -361,7 +372,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **identifier** | **str**|  | 
  **webhook_input** | [**WebhookInput**](WebhookInput.md)|  | 
- **authorization** | **str**| Bearer token authentication using your API key. Format: &#39;Bearer your_api_key&#39;. To get an API key, create an account at mixpeek.com/start and generate a key in your account settings. Example: &#39;Bearer sk_1234567890abcdef&#39; | [optional] 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
 
 ### Return type
 

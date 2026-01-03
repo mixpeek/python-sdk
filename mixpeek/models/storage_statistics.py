@@ -27,10 +27,11 @@ class StorageStatistics(BaseModel):
     """
     Statistics about object storage in a bucket.
     """ # noqa: E501
+    total_size_bytes: Optional[StrictInt] = Field(default=0, description="Total size of all objects/blobs in the bucket in bytes")
     avg_size_bytes: Optional[StrictInt] = Field(default=0, description="Average object size in bytes")
     max_size_bytes: Optional[StrictInt] = Field(default=0, description="Size of the largest object in bytes")
     min_size_bytes: Optional[StrictInt] = Field(default=0, description="Size of the smallest object in bytes")
-    __properties: ClassVar[List[str]] = ["avg_size_bytes", "max_size_bytes", "min_size_bytes"]
+    __properties: ClassVar[List[str]] = ["total_size_bytes", "avg_size_bytes", "max_size_bytes", "min_size_bytes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +84,7 @@ class StorageStatistics(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "total_size_bytes": obj.get("total_size_bytes") if obj.get("total_size_bytes") is not None else 0,
             "avg_size_bytes": obj.get("avg_size_bytes") if obj.get("avg_size_bytes") is not None else 0,
             "max_size_bytes": obj.get("max_size_bytes") if obj.get("max_size_bytes") is not None else 0,
             "min_size_bytes": obj.get("min_size_bytes") if obj.get("min_size_bytes") is not None else 0

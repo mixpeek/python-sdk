@@ -55,10 +55,52 @@ class TestBucketBatchesApi(unittest.TestCase):
         """
         pass
 
+    def test_get_batch_buckets_batches(self) -> None:
+        """Test case for get_batch_buckets_batches
+
+        Get Batch Configuration
+        """
+        pass
+
+    def test_get_batch_logs_buckets_batches(self) -> None:
+        """Test case for get_batch_logs_buckets_batches
+
+        Get Ray Job Logs for Batch
+        """
+        pass
+
+    def test_get_failed_documents_buckets_batches_batch(self) -> None:
+        """Test case for get_failed_documents_buckets_batches_batch
+
+        Get Failed Documents for Batch
+        """
+        pass
+
     def test_list_batches_buckets(self) -> None:
         """Test case for list_batches_buckets
 
         List Batches
+        """
+        pass
+
+    def test_patch_batch_buckets_batches(self) -> None:
+        """Test case for patch_batch_buckets_batches
+
+        Partially Update Batch
+        """
+        pass
+
+    def test_retry_batch_buckets_batches(self) -> None:
+        """Test case for retry_batch_buckets_batches
+
+        Retry Failed Documents
+        """
+        pass
+
+    def test_retry_qdrant_write_buckets_batches_batch_id_tiers_num(self) -> None:
+        """Test case for retry_qdrant_write_buckets_batches_batch_id_tiers_num
+
+        Retry Qdrant Write from S3
         """
         pass
 

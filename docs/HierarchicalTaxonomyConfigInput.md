@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **cluster_ids** | **List[str]** | Cluster IDs to use for CLUSTER inference strategy | [optional] 
 **cluster_overlap_threshold** | **float** | Minimum overlap ratio to establish parent-child relationship between clusters | [optional] [default to 0.7]
 **hierarchical_nodes** | [**List[HierarchicalNodeInput]**](HierarchicalNodeInput.md) | Explicit node definitions that either: 1) Define the entire hierarchy (when inference_strategy is None), 2) Add additional nodes to an inferred hierarchy, or 3) Override specific relationships in an inferred hierarchy. Supports true hybrid: infer from some collections, manually add others. | [optional] 
+**step_analytics** | [**StepAnalyticsConfigInput**](StepAnalyticsConfigInput.md) | Optional configuration for step transition analytics. Enables tracking how documents progress through hierarchical taxonomy nodes over time (e.g., content workflow tracking from &#39;draft&#39; to &#39;published&#39;). If not provided, only basic assignment events are logged. | [optional] 
 
 ## Example
 

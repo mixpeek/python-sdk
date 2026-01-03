@@ -27,9 +27,9 @@ class ListNamespacesRequest(BaseModel):
     """
     Request schema for listing namespaces.
     """ # noqa: E501
-    filters: Optional[Dict[str, Any]] = Field(default=None, description="Optional filters to apply to the namespace list.")
+    filters: Optional[Dict[str, Any]] = Field(default=None, description="Optional filters to apply to the namespace list. Supports filtering by namespace_id or namespace_name.")
     sort: Optional[Dict[str, Any]] = Field(default=None, description="Optional sort criteria for the namespace list.")
-    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across all text fields.")
+    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across namespace_id, namespace_name, description, and other text fields.")
     case_sensitive: Optional[StrictBool] = Field(default=False, description="If True, filters and search will be case-sensitive")
     __properties: ClassVar[List[str]] = ["filters", "sort", "search", "case_sensitive"]
 

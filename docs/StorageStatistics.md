@@ -6,6 +6,7 @@ Statistics about object storage in a bucket.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**total_size_bytes** | **int** | Total size of all objects/blobs in the bucket in bytes | [optional] [default to 0]
 **avg_size_bytes** | **int** | Average object size in bytes | [optional] [default to 0]
 **max_size_bytes** | **int** | Size of the largest object in bytes | [optional] [default to 0]
 **min_size_bytes** | **int** | Size of the smallest object in bytes | [optional] [default to 0]

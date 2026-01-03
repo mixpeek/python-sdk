@@ -27,17 +27,17 @@ class TestRetrieversApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
+    def test_clone_retriever(self) -> None:
+        """Test case for clone_retriever
+
+        Clone Retriever
+        """
+        pass
+
     def test_create_retriever(self) -> None:
         """Test case for create_retriever
 
         Create Retriever
-        """
-        pass
-
-    def test_debug_inference_retrievers(self) -> None:
-        """Test case for debug_inference_retrievers
-
-        Debug Inference
         """
         pass
 
@@ -51,7 +51,21 @@ class TestRetrieversApi(unittest.TestCase):
     def test_execute_retriever(self) -> None:
         """Test case for execute_retriever
 
-        Execute Retriever
+        Execute Retriever (Auto-Optimized)
+        """
+        pass
+
+    def test_explain_retriever_execution_id_execute(self) -> None:
+        """Test case for explain_retriever_execution_id_execute
+
+        Explain Retriever Execution Plan
+        """
+        pass
+
+    def test_get_execution_retrievers(self) -> None:
+        """Test case for get_execution_retrievers
+
+        Get Execution
         """
         pass
 
@@ -62,10 +76,24 @@ class TestRetrieversApi(unittest.TestCase):
         """
         pass
 
+    def test_list_executions_retrievers(self) -> None:
+        """Test case for list_executions_retrievers
+
+        List Executions
+        """
+        pass
+
     def test_list_retrievers(self) -> None:
         """Test case for list_retrievers
 
         List Retrievers
+        """
+        pass
+
+    def test_patch_retriever(self) -> None:
+        """Test case for patch_retriever
+
+        Patch Retriever
         """
         pass
 

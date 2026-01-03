@@ -18,31 +18,21 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from mixpeek.models.blob_url_ref import BlobURLRef
-from mixpeek.models.enrichments import Enrichments
-from mixpeek.models.presigned_url_model import PresignedURLModel
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.internal_payload_model import InternalPayloadModel
 from typing import Optional, Set
 from typing_extensions import Self
 
 class DocumentResponse(BaseModel):
     """
-    Response model for a single document.
+    Response model for a single document.  This is the standard response format when fetching documents via API endpoints. Contains all document data plus optional presigned URLs for S3 blobs.  The document payload structure follows native Qdrant format:     - System fields are stored in `_internal` (lineage, metadata, blobs, etc.)     - User fields are at root level (brand_name, thumbnail_url, etc.)     - Only document_id and collection_id are Mixpeek IDs at root level     - No duplication between root and _internal  Query Parameters Affecting Response:     - return_url=true: Adds presigned_url to each document_blobs entry     - return_vectors=true: Includes embedding arrays in response  Use Cases:     - Display document details in UI     - Download source files or generated artifacts     - Understand document provenance and processing     - Access enrichment fields (flat) for filtering/display
     """ # noqa: E501
-    document_id: StrictStr = Field(description="ID of the document")
-    collection_id: StrictStr = Field(description="ID of the collection")
-    object_id: StrictStr = Field(description="ID of the source object for this document")
-    enrichments: Optional[Enrichments] = Field(default=None, description="Enrichments from clusters, taxonomies, joins, etc.")
-    source_blobs: Optional[List[Dict[str, Any]]] = Field(default=None, description="A list of the source blobs for the object.")
-    internal_metadata: Optional[Dict[str, Any]] = Field(default=None, description="Internal metadata calculated during processing.")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Metadata associated with the document")
-    vector: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="Vector embedding for the document")
-    presigned_url: Optional[StrictStr] = Field(default=None, description="Deprecated. Use 'presigned_urls' or document_blobs[*].presigned_url.")
-    document_blobs: Optional[List[BlobURLRef]] = Field(default=None, description="Related blobs for this document (e.g., thumbnails, source). When return_url=true, each BlobURLRef.presigned_url will be populated alongside the canonical url.")
-    presigned_urls: Optional[List[PresignedURLModel]] = Field(default=None, description="Aggregated presigned URLs keyed by logical name or filename.")
+    document_id: StrictStr = Field(description="REQUIRED. Unique identifier for the document. Format: 'doc_' prefix + alphanumeric characters. Use for: API queries, references, filtering.")
+    collection_id: StrictStr = Field(description="REQUIRED. ID of the collection this document belongs to. Format: 'col_' prefix + alphanumeric characters. Use for: Collection-scoped queries, filtering.")
+    internal: Optional[InternalPayloadModel] = Field(default=None, description="System-managed internal fields. Contains all Mixpeek-managed metadata including lineage, processing info, timestamps, and blob references. User-defined fields appear at root level alongside document_id and collection_id.", alias="_internal")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["document_id", "collection_id", "object_id", "enrichments", "source_blobs", "internal_metadata", "metadata", "vector", "presigned_url", "document_blobs", "presigned_urls"]
+    __properties: ClassVar[List[str]] = ["document_id", "collection_id", "_internal"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,23 +75,9 @@ class DocumentResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of enrichments
-        if self.enrichments:
-            _dict['enrichments'] = self.enrichments.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in document_blobs (list)
-        _items = []
-        if self.document_blobs:
-            for _item_document_blobs in self.document_blobs:
-                if _item_document_blobs:
-                    _items.append(_item_document_blobs.to_dict())
-            _dict['document_blobs'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in presigned_urls (list)
-        _items = []
-        if self.presigned_urls:
-            for _item_presigned_urls in self.presigned_urls:
-                if _item_presigned_urls:
-                    _items.append(_item_presigned_urls.to_dict())
-            _dict['presigned_urls'] = _items
+        # override the default output from pydantic by calling `to_dict()` of internal
+        if self.internal:
+            _dict['_internal'] = self.internal.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -121,15 +97,7 @@ class DocumentResponse(BaseModel):
         _obj = cls.model_validate({
             "document_id": obj.get("document_id"),
             "collection_id": obj.get("collection_id"),
-            "object_id": obj.get("object_id"),
-            "enrichments": Enrichments.from_dict(obj["enrichments"]) if obj.get("enrichments") is not None else None,
-            "source_blobs": obj.get("source_blobs"),
-            "internal_metadata": obj.get("internal_metadata"),
-            "metadata": obj.get("metadata"),
-            "vector": obj.get("vector"),
-            "presigned_url": obj.get("presigned_url"),
-            "document_blobs": [BlobURLRef.from_dict(_item) for _item in obj["document_blobs"]] if obj.get("document_blobs") is not None else None,
-            "presigned_urls": [PresignedURLModel.from_dict(_item) for _item in obj["presigned_urls"]] if obj.get("presigned_urls") is not None else None
+            "_internal": InternalPayloadModel.from_dict(obj["_internal"]) if obj.get("_internal") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

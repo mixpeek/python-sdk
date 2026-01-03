@@ -27,24 +27,10 @@ class TestOrganizationsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_create_key_organizations_users_email(self) -> None:
-        """Test case for create_key_organizations_users_email
+    def test_add_credits_organizations(self) -> None:
+        """Test case for add_credits_organizations
 
-        Create Api Key
-        """
-        pass
-
-    def test_delete_key_organizations_users_email_name(self) -> None:
-        """Test case for delete_key_organizations_users_email_name
-
-        Delete Api Key
-        """
-        pass
-
-    def test_delete_user_organizations_email(self) -> None:
-        """Test case for delete_user_organizations_email
-
-        Delete User
+        Add Credits
         """
         pass
 
@@ -55,17 +41,10 @@ class TestOrganizationsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_user_organizations_email(self) -> None:
-        """Test case for get_user_organizations_email
+    def test_update_organization(self) -> None:
+        """Test case for update_organization
 
-        Get User
-        """
-        pass
-
-    def test_update_key_organizations_users_email_name(self) -> None:
-        """Test case for update_key_organizations_users_email_name
-
-        Update Api Key
+        Update Organization
         """
         pass
 

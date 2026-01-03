@@ -36,13 +36,14 @@ class TestPayloadIndexConfigInput(unittest.TestCase):
         model = PayloadIndexConfigInput()
         if include_optional:
             return PayloadIndexConfigInput(
-                field_name = '',
+                field_name = '0',
                 type = 'keyword',
-                field_schema = None
+                field_schema = None,
+                is_protected = True
             )
         else:
             return PayloadIndexConfigInput(
-                field_name = '',
+                field_name = '0',
                 type = 'keyword',
         )
         """

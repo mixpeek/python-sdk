@@ -18,9 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.feature_model import FeatureModel
+from mixpeek.models.lineage_step import LineageStep
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,10 +30,29 @@ class DocumentCreateRequest(BaseModel):
     Request model for creating a document.
     """ # noqa: E501
     collection_id: StrictStr = Field(description="ID of the collection the document belongs to.")
-    object_id: StrictStr = Field(description="ID of the source object for this document.")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Arbitrary metadata for the document.")
+    root_object_id: Optional[StrictStr] = Field(default=None, description="Optional denormalized root object identifier provided during creation.")
+    root_bucket_id: Optional[StrictStr] = Field(default=None, description="Optional denormalized bucket identifier provided during creation.")
+    source_type: Optional[StrictStr] = Field(default=None, description="Optional immediate parent type for the document.")
+    source_collection_id: Optional[StrictStr] = Field(default=None, description="Optional parent collection identifier when sourced from a collection.")
+    source_document_id: Optional[StrictStr] = Field(default=None, description="Optional parent document identifier when sourced from a collection.")
+    source_object_id: Optional[StrictStr] = Field(default=None, description="Optional parent object identifier when sourced directly from a bucket.")
+    lineage_path: Optional[StrictStr] = Field(default=None, description="Optional materialized lineage path to set during creation.")
+    lineage_chain: Optional[List[LineageStep]] = Field(default=None, description="Processing steps from root object to this document. Recommended for decomposition trees.")
+    document_schema_version: Optional[StrictStr] = Field(default=None, description="Optional document schema version (v1 or v2). If not provided, uses system default.")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Optional metadata dictionary for user-defined fields and custom attributes.")
     features: Optional[List[FeatureModel]] = Field(default=None, description="Features to associate with the document")
-    __properties: ClassVar[List[str]] = ["collection_id", "object_id", "metadata", "features"]
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["collection_id", "root_object_id", "root_bucket_id", "source_type", "source_collection_id", "source_document_id", "source_object_id", "lineage_path", "lineage_chain", "document_schema_version", "metadata", "features"]
+
+    @field_validator('source_type')
+    def source_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['bucket', 'collection']):
+            raise ValueError("must be one of enum values ('bucket', 'collection')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -64,8 +84,10 @@ class DocumentCreateRequest(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -73,6 +95,13 @@ class DocumentCreateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in lineage_chain (list)
+        _items = []
+        if self.lineage_chain:
+            for _item_lineage_chain in self.lineage_chain:
+                if _item_lineage_chain:
+                    _items.append(_item_lineage_chain.to_dict())
+            _dict['lineage_chain'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in features (list)
         _items = []
         if self.features:
@@ -80,6 +109,11 @@ class DocumentCreateRequest(BaseModel):
                 if _item_features:
                     _items.append(_item_features.to_dict())
             _dict['features'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -93,10 +127,23 @@ class DocumentCreateRequest(BaseModel):
 
         _obj = cls.model_validate({
             "collection_id": obj.get("collection_id"),
-            "object_id": obj.get("object_id"),
+            "root_object_id": obj.get("root_object_id"),
+            "root_bucket_id": obj.get("root_bucket_id"),
+            "source_type": obj.get("source_type"),
+            "source_collection_id": obj.get("source_collection_id"),
+            "source_document_id": obj.get("source_document_id"),
+            "source_object_id": obj.get("source_object_id"),
+            "lineage_path": obj.get("lineage_path"),
+            "lineage_chain": [LineageStep.from_dict(_item) for _item in obj["lineage_chain"]] if obj.get("lineage_chain") is not None else None,
+            "document_schema_version": obj.get("document_schema_version"),
             "metadata": obj.get("metadata"),
             "features": [FeatureModel.from_dict(_item) for _item in obj["features"]] if obj.get("features") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

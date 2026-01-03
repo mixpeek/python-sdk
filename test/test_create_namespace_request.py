@@ -38,13 +38,14 @@ class TestCreateNamespaceRequest(unittest.TestCase):
             return CreateNamespaceRequest(
                 namespace_name = 'spotify_playlists_dev',
                 description = 'This namespace contains playlists from Spotify',
-                feature_extractors = [{feature_extractor_id=video_extractor_1.0.0, feature_extractor_name=video_extractor, version=1.0.0}],
-                payload_indexes = [{field_name=metadata.title, field_schema={lowercase=true, max_token_len=15, min_token_len=2, tokenizer=word, type=text}, type=text}, {field_name=metadata.description, field_schema={is_tenant=true, type=keyword}, type=keyword}]
+                feature_extractors = [{feature_extractor_id=multimodal_extractor_v1, feature_extractor_name=multimodal_extractor, version=v1}, {feature_extractor_id=image_extractor_v1, feature_extractor_name=image_extractor, params={model=siglip_base}, version=v1}],
+                payload_indexes = [{field_name=metadata.title, field_schema={lowercase=true, max_token_len=15, min_token_len=2, tokenizer=word, type=text}, is_protected=false, type=text}, {field_name=metadata.description, field_schema={is_tenant=true, type=keyword}, is_protected=false, type=keyword}],
+                auto_create_indexes = True
             )
         else:
             return CreateNamespaceRequest(
                 namespace_name = 'spotify_playlists_dev',
-                feature_extractors = [{feature_extractor_id=video_extractor_1.0.0, feature_extractor_name=video_extractor, version=1.0.0}],
+                feature_extractors = [{feature_extractor_id=multimodal_extractor_v1, feature_extractor_name=multimodal_extractor, version=v1}, {feature_extractor_id=image_extractor_v1, feature_extractor_name=image_extractor, params={model=siglip_base}, version=v1}],
         )
         """
 

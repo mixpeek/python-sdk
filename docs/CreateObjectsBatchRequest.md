@@ -6,7 +6,7 @@ Request model for creating multiple bucket objects in a batch.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**objects** | [**List[CreateObjectRequest]**](CreateObjectRequest.md) | List of objects to be created in this batch. | 
+**objects** | [**List[CreateObjectRequest]**](CreateObjectRequest.md) | List of objects to be created in this batch (max 100). | 
 
 ## Example
 

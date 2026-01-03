@@ -37,9 +37,15 @@ class TestListDocumentsResponse(unittest.TestCase):
         if include_optional:
             return ListDocumentsResponse(
                 results = [
-                    {
-                        'key' : null
-                        }
+                    { }
+                    ],
+                groups = [
+                    mixpeek.models.document_group.DocumentGroup(
+                        group_key = null, 
+                        documents = [
+                            { }
+                            ], 
+                        count = 56, )
                     ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
@@ -47,22 +53,25 @@ class TestListDocumentsResponse(unittest.TestCase):
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', )
+                    previous_page = '', 
+                    next_cursor = '', ),
+                stats = mixpeek.models.document_list_stats.DocumentListStats(
+                    total_documents = 56, 
+                    avg_blobs_per_document = 1.337, 
+                    total_groups = 56, 
+                    avg_documents_per_group = 1.337, ),
+                group_by_field = ''
             )
         else:
             return ListDocumentsResponse(
-                results = [
-                    {
-                        'key' : null
-                        }
-                    ],
                 pagination = mixpeek.models.pagination_response.PaginationResponse(
                     total = 56, 
                     page = 56, 
                     page_size = 56, 
                     total_pages = 56, 
                     next_page = '', 
-                    previous_page = '', ),
+                    previous_page = '', 
+                    next_cursor = '', ),
         )
         """
 

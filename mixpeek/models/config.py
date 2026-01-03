@@ -28,7 +28,7 @@ CONFIG_ONE_OF_SCHEMAS = ["FlatTaxonomyConfigInput", "HierarchicalTaxonomyConfigI
 
 class Config(BaseModel):
     """
-    Configuration specific to the taxonomy type.
+    OPTIONAL. Override taxonomy configuration. If omitted, copies from source taxonomy. This allows you to change retriever_id, input_mappings, enrichment_fields, or collection hierarchy.
     """
     # data type: FlatTaxonomyConfigInput
     oneof_schema_1_validator: Optional[FlatTaxonomyConfigInput] = None

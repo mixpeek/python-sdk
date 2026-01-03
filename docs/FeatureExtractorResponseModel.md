@@ -1,6 +1,6 @@
 # FeatureExtractorResponseModel
 
-Feature extractor response model.
+Feature extractor response model for API responses.
 
 ## Properties
 
@@ -10,16 +10,16 @@ Name | Type | Description | Notes
 **version** | **str** |  | 
 **feature_extractor_id** | **str** |  | 
 **description** | **str** |  | 
+**icon** | **str** |  | 
 **input_schema** | **Dict[str, object]** |  | 
 **output_schema** | **Dict[str, object]** |  | 
 **parameter_schema** | **Dict[str, object]** |  | 
 **supported_input_types** | **List[str]** |  | 
 **max_inputs** | **Dict[str, int]** |  | 
 **default_parameters** | **Dict[str, object]** |  | 
-**document_output_type** | [**DocumentOutputType**](DocumentOutputType.md) |  | 
-**document_input_handling** | [**DocumentInputHandling**](DocumentInputHandling.md) |  | 
 **required_vector_indexes** | [**List[VectorIndexDefinition]**](VectorIndexDefinition.md) |  | 
 **required_payload_indexes** | [**List[PayloadIndexConfigOutput]**](PayloadIndexConfigOutput.md) |  | 
+**position_fields** | **List[str]** | Output fields that uniquely identify each document within a source object. Enables idempotent reprocessing: rerunning a batch produces the same document IDs, so existing documents are updated instead of creating duplicates. Works with bucket &#x60;unique_key&#x60; to enable fully deterministic document IDs. Empty list means single-output extractor (one document per source). Read-only (set by extractor). | [optional] 
 
 ## Example
 

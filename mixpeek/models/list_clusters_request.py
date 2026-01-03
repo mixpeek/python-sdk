@@ -31,7 +31,7 @@ class ListClustersRequest(BaseModel):
     """ # noqa: E501
     filters: Optional[LogicalOperatorInput] = Field(default=None, description="Filters to apply when listing clusters")
     sort: Optional[SortOption] = Field(default=None, description="Sort options for the results")
-    search: Optional[StrictStr] = Field(default=None, description="Search query for filtering clusters")
+    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across cluster_id, cluster_name, description, and other text fields")
     __properties: ClassVar[List[str]] = ["filters", "sort", "search"]
 
     model_config = ConfigDict(

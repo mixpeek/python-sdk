@@ -1,19 +1,22 @@
 # OrganizationModelResponse
 
-Organization Model.
+Response model for organization endpoints.  SECURITY: Does NOT expose internal_id to prevent leakage of high-entropy secrets. Only organization_id (public identifier) is included in API responses.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**internal_id** | **str** |  | 
-**organization_name** | **str** |  | 
 **organization_id** | **str** |  | 
+**organization_name** | **str** |  | 
+**logo_url** | **str** |  | [optional] 
 **account_type** | [**AccountTier**](AccountTier.md) |  | 
 **credit_count** | **int** |  | 
-**metadata** | **Dict[str, object]** |  | 
-**users** | [**List[UserModelOutput]**](UserModelOutput.md) |  | 
+**metadata** | **Dict[str, object]** |  | [optional] 
+**billing_email** | **str** |  | [optional] 
 **rate_limits** | [**BaseRateLimits**](BaseRateLimits.md) |  | 
+**created_at** | **datetime** |  | 
+**updated_at** | **datetime** |  | 
+**users** | **List[Dict[str, object]]** |  | [optional] 
 
 ## Example
 

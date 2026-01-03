@@ -62,13 +62,6 @@ class TestClustersApi(unittest.TestCase):
         """
         pass
 
-    def test_get_cluster_artifacts(self) -> None:
-        """Test case for get_cluster_artifacts
-
-        Get Cluster Artifacts
-        """
-        pass
-
     def test_list_clusters(self) -> None:
         """Test case for list_clusters
 
@@ -76,17 +69,10 @@ class TestClustersApi(unittest.TestCase):
         """
         pass
 
-    def test_stream_cluster_data(self) -> None:
-        """Test case for stream_cluster_data
+    def test_patch_cluster(self) -> None:
+        """Test case for patch_cluster
 
-        Stream Cluster Data
-        """
-        pass
-
-    def test_submit_clustering_job_clusters(self) -> None:
-        """Test case for submit_clustering_job_clusters
-
-        Submit Clustering Job
+        Partially Update Cluster
         """
         pass
 

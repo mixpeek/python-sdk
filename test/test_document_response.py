@@ -38,67 +38,14 @@ class TestDocumentResponse(unittest.TestCase):
             return DocumentResponse(
                 document_id = '',
                 collection_id = '',
-                object_id = '',
-                enrichments = mixpeek.models.enrichments.Enrichments(
-                    clusters = [
-                        mixpeek.models.cluster_member.ClusterMember(
-                            document_id = '', 
-                            cluster_id = '', 
-                            distance_to_centroid = 1.337, 
-                            coordinates = [
-                                1.337
-                                ], 
-                            source_details = mixpeek.models.source_details.SourceDetails(
-                                type = 'bucket', 
-                                source_id = '', ), 
-                            features = { }, )
-                        ], 
-                    taxonomies = [
-                        mixpeek.models.taxonomy_assignment.TaxonomyAssignment(
-                            taxonomy_id = '', 
-                            node_id = '', 
-                            path = [
-                                ''
-                                ], 
-                            label = '', 
-                            score = 1.337, )
-                        ], ),
-                source_blobs = [
-                    { }
-                    ],
-                internal_metadata = { },
-                metadata = { },
-                vector = [
-                    1.337
-                    ],
-                presigned_url = '',
-                document_blobs = [
-                    mixpeek.models.blob_url_ref.BlobURLRef(
-                        field = '', 
-                        role = 'source', 
-                        type = 'other', 
-                        url = '', 
-                        object_key = '', 
-                        filename = '', 
-                        size_bytes = 56, 
-                        content_type = '', 
-                        checksum = '', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        source_blob_id = '', 
-                        presigned_url = '0', )
-                    ],
-                presigned_urls = [
-                    mixpeek.models.presigned_url_model.PresignedURLModel(
-                        key_name = '', 
-                        object_key = '', 
-                        presigned_url = '0', )
-                    ]
+                internal = {
+                    'key' : null
+                    }
             )
         else:
             return DocumentResponse(
                 document_id = '',
                 collection_id = '',
-                object_id = '',
         )
         """
 

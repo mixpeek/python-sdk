@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Filters to apply when listing clusters | [optional] 
 **sort** | [**SortOption**](SortOption.md) | Sort options for the results | [optional] 
-**search** | **str** | Search query for filtering clusters | [optional] 
+**search** | **str** | Search term for wildcard search across cluster_id, cluster_name, description, and other text fields | [optional] 
 
 ## Example
 

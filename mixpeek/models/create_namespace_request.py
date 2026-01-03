@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from mixpeek.models.base_feature_extractor_model_input import BaseFeatureExtractorModelInput
@@ -32,9 +32,10 @@ class CreateNamespaceRequest(BaseModel):
     """ # noqa: E501
     namespace_name: StrictStr = Field(description="Name of the namespace to create")
     description: Optional[StrictStr] = Field(default=None, description="Description of the namespace")
-    feature_extractors: Annotated[List[BaseFeatureExtractorModelInput], Field(min_length=1)] = Field(description="List of feature extractors to use. At least one feature extractor must be provided.")
+    feature_extractors: Annotated[List[BaseFeatureExtractorModelInput], Field(min_length=1)] = Field(description="List of feature extractors to use. At least one feature extractor must be provided. Optional 'params' can be specified for extractors with configurable settings (e.g., model selection) that affect vector dimensions. These params are locked at namespace creation time.")
     payload_indexes: Optional[List[PayloadIndexConfigInput]] = Field(default=None, description="Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically.")
-    __properties: ClassVar[List[str]] = ["namespace_name", "description", "feature_extractors", "payload_indexes"]
+    auto_create_indexes: Optional[StrictBool] = Field(default=False, description="Enable automatic creation of Qdrant payload indexes based on filter usage patterns. When enabled, the system tracks which fields are most frequently filtered (>100 queries/24h) and automatically creates indexes to improve query performance. Background task runs every 6 hours. Expected performance improvement: 50-90% latency reduction for filtered queries.")
+    __properties: ClassVar[List[str]] = ["namespace_name", "description", "feature_extractors", "payload_indexes", "auto_create_indexes"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -104,7 +105,8 @@ class CreateNamespaceRequest(BaseModel):
             "namespace_name": obj.get("namespace_name"),
             "description": obj.get("description"),
             "feature_extractors": [BaseFeatureExtractorModelInput.from_dict(_item) for _item in obj["feature_extractors"]] if obj.get("feature_extractors") is not None else None,
-            "payload_indexes": [PayloadIndexConfigInput.from_dict(_item) for _item in obj["payload_indexes"]] if obj.get("payload_indexes") is not None else None
+            "payload_indexes": [PayloadIndexConfigInput.from_dict(_item) for _item in obj["payload_indexes"]] if obj.get("payload_indexes") is not None else None,
+            "auto_create_indexes": obj.get("auto_create_indexes") if obj.get("auto_create_indexes") is not None else False
         })
         return _obj
 

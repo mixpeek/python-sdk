@@ -37,6 +37,7 @@ class TestEnrichmentField(unittest.TestCase):
         if include_optional:
             return EnrichmentField(
                 field_path = '',
+                target_field = '',
                 merge_mode = 'replace'
             )
         else:

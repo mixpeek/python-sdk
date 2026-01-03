@@ -25,6 +25,7 @@ from mixpeek.models.batch_statistics import BatchStatistics
 from mixpeek.models.bucket_schema_output import BucketSchemaOutput
 from mixpeek.models.storage_statistics import StorageStatistics
 from mixpeek.models.task_status_enum import TaskStatusEnum
+from mixpeek.models.unique_key_config import UniqueKeyConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,6 +37,7 @@ class BucketResponse(BaseModel):
     bucket_name: StrictStr = Field(description="Human-readable name for the bucket")
     description: Optional[StrictStr] = Field(default=None, description="Description of the bucket")
     bucket_schema: Optional[BucketSchemaOutput] = Field(default=None, description="Schema definition for objects in this bucket")
+    unique_key: Optional[UniqueKeyConfig] = Field(default=None, description="Unique key configuration for this bucket (if configured)")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the bucket")
     object_count: StrictInt = Field(description="Number of objects in the bucket")
     total_size_bytes: StrictInt = Field(description="Total size of all objects in the bucket in bytes")
@@ -46,7 +48,7 @@ class BucketResponse(BaseModel):
     is_locked: Optional[StrictBool] = Field(default=False, description="Whether the bucket is locked (read-only)")
     batch_stats: Optional[BatchStatistics] = Field(default=None, description="Batch statistics for this bucket (calculated asynchronously, stored in DB)")
     storage_stats: Optional[StorageStatistics] = Field(default=None, description="Storage statistics for this bucket (calculated asynchronously, stored in DB)")
-    __properties: ClassVar[List[str]] = ["bucket_id", "bucket_name", "description", "bucket_schema", "metadata", "object_count", "total_size_bytes", "created_at", "updated_at", "last_upload_at", "status", "is_locked", "batch_stats", "storage_stats"]
+    __properties: ClassVar[List[str]] = ["bucket_id", "bucket_name", "description", "bucket_schema", "unique_key", "metadata", "object_count", "total_size_bytes", "created_at", "updated_at", "last_upload_at", "status", "is_locked", "batch_stats", "storage_stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,9 @@ class BucketResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of bucket_schema
         if self.bucket_schema:
             _dict['bucket_schema'] = self.bucket_schema.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of unique_key
+        if self.unique_key:
+            _dict['unique_key'] = self.unique_key.to_dict()
         # override the default output from pydantic by calling `to_dict()` of batch_stats
         if self.batch_stats:
             _dict['batch_stats'] = self.batch_stats.to_dict()
@@ -112,6 +117,7 @@ class BucketResponse(BaseModel):
             "bucket_name": obj.get("bucket_name"),
             "description": obj.get("description"),
             "bucket_schema": BucketSchemaOutput.from_dict(obj["bucket_schema"]) if obj.get("bucket_schema") is not None else None,
+            "unique_key": UniqueKeyConfig.from_dict(obj["unique_key"]) if obj.get("unique_key") is not None else None,
             "metadata": obj.get("metadata"),
             "object_count": obj.get("object_count"),
             "total_size_bytes": obj.get("total_size_bytes"),

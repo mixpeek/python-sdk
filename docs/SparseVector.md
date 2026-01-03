@@ -6,7 +6,7 @@ Sparse vector representation with indices and values.  Only non-zero elements ar
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**indices** | [**List[SparseVectorIndicesInner]**](SparseVectorIndicesInner.md) | Indices of non-zero elements | 
+**indices** | [**List[RangeBucketBoundariesInner]**](RangeBucketBoundariesInner.md) | Indices of non-zero elements | 
 **values** | **List[float]** | Values of non-zero elements | 
 
 ## Example

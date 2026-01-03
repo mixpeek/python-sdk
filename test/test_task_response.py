@@ -36,19 +36,23 @@ class TestTaskResponse(unittest.TestCase):
         model = TaskResponse()
         if include_optional:
             return TaskResponse(
-                task_id = 'task_123',
-                task_type = api_namespaces_create,
-                status = IN_PROGRESS,
-                inputs = [file1.pdf, {config={key=value}}],
-                outputs = [processed_file1.pdf, {result=success}],
-                additional_data = {priority=high, user_id=user_456},
-                error_message = ''
+                task_id = '',
+                task_type = 'api_namespaces_create',
+                status = 'PENDING',
+                inputs = [
+                    null
+                    ],
+                outputs = [
+                    null
+                    ],
+                additional_data = { },
+                error = ''
             )
         else:
             return TaskResponse(
-                task_id = 'task_123',
-                task_type = api_namespaces_create,
-                status = IN_PROGRESS,
+                task_id = '',
+                task_type = 'api_namespaces_create',
+                status = 'PENDING',
         )
         """
 

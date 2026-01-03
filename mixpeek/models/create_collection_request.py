@@ -21,23 +21,27 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.bucket_schema_input import BucketSchemaInput
-from mixpeek.models.feature_extractor_config_input import FeatureExtractorConfigInput
-from mixpeek.models.source_config import SourceConfig
+from mixpeek.models.cluster_application_config import ClusterApplicationConfig
+from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_input import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput
+from mixpeek.models.source_config_input import SourceConfigInput
+from mixpeek.models.taxonomy_application_config_input import TaxonomyApplicationConfigInput
 from typing import Optional, Set
 from typing_extensions import Self
 
 class CreateCollectionRequest(BaseModel):
     """
-    Request model for creating a new collection.  Collections process data from buckets or other collections using feature extractors.  CRITICAL: To use input_mappings in feature_extractors: 1. Your source bucket MUST have a bucket_schema defined 2. The input_mappings reference fields from that bucket_schema 3. The system validates that mapped fields exist in the source schema  Example workflow: 1. Create bucket with schema: { \"properties\": { \"image\": {\"type\": \"image\"}, \"metadata\": {...} } } 2. Upload objects conforming to that schema 3. Create collection with input_mappings: { \"image\": \"image\", \"text\": \"metadata.title\" } 4. The system validates \"image\" and \"metadata.title\" exist in the bucket schema  Without a bucket_schema, input_mappings will fail with: \"The source field 'X' does not exist in the source schema.\"
+    Request model for creating a new collection.  Collections process data from buckets or other collections using a single feature extractor.  KEY ARCHITECTURAL CHANGE: Each collection has EXACTLY ONE feature extractor. - Use field_passthrough to include additional source fields in output documents - Multiple extractors = multiple collections - This simplifies processing and makes output schema deterministic  CRITICAL: To use input_mappings: 1. Your source bucket MUST have a bucket_schema defined 2. The input_mappings reference fields from that bucket_schema 3. The system validates that mapped fields exist in the source schema  Example workflow: 1. Create bucket with schema: { \"properties\": { \"image\": {\"type\": \"image\"}, \"title\": {\"type\": \"string\"} } } 2. Upload objects conforming to that schema 3. Create collection with:    - input_mappings: { \"image\": \"image\" }    - field_passthrough: [{\"source_path\": \"title\"}] 4. Output documents will have both extractor outputs AND passthrough fields  Schema Computation: - output_schema is computed IMMEDIATELY when collection is created - output_schema = field_passthrough fields + extractor output fields - No waiting for documents to be processed!
     """ # noqa: E501
     collection_name: StrictStr = Field(description="Name of the collection to create")
     description: Optional[StrictStr] = Field(default=None, description="Description of the collection")
-    source: SourceConfig = Field(description="Source configuration (bucket or collection) for this collection")
+    source: SourceConfigInput = Field(description="Source configuration (bucket or collection) for this collection")
     input_schema: Optional[BucketSchemaInput] = Field(default=None, description="Input schema for the collection. If not provided, inferred from source bucket's bucket_schema or source collection's output_schema. REQUIRED for input_mappings to work - defines what fields can be mapped to feature extractors.")
-    feature_extractors: Optional[List[FeatureExtractorConfigInput]] = Field(default=None, description="Feature extractors to apply. Use input_mappings in each extractor to map source schema fields to extractor inputs. Example: {'image': 'product_image', 'text': 'metadata.title'}")
+    feature_extractor: SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput = Field(description="Single feature extractor for this collection. Use field_passthrough within the extractor config to include additional source fields. For multiple extractors, create multiple collections and use collection-to-collection pipelines.")
     enabled: Optional[StrictBool] = Field(default=True, description="Whether the collection is enabled")
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the collection")
-    __properties: ClassVar[List[str]] = ["collection_name", "description", "source", "input_schema", "feature_extractors", "enabled", "metadata"]
+    taxonomy_applications: Optional[List[TaxonomyApplicationConfigInput]] = Field(default=None, description="Optional taxonomy applications to automatically enrich documents in this collection. Each taxonomy will classify/enrich documents based on configured retriever matches.")
+    cluster_applications: Optional[List[ClusterApplicationConfig]] = Field(default=None, description="Optional cluster applications to automatically execute when batch processing completes. Each cluster enriches documents with cluster assignments (cluster_id, cluster_label, etc.).")
+    __properties: ClassVar[List[str]] = ["collection_name", "description", "source", "input_schema", "feature_extractor", "enabled", "metadata", "taxonomy_applications", "cluster_applications"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,13 +88,23 @@ class CreateCollectionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of input_schema
         if self.input_schema:
             _dict['input_schema'] = self.input_schema.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in feature_extractors (list)
+        # override the default output from pydantic by calling `to_dict()` of feature_extractor
+        if self.feature_extractor:
+            _dict['feature_extractor'] = self.feature_extractor.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in taxonomy_applications (list)
         _items = []
-        if self.feature_extractors:
-            for _item_feature_extractors in self.feature_extractors:
-                if _item_feature_extractors:
-                    _items.append(_item_feature_extractors.to_dict())
-            _dict['feature_extractors'] = _items
+        if self.taxonomy_applications:
+            for _item_taxonomy_applications in self.taxonomy_applications:
+                if _item_taxonomy_applications:
+                    _items.append(_item_taxonomy_applications.to_dict())
+            _dict['taxonomy_applications'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in cluster_applications (list)
+        _items = []
+        if self.cluster_applications:
+            for _item_cluster_applications in self.cluster_applications:
+                if _item_cluster_applications:
+                    _items.append(_item_cluster_applications.to_dict())
+            _dict['cluster_applications'] = _items
         return _dict
 
     @classmethod
@@ -105,11 +119,13 @@ class CreateCollectionRequest(BaseModel):
         _obj = cls.model_validate({
             "collection_name": obj.get("collection_name"),
             "description": obj.get("description"),
-            "source": SourceConfig.from_dict(obj["source"]) if obj.get("source") is not None else None,
+            "source": SourceConfigInput.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "input_schema": BucketSchemaInput.from_dict(obj["input_schema"]) if obj.get("input_schema") is not None else None,
-            "feature_extractors": [FeatureExtractorConfigInput.from_dict(_item) for _item in obj["feature_extractors"]] if obj.get("feature_extractors") is not None else None,
+            "feature_extractor": SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput.from_dict(obj["feature_extractor"]) if obj.get("feature_extractor") is not None else None,
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
-            "metadata": obj.get("metadata")
+            "metadata": obj.get("metadata"),
+            "taxonomy_applications": [TaxonomyApplicationConfigInput.from_dict(_item) for _item in obj["taxonomy_applications"]] if obj.get("taxonomy_applications") is not None else None,
+            "cluster_applications": [ClusterApplicationConfig.from_dict(_item) for _item in obj["cluster_applications"]] if obj.get("cluster_applications") is not None else None
         })
         return _obj
 

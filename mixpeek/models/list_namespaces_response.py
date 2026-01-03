@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.namespace_list_stats import NamespaceListStats
 from mixpeek.models.namespace_model import NamespaceModel
 from mixpeek.models.pagination_response import PaginationResponse
 from typing import Optional, Set
@@ -32,7 +33,8 @@ class ListNamespacesResponse(BaseModel):
     results: List[NamespaceModel] = Field(description="List of namespaces matching the query")
     pagination: PaginationResponse = Field(description="Pagination information for the current result window")
     total_count: StrictInt = Field(description="Total number of namespaces that match the query")
-    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count"]
+    stats: Optional[NamespaceListStats] = Field(default=None, description="Aggregate statistics across all namespaces in the result")
+    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +85,9 @@ class ListNamespacesResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
             _dict['pagination'] = self.pagination.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of stats
+        if self.stats:
+            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -97,7 +102,8 @@ class ListNamespacesResponse(BaseModel):
         _obj = cls.model_validate({
             "results": [NamespaceModel.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
-            "total_count": obj.get("total_count")
+            "total_count": obj.get("total_count"),
+            "stats": NamespaceListStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None
         })
         return _obj
 

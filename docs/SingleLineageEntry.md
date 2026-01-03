@@ -1,13 +1,13 @@
 # SingleLineageEntry
 
-Single entry in the lineage chain of a collection.
+Single entry in the lineage chain of a collection.  Each lineage entry represents one processing stage with one feature extractor.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source_config** | [**SourceConfig**](SourceConfig.md) | Configuration of the source for this lineage entry | 
-**feature_extractors** | [**List[FeatureExtractorConfigOutput]**](FeatureExtractorConfigOutput.md) | Feature extractors applied at this stage | [optional] 
+**source_config** | [**SourceConfigOutput**](SourceConfigOutput.md) | Configuration of the source for this lineage entry | 
+**feature_extractor** | [**SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput**](SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput.md) | Single feature extractor applied at this stage | 
 **output_schema** | [**BucketSchemaOutput**](BucketSchemaOutput.md) | Output schema produced by this processing stage | 
 
 ## Example

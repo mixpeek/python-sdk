@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.config import Config
+from mixpeek.models.config1 import Config1
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,7 +30,7 @@ class CreateTaxonomyRequest(BaseModel):
     """ # noqa: E501
     taxonomy_name: StrictStr = Field(description="A unique name for the taxonomy within the namespace.")
     description: Optional[StrictStr] = Field(default=None, description="An optional description of the taxonomy.")
-    config: Config
+    config: Config1
     __properties: ClassVar[List[str]] = ["taxonomy_name", "description", "config"]
 
     model_config = ConfigDict(
@@ -89,7 +89,7 @@ class CreateTaxonomyRequest(BaseModel):
         _obj = cls.model_validate({
             "taxonomy_name": obj.get("taxonomy_name"),
             "description": obj.get("description"),
-            "config": Config.from_dict(obj["config"]) if obj.get("config") is not None else None
+            "config": Config1.from_dict(obj["config"]) if obj.get("config") is not None else None
         })
         return _obj
 

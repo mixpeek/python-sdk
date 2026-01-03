@@ -19,21 +19,21 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from mixpeek.models.bucket_schema_output import BucketSchemaOutput
-from mixpeek.models.feature_extractor_config_output import FeatureExtractorConfigOutput
-from mixpeek.models.source_config import SourceConfig
+from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_output import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput
+from mixpeek.models.source_config_output import SourceConfigOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
 class SingleLineageEntry(BaseModel):
     """
-    Single entry in the lineage chain of a collection.
+    Single entry in the lineage chain of a collection.  Each lineage entry represents one processing stage with one feature extractor.
     """ # noqa: E501
-    source_config: SourceConfig = Field(description="Configuration of the source for this lineage entry")
-    feature_extractors: Optional[List[FeatureExtractorConfigOutput]] = Field(default=None, description="Feature extractors applied at this stage")
+    source_config: SourceConfigOutput = Field(description="Configuration of the source for this lineage entry")
+    feature_extractor: SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput = Field(description="Single feature extractor applied at this stage")
     output_schema: BucketSchemaOutput = Field(description="Output schema produced by this processing stage")
-    __properties: ClassVar[List[str]] = ["source_config", "feature_extractors", "output_schema"]
+    __properties: ClassVar[List[str]] = ["source_config", "feature_extractor", "output_schema"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -77,13 +77,9 @@ class SingleLineageEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of source_config
         if self.source_config:
             _dict['source_config'] = self.source_config.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in feature_extractors (list)
-        _items = []
-        if self.feature_extractors:
-            for _item_feature_extractors in self.feature_extractors:
-                if _item_feature_extractors:
-                    _items.append(_item_feature_extractors.to_dict())
-            _dict['feature_extractors'] = _items
+        # override the default output from pydantic by calling `to_dict()` of feature_extractor
+        if self.feature_extractor:
+            _dict['feature_extractor'] = self.feature_extractor.to_dict()
         # override the default output from pydantic by calling `to_dict()` of output_schema
         if self.output_schema:
             _dict['output_schema'] = self.output_schema.to_dict()
@@ -99,8 +95,8 @@ class SingleLineageEntry(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "source_config": SourceConfig.from_dict(obj["source_config"]) if obj.get("source_config") is not None else None,
-            "feature_extractors": [FeatureExtractorConfigOutput.from_dict(_item) for _item in obj["feature_extractors"]] if obj.get("feature_extractors") is not None else None,
+            "source_config": SourceConfigOutput.from_dict(obj["source_config"]) if obj.get("source_config") is not None else None,
+            "feature_extractor": SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput.from_dict(obj["feature_extractor"]) if obj.get("feature_extractor") is not None else None,
             "output_schema": BucketSchemaOutput.from_dict(obj["output_schema"]) if obj.get("output_schema") is not None else None
         })
         return _obj

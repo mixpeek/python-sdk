@@ -27,14 +27,14 @@ from typing_extensions import Self
 
 class CacheConfig(BaseModel):
     """
-    Configuration for retriever result caching.  Controls how retriever results are cached to improve performance and reduce redundant compute.
+    Configuration for retriever result caching.  Controls how retriever results are cached to improve performance and reduce redundant compute.  Caching can be configured at specific stages in the retriever pipeline. If no stages are specified, the final results are cached by default.
     """ # noqa: E501
     enabled: Optional[StrictBool] = Field(default=True, description="Whether caching is enabled for this retriever")
     ttl_seconds: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=3600, description="Time-to-live for cached results in seconds. Default: 1 hour")
-    stage: Optional[StrictStr] = Field(default='retrieval', description="Which stage to cache: 'retrieval', 'generation', or 'full'")
+    cache_stage_names: Optional[List[StrictStr]] = Field(default=None, description="List of stage names to cache results after. Stage names must match the stage_name field in the retriever's stages. If not specified, caches the final results after all stages. Examples: ['semantic_search'], ['semantic_search', 'rerank']")
     exclude_fields: Optional[List[StrictStr]] = Field(default=None, description="Fields to exclude from caching (e.g., PII fields)")
     stats: Optional[CacheStatistics] = Field(default=None, description="Cache performance statistics")
-    __properties: ClassVar[List[str]] = ["enabled", "ttl_seconds", "stage", "exclude_fields", "stats"]
+    __properties: ClassVar[List[str]] = ["enabled", "ttl_seconds", "cache_stage_names", "exclude_fields", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +92,7 @@ class CacheConfig(BaseModel):
         _obj = cls.model_validate({
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
             "ttl_seconds": obj.get("ttl_seconds") if obj.get("ttl_seconds") is not None else 3600,
-            "stage": obj.get("stage") if obj.get("stage") is not None else 'retrieval',
+            "cache_stage_names": obj.get("cache_stage_names"),
             "exclude_fields": obj.get("exclude_fields"),
             "stats": CacheStatistics.from_dict(obj["stats"]) if obj.get("stats") is not None else None
         })

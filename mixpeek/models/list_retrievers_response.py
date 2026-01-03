@@ -19,19 +19,18 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.retriever_model_output import RetrieverModelOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ListRetrieversResponse(BaseModel):
     """
-    Response for listing retrievers.
+    Response from listing retrievers.
     """ # noqa: E501
-    results: List[RetrieverModelOutput] = Field(description="List of retrievers matching the query")
-    pagination: Dict[str, Any] = Field(description="Pagination information for the current window")
-    total_count: StrictInt = Field(description="Total number of retrievers that match the query")
-    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count"]
+    results: Optional[List[RetrieverModelOutput]] = Field(default=None, description="List of retrievers in the namespace.")
+    total: Optional[StrictInt] = Field(default=0, description="Total number of retrievers.")
+    __properties: ClassVar[List[str]] = ["results", "total"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,8 +91,7 @@ class ListRetrieversResponse(BaseModel):
 
         _obj = cls.model_validate({
             "results": [RetrieverModelOutput.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
-            "pagination": obj.get("pagination"),
-            "total_count": obj.get("total_count")
+            "total": obj.get("total") if obj.get("total") is not None else 0
         })
         return _obj
 

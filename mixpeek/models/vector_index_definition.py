@@ -18,21 +18,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from mixpeek.models.index import Index
 from typing import Optional, Set
 from typing_extensions import Self
 
 class VectorIndexDefinition(BaseModel):
     """
-    Complete vector index definition that can be either single or multi-vector.
+    Complete vector index definition that can be either single or multi-vector.  This is the USER-FACING representation that appears in feature extractor definitions and API responses. It wraps a VectorIndex (or MultiVectorIndex) and adds metadata.  Key Concepts - Two-Name System:     - VectorIndexDefinition.name: SHORT user-facing name (e.g., \"embedding\")       Used in feature URIs: mixpeek://text_extractor@v1/multilingual_e5_large_instruct_v1                                                         ^^^^^^^^^^      - VectorIndex.name: FULL storage name (e.g., \"text_extractor_v1_embedding\")       Used as Qdrant collection name for namespace isolation  This two-level naming allows clean URIs while preventing storage collisions.  Use Cases:     - Define extractor outputs in feature extractor definitions     - Expose available vector indexes in collection metadata     - Enable feature URI resolution (short name → full storage name)  Requirements:     - name: REQUIRED - Short output name for feature URIs     - description: REQUIRED - Explain what this output produces     - type: REQUIRED - \"single\" (most common) or \"multi\" (rare)     - index: REQUIRED - Nested VectorIndex or MultiVectorIndex     - feature_uri: OPTIONAL - Populated at collection creation time
     """ # noqa: E501
-    name: StrictStr
-    description: StrictStr
-    type: StrictStr
+    feature_uri: Optional[StrictStr] = Field(default=None, description="Full feature URI for this vector index. Format: mixpeek://{extractor}@{version}/{output_name}. Populated at collection creation time. Use this URI in retriever feature_filter stages.")
+    name: Annotated[str, Field(min_length=1, strict=True)] = Field(description="REQUIRED. Short user-facing output name used in feature URIs. This is NOT the Qdrant collection name - it's the clean identifier for this output. Format: Simple snake_case name (e.g., 'embedding', 'video_embedding', 'sparse_embedding'). Used in feature URIs: mixpeek://{extractor}@{version}/{THIS_NAME}. Must be unique within this extractor's outputs.")
+    description: Annotated[str, Field(min_length=10, strict=True)] = Field(description="REQUIRED. Human-readable description of this vector output. Explain what content this output embeds and when to use it. Appears in API documentation and helps users choose the right feature URI. Be specific about the embedding type and use cases.")
+    type: StrictStr = Field(description="REQUIRED. Index type - 'single' or 'multi'. 'single': One vector per document (most common). Use for standard embeddings. 'multi': Multiple named vectors per document (rare). Use for hybrid/ensemble. Determines whether 'index' field contains VectorIndex or MultiVectorIndex.")
     index: Index
-    __properties: ClassVar[List[str]] = ["name", "description", "type", "index"]
+    __properties: ClassVar[List[str]] = ["feature_uri", "name", "description", "type", "index"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -95,6 +97,7 @@ class VectorIndexDefinition(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "feature_uri": obj.get("feature_uri"),
             "name": obj.get("name"),
             "description": obj.get("description"),
             "type": obj.get("type"),

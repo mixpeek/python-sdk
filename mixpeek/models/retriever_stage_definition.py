@@ -20,18 +20,20 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.stage_category import StageCategory
 from typing import Optional, Set
 from typing_extensions import Self
 
 class RetrieverStageDefinition(BaseModel):
     """
-    Public definition of a retriever stage.
+    Public definition of a retriever stage available in the system.  Each stage represents a specific operation in a retrieval pipeline (filter, sort, enrich, etc). Use the `/v1/retrievers/stages` endpoint to discover available stages and their parameter schemas before creating retrievers.  Stage Registration:     - Stages are registered in the retriever stage registry     - Each stage has a unique ID, category, and parameter schema     - Parameter schemas are Pydantic models with full validation  Usage Flow:     1. Call GET /v1/retrievers/stages to list all available stages     2. Review parameter_schema for each stage to understand requirements     3. Compose stages into a retrieval pipeline     4. Create retriever via POST /v1/collections/{id}/retrievers  Example Workflow:     ```     # 1. Discover stages     GET /v1/retrievers/stages      # 2. Review attribute_filter schema     {       \"stage_id\": \"attribute_filter\",       \"description\": \"Filter documents by attribute conditions\",       \"category\": \"filter\",       \"parameter_schema\": {         \"type\": \"object\",         \"properties\": {           \"field\": {\"type\": \"string\"},           \"operator\": {\"enum\": [\"eq\", \"ne\", \"gt\", \"gte\", \"lt\", \"lte\", \"in\", \"nin\"]},           \"value\": {}         }       }     }      # 3. Create retriever using discovered stage     POST /v1/collections/col_123/retrievers     {       \"stages\": [         {           \"stage_name\": \"filter_active\",           \"stage_type\": \"filter\",           \"config\": {             \"stage_id\": \"attribute_filter\",             \"parameters\": {               \"field\": \"status\",               \"operator\": \"eq\",               \"value\": \"active\"             }           }         }       ]     }     ```  Requirements:     - stage_id: REQUIRED, unique identifier for the stage     - description: REQUIRED, human-readable description of stage purpose     - category: REQUIRED, transformation category (filter/sort/reduce/apply)     - icon: REQUIRED, UI icon identifier (Lucide React)     - parameter_schema: OPTIONAL, JSON Schema for stage parameters (null if no params)
     """ # noqa: E501
-    stage_name: StrictStr = Field(description="The unique name of the stage.")
-    version: StrictStr = Field(description="The version of the stage.")
-    description: StrictStr = Field(description="A description of what the stage does.")
-    parameter_schema: Optional[Dict[str, Any]] = Field(default=None, description="The schema for the parameters this stage accepts.")
-    __properties: ClassVar[List[str]] = ["stage_name", "version", "description", "parameter_schema"]
+    stage_id: StrictStr = Field(description="REQUIRED. Unique identifier for the stage type. Use this ID in the 'stage_id' field when configuring stages in a retriever. Common stage IDs: 'attribute_filter', 'feature_filter', 'llm_filter', 'sort_relevance', 'document_enrich', 'taxonomy_enrich'. Stage IDs are immutable and versioned separately from implementation.")
+    description: StrictStr = Field(description="REQUIRED. Human-readable description of what the stage does. Explains the stage's purpose, behavior, and when to use it. Use this to understand stage capabilities before using in pipelines.")
+    category: StageCategory = Field(description="REQUIRED. Transformation category defining how the stage processes documents. Categories: 'filter' (subset, N→≤N), 'sort' (reorder, N→N), 'reduce' (aggregate, N→1), 'apply' (enrich/expand, N→N or N→N*M). Use category to understand stage's impact on document flow.")
+    icon: StrictStr = Field(description="REQUIRED. Lucide React icon identifier for UI rendering. Used by frontend clients to display stage icons in pipeline builders. See https://lucide.dev for available icon names. Common icons: 'filter' (attribute_filter), 'search' (semantic), 'brain-circuit' (LLM), 'arrow-up-down' (sort).")
+    parameter_schema: Optional[Dict[str, Any]] = Field(default=None, description="OPTIONAL. JSON Schema defining the parameters this stage accepts. Contains full Pydantic schema including types, descriptions, examples, and validation rules for all stage parameters. Use this schema to validate stage configurations before submission. Null if stage requires no parameters (rare). Schema includes: field types, required fields, defaults, validation constraints, field descriptions, and usage examples.")
+    __properties: ClassVar[List[str]] = ["stage_id", "description", "category", "icon", "parameter_schema"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,9 +86,10 @@ class RetrieverStageDefinition(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "stage_name": obj.get("stage_name"),
-            "version": obj.get("version"),
+            "stage_id": obj.get("stage_id"),
             "description": obj.get("description"),
+            "category": obj.get("category"),
+            "icon": obj.get("icon"),
             "parameter_schema": obj.get("parameter_schema")
         })
         return _obj

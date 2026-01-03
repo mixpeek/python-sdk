@@ -20,18 +20,17 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from mixpeek.models.logical_operator_input import LogicalOperatorInput
 from mixpeek.models.sort_option import SortOption
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ListCollectionsRequest(BaseModel):
     """
-    Request model for listing collections.
+    Request model for listing collections.  To filter by taxonomy, use dot notation in filters: filters.AND = [{\"field\": \"taxonomy_applications.taxonomy_id\", \"operator\": \"eq\", \"value\": \"tax_123\"}]
     """ # noqa: E501
-    filters: Optional[LogicalOperatorInput] = Field(default=None, description="Filters to apply when listing collections")
+    filters: Optional[Dict[str, Any]] = Field(default=None, description="Filters to apply when listing collections. Supports nested field filtering like 'taxonomy_applications.taxonomy_id'. Format: {\"AND\": [{\"field\": \"field_name\", \"operator\": \"eq\", \"value\": \"value\"}]}")
     sort: Optional[SortOption] = Field(default=None, description="Sort options for the results")
-    search: Optional[StrictStr] = Field(default=None, description="Search query for filtering collections")
+    search: Optional[StrictStr] = Field(default=None, description="Search term for wildcard search across collection_id, collection_name, description, and other text fields")
     case_sensitive: Optional[StrictBool] = Field(default=False, description="If True, filters and search will be case-sensitive")
     __properties: ClassVar[List[str]] = ["filters", "sort", "search", "case_sensitive"]
 
@@ -74,9 +73,6 @@ class ListCollectionsRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of filters
-        if self.filters:
-            _dict['filters'] = self.filters.to_dict()
         # override the default output from pydantic by calling `to_dict()` of sort
         if self.sort:
             _dict['sort'] = self.sort.to_dict()
@@ -92,7 +88,7 @@ class ListCollectionsRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "filters": LogicalOperatorInput.from_dict(obj["filters"]) if obj.get("filters") is not None else None,
+            "filters": obj.get("filters"),
             "sort": SortOption.from_dict(obj["sort"]) if obj.get("sort") is not None else None,
             "search": obj.get("search"),
             "case_sensitive": obj.get("case_sensitive") if obj.get("case_sensitive") is not None else False

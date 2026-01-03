@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.input_mapping import InputMapping
 from mixpeek.models.source_collection_input import SourceCollectionInput
+from mixpeek.models.step_analytics_config_input import StepAnalyticsConfigInput
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,8 @@ class FlatTaxonomyConfigInput(BaseModel):
     retriever_id: StrictStr = Field(description="The retriever to use for matching against the source collection.")
     input_mappings: List[InputMapping] = Field(description="Input mappings defining how to construct retriever inputs.")
     source_collection: SourceCollectionInput = Field(description="The single source collection for this flat taxonomy.")
-    __properties: ClassVar[List[str]] = ["taxonomy_type", "retriever_id", "input_mappings", "source_collection"]
+    step_analytics: Optional[StepAnalyticsConfigInput] = Field(default=None, description="Optional configuration for step transition analytics. Enables tracking how documents progress through taxonomy labels over time (e.g., email thread progression from 'inquiry' to 'closed_won'). If not provided, only basic assignment events are logged.")
+    __properties: ClassVar[List[str]] = ["taxonomy_type", "retriever_id", "input_mappings", "source_collection", "step_analytics"]
 
     @field_validator('taxonomy_type')
     def taxonomy_type_validate_enum(cls, value):
@@ -94,6 +96,9 @@ class FlatTaxonomyConfigInput(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of source_collection
         if self.source_collection:
             _dict['source_collection'] = self.source_collection.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of step_analytics
+        if self.step_analytics:
+            _dict['step_analytics'] = self.step_analytics.to_dict()
         return _dict
 
     @classmethod
@@ -109,7 +114,8 @@ class FlatTaxonomyConfigInput(BaseModel):
             "taxonomy_type": obj.get("taxonomy_type") if obj.get("taxonomy_type") is not None else 'flat',
             "retriever_id": obj.get("retriever_id"),
             "input_mappings": [InputMapping.from_dict(_item) for _item in obj["input_mappings"]] if obj.get("input_mappings") is not None else None,
-            "source_collection": SourceCollectionInput.from_dict(obj["source_collection"]) if obj.get("source_collection") is not None else None
+            "source_collection": SourceCollectionInput.from_dict(obj["source_collection"]) if obj.get("source_collection") is not None else None,
+            "step_analytics": StepAnalyticsConfigInput.from_dict(obj["step_analytics"]) if obj.get("step_analytics") is not None else None
         })
         return _obj
 

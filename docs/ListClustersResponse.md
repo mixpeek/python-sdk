@@ -6,8 +6,10 @@ Response model for listing clusters.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**List[ClusterModel]**](ClusterModel.md) | List of cluster models | 
+**results** | [**List[ClusterMetadata]**](ClusterMetadata.md) | List of cluster metadata | 
 **pagination** | [**PaginationResponse**](PaginationResponse.md) | Pagination information | 
+**total_count** | **int** | Total number of clusters matching the query | 
+**stats** | [**ClusterListStats**](ClusterListStats.md) | Aggregate statistics across all clusters in the result | [optional] 
 
 ## Example
 

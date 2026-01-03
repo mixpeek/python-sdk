@@ -36,10 +36,11 @@ class TestBaseRateLimits(unittest.TestCase):
         model = BaseRateLimits()
         if include_optional:
             return BaseRateLimits(
-                default = 56,
-                search = 56,
-                upload = 56,
-                delete = 56
+                metadata = 1.0,
+                data = 1.0,
+                search = 1.0,
+                upload = 1.0,
+                compute = 1.0
             )
         else:
             return BaseRateLimits(

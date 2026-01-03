@@ -1,26 +1,24 @@
 [project]
 name = "mixpeek"
 version = "0.81.0"
-description = "Mixpeek API - Multimodal search and data processing SDK"
+description = "Mixpeek API"
 authors = [
-  {name = "Mixpeek Support", email = "info@mixpeek.com"},
+  {name = "Mixpeek Support",email = "info@mixpeek.com"},
 ]
-license = "MIT"
+license = "NoLicense"
 readme = "README.md"
-keywords = ["OpenAPI", "Mixpeek", "multimodal", "search", "AI", "SDK"]
+keywords = ["OpenAPI", "OpenAPI-Generator", "Mixpeek API"]
 requires-python = ">=3.9"
 
 dependencies = [
-  "urllib3>=2.1.0,<3.0.0",
-  "python-dateutil>=2.8.2",
-  "pydantic>=2",
-  "typing-extensions>=4.7.1"
+  "urllib3 (>=2.1.0,<3.0.0)",
+  "python-dateutil (>=2.8.2)",
+  "pydantic (>=2)",
+  "typing-extensions (>=4.7.1)"
 ]
 
 [project.urls]
-Homepage = "https://mixpeek.com"
-Documentation = "https://docs.mixpeek.com"
-Repository = "https://github.com/mixpeek/python-sdk"
+Repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 
 [tool.poetry]
 requires-poetry = ">=2.0"

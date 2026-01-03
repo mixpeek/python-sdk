@@ -1,13 +1,14 @@
 # OrganizationAdminUpdateRequest
 
-Admin-only update request for organizations.  Allows changing the account tier and overriding rate limits.
+Admin-only update payload for organization.  Security: This model is ONLY used by private admin endpoints that require MIXPEEK_PRIVATE_TOKEN authentication. Regular users cannot access or modify these fields, especially infrastructure configuration.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_type** | [**AccountTier**](AccountTier.md) |  | [optional] 
-**rate_limits** | [**BaseRateLimits**](BaseRateLimits.md) |  | [optional] 
+**account_type** | [**AccountTier**](AccountTier.md) | Update organization billing tier. | [optional] 
+**rate_limits** | [**BaseRateLimits**](BaseRateLimits.md) | Override rate limits for the organization. | [optional] 
+**infrastructure** | [**OrganizationInfrastructure**](OrganizationInfrastructure.md) | 🔒 ADMIN ONLY: Configure dedicated infrastructure (Qdrant/Ray). This field is ONLY accessible via private admin endpoints with MIXPEEK_PRIVATE_TOKEN. NOT exposed in public API responses. NOT modifiable by organization users. Used for ENTERPRISE customers with dedicated infrastructure. | [optional] 
 
 ## Example
 

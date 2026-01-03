@@ -19,9 +19,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from mixpeek.models.base_feature_extractor_model_output import BaseFeatureExtractorModelOutput
+from mixpeek.models.namespace_infrastructure import NamespaceInfrastructure
 from mixpeek.models.payload_index_config_output import PayloadIndexConfigOutput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,12 +33,20 @@ class NamespaceModel(BaseModel):
     """ # noqa: E501
     namespace_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the namespace")
     namespace_name: StrictStr = Field(description="Name of the namespace")
+    infrastructure: Optional[NamespaceInfrastructure] = Field(default=None, description="Infrastructure configuration for the namespace (Ray, Qdrant).")
+    cluster_id: Optional[StrictStr] = Field(default=None, description="Infrastructure cluster ID for this namespace (Enterprise only). When set, this namespace uses dedicated Anyscale/Ray + Qdrant cluster. If None, uses shared infrastructure or organization-level infrastructure. Format: iclstr_xxx")
     description: Optional[StrictStr] = Field(default=None, description="Description of the namespace")
     feature_extractors: Optional[List[BaseFeatureExtractorModelOutput]] = Field(default=None, description="List of feature extractors configured for this namespace")
     payload_indexes: Optional[List[PayloadIndexConfigOutput]] = Field(default=None, description="Custom payload indexes configured for this namespace")
+    document_count: Optional[StrictInt] = Field(default=None, description="Total number of documents in this namespace (from Qdrant collection)")
+    bucket_count: Optional[StrictInt] = Field(default=None, description="Total number of buckets in this namespace")
+    collection_count: Optional[StrictInt] = Field(default=None, description="Total number of collections in this namespace")
+    object_count: Optional[StrictInt] = Field(default=None, description="Total number of objects across all buckets in this namespace")
+    auto_create_indexes: Optional[StrictBool] = Field(default=False, description="Enable automatic creation of Qdrant payload indexes based on filter usage patterns. When enabled, the system tracks which fields are most frequently filtered (>100 queries/24h) and automatically creates indexes to improve query performance. Background task runs every 6 hours. Expected performance improvement: 50-90% latency reduction for filtered queries.")
+    vector_inference_map: Optional[Dict[str, StrictStr]] = Field(default=None, description="Mapping of vector index names to inference service names. Built at namespace creation based on extractor configurations. Used by feature search to determine correct inference service for queries. Example: {'image_extractor_v1_embedding': 'google_siglip_base_v1'}")
     created_at: Optional[datetime] = Field(default=None, description="When the namespace was created")
     updated_at: Optional[datetime] = Field(default=None, description="When the namespace was last updated")
-    __properties: ClassVar[List[str]] = ["namespace_id", "namespace_name", "description", "feature_extractors", "payload_indexes", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["namespace_id", "namespace_name", "infrastructure", "cluster_id", "description", "feature_extractors", "payload_indexes", "document_count", "bucket_count", "collection_count", "object_count", "auto_create_indexes", "vector_inference_map", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +87,9 @@ class NamespaceModel(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of infrastructure
+        if self.infrastructure:
+            _dict['infrastructure'] = self.infrastructure.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in feature_extractors (list)
         _items = []
         if self.feature_extractors:
@@ -106,9 +118,17 @@ class NamespaceModel(BaseModel):
         _obj = cls.model_validate({
             "namespace_id": obj.get("namespace_id"),
             "namespace_name": obj.get("namespace_name"),
+            "infrastructure": NamespaceInfrastructure.from_dict(obj["infrastructure"]) if obj.get("infrastructure") is not None else None,
+            "cluster_id": obj.get("cluster_id"),
             "description": obj.get("description"),
             "feature_extractors": [BaseFeatureExtractorModelOutput.from_dict(_item) for _item in obj["feature_extractors"]] if obj.get("feature_extractors") is not None else None,
             "payload_indexes": [PayloadIndexConfigOutput.from_dict(_item) for _item in obj["payload_indexes"]] if obj.get("payload_indexes") is not None else None,
+            "document_count": obj.get("document_count"),
+            "bucket_count": obj.get("bucket_count"),
+            "collection_count": obj.get("collection_count"),
+            "object_count": obj.get("object_count"),
+            "auto_create_indexes": obj.get("auto_create_indexes") if obj.get("auto_create_indexes") is not None else False,
+            "vector_inference_map": obj.get("vector_inference_map"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at")
         })

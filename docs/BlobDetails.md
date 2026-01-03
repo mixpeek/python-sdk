@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **size_bytes** | **int** |  | [optional] 
 **mime_type** | **str** |  | [optional] 
 **hash** | **str** |  | [optional] 
-**s3_object_key** | **str** |  | [optional] 
 
 ## Example
 

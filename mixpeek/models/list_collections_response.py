@@ -19,7 +19,8 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.collection_list_stats import CollectionListStats
 from mixpeek.models.collection_response import CollectionResponse
 from mixpeek.models.pagination_response import PaginationResponse
 from typing import Optional, Set
@@ -32,7 +33,8 @@ class ListCollectionsResponse(BaseModel):
     results: List[CollectionResponse] = Field(description="List of collections")
     pagination: PaginationResponse = Field(description="Pagination information")
     total_count: StrictInt = Field(description="Total number of collections matching the query")
-    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count"]
+    stats: Optional[CollectionListStats] = Field(default=None, description="Aggregate statistics across all collections in the result")
+    __properties: ClassVar[List[str]] = ["results", "pagination", "total_count", "stats"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -83,6 +85,9 @@ class ListCollectionsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of pagination
         if self.pagination:
             _dict['pagination'] = self.pagination.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of stats
+        if self.stats:
+            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -97,7 +102,8 @@ class ListCollectionsResponse(BaseModel):
         _obj = cls.model_validate({
             "results": [CollectionResponse.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
             "pagination": PaginationResponse.from_dict(obj["pagination"]) if obj.get("pagination") is not None else None,
-            "total_count": obj.get("total_count")
+            "total_count": obj.get("total_count"),
+            "stats": CollectionListStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None
         })
         return _obj
 

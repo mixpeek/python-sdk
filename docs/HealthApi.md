@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **healthcheck_health**
-> HealthCheckResponse healthcheck_health(deep=deep)
+> HealthCheckResponse healthcheck_health(deep=deep, metrics=metrics)
 
 Healthcheck
 
@@ -36,10 +36,11 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.HealthApi(api_client)
     deep = False # bool |  (optional) (default to False)
+    metrics = False # bool | Include Layer 2 protection metrics (optional) (default to False)
 
     try:
         # Healthcheck
-        api_response = api_instance.healthcheck_health(deep=deep)
+        api_response = api_instance.healthcheck_health(deep=deep, metrics=metrics)
         print("The response of HealthApi->healthcheck_health:\n")
         pprint(api_response)
     except Exception as e:
@@ -54,6 +55,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deep** | **bool**|  | [optional] [default to False]
+ **metrics** | **bool**| Include Layer 2 protection metrics | [optional] [default to False]
 
 ### Return type
 
@@ -83,7 +85,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **healthcheck_health_0**
-> HealthCheckResponse healthcheck_health_0(deep=deep)
+> HealthCheckResponse healthcheck_health_0(deep=deep, metrics=metrics)
 
 Healthcheck
 
@@ -110,10 +112,11 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.HealthApi(api_client)
     deep = False # bool |  (optional) (default to False)
+    metrics = False # bool | Include Layer 2 protection metrics (optional) (default to False)
 
     try:
         # Healthcheck
-        api_response = api_instance.healthcheck_health_0(deep=deep)
+        api_response = api_instance.healthcheck_health_0(deep=deep, metrics=metrics)
         print("The response of HealthApi->healthcheck_health_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -128,6 +131,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **deep** | **bool**|  | [optional] [default to False]
+ **metrics** | **bool**| Include Layer 2 protection metrics | [optional] [default to False]
 
 ### Return type
 

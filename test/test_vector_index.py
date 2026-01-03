@@ -36,9 +36,9 @@ class TestVectorIndex(unittest.TestCase):
         model = VectorIndex()
         if include_optional:
             return VectorIndex(
-                name = '',
-                description = '',
-                dimensions = 56,
+                name = '0',
+                description = '0123456789',
+                dimensions = 1.0,
                 type = 'dense',
                 distance = 'cosine',
                 datatype = 'float32',
@@ -50,9 +50,8 @@ class TestVectorIndex(unittest.TestCase):
             )
         else:
             return VectorIndex(
-                name = '',
-                description = '',
-                dimensions = 56,
+                name = '0',
+                description = '0123456789',
                 type = 'dense',
         )
         """

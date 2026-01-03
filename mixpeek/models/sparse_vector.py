@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Union
-from mixpeek.models.sparse_vector_indices_inner import SparseVectorIndicesInner
+from mixpeek.models.range_bucket_boundaries_inner import RangeBucketBoundariesInner
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class SparseVector(BaseModel):
     """
     Sparse vector representation with indices and values.  Only non-zero elements are stored for efficiency.  Example: ```json {     \"indices\": [0, 2, 4],     \"values\": [0.1, 0.3, 0.5] } ```
     """ # noqa: E501
-    indices: List[SparseVectorIndicesInner] = Field(description="Indices of non-zero elements")
+    indices: List[RangeBucketBoundariesInner] = Field(description="Indices of non-zero elements")
     values: List[Union[StrictFloat, StrictInt]] = Field(description="Values of non-zero elements")
     __properties: ClassVar[List[str]] = ["indices", "values"]
 
@@ -90,7 +90,7 @@ class SparseVector(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "indices": [SparseVectorIndicesInner.from_dict(_item) for _item in obj["indices"]] if obj.get("indices") is not None else None,
+            "indices": [RangeBucketBoundariesInner.from_dict(_item) for _item in obj["indices"]] if obj.get("indices") is not None else None,
             "values": obj.get("values")
         })
         return _obj
