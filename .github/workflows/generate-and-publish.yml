@@ -64,6 +64,10 @@ jobs:
           if [ -f "mixpeek/exceptions.py" ]; then
             cp mixpeek/exceptions.py .backup/ || true
           fi
+          # Backup CLI module (custom plugin development tools)
+          if [ -d "mixpeek/cli" ]; then
+            cp -r mixpeek/cli .backup/ || true
+          fi
 
       - name: Generate Python client
         run: |
@@ -89,6 +93,10 @@ jobs:
           fi
           if [ -f ".backup/exceptions.py" ]; then
             cp .backup/exceptions.py mixpeek/ || true
+          fi
+          # Restore CLI module
+          if [ -d ".backup/cli" ]; then
+            cp -r .backup/cli mixpeek/ || true
           fi
 
       - name: Auto-increment version

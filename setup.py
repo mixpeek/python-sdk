@@ -14,11 +14,16 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/mixpeek/mixpeek-python',
     packages=find_packages(),
-    install_requires=required,
+    install_requires=required + ['click>=8.0.0'],
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.10',
+    entry_points={
+        'console_scripts': [
+            'mixpeek=mixpeek.cli:cli',
+        ],
+    },
 )

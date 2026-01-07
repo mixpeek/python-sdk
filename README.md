@@ -16,6 +16,7 @@ This SDK is automatically generated from the [OpenAPI specification](https://api
 - 🎯 **Complete coverage** - 200+ endpoints for all Mixpeek features
 - ✅ **Well-tested** - Comprehensive test suite with 100% pass rate
 - 🎨 **Clean API** - Stripe-like resource interfaces for common operations
+- 🔧 **CLI Tools** - Build, test, and publish custom extractors
 
 ## Installation
 
@@ -152,6 +153,281 @@ async def main():
 
 asyncio.run(main())
 ```
+
+## CLI: Custom Plugin Development
+
+The Mixpeek CLI enables you to build, test, and publish custom extractors.
+
+### Quick Start
+
+```bash
+# Create a new plugin
+mixpeek plugin init my_extractor --category text --description "My custom text processor"
+
+# Navigate to plugin directory
+cd my_extractor
+
+# Test locally
+mixpeek plugin test
+
+# Publish to your namespace (Enterprise)
+mixpeek plugin publish --namespace ns_your_namespace
+```
+
+### CLI Commands
+
+#### `mixpeek plugin init <name>`
+
+Create a new plugin from a template with all required files.
+
+```bash
+mixpeek plugin init sentiment_analyzer \
+  --category text \
+  --description "Custom sentiment analysis" \
+  --author "Your Name"
+```
+
+**Options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--description` | `-d` | Plugin description |
+| `--category` | `-c` | Category: text, image, video, audio, document, multimodal |
+| `--author` | `-a` | Author name (defaults to git user.name) |
+| `--output` | `-o` | Output directory |
+
+**Generated Structure:**
+```
+my_extractor/
+├── __init__.py          # Package exports
+├── manifest.py          # Metadata, input/output schemas
+├── pipeline.py          # build_steps() implementation
+├── processors/
+│   ├── __init__.py
+│   └── core.py          # Main processing logic
+├── tests/
+│   ├── __init__.py
+│   └── test_plugin.py   # Unit tests (pytest)
+├── README.md            # Documentation
+└── pyproject.toml       # Package config
+```
+
+#### `mixpeek plugin test`
+
+Validate plugin structure and run tests locally.
+
+```bash
+# Test current directory
+mixpeek plugin test
+
+# Test specific path
+mixpeek plugin test --path ./my_extractor
+
+# Test with sample data
+mixpeek plugin test --sample-data test_data.json --verbose
+```
+
+**Options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--path` | `-p` | Plugin directory path |
+| `--sample-data` | `-s` | JSON/CSV file with test data |
+| `--verbose` | `-v` | Show detailed output |
+
+**What it validates:**
+1. Required files exist (manifest.py, pipeline.py)
+2. Schemas are valid (input, output, parameters)
+3. Pipeline builds successfully
+4. Unit tests pass (pytest)
+5. Sample data processes correctly (if provided)
+
+#### `mixpeek plugin validate`
+
+Quick validation without running full tests.
+
+```bash
+mixpeek plugin validate --path ./my_extractor
+```
+
+#### `mixpeek plugin publish`
+
+Upload plugin to your Mixpeek namespace (Enterprise feature).
+
+```bash
+# Publish with explicit credentials
+mixpeek plugin publish \
+  --namespace ns_abc123 \
+  --api-key sk_your_key
+
+# Using environment variables
+export MIXPEEK_API_KEY=sk_your_key
+export MIXPEEK_NAMESPACE=ns_abc123
+mixpeek plugin publish
+
+# Dry run (validate without publishing)
+mixpeek plugin publish --dry-run
+```
+
+**Options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--path` | `-p` | Plugin directory path |
+| `--namespace` | `-n` | Target namespace ID |
+| `--dry-run` | | Validate without publishing |
+
+#### `mixpeek plugin list`
+
+List available extractors in your namespace.
+
+```bash
+# List all extractors
+mixpeek plugin list --api-key sk_your_key
+
+# Filter by source
+mixpeek plugin list --source builtin   # Mixpeek built-in
+mixpeek plugin list --source custom    # Your custom plugins
+mixpeek plugin list --source community # Community marketplace
+```
+
+**Options:**
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--namespace` | `-n` | Namespace ID |
+| `--source` | `-s` | Filter: all, builtin, custom, community |
+
+### Plugin Development Guide
+
+#### 1. Define Your Schema (manifest.py)
+
+```python
+from pydantic import BaseModel, Field
+
+class MyExtractorInput(BaseModel):
+    """What your extractor accepts."""
+    text: str = Field(..., description="Input text")
+
+class MyExtractorOutput(BaseModel):
+    """What your extractor produces."""
+    sentiment: str = Field(..., description="Detected sentiment")
+    confidence: float = Field(..., ge=0.0, le=1.0)
+
+class MyExtractorParams(BaseModel):
+    """User-configurable parameters."""
+    threshold: float = Field(default=0.5, ge=0.0, le=1.0)
+```
+
+#### 2. Implement Processing Logic (processors/core.py)
+
+```python
+import pandas as pd
+from dataclasses import dataclass
+
+@dataclass
+class MyProcessorConfig:
+    threshold: float = 0.5
+    text_column: str = "text"
+
+class MyProcessor:
+    def __init__(self, config: MyProcessorConfig, progress_actor=None):
+        self.config = config
+        self.progress_actor = progress_actor  # For Ray progress tracking
+
+    def __call__(self, batch: pd.DataFrame) -> pd.DataFrame:
+        """Process a batch of inputs."""
+        results = []
+        for text in batch[self.config.text_column]:
+            # Your processing logic here
+            sentiment, confidence = self.analyze(text)
+            results.append({"sentiment": sentiment, "confidence": confidence})
+
+        batch["sentiment"] = [r["sentiment"] for r in results]
+        batch["confidence"] = [r["confidence"] for r in results]
+        return batch
+
+    def analyze(self, text: str) -> tuple[str, float]:
+        # Implement your analysis
+        return "positive", 0.95
+```
+
+#### 3. Wire Up the Pipeline (pipeline.py)
+
+```python
+from .processors.core import MyProcessor, MyProcessorConfig
+
+def build_steps(extractor_request, container=None, base_steps=None, **kwargs):
+    params = extractor_request.extractor_config.parameters or {}
+
+    config = MyProcessorConfig(
+        threshold=params.get("threshold", 0.5)
+    )
+
+    steps = base_steps or []
+    steps.append(MyProcessor(config))
+
+    return {
+        "steps": steps,
+        "prepare": lambda ds: ds,  # Dataset preparation
+    }
+```
+
+#### 4. Write Tests (tests/test_plugin.py)
+
+```python
+import pandas as pd
+import pytest
+from ..processors.core import MyProcessor, MyProcessorConfig
+
+def test_processor_basic():
+    config = MyProcessorConfig(threshold=0.5)
+    processor = MyProcessor(config)
+
+    batch = pd.DataFrame({"text": ["I love this!", "This is terrible"]})
+    result = processor(batch)
+
+    assert "sentiment" in result.columns
+    assert "confidence" in result.columns
+    assert len(result) == 2
+```
+
+#### 5. Test and Publish
+
+```bash
+# Run local tests
+mixpeek plugin test --verbose
+
+# Publish when ready
+mixpeek plugin publish --namespace ns_your_namespace
+```
+
+### Using Your Custom Plugin
+
+After publishing, use your extractor in collections:
+
+```python
+from mixpeek import Mixpeek
+
+client = Mixpeek(api_key="sk_your_key")
+
+# Create collection with your custom extractor
+collection = client.collections.create(
+    collection_name="my_collection",
+    source={"type": "bucket", "bucket_ids": ["bkt_abc123"]},
+    feature_extractor={
+        "feature_extractor_name": "my_extractor",
+        "version": "v1",
+        "parameters": {
+            "threshold": 0.7
+        }
+    }
+)
+```
+
+### Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `MIXPEEK_API_KEY` | Your API key |
+| `MIXPEEK_NAMESPACE` | Default namespace ID |
+| `MIXPEEK_BASE_URL` | API base URL (default: https://api.mixpeek.com) |
 
 ## Core Resources
 
