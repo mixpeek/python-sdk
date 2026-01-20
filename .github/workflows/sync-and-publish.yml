@@ -41,8 +41,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install build twine setuptools wheel
       
-      - name: Download OpenAPI Spec
-        run: curl -s https://api.mixpeek.com/docs/openapi.json -o openapi.json
+      - name: Use synced OpenAPI Spec (or download as fallback)
+        run: |
+          if [ -f "openapi.json" ]; then
+            echo "✅ Using synced openapi.json from server repo"
+            echo "📄 File size: $(wc -c < openapi.json) bytes"
+          else
+            echo "⚠️  No synced openapi.json found, downloading from production..."
+            curl -s https://api.mixpeek.com/docs/openapi.json -o openapi.json
+            echo "📥 Downloaded from production API"
+          fi
       
       - name: Extract version from OpenAPI spec
         id: get-version
