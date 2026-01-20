@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **organization_name** | **str** | Updated display name for the organization. | [optional] 
 **logo_url** | **str** | Updated organization logo URL (e.g., custom logo to override auto-generated logo). | [optional] 
 **billing_email** | **str** | Updated billing contact email. | [optional] 
-**metadata** | **Dict[str, object]** | Replace metadata with provided dictionary when set. | [optional] 
+**metadata** | **object** | Replace metadata with provided dictionary when set. | [optional] 
 **rate_limits** | [**BaseRateLimits**](BaseRateLimits.md) | Override the computed rate limits for the organization. | [optional] 
 
 ## Example

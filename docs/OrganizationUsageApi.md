@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_key_breakdown_organizations_id_usage_endpoints**
-> List[Dict[str, object]] get_key_breakdown_organizations_id_usage_endpoints(key_id, start=start, end=end, authorization=authorization)
+> List[object] get_key_breakdown_organizations_id_usage_endpoints(key_id, start=start, end=end, authorization=authorization)
 
 Get Api Key Endpoint Breakdown
 
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -89,7 +89,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_key_usage_organizations**
-> Dict[str, object] get_key_usage_organizations(key_id, start=start, end=end, authorization=authorization)
+> object get_key_usage_organizations(key_id, start=start, end=end, authorization=authorization)
 
 Get Api Key Usage
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -168,7 +168,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_org_usage_organizations**
-> Dict[str, object] get_org_usage_organizations(start=start, end=end, authorization=authorization)
+> object get_org_usage_organizations(start=start, end=end, authorization=authorization)
 
 Get Org Usage
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

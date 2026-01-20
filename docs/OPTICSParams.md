@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **max_eps** | **float** | Maximum distance between two samples. Default (None) means no maximum distance | [optional] 
 **metric** | **str** | Metric to use for distance computation | [optional] [default to 'minkowski']
 **p** | **float** | Parameter for the Minkowski metric | [optional] [default to 2]
-**metric_params** | **Dict[str, object]** | Additional keyword arguments for the metric function | [optional] 
+**metric_params** | **object** | Additional keyword arguments for the metric function | [optional] 
 **cluster_method** | **str** | Method to extract clusters (&#39;xi&#39; or &#39;dbscan&#39;) | [optional] [default to 'xi']
 **eps** | **float** | Maximum distance for DBSCAN cluster extraction method | [optional] 
 **xi** | **float** | Minimum steepness on the reachability plot for cluster boundary (xi method) | [optional] [default to 0.05]

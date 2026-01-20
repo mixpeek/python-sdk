@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cluster_name** | **str** | Updated name for the cluster | [optional] 
 **description** | **str** | Updated description for the cluster | [optional] 
-**metadata** | **Dict[str, object]** | Updated metadata for the cluster | [optional] 
+**metadata** | **object** | Updated metadata for the cluster | [optional] 
 
 ## Example
 

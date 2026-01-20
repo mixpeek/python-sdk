@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **last_run_id** | **str** | Run ID of the most recent successful clustering execution. Used to retrieve execution results. | [optional] 
 **created_at** | **datetime** | When the cluster was created | [optional] 
 **updated_at** | **datetime** | When the cluster was last updated | [optional] 
-**metadata** | **Dict[str, object]** | Additional user-defined metadata for the cluster | [optional] 
+**metadata** | **object** | Additional user-defined metadata for the cluster | [optional] 
 
 ## Example
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key_prefix** | **str** | Updated storage key/path prefix of the object, this will be used to retrieve the object from the storage. It&#39;s at the root of the object. | [optional] 
 **blobs** | [**List[CreateBlobRequest]**](CreateBlobRequest.md) | List of new or updated blobs for this object | [optional] 
-**metadata** | **Dict[str, object]** | Updated metadata for the object, this will be merged with existing metadata. | [optional] 
+**metadata** | **object** | Updated metadata for the object, this will be merged with existing metadata. | [optional] 
 **skip_duplicates** | **bool** | Skip duplicate blobs, if a blob with the same hash already exists, it will be skipped. | [optional] 
 
 ## Example

@@ -207,7 +207,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deploy_plugin_namespaces**
-> Dict[str, object] deploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
+> object deploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
 
 Deploy or redeploy a plugin
 
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -901,7 +901,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **undeploy_plugin_namespaces**
-> Dict[str, object] undeploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
+> object undeploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
 
 Undeploy a plugin
 
@@ -958,7 +958,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

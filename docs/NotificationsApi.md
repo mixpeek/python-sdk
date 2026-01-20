@@ -91,7 +91,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_funnel_state_notifications**
-> Dict[str, object] get_funnel_state_notifications(authorization=authorization)
+> object get_funnel_state_notifications(authorization=authorization)
 
 Get Funnel State
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -246,7 +246,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_preferences_notifications**
-> Dict[str, object] get_preferences_notifications(authorization=authorization)
+> object get_preferences_notifications(authorization=authorization)
 
 Get Preferences
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -396,7 +396,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_unread_count_notifications**
-> Dict[str, object] get_unread_count_notifications(user_id=user_id, authorization=authorization)
+> object get_unread_count_notifications(user_id=user_id, authorization=authorization)
 
 Get Unread Count
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -708,7 +708,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_preferences_notifications**
-> Dict[str, object] update_preferences_notifications(update_preferences_request, authorization=authorization)
+> object update_preferences_notifications(update_preferences_request, authorization=authorization)
 
 Update Preferences
 
@@ -758,7 +758,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

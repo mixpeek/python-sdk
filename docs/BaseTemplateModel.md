@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **name** | **str** | Human-readable template name | 
 **description** | **str** | Detailed description of the template&#39;s purpose | 
 **category** | **str** | Optional category for organizing templates | [optional] 
-**configuration** | **Dict[str, object]** | Template-specific configuration (varies by template_type) | 
+**configuration** | **object** | Template-specific configuration (varies by template_type) | 
 **tags** | **List[str]** | Tags for categorizing and filtering templates | [optional] 
 **is_active** | **bool** | Whether this template is available for use | [optional] [default to True]
 **is_public** | **bool** | Whether this template is publicly discoverable without authentication | [optional] [default to False]

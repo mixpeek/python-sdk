@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **timestamp** | **datetime** | Event timestamp | 
 **execution_id** | **str** | Execution identifier | 
 **signal_type** | **str** | Type of signal | 
-**signal_data** | **Dict[str, object]** | Signal-specific data | 
-**metadata** | **Dict[str, object]** | Additional metadata | [optional] 
+**signal_data** | **object** | Signal-specific data | 
+**metadata** | **object** | Additional metadata | [optional] 
 
 ## Example
 

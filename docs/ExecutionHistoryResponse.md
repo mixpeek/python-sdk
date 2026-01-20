@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **cluster_id** | **str** |  | 
 **time_range** | [**ApiAnalyticsClustersModelsTimeRange**](ApiAnalyticsClustersModelsTimeRange.md) |  | 
 **results** | [**List[ClusterExecutionMetric]**](ClusterExecutionMetric.md) |  | 
-**summary** | **Dict[str, object]** |  | [optional] 
+**summary** | **object** |  | [optional] 
 
 ## Example
 

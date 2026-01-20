@@ -6,7 +6,7 @@ Request payload for updating session metadata.  Only user_memory can be updated 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_memory** | **Dict[str, object]** | Updated user memory (REQUIRED) | 
+**user_memory** | **object** | Updated user memory (REQUIRED) | 
 
 ## Example
 

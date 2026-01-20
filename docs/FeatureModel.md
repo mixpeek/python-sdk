@@ -7,7 +7,7 @@ Response from a feature extractor.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **feature_extractor_id** | **str** | ID of the feature extractor that produced this response | 
-**payload** | **Dict[str, object]** | Metadata of the feature | [optional] 
+**payload** | **object** | Metadata of the feature | [optional] 
 **vectors** | [**Vectors**](Vectors.md) |  | [optional] 
 
 ## Example

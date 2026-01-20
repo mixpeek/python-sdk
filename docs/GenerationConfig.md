@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **temperature** | **float** | Controls randomness for video description generation. Higher is more random. | [optional] [default to 0.7]
 **top_p** | **float** | Nucleus sampling (top-p) for video description generation. | [optional] [default to 0.8]
 **response_mime_type** | **str** | MIME type for response (e.g., &#39;application/json&#39;) | [optional] 
-**response_schema** | **Dict[str, object]** | JSON schema for structured output | [optional] 
+**response_schema** | **object** | JSON schema for structured output | [optional] 
 
 ## Example
 

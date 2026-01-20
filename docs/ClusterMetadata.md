@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **namespace_id** | **str** | Namespace this cluster belongs to | 
 **input_collections** | **List[str]** | Source collection IDs that were clustered | 
 **source_bucket_ids** | **List[str]** | Source bucket IDs that the input collections originated from. Enables bucket lineage tracking. | [optional] 
-**filters** | **Dict[str, object]** | Optional filters that were applied to pre-filter documents before clustering | [optional] 
+**filters** | **object** | Optional filters that were applied to pre-filter documents before clustering | [optional] 
 **cluster_type** | **str** | Type of clustering: vector (embedding-based) or attribute (metadata-based) | 
 **feature_uris** | **List[str]** | Feature URIs that were clustered (mixpeek://{extractor}@{version}/{output}). Only for vector clustering. | [optional] 
 **multi_feature_strategy** | **str** | Strategy used if multiple features (concatenate/independent/weighted). Only for vector clustering. | [optional] 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **output_collection_ids** | **List[str]** | Collection IDs where cluster documents are stored. For single output: list with one collection ID. For per-feature output: list with one collection ID per feature. | [optional] 
 **output_collection_names** | **List[str]** | Names of output collections. Corresponds to output_collection_ids. | [optional] 
 **algorithm** | **str** | Clustering algorithm used (hdbscan, kmeans, attribute_based, etc.) | [optional] 
-**algorithm_params** | **Dict[str, object]** | Algorithm-specific parameters (not used for attribute_based) | [optional] 
+**algorithm_params** | **object** | Algorithm-specific parameters (not used for attribute_based) | [optional] 
 **enrich_source** | **bool** | Whether source documents were enriched with cluster_id | [optional] [default to False]
 **source_enrichment_config** | [**SourceEnrichmentConfig**](SourceEnrichmentConfig.md) | Configuration for source enrichment (if enrich_source&#x3D;True) | [optional] 
 **llm_labeling** | [**LLMLabelingOutput**](LLMLabelingOutput.md) | Configuration for LLM-based cluster labeling (applies to all cluster types) | [optional] 
@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **hierarchy_detected** | **bool** | Whether implicit hierarchy was detected (multi-feature independent) or created (hierarchical attributes) | [optional] [default to False]
 **parent_cluster_id** | **str** | For child clusters in hierarchy | [optional] 
 **child_cluster_ids** | **List[str]** | For parent clusters | [optional] 
-**hierarchy_relationships** | **List[Dict[str, object]]** | Parent-child relationships detected from cluster membership overlap | [optional] 
+**hierarchy_relationships** | **List[object]** | Parent-child relationships detected from cluster membership overlap | [optional] 
 **status** | [**TaskStatusEnum**](TaskStatusEnum.md) | Cluster job status (propagated from TaskService) | [optional] 
 **last_execution_task_id** | **str** | Most recent task ID for this cluster | [optional] 
 **created_at** | **datetime** | When cluster was created | [optional] 
@@ -42,7 +42,7 @@ Name | Type | Description | Notes
 **last_executed_at** | **datetime** | Last execution timestamp | [optional] 
 **completed_at** | **datetime** | When clustering completed successfully | [optional] 
 **llm_labeling_errors** | **List[str]** | List of errors encountered during LLM labeling (if any). Stored in MongoDB cluster metadata only, NOT in Qdrant cluster documents. Used to track LLM failures while allowing fallback labels to work. | [optional] 
-**metadata** | **Dict[str, object]** | Additional user-defined metadata | [optional] 
+**metadata** | **object** | Additional user-defined metadata | [optional] 
 
 ## Example
 

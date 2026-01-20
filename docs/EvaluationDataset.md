@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **namespace_id** | **str** | Namespace this dataset belongs to | 
 **internal_id** | **str** | Internal organization ID | 
 **query_count** | **int** | Number of queries in dataset | 
-**metadata** | **Dict[str, object]** | Additional metadata (e.g., labeling instructions, version info) | [optional] 
+**metadata** | **object** | Additional metadata (e.g., labeling instructions, version info) | [optional] 
 
 ## Example
 

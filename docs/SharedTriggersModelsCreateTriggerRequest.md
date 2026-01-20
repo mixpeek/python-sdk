@@ -7,9 +7,9 @@ Request to create a new trigger.  Examples:     Cluster trigger (cron):         
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action_type** | [**TriggerActionType**](TriggerActionType.md) | Type of action to execute | 
-**action_config** | **Dict[str, object]** | Action-specific configuration | 
+**action_config** | **object** | Action-specific configuration | 
 **trigger_type** | [**SharedTriggersModelsTriggerType**](SharedTriggersModelsTriggerType.md) | Type of schedule | 
-**schedule_config** | **Dict[str, object]** | Schedule-specific configuration | 
+**schedule_config** | **object** | Schedule-specific configuration | 
 **description** | **str** | Human-readable description | [optional] 
 **status** | [**SharedTriggersModelsTriggerStatus**](SharedTriggersModelsTriggerStatus.md) | Initial status (active or paused) | [optional] 
 

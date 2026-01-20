@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **document_id** | **str** | ID of the matched document | 
 **asset_id** | **str** | Asset ID of the matched document | [optional] 
 **score** | **float** | Similarity/relevance score | 
-**matched_features** | **Dict[str, object]** | Features that caused the match | [optional] 
-**metadata** | **Dict[str, object]** | Metadata from the matched document | [optional] 
+**matched_features** | **object** | Features that caused the match | [optional] 
+**metadata** | **object** | Metadata from the matched document | [optional] 
 
 ## Example
 

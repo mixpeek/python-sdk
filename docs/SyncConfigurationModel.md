@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 **created_by_user_id** | **str** | User identifier that created the sync configuration. | 
 **last_error** | **str** | Most recent error message if sync attempts failed. | [optional] 
 **consecutive_failures** | **int** |  | [optional] [default to 0]
-**metadata** | **Dict[str, object]** | Arbitrary metadata supplied by the user. | [optional] 
+**metadata** | **object** | Arbitrary metadata supplied by the user. | [optional] 
 **locked_by_worker_id** | **str** | Worker ID that currently holds the lock for this sync | [optional] 
 **locked_at** | **datetime** | Timestamp when lock was acquired | [optional] 
 **lock_expires_at** | **datetime** | Timestamp when lock expires (for stale lock recovery) | [optional] 

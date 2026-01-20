@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **var_property** | **str** | Property name of the blob | 
 **key_prefix** | **str** | Storage key/path of the blob, this will be used to retrieve the blob from the storage. It is similar to a file path. If not provided, it will be placed in the root of the bucket. | [optional] 
 **type** | [**BucketSchemaFieldType**](BucketSchemaFieldType.md) | The schema field type this blob corresponds to (e.g., IMAGE, PDF, DOCUMENT) | 
-**properties** | **Dict[str, object]** | All blob data and metadata unified (formerly separate &#39;data&#39; and &#39;metadata&#39; fields). Contains URLs, dimensions, metadata, and any other blob-specific information. | [optional] 
+**properties** | **object** | All blob data and metadata unified (formerly separate &#39;data&#39; and &#39;metadata&#39; fields). Contains URLs, dimensions, metadata, and any other blob-specific information. | [optional] 
 **details** | [**BlobDetails**](BlobDetails.md) | System-generated file details (filename, size, hash, etc.) | [optional] 
 
 ## Example

@@ -7,7 +7,7 @@ Single query with ground truth relevance labels.  This represents one query in a
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **query_id** | **str** | Unique identifier for this query within the dataset | 
-**query_input** | **Dict[str, object]** | Query input in the same format as retriever execution (e.g., {&#39;text&#39;: &#39;...&#39;}) | 
+**query_input** | **object** | Query input in the same format as retriever execution (e.g., {&#39;text&#39;: &#39;...&#39;}) | 
 **relevant_documents** | **List[str]** | List of feature_ids that are relevant for this query | 
 **relevance_scores** | **Dict[str, int]** | Optional graded relevance scores (doc_id -&gt; score, 0-5 where 5 is most relevant). Used for NDCG calculation. | [optional] 
 

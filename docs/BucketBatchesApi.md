@@ -508,7 +508,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_failed_documents_buckets_batches_batch**
-> Dict[str, object] get_failed_documents_buckets_batches_batch(bucket_identifier, batch_id, tier_num=tier_num, collection_id=collection_id, limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
+> object get_failed_documents_buckets_batches_batch(bucket_identifier, batch_id, tier_num=tier_num, collection_id=collection_id, limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
 
 Get Failed Documents for Batch
 
@@ -569,7 +569,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -761,7 +761,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **retry_batch_buckets_batches**
-> Dict[str, object] retry_batch_buckets_batches(bucket_identifier, batch_id, retry_batch_request, authorization=authorization, x_namespace=x_namespace)
+> object retry_batch_buckets_batches(bucket_identifier, batch_id, retry_batch_request, authorization=authorization, x_namespace=x_namespace)
 
 Retry Failed Documents
 
@@ -817,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -843,7 +843,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **retry_qdrant_write_buckets_batches_batch_id_tiers_num**
-> Dict[str, object] retry_qdrant_write_buckets_batches_batch_id_tiers_num(bucket_identifier, batch_id, tier_num, authorization=authorization, x_namespace=x_namespace)
+> object retry_qdrant_write_buckets_batches_batch_id_tiers_num(bucket_identifier, batch_id, tier_num, authorization=authorization, x_namespace=x_namespace)
 
 Retry Qdrant Write from S3
 
@@ -898,7 +898,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

@@ -7,7 +7,7 @@ Request model for bulk updating documents by filters.  Updates ALL documents mat
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | OPTIONAL. Filter conditions to match documents for update. If not provided, updates ALL documents in the collection. Supports complex logical operators (AND, OR, NOT). Example: {&#39;must&#39;: [{&#39;key&#39;: &#39;metadata.status&#39;, &#39;value&#39;: &#39;pending&#39;}]} | [optional] 
-**update_data** | **Dict[str, object]** | REQUIRED. Dictionary of field-value pairs to update on ALL matching documents. Can update any document field except vectors (metadata, source_blobs, etc.). All matched documents receive the SAME updates. Example: {&#39;metadata.status&#39;: &#39;processed&#39;, &#39;metadata.reviewed&#39;: true} | 
+**update_data** | **object** | REQUIRED. Dictionary of field-value pairs to update on ALL matching documents. Can update any document field except vectors (metadata, source_blobs, etc.). All matched documents receive the SAME updates. Example: {&#39;metadata.status&#39;: &#39;processed&#39;, &#39;metadata.reviewed&#39;: true} | 
 
 ## Example
 

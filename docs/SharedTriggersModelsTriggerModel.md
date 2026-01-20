@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **namespace_id** | **str** | Namespace ID | 
 **internal_id** | **str** | Organization internal ID | 
 **action_type** | [**TriggerActionType**](TriggerActionType.md) | Type of action to execute | 
-**action_config** | **Dict[str, object]** | Action-specific configuration | 
+**action_config** | **object** | Action-specific configuration | 
 **trigger_type** | [**SharedTriggersModelsTriggerType**](SharedTriggersModelsTriggerType.md) | Type of schedule | 
-**schedule_config** | **Dict[str, object]** | Schedule-specific configuration | 
+**schedule_config** | **object** | Schedule-specific configuration | 
 **status** | [**SharedTriggersModelsTriggerStatus**](SharedTriggersModelsTriggerStatus.md) | Current trigger status | [optional] 
 **last_triggered_at** | **datetime** | Last time trigger fired | [optional] 
 **last_execution_task_id** | **str** | Task ID of last execution | [optional] 
@@ -23,8 +23,8 @@ Name | Type | Description | Notes
 **last_execution_error** | **str** | Error from last execution (if failed) | [optional] 
 **event_counter** | **int** | Current event count since last trigger | [optional] [default to 0]
 **last_cooldown_at** | **datetime** | Last time cooldown was applied | [optional] 
-**baseline_snapshot** | **Dict[str, object]** | Baseline snapshot for drift measurement (captured after successful execution) | [optional] 
-**last_drift_measurement** | **Dict[str, object]** | Result of most recent drift measurement check | [optional] 
+**baseline_snapshot** | **object** | Baseline snapshot for drift measurement (captured after successful execution) | [optional] 
+**last_drift_measurement** | **object** | Result of most recent drift measurement check | [optional] 
 **last_condition_check_at** | **datetime** | When condition was last evaluated | [optional] 
 **description** | **str** | Human-readable description | [optional] 
 **created_at** | **datetime** | Creation timestamp | [optional] 

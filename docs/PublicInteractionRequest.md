@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **interaction_type** | [**List[InteractionType]**](InteractionType.md) | Type(s) of interaction that occurred | 
 **position** | **int** | Position in search results (0-indexed) | 
 **execution_id** | **str** | ID of the retriever execution that generated these results. HIGHLY RECOMMENDED for analytics. | [optional] 
-**query_snapshot** | **Dict[str, object]** | Snapshot of the query that generated these results. HIGHLY RECOMMENDED for training optimization. | [optional] 
+**query_snapshot** | **object** | Snapshot of the query that generated these results. HIGHLY RECOMMENDED for training optimization. | [optional] 
 **document_score** | **float** | Initial retrieval score of this document | [optional] 
 **result_set_size** | **int** | Total number of results shown | [optional] 
 **session_id** | **str** | Session identifier for tracking user journey | [optional] 
-**metadata** | **Dict[str, object]** | Additional context about the interaction | [optional] 
+**metadata** | **object** | Additional context about the interaction | [optional] 
 
 ## Example
 

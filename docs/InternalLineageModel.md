@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **source_document_id** | **str** | Document ID of immediate parent when source_type&#x3D;&#39;collection&#39;. | [optional] 
 **source_collection_id** | **str** | Collection ID of immediate parent when source_type&#x3D;&#39;collection&#39;. | [optional] 
 **path** | **str** | Materialized lineage path string (e.g., &#39;bkt_123/col_456/col_789&#39;). | [optional] 
-**chain** | **List[Dict[str, object]]** | Ordered list of processing steps from root object to this document. Each step contains: collection_id, feature_extractor_id, document_id, timestamp. | [optional] 
+**chain** | **List[object]** | Ordered list of processing steps from root object to this document. Each step contains: collection_id, feature_extractor_id, document_id, timestamp. | [optional] 
 
 ## Example
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **dataset_name** | **str** | Unique name for this dataset | 
 **description** | **str** | Description of what this dataset measures | [optional] 
 **queries** | [**List[GroundTruthQuery]**](GroundTruthQuery.md) | List of queries with ground truth relevance labels | 
-**metadata** | **Dict[str, object]** | Additional metadata | [optional] 
+**metadata** | **object** | Additional metadata | [optional] 
 
 ## Example
 

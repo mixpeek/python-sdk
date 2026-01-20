@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **retriever_id** | **str** | Retriever identifier | 
 **time_range** | [**ApiAnalyticsModelsTimeRange**](ApiAnalyticsModelsTimeRange.md) | Time range of the data | 
-**metrics** | **List[Dict[str, object]]** | Time-series performance metrics | 
-**summary** | **Dict[str, object]** | Aggregated summary statistics | [optional] 
+**metrics** | **List[object]** | Time-series performance metrics | 
+**summary** | **object** | Aggregated summary statistics | [optional] 
 
 ## Example
 

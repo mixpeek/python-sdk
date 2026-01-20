@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **stats** | [**JoinStats**](JoinStats.md) |  | 
-**results** | **List[Dict[str, object]]** |  | [optional] 
+**results** | **List[object]** |  | [optional] 
 
 ## Example
 

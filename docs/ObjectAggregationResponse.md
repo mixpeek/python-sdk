@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**List[AggregationResult]**](AggregationResult.md) | List of aggregation results, one per group. | 
 **total_groups** | **int** | Total number of unique groups returned. | 
-**query_info** | **Dict[str, object]** | Additional information about the query execution. May include pipeline stages, execution time, etc. | [optional] 
+**query_info** | **object** | Additional information about the query execution. May include pipeline stages, execution time, etc. | [optional] 
 
 ## Example
 

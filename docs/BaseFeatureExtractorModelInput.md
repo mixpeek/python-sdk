@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **feature_extractor_name** | **str** | Name of the feature extractor | 
 **version** | **str** | Version of the feature extractor | 
-**params** | **Dict[str, object]** | Optional extractor parameters that affect vector index configuration. Parameters set here are locked at namespace creation and determine vector dimensions in Qdrant. Collections using this extractor must use compatible params. Example: {&#39;model&#39;: &#39;siglip_base&#39;} | [optional] 
+**params** | **object** | Optional extractor parameters that affect vector index configuration. Parameters set here are locked at namespace creation and determine vector dimensions in Qdrant. Collections using this extractor must use compatible params. Example: {&#39;model&#39;: &#39;siglip_base&#39;} | [optional] 
 
 ## Example
 

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **assign_labels** | **str** | Strategy to assign labels in the embedding space (&#39;kmeans&#39; or &#39;discretize&#39;) | [optional] [default to 'kmeans']
 **degree** | **float** | Degree of the polynomial kernel. Ignored by other kernels | [optional] [default to 3]
 **coef0** | **float** | Zero coefficient for polynomial and sigmoid kernels | [optional] [default to 1]
-**kernel_params** | **Dict[str, object]** | Parameters for the kernel function | [optional] 
+**kernel_params** | **object** | Parameters for the kernel function | [optional] 
 **n_jobs** | **int** | Number of parallel jobs to run (-1 means using all processors) | [optional] [default to 1]
 **verbose** | **bool** | Verbosity mode | [optional] [default to False]
 

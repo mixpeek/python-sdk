@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **max_path_length** | **int** | Maximum number of steps in a path | [optional] [default to 10]
 **min_support** | **int** | Minimum sequences required to include a path | [optional] [default to 5]
 **max_window_days** | **int** | Maximum duration for path completion (in days) | [optional] 
-**filters** | **Dict[str, object]** | Optional event filters | [optional] 
+**filters** | **object** | Optional event filters | [optional] 
 
 ## Example
 

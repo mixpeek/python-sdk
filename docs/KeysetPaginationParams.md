@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **method** | [**PaginationMethod**](PaginationMethod.md) | Constant identifying keyset pagination (REQUIRED). | [optional] 
 **limit** | **int** | Maximum number of documents to return per page (REQUIRED). Default: 10. | [optional] [default to 10]
-**after** | **Dict[str, object]** | Last seen keyset marker from previous response (OPTIONAL). Must include all sort fields. Example: {&#39;score&#39;: 0.73, &#39;id&#39;: &#39;doc_20&#39;}. null for first page, then use next_cursor from response | [optional] 
+**after** | **object** | Last seen keyset marker from previous response (OPTIONAL). Must include all sort fields. Example: {&#39;score&#39;: 0.73, &#39;id&#39;: &#39;doc_20&#39;}. null for first page, then use next_cursor from response | [optional] 
 
 ## Example
 

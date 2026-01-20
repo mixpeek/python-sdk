@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 **presigned_url_expiration** | **int** | How long the presigned URL is valid, in seconds | 
 **s3_key** | **str** | Full S3 object key where the file will be stored. Format: {internal_id}/{namespace_id}/api_buckets_uploads_create/{upload_id}/{filename}. Used internally for verification and object creation. | 
 **status** | [**TaskStatusEnum**](TaskStatusEnum.md) | Current upload status. After creation, always PENDING. Possible statuses: PENDING → IN_PROGRESS → PROCESSING → COMPLETED/FAILED/CANCELED | 
-**metadata** | **Dict[str, object]** | Custom metadata for tracking | [optional] 
+**metadata** | **object** | Custom metadata for tracking | [optional] 
 **create_object_on_confirm** | **bool** | Whether bucket object will be auto-created on confirmation | 
-**object_metadata** | **Dict[str, object]** | Metadata for the bucket object (if create_object_on_confirm&#x3D;true) | [optional] 
+**object_metadata** | **object** | Metadata for the bucket object (if create_object_on_confirm&#x3D;true) | [optional] 
 **blob_property** | **str** | Property name for the blob in bucket object | [optional] 
 **blob_type** | **str** | Type of blob (IMAGE, VIDEO, etc.) | [optional] 
 **file_hash** | **str** | SHA256 hash of the file content. Set during confirmation from S3 metadata or provided in request. Used for duplicate detection. | [optional] 

@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **source_url** | **str** | Original URL before S3 mirroring (for URL-based ingestion). | [optional] 
 **object_key_source** | **str** | S3 key source identifier. | [optional] 
 **detected_mime_type** | **str** | MIME type detected during canonicalization. | [optional] 
-**history** | **List[Dict[str, object]]** | Processing steps history with timestamps and operations. | [optional] 
-**taxonomy_lineage** | **List[Dict[str, object]]** | Taxonomy enrichment entries applied to this document. | [optional] 
-**last_health_check** | **Dict[str, object]** | Last health check result (for batch processing). | [optional] 
+**history** | **List[object]** | Processing steps history with timestamps and operations. | [optional] 
+**taxonomy_lineage** | **List[object]** | Taxonomy enrichment entries applied to this document. | [optional] 
+**last_health_check** | **object** | Last health check result (for batch processing). | [optional] 
 
 ## Example
 

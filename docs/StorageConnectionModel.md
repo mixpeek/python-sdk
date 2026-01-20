@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | UTC timestamp when the connection was created. Auto-generated using shared.utilities.helpers.current_time(). Immutable after creation. Format: ISO 8601 datetime. | [optional] 
 **updated_at** | **datetime** | UTC timestamp of the most recent update to the connection. Updated automatically on any field modification. Tracks configuration changes, status updates, and credential refreshes. Format: ISO 8601 datetime. | [optional] 
 **created_by_user_id** | **str** | REQUIRED. User identifier of the user who created this connection. Used for audit trails and permission checks. Format: usr_{15-character alphanumeric}. Immutable after creation. | 
-**metadata** | **Dict[str, object]** | Arbitrary key-value metadata provided by the user. Useful for tagging, categorization, and custom annotations. NOT REQUIRED - defaults to empty dictionary. Common uses: team tags, cost center codes, project identifiers. | [optional] 
+**metadata** | **object** | Arbitrary key-value metadata provided by the user. Useful for tagging, categorization, and custom annotations. NOT REQUIRED - defaults to empty dictionary. Common uses: team tags, cost center codes, project identifiers. | [optional] 
 
 ## Example
 

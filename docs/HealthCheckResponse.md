@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **status** | [**HealthStatusOutput**](HealthStatusOutput.md) | Overall API health status | 
 **data** | [**HealthServiceStatus**](HealthServiceStatus.md) | Per-service health status flags | 
 **errors** | [**HealthServiceErrors**](HealthServiceErrors.md) | Optional per-service error messages when a service check fails | [optional] 
-**meta** | **Dict[str, object]** | Optional metadata such as configured object storage bucket/region/endpoint, API URL, and deployment health details (when deep&#x3D;True) | [optional] 
+**meta** | **object** | Optional metadata such as configured object storage bucket/region/endpoint, API URL, and deployment health details (when deep&#x3D;True) | [optional] 
 
 ## Example
 

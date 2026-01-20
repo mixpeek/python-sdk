@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **bool** | Whether the CORS configuration was successful | 
 **bucket** | **str** | The object storage bucket name where CORS was configured | 
-**applied_configuration** | **Dict[str, object]** | The CORS configuration that was applied to the bucket | 
+**applied_configuration** | **object** | The CORS configuration that was applied to the bucket | 
 **message** | **str** | Human-readable status message | 
 
 ## Example

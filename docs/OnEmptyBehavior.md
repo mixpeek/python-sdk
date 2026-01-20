@@ -1,0 +1,15 @@
+# OnEmptyBehavior
+
+Behavior when a feature search input is empty or missing.  Controls what happens when the resolved input (text, URL, or base64) is empty, None, or evaluates to an empty string after template resolution.  ┌─────────┬────────────────────────────────────────────────────────────────────┐ │ Value   │ Behavior                                                           │ ├─────────┼────────────────────────────────────────────────────────────────────┤ │ error   │ Fail with validation error (input is required)                     │ │ skip    │ Exclude this search from fusion (let other searches drive results) │ │ random  │ Use random vector to return results (for optional single-search)   │ └─────────┴────────────────────────────────────────────────────────────────────┘  Use Cases:     - error (default): Strict mode - fail fast if required input is missing.       Best for: Production pipelines where missing input indicates a bug.      - skip: Graceful degradation - exclude from fusion if input missing.       Best for: Multi-modal search where user may provide text OR image OR both.       If text is empty but image is provided, only image search runs.      - random: Always return results - use random vector as fallback.       Best for: Single-feature search where you always want results returned,       even if the input is empty (e.g., \"show me anything\" behavior).  Examples:     Multi-modal with optional inputs (skip empty):         ```json         {             \"searches\": [                 {\"feature_uri\": \"text-embed\", \"on_empty\": \"skip\", ...},                 {\"feature_uri\": \"image-embed\", \"on_empty\": \"skip\", ...}             ]         }         ```         - Text only provided → text search runs         - Image only provided → image search runs         - Both provided → fusion of both         - Neither provided → error (no searches to run)      Single search, always return results:         ```json         {             \"searches\": [                 {\"feature_uri\": \"text-embed\", \"on_empty\": \"random\", ...}             ]         }         ```         - Input provided → normal search         - Input empty → random results from collection
+
+## Enum
+
+* `ERROR` (value: `'error'`)
+
+* `SKIP` (value: `'skip'`)
+
+* `RANDOM` (value: `'random'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

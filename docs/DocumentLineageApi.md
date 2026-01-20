@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_decomposition_tree_objects**
-> Dict[str, object] get_decomposition_tree_objects(object_id, include_document_ids=include_document_ids, authorization=authorization, x_namespace=x_namespace)
+> object get_decomposition_tree_objects(object_id, include_document_ids=include_document_ids, authorization=authorization, x_namespace=x_namespace)
 
 Get decomposition tree visualization
 
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -89,7 +89,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_lineage**
-> Dict[str, object] get_document_lineage(collection_id, document_id, authorization=authorization, x_namespace=x_namespace)
+> object get_document_lineage(collection_id, document_id, authorization=authorization, x_namespace=x_namespace)
 
 Get document lineage
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -168,7 +168,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_documents_by_object**
-> Dict[str, object] get_documents_by_object(object_id, collection_ids=collection_ids, authorization=authorization, x_namespace=x_namespace)
+> object get_documents_by_object(object_id, collection_ids=collection_ids, authorization=authorization, x_namespace=x_namespace)
 
 Get all documents derived from an object
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

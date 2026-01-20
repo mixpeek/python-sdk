@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **lineage_path** | **str** | Optional materialized lineage path to set during creation. | [optional] 
 **lineage_chain** | [**List[LineageStep]**](LineageStep.md) | Processing steps from root object to this document. Recommended for decomposition trees. | [optional] 
 **document_schema_version** | **str** | Optional document schema version (v1 or v2). If not provided, uses system default. | [optional] 
-**metadata** | **Dict[str, object]** | Optional metadata dictionary for user-defined fields and custom attributes. | [optional] 
+**metadata** | **object** | Optional metadata dictionary for user-defined fields and custom attributes. | [optional] 
 **features** | [**List[FeatureModel]**](FeatureModel.md) | Features to associate with the document | [optional] 
 
 ## Example

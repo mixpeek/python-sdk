@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **source** | [**ExtractorSource**](ExtractorSource.md) | Origin of this extractor: &#39;builtin&#39; (shipped with Mixpeek), &#39;custom&#39; (user-uploaded plugin), or &#39;community&#39; (marketplace) | 
 **description** | **str** | Human-readable description | 
 **icon** | **str** | Lucide-react icon name for frontend rendering | [optional] [default to 'box']
-**input_schema** | **Dict[str, object]** | JSON schema for input data | 
-**output_schema** | **Dict[str, object]** | JSON schema for output data | 
-**parameter_schema** | **Dict[str, object]** | JSON schema for parameters | [optional] 
+**input_schema** | **object** | JSON schema for input data | 
+**output_schema** | **object** | JSON schema for output data | 
+**parameter_schema** | **object** | JSON schema for parameters | [optional] 
 **supported_input_types** | **List[str]** | Supported input types (video, image, text, etc.) | [optional] 
 **max_inputs** | **Dict[str, int]** | Maximum number of inputs per type | [optional] 
-**default_parameters** | **Dict[str, object]** | Default parameter values | [optional] 
+**default_parameters** | **object** | Default parameter values | [optional] 
 **costs** | [**CostsInfo**](CostsInfo.md) | Credit cost information (builtin extractors only) | [optional] 
 **required_vector_indexes** | [**List[VectorIndexDefinition]**](VectorIndexDefinition.md) | Vector indexes this extractor produces | [optional] 
 **required_payload_indexes** | [**List[PayloadIndexConfigOutput]**](PayloadIndexConfigOutput.md) | Payload indexes required by this extractor | [optional] 

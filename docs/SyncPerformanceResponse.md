@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **sync_config_id** | **str** | Optional sync config filter | [optional] 
 **time_range** | [**ApiAnalyticsBucketsModelsTimeRange**](ApiAnalyticsBucketsModelsTimeRange.md) | Query time range | 
 **runs** | [**List[SyncRunMetric]**](SyncRunMetric.md) | Sync run metrics | 
-**summary** | **Dict[str, object]** | Summary statistics | [optional] 
+**summary** | **object** | Summary statistics | [optional] 
 
 ## Example
 

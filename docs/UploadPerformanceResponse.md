@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **bucket_id** | **str** | Bucket identifier | 
 **time_range** | [**ApiAnalyticsBucketsModelsTimeRange**](ApiAnalyticsBucketsModelsTimeRange.md) | Query time range | 
 **metrics** | [**List[UploadPerformanceMetric]**](UploadPerformanceMetric.md) | Upload performance metrics | 
-**summary** | **Dict[str, object]** | Summary statistics | [optional] 
+**summary** | **object** | Summary statistics | [optional] 
 
 ## Example
 

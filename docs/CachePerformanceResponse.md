@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **total_cache_misses** | **int** | Total cache misses | 
 **avg_cache_hit_latency_ms** | **float** | Average latency on cache hit | 
 **avg_cache_miss_latency_ms** | **float** | Average latency on cache miss | 
-**hourly_breakdown** | **List[Dict[str, object]]** | Hourly cache performance | 
+**hourly_breakdown** | **List[object]** | Hourly cache performance | 
 
 ## Example
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **namespace_id** | **str** | Namespace ID analyzed | 
 **time_range_days** | **int** | Number of days analyzed | 
-**summary** | **Dict[str, object]** | Summary statistics (total_fields_analyzed, high_priority_indexes, etc.) | 
+**summary** | **object** | Summary statistics (total_fields_analyzed, high_priority_indexes, etc.) | 
 **recommendations** | [**List[IndexRecommendation]**](IndexRecommendation.md) | Top index recommendations | 
 **most_queried_fields** | [**List[FieldQueryMetrics]**](FieldQueryMetrics.md) | Most frequently queried fields | 
 **slowest_fields** | [**List[FieldPerformanceMetrics]**](FieldPerformanceMetrics.md) | Fields with highest latency | 

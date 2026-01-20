@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **cluster_id** | **str** | OPTIONAL. Reference to existing cluster definition. If provided, execution_config is inherited from the cluster. Either cluster_id OR execution_config must be provided. | [optional] 
 **execution_config** | [**TriggerExecutionConfig**](TriggerExecutionConfig.md) | OPTIONAL. Clustering configuration for this trigger. Specifies collections and algorithm to use when trigger fires. Required if cluster_id is not provided. | [optional] 
 **trigger_type** | [**SharedClustersTriggersModelsTriggerType**](SharedClustersTriggersModelsTriggerType.md) | REQUIRED. Type of trigger to create. Determines which schedule_config fields are required. Options: &#39;cron&#39;, &#39;interval&#39;, &#39;event&#39;, &#39;conditional&#39;. | 
-**schedule_config** | **Dict[str, object]** | REQUIRED. Type-specific schedule configuration. Contents depend on trigger_type. See trigger type examples above for required fields. | 
+**schedule_config** | **object** | REQUIRED. Type-specific schedule configuration. Contents depend on trigger_type. See trigger type examples above for required fields. | 
 **description** | **str** | OPTIONAL. Human-readable description of what this trigger does. Helpful for identifying triggers in dashboards. | [optional] 
 **status** | [**SharedClustersTriggersModelsTriggerStatus**](SharedClustersTriggersModelsTriggerStatus.md) | OPTIONAL. Initial status of trigger. Defaults to &#39;active&#39; (enabled). Can be set to &#39;paused&#39; to create disabled trigger. | [optional] 
 

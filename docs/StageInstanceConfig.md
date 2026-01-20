@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **stage_name** | **str** |  | 
 **stage_id** | **str** | Stage implementation ID (overrides stage_name for lookups) | [optional] 
-**parameters** | **Dict[str, object]** | Stage parameters | [optional] 
+**parameters** | **object** | Stage parameters | [optional] 
 **pre_filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Filters to apply to the documents *before* this stage is executed.These filters are combined with any global retriever filters. | [optional] 
 **post_filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Filters to apply to the documents *after* this stage is executed.These filters are applied to the results of this stage before passing to the next. | [optional] 
 **stats** | [**StagePerformanceInput**](StagePerformanceInput.md) | Performance statistics for this stage | [optional] 

@@ -729,7 +729,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_collection**
-> CollectionResponse update_collection(collection_identifier, request_body, authorization=authorization, x_namespace=x_namespace)
+> CollectionResponse update_collection(collection_identifier, body, authorization=authorization, x_namespace=x_namespace)
 
 Update Collection
 
@@ -756,13 +756,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to update
-    request_body = None # Dict[str, object] | 
+    body = None # object | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Update Collection
-        api_response = api_instance.update_collection(collection_identifier, request_body, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.update_collection(collection_identifier, body, authorization=authorization, x_namespace=x_namespace)
         print("The response of CollectionsApi->update_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -777,7 +777,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to update | 
- **request_body** | [**Dict[str, object]**](object.md)|  | 
+ **body** | **object**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 

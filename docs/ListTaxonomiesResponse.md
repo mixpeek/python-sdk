@@ -7,7 +7,7 @@ Response model for listing taxonomies.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**List[TaxonomyResponse]**](TaxonomyResponse.md) |  | 
-**pagination** | **Dict[str, object]** |  | 
+**pagination** | **object** |  | 
 **total_count** | **int** |  | 
 **stats** | [**TaxonomyListStats**](TaxonomyListStats.md) | Aggregate statistics across all taxonomies in the result | [optional] 
 

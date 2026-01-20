@@ -6,9 +6,9 @@ Metadata explaining how the retriever works.  This is separate from DisplayConfi
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**stages** | **List[Dict[str, object]]** | Pipeline stages used in this retriever | [optional] 
-**collections** | **List[Dict[str, object]]** | Collections and feature extractors used | [optional] 
-**capabilities** | **Dict[str, object]** | Capabilities and features of this retriever | [optional] 
+**stages** | **List[object]** | Pipeline stages used in this retriever | [optional] 
+**collections** | **List[object]** | Collections and feature extractors used | [optional] 
+**capabilities** | **object** | Capabilities and features of this retriever | [optional] 
 
 ## Example
 

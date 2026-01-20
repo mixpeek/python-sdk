@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_inference_performance_analytics**
-> List[Dict[str, object]] get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Inference Performance
 
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 

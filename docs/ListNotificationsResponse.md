@@ -7,7 +7,7 @@ Response model for listing notifications.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**List[Notification]**](Notification.md) | List of notifications | 
-**pagination** | **Dict[str, object]** | Pagination information | 
+**pagination** | **object** | Pagination information | 
 **total** | **int** | Total number of notifications | 
 
 ## Example

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **channel_type** | **str** | Type of notification channel: &#39;webhook&#39;, &#39;slack&#39;, &#39;email&#39; | 
 **channel_id** | **str** | Reference to a pre-configured notification channel in the organization | [optional] 
-**config** | **Dict[str, object]** | Channel-specific configuration overrides (e.g., webhook URL, Slack channel) | [optional] 
+**config** | **object** | Channel-specific configuration overrides (e.g., webhook URL, Slack channel) | [optional] 
 
 ## Example
 

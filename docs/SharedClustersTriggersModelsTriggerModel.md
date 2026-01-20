@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **internal_id** | **str** | Organization internal ID | 
 **execution_config** | [**TriggerExecutionConfig**](TriggerExecutionConfig.md) | Configuration for cluster execution | 
 **trigger_type** | [**SharedClustersTriggersModelsTriggerType**](SharedClustersTriggersModelsTriggerType.md) | Type of trigger | 
-**schedule_config** | **Dict[str, object]** | Type-specific schedule configuration | 
+**schedule_config** | **object** | Type-specific schedule configuration | 
 **status** | [**SharedClustersTriggersModelsTriggerStatus**](SharedClustersTriggersModelsTriggerStatus.md) | Current status | [optional] 
 **last_triggered_at** | **datetime** | Last time trigger fired | [optional] 
 **last_execution_job_id** | **str** | Job ID of last execution | [optional] 

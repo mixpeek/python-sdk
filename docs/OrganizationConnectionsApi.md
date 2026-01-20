@@ -301,7 +301,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_google_drive_files_organizations_connections**
-> Dict[str, object] list_google_drive_files_organizations_connections(connection_identifier, path=path, max_results=max_results, authorization=authorization)
+> object list_google_drive_files_organizations_connections(connection_identifier, path=path, max_results=max_results, authorization=authorization)
 
 List Google Drive Files
 
@@ -368,7 +368,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

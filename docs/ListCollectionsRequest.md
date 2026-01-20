@@ -6,7 +6,7 @@ Request model for listing collections.  To filter by taxonomy, use dot notation 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filters** | **Dict[str, object]** | Filters to apply when listing collections. Supports nested field filtering like &#39;taxonomy_applications.taxonomy_id&#39;. Format: {\&quot;AND\&quot;: [{\&quot;field\&quot;: \&quot;field_name\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;value\&quot;}]} | [optional] 
+**filters** | **object** | Filters to apply when listing collections. Supports nested field filtering like &#39;taxonomy_applications.taxonomy_id&#39;. Format: {\&quot;AND\&quot;: [{\&quot;field\&quot;: \&quot;field_name\&quot;, \&quot;operator\&quot;: \&quot;eq\&quot;, \&quot;value\&quot;: \&quot;value\&quot;}]} | [optional] 
 **sort** | [**SortOption**](SortOption.md) | Sort options for the results | [optional] 
 **search** | **str** | Search term for wildcard search across collection_id, collection_name, description, and other text fields | [optional] 
 **case_sensitive** | **bool** | If True, filters and search will be case-sensitive | [optional] [default to False]

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **user_id** | **str** | User identifier | [optional] 
 **session_name** | **str** | Auto-generated session name based on first conversation | [optional] 
 **agent_config** | [**AgentConfig**](AgentConfig.md) | Agent configuration | 
-**user_memory** | **Dict[str, object]** | User memory/preferences | [optional] 
+**user_memory** | **object** | User memory/preferences | [optional] 
 **status** | [**SessionStatus**](SessionStatus.md) | Session status | 
 **message_count** | **int** | Total messages in session | 
 **stats** | [**SessionStats**](SessionStats.md) | Session statistics | 

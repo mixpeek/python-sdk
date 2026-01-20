@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_extractor_performance_analytics**
-> List[Dict[str, object]] get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 

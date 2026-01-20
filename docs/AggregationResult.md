@@ -6,8 +6,8 @@ Single aggregation result row.  Contains grouped field values and computed aggre
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group** | **Dict[str, object]** | Grouped field values that define this result row. | 
-**metrics** | **Dict[str, object]** | Computed aggregation values for this group. | 
+**group** | **object** | Grouped field values that define this result row. | 
+**metrics** | **object** | Computed aggregation values for this group. | 
 
 ## Example
 

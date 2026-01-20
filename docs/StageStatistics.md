@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **error** | **str** | Stage-specific error message if execution failed but retriever execution continued (OPTIONAL). | [optional] 
 **llm_calls** | **int** | Number of LLM invocations performed by the stage (OPTIONAL). | [optional] 
 **tokens_used** | **int** | Total tokens consumed by the stage (OPTIONAL, only for LLM stages). | [optional] 
-**metadata** | **Dict[str, object]** | Stage-specific metadata containing additional execution details (OPTIONAL). For example, join stages include: join_strategy, join_type, matched_count, match_rate, etc. LLM stages may include: model_name, temperature, max_tokens, etc. | [optional] 
+**metadata** | **object** | Stage-specific metadata containing additional execution details (OPTIONAL). For example, join stages include: join_strategy, join_type, matched_count, match_rate, etc. LLM stages may include: model_name, temperature, max_tokens, etc. | [optional] 
 
 ## Example
 

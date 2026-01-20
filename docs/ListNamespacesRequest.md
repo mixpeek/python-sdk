@@ -6,8 +6,8 @@ Request schema for listing namespaces.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filters** | **Dict[str, object]** | Optional filters to apply to the namespace list. Supports filtering by namespace_id or namespace_name. | [optional] 
-**sort** | **Dict[str, object]** | Optional sort criteria for the namespace list. | [optional] 
+**filters** | **object** | Optional filters to apply to the namespace list. Supports filtering by namespace_id or namespace_name. | [optional] 
+**sort** | **object** | Optional sort criteria for the namespace list. | [optional] 
 **search** | **str** | Search term for wildcard search across namespace_id, namespace_name, description, and other text fields. | [optional] 
 **case_sensitive** | **bool** | If True, filters and search will be case-sensitive | [optional] [default to False]
 

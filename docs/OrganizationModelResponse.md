@@ -11,12 +11,12 @@ Name | Type | Description | Notes
 **logo_url** | **str** |  | [optional] 
 **account_type** | [**AccountTier**](AccountTier.md) |  | 
 **credit_count** | **int** |  | 
-**metadata** | **Dict[str, object]** |  | [optional] 
+**metadata** | **object** |  | [optional] 
 **billing_email** | **str** |  | [optional] 
 **rate_limits** | [**BaseRateLimits**](BaseRateLimits.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
-**users** | **List[Dict[str, object]]** |  | [optional] 
+**users** | **List[object]** |  | [optional] 
 
 ## Example
 

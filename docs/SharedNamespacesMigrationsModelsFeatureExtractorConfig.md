@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **feature_extractor_name** | **str** | Name of the extractor | 
 **version** | **str** | Version to use | [optional] 
-**parameters** | **Dict[str, object]** | Extractor parameters | [optional] 
+**parameters** | **object** | Extractor parameters | [optional] 
 
 ## Example
 

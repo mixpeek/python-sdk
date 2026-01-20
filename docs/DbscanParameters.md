@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **eps** | **float** | Maximum distance between two samples for one to be considered in the neighborhood of the other | [optional] [default to 0.5]
 **min_samples** | **int** | Number of samples in a neighborhood for a point to be considered a core point | [optional] [default to 5]
 **metric** | **str** | Metric to use for distance computation | [optional] [default to 'euclidean']
-**metric_params** | **Dict[str, object]** | Additional keyword arguments for the metric function | [optional] 
+**metric_params** | **object** | Additional keyword arguments for the metric function | [optional] 
 **algorithm** | **str** | Algorithm to compute pointwise distances and find nearest neighbors (&#39;auto&#39;, &#39;ball_tree&#39;, &#39;kd_tree&#39;, &#39;brute&#39;) | [optional] [default to 'auto']
 **leaf_size** | **int** | Leaf size passed to BallTree or KDTree | [optional] [default to 30]
 **p** | **float** | The power of the Minkowski metric to be used to calculate distance between points | [optional] [default to 2]

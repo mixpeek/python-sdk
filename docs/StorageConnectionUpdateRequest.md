@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | OPTIONAL. New name for the connection. Must be unique within the organization if provided. Format: 1-100 characters. | [optional] 
 **description** | **str** | OPTIONAL. New description for the connection. Set to empty string to clear existing description. Format: Up to 500 characters. | [optional] 
-**metadata** | **Dict[str, object]** | OPTIONAL. New metadata dictionary. Replaces existing metadata entirely (partial updates not supported). Set to empty dict {} to clear all metadata. | [optional] 
+**metadata** | **object** | OPTIONAL. New metadata dictionary. Replaces existing metadata entirely (partial updates not supported). Set to empty dict {} to clear all metadata. | [optional] 
 **status** | [**TaskStatusEnum**](TaskStatusEnum.md) | OPTIONAL. New operational status. ACTIVE: Connection is healthy and ready for use. SUSPENDED: Temporarily disabled, credentials preserved. FAILED: Health checks failing. ARCHIVED: Permanently retired (cannot be reactivated). | [optional] 
 **is_active** | **bool** | OPTIONAL. Quick boolean flag for filtering. True when status is ACTIVE, False otherwise. Automatically maintained when status changes. | [optional] 
-**provider_config** | **Dict[str, object]** | OPTIONAL. Updated provider configuration including credentials. Replaces entire provider_config (partial updates not supported). SECURITY: Sensitive fields are encrypted at rest. | [optional] 
+**provider_config** | **object** | OPTIONAL. Updated provider configuration including credentials. Replaces entire provider_config (partial updates not supported). SECURITY: Sensitive fields are encrypted at rest. | [optional] 
 
 ## Example
 

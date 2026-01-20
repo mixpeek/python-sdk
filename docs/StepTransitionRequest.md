@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **from_step** | **str** | Starting step label (e.g., &#39;inquiry&#39;, &#39;draft&#39;) | 
 **to_step** | **str** | Ending step label (e.g., &#39;closed_won&#39;, &#39;published&#39;) | 
 **max_window_days** | **int** | Maximum days between from_step and to_step. Sequences exceeding this are excluded. | [optional] 
-**filters** | **Dict[str, object]** | Optional filters for events (e.g., {&#39;metadata.region&#39;: &#39;US&#39;}) | [optional] 
+**filters** | **object** | Optional filters for events (e.g., {&#39;metadata.region&#39;: &#39;US&#39;}) | [optional] 
 **override_step_analytics** | [**StepAnalyticsConfigInput**](StepAnalyticsConfigInput.md) | Override taxonomy&#39;s default step_analytics config for this query | [optional] 
 **min_support** | **int** | Minimum number of sequences required for valid analysis | [optional] [default to 10]
 

@@ -7,7 +7,7 @@ Schema.org structured data configuration for search engines.  Enables rich searc
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | Schema.org type for structured data | [optional] [default to 'WebApplication']
-**additional_properties** | **Dict[str, object]** | Additional Schema.org properties | [optional] 
+**additional_properties** | **object** | Additional Schema.org properties | [optional] 
 
 ## Example
 

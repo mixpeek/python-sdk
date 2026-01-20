@@ -6,8 +6,8 @@ Request to list retriever executions.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**filters** | **Dict[str, object]** |  | [optional] 
-**sorts** | **List[Dict[str, object]]** |  | [optional] 
+**filters** | **object** |  | [optional] 
+**sorts** | **List[object]** |  | [optional] 
 **status** | **str** | Optional status filter (completed, failed, running). | [optional] 
 
 ## Example

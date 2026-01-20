@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **updates** | [**List[BatchDocumentUpdate]**](BatchDocumentUpdate.md) | OPTIONAL. List of document updates with explicit document IDs. Each entry specifies document_id and update_data. Use this mode when you know exact document IDs and want per-document control. Mutually exclusive with filters + update_data mode. Maximum 1000 documents per batch request. | [optional] 
 **filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | OPTIONAL. Filter conditions to match documents for update. Must be used with &#39;update_data&#39; field. Mutually exclusive with &#39;updates&#39; array. If provided, applies same update_data to all matching documents. | [optional] 
-**update_data** | **Dict[str, object]** | OPTIONAL. Update data to apply when using filters mode. Must be used with &#39;filters&#39; field. All matched documents receive the same updates. Can update any document field except vectors. | [optional] 
+**update_data** | **object** | OPTIONAL. Update data to apply when using filters mode. Must be used with &#39;filters&#39; field. All matched documents receive the same updates. Can update any document field except vectors. | [optional] 
 
 ## Example
 

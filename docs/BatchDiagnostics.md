@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **estimated_completion** | **datetime** | Estimated completion time | [optional] 
 **tiers** | [**List[TierDiagnostic]**](TierDiagnostic.md) | Diagnostic info for each tier | [optional] 
 **collections** | [**List[CollectionDiagnostic]**](CollectionDiagnostic.md) | Status of target collections | [optional] 
-**performance_summary** | **Dict[str, object]** | Performance metrics summary (available after completion) | [optional] 
+**performance_summary** | **object** | Performance metrics summary (available after completion) | [optional] 
 **insights** | [**List[PerformanceInsight]**](PerformanceInsight.md) | Performance insights and recommendations | [optional] 
 **has_failures** | **bool** | Whether batch has any failures | [optional] [default to False]
 **failed_tier_count** | **int** | Number of failed tiers | [optional] [default to 0]

@@ -1,6 +1,6 @@
 # ToolInfo
 
-Information about an available agent tool.  Attributes:     name: Tool name (use this in available_tools)     description: What the tool does     category: Tool category (search, read, create, etc.)     parameters: Parameter definitions     required_params: List of required parameter names     requires_confirmation: Whether the tool requires user confirmation before execution
+Information about an available agent tool.  Attributes:     name: Tool name (use this in available_tools)     description: What the tool does     category: Tool category (search, read, create, etc.)     parameters: Parameter definitions     required_params: List of required parameter names
 
 ## Properties
 
@@ -9,9 +9,8 @@ Name | Type | Description | Notes
 **name** | **str** | Tool name | 
 **description** | **str** | Tool description | 
 **category** | **str** | Tool category | 
-**parameters** | **Dict[str, object]** | Parameter definitions | [optional] 
+**parameters** | **object** | Parameter definitions | [optional] 
 **required_params** | **List[str]** | Required parameters | [optional] 
-**requires_confirmation** | **bool** | Whether the tool requires user confirmation | [optional] [default to False]
 
 ## Example
 

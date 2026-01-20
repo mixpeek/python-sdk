@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **total_objects** | **int** | Total number of objects in the result | [optional] [default to 0]
 **total_blobs** | **int** | Total number of blobs across all objects | [optional] [default to 0]
 **avg_blobs_per_object** | **float** | Average number of blobs per object | [optional] [default to 0.0]
-**objects_by_status** | **Dict[str, object]** | Count of objects grouped by status | [optional] 
+**objects_by_status** | **object** | Count of objects grouped by status | [optional] 
 
 ## Example
 

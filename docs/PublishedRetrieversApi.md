@@ -254,7 +254,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_published_retrievers**
-> Dict[str, object] list_published_retrievers(limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
+> object list_published_retrievers(limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
 
 List Published Retrievers
 
@@ -307,7 +307,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

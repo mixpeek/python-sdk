@@ -7,8 +7,8 @@ Request to generate multiple presigned URLs in a single request.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uploads** | [**List[CreateUploadRequest]**](CreateUploadRequest.md) | List of upload requests (max 100) | 
-**shared_metadata** | **Dict[str, object]** | Metadata to apply to all uploads (merged with individual metadata) | [optional] 
-**shared_object_metadata** | **Dict[str, object]** | Object metadata to apply to all uploads (merged with individual) | [optional] 
+**shared_metadata** | **object** | Metadata to apply to all uploads (merged with individual metadata) | [optional] 
+**shared_object_metadata** | **object** | Object metadata to apply to all uploads (merged with individual) | [optional] 
 
 ## Example
 

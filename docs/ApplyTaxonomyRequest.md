@@ -7,7 +7,7 @@ Request to apply a taxonomy to an existing collection.  This endpoint triggers r
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **taxonomy_id** | **str** | ID of the taxonomy to apply. REQUIRED. Must be an existing taxonomy (tax_*). The taxonomy must already be in the collection&#39;s taxonomy_applications list. | 
-**scroll_filters** | **Dict[str, object]** | Optional Qdrant filters to limit which documents are enriched. NOT REQUIRED. If not provided, all documents in the collection will be enriched. Use to process specific subsets (e.g., documents missing enrichment). | [optional] 
+**scroll_filters** | **object** | Optional Qdrant filters to limit which documents are enriched. NOT REQUIRED. If not provided, all documents in the collection will be enriched. Use to process specific subsets (e.g., documents missing enrichment). | [optional] 
 **batch_size** | **int** | Number of documents to process in each parallel batch. NOT REQUIRED. Defaults to 1000. Larger batches &#x3D; fewer Ray tasks but more memory per task. Smaller batches &#x3D; more Ray tasks but lower memory per task. | [optional] [default to 1000]
 **parallelism** | **int** | Number of parallel Ray workers to use for processing. NOT REQUIRED. Defaults to 4. Higher parallelism &#x3D; faster processing but more cluster resources. Set based on available Ray cluster capacity. | [optional] [default to 4]
 

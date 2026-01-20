@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **avatar_url** | **str** | Updated profile image URL (e.g., custom avatar to override Gravatar). | [optional] 
 **role** | [**UserRole**](UserRole.md) | Updated organization role. | [optional] 
 **status** | [**UserStatus**](UserStatus.md) | Lifecycle status update (active, suspended, pending). | [optional] 
-**metadata** | **Dict[str, object]** | Replaces metadata with the provided dictionary when set. | [optional] 
+**metadata** | **object** | Replaces metadata with the provided dictionary when set. | [optional] 
 
 ## Example
 

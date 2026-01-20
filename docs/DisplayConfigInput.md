@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **external_links** | [**List[ExternalLink]**](ExternalLink.md) | External resource links for this retriever (GitHub repos, blog posts, docs, etc.). Displayed on homepage and retriever listing pages to provide additional context. | [optional] 
 **template_type** | **str** | Template identifier for frontend rendering. Built-in templates: portrait-gallery, media-search, document-search. Custom templates can use any string identifier. | [optional] 
 **field_mappings** | **Dict[str, str]** | Field mappings from collection output fields to template display slots. Maps template slot names (e.g., &#39;thumbnail&#39;, &#39;title&#39;) to actual field names in the search results. | [optional] 
-**extensions** | **Dict[str, object]** | Generic extensions for template-specific configuration. Allows templates to store custom config without schema changes. | [optional] 
+**extensions** | **object** | Generic extensions for template-specific configuration. Allows templates to store custom config without schema changes. | [optional] 
 
 ## Example
 

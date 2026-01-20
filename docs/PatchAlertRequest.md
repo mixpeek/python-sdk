@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | Updated retriever ID | [optional] 
 **notification_config** | [**AlertNotificationConfig**](AlertNotificationConfig.md) | Updated notification configuration | [optional] 
 **enabled** | **bool** | Updated enabled status | [optional] 
-**metadata** | **Dict[str, object]** | Updated metadata | [optional] 
+**metadata** | **object** | Updated metadata | [optional] 
 
 ## Example
 

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | Creation timestamp | [optional] 
 **organization_id** | **str** | Organization ID | 
 **user_id** | **str** | User ID (if applicable) | [optional] 
-**metadata** | **Dict[str, object]** | Additional metadata | [optional] 
+**metadata** | **object** | Additional metadata | [optional] 
 **delivery_status** | **Dict[str, str]** | Delivery status by channel | [optional] 
 **read** | **bool** | Whether the notification has been read | [optional] [default to False]
 **read_at** | **datetime** | When the notification was read | [optional] 

@@ -7,8 +7,8 @@ Request model for listing buckets.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **search** | **str** | Search term for wildcard search across bucket_id, bucket_name, description, and other text fields | [optional] 
-**filters** | **Dict[str, object]** | Filters to apply to the bucket list. Supports filtering by bucket_id or bucket_name. | [optional] 
-**sort** | **Dict[str, object]** | Sort options for the bucket list | [optional] 
+**filters** | **object** | Filters to apply to the bucket list. Supports filtering by bucket_id or bucket_name. | [optional] 
+**sort** | **object** | Sort options for the bucket list | [optional] 
 **case_sensitive** | **bool** | If True, filters and search will be case-sensitive | [optional] [default to False]
 **limit** | **int** | Number of results to return | [optional] [default to 10]
 **offset** | **int** | Number of results to skip | [optional] [default to 0]

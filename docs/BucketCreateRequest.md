@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** | Description of the bucket | [optional] 
 **bucket_schema** | [**BucketSchemaInput**](BucketSchemaInput.md) | Schema definition for objects in this bucket (REQUIRED). Defines the custom fields your objects will have (blob properties, metadata structure, etc.) | 
 **unique_key** | [**UniqueKeyConfig**](UniqueKeyConfig.md) | Unique key configuration for this bucket (OPTIONAL). Enables uniqueness enforcement and upsert operations on specified field(s) from the schema. Cannot be changed after bucket creation. | [optional] 
-**metadata** | **Dict[str, object]** | Additional metadata for the bucket | [optional] 
+**metadata** | **object** | Additional metadata for the bucket | [optional] 
 
 ## Example
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **stage_name** | **str** | Stage name | 
 **component** | **str** | Component | 
 **latency_ms** | **float** | Operation latency | 
-**metadata** | **Dict[str, object]** | Additional context from profiling | [optional] 
+**metadata** | **object** | Additional context from profiling | [optional] 
 
 ## Example
 

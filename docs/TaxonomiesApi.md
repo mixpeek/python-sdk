@@ -200,7 +200,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_taxonomy_version_taxonomies**
-> TaxonomyResponse create_taxonomy_version_taxonomies(taxonomy_id, request_body, authorization=authorization, x_namespace=x_namespace)
+> TaxonomyResponse create_taxonomy_version_taxonomies(taxonomy_id, body, authorization=authorization, x_namespace=x_namespace)
 
 Create Taxonomy Version
 
@@ -227,13 +227,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.TaxonomiesApi(api_client)
     taxonomy_id = 'taxonomy_id_example' # str | Taxonomy ID (tax_...)
-    request_body = None # Dict[str, object] | 
+    body = None # object | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Taxonomy Version
-        api_response = api_instance.create_taxonomy_version_taxonomies(taxonomy_id, request_body, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_taxonomy_version_taxonomies(taxonomy_id, body, authorization=authorization, x_namespace=x_namespace)
         print("The response of TaxonomiesApi->create_taxonomy_version_taxonomies:\n")
         pprint(api_response)
     except Exception as e:
@@ -248,7 +248,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **taxonomy_id** | **str**| Taxonomy ID (tax_...) | 
- **request_body** | [**Dict[str, object]**](object.md)|  | 
+ **body** | **object**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | Retriever identifier | 
 **analysis_period** | [**ApiAnalyticsModelsTimeRange**](ApiAnalyticsModelsTimeRange.md) | Analysis period | 
 **recommendations** | [**List[InteractionTuningRecommendation]**](InteractionTuningRecommendation.md) | Tuning recommendations | 
-**current_performance** | **Dict[str, object]** | Current performance baseline | 
+**current_performance** | **object** | Current performance baseline | 
 
 ## Example
 

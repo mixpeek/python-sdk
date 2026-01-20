@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **create_user_organizations**
-> Dict[str, object] create_user_organizations(user_create_request, authorization=authorization)
+> object create_user_organizations(user_create_request, authorization=authorization)
 
 Create User
 
@@ -62,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -164,7 +164,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_organizations_email**
-> Dict[str, object] get_user_organizations_email(user_email, authorization=authorization)
+> object get_user_organizations_email(user_email, authorization=authorization)
 
 Get User
 
@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -239,7 +239,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_users_organizations**
-> Dict[str, object] list_users_organizations(skip=skip, limit=limit, role=role, status=status, authorization=authorization)
+> object list_users_organizations(skip=skip, limit=limit, role=role, status=status, authorization=authorization)
 
 List Users
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -322,7 +322,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_organizations_email**
-> Dict[str, object] update_user_organizations_email(user_email, user_update_request, authorization=authorization)
+> object update_user_organizations_email(user_email, user_update_request, authorization=authorization)
 
 Update User
 
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

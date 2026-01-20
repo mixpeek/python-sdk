@@ -90,7 +90,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_interaction_retrievers**
-> Dict[str, object] delete_interaction_retrievers(interaction_id, authorization=authorization, x_namespace=x_namespace)
+> object delete_interaction_retrievers(interaction_id, authorization=authorization, x_namespace=x_namespace)
 
 Delete Interaction
 
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

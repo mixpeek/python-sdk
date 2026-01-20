@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | ID of the retriever to execute. The retriever defines filters, scoring, limits. | 
 **notification_config** | [**AlertNotificationConfig**](AlertNotificationConfig.md) | How and where to send notifications when alert triggers | 
 **enabled** | **bool** | Whether the alert is active and will execute | [optional] [default to True]
-**metadata** | **Dict[str, object]** | Additional user-defined metadata for the alert | [optional] 
+**metadata** | **object** | Additional user-defined metadata for the alert | [optional] 
 
 ## Example
 

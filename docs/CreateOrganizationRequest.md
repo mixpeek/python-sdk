@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **organization_name** | **str** | Display name for the organization. | 
 **logo_url** | **str** | Organization logo URL (e.g., from Google Favicon service). If not provided, will be auto-generated from first user&#39;s email domain. | [optional] 
 **users** | [**List[UserCreateRequest]**](UserCreateRequest.md) | Initial users to create with the organization. | [optional] 
-**metadata** | **Dict[str, object]** | Custom metadata for the organization. | [optional] 
+**metadata** | **object** | Custom metadata for the organization. | [optional] 
 **credit_count** | **int** | Initial credit count for the organization. Defaults to 1000 if not provided. | [optional] 
 **account_type** | **str** | Account type for the organization (free, pro, team, enterprise). Defaults to &#39;free&#39;. | [optional] 
 

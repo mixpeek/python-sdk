@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **include_buckets** | **List[str]** | Limit processing to objects from these specific buckets (IDs or names). Only applies to bucket-sourced collections. If not provided, all configured source buckets are used. | [optional] 
 **include_collections** | **List[str]** | Limit processing to documents from these specific collections (IDs or names). Only applies to collection-sourced collections. If not provided, all configured source collections are used. | [optional] 
-**source_filters** | **Dict[str, object]** | Field-level filters for objects (bucket-sourced) or documents (collection-sourced). Uses LogicalOperator format (AND/OR/NOT). Use this to filter by metadata fields, status, or any other object/document properties. | [optional] 
+**source_filters** | **object** | Field-level filters for objects (bucket-sourced) or documents (collection-sourced). Uses LogicalOperator format (AND/OR/NOT). Use this to filter by metadata fields, status, or any other object/document properties. | [optional] 
 
 ## Example
 

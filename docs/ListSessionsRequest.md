@@ -7,8 +7,8 @@ Request payload for listing sessions.  Attributes:     status: Optional status f
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**SessionStatus**](SessionStatus.md) | Filter by session status | [optional] 
-**filters** | **Dict[str, object]** | Additional filters | [optional] 
-**sort** | **Dict[str, object]** | Sort configuration | [optional] 
+**filters** | **object** | Additional filters | [optional] 
+**sort** | **object** | Sort configuration | [optional] 
 
 ## Example
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **group_by** | [**List[GroupByField]**](GroupByField.md) | Fields to group results by. REQUIRED, at least one field. Can include field transformations (date_trunc, date_part). Results will have one row per unique combination of group_by values. | 
 **aggregations** | [**List[AggregationOperation]**](AggregationOperation.md) | Aggregation operations to perform. REQUIRED, at least one operation. Each operation produces a calculated field in results. Can combine multiple functions (COUNT, SUM, AVG, etc.). | 
-**filters** | **Dict[str, object]** | Pre-aggregation filters to apply to source data. OPTIONAL, filters data before grouping. Uses same syntax as standard query filters. Applied before GROUP BY. | [optional] 
+**filters** | **object** | Pre-aggregation filters to apply to source data. OPTIONAL, filters data before grouping. Uses same syntax as standard query filters. Applied before GROUP BY. | [optional] 
 **having** | [**List[HavingCondition]**](HavingCondition.md) | Post-aggregation filters to apply to results. OPTIONAL, filters groups after aggregation. Uses aggregation aliases as field names. Applied after GROUP BY and aggregation calculations. | [optional] 
 **unwind** | **str** | Array field to unwind before aggregation. OPTIONAL, creates one document per array element. Useful for aggregating over array contents. Example: &#39;blobs&#39; to analyze each blob separately. | [optional] 
 **range_buckets** | [**List[RangeBucket]**](RangeBucket.md) | Range-based bucketing for numeric fields. OPTIONAL, creates histogram-style buckets. Groups numeric values into defined ranges. Applied during grouping stage. | [optional] 

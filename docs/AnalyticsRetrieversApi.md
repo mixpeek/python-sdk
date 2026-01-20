@@ -428,7 +428,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_queries_analytics_retrievers_id_slow**
-> List[Dict[str, object]] get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Slowest Queries
 
@@ -502,7 +502,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 

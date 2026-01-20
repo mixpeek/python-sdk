@@ -6,7 +6,7 @@ Request to confirm multiple uploads in batch.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**confirmations** | **List[Dict[str, object]]** | List of confirmations with upload_id, etag, file_size_bytes | 
+**confirmations** | **List[object]** | List of confirmations with upload_id, etag, file_size_bytes | 
 
 ## Example
 

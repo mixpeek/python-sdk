@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_usage_summary_analytics**
-> Dict[str, object] get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> object get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
 
 Get Usage Summary
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

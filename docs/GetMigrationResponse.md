@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **started_at** | **datetime** | Start timestamp | [optional] 
 **completed_at** | **datetime** | Completion timestamp | [optional] 
 **error_message** | **str** | Error if failed | [optional] 
-**additional_data** | **Dict[str, object]** | Additional metadata | [optional] 
+**additional_data** | **object** | Additional metadata | [optional] 
 
 ## Example
 

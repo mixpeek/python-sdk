@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **model** | **str** | Model identifier specific to the provider (required if inference_name not set) | [optional] 
 **inference_name** | **str** | Custom plugin inference name (alternative to provider+model) | [optional] 
 **feature_uri** | **str** | Feature URI to resolve to inference_name (alternative to inference_name). Format: mixpeek://{extractor}@{version}/{vector_index_name} | [optional] 
-**inputs** | **Dict[str, object]** | Model-specific inputs. Chat: {prompts: [str]}, Embeddings: {text: str} or {texts: [str]}, Transcription: {audio_url: str}, Vision: {prompts: [str], image_url: str} | 
-**parameters** | **Dict[str, object]** | Optional parameters for inference. Common: temperature (float), max_tokens (int), schema (dict for structured output) | [optional] 
+**inputs** | **object** | Model-specific inputs. Chat: {prompts: [str]}, Embeddings: {text: str} or {texts: [str]}, Transcription: {audio_url: str}, Vision: {prompts: [str], image_url: str} | 
+**parameters** | **object** | Optional parameters for inference. Common: temperature (float), max_tokens (int), schema (dict for structured output) | [optional] 
 **enable_semantic_cache** | **bool** | Enable semantic caching (vCache) for LLM chat operations. When enabled, semantically similar prompts may return cached responses, reducing latency and cost. Only applies to chat/completion models. | [optional] [default to False]
 **cache_delta** | **float** | Maximum error rate for semantic cache (0.0-1.0). Lower values are more conservative. Default uses system setting (0.02 &#x3D; 2%). | [optional] 
 

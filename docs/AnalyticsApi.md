@@ -3429,7 +3429,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_performance_analytics**
-> List[Dict[str, object]] get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -3494,7 +3494,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -3520,7 +3520,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_performance_analytics_0**
-> List[Dict[str, object]] get_extractor_performance_analytics_0(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_extractor_performance_analytics_0(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -3585,7 +3585,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -4903,7 +4903,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_inference_performance_analytics**
-> List[Dict[str, object]] get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Inference Performance
 
@@ -4958,7 +4958,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -4984,7 +4984,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_inference_performance_analytics_0**
-> List[Dict[str, object]] get_inference_performance_analytics_0(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_inference_performance_analytics_0(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Inference Performance
 
@@ -5039,7 +5039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -6691,7 +6691,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_queries_analytics_retrievers_id_slow**
-> List[Dict[str, object]] get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Slowest Queries
 
@@ -6765,7 +6765,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -6791,7 +6791,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_queries_analytics_retrievers_id_slow_0**
-> List[Dict[str, object]] get_slowest_queries_analytics_retrievers_id_slow_0(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[object] get_slowest_queries_analytics_retrievers_id_slow_0(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
 
 Get Slowest Queries
 
@@ -6865,7 +6865,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[Dict[str, object]]**
+**List[object]**
 
 ### Authorization
 
@@ -7689,7 +7689,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_summary_analytics**
-> Dict[str, object] get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> object get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
 
 Get Usage Summary
 
@@ -7759,7 +7759,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 
@@ -7785,7 +7785,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_summary_analytics_0**
-> Dict[str, object] get_usage_summary_analytics_0(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> object get_usage_summary_analytics_0(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
 
 Get Usage Summary
 
@@ -7855,7 +7855,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

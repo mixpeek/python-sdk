@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **affected_document_ids** | **List[str]** | OPTIONAL. List of document IDs affected by this error. For object-level errors: contains single document ID. For batch-level aggregation: contains all affected document IDs. Used to identify scope of impact. | [optional] 
 **affected_count** | **int** | REQUIRED. Number of documents affected by this error. For object-level: typically 1. For batch-level aggregation: total count of affected documents. Used for error impact analysis. | [optional] [default to 1]
 **recovery_suggestion** | **str** | OPTIONAL. Actionable suggestion for resolving the error. Helps users quickly fix common issues. Examples: install missing package, check credentials, update schema. | [optional] 
-**metadata** | **Dict[str, object]** | OPTIONAL. Additional error context and metadata. Free-form dictionary for error-specific details. Examples: retry_count, last_retry_at, error_code, http_status. | [optional] 
+**metadata** | **object** | OPTIONAL. Additional error context and metadata. Free-form dictionary for error-specific details. Examples: retry_count, last_retry_at, error_code, http_status. | [optional] 
 
 ## Example
 

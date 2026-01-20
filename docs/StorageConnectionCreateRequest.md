@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | REQUIRED. Human-readable name for the storage connection. Must be unique within the organization. Displayed in dashboards and sync logs. Format: 1-100 characters, descriptive of the connection&#39;s purpose. | 
 **provider_type** | [**StorageProvider**](StorageProvider.md) | REQUIRED. Storage provider to connect to. Supported providers: google_drive, s3, snowflake, sharepoint, tigris. Determines which authentication and sync logic is used. | 
-**provider_config** | **Dict[str, object]** | REQUIRED. Provider-specific configuration including credentials. Structure varies by provider_type. SECURITY: Sensitive credential fields (private_key, secret_access_key, client_secret, refresh_token, session_token) are automatically encrypted at rest and never appear in responses or logs. | 
+**provider_config** | **object** | REQUIRED. Provider-specific configuration including credentials. Structure varies by provider_type. SECURITY: Sensitive credential fields (private_key, secret_access_key, client_secret, refresh_token, session_token) are automatically encrypted at rest and never appear in responses or logs. | 
 **description** | **str** | OPTIONAL. Description explaining the connection&#39;s purpose and scope. Helpful for team collaboration and documentation. Format: Up to 500 characters. | [optional] 
-**metadata** | **Dict[str, object]** | OPTIONAL. Arbitrary key-value metadata for tagging and categorization. Common uses: team tags, cost center codes, project identifiers. | [optional] 
+**metadata** | **object** | OPTIONAL. Arbitrary key-value metadata for tagging and categorization. Common uses: team tags, cost center codes, project identifiers. | [optional] 
 **test_before_save** | **bool** | OPTIONAL. Whether to validate credentials before saving the connection. Defaults to True. If True, connection will be tested against the provider before creation. If False, connection is saved without validation (use with caution). | [optional] [default to True]
 
 ## Example

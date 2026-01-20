@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **str** | Human-readable error message | 
 **type** | **str** | Stable error type identifier (machine-readable) | 
-**details** | **Dict[str, object]** | Optional structured details to help debugging (validation errors, IDs, etc.) | [optional] 
+**details** | **object** | Optional structured details to help debugging (validation errors, IDs, etc.) | [optional] 
 
 ## Example
 

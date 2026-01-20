@@ -6,7 +6,7 @@ Request to enable an org-level plugin for a namespace.  This adds the plugin to 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**params** | **Dict[str, object]** | Optional parameters to configure the plugin for this namespace | [optional] 
+**params** | **object** | Optional parameters to configure the plugin for this namespace | [optional] 
 **deploy** | **bool** | Whether to deploy the plugin to Ray immediately after enabling | [optional] [default to True]
 
 ## Example

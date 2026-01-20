@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **status** | [**RetrieverStatus**](RetrieverStatus.md) | Current operational status | [optional] 
 **usage_stats** | [**UsageStatistics**](UsageStatistics.md) | Usage and performance statistics | [optional] 
 **collections** | [**List[CollectionDetail]**](CollectionDetail.md) | Expanded collection details with names and metadata | [optional] 
-**metadata** | **Dict[str, object]** | Custom key-value metadata | [optional] 
+**metadata** | **object** | Custom key-value metadata | [optional] 
 **tags** | **List[str]** | Tags for organization and filtering | [optional] 
 **created_by** | [**CreatorInfo**](CreatorInfo.md) | Information about who created this retriever | [optional] 
 **updated_by** | [**CreatorInfo**](CreatorInfo.md) | Information about who last updated this retriever | [optional] 

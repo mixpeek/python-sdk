@@ -7,8 +7,8 @@ Request to list retrievers.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **search** | **str** | Search term for wildcard search across retriever_id, retriever_name, description, and other text fields | [optional] 
-**filters** | **Dict[str, object]** | Filters to apply to the retriever list. Supports filtering by retriever_id or retriever_name. | [optional] 
-**sorts** | **List[Dict[str, object]]** | Sort options for the retriever list | [optional] 
+**filters** | **object** | Filters to apply to the retriever list. Supports filtering by retriever_id or retriever_name. | [optional] 
+**sorts** | **List[object]** | Sort options for the retriever list | [optional] 
 **case_sensitive** | **bool** | If True, filters and search will be case-sensitive | [optional] [default to False]
 
 ## Example

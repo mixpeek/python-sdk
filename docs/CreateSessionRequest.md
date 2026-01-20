@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **agent_config** | [**AgentConfig**](AgentConfig.md) | Agent configuration (REQUIRED) | 
 **quotas** | [**SessionQuotas**](SessionQuotas.md) | Session quotas and rate limits (OPTIONAL) | [optional] 
 **user_id** | **str** | User identifier (OPTIONAL) | [optional] 
-**user_memory** | **Dict[str, object]** | Initial user memory/preferences (OPTIONAL) | [optional] 
-**metadata** | **Dict[str, object]** | Session metadata (OPTIONAL) | [optional] 
+**user_memory** | **object** | Initial user memory/preferences (OPTIONAL) | [optional] 
+**metadata** | **object** | Session metadata (OPTIONAL) | [optional] 
 **enable_memory** | **bool** | Enable semantic memory for conversation context (OPTIONAL, default: True) | [optional] [default to True]
 
 ## Example

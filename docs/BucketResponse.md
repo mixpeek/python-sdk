@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **description** | **str** | Description of the bucket | [optional] 
 **bucket_schema** | [**BucketSchemaOutput**](BucketSchemaOutput.md) | Schema definition for objects in this bucket | [optional] 
 **unique_key** | [**UniqueKeyConfig**](UniqueKeyConfig.md) | Unique key configuration for this bucket (if configured) | [optional] 
-**metadata** | **Dict[str, object]** | Additional metadata for the bucket | [optional] 
+**metadata** | **object** | Additional metadata for the bucket | [optional] 
 **object_count** | **int** | Number of objects in the bucket | 
 **total_size_bytes** | **int** | Total size of all objects in the bucket in bytes | 
 **created_at** | **datetime** | When the bucket was created | [optional] 

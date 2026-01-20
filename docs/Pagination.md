@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **cursor** | **str** | Opaque base64 cursor from previous response (OPTIONAL). null for first page, then use cursor from response.pagination.cursor | [optional] 
 **scroll_id** | **str** | Server-issued scroll session identifier (OPTIONAL). null for first request, then use scroll_id from response | [optional] 
 **scroll_ttl** | **int** | Seconds to keep scroll context alive (REQUIRED). Default: 300 (5 minutes). | [optional] [default to 300]
-**after** | **Dict[str, object]** | Last seen keyset marker from previous response (OPTIONAL). Must include all sort fields. Example: {&#39;score&#39;: 0.73, &#39;id&#39;: &#39;doc_20&#39;}. null for first page, then use next_cursor from response | [optional] 
+**after** | **object** | Last seen keyset marker from previous response (OPTIONAL). Must include all sort fields. Example: {&#39;score&#39;: 0.73, &#39;id&#39;: &#39;doc_20&#39;}. null for first page, then use next_cursor from response | [optional] 
 
 ## Example
 

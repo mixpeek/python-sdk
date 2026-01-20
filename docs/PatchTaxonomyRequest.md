@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **taxonomy_name** | **str** | Updated name for the taxonomy | [optional] 
 **description** | **str** | Updated description for the taxonomy | [optional] 
-**metadata** | **Dict[str, object]** | Updated metadata for the taxonomy | [optional] 
+**metadata** | **object** | Updated metadata for the taxonomy | [optional] 
 
 ## Example
 

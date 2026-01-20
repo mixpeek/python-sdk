@@ -6,7 +6,7 @@ Request to update an existing trigger.  Only provided fields will be updated.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**schedule_config** | **Dict[str, object]** | Updated schedule configuration | [optional] 
+**schedule_config** | **object** | Updated schedule configuration | [optional] 
 **description** | **str** | Updated description | [optional] 
 **status** | [**SharedTriggersModelsTriggerStatus**](SharedTriggersModelsTriggerStatus.md) | Updated status | [optional] 
 

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **enabled** | **bool** | Whether the alert is active and will execute | [optional] [default to True]
 **created_at** | **datetime** | Timestamp when the alert was created | [optional] 
 **updated_at** | **datetime** | Timestamp when the alert was last updated | [optional] 
-**metadata** | **Dict[str, object]** | Additional user-defined metadata for the alert | [optional] 
+**metadata** | **object** | Additional user-defined metadata for the alert | [optional] 
 
 ## Example
 

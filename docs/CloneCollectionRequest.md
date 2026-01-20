@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **source** | [**SourceConfigInput**](SourceConfigInput.md) | OPTIONAL. Override source configuration. If omitted, copies from source collection. Allows switching between buckets or collections. | [optional] 
 **feature_extractor** | [**SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput**](SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput.md) | OPTIONAL. Override feature extractor configuration. If omitted, copies from source collection. This is where you&#39;d change models, parameters, or field_passthrough. | [optional] 
 **enabled** | **bool** | OPTIONAL. Override enabled status. If omitted, copies from source collection. | [optional] 
-**metadata** | **Dict[str, object]** | OPTIONAL. Override metadata. If omitted, copies from source collection. | [optional] 
+**metadata** | **object** | OPTIONAL. Override metadata. If omitted, copies from source collection. | [optional] 
 **taxonomy_applications** | [**List[TaxonomyApplicationConfigInput]**](TaxonomyApplicationConfigInput.md) | OPTIONAL. Override taxonomy applications. If omitted, copies from source collection. | [optional] 
 
 ## Example

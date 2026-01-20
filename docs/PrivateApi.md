@@ -268,7 +268,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_bootstrap_key_organizations_id_users_email**
-> Dict[str, object] create_bootstrap_key_organizations_id_users_email(organization_id, user_email)
+> object create_bootstrap_key_organizations_id_users_email(organization_id, user_email)
 
 Create Bootstrap Api Key
 
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Dict[str, object]**
+**object**
 
 ### Authorization
 

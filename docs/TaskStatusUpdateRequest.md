@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **namespace_id** | **str** |  | 
 **status** | **str** |  | 
 **outputs** | **List[object]** |  | [optional] 
-**additional_data** | **Dict[str, object]** |  | [optional] 
+**additional_data** | **object** |  | [optional] 
 **error** | **str** |  | [optional] 
 
 ## Example

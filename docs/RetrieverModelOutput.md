@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **budget_limits** | [**BudgetLimits**](BudgetLimits.md) | Execution budget limits for the retriever (OPTIONAL). | [optional] 
 **feature_dependencies** | [**List[FeatureAddress]**](FeatureAddress.md) | Feature addresses required by stages (OPTIONAL, aids validation). | [optional] 
 **tags** | **List[str]** | Arbitrary tags to help organise retrievers (OPTIONAL). | [optional] 
-**display_config** | **Dict[str, object]** | Display configuration for public retriever UI rendering (OPTIONAL). Defines how the search interface should appear when the retriever is published, including input fields, theme, layout, exposed result fields, and field formatting. This configuration is used as the default when publishing the retriever. | [optional] 
+**display_config** | **object** | Display configuration for public retriever UI rendering (OPTIONAL). Defines how the search interface should appear when the retriever is published, including input fields, theme, layout, exposed result fields, and field formatting. This configuration is used as the default when publishing the retriever. | [optional] 
 **version** | **int** | Version number that increments on each update (REQUIRED). | [optional] [default to 1]
 **created_at** | **datetime** | Creation timestamp in UTC (REQUIRED). | [optional] 
 **updated_at** | **datetime** | Last update timestamp in UTC (REQUIRED). | [optional] 

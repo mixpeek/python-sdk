@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **conversion_rate** | **float** | Percentage that converted (converted / count) | 
 **durations_sec** | [**DurationStats**](DurationStats.md) | Duration statistics (None if no conversions) | [optional] 
 **top_predictors** | [**List[PredictorLift]**](PredictorLift.md) | Covariates with highest lift (sorted by absolute lift) | [optional] 
-**metadata** | **Dict[str, object]** | Additional metadata (collection_id, event counts, etc.) | [optional] 
+**metadata** | **object** | Additional metadata (collection_id, event counts, etc.) | [optional] 
 
 ## Example
 

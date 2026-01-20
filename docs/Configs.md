@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **blocks_template** | **str** | Template for Slack blocks | [optional] 
 **url** | **str** | The URL to which the webhook will be sent. | 
 **headers** | **Dict[str, str]** | Custom headers to include in the webhook request. | [optional] 
-**payload_template** | **Dict[str, object]** | A Jinja2 template for the JSON payload. | [optional] 
+**payload_template** | **object** | A Jinja2 template for the JSON payload. | [optional] 
 **timeout** | **float** | Request timeout in seconds. | [optional] [default to 10.0]
 
 ## Example

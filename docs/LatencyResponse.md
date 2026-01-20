@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **collection_id** | **str** |  | 
 **time_range** | [**ApiAnalyticsCollectionsModelsTimeRange**](ApiAnalyticsCollectionsModelsTimeRange.md) |  | 
 **metrics** | [**List[LatencyMetric]**](LatencyMetric.md) |  | 
-**slowest_documents** | **List[Dict[str, object]]** |  | [optional] 
+**slowest_documents** | **List[object]** |  | [optional] 
 
 ## Example
 

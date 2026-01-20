@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **bool** | Whether the connection test succeeded. True: Credentials are valid and connection is accessible. False: Authentication failed, network error, or permissions denied. | 
 **message** | **str** | Human-readable message describing the test result. Success: &#39;Connection test succeeded&#39; or similar. Failure: Error message explaining what went wrong. | 
-**details** | **Dict[str, object]** | OPTIONAL. Additional diagnostic information about the test result. May include error details, provider-specific information, or success metadata. Format varies by provider. | [optional] 
+**details** | **object** | OPTIONAL. Additional diagnostic information about the test result. May include error details, provider-specific information, or success metadata. Format varies by provider. | [optional] 
 
 ## Example
 

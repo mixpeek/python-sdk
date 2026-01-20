@@ -7,7 +7,7 @@ Request payload for sending a message to the agent.  Attributes:     content: Me
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **content** | **str** | Message text content (REQUIRED) | 
-**metadata** | **Dict[str, object]** | Message metadata (OPTIONAL) | [optional] 
+**metadata** | **object** | Message metadata (OPTIONAL) | [optional] 
 **stream** | **bool** | Stream response as SSE (default: True) | [optional] [default to True]
 
 ## Example

@@ -6,9 +6,9 @@ Represents a logical operation (AND, OR, NOT) on filter conditions.  Allows nest
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_and** | [**List[LogicalOperatorInputANDInner]**](LogicalOperatorInputANDInner.md) | Logical AND operation - all conditions must be true | [optional] 
-**var_or** | [**List[LogicalOperatorInputANDInner]**](LogicalOperatorInputANDInner.md) | Logical OR operation - at least one condition must be true | [optional] 
-**var_not** | [**List[LogicalOperatorInputANDInner]**](LogicalOperatorInputANDInner.md) | Logical NOT operation - all conditions must be false | [optional] 
+**var_and** | [**List[AndInner]**](AndInner.md) | Logical AND operation - all conditions must be true | [optional] 
+**var_or** | [**List[AndInner]**](AndInner.md) | Logical OR operation - at least one condition must be true | [optional] 
+**var_not** | [**List[AndInner]**](AndInner.md) | Logical NOT operation - all conditions must be false | [optional] 
 **case_sensitive** | **bool** | Whether to perform case-sensitive matching | [optional] [default to False]
 
 ## Example

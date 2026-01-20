@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bucket** | **str** | The object storage bucket name | 
 **has_cors** | **bool** | Whether CORS is currently configured on the bucket | 
-**cors_rules** | **List[Dict[str, object]]** | The current CORS rules (if configured) | [optional] 
+**cors_rules** | **List[object]** | The current CORS rules (if configured) | [optional] 
 
 ## Example
 
