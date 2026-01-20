@@ -5,6 +5,7 @@ All URIs are relative to *https://api.mixpeek.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_user_to_organization**](PrivateApi.md#add_user_to_organization) | **POST** /v1/private/organizations/add-user | Add User To Organization Private
+[**complete_tier_internal_batches_batch_id_num**](PrivateApi.md#complete_tier_internal_batches_batch_id_num) | **POST** /v1/internal/batches/{batch_id}/tiers/{tier_num}/complete | Mark tier complete and trigger next tier (KISS - Engine callback)
 [**configure_storage_cors_configurations**](PrivateApi.md#configure_storage_cors_configurations) | **POST** /v1/private/configurations/storage/cors | Configure CORS for Object Storage
 [**create_bootstrap_key_organizations_id_users_email**](PrivateApi.md#create_bootstrap_key_organizations_id_users_email) | **POST** /v1/private/organizations/{organization_id}/users/{user_email}/bootstrap-key | Create Bootstrap Api Key
 [**create_organization**](PrivateApi.md#create_organization) | **POST** /v1/private/organizations | Create Organization Private
@@ -12,8 +13,8 @@ Method | HTTP request | Description
 [**diagnose_clickhouse_configurations_diagnostics**](PrivateApi.md#diagnose_clickhouse_configurations_diagnostics) | **GET** /v1/private/configurations/clickhouse/diagnostics | Diagnose ClickHouse Configuration
 [**get_organization**](PrivateApi.md#get_organization) | **GET** /v1/private/organizations/{organization_identifier} | Get Organization Private
 [**get_storage_cors_configurations**](PrivateApi.md#get_storage_cors_configurations) | **GET** /v1/private/configurations/storage/cors | Get Current CORS Configuration
-[**trigger_next_tier_internal_batches_batch_id_num**](PrivateApi.md#trigger_next_tier_internal_batches_batch_id_num) | **POST** /v1/internal/batches/{batch_id}/trigger-tier/{tier_num} | Trigger next tier processing (Internal - Engine callback)
 [**update_organization**](PrivateApi.md#update_organization) | **PATCH** /v1/private/organizations/{organization_identifier} | Update Organization Private
+[**update_task_status_internal**](PrivateApi.md#update_task_status_internal) | **POST** /v1/internal/tasks/{task_id}/status | Update task status (Engine callback)
 
 
 # **add_user_to_organization**
@@ -67,6 +68,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationModelResponse**](OrganizationModelResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **complete_tier_internal_batches_batch_id_num**
+> object complete_tier_internal_batches_batch_id_num(batch_id, tier_num, trigger_tier_request, authorization=authorization)
+
+Mark tier complete and trigger next tier (KISS - Engine callback)
+
+Called by Engine/BatchPoller when a tier completes. Simplified single-endpoint flow.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.trigger_tier_request import TriggerTierRequest
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.PrivateApi(api_client)
+    batch_id = 'batch_id_example' # str | 
+    tier_num = 56 # int | 
+    trigger_tier_request = mixpeek.TriggerTierRequest() # TriggerTierRequest | 
+    authorization = 'authorization_example' # str |  (optional)
+
+    try:
+        # Mark tier complete and trigger next tier (KISS - Engine callback)
+        api_response = api_instance.complete_tier_internal_batches_batch_id_num(batch_id, tier_num, trigger_tier_request, authorization=authorization)
+        print("The response of PrivateApi->complete_tier_internal_batches_batch_id_num:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivateApi->complete_tier_internal_batches_batch_id_num: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **batch_id** | **str**|  | 
+ **tier_num** | **int**|  | 
+ **trigger_tier_request** | [**TriggerTierRequest**](TriggerTierRequest.md)|  | 
+ **authorization** | **str**|  | [optional] 
+
+### Return type
+
+**object**
 
 ### Authorization
 
@@ -285,11 +366,15 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_organization**
-> OrganizationModelResponse create_organization(create_organization_request)
+> OrganizationModel create_organization(create_organization_request)
 
 Create Organization Private
 
 Create a new private organization.
+
+NOTE: This endpoint returns OrganizationModel (with internal_id) instead of
+OrganizationModelResponse because it's admin-only and callers need the
+internal_id for service initialization and E2E testing.
 
 ### Example
 
@@ -297,7 +382,7 @@ Create a new private organization.
 ```python
 import mixpeek
 from mixpeek.models.create_organization_request import CreateOrganizationRequest
-from mixpeek.models.organization_model_response import OrganizationModelResponse
+from mixpeek.models.organization_model import OrganizationModel
 from mixpeek.rest import ApiException
 from pprint import pprint
 
@@ -334,7 +419,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationModelResponse**](OrganizationModelResponse.md)
+[**OrganizationModel**](OrganizationModel.md)
 
 ### Authorization
 
@@ -655,86 +740,6 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **trigger_next_tier_internal_batches_batch_id_num**
-> object trigger_next_tier_internal_batches_batch_id_num(batch_id, tier_num, trigger_tier_request, authorization=authorization)
-
-Trigger next tier processing (Internal - Engine callback)
-
-Called by Engine/BatchPoller when a tier completes to trigger next tier
-
-### Example
-
-
-```python
-import mixpeek
-from mixpeek.models.trigger_tier_request import TriggerTierRequest
-from mixpeek.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.mixpeek.com
-# See configuration.py for a list of all supported configuration parameters.
-configuration = mixpeek.Configuration(
-    host = "https://api.mixpeek.com"
-)
-
-
-# Enter a context with an instance of the API client
-with mixpeek.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = mixpeek.PrivateApi(api_client)
-    batch_id = 'batch_id_example' # str | 
-    tier_num = 56 # int | 
-    trigger_tier_request = mixpeek.TriggerTierRequest() # TriggerTierRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-
-    try:
-        # Trigger next tier processing (Internal - Engine callback)
-        api_response = api_instance.trigger_next_tier_internal_batches_batch_id_num(batch_id, tier_num, trigger_tier_request, authorization=authorization)
-        print("The response of PrivateApi->trigger_next_tier_internal_batches_batch_id_num:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PrivateApi->trigger_next_tier_internal_batches_batch_id_num: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **batch_id** | **str**|  | 
- **tier_num** | **int**|  | 
- **trigger_tier_request** | [**TriggerTierRequest**](TriggerTierRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
-
-### Return type
-
-**object**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**400** | Bad Request |  -  |
-**401** | Unauthorized |  -  |
-**403** | Forbidden |  -  |
-**404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
-**422** | Validation Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **update_organization**
 > OrganizationModelResponse update_organization(organization_identifier, organization_admin_update_request)
 
@@ -793,6 +798,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**OrganizationModelResponse**](OrganizationModelResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_task_status_internal**
+> object update_task_status_internal(task_id, task_status_update_request, authorization=authorization)
+
+Update task status (Engine callback)
+
+Internal endpoint for Engine to update task status after async job completion.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.task_status_update_request import TaskStatusUpdateRequest
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.PrivateApi(api_client)
+    task_id = 'task_id_example' # str | 
+    task_status_update_request = mixpeek.TaskStatusUpdateRequest() # TaskStatusUpdateRequest | 
+    authorization = 'authorization_example' # str |  (optional)
+
+    try:
+        # Update task status (Engine callback)
+        api_response = api_instance.update_task_status_internal(task_id, task_status_update_request, authorization=authorization)
+        print("The response of PrivateApi->update_task_status_internal:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivateApi->update_task_status_internal: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **task_id** | **str**|  | 
+ **task_status_update_request** | [**TaskStatusUpdateRequest**](TaskStatusUpdateRequest.md)|  | 
+ **authorization** | **str**|  | [optional] 
+
+### Return type
+
+**object**
 
 ### Authorization
 

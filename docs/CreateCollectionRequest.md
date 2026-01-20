@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **metadata** | **Dict[str, object]** | Additional metadata for the collection | [optional] 
 **taxonomy_applications** | [**List[TaxonomyApplicationConfigInput]**](TaxonomyApplicationConfigInput.md) | Optional taxonomy applications to automatically enrich documents in this collection. Each taxonomy will classify/enrich documents based on configured retriever matches. | [optional] 
 **cluster_applications** | [**List[ClusterApplicationConfig]**](ClusterApplicationConfig.md) | Optional cluster applications to automatically execute when batch processing completes. Each cluster enriches documents with cluster assignments (cluster_id, cluster_label, etc.). | [optional] 
+**alert_applications** | [**List[AlertApplicationConfigInput]**](AlertApplicationConfigInput.md) | Optional alert applications to automatically execute when documents are ingested. Each alert runs a retriever against new documents and sends notifications if matches are found. Supports both ON_INGEST (triggered per batch) and SCHEDULED (periodic) execution modes. | [optional] 
 
 ## Example
 

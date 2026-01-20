@@ -39,7 +39,10 @@ class TestTaxonomyApplicationConfigOutput(unittest.TestCase):
                 taxonomy_id = '',
                 execution_mode = 'materialize',
                 target_collection_id = '',
-                scroll_filters = { }
+                scroll_filters = { },
+                execution_phase = 1.0,
+                priority = 0.0,
+                hierarchical_enrichment_style = 'full_chain'
             )
         else:
             return TaxonomyApplicationConfigOutput(

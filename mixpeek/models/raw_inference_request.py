@@ -18,20 +18,25 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class RawInferenceRequest(BaseModel):
     """
-    Request for raw inference without retriever framework.  This endpoint provides direct access to inference services with minimal configuration. Ideal for simple LLM calls, embeddings, transcription, or vision tasks without requiring collection setup or retriever configuration.  Examples:     # Chat completion     {         \"provider\": \"openai\",         \"model\": \"gpt-4o-mini\",         \"inputs\": {\"prompts\": [\"What is AI?\"]},         \"parameters\": {\"temperature\": 0.7, \"max_tokens\": 500}     }      # Text embedding     {         \"provider\": \"openai\",         \"model\": \"text-embedding-3-large\",         \"inputs\": {\"text\": \"machine learning\"},         \"parameters\": {}     }      # Audio transcription     {         \"provider\": \"openai\",         \"model\": \"whisper-1\",         \"inputs\": {\"audio_url\": \"https://example.com/audio.mp3\"},         \"parameters\": {}     }      # Vision (multimodal)     {         \"provider\": \"openai\",         \"model\": \"gpt-4o\",         \"inputs\": {             \"prompts\": [\"Describe this image\"],             \"image_url\": \"https://example.com/image.jpg\"         },         \"parameters\": {\"temperature\": 0.5}     }
+    Request for raw inference without retriever framework.  This endpoint provides direct access to inference services with minimal configuration. Ideal for simple LLM calls, embeddings, transcription, or vision tasks without requiring collection setup or retriever configuration.  You can either use: - `provider` + `model` for standard providers (openai, google, anthropic) - `inference_name` for custom plugins  Examples:     # Chat completion (provider + model)     {         \"provider\": \"openai\",         \"model\": \"gpt-4o-mini\",         \"inputs\": {\"prompts\": [\"What is AI?\"]},         \"parameters\": {\"temperature\": 0.7, \"max_tokens\": 500}     }      # Text embedding (provider + model)     {         \"provider\": \"openai\",         \"model\": \"text-embedding-3-large\",         \"inputs\": {\"text\": \"machine learning\"},         \"parameters\": {}     }      # Custom plugin (inference_name)     {         \"inference_name\": \"my_text_embedder_1_0_0\",         \"inputs\": {\"text\": \"hello world\"},         \"parameters\": {}     }      # Audio transcription     {         \"provider\": \"openai\",         \"model\": \"whisper-1\",         \"inputs\": {\"audio_url\": \"https://example.com/audio.mp3\"},         \"parameters\": {}     }      # Vision (multimodal)     {         \"provider\": \"openai\",         \"model\": \"gpt-4o\",         \"inputs\": {             \"prompts\": [\"Describe this image\"],             \"image_url\": \"https://example.com/image.jpg\"         },         \"parameters\": {\"temperature\": 0.5}     }
     """ # noqa: E501
-    provider: StrictStr = Field(description="Provider name: openai, google, anthropic")
-    model: StrictStr = Field(description="Model identifier specific to the provider")
+    provider: Optional[StrictStr] = Field(default=None, description="Provider name: openai, google, anthropic (required if inference_name not set)")
+    model: Optional[StrictStr] = Field(default=None, description="Model identifier specific to the provider (required if inference_name not set)")
+    inference_name: Optional[StrictStr] = Field(default=None, description="Custom plugin inference name (alternative to provider+model)")
+    feature_uri: Optional[StrictStr] = Field(default=None, description="Feature URI to resolve to inference_name (alternative to inference_name). Format: mixpeek://{extractor}@{version}/{vector_index_name}")
     inputs: Dict[str, Any] = Field(description="Model-specific inputs. Chat: {prompts: [str]}, Embeddings: {text: str} or {texts: [str]}, Transcription: {audio_url: str}, Vision: {prompts: [str], image_url: str}")
     parameters: Optional[Dict[str, Any]] = Field(default=None, description="Optional parameters for inference. Common: temperature (float), max_tokens (int), schema (dict for structured output)")
-    __properties: ClassVar[List[str]] = ["provider", "model", "inputs", "parameters"]
+    enable_semantic_cache: Optional[StrictBool] = Field(default=False, description="Enable semantic caching (vCache) for LLM chat operations. When enabled, semantically similar prompts may return cached responses, reducing latency and cost. Only applies to chat/completion models.")
+    cache_delta: Optional[Union[Annotated[float, Field(le=1.0, strict=True, ge=0.0)], Annotated[int, Field(le=1, strict=True, ge=0)]]] = Field(default=None, description="Maximum error rate for semantic cache (0.0-1.0). Lower values are more conservative. Default uses system setting (0.02 = 2%).")
+    __properties: ClassVar[List[str]] = ["provider", "model", "inference_name", "feature_uri", "inputs", "parameters", "enable_semantic_cache", "cache_delta"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,8 +91,12 @@ class RawInferenceRequest(BaseModel):
         _obj = cls.model_validate({
             "provider": obj.get("provider"),
             "model": obj.get("model"),
+            "inference_name": obj.get("inference_name"),
+            "feature_uri": obj.get("feature_uri"),
             "inputs": obj.get("inputs"),
-            "parameters": obj.get("parameters")
+            "parameters": obj.get("parameters"),
+            "enable_semantic_cache": obj.get("enable_semantic_cache") if obj.get("enable_semantic_cache") is not None else False,
+            "cache_delta": obj.get("cache_delta")
         })
         return _obj
 

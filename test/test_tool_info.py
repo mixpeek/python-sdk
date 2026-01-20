@@ -42,7 +42,8 @@ class TestToolInfo(unittest.TestCase):
                 parameters = { },
                 required_params = [
                     ''
-                    ]
+                    ],
+                requires_confirmation = True
             )
         else:
             return ToolInfo(

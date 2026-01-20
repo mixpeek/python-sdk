@@ -391,6 +391,7 @@ class BucketObjectsApi:
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_object_request: CreateObjectRequest,
         policy: Annotated[Optional[StrictStr], Field(description="Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided.")] = None,
+        auto_process: Annotated[Optional[StrictBool], Field(description="Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows.")] = None,
         authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
@@ -408,7 +409,7 @@ class BucketObjectsApi:
     ) -> ObjectResponse:
         """Create Object
 
-        This endpoint creates a new object in the specified bucket.     The object must conform to the bucket's schema. It does not trigger processing.      If the bucket has a unique_key configured, the insertion policy determines behavior:     - insert: Create only. Fail with 409 Conflict if unique key exists.     - update: Update only. Fail with 404 Not Found if unique key doesn't exist.     - upsert: Create if new, update if exists (idempotent).      Policy resolution:     1. Use ?policy= query parameter if provided     2. Fall back to bucket's default_policy if configured     3. Error 400 if neither is specified
+        This endpoint creates a new object in the specified bucket.     The object must conform to the bucket's schema.      **Processing**: By default, objects are created in DRAFT status and require     batch submission for processing. Set `auto_process=true` to automatically     create a batch and submit it for processing (zero-touch workflow).      If the bucket has a unique_key configured, the insertion policy determines behavior:     - insert: Create only. Fail with 409 Conflict if unique key exists.     - update: Update only. Fail with 404 Not Found if unique key doesn't exist.     - upsert: Create if new, update if exists (idempotent).      Policy resolution:     1. Use ?policy= query parameter if provided     2. Fall back to bucket's default_policy if configured     3. Error 400 if neither is specified
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
@@ -416,6 +417,8 @@ class BucketObjectsApi:
         :type create_object_request: CreateObjectRequest
         :param policy: Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided.
         :type policy: str
+        :param auto_process: Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows.
+        :type auto_process: bool
         :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
@@ -446,6 +449,7 @@ class BucketObjectsApi:
             bucket_identifier=bucket_identifier,
             create_object_request=create_object_request,
             policy=policy,
+            auto_process=auto_process,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -480,6 +484,7 @@ class BucketObjectsApi:
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_object_request: CreateObjectRequest,
         policy: Annotated[Optional[StrictStr], Field(description="Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided.")] = None,
+        auto_process: Annotated[Optional[StrictBool], Field(description="Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows.")] = None,
         authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
@@ -497,7 +502,7 @@ class BucketObjectsApi:
     ) -> ApiResponse[ObjectResponse]:
         """Create Object
 
-        This endpoint creates a new object in the specified bucket.     The object must conform to the bucket's schema. It does not trigger processing.      If the bucket has a unique_key configured, the insertion policy determines behavior:     - insert: Create only. Fail with 409 Conflict if unique key exists.     - update: Update only. Fail with 404 Not Found if unique key doesn't exist.     - upsert: Create if new, update if exists (idempotent).      Policy resolution:     1. Use ?policy= query parameter if provided     2. Fall back to bucket's default_policy if configured     3. Error 400 if neither is specified
+        This endpoint creates a new object in the specified bucket.     The object must conform to the bucket's schema.      **Processing**: By default, objects are created in DRAFT status and require     batch submission for processing. Set `auto_process=true` to automatically     create a batch and submit it for processing (zero-touch workflow).      If the bucket has a unique_key configured, the insertion policy determines behavior:     - insert: Create only. Fail with 409 Conflict if unique key exists.     - update: Update only. Fail with 404 Not Found if unique key doesn't exist.     - upsert: Create if new, update if exists (idempotent).      Policy resolution:     1. Use ?policy= query parameter if provided     2. Fall back to bucket's default_policy if configured     3. Error 400 if neither is specified
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
@@ -505,6 +510,8 @@ class BucketObjectsApi:
         :type create_object_request: CreateObjectRequest
         :param policy: Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided.
         :type policy: str
+        :param auto_process: Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows.
+        :type auto_process: bool
         :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
@@ -535,6 +542,7 @@ class BucketObjectsApi:
             bucket_identifier=bucket_identifier,
             create_object_request=create_object_request,
             policy=policy,
+            auto_process=auto_process,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -569,6 +577,7 @@ class BucketObjectsApi:
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_object_request: CreateObjectRequest,
         policy: Annotated[Optional[StrictStr], Field(description="Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided.")] = None,
+        auto_process: Annotated[Optional[StrictBool], Field(description="Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows.")] = None,
         authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
@@ -586,7 +595,7 @@ class BucketObjectsApi:
     ) -> RESTResponseType:
         """Create Object
 
-        This endpoint creates a new object in the specified bucket.     The object must conform to the bucket's schema. It does not trigger processing.      If the bucket has a unique_key configured, the insertion policy determines behavior:     - insert: Create only. Fail with 409 Conflict if unique key exists.     - update: Update only. Fail with 404 Not Found if unique key doesn't exist.     - upsert: Create if new, update if exists (idempotent).      Policy resolution:     1. Use ?policy= query parameter if provided     2. Fall back to bucket's default_policy if configured     3. Error 400 if neither is specified
+        This endpoint creates a new object in the specified bucket.     The object must conform to the bucket's schema.      **Processing**: By default, objects are created in DRAFT status and require     batch submission for processing. Set `auto_process=true` to automatically     create a batch and submit it for processing (zero-touch workflow).      If the bucket has a unique_key configured, the insertion policy determines behavior:     - insert: Create only. Fail with 409 Conflict if unique key exists.     - update: Update only. Fail with 404 Not Found if unique key doesn't exist.     - upsert: Create if new, update if exists (idempotent).      Policy resolution:     1. Use ?policy= query parameter if provided     2. Fall back to bucket's default_policy if configured     3. Error 400 if neither is specified
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
@@ -594,6 +603,8 @@ class BucketObjectsApi:
         :type create_object_request: CreateObjectRequest
         :param policy: Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided.
         :type policy: str
+        :param auto_process: Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows.
+        :type auto_process: bool
         :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
@@ -624,6 +635,7 @@ class BucketObjectsApi:
             bucket_identifier=bucket_identifier,
             create_object_request=create_object_request,
             policy=policy,
+            auto_process=auto_process,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -653,6 +665,7 @@ class BucketObjectsApi:
         bucket_identifier,
         create_object_request,
         policy,
+        auto_process,
         authorization,
         x_namespace,
         _request_auth,
@@ -682,6 +695,10 @@ class BucketObjectsApi:
         if policy is not None:
             
             _query_params.append(('policy', policy))
+            
+        if auto_process is not None:
+            
+            _query_params.append(('auto_process', auto_process))
             
         # process the header parameters
         if authorization is not None:
@@ -743,6 +760,7 @@ class BucketObjectsApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_objects_batch_request: CreateObjectsBatchRequest,
+        auto_process: Annotated[Optional[StrictBool], Field(description="Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows.")] = None,
         authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
@@ -760,12 +778,14 @@ class BucketObjectsApi:
     ) -> CreateObjectsBatchResponse:
         """Create Objects in Batch
 
-        This endpoint creates multiple new objects in the specified bucket as a batch.     Each object must conform to the bucket's schema. It does not trigger processing.      **Partial Success**: This endpoint uses partial success - valid objects are created     even if some fail validation. Failed objects are returned separately with error details,     allowing you to fix and retry only the failed ones.      **Response**: Returns both succeeded and failed objects. The batch succeeds (200 OK) as long     as at least one object is created. Check the `failed` array for objects that need attention.
+        This endpoint creates multiple new objects in the specified bucket as a batch.     Each object must conform to the bucket's schema.      **Processing**: By default, objects are created in DRAFT status and require     batch submission for processing. Set `auto_process=true` to automatically     create a processing batch and submit it (zero-touch workflow).      **Partial Success**: This endpoint uses partial success - valid objects are created     even if some fail validation. Failed objects are returned separately with error details,     allowing you to fix and retry only the failed ones.      **Response**: Returns both succeeded and failed objects. The batch succeeds (200 OK) as long     as at least one object is created. Check the `failed` array for objects that need attention.
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
         :param create_objects_batch_request: (required)
         :type create_objects_batch_request: CreateObjectsBatchRequest
+        :param auto_process: Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows.
+        :type auto_process: bool
         :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
@@ -795,6 +815,7 @@ class BucketObjectsApi:
         _param = self._create_objects_batch_buckets_serialize(
             bucket_identifier=bucket_identifier,
             create_objects_batch_request=create_objects_batch_request,
+            auto_process=auto_process,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -828,6 +849,7 @@ class BucketObjectsApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_objects_batch_request: CreateObjectsBatchRequest,
+        auto_process: Annotated[Optional[StrictBool], Field(description="Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows.")] = None,
         authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
@@ -845,12 +867,14 @@ class BucketObjectsApi:
     ) -> ApiResponse[CreateObjectsBatchResponse]:
         """Create Objects in Batch
 
-        This endpoint creates multiple new objects in the specified bucket as a batch.     Each object must conform to the bucket's schema. It does not trigger processing.      **Partial Success**: This endpoint uses partial success - valid objects are created     even if some fail validation. Failed objects are returned separately with error details,     allowing you to fix and retry only the failed ones.      **Response**: Returns both succeeded and failed objects. The batch succeeds (200 OK) as long     as at least one object is created. Check the `failed` array for objects that need attention.
+        This endpoint creates multiple new objects in the specified bucket as a batch.     Each object must conform to the bucket's schema.      **Processing**: By default, objects are created in DRAFT status and require     batch submission for processing. Set `auto_process=true` to automatically     create a processing batch and submit it (zero-touch workflow).      **Partial Success**: This endpoint uses partial success - valid objects are created     even if some fail validation. Failed objects are returned separately with error details,     allowing you to fix and retry only the failed ones.      **Response**: Returns both succeeded and failed objects. The batch succeeds (200 OK) as long     as at least one object is created. Check the `failed` array for objects that need attention.
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
         :param create_objects_batch_request: (required)
         :type create_objects_batch_request: CreateObjectsBatchRequest
+        :param auto_process: Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows.
+        :type auto_process: bool
         :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
@@ -880,6 +904,7 @@ class BucketObjectsApi:
         _param = self._create_objects_batch_buckets_serialize(
             bucket_identifier=bucket_identifier,
             create_objects_batch_request=create_objects_batch_request,
+            auto_process=auto_process,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -913,6 +938,7 @@ class BucketObjectsApi:
         self,
         bucket_identifier: Annotated[StrictStr, Field(description="The unique identifier of the bucket.")],
         create_objects_batch_request: CreateObjectsBatchRequest,
+        auto_process: Annotated[Optional[StrictBool], Field(description="Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows.")] = None,
         authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
         x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
         _request_timeout: Union[
@@ -930,12 +956,14 @@ class BucketObjectsApi:
     ) -> RESTResponseType:
         """Create Objects in Batch
 
-        This endpoint creates multiple new objects in the specified bucket as a batch.     Each object must conform to the bucket's schema. It does not trigger processing.      **Partial Success**: This endpoint uses partial success - valid objects are created     even if some fail validation. Failed objects are returned separately with error details,     allowing you to fix and retry only the failed ones.      **Response**: Returns both succeeded and failed objects. The batch succeeds (200 OK) as long     as at least one object is created. Check the `failed` array for objects that need attention.
+        This endpoint creates multiple new objects in the specified bucket as a batch.     Each object must conform to the bucket's schema.      **Processing**: By default, objects are created in DRAFT status and require     batch submission for processing. Set `auto_process=true` to automatically     create a processing batch and submit it (zero-touch workflow).      **Partial Success**: This endpoint uses partial success - valid objects are created     even if some fail validation. Failed objects are returned separately with error details,     allowing you to fix and retry only the failed ones.      **Response**: Returns both succeeded and failed objects. The batch succeeds (200 OK) as long     as at least one object is created. Check the `failed` array for objects that need attention.
 
         :param bucket_identifier: The unique identifier of the bucket. (required)
         :type bucket_identifier: str
         :param create_objects_batch_request: (required)
         :type create_objects_batch_request: CreateObjectsBatchRequest
+        :param auto_process: Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows.
+        :type auto_process: bool
         :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
         :type authorization: str
         :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
@@ -965,6 +993,7 @@ class BucketObjectsApi:
         _param = self._create_objects_batch_buckets_serialize(
             bucket_identifier=bucket_identifier,
             create_objects_batch_request=create_objects_batch_request,
+            auto_process=auto_process,
             authorization=authorization,
             x_namespace=x_namespace,
             _request_auth=_request_auth,
@@ -993,6 +1022,7 @@ class BucketObjectsApi:
         self,
         bucket_identifier,
         create_objects_batch_request,
+        auto_process,
         authorization,
         x_namespace,
         _request_auth,
@@ -1019,6 +1049,10 @@ class BucketObjectsApi:
         if bucket_identifier is not None:
             _path_params['bucket_identifier'] = bucket_identifier
         # process the query parameters
+        if auto_process is not None:
+            
+            _query_params.append(('auto_process', auto_process))
+            
         # process the header parameters
         if authorization is not None:
             _header_params['Authorization'] = authorization

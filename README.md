@@ -100,9 +100,24 @@ Class | Method | HTTP request | Description
 *AgentSessionsApi* | [**list_sessions_agents**](docs/AgentSessionsApi.md#list_sessions_agents) | **POST** /v1/agents/sessions/list | List Sessions
 *AgentSessionsApi* | [**list_tools_agents_sessions**](docs/AgentSessionsApi.md#list_tools_agents_sessions) | **GET** /v1/agents/sessions/tools | List Tools
 *AgentSessionsApi* | [**patch_session_agents**](docs/AgentSessionsApi.md#patch_session_agents) | **PATCH** /v1/agents/sessions/{session_id} | Patch Session
+*AgentSessionsApi* | [**respond_to_confirmation_agents_sessions**](docs/AgentSessionsApi.md#respond_to_confirmation_agents_sessions) | **POST** /v1/agents/sessions/{session_id}/confirmations/{confirmation_id} | Respond To Confirmation
 *AgentSessionsApi* | [**send_message_agents_sessions**](docs/AgentSessionsApi.md#send_message_agents_sessions) | **POST** /v1/agents/sessions/{session_id}/messages | Send Message
 *AgentSessionsApi* | [**submit_feedback_agents_sessions**](docs/AgentSessionsApi.md#submit_feedback_agents_sessions) | **POST** /v1/agents/sessions/{session_id}/feedback | Submit Feedback
 *AgentSessionsApi* | [**terminate_session_agents**](docs/AgentSessionsApi.md#terminate_session_agents) | **DELETE** /v1/agents/sessions/{session_id} | Terminate Session
+*AlertsApi* | [**create_alert**](docs/AlertsApi.md#create_alert) | **POST** /v1/alerts | Create Alert
+*AlertsApi* | [**create_alert_0**](docs/AlertsApi.md#create_alert_0) | **POST** /v1/alerts | Create Alert
+*AlertsApi* | [**delete_alert**](docs/AlertsApi.md#delete_alert) | **DELETE** /v1/alerts/{alert_identifier} | Delete Alert
+*AlertsApi* | [**delete_alert_0**](docs/AlertsApi.md#delete_alert_0) | **DELETE** /v1/alerts/{alert_identifier} | Delete Alert
+*AlertsApi* | [**get_alert**](docs/AlertsApi.md#get_alert) | **GET** /v1/alerts/{alert_identifier} | Get Alert
+*AlertsApi* | [**get_alert_0**](docs/AlertsApi.md#get_alert_0) | **GET** /v1/alerts/{alert_identifier} | Get Alert
+*AlertsApi* | [**list_alert_executions**](docs/AlertsApi.md#list_alert_executions) | **GET** /v1/alerts/{alert_identifier}/executions | List Alert Executions
+*AlertsApi* | [**list_alert_executions_0**](docs/AlertsApi.md#list_alert_executions_0) | **GET** /v1/alerts/{alert_identifier}/executions | List Alert Executions
+*AlertsApi* | [**list_alerts**](docs/AlertsApi.md#list_alerts) | **POST** /v1/alerts/list | List Alerts
+*AlertsApi* | [**list_alerts_0**](docs/AlertsApi.md#list_alerts_0) | **POST** /v1/alerts/list | List Alerts
+*AlertsApi* | [**list_all_executions_alerts**](docs/AlertsApi.md#list_all_executions_alerts) | **GET** /v1/alerts/executions | List All Executions
+*AlertsApi* | [**list_all_executions_alerts_0**](docs/AlertsApi.md#list_all_executions_alerts_0) | **GET** /v1/alerts/executions | List All Executions
+*AlertsApi* | [**patch_alert**](docs/AlertsApi.md#patch_alert) | **PATCH** /v1/alerts/{alert_identifier} | Update Alert
+*AlertsApi* | [**patch_alert_0**](docs/AlertsApi.md#patch_alert_0) | **PATCH** /v1/alerts/{alert_identifier} | Update Alert
 *AnalyticsApi* | [**analyze_bottlenecks_analytics_performance_engine**](docs/AnalyticsApi.md#analyze_bottlenecks_analytics_performance_engine) | **GET** /v1/analytics/performance/engine/bottlenecks | Analyze Bottlenecks
 *AnalyticsApi* | [**analyze_bottlenecks_analytics_performance_engine_0**](docs/AnalyticsApi.md#analyze_bottlenecks_analytics_performance_engine_0) | **GET** /v1/analytics/performance/engine/bottlenecks | Analyze Bottlenecks
 *AnalyticsApi* | [**analyze_for_tuning_analytics_retrievers**](docs/AnalyticsApi.md#analyze_for_tuning_analytics_retrievers) | **POST** /v1/analytics/retrievers/{retriever_id}/analyze-tuning | Analyze For Tuning
@@ -311,10 +326,31 @@ Class | Method | HTTP request | Description
 *CollectionsApi* | [**create_collection**](docs/CollectionsApi.md#create_collection) | **POST** /v1/collections | Create Collection
 *CollectionsApi* | [**delete_collection**](docs/CollectionsApi.md#delete_collection) | **DELETE** /v1/collections/{collection_identifier} | Delete Collection
 *CollectionsApi* | [**describe_collection_features**](docs/CollectionsApi.md#describe_collection_features) | **GET** /v1/collections/{collection_identifier}/features | Describe collection features
+*CollectionsApi* | [**export_collection**](docs/CollectionsApi.md#export_collection) | **POST** /v1/collections/{collection_identifier}/export | Export Collection
 *CollectionsApi* | [**get_collection**](docs/CollectionsApi.md#get_collection) | **GET** /v1/collections/{collection_identifier} | Get Collection
 *CollectionsApi* | [**list_collections**](docs/CollectionsApi.md#list_collections) | **POST** /v1/collections/list | List Collections
 *CollectionsApi* | [**trigger_collection**](docs/CollectionsApi.md#trigger_collection) | **POST** /v1/collections/{collection_identifier}/trigger | Trigger Collection Processing
 *CollectionsApi* | [**update_collection**](docs/CollectionsApi.md#update_collection) | **PATCH** /v1/collections/{collection_identifier} | Update Collection
+*CustomModelsApi* | [**delete_model_namespaces**](docs/CustomModelsApi.md#delete_model_namespaces) | **DELETE** /v1/namespaces/{namespace_id}/models/{model_id} | Delete a model
+*CustomModelsApi* | [**deploy_model_namespaces**](docs/CustomModelsApi.md#deploy_model_namespaces) | **POST** /v1/namespaces/{namespace_id}/models/{model_id}/deploy | Deploy model to Ray object store
+*CustomModelsApi* | [**disable_org_model_namespaces**](docs/CustomModelsApi.md#disable_org_model_namespaces) | **POST** /v1/namespaces/{namespace_id}/models/org/{model_id}/disable | Disable org model for namespace
+*CustomModelsApi* | [**enable_org_model_namespaces**](docs/CustomModelsApi.md#enable_org_model_namespaces) | **POST** /v1/namespaces/{namespace_id}/models/org/{model_id}/enable | Enable org model for namespace
+*CustomModelsApi* | [**get_model_namespaces**](docs/CustomModelsApi.md#get_model_namespaces) | **GET** /v1/namespaces/{namespace_id}/models/{model_id} | Get model details
+*CustomModelsApi* | [**list_available_org_models_namespaces**](docs/CustomModelsApi.md#list_available_org_models_namespaces) | **GET** /v1/namespaces/{namespace_id}/models/available | List available org models
+*CustomModelsApi* | [**list_models_namespaces**](docs/CustomModelsApi.md#list_models_namespaces) | **GET** /v1/namespaces/{namespace_id}/models | List models in namespace
+*CustomModelsApi* | [**upload_model_namespaces**](docs/CustomModelsApi.md#upload_model_namespaces) | **POST** /v1/namespaces/{namespace_id}/models | Upload a custom model
+*CustomPluginsNamespaceApi* | [**confirm_upload_namespaces_id_plugins**](docs/CustomPluginsNamespaceApi.md#confirm_upload_namespaces_id_plugins) | **POST** /v1/namespaces/{namespace_id}/plugins/uploads/{upload_id}/confirm | Confirm plugin upload
+*CustomPluginsNamespaceApi* | [**delete_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#delete_plugin_namespaces) | **DELETE** /v1/namespaces/{namespace_id}/plugins/{plugin_id} | Delete a plugin
+*CustomPluginsNamespaceApi* | [**deploy_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#deploy_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins/{plugin_id}/deploy | Deploy or redeploy a plugin
+*CustomPluginsNamespaceApi* | [**disable_org_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#disable_org_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins/org/{plugin_id}/disable | Disable org plugin for namespace
+*CustomPluginsNamespaceApi* | [**enable_org_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#enable_org_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins/org/{plugin_id}/enable | Enable org plugin for namespace
+*CustomPluginsNamespaceApi* | [**generate_upload_url_namespaces_id_plugins**](docs/CustomPluginsNamespaceApi.md#generate_upload_url_namespaces_id_plugins) | **POST** /v1/namespaces/{namespace_id}/plugins/uploads | Generate presigned URL for plugin upload
+*CustomPluginsNamespaceApi* | [**get_deployment_status_namespaces_id_plugins**](docs/CustomPluginsNamespaceApi.md#get_deployment_status_namespaces_id_plugins) | **GET** /v1/namespaces/{namespace_id}/plugins/{plugin_id}/status | Get plugin deployment status
+*CustomPluginsNamespaceApi* | [**get_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#get_plugin_namespaces) | **GET** /v1/namespaces/{namespace_id}/plugins/{plugin_id} | Get plugin details
+*CustomPluginsNamespaceApi* | [**list_available_org_plugins_namespaces**](docs/CustomPluginsNamespaceApi.md#list_available_org_plugins_namespaces) | **GET** /v1/namespaces/{namespace_id}/plugins/available | List available org plugins
+*CustomPluginsNamespaceApi* | [**list_plugins_namespaces**](docs/CustomPluginsNamespaceApi.md#list_plugins_namespaces) | **GET** /v1/namespaces/{namespace_id}/plugins | List plugins in namespace
+*CustomPluginsNamespaceApi* | [**undeploy_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#undeploy_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins/{plugin_id}/undeploy | Undeploy a plugin
+*CustomPluginsNamespaceApi* | [**upload_plugin_namespaces**](docs/CustomPluginsNamespaceApi.md#upload_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins | Upload a custom plugin
 *DocumentLineageApi* | [**get_decomposition_tree_objects**](docs/DocumentLineageApi.md#get_decomposition_tree_objects) | **GET** /v1/objects/{object_id}/decomposition-tree | Get decomposition tree visualization
 *DocumentLineageApi* | [**get_document_lineage**](docs/DocumentLineageApi.md#get_document_lineage) | **GET** /v1/collections/{collection_id}/documents/{document_id}/lineage | Get document lineage
 *DocumentLineageApi* | [**get_documents_by_object**](docs/DocumentLineageApi.md#get_documents_by_object) | **GET** /v1/objects/{object_id}/documents | Get all documents derived from an object
@@ -328,6 +364,8 @@ Class | Method | HTTP request | Description
 *FeatureExtractorsApi* | [**list_feature_extractors**](docs/FeatureExtractorsApi.md#list_feature_extractors) | **GET** /v1/collections/features/extractors | List Feature Extractors
 *HealthApi* | [**healthcheck_health**](docs/HealthApi.md#healthcheck_health) | **GET** /v1/health | Healthcheck
 *HealthApi* | [**healthcheck_health_0**](docs/HealthApi.md#healthcheck_health_0) | **GET** /v1/health | Healthcheck
+*HealthApi* | [**liveness_health**](docs/HealthApi.md#liveness_health) | **GET** /v1/health/liveness | Liveness
+*HealthApi* | [**liveness_health_0**](docs/HealthApi.md#liveness_health_0) | **GET** /v1/health/liveness | Liveness
 *InferenceApi* | [**execute_raw_inference**](docs/InferenceApi.md#execute_raw_inference) | **POST** /v1/inference | Execute Raw Inference
 *ManifestApi* | [**apply_manifest**](docs/ManifestApi.md#apply_manifest) | **POST** /v1/manifest/apply | Apply Manifest
 *ManifestApi* | [**diff_manifest**](docs/ManifestApi.md#diff_manifest) | **POST** /v1/manifest/diff | Diff Manifest
@@ -335,7 +373,14 @@ Class | Method | HTTP request | Description
 *ManifestApi* | [**export_manifest_post**](docs/ManifestApi.md#export_manifest_post) | **POST** /v1/manifest/export | Export Manifest Post
 *ManifestApi* | [**generate_manifest**](docs/ManifestApi.md#generate_manifest) | **POST** /v1/manifest/generate | Generate Manifest
 *ManifestApi* | [**validate_manifest**](docs/ManifestApi.md#validate_manifest) | **POST** /v1/manifest/validate | Validate Manifest
+*ModelsApi* | [**confirm_upload_models**](docs/ModelsApi.md#confirm_upload_models) | **POST** /v1/models/uploads/{upload_id}/confirm | Confirm model upload
+*ModelsApi* | [**delete_model**](docs/ModelsApi.md#delete_model) | **DELETE** /v1/models/{model_id} | Delete model
+*ModelsApi* | [**generate_upload_url_models**](docs/ModelsApi.md#generate_upload_url_models) | **POST** /v1/models/uploads | Generate presigned URL for model upload
+*ModelsApi* | [**get_model**](docs/ModelsApi.md#get_model) | **GET** /v1/models/{model_id} | Get model details
+*ModelsApi* | [**list_models**](docs/ModelsApi.md#list_models) | **GET** /v1/models | List organization models
 *NamespaceCloneApi* | [**clone_namespace**](docs/NamespaceCloneApi.md#clone_namespace) | **POST** /v1/namespaces/{namespace_identifier}/clone | Clone Namespace
+*NamespaceExtractorsApi* | [**get_extractor_namespaces**](docs/NamespaceExtractorsApi.md#get_extractor_namespaces) | **GET** /v1/namespaces/{namespace_id}/extractors/{extractor_id} | Get extractor details
+*NamespaceExtractorsApi* | [**list_extractors_namespaces**](docs/NamespaceExtractorsApi.md#list_extractors_namespaces) | **GET** /v1/namespaces/{namespace_id}/extractors | List all extractors available to namespace
 *NamespaceMigrationsApi* | [**cancel_migration_namespaces**](docs/NamespaceMigrationsApi.md#cancel_migration_namespaces) | **POST** /v1/namespaces/migrations/{migration_id}/cancel | Cancel Migration
 *NamespaceMigrationsApi* | [**create_migration_namespaces**](docs/NamespaceMigrationsApi.md#create_migration_namespaces) | **POST** /v1/namespaces/migrations/ | Create Migration
 *NamespaceMigrationsApi* | [**delete_migration_namespaces**](docs/NamespaceMigrationsApi.md#delete_migration_namespaces) | **DELETE** /v1/namespaces/migrations/{migration_id} | Delete Migration
@@ -354,13 +399,16 @@ Class | Method | HTTP request | Description
 *NamespacesApi* | [**patch_namespace**](docs/NamespacesApi.md#patch_namespace) | **PATCH** /v1/namespaces/{namespace_identifier} | Partially Update Namespace
 *NamespacesApi* | [**update_namespace**](docs/NamespacesApi.md#update_namespace) | **PUT** /v1/namespaces/{namespace_identifier} | Update Namespace
 *NotificationsApi* | [**delete_notification**](docs/NotificationsApi.md#delete_notification) | **DELETE** /v1/notifications/{notification_id} | Delete Notification
+*NotificationsApi* | [**get_funnel_state_notifications**](docs/NotificationsApi.md#get_funnel_state_notifications) | **GET** /v1/notifications/funnel/state | Get Funnel State
 *NotificationsApi* | [**get_notification**](docs/NotificationsApi.md#get_notification) | **GET** /v1/notifications/{notification_id} | Get Notification
 *NotificationsApi* | [**get_preferences_notifications**](docs/NotificationsApi.md#get_preferences_notifications) | **GET** /v1/notifications/preferences | Get Preferences
+*NotificationsApi* | [**get_reminder_preferences_notifications**](docs/NotificationsApi.md#get_reminder_preferences_notifications) | **GET** /v1/notifications/preferences/reminders | Get Reminder Preferences
 *NotificationsApi* | [**get_unread_count_notifications**](docs/NotificationsApi.md#get_unread_count_notifications) | **GET** /v1/notifications/unread/count | Get Unread Count
 *NotificationsApi* | [**list_notifications**](docs/NotificationsApi.md#list_notifications) | **POST** /v1/notifications/list | List Notifications
 *NotificationsApi* | [**mark_all_as_read_notifications**](docs/NotificationsApi.md#mark_all_as_read_notifications) | **POST** /v1/notifications/read/all | Mark All As Read
 *NotificationsApi* | [**mark_as_read_notifications**](docs/NotificationsApi.md#mark_as_read_notifications) | **POST** /v1/notifications/{notification_id}/read | Mark As Read
 *NotificationsApi* | [**update_preferences_notifications**](docs/NotificationsApi.md#update_preferences_notifications) | **PUT** /v1/notifications/preferences | Update Preferences
+*NotificationsApi* | [**update_reminder_preferences_notifications**](docs/NotificationsApi.md#update_reminder_preferences_notifications) | **PUT** /v1/notifications/preferences/reminders | Update Reminder Preferences
 *OrganizationAPIKeysApi* | [**create_key_organizations_users_email**](docs/OrganizationAPIKeysApi.md#create_key_organizations_users_email) | **POST** /v1/organizations/users/{user_email}/api-keys | Create Api Key
 *OrganizationAPIKeysApi* | [**delete_key_organizations_users_email_name**](docs/OrganizationAPIKeysApi.md#delete_key_organizations_users_email_name) | **DELETE** /v1/organizations/users/{user_email}/api-keys/{key_name} | Delete Api Key
 *OrganizationAPIKeysApi* | [**list_keys_organizations_users_email**](docs/OrganizationAPIKeysApi.md#list_keys_organizations_users_email) | **GET** /v1/organizations/users/{user_email}/api-keys | List Api Keys
@@ -373,6 +421,7 @@ Class | Method | HTTP request | Description
 *OrganizationBillingApi* | [**confirm_payment_method_organizations_billing**](docs/OrganizationBillingApi.md#confirm_payment_method_organizations_billing) | **POST** /v1/organizations/billing/confirm-payment-method | Confirm Payment Method
 *OrganizationBillingApi* | [**disable_auto_billing_organizations**](docs/OrganizationBillingApi.md#disable_auto_billing_organizations) | **POST** /v1/organizations/billing/disable-auto-billing | Disable Auto Billing
 *OrganizationBillingApi* | [**enable_auto_billing_organizations**](docs/OrganizationBillingApi.md#enable_auto_billing_organizations) | **POST** /v1/organizations/billing/enable-auto-billing | Enable Auto Billing
+*OrganizationBillingApi* | [**get_credit_balance_organizations_billing**](docs/OrganizationBillingApi.md#get_credit_balance_organizations_billing) | **GET** /v1/organizations/billing/balance | Get Credit Balance
 *OrganizationBillingApi* | [**get_current_usage_organizations_billing**](docs/OrganizationBillingApi.md#get_current_usage_organizations_billing) | **GET** /v1/organizations/billing/usage/current | Get Current Usage
 *OrganizationBillingApi* | [**get_payment_method_organizations_billing**](docs/OrganizationBillingApi.md#get_payment_method_organizations_billing) | **GET** /v1/organizations/billing/payment-method | Get Payment Method
 *OrganizationBillingApi* | [**get_spending_caps_organizations_billing**](docs/OrganizationBillingApi.md#get_spending_caps_organizations_billing) | **GET** /v1/organizations/billing/spending-caps | Get Spending Caps
@@ -403,7 +452,13 @@ Class | Method | HTTP request | Description
 *OrganizationsApi* | [**add_credits_organizations**](docs/OrganizationsApi.md#add_credits_organizations) | **POST** /v1/organizations/credits | Add Credits
 *OrganizationsApi* | [**get_organization**](docs/OrganizationsApi.md#get_organization) | **GET** /v1/organizations | Get Organization
 *OrganizationsApi* | [**update_organization**](docs/OrganizationsApi.md#update_organization) | **PATCH** /v1/organizations | Update Organization
+*PluginsApi* | [**confirm_upload_plugins**](docs/PluginsApi.md#confirm_upload_plugins) | **POST** /v1/plugins/uploads/{upload_id}/confirm | Confirm plugin upload
+*PluginsApi* | [**delete_plugin**](docs/PluginsApi.md#delete_plugin) | **DELETE** /v1/plugins/{plugin_id} | Delete a plugin
+*PluginsApi* | [**generate_upload_url_plugins**](docs/PluginsApi.md#generate_upload_url_plugins) | **POST** /v1/plugins/uploads | Generate presigned URL for plugin upload
+*PluginsApi* | [**get_plugin**](docs/PluginsApi.md#get_plugin) | **GET** /v1/plugins/{plugin_id} | Get plugin details
+*PluginsApi* | [**list_plugins**](docs/PluginsApi.md#list_plugins) | **GET** /v1/plugins | List plugins in organization
 *PrivateApi* | [**add_user_to_organization**](docs/PrivateApi.md#add_user_to_organization) | **POST** /v1/private/organizations/add-user | Add User To Organization Private
+*PrivateApi* | [**complete_tier_internal_batches_batch_id_num**](docs/PrivateApi.md#complete_tier_internal_batches_batch_id_num) | **POST** /v1/internal/batches/{batch_id}/tiers/{tier_num}/complete | Mark tier complete and trigger next tier (KISS - Engine callback)
 *PrivateApi* | [**configure_storage_cors_configurations**](docs/PrivateApi.md#configure_storage_cors_configurations) | **POST** /v1/private/configurations/storage/cors | Configure CORS for Object Storage
 *PrivateApi* | [**create_bootstrap_key_organizations_id_users_email**](docs/PrivateApi.md#create_bootstrap_key_organizations_id_users_email) | **POST** /v1/private/organizations/{organization_id}/users/{user_email}/bootstrap-key | Create Bootstrap Api Key
 *PrivateApi* | [**create_organization**](docs/PrivateApi.md#create_organization) | **POST** /v1/private/organizations | Create Organization Private
@@ -411,8 +466,9 @@ Class | Method | HTTP request | Description
 *PrivateApi* | [**diagnose_clickhouse_configurations_diagnostics**](docs/PrivateApi.md#diagnose_clickhouse_configurations_diagnostics) | **GET** /v1/private/configurations/clickhouse/diagnostics | Diagnose ClickHouse Configuration
 *PrivateApi* | [**get_organization**](docs/PrivateApi.md#get_organization) | **GET** /v1/private/organizations/{organization_identifier} | Get Organization Private
 *PrivateApi* | [**get_storage_cors_configurations**](docs/PrivateApi.md#get_storage_cors_configurations) | **GET** /v1/private/configurations/storage/cors | Get Current CORS Configuration
-*PrivateApi* | [**trigger_next_tier_internal_batches_batch_id_num**](docs/PrivateApi.md#trigger_next_tier_internal_batches_batch_id_num) | **POST** /v1/internal/batches/{batch_id}/trigger-tier/{tier_num} | Trigger next tier processing (Internal - Engine callback)
 *PrivateApi* | [**update_organization**](docs/PrivateApi.md#update_organization) | **PATCH** /v1/private/organizations/{organization_identifier} | Update Organization Private
+*PrivateApi* | [**update_task_status_internal**](docs/PrivateApi.md#update_task_status_internal) | **POST** /v1/internal/tasks/{task_id}/status | Update task status (Engine callback)
+*PublicNotificationsAPIApi* | [**unsubscribe_from_nudges_notifications**](docs/PublicNotificationsAPIApi.md#unsubscribe_from_nudges_notifications) | **GET** /v1/public/notifications/unsubscribe | Unsubscribe From Nudges
 *PublicRetrieverAPIApi* | [**execute_retriever_name**](docs/PublicRetrieverAPIApi.md#execute_retriever_name) | **POST** /v1/public/retrievers/{public_name}/execute | Execute Public Retriever
 *PublicRetrieverAPIApi* | [**get_retriever_config_name**](docs/PublicRetrieverAPIApi.md#get_retriever_config_name) | **GET** /v1/public/retrievers/{public_name}/config | Get Public Retriever Config
 *PublicRetrieverAPIApi* | [**get_retriever_template_name**](docs/PublicRetrieverAPIApi.md#get_retriever_template_name) | **GET** /v1/public/retrievers/{public_name}/template | Get Public Retriever Template
@@ -436,6 +492,14 @@ Class | Method | HTTP request | Description
 *PublishedRetrieversApi* | [**unpublish_retriever_id_publish**](docs/PublishedRetrieversApi.md#unpublish_retriever_id_publish) | **DELETE** /v1/retrievers/{retriever_id}/publish | Unpublish Retriever
 *PublishedRetrieversApi* | [**update_published_retriever_id_publish**](docs/PublishedRetrieversApi.md#update_published_retriever_id_publish) | **PATCH** /v1/retrievers/{retriever_id}/publish | Update Published Retriever
 *ResourceSearchApi* | [**search_resources**](docs/ResourceSearchApi.md#search_resources) | **POST** /v1/resources/search | Search Resources
+*RetrieverBenchmarksApi* | [**create_benchmark_retrievers**](docs/RetrieverBenchmarksApi.md#create_benchmark_retrievers) | **POST** /v1/retrievers/benchmarks | Create benchmark
+*RetrieverBenchmarksApi* | [**create_benchmark_retrievers_0**](docs/RetrieverBenchmarksApi.md#create_benchmark_retrievers_0) | **POST** /v1/retrievers/benchmarks | Create benchmark
+*RetrieverBenchmarksApi* | [**delete_benchmark_retrievers**](docs/RetrieverBenchmarksApi.md#delete_benchmark_retrievers) | **DELETE** /v1/retrievers/benchmarks/{benchmark_id} | Delete benchmark
+*RetrieverBenchmarksApi* | [**delete_benchmark_retrievers_0**](docs/RetrieverBenchmarksApi.md#delete_benchmark_retrievers_0) | **DELETE** /v1/retrievers/benchmarks/{benchmark_id} | Delete benchmark
+*RetrieverBenchmarksApi* | [**get_benchmark_retrievers**](docs/RetrieverBenchmarksApi.md#get_benchmark_retrievers) | **GET** /v1/retrievers/benchmarks/{benchmark_id} | Get benchmark
+*RetrieverBenchmarksApi* | [**get_benchmark_retrievers_0**](docs/RetrieverBenchmarksApi.md#get_benchmark_retrievers_0) | **GET** /v1/retrievers/benchmarks/{benchmark_id} | Get benchmark
+*RetrieverBenchmarksApi* | [**list_benchmarks_retrievers**](docs/RetrieverBenchmarksApi.md#list_benchmarks_retrievers) | **GET** /v1/retrievers/benchmarks | List benchmarks
+*RetrieverBenchmarksApi* | [**list_benchmarks_retrievers_0**](docs/RetrieverBenchmarksApi.md#list_benchmarks_retrievers_0) | **GET** /v1/retrievers/benchmarks | List benchmarks
 *RetrieverEvaluationsApi* | [**create_dataset_retrievers_evaluations**](docs/RetrieverEvaluationsApi.md#create_dataset_retrievers_evaluations) | **POST** /v1/retrievers/evaluations/datasets | Create evaluation dataset
 *RetrieverEvaluationsApi* | [**get_dataset_retrievers_evaluations**](docs/RetrieverEvaluationsApi.md#get_dataset_retrievers_evaluations) | **GET** /v1/retrievers/evaluations/datasets/{dataset_identifier} | Get evaluation dataset
 *RetrieverEvaluationsApi* | [**get_evaluation_retrievers**](docs/RetrieverEvaluationsApi.md#get_evaluation_retrievers) | **GET** /v1/retrievers/{retriever_id}/evaluations/{evaluation_id} | Get evaluation results
@@ -543,7 +607,18 @@ Class | Method | HTTP request | Description
  - [AggregationFunction](docs/AggregationFunction.md)
  - [AggregationOperation](docs/AggregationOperation.md)
  - [AggregationResult](docs/AggregationResult.md)
+ - [AlertApplicationConfigInput](docs/AlertApplicationConfigInput.md)
+ - [AlertApplicationConfigOutput](docs/AlertApplicationConfigOutput.md)
+ - [AlertExecutionListResponse](docs/AlertExecutionListResponse.md)
+ - [AlertExecutionMode](docs/AlertExecutionMode.md)
+ - [AlertExecutionResult](docs/AlertExecutionResult.md)
+ - [AlertInputMapping](docs/AlertInputMapping.md)
+ - [AlertListStats](docs/AlertListStats.md)
+ - [AlertMatchResult](docs/AlertMatchResult.md)
+ - [AlertNotificationConfig](docs/AlertNotificationConfig.md)
+ - [AlertResponse](docs/AlertResponse.md)
  - [AlgorithmParams](docs/AlgorithmParams.md)
+ - [AlignmentMetrics](docs/AlignmentMetrics.md)
  - [AnthropicModel](docs/AnthropicModel.md)
  - [ApiAnalyticsBucketsModelsTimeRange](docs/ApiAnalyticsBucketsModelsTimeRange.md)
  - [ApiAnalyticsClustersModelsFailureAnalysisResponse](docs/ApiAnalyticsClustersModelsFailureAnalysisResponse.md)
@@ -552,6 +627,20 @@ Class | Method | HTTP request | Description
  - [ApiAnalyticsCollectionsModelsTimeRange](docs/ApiAnalyticsCollectionsModelsTimeRange.md)
  - [ApiAnalyticsModelsTimeRange](docs/ApiAnalyticsModelsTimeRange.md)
  - [ApiAnalyticsTaxonomiesModelsTimeRange](docs/ApiAnalyticsTaxonomiesModelsTimeRange.md)
+ - [ApiNamespacesPluginsModelsCreatePluginUploadRequest](docs/ApiNamespacesPluginsModelsCreatePluginUploadRequest.md)
+ - [ApiNamespacesPluginsModelsPluginDeleteResponse](docs/ApiNamespacesPluginsModelsPluginDeleteResponse.md)
+ - [ApiNamespacesPluginsModelsPluginDetailResponse](docs/ApiNamespacesPluginsModelsPluginDetailResponse.md)
+ - [ApiNamespacesPluginsModelsPluginDocument](docs/ApiNamespacesPluginsModelsPluginDocument.md)
+ - [ApiNamespacesPluginsModelsPluginListResponse](docs/ApiNamespacesPluginsModelsPluginListResponse.md)
+ - [ApiNamespacesPluginsModelsPluginManifestMetadata](docs/ApiNamespacesPluginsModelsPluginManifestMetadata.md)
+ - [ApiNamespacesPluginsModelsPluginPresignedURLResponse](docs/ApiNamespacesPluginsModelsPluginPresignedURLResponse.md)
+ - [ApiPluginsModelsCreatePluginUploadRequest](docs/ApiPluginsModelsCreatePluginUploadRequest.md)
+ - [ApiPluginsModelsPluginDeleteResponse](docs/ApiPluginsModelsPluginDeleteResponse.md)
+ - [ApiPluginsModelsPluginDetailResponse](docs/ApiPluginsModelsPluginDetailResponse.md)
+ - [ApiPluginsModelsPluginDocument](docs/ApiPluginsModelsPluginDocument.md)
+ - [ApiPluginsModelsPluginListResponse](docs/ApiPluginsModelsPluginListResponse.md)
+ - [ApiPluginsModelsPluginManifestMetadata](docs/ApiPluginsModelsPluginManifestMetadata.md)
+ - [ApiPluginsModelsPluginPresignedURLResponse](docs/ApiPluginsModelsPluginPresignedURLResponse.md)
  - [ApplyClusterEnrichmentRequest](docs/ApplyClusterEnrichmentRequest.md)
  - [ApplyResult](docs/ApplyResult.md)
  - [ApplyTaxonomyRequest](docs/ApplyTaxonomyRequest.md)
@@ -565,6 +654,10 @@ Class | Method | HTTP request | Description
  - [AuditSettings](docs/AuditSettings.md)
  - [AuditSettingsUpdateRequest](docs/AuditSettingsUpdateRequest.md)
  - [AutoBillingToggleResponse](docs/AutoBillingToggleResponse.md)
+ - [AvailableOrgModelItem](docs/AvailableOrgModelItem.md)
+ - [AvailableOrgModelsResponse](docs/AvailableOrgModelsResponse.md)
+ - [AvailableOrgPluginItem](docs/AvailableOrgPluginItem.md)
+ - [AvailableOrgPluginsResponse](docs/AvailableOrgPluginsResponse.md)
  - [AvailableStepsResponse](docs/AvailableStepsResponse.md)
  - [BaseFeatureExtractorModelInput](docs/BaseFeatureExtractorModelInput.md)
  - [BaseFeatureExtractorModelOutput](docs/BaseFeatureExtractorModelOutput.md)
@@ -587,10 +680,16 @@ Class | Method | HTTP request | Description
  - [BatchUpdateDocumentsResponse](docs/BatchUpdateDocumentsResponse.md)
  - [BatchUploadRequest](docs/BatchUploadRequest.md)
  - [BatchUploadResponse](docs/BatchUploadResponse.md)
+ - [BenchmarkComparison](docs/BenchmarkComparison.md)
+ - [BenchmarkListResponse](docs/BenchmarkListResponse.md)
+ - [BenchmarkResponse](docs/BenchmarkResponse.md)
+ - [BenchmarkResult](docs/BenchmarkResult.md)
+ - [BenchmarkStatus](docs/BenchmarkStatus.md)
  - [BlobDetails](docs/BlobDetails.md)
  - [BlobMappingEntry](docs/BlobMappingEntry.md)
  - [BlobModel](docs/BlobModel.md)
  - [BlobType](docs/BlobType.md)
+ - [BlobURLRef](docs/BlobURLRef.md)
  - [BoolIndexParams](docs/BoolIndexParams.md)
  - [BottleneckAnalysis](docs/BottleneckAnalysis.md)
  - [BottleneckResponse](docs/BottleneckResponse.md)
@@ -617,6 +716,7 @@ Class | Method | HTTP request | Description
  - [CacheStatistics](docs/CacheStatistics.md)
  - [CancelMigrationRequest](docs/CancelMigrationRequest.md)
  - [CancelMigrationResponse](docs/CancelMigrationResponse.md)
+ - [ChunkStrategy](docs/ChunkStrategy.md)
  - [ClarificationOption](docs/ClarificationOption.md)
  - [CloneCollectionRequest](docs/CloneCollectionRequest.md)
  - [CloneCollectionResponse](docs/CloneCollectionResponse.md)
@@ -644,6 +744,8 @@ Class | Method | HTTP request | Description
  - [ClusteringEnrichmentResponse](docs/ClusteringEnrichmentResponse.md)
  - [CollectionDetail](docs/CollectionDetail.md)
  - [CollectionDiagnostic](docs/CollectionDiagnostic.md)
+ - [CollectionExportRequest](docs/CollectionExportRequest.md)
+ - [CollectionExportResponse](docs/CollectionExportResponse.md)
  - [CollectionFeatureDescriptor](docs/CollectionFeatureDescriptor.md)
  - [CollectionListStats](docs/CollectionListStats.md)
  - [CollectionModel](docs/CollectionModel.md)
@@ -661,21 +763,34 @@ Class | Method | HTTP request | Description
  - [Config2](docs/Config2.md)
  - [Configs](docs/Configs.md)
  - [ConfigureCORSRequest](docs/ConfigureCORSRequest.md)
+ - [ConfirmModelUploadRequest](docs/ConfirmModelUploadRequest.md)
+ - [ConfirmModelUploadResponse](docs/ConfirmModelUploadResponse.md)
  - [ConfirmPaymentMethodRequest](docs/ConfirmPaymentMethodRequest.md)
  - [ConfirmPaymentMethodResponse](docs/ConfirmPaymentMethodResponse.md)
+ - [ConfirmPluginUploadRequest](docs/ConfirmPluginUploadRequest.md)
+ - [ConfirmPluginUploadResponse](docs/ConfirmPluginUploadResponse.md)
  - [ConfirmUploadRequest](docs/ConfirmUploadRequest.md)
  - [ConfirmUploadResponse](docs/ConfirmUploadResponse.md)
+ - [ConfirmationRequest](docs/ConfirmationRequest.md)
  - [ConstantSource](docs/ConstantSource.md)
  - [CostBreakdown](docs/CostBreakdown.md)
+ - [CostRate](docs/CostRate.md)
+ - [CostUnit](docs/CostUnit.md)
+ - [CostsInfo](docs/CostsInfo.md)
+ - [CourseContentExtractorParams](docs/CourseContentExtractorParams.md)
  - [CovariateConfig](docs/CovariateConfig.md)
  - [CovariateType](docs/CovariateType.md)
+ - [CrawlMode](docs/CrawlMode.md)
+ - [CreateAlertRequest](docs/CreateAlertRequest.md)
  - [CreateBatchRequest](docs/CreateBatchRequest.md)
+ - [CreateBenchmarkRequest](docs/CreateBenchmarkRequest.md)
  - [CreateBlobRequest](docs/CreateBlobRequest.md)
  - [CreateClusterRequest](docs/CreateClusterRequest.md)
  - [CreateCollectionRequest](docs/CreateCollectionRequest.md)
  - [CreateDatasetRequest](docs/CreateDatasetRequest.md)
  - [CreateMigrationRequest](docs/CreateMigrationRequest.md)
  - [CreateMigrationResponse](docs/CreateMigrationResponse.md)
+ - [CreateModelUploadRequest](docs/CreateModelUploadRequest.md)
  - [CreateNamespaceRequest](docs/CreateNamespaceRequest.md)
  - [CreateObjectRequest](docs/CreateObjectRequest.md)
  - [CreateObjectsBatchRequest](docs/CreateObjectsBatchRequest.md)
@@ -695,9 +810,12 @@ Class | Method | HTTP request | Description
  - [Credentials1](docs/Credentials1.md)
  - [Credentials2](docs/Credentials2.md)
  - [Credentials3](docs/Credentials3.md)
+ - [CreditBalanceResponse](docs/CreditBalanceResponse.md)
  - [CurrentUsageResponse](docs/CurrentUsageResponse.md)
  - [CursorPaginationParams](docs/CursorPaginationParams.md)
  - [CustomCTA](docs/CustomCTA.md)
+ - [CustomModelDocument](docs/CustomModelDocument.md)
+ - [CustomPluginParams](docs/CustomPluginParams.md)
  - [DBSCANParams](docs/DBSCANParams.md)
  - [Data](docs/Data.md)
  - [DatasetListResponse](docs/DatasetListResponse.md)
@@ -711,6 +829,8 @@ Class | Method | HTTP request | Description
  - [DetectIntentRequest](docs/DetectIntentRequest.md)
  - [DiffItem](docs/DiffItem.md)
  - [DiffResult](docs/DiffResult.md)
+ - [DisableOrgModelResponse](docs/DisableOrgModelResponse.md)
+ - [DisableOrgPluginResponse](docs/DisableOrgPluginResponse.md)
  - [DisplayConfigInput](docs/DisplayConfigInput.md)
  - [DisplayConfigOutput](docs/DisplayConfigOutput.md)
  - [DocumentAggregationRequest](docs/DocumentAggregationRequest.md)
@@ -718,12 +838,17 @@ Class | Method | HTTP request | Description
  - [DocumentCreateRequest](docs/DocumentCreateRequest.md)
  - [DocumentGraphExtractorParams](docs/DocumentGraphExtractorParams.md)
  - [DocumentGroup](docs/DocumentGroup.md)
+ - [DocumentIdStrategy](docs/DocumentIdStrategy.md)
  - [DocumentListStats](docs/DocumentListStats.md)
  - [DocumentResponse](docs/DocumentResponse.md)
  - [DrivePropertySource](docs/DrivePropertySource.md)
  - [DurationStats](docs/DurationStats.md)
  - [DynamicValue](docs/DynamicValue.md)
  - [EmailConfig](docs/EmailConfig.md)
+ - [EnableOrgModelRequest](docs/EnableOrgModelRequest.md)
+ - [EnableOrgModelResponse](docs/EnableOrgModelResponse.md)
+ - [EnableOrgPluginRequest](docs/EnableOrgPluginRequest.md)
+ - [EnableOrgPluginResponse](docs/EnableOrgPluginResponse.md)
  - [EnginePerformanceResponse](docs/EnginePerformanceResponse.md)
  - [EngineStageBreakdownResponse](docs/EngineStageBreakdownResponse.md)
  - [EnrichmentField](docs/EnrichmentField.md)
@@ -748,12 +873,14 @@ Class | Method | HTTP request | Description
  - [ExplainRetrieverRequest](docs/ExplainRetrieverRequest.md)
  - [ExplainRetrieverResponse](docs/ExplainRetrieverResponse.md)
  - [ExplainStagePlan](docs/ExplainStagePlan.md)
+ - [ExportFormat](docs/ExportFormat.md)
  - [ExternalLink](docs/ExternalLink.md)
  - [ExtractorBreakdownResponse](docs/ExtractorBreakdownResponse.md)
  - [ExtractorJobInfo](docs/ExtractorJobInfo.md)
  - [ExtractorMetrics](docs/ExtractorMetrics.md)
  - [ExtractorPerformance](docs/ExtractorPerformance.md)
  - [ExtractorPerformanceResponse](docs/ExtractorPerformanceResponse.md)
+ - [ExtractorSource](docs/ExtractorSource.md)
  - [FaceIdentityExtractorParams](docs/FaceIdentityExtractorParams.md)
  - [FailedObjectError](docs/FailedObjectError.md)
  - [FailureMetric](docs/FailureMetric.md)
@@ -808,6 +935,7 @@ Class | Method | HTTP request | Description
  - [HealthServiceStatus](docs/HealthServiceStatus.md)
  - [HealthStatusInput](docs/HealthStatusInput.md)
  - [HealthStatusOutput](docs/HealthStatusOutput.md)
+ - [HierarchicalEnrichmentStyle](docs/HierarchicalEnrichmentStyle.md)
  - [HierarchicalNodeInput](docs/HierarchicalNodeInput.md)
  - [HierarchicalNodeOutput](docs/HierarchicalNodeOutput.md)
  - [HierarchicalTaxonomyConfigInput](docs/HierarchicalTaxonomyConfigInput.md)
@@ -820,6 +948,7 @@ Class | Method | HTTP request | Description
  - [IndexSuggestion](docs/IndexSuggestion.md)
  - [IndexSuggestionsResponse](docs/IndexSuggestionsResponse.md)
  - [InputMapping](docs/InputMapping.md)
+ - [InputMappingSource](docs/InputMappingSource.md)
  - [InputMappings](docs/InputMappings.md)
  - [InputRenderingConfigInput](docs/InputRenderingConfigInput.md)
  - [InputRenderingConfigOutput](docs/InputRenderingConfigOutput.md)
@@ -844,6 +973,7 @@ Class | Method | HTTP request | Description
  - [InteractionTuningRecommendation](docs/InteractionTuningRecommendation.md)
  - [InteractionTuningResponse](docs/InteractionTuningResponse.md)
  - [InteractionType](docs/InteractionType.md)
+ - [InteractionWeights](docs/InteractionWeights.md)
  - [InternalLineageModel](docs/InternalLineageModel.md)
  - [InternalPayloadModel](docs/InternalPayloadModel.md)
  - [InternalProcessingModel](docs/InternalProcessingModel.md)
@@ -865,11 +995,14 @@ Class | Method | HTTP request | Description
  - [LabelDistributionResponse](docs/LabelDistributionResponse.md)
  - [LabelMetric](docs/LabelMetric.md)
  - [LatencyMetric](docs/LatencyMetric.md)
+ - [LatencyMetrics](docs/LatencyMetrics.md)
  - [LatencyResponse](docs/LatencyResponse.md)
  - [LayoutConfig](docs/LayoutConfig.md)
  - [LineageStep](docs/LineageStep.md)
  - [ListAdhocExecutionsRequest](docs/ListAdhocExecutionsRequest.md)
  - [ListAdhocExecutionsResponse](docs/ListAdhocExecutionsResponse.md)
+ - [ListAlertsRequest](docs/ListAlertsRequest.md)
+ - [ListAlertsResponse](docs/ListAlertsResponse.md)
  - [ListBatchesRequest](docs/ListBatchesRequest.md)
  - [ListBatchesResponse](docs/ListBatchesResponse.md)
  - [ListBucketsRequest](docs/ListBucketsRequest.md)
@@ -927,7 +1060,16 @@ Class | Method | HTTP request | Description
  - [MigrationStage](docs/MigrationStage.md)
  - [MigrationStatus](docs/MigrationStatus.md)
  - [MigrationType](docs/MigrationType.md)
+ - [ModelDeleteResponse](docs/ModelDeleteResponse.md)
+ - [ModelDeployResponse](docs/ModelDeployResponse.md)
+ - [ModelDeploymentInfo](docs/ModelDeploymentInfo.md)
+ - [ModelDetailResponse](docs/ModelDetailResponse.md)
+ - [ModelListItem](docs/ModelListItem.md)
+ - [ModelListResponse](docs/ModelListResponse.md)
  - [ModelName](docs/ModelName.md)
+ - [ModelPresignedURLResponse](docs/ModelPresignedURLResponse.md)
+ - [ModelResourceRequirements](docs/ModelResourceRequirements.md)
+ - [ModelUploadResponse](docs/ModelUploadResponse.md)
  - [MostQueriedFieldsResponse](docs/MostQueriedFieldsResponse.md)
  - [MultiVectorIndex](docs/MultiVectorIndex.md)
  - [MultimodalExtractorParams](docs/MultimodalExtractorParams.md)
@@ -938,6 +1080,7 @@ Class | Method | HTTP request | Description
  - [NamespaceSummaryResponse](docs/NamespaceSummaryResponse.md)
  - [Notification](docs/Notification.md)
  - [NotificationChannel](docs/NotificationChannel.md)
+ - [NotificationChannelConfig](docs/NotificationChannelConfig.md)
  - [NotificationContentType](docs/NotificationContentType.md)
  - [NotificationPriority](docs/NotificationPriority.md)
  - [NotificationType](docs/NotificationType.md)
@@ -948,8 +1091,15 @@ Class | Method | HTTP request | Description
  - [ObjectResponse](docs/ObjectResponse.md)
  - [OffsetPaginationParams](docs/OffsetPaginationParams.md)
  - [OpenAIModel](docs/OpenAIModel.md)
+ - [OrgModelDeleteResponse](docs/OrgModelDeleteResponse.md)
+ - [OrgModelDeploymentInfo](docs/OrgModelDeploymentInfo.md)
+ - [OrgModelDetailResponse](docs/OrgModelDetailResponse.md)
+ - [OrgModelDocument](docs/OrgModelDocument.md)
+ - [OrgModelListItem](docs/OrgModelListItem.md)
+ - [OrgModelListResponse](docs/OrgModelListResponse.md)
  - [OrganizationAdminUpdateRequest](docs/OrganizationAdminUpdateRequest.md)
  - [OrganizationInfrastructure](docs/OrganizationInfrastructure.md)
+ - [OrganizationModel](docs/OrganizationModel.md)
  - [OrganizationModelResponse](docs/OrganizationModelResponse.md)
  - [OrganizationPublishStatsResponse](docs/OrganizationPublishStatsResponse.md)
  - [OrganizationUpdateRequest](docs/OrganizationUpdateRequest.md)
@@ -958,6 +1108,7 @@ Class | Method | HTTP request | Description
  - [PaginationMethod](docs/PaginationMethod.md)
  - [PaginationResponse](docs/PaginationResponse.md)
  - [Parameters](docs/Parameters.md)
+ - [PatchAlertRequest](docs/PatchAlertRequest.md)
  - [PatchBatchRequest](docs/PatchBatchRequest.md)
  - [PatchClusterRequest](docs/PatchClusterRequest.md)
  - [PatchNamespaceRequest](docs/PatchNamespaceRequest.md)
@@ -978,6 +1129,12 @@ Class | Method | HTTP request | Description
  - [PerformanceMetric](docs/PerformanceMetric.md)
  - [PerformanceSummary](docs/PerformanceSummary.md)
  - [Permission](docs/Permission.md)
+ - [PipelineComparison](docs/PipelineComparison.md)
+ - [PluginDeploymentInfo](docs/PluginDeploymentInfo.md)
+ - [PluginListItem](docs/PluginListItem.md)
+ - [PluginStatusResponse](docs/PluginStatusResponse.md)
+ - [PluginUploadResponse](docs/PluginUploadResponse.md)
+ - [PostProcessingPhase](docs/PostProcessingPhase.md)
  - [PostgreSQLConfig](docs/PostgreSQLConfig.md)
  - [PostgreSQLCredentials](docs/PostgreSQLCredentials.md)
  - [PredictorLift](docs/PredictorLift.md)
@@ -998,6 +1155,9 @@ Class | Method | HTTP request | Description
  - [RateLimitTier](docs/RateLimitTier.md)
  - [RawInferenceRequest](docs/RawInferenceRequest.md)
  - [RawInferenceResponse](docs/RawInferenceResponse.md)
+ - [ReminderPreferences](docs/ReminderPreferences.md)
+ - [ReminderPreferencesResponse](docs/ReminderPreferencesResponse.md)
+ - [RenderStrategy](docs/RenderStrategy.md)
  - [ResourceFilter](docs/ResourceFilter.md)
  - [ResourceProgress](docs/ResourceProgress.md)
  - [ResourceResult](docs/ResourceResult.md)
@@ -1008,6 +1168,7 @@ Class | Method | HTTP request | Description
  - [ResponseShape](docs/ResponseShape.md)
  - [ResponseShape1](docs/ResponseShape1.md)
  - [ResponseShape2](docs/ResponseShape2.md)
+ - [ResponseShape3](docs/ResponseShape3.md)
  - [ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost](docs/ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost.md)
  - [ResultCardProperties](docs/ResultCardProperties.md)
  - [RetrieverConfig](docs/RetrieverConfig.md)
@@ -1047,6 +1208,9 @@ Class | Method | HTTP request | Description
  - [SecretResponse](docs/SecretResponse.md)
  - [SecretsListResponse](docs/SecretsListResponse.md)
  - [SendMessageRequest](docs/SendMessageRequest.md)
+ - [SentimentClassifierParams](docs/SentimentClassifierParams.md)
+ - [SessionFilterInput](docs/SessionFilterInput.md)
+ - [SessionFilterOutput](docs/SessionFilterOutput.md)
  - [SessionQuotas](docs/SessionQuotas.md)
  - [SessionStats](docs/SessionStats.md)
  - [SessionStatus](docs/SessionStatus.md)
@@ -1067,6 +1231,7 @@ Class | Method | HTTP request | Description
  - [SharedNamespacesMigrationsModelsFeatureExtractorConfig](docs/SharedNamespacesMigrationsModelsFeatureExtractorConfig.md)
  - [SharedNamespacesMigrationsModelsResourceType](docs/SharedNamespacesMigrationsModelsResourceType.md)
  - [SharedOrganizationsEnumsResourceType](docs/SharedOrganizationsEnumsResourceType.md)
+ - [SharedRetrieversBenchmarksModelsTimeRange](docs/SharedRetrieversBenchmarksModelsTimeRange.md)
  - [SharedTriggersModelsCreateTriggerRequest](docs/SharedTriggersModelsCreateTriggerRequest.md)
  - [SharedTriggersModelsListTriggersRequest](docs/SharedTriggersModelsListTriggersRequest.md)
  - [SharedTriggersModelsListTriggersResponse](docs/SharedTriggersModelsListTriggersResponse.md)
@@ -1081,7 +1246,6 @@ Class | Method | HTTP request | Description
  - [SlowOperationsResponse](docs/SlowOperationsResponse.md)
  - [SlowQueriesResponse](docs/SlowQueriesResponse.md)
  - [SlowQueryDetails](docs/SlowQueryDetails.md)
- - [SmsConfig](docs/SmsConfig.md)
  - [SnowflakeConfig](docs/SnowflakeConfig.md)
  - [SnowflakeKeyPairCredentials](docs/SnowflakeKeyPairCredentials.md)
  - [SnowflakeUsernamePasswordCredentials](docs/SnowflakeUsernamePasswordCredentials.md)
@@ -1149,6 +1313,7 @@ Class | Method | HTTP request | Description
  - [TaskResponse](docs/TaskResponse.md)
  - [TaskResponseInputsInner](docs/TaskResponseInputsInner.md)
  - [TaskStatusEnum](docs/TaskStatusEnum.md)
+ - [TaskStatusUpdateRequest](docs/TaskStatusUpdateRequest.md)
  - [TaskType](docs/TaskType.md)
  - [TaxonomyApplicationConfigInput](docs/TaxonomyApplicationConfigInput.md)
  - [TaxonomyApplicationConfigOutput](docs/TaxonomyApplicationConfigOutput.md)
@@ -1170,6 +1335,7 @@ Class | Method | HTTP request | Description
  - [TierTaskInfo](docs/TierTaskInfo.md)
  - [TigrisAccessKeyCredentials](docs/TigrisAccessKeyCredentials.md)
  - [TigrisConfig](docs/TigrisConfig.md)
+ - [TimeRangeInput](docs/TimeRangeInput.md)
  - [TokenizerType](docs/TokenizerType.md)
  - [ToolInfo](docs/ToolInfo.md)
  - [TransitionPath](docs/TransitionPath.md)
@@ -1181,11 +1347,14 @@ Class | Method | HTTP request | Description
  - [TriggerExecutionHistoryItem](docs/TriggerExecutionHistoryItem.md)
  - [TriggerHistoryRequest](docs/TriggerHistoryRequest.md)
  - [TriggerTierRequest](docs/TriggerTierRequest.md)
+ - [UnifiedExtractorListResponse](docs/UnifiedExtractorListResponse.md)
+ - [UnifiedExtractorResponse](docs/UnifiedExtractorResponse.md)
  - [UniqueKeyConfig](docs/UniqueKeyConfig.md)
  - [UpdateNamespaceRequest](docs/UpdateNamespaceRequest.md)
  - [UpdateObjectRequest](docs/UpdateObjectRequest.md)
  - [UpdatePreferencesRequest](docs/UpdatePreferencesRequest.md)
  - [UpdatePublishedRetrieverRequest](docs/UpdatePublishedRetrieverRequest.md)
+ - [UpdateReminderPreferencesRequest](docs/UpdateReminderPreferencesRequest.md)
  - [UpdateSecretRequest](docs/UpdateSecretRequest.md)
  - [UpdateSpendingCapsRequest](docs/UpdateSpendingCapsRequest.md)
  - [UploadListStats](docs/UploadListStats.md)
@@ -1212,10 +1381,12 @@ Class | Method | HTTP request | Description
  - [VectorDataType](docs/VectorDataType.md)
  - [VectorIndex](docs/VectorIndex.md)
  - [VectorIndexDefinition](docs/VectorIndexDefinition.md)
+ - [VectorPurpose](docs/VectorPurpose.md)
  - [VectorType](docs/VectorType.md)
  - [Vectors](docs/Vectors.md)
  - [VerifyPasswordRequest](docs/VerifyPasswordRequest.md)
  - [VerifyPasswordResponse](docs/VerifyPasswordResponse.md)
+ - [WebScraperExtractorParams](docs/WebScraperExtractorParams.md)
  - [WebhookChannelInput](docs/WebhookChannelInput.md)
  - [WebhookChannelOutput](docs/WebhookChannelOutput.md)
  - [WebhookConfig](docs/WebhookConfig.md)

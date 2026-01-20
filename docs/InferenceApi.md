@@ -12,11 +12,13 @@ Method | HTTP request | Description
 
 Execute Raw Inference
 
-Execute raw inference with provider and model parameters.
+Execute raw inference with provider+model or custom plugin.
 
 This endpoint provides direct access to inference services without
-the retriever framework overhead. Ideal for simple LLM calls,
-embeddings, transcription, or vision tasks.
+the retriever framework overhead. Supports two modes:
+
+1. **Provider + Model**: Use standard providers (openai, google, anthropic)
+2. **Custom Plugin**: Use your custom inference plugins by inference_name
 
 ## Supported Providers
 
@@ -25,6 +27,33 @@ embeddings, transcription, or vision tasks.
 - **anthropic**: Claude models
 
 ## Examples
+
+### Custom Plugin (by inference_name)
+```json
+{
+    "inference_name": "my_text_embedder_1_0_0",
+    "inputs": {"text": "hello world"},
+    "parameters": {}
+}
+```
+
+### Custom Plugin (by feature_uri)
+```json
+{
+    "feature_uri": "mixpeek://my_custom_embedder@1.0.0/embedding",
+    "inputs": {"text": "hello world"},
+    "parameters": {}
+}
+```
+
+### Builtin Embedder (by feature_uri)
+```json
+{
+    "feature_uri": "mixpeek://text_extractor@v1/multilingual_e5_large_instruct_v1",
+    "inputs": {"text": "hello world"},
+    "parameters": {}
+}
+```
 
 ### Chat Completion
 ```json

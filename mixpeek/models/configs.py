@@ -22,17 +22,16 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, f
 from typing import Optional
 from mixpeek.models.email_config import EmailConfig
 from mixpeek.models.slack_config import SlackConfig
-from mixpeek.models.sms_config import SmsConfig
 from mixpeek.models.webhook_config import WebhookConfig
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-CONFIGS_ANY_OF_SCHEMAS = ["EmailConfig", "SlackConfig", "SmsConfig", "WebhookConfig"]
+CONFIGS_ANY_OF_SCHEMAS = ["EmailConfig", "SlackConfig", "WebhookConfig"]
 
 class Configs(BaseModel):
     """
-    REQUIRED. Channel-specific configuration for notification delivery. Type depends on the channel field: - EmailConfig for EMAIL channel (recipients, subject template, etc.) - SlackConfig for SLACK channel (workspace, channel, bot token) - WebhookConfig for WEBHOOK channel (URL, headers, auth) - SmsConfig for SMS channel (phone numbers, provider credentials). See respective config models for detailed field requirements.
+    REQUIRED. Channel-specific configuration for notification delivery. Type depends on the channel field: - EmailConfig for EMAIL channel (recipients, subject template, etc.) - SlackConfig for SLACK channel (workspace, channel, bot token) - WebhookConfig for WEBHOOK channel (URL, headers, auth). See respective config models for detailed field requirements.
     """
 
     # data type: EmailConfig
@@ -41,13 +40,11 @@ class Configs(BaseModel):
     anyof_schema_2_validator: Optional[SlackConfig] = None
     # data type: WebhookConfig
     anyof_schema_3_validator: Optional[WebhookConfig] = None
-    # data type: SmsConfig
-    anyof_schema_4_validator: Optional[SmsConfig] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[EmailConfig, SlackConfig, SmsConfig, WebhookConfig]] = None
+        actual_instance: Optional[Union[EmailConfig, SlackConfig, WebhookConfig]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "EmailConfig", "SlackConfig", "SmsConfig", "WebhookConfig" }
+    any_of_schemas: Set[str] = { "EmailConfig", "SlackConfig", "WebhookConfig" }
 
     model_config = {
         "validate_assignment": True,
@@ -86,15 +83,9 @@ class Configs(BaseModel):
         else:
             return v
 
-        # validate data type: SmsConfig
-        if not isinstance(v, SmsConfig):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `SmsConfig`")
-        else:
-            return v
-
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in Configs with anyOf schemas: EmailConfig, SlackConfig, SmsConfig, WebhookConfig. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in Configs with anyOf schemas: EmailConfig, SlackConfig, WebhookConfig. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -125,16 +116,10 @@ class Configs(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
-        # anyof_schema_4_validator: Optional[SmsConfig] = None
-        try:
-            instance.actual_instance = SmsConfig.from_json(json_str)
-            return instance
-        except (ValidationError, ValueError) as e:
-             error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Configs with anyOf schemas: EmailConfig, SlackConfig, SmsConfig, WebhookConfig. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Configs with anyOf schemas: EmailConfig, SlackConfig, WebhookConfig. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -148,7 +133,7 @@ class Configs(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], EmailConfig, SlackConfig, SmsConfig, WebhookConfig]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], EmailConfig, SlackConfig, WebhookConfig]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

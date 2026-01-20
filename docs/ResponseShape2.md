@@ -1,6 +1,6 @@
 # ResponseShape2
 
-OPTIONAL. Define custom structured output using LLM extraction. NOT REQUIRED - by default, only embeddings are generated. When provided, LLM will extract structured data matching this schema.   Two modes supported: 1. Natural language prompt (string): Describe desired output in plain English    - Service automatically infers JSON schema from your description    - Example: 'Extract key entities, sentiment (positive/negative/neutral), and main topics'    - Auto-generates schema with appropriate types (string, array, etc.)  2. Explicit JSON schema (dict): Provide complete JSON schema for output structure    - Full control over output structure, types, and constraints    - Example: {'type': 'object', 'properties': {'entities': {'type': 'array', ...}}}   Use when:   - Need to extract entities, relationships, sentiment from text   - Want structured summaries with custom fields   - Require classification into custom taxonomies   - Have domain-specific extraction requirements   Output fields are automatically added to collection schema and stored in document metadata. Note: Adds LLM latency - only use when structured extraction is needed. 
+Define custom structured output using LLM extraction.
 
 ## Properties
 

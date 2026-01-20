@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 **feature_extractor_id** | **str** |  | 
 **description** | **str** |  | 
 **icon** | **str** |  | 
+**source** | [**ExtractorSource**](ExtractorSource.md) | The origin/source of this extractor: &#39;builtin&#39; (shipped with Mixpeek), &#39;custom&#39; (user-created), or &#39;community&#39; (marketplace). | [optional] 
 **input_schema** | **Dict[str, object]** |  | 
 **output_schema** | **Dict[str, object]** |  | 
 **parameter_schema** | **Dict[str, object]** |  | 
 **supported_input_types** | **List[str]** |  | 
 **max_inputs** | **Dict[str, int]** |  | 
 **default_parameters** | **Dict[str, object]** |  | 
+**costs** | [**CostsInfo**](CostsInfo.md) | Credit cost information for this extractor | [optional] 
 **required_vector_indexes** | [**List[VectorIndexDefinition]**](VectorIndexDefinition.md) |  | 
 **required_payload_indexes** | [**List[PayloadIndexConfigOutput]**](PayloadIndexConfigOutput.md) |  | 
 **position_fields** | **List[str]** | Output fields that uniquely identify each document within a source object. Enables idempotent reprocessing: rerunning a batch produces the same document IDs, so existing documents are updated instead of creating duplicates. Works with bucket &#x60;unique_key&#x60; to enable fully deterministic document IDs. Empty list means single-output extractor (one document per source). Read-only (set by extractor). | [optional] 

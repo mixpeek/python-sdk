@@ -36,18 +36,19 @@ class TestParameters(unittest.TestCase):
         model = Parameters()
         if include_optional:
             return Parameters(
-                extractor_type = 'document_graph_extractor',
+                extractor_type = '',
                 split_by = 'characters',
                 chunk_size = 1.0,
                 chunk_overlap = 0.0,
                 response_shape = None,
                 llm_provider = '',
                 llm_model = '',
+                llm_api_key = '',
                 split_method = 'time',
                 description_prompt = 'Describe the video segment in detail.',
                 time_split_interval = 56,
                 silence_db_threshold = 56,
-                scene_detection_threshold = 1.337,
+                scene_detection_threshold = 0.1,
                 run_transcription = True,
                 transcription_language = 'en',
                 run_video_description = True,
@@ -79,6 +80,7 @@ class TestParameters(unittest.TestCase):
                 include_face_crops = True,
                 store_detection_metadata = True,
                 use_layout_detection = True,
+                layout_detector = 'pymupdf',
                 vertical_threshold = 1.0,
                 horizontal_threshold = 1.0,
                 min_text_length = 1.0,
@@ -92,10 +94,69 @@ class TestParameters(unittest.TestCase):
                 render_dpi = 72.0,
                 generate_thumbnails = True,
                 thumbnail_mode = 'both',
-                thumbnail_dpi = 36.0
+                thumbnail_dpi = 36.0,
+                model_name = 'distilbert-base-uncased-finetuned-sst-2-english',
+                max_length = 32.0,
+                batch_size = 1.0,
+                return_all_scores = True,
+                embed = True,
+                max_depth = 0.0,
+                max_pages = 1.0,
+                crawl_timeout = 10.0,
+                crawl_mode = 'deterministic',
+                crawl_goal = '',
+                render_strategy = 'static',
+                include_patterns = [
+                    ''
+                    ],
+                exclude_patterns = [
+                    ''
+                    ],
+                chunk_strategy = 'none',
+                document_id_strategy = 'url',
+                generate_text_embeddings = True,
+                generate_code_embeddings = True,
+                generate_image_embeddings = True,
+                max_retries = 0.0,
+                retry_base_delay = 0.1,
+                retry_max_delay = 1.0,
+                respect_retry_after = True,
+                proxies = [
+                    ''
+                    ],
+                rotate_proxy_on_error = True,
+                rotate_proxy_every_n_requests = 0.0,
+                captcha_service_provider = '',
+                captcha_service_api_key = '',
+                detect_captcha = True,
+                persist_cookies = True,
+                custom_headers = {
+                    'key' : ''
+                    },
+                delay_between_requests = 0.0,
+                target_segment_duration_ms = 30000.0,
+                min_segment_duration_ms = 10000.0,
+                segmentation_method = 'scene',
+                use_whisper_asr = True,
+                expand_to_granular_docs = True,
+                ocr_frames_per_segment = 1.0,
+                pdf_extraction_mode = 'per_element',
+                pdf_render_dpi = 72.0,
+                detect_code_in_pdf = True,
+                segment_functions = True,
+                supported_languages = [
+                    ''
+                    ],
+                run_code_embedding = True,
+                run_visual_embedding = True,
+                visual_embedding_use_case = 'lecture',
+                extract_screen_text = True,
+                enrich_with_llm = True,
+                llm_prompt = 'Summarize this educational content segment, highlighting key concepts.'
             )
         else:
             return Parameters(
+                extractor_type = '',
         )
         """
 

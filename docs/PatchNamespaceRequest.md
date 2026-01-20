@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** | Updated description for the namespace | [optional] 
 **payload_indexes** | [**List[PayloadIndexConfigInput]**](PayloadIndexConfigInput.md) | Updated list of custom payload indexes for this namespace. | [optional] 
 **auto_create_indexes** | **bool** | Enable automatic creation of Qdrant payload indexes based on filter usage patterns. When enabled, the system tracks which fields are most frequently filtered (&gt;100 queries/24h) and automatically creates indexes to improve query performance. Background task runs every 6 hours. Expected performance improvement: 50-90% latency reduction for filtered queries. Default: False. | [optional] 
+**infrastructure** | [**NamespaceInfrastructure**](NamespaceInfrastructure.md) | Infrastructure configuration for this namespace. Set compute_tier to &#39;dedicated_cpu&#39; or &#39;dedicated_gpu&#39; and max_custom_models &gt; 0 to enable custom model uploads. Requires Enterprise account. | [optional] 
 
 ## Example
 

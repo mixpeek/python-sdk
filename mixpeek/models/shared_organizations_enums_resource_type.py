@@ -37,6 +37,7 @@ class SharedOrganizationsEnumsResourceType(str, Enum):
     CLUSTER = 'cluster'
     TAXONOMY = 'taxonomy'
     STORAGE_CONNECTION = 'storage_connection'
+    ALERT = 'alert'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

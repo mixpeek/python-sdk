@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +32,8 @@ class RawInferenceResponse(BaseModel):
     model: StrictStr = Field(description="Model that was used")
     tokens_used: Optional[Dict[str, StrictInt]] = Field(default=None, description="Token usage statistics (if available)")
     latency_ms: Union[StrictFloat, StrictInt] = Field(description="Total inference latency in milliseconds")
-    __properties: ClassVar[List[str]] = ["data", "provider", "model", "tokens_used", "latency_ms"]
+    cached: Optional[StrictBool] = Field(default=False, description="Whether the response was served from semantic cache (vCache)")
+    __properties: ClassVar[List[str]] = ["data", "provider", "model", "tokens_used", "latency_ms", "cached"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +95,8 @@ class RawInferenceResponse(BaseModel):
             "provider": obj.get("provider"),
             "model": obj.get("model"),
             "tokens_used": obj.get("tokens_used"),
-            "latency_ms": obj.get("latency_ms")
+            "latency_ms": obj.get("latency_ms"),
+            "cached": obj.get("cached") if obj.get("cached") is not None else False
         })
         return _obj
 

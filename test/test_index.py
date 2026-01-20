@@ -47,9 +47,12 @@ class TestIndex(unittest.TestCase):
                     'string'
                     ],
                 inference_name = '',
+                inference_service_id = '',
+                purpose = 'text',
+                vector_name_override = '',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '0', 
+                        name = '', 
                         description = '0123456789', 
                         dimensions = 1.0, 
                         type = 'dense', 
@@ -59,7 +62,10 @@ class TestIndex(unittest.TestCase):
                         supported_inputs = [
                             'string'
                             ], 
-                        inference_name = '', )
+                        inference_name = '', 
+                        inference_service_id = '', 
+                        purpose = 'text', 
+                        vector_name_override = '', )
                     }
             )
         else:
@@ -69,7 +75,7 @@ class TestIndex(unittest.TestCase):
                 type = 'dense',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '0', 
+                        name = '', 
                         description = '0123456789', 
                         dimensions = 1.0, 
                         type = 'dense', 
@@ -79,7 +85,10 @@ class TestIndex(unittest.TestCase):
                         supported_inputs = [
                             'string'
                             ], 
-                        inference_name = '', )
+                        inference_name = '', 
+                        inference_service_id = '', 
+                        purpose = 'text', 
+                        vector_name_override = '', )
                     },
         )
         """

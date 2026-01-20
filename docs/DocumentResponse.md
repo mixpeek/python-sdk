@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **document_id** | **str** | REQUIRED. Unique identifier for the document. Format: &#39;doc_&#39; prefix + alphanumeric characters. Use for: API queries, references, filtering. | 
 **collection_id** | **str** | REQUIRED. ID of the collection this document belongs to. Format: &#39;col_&#39; prefix + alphanumeric characters. Use for: Collection-scoped queries, filtering. | 
+**document_blobs** | [**List[BlobURLRef]**](BlobURLRef.md) | Document blobs with presigned URLs when requested | [optional] 
 **internal** | [**InternalPayloadModel**](InternalPayloadModel.md) | System-managed internal fields. Contains all Mixpeek-managed metadata including lineage, processing info, timestamps, and blob references. User-defined fields appear at root level alongside document_id and collection_id. | [optional] 
 
 ## Example

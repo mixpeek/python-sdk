@@ -41,6 +41,20 @@ class TestHealthApi(unittest.TestCase):
         """
         pass
 
+    def test_liveness_health(self) -> None:
+        """Test case for liveness_health
+
+        Liveness
+        """
+        pass
+
+    def test_liveness_health_0(self) -> None:
+        """Test case for liveness_health_0
+
+        Liveness
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

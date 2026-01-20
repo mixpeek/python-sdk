@@ -41,6 +41,7 @@ class TestFeatureExtractorResponseModel(unittest.TestCase):
                 feature_extractor_id = '',
                 description = '',
                 icon = '',
+                source = 'builtin',
                 input_schema = { },
                 output_schema = { },
                 parameter_schema = { },
@@ -51,6 +52,15 @@ class TestFeatureExtractorResponseModel(unittest.TestCase):
                     'key' : 56
                     },
                 default_parameters = { },
+                costs = mixpeek.models.costs_info.CostsInfo(
+                    tier = 1.0, 
+                    tier_label = '', 
+                    rates = [
+                        mixpeek.models.cost_rate.CostRate(
+                            unit = 'minute', 
+                            credits_per_unit = 1.0, 
+                            description = '', )
+                        ], ),
                 required_vector_indexes = [
                     mixpeek.models.vector_index_definition.VectorIndexDefinition(
                         feature_uri = '', 

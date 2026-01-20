@@ -36,7 +36,7 @@ class TestVectorIndex(unittest.TestCase):
         model = VectorIndex()
         if include_optional:
             return VectorIndex(
-                name = '0',
+                name = '',
                 description = '0123456789',
                 dimensions = 1.0,
                 type = 'dense',
@@ -46,11 +46,13 @@ class TestVectorIndex(unittest.TestCase):
                 supported_inputs = [
                     'string'
                     ],
-                inference_name = ''
+                inference_name = '',
+                inference_service_id = '',
+                purpose = 'text',
+                vector_name_override = ''
             )
         else:
             return VectorIndex(
-                name = '0',
                 description = '0123456789',
                 type = 'dense',
         )

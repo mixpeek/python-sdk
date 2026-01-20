@@ -34,6 +34,13 @@ class TestNotificationsApi(unittest.TestCase):
         """
         pass
 
+    def test_get_funnel_state_notifications(self) -> None:
+        """Test case for get_funnel_state_notifications
+
+        Get Funnel State
+        """
+        pass
+
     def test_get_notification(self) -> None:
         """Test case for get_notification
 
@@ -45,6 +52,13 @@ class TestNotificationsApi(unittest.TestCase):
         """Test case for get_preferences_notifications
 
         Get Preferences
+        """
+        pass
+
+    def test_get_reminder_preferences_notifications(self) -> None:
+        """Test case for get_reminder_preferences_notifications
+
+        Get Reminder Preferences
         """
         pass
 
@@ -80,6 +94,13 @@ class TestNotificationsApi(unittest.TestCase):
         """Test case for update_preferences_notifications
 
         Update Preferences
+        """
+        pass
+
+    def test_update_reminder_preferences_notifications(self) -> None:
+        """Test case for update_reminder_preferences_notifications
+
+        Update Reminder Preferences
         """
         pass
 

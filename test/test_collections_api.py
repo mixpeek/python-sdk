@@ -55,6 +55,13 @@ class TestCollectionsApi(unittest.TestCase):
         """
         pass
 
+    def test_export_collection(self) -> None:
+        """Test case for export_collection
+
+        Export Collection
+        """
+        pass
+
     def test_get_collection(self) -> None:
         """Test case for get_collection
 

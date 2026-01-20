@@ -109,7 +109,12 @@ class TestCloneCollectionResponse(unittest.TestCase):
                             cluster_id = '', 
                             auto_execute_on_batch = True, 
                             min_document_threshold = 56, 
-                            cooldown_seconds = 56, )
+                            cooldown_seconds = 56, 
+                            execution_phase = 1.0, 
+                            priority = 0.0, )
+                        ], 
+                    alert_applications = [
+                        { }
                         ], ),
                 source_collection_id = ''
             )
@@ -188,7 +193,12 @@ class TestCloneCollectionResponse(unittest.TestCase):
                             cluster_id = '', 
                             auto_execute_on_batch = True, 
                             min_document_threshold = 56, 
-                            cooldown_seconds = 56, )
+                            cooldown_seconds = 56, 
+                            execution_phase = 1.0, 
+                            priority = 0.0, )
+                        ], 
+                    alert_applications = [
+                        { }
                         ], ),
                 source_collection_id = '',
         )

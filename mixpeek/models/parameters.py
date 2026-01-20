@@ -14,45 +14,59 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
 import json
 import pprint
+import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
-from typing import Any, List, Optional
+from typing import Optional
+from mixpeek.models.course_content_extractor_params import CourseContentExtractorParams
+from mixpeek.models.custom_plugin_params import CustomPluginParams
 from mixpeek.models.document_graph_extractor_params import DocumentGraphExtractorParams
 from mixpeek.models.face_identity_extractor_params import FaceIdentityExtractorParams
 from mixpeek.models.image_extractor_params import ImageExtractorParams
 from mixpeek.models.multimodal_extractor_params import MultimodalExtractorParams
+from mixpeek.models.sentiment_classifier_params import SentimentClassifierParams
 from mixpeek.models.text_extractor_params import TextExtractorParams
-from pydantic import StrictStr, Field
-from typing import Union, List, Set, Optional, Dict
+from mixpeek.models.web_scraper_extractor_params import WebScraperExtractorParams
+from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
+from pydantic import Field
 
-PARAMETERS_ONE_OF_SCHEMAS = ["DocumentGraphExtractorParams", "FaceIdentityExtractorParams", "ImageExtractorParams", "MultimodalExtractorParams", "TextExtractorParams"]
+PARAMETERS_ANY_OF_SCHEMAS = ["CourseContentExtractorParams", "CustomPluginParams", "DocumentGraphExtractorParams", "FaceIdentityExtractorParams", "ImageExtractorParams", "MultimodalExtractorParams", "SentimentClassifierParams", "TextExtractorParams", "WebScraperExtractorParams"]
 
 class Parameters(BaseModel):
     """
     Parameters for the feature extractor. Each extractor type has specific parameters. See the schema for your chosen extractor (e.g., MultimodalExtractorParams for multimodal_extractor).
     """
+
     # data type: TextExtractorParams
-    oneof_schema_1_validator: Optional[TextExtractorParams] = None
+    anyof_schema_1_validator: Optional[TextExtractorParams] = None
     # data type: MultimodalExtractorParams
-    oneof_schema_2_validator: Optional[MultimodalExtractorParams] = None
+    anyof_schema_2_validator: Optional[MultimodalExtractorParams] = None
     # data type: FaceIdentityExtractorParams
-    oneof_schema_3_validator: Optional[FaceIdentityExtractorParams] = None
+    anyof_schema_3_validator: Optional[FaceIdentityExtractorParams] = None
     # data type: ImageExtractorParams
-    oneof_schema_4_validator: Optional[ImageExtractorParams] = None
+    anyof_schema_4_validator: Optional[ImageExtractorParams] = None
     # data type: DocumentGraphExtractorParams
-    oneof_schema_5_validator: Optional[DocumentGraphExtractorParams] = None
-    actual_instance: Optional[Union[DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, TextExtractorParams]] = None
-    one_of_schemas: Set[str] = { "DocumentGraphExtractorParams", "FaceIdentityExtractorParams", "ImageExtractorParams", "MultimodalExtractorParams", "TextExtractorParams" }
+    anyof_schema_5_validator: Optional[DocumentGraphExtractorParams] = None
+    # data type: SentimentClassifierParams
+    anyof_schema_6_validator: Optional[SentimentClassifierParams] = None
+    # data type: WebScraperExtractorParams
+    anyof_schema_7_validator: Optional[WebScraperExtractorParams] = None
+    # data type: CourseContentExtractorParams
+    anyof_schema_8_validator: Optional[CourseContentExtractorParams] = None
+    # data type: CustomPluginParams
+    anyof_schema_9_validator: Optional[CustomPluginParams] = None
+    if TYPE_CHECKING:
+        actual_instance: Optional[Union[CourseContentExtractorParams, CustomPluginParams, DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, SentimentClassifierParams, TextExtractorParams, WebScraperExtractorParams]] = None
+    else:
+        actual_instance: Any = None
+    any_of_schemas: Set[str] = { "CourseContentExtractorParams", "CustomPluginParams", "DocumentGraphExtractorParams", "FaceIdentityExtractorParams", "ImageExtractorParams", "MultimodalExtractorParams", "SentimentClassifierParams", "TextExtractorParams", "WebScraperExtractorParams" }
 
-    model_config = ConfigDict(
-        validate_assignment=True,
-        protected_namespaces=(),
-    )
-
-
-    discriminator_value_class_map: Dict[str, str] = {
+    model_config = {
+        "validate_assignment": True,
+        "protected_namespaces": (),
     }
 
     def __init__(self, *args, **kwargs) -> None:
@@ -66,46 +80,71 @@ class Parameters(BaseModel):
             super().__init__(**kwargs)
 
     @field_validator('actual_instance')
-    def actual_instance_must_validate_oneof(cls, v):
+    def actual_instance_must_validate_anyof(cls, v):
         instance = Parameters.model_construct()
         error_messages = []
-        match = 0
         # validate data type: TextExtractorParams
         if not isinstance(v, TextExtractorParams):
             error_messages.append(f"Error! Input type `{type(v)}` is not `TextExtractorParams`")
         else:
-            match += 1
+            return v
+
         # validate data type: MultimodalExtractorParams
         if not isinstance(v, MultimodalExtractorParams):
             error_messages.append(f"Error! Input type `{type(v)}` is not `MultimodalExtractorParams`")
         else:
-            match += 1
+            return v
+
         # validate data type: FaceIdentityExtractorParams
         if not isinstance(v, FaceIdentityExtractorParams):
             error_messages.append(f"Error! Input type `{type(v)}` is not `FaceIdentityExtractorParams`")
         else:
-            match += 1
+            return v
+
         # validate data type: ImageExtractorParams
         if not isinstance(v, ImageExtractorParams):
             error_messages.append(f"Error! Input type `{type(v)}` is not `ImageExtractorParams`")
         else:
-            match += 1
+            return v
+
         # validate data type: DocumentGraphExtractorParams
         if not isinstance(v, DocumentGraphExtractorParams):
             error_messages.append(f"Error! Input type `{type(v)}` is not `DocumentGraphExtractorParams`")
         else:
-            match += 1
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Parameters with oneOf schemas: DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, TextExtractorParams. Details: " + ", ".join(error_messages))
-        elif match == 0:
+            return v
+
+        # validate data type: SentimentClassifierParams
+        if not isinstance(v, SentimentClassifierParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SentimentClassifierParams`")
+        else:
+            return v
+
+        # validate data type: WebScraperExtractorParams
+        if not isinstance(v, WebScraperExtractorParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `WebScraperExtractorParams`")
+        else:
+            return v
+
+        # validate data type: CourseContentExtractorParams
+        if not isinstance(v, CourseContentExtractorParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CourseContentExtractorParams`")
+        else:
+            return v
+
+        # validate data type: CustomPluginParams
+        if not isinstance(v, CustomPluginParams):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CustomPluginParams`")
+        else:
+            return v
+
+        if error_messages:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Parameters with oneOf schemas: DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, TextExtractorParams. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in Parameters with anyOf schemas: CourseContentExtractorParams, CustomPluginParams, DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, SentimentClassifierParams, TextExtractorParams, WebScraperExtractorParams. Details: " + ", ".join(error_messages))
         else:
             return v
 
     @classmethod
-    def from_dict(cls, obj: Union[str, Dict[str, Any]]) -> Self:
+    def from_dict(cls, obj: Dict[str, Any]) -> Self:
         return cls.from_json(json.dumps(obj))
 
     @classmethod
@@ -113,45 +152,64 @@ class Parameters(BaseModel):
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
-        match = 0
-
-        # deserialize data into TextExtractorParams
+        # anyof_schema_1_validator: Optional[TextExtractorParams] = None
         try:
             instance.actual_instance = TextExtractorParams.from_json(json_str)
-            match += 1
+            return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into MultimodalExtractorParams
+             error_messages.append(str(e))
+        # anyof_schema_2_validator: Optional[MultimodalExtractorParams] = None
         try:
             instance.actual_instance = MultimodalExtractorParams.from_json(json_str)
-            match += 1
+            return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into FaceIdentityExtractorParams
+             error_messages.append(str(e))
+        # anyof_schema_3_validator: Optional[FaceIdentityExtractorParams] = None
         try:
             instance.actual_instance = FaceIdentityExtractorParams.from_json(json_str)
-            match += 1
+            return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into ImageExtractorParams
+             error_messages.append(str(e))
+        # anyof_schema_4_validator: Optional[ImageExtractorParams] = None
         try:
             instance.actual_instance = ImageExtractorParams.from_json(json_str)
-            match += 1
+            return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into DocumentGraphExtractorParams
+             error_messages.append(str(e))
+        # anyof_schema_5_validator: Optional[DocumentGraphExtractorParams] = None
         try:
             instance.actual_instance = DocumentGraphExtractorParams.from_json(json_str)
-            match += 1
+            return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
+             error_messages.append(str(e))
+        # anyof_schema_6_validator: Optional[SentimentClassifierParams] = None
+        try:
+            instance.actual_instance = SentimentClassifierParams.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+             error_messages.append(str(e))
+        # anyof_schema_7_validator: Optional[WebScraperExtractorParams] = None
+        try:
+            instance.actual_instance = WebScraperExtractorParams.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+             error_messages.append(str(e))
+        # anyof_schema_8_validator: Optional[CourseContentExtractorParams] = None
+        try:
+            instance.actual_instance = CourseContentExtractorParams.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+             error_messages.append(str(e))
+        # anyof_schema_9_validator: Optional[CustomPluginParams] = None
+        try:
+            instance.actual_instance = CustomPluginParams.from_json(json_str)
+            return instance
+        except (ValidationError, ValueError) as e:
+             error_messages.append(str(e))
 
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Parameters with oneOf schemas: DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, TextExtractorParams. Details: " + ", ".join(error_messages))
-        elif match == 0:
+        if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Parameters with oneOf schemas: DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, TextExtractorParams. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Parameters with anyOf schemas: CourseContentExtractorParams, CustomPluginParams, DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, SentimentClassifierParams, TextExtractorParams, WebScraperExtractorParams. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -165,7 +223,7 @@ class Parameters(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, TextExtractorParams]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], CourseContentExtractorParams, CustomPluginParams, DocumentGraphExtractorParams, FaceIdentityExtractorParams, ImageExtractorParams, MultimodalExtractorParams, SentimentClassifierParams, TextExtractorParams, WebScraperExtractorParams]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
@@ -173,7 +231,6 @@ class Parameters(BaseModel):
         if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
-            # primitive type
             return self.actual_instance
 
     def to_str(self) -> str:

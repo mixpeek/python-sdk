@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_collection**](CollectionsApi.md#create_collection) | **POST** /v1/collections | Create Collection
 [**delete_collection**](CollectionsApi.md#delete_collection) | **DELETE** /v1/collections/{collection_identifier} | Delete Collection
 [**describe_collection_features**](CollectionsApi.md#describe_collection_features) | **GET** /v1/collections/{collection_identifier}/features | Describe collection features
+[**export_collection**](CollectionsApi.md#export_collection) | **POST** /v1/collections/{collection_identifier}/export | Export Collection
 [**get_collection**](CollectionsApi.md#get_collection) | **GET** /v1/collections/{collection_identifier} | Get Collection
 [**list_collections**](CollectionsApi.md#list_collections) | **POST** /v1/collections/list | List Collections
 [**trigger_collection**](CollectionsApi.md#trigger_collection) | **POST** /v1/collections/{collection_identifier}/trigger | Trigger Collection Processing
@@ -345,6 +346,109 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **export_collection**
+> CollectionExportResponse export_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace, collection_export_request=collection_export_request)
+
+Export Collection
+
+Export collection documents to JSON, CSV, or Parquet format.
+
+    **Export Formats:**
+    - **JSON**: Line-delimited JSON (JSONL) format. Good for streaming.
+    - **CSV**: Comma-separated values. Best for spreadsheets.
+    - **PARQUET**: Columnar format (default). Best for data pipelines.
+
+    **Vector Export:**
+    Vectors are large and exported separately. When `include_vectors=True`,
+    a separate file is created for vectors with document_id mapping.
+
+    **Field Selection:**
+    Use `select_fields` to export only specific fields, reducing file size.
+
+    **Filtering:**
+    Apply filters to export a subset of documents.
+
+    **Response:**
+    Returns presigned download URLs valid for 1 hour.
+
+    **Limits:**
+    - Large exports may take time. Consider using `sample_size` for testing.
+    - Vector exports significantly increase processing time.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.collection_export_request import CollectionExportRequest
+from mixpeek.models.collection_export_response import CollectionExportResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.CollectionsApi(api_client)
+    collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to export
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
+    collection_export_request = mixpeek.CollectionExportRequest() # CollectionExportRequest |  (optional)
+
+    try:
+        # Export Collection
+        api_response = api_instance.export_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace, collection_export_request=collection_export_request)
+        print("The response of CollectionsApi->export_collection:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CollectionsApi->export_collection: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **collection_identifier** | **str**| The ID or name of the collection to export | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
+ **collection_export_request** | [**CollectionExportRequest**](CollectionExportRequest.md)|  | [optional] 
+
+### Return type
+
+[**CollectionExportResponse**](CollectionExportResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

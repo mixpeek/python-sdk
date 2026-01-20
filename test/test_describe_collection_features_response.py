@@ -42,7 +42,7 @@ class TestDescribeCollectionFeaturesResponse(unittest.TestCase):
                         feature_extractor_name = '', 
                         version = '', 
                         vector_index = mixpeek.models.vector_index.VectorIndex(
-                            name = '0', 
+                            name = '', 
                             description = '0123456789', 
                             dimensions = 1.0, 
                             type = 'dense', 
@@ -52,7 +52,10 @@ class TestDescribeCollectionFeaturesResponse(unittest.TestCase):
                             supported_inputs = [
                                 'string'
                                 ], 
-                            inference_name = '', ), 
+                            inference_name = '', 
+                            inference_service_id = '', 
+                            purpose = 'text', 
+                            vector_name_override = '', ), 
                         primary = True, )
                     ]
             )
@@ -64,7 +67,7 @@ class TestDescribeCollectionFeaturesResponse(unittest.TestCase):
                         feature_extractor_name = '', 
                         version = '', 
                         vector_index = mixpeek.models.vector_index.VectorIndex(
-                            name = '0', 
+                            name = '', 
                             description = '0123456789', 
                             dimensions = 1.0, 
                             type = 'dense', 
@@ -74,7 +77,10 @@ class TestDescribeCollectionFeaturesResponse(unittest.TestCase):
                             supported_inputs = [
                                 'string'
                                 ], 
-                            inference_name = '', ), 
+                            inference_name = '', 
+                            inference_service_id = '', 
+                            purpose = 'text', 
+                            vector_name_override = '', ), 
                         primary = True, )
                     ],
         )

@@ -48,6 +48,13 @@ class TestOrganizationBillingApi(unittest.TestCase):
         """
         pass
 
+    def test_get_credit_balance_organizations_billing(self) -> None:
+        """Test case for get_credit_balance_organizations_billing
+
+        Get Credit Balance
+        """
+        pass
+
     def test_get_current_usage_organizations_billing(self) -> None:
         """Test case for get_current_usage_organizations_billing
 

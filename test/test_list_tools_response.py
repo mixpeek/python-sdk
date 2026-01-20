@@ -44,7 +44,8 @@ class TestListToolsResponse(unittest.TestCase):
                         parameters = { }, 
                         required_params = [
                             ''
-                            ], )
+                            ], 
+                        requires_confirmation = True, )
                     ],
                 total = 56,
                 categories = [
@@ -61,7 +62,8 @@ class TestListToolsResponse(unittest.TestCase):
                         parameters = { }, 
                         required_params = [
                             ''
-                            ], )
+                            ], 
+                        requires_confirmation = True, )
                     ],
                 total = 56,
                 categories = [

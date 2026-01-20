@@ -82,6 +82,16 @@ Canonical audit log actions captured for organization events.  These events are 
 
 * `TAXONOMY_ACCESSED` (value: `'taxonomy_accessed'`)
 
+* `ALERT_CREATED` (value: `'alert_created'`)
+
+* `ALERT_UPDATED` (value: `'alert_updated'`)
+
+* `ALERT_DELETED` (value: `'alert_deleted'`)
+
+* `ALERT_ACCESSED` (value: `'alert_accessed'`)
+
+* `ALERT_TRIGGERED` (value: `'alert_triggered'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

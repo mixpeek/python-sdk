@@ -76,6 +76,13 @@ class TestAgentSessionsApi(unittest.TestCase):
         """
         pass
 
+    def test_respond_to_confirmation_agents_sessions(self) -> None:
+        """Test case for respond_to_confirmation_agents_sessions
+
+        Respond To Confirmation
+        """
+        pass
+
     def test_send_message_agents_sessions(self) -> None:
         """Test case for send_message_agents_sessions
 

@@ -21,7 +21,7 @@ from typing_extensions import Self
 
 class TriggerActionType(str, Enum):
     """
-    Type of action to execute when trigger fires.  Supported action types: - **cluster**: Execute clustering on a cluster definition - **taxonomy_enrichment**: Apply taxonomy enrichment to a collection
+    Type of action to execute when trigger fires.  Supported action types: - **cluster**: Execute clustering on a cluster definition - **taxonomy_enrichment**: Apply taxonomy enrichment to a collection - **batch_rerun**: Re-execute a completed/failed batch
     """
 
     """
@@ -29,6 +29,7 @@ class TriggerActionType(str, Enum):
     """
     CLUSTER = 'cluster'
     TAXONOMY_ENRICHMENT = 'taxonomy_enrichment'
+    BATCH_RERUN = 'batch_rerun'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

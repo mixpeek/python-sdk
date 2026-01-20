@@ -86,7 +86,8 @@ class TestListBatchesResponse(unittest.TestCase):
                                                 affected_count = 1.0, 
                                                 recovery_suggestion = '', 
                                                 metadata = { }, )
-                                            ], )
+                                            ], 
+                                        error = '', )
                                     ], 
                                 source_type = '', 
                                 source_collection_ids = [
@@ -184,7 +185,8 @@ class TestListBatchesResponse(unittest.TestCase):
                                                 affected_count = 1.0, 
                                                 recovery_suggestion = '', 
                                                 metadata = { }, )
-                                            ], )
+                                            ], 
+                                        error = '', )
                                     ], 
                                 source_type = '', 
                                 source_collection_ids = [

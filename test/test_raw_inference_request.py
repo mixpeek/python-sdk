@@ -38,13 +38,15 @@ class TestRawInferenceRequest(unittest.TestCase):
             return RawInferenceRequest(
                 provider = '',
                 model = '',
+                inference_name = '',
+                feature_uri = '',
                 inputs = { },
-                parameters = { }
+                parameters = { },
+                enable_semantic_cache = True,
+                cache_delta = 0.0
             )
         else:
             return RawInferenceRequest(
-                provider = '',
-                model = '',
                 inputs = { },
         )
         """

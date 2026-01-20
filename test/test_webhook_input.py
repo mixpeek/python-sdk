@@ -36,7 +36,7 @@ class TestWebhookInput(unittest.TestCase):
         model = WebhookInput()
         if include_optional:
             return WebhookInput(
-                webhook_id = 'wh_gCu2LC4aWw',
+                webhook_id = 'wh_62ECB020842930cc',
                 webhook_name = '0',
                 internal_id = '',
                 event_types = [

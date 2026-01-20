@@ -18,21 +18,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ToolInfo(BaseModel):
     """
-    Information about an available agent tool.  Attributes:     name: Tool name (use this in available_tools)     description: What the tool does     category: Tool category (search, read, create, etc.)     parameters: Parameter definitions     required_params: List of required parameter names
+    Information about an available agent tool.  Attributes:     name: Tool name (use this in available_tools)     description: What the tool does     category: Tool category (search, read, create, etc.)     parameters: Parameter definitions     required_params: List of required parameter names     requires_confirmation: Whether the tool requires user confirmation before execution
     """ # noqa: E501
     name: StrictStr = Field(description="Tool name")
     description: StrictStr = Field(description="Tool description")
     category: StrictStr = Field(description="Tool category")
     parameters: Optional[Dict[str, Any]] = Field(default=None, description="Parameter definitions")
     required_params: Optional[List[StrictStr]] = Field(default=None, description="Required parameters")
-    __properties: ClassVar[List[str]] = ["name", "description", "category", "parameters", "required_params"]
+    requires_confirmation: Optional[StrictBool] = Field(default=False, description="Whether the tool requires user confirmation")
+    __properties: ClassVar[List[str]] = ["name", "description", "category", "parameters", "required_params", "requires_confirmation"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -89,7 +90,8 @@ class ToolInfo(BaseModel):
             "description": obj.get("description"),
             "category": obj.get("category"),
             "parameters": obj.get("parameters"),
-            "required_params": obj.get("required_params")
+            "required_params": obj.get("required_params"),
+            "requires_confirmation": obj.get("requires_confirmation") if obj.get("requires_confirmation") is not None else False
         })
         return _obj
 

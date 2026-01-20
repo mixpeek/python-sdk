@@ -3,6 +3,7 @@
 # import apis into api package
 from mixpeek.api.adhoc_retrievers_api import AdhocRetrieversApi
 from mixpeek.api.agent_sessions_api import AgentSessionsApi
+from mixpeek.api.alerts_api import AlertsApi
 from mixpeek.api.analytics_api import AnalyticsApi
 from mixpeek.api.analytics_buckets_api import AnalyticsBucketsApi
 from mixpeek.api.analytics_clusters_api import AnalyticsClustersApi
@@ -30,6 +31,8 @@ from mixpeek.api.collection_schema_api import CollectionSchemaApi
 from mixpeek.api.collection_taxonomies_api import CollectionTaxonomiesApi
 from mixpeek.api.collection_templates_api import CollectionTemplatesApi
 from mixpeek.api.collections_api import CollectionsApi
+from mixpeek.api.custom_models_api import CustomModelsApi
+from mixpeek.api.custom_plugins_namespace_api import CustomPluginsNamespaceApi
 from mixpeek.api.document_lineage_api import DocumentLineageApi
 from mixpeek.api.evaluation_datasets_api import EvaluationDatasetsApi
 from mixpeek.api.evaluations_api import EvaluationsApi
@@ -37,7 +40,9 @@ from mixpeek.api.feature_extractors_api import FeatureExtractorsApi
 from mixpeek.api.health_api import HealthApi
 from mixpeek.api.inference_api import InferenceApi
 from mixpeek.api.manifest_api import ManifestApi
+from mixpeek.api.models_api import ModelsApi
 from mixpeek.api.namespace_clone_api import NamespaceCloneApi
+from mixpeek.api.namespace_extractors_api import NamespaceExtractorsApi
 from mixpeek.api.namespace_migrations_api import NamespaceMigrationsApi
 from mixpeek.api.namespace_templates_api import NamespaceTemplatesApi
 from mixpeek.api.namespaces_api import NamespacesApi
@@ -50,12 +55,15 @@ from mixpeek.api.organization_secrets_api import OrganizationSecretsApi
 from mixpeek.api.organization_usage_api import OrganizationUsageApi
 from mixpeek.api.organization_users_api import OrganizationUsersApi
 from mixpeek.api.organizations_api import OrganizationsApi
+from mixpeek.api.plugins_api import PluginsApi
 from mixpeek.api.private_api import PrivateApi
+from mixpeek.api.public_notifications_api_api import PublicNotificationsAPIApi
 from mixpeek.api.public_retriever_api_api import PublicRetrieverAPIApi
 from mixpeek.api.public_scaffolds_api import PublicScaffoldsApi
 from mixpeek.api.public_templates_api_api import PublicTemplatesAPIApi
 from mixpeek.api.published_retrievers_api import PublishedRetrieversApi
 from mixpeek.api.resource_search_api import ResourceSearchApi
+from mixpeek.api.retriever_benchmarks_api import RetrieverBenchmarksApi
 from mixpeek.api.retriever_evaluations_api import RetrieverEvaluationsApi
 from mixpeek.api.retriever_interactions_api import RetrieverInteractionsApi
 from mixpeek.api.retriever_stages_api import RetrieverStagesApi

@@ -40,7 +40,7 @@ class TestMultiVectorIndex(unittest.TestCase):
                 description = '0123456789',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '0', 
+                        name = '', 
                         description = '0123456789', 
                         dimensions = 1.0, 
                         type = 'dense', 
@@ -50,7 +50,10 @@ class TestMultiVectorIndex(unittest.TestCase):
                         supported_inputs = [
                             'string'
                             ], 
-                        inference_name = '', )
+                        inference_name = '', 
+                        inference_service_id = '', 
+                        purpose = 'text', 
+                        vector_name_override = '', )
                     }
             )
         else:
@@ -59,7 +62,7 @@ class TestMultiVectorIndex(unittest.TestCase):
                 description = '0123456789',
                 vectors = {
                     'key' : mixpeek.models.vector_index.VectorIndex(
-                        name = '0', 
+                        name = '', 
                         description = '0123456789', 
                         dimensions = 1.0, 
                         type = 'dense', 
@@ -69,7 +72,10 @@ class TestMultiVectorIndex(unittest.TestCase):
                         supported_inputs = [
                             'string'
                             ], 
-                        inference_name = '', )
+                        inference_name = '', 
+                        inference_service_id = '', 
+                        purpose = 'text', 
+                        vector_name_override = '', )
                     },
         )
         """

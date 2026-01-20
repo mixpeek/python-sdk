@@ -61,7 +61,8 @@ class TestExtractorJobInfo(unittest.TestCase):
                         affected_count = 1.0, 
                         recovery_suggestion = '', 
                         metadata = { }, )
-                    ]
+                    ],
+                error = ''
             )
         else:
             return ExtractorJobInfo(

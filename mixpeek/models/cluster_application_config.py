@@ -20,18 +20,21 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 class ClusterApplicationConfig(BaseModel):
     """
-    Configuration for automatic cluster execution on collection.  Similar to TaxonomyApplicationConfig, this attaches a cluster to a collection and defines when/how it should be automatically executed.  Used in CollectionModel.cluster_applications field.
+    Configuration for automatic cluster execution on collection.  Similar to TaxonomyApplicationConfig, this attaches a cluster to a collection and defines when/how it should be automatically executed.  Used in CollectionModel.cluster_applications field.  Supports execution phase ordering for unified post-processing with taxonomies, clusters, and alerts.
     """ # noqa: E501
     cluster_id: StrictStr = Field(description="ID of the cluster to execute (must exist and use this collection as input)")
     auto_execute_on_batch: Optional[StrictBool] = Field(default=True, description="Automatically execute cluster when batch processing completes for this collection. If False, cluster must be executed manually via API.")
     min_document_threshold: Optional[StrictInt] = Field(default=None, description="Minimum number of documents required before executing cluster. If document_count < threshold, clustering is skipped. Useful to avoid clustering on small datasets.")
     cooldown_seconds: Optional[StrictInt] = Field(default=3600, description="Minimum time (in seconds) between automatic cluster executions. Prevents excessive re-clustering on frequent batch completions. Default: 3600 seconds (1 hour).")
-    __properties: ClassVar[List[str]] = ["cluster_id", "auto_execute_on_batch", "min_document_threshold", "cooldown_seconds"]
+    execution_phase: Optional[Annotated[int, Field(le=3, strict=True, ge=1)]] = Field(default=2, description="Which phase this cluster runs in. Default: 2 (CLUSTER phase, after taxonomies). Valid values: 1=TAXONOMY, 2=CLUSTER, 3=ALERT. Lower phases run earlier.")
+    priority: Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]] = Field(default=0, description="Priority within the execution phase (higher = runs first)")
+    __properties: ClassVar[List[str]] = ["cluster_id", "auto_execute_on_batch", "min_document_threshold", "cooldown_seconds", "execution_phase", "priority"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +90,9 @@ class ClusterApplicationConfig(BaseModel):
             "cluster_id": obj.get("cluster_id"),
             "auto_execute_on_batch": obj.get("auto_execute_on_batch") if obj.get("auto_execute_on_batch") is not None else True,
             "min_document_threshold": obj.get("min_document_threshold"),
-            "cooldown_seconds": obj.get("cooldown_seconds") if obj.get("cooldown_seconds") is not None else 3600
+            "cooldown_seconds": obj.get("cooldown_seconds") if obj.get("cooldown_seconds") is not None else 3600,
+            "execution_phase": obj.get("execution_phase") if obj.get("execution_phase") is not None else 2,
+            "priority": obj.get("priority") if obj.get("priority") is not None else 0
         })
         return _obj
 

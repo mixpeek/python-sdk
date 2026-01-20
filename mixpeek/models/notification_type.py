@@ -37,6 +37,9 @@ class NotificationType(str, Enum):
     AUDIT_ALERT = 'audit_alert'
     MAINTENANCE_ALERT = 'maintenance_alert'
     CUSTOM = 'custom'
+    ONBOARDING_NUDGE = 'onboarding_nudge'
+    ENGAGEMENT_NUDGE = 'engagement_nudge'
+    FEATURE_TIP = 'feature_tip'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

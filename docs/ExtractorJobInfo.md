@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **duration_ms** | **float** | Processing duration in milliseconds | [optional] 
 **documents_written** | **int** | Number of documents written by this extractor job | [optional] 
 **errors** | [**List[BatchErrorDetail]**](BatchErrorDetail.md) | Detailed errors from this extractor job | [optional] 
+**error** | **str** | OPTIONAL. Simple error message string for quick debugging. Set when the Ray job fails with error details from JobStatusMonitor. For detailed error information, see errors array. | [optional] 
 
 ## Example
 

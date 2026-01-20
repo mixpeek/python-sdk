@@ -110,7 +110,12 @@ class TestListCollectionsResponse(unittest.TestCase):
                                 cluster_id = '', 
                                 auto_execute_on_batch = True, 
                                 min_document_threshold = 56, 
-                                cooldown_seconds = 56, )
+                                cooldown_seconds = 56, 
+                                execution_phase = 1.0, 
+                                priority = 0.0, )
+                            ], 
+                        alert_applications = [
+                            { }
                             ], 
                         taxonomy_count = 56, 
                         retriever_count = 56, )
@@ -208,7 +213,12 @@ class TestListCollectionsResponse(unittest.TestCase):
                                 cluster_id = '', 
                                 auto_execute_on_batch = True, 
                                 min_document_threshold = 56, 
-                                cooldown_seconds = 56, )
+                                cooldown_seconds = 56, 
+                                execution_phase = 1.0, 
+                                priority = 0.0, )
+                            ], 
+                        alert_applications = [
+                            { }
                             ], 
                         taxonomy_count = 56, 
                         retriever_count = 56, )

@@ -42,7 +42,8 @@ class TestTextExtractorParams(unittest.TestCase):
                 chunk_overlap = 0.0,
                 response_shape = None,
                 llm_provider = '',
-                llm_model = ''
+                llm_model = '',
+                llm_api_key = ''
             )
         else:
             return TextExtractorParams(

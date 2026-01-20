@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **model** | **str** | Model that was used | 
 **tokens_used** | **Dict[str, int]** | Token usage statistics (if available) | [optional] 
 **latency_ms** | **float** | Total inference latency in milliseconds | 
+**cached** | **bool** | Whether the response was served from semantic cache (vCache) | [optional] [default to False]
 
 ## Example
 

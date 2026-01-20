@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**confirm_payment_method_organizations_billing**](OrganizationBillingApi.md#confirm_payment_method_organizations_billing) | **POST** /v1/organizations/billing/confirm-payment-method | Confirm Payment Method
 [**disable_auto_billing_organizations**](OrganizationBillingApi.md#disable_auto_billing_organizations) | **POST** /v1/organizations/billing/disable-auto-billing | Disable Auto Billing
 [**enable_auto_billing_organizations**](OrganizationBillingApi.md#enable_auto_billing_organizations) | **POST** /v1/organizations/billing/enable-auto-billing | Enable Auto Billing
+[**get_credit_balance_organizations_billing**](OrganizationBillingApi.md#get_credit_balance_organizations_billing) | **GET** /v1/organizations/billing/balance | Get Credit Balance
 [**get_current_usage_organizations_billing**](OrganizationBillingApi.md#get_current_usage_organizations_billing) | **GET** /v1/organizations/billing/usage/current | Get Current Usage
 [**get_payment_method_organizations_billing**](OrganizationBillingApi.md#get_payment_method_organizations_billing) | **GET** /v1/organizations/billing/payment-method | Get Payment Method
 [**get_spending_caps_organizations_billing**](OrganizationBillingApi.md#get_spending_caps_organizations_billing) | **GET** /v1/organizations/billing/spending-caps | Get Spending Caps
@@ -256,6 +257,93 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AutoBillingToggleResponse**](AutoBillingToggleResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_credit_balance_organizations_billing**
+> CreditBalanceResponse get_credit_balance_organizations_billing(authorization=authorization)
+
+Get Credit Balance
+
+Get current credit balance and tier information.
+
+Returns the organization's credit balance, current tier, and usage statistics.
+Useful for displaying billing status in dashboards.
+
+**Requirements:**
+- Read permission
+
+**Example:**
+```python
+response = await client.get("/v1/organizations/billing/balance")
+print(f"Balance: {response['credit_balance']} credits")
+print(f"Tier: {response['account_tier']}")
+```
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.credit_balance_response import CreditBalanceResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.OrganizationBillingApi(api_client)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Get Credit Balance
+        api_response = api_instance.get_credit_balance_organizations_billing(authorization=authorization)
+        print("The response of OrganizationBillingApi->get_credit_balance_organizations_billing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrganizationBillingApi->get_credit_balance_organizations_billing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+[**CreditBalanceResponse**](CreditBalanceResponse.md)
 
 ### Authorization
 

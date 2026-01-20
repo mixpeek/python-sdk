@@ -1,6 +1,6 @@
 # Configs
 
-REQUIRED. Channel-specific configuration for notification delivery. Type depends on the channel field: - EmailConfig for EMAIL channel (recipients, subject template, etc.) - SlackConfig for SLACK channel (workspace, channel, bot token) - WebhookConfig for WEBHOOK channel (URL, headers, auth) - SmsConfig for SMS channel (phone numbers, provider credentials). See respective config models for detailed field requirements.
+REQUIRED. Channel-specific configuration for notification delivery. Type depends on the channel field: - EmailConfig for EMAIL channel (recipients, subject template, etc.) - SlackConfig for SLACK channel (workspace, channel, bot token) - WebhookConfig for WEBHOOK channel (URL, headers, auth). See respective config models for detailed field requirements.
 
 ## Properties
 
@@ -22,8 +22,6 @@ Name | Type | Description | Notes
 **headers** | **Dict[str, str]** | Custom headers to include in the webhook request. | [optional] 
 **payload_template** | **Dict[str, object]** | A Jinja2 template for the JSON payload. | [optional] 
 **timeout** | **float** | Request timeout in seconds. | [optional] [default to 10.0]
-**phone_numbers** | **List[str]** | Phone numbers to send to | 
-**message_template** | **str** | Template for SMS message | [optional] 
 
 ## Example
 

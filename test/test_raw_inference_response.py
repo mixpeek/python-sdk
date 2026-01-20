@@ -42,7 +42,8 @@ class TestRawInferenceResponse(unittest.TestCase):
                 tokens_used = {
                     'key' : 56
                     },
-                latency_ms = 1.337
+                latency_ms = 1.337,
+                cached = True
             )
         else:
             return RawInferenceResponse(

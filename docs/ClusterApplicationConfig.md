@@ -1,6 +1,6 @@
 # ClusterApplicationConfig
 
-Configuration for automatic cluster execution on collection.  Similar to TaxonomyApplicationConfig, this attaches a cluster to a collection and defines when/how it should be automatically executed.  Used in CollectionModel.cluster_applications field.
+Configuration for automatic cluster execution on collection.  Similar to TaxonomyApplicationConfig, this attaches a cluster to a collection and defines when/how it should be automatically executed.  Used in CollectionModel.cluster_applications field.  Supports execution phase ordering for unified post-processing with taxonomies, clusters, and alerts.
 
 ## Properties
 
@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **auto_execute_on_batch** | **bool** | Automatically execute cluster when batch processing completes for this collection. If False, cluster must be executed manually via API. | [optional] [default to True]
 **min_document_threshold** | **int** | Minimum number of documents required before executing cluster. If document_count &lt; threshold, clustering is skipped. Useful to avoid clustering on small datasets. | [optional] 
 **cooldown_seconds** | **int** | Minimum time (in seconds) between automatic cluster executions. Prevents excessive re-clustering on frequent batch completions. Default: 3600 seconds (1 hour). | [optional] [default to 3600]
+**execution_phase** | **int** | Which phase this cluster runs in. Default: 2 (CLUSTER phase, after taxonomies). Valid values: 1&#x3D;TAXONOMY, 2&#x3D;CLUSTER, 3&#x3D;ALERT. Lower phases run earlier. | [optional] [default to 2]
+**priority** | **int** | Priority within the execution phase (higher &#x3D; runs first) | [optional] [default to 0]
 
 ## Example
 

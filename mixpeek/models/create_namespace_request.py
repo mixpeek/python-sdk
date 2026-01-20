@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from mixpeek.models.base_feature_extractor_model_input import BaseFeatureExtractorModelInput
+from mixpeek.models.namespace_infrastructure import NamespaceInfrastructure
 from mixpeek.models.payload_index_config_input import PayloadIndexConfigInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +36,8 @@ class CreateNamespaceRequest(BaseModel):
     feature_extractors: Annotated[List[BaseFeatureExtractorModelInput], Field(min_length=1)] = Field(description="List of feature extractors to use. At least one feature extractor must be provided. Optional 'params' can be specified for extractors with configurable settings (e.g., model selection) that affect vector dimensions. These params are locked at namespace creation time.")
     payload_indexes: Optional[List[PayloadIndexConfigInput]] = Field(default=None, description="Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically.")
     auto_create_indexes: Optional[StrictBool] = Field(default=False, description="Enable automatic creation of Qdrant payload indexes based on filter usage patterns. When enabled, the system tracks which fields are most frequently filtered (>100 queries/24h) and automatically creates indexes to improve query performance. Background task runs every 6 hours. Expected performance improvement: 50-90% latency reduction for filtered queries.")
-    __properties: ClassVar[List[str]] = ["namespace_name", "description", "feature_extractors", "payload_indexes", "auto_create_indexes"]
+    infrastructure: Optional[NamespaceInfrastructure] = Field(default=None, description="Optional dedicated infrastructure configuration for this namespace. Required for custom plugins and custom models (Enterprise tier). If None, uses shared infrastructure or organization-level infrastructure.")
+    __properties: ClassVar[List[str]] = ["namespace_name", "description", "feature_extractors", "payload_indexes", "auto_create_indexes", "infrastructure"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -90,6 +92,9 @@ class CreateNamespaceRequest(BaseModel):
                 if _item_payload_indexes:
                     _items.append(_item_payload_indexes.to_dict())
             _dict['payload_indexes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of infrastructure
+        if self.infrastructure:
+            _dict['infrastructure'] = self.infrastructure.to_dict()
         return _dict
 
     @classmethod
@@ -106,7 +111,8 @@ class CreateNamespaceRequest(BaseModel):
             "description": obj.get("description"),
             "feature_extractors": [BaseFeatureExtractorModelInput.from_dict(_item) for _item in obj["feature_extractors"]] if obj.get("feature_extractors") is not None else None,
             "payload_indexes": [PayloadIndexConfigInput.from_dict(_item) for _item in obj["payload_indexes"]] if obj.get("payload_indexes") is not None else None,
-            "auto_create_indexes": obj.get("auto_create_indexes") if obj.get("auto_create_indexes") is not None else False
+            "auto_create_indexes": obj.get("auto_create_indexes") if obj.get("auto_create_indexes") is not None else False,
+            "infrastructure": NamespaceInfrastructure.from_dict(obj["infrastructure"]) if obj.get("infrastructure") is not None else None
         })
         return _obj
 

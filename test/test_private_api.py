@@ -34,6 +34,13 @@ class TestPrivateApi(unittest.TestCase):
         """
         pass
 
+    def test_complete_tier_internal_batches_batch_id_num(self) -> None:
+        """Test case for complete_tier_internal_batches_batch_id_num
+
+        Mark tier complete and trigger next tier (KISS - Engine callback)
+        """
+        pass
+
     def test_configure_storage_cors_configurations(self) -> None:
         """Test case for configure_storage_cors_configurations
 
@@ -83,17 +90,17 @@ class TestPrivateApi(unittest.TestCase):
         """
         pass
 
-    def test_trigger_next_tier_internal_batches_batch_id_num(self) -> None:
-        """Test case for trigger_next_tier_internal_batches_batch_id_num
-
-        Trigger next tier processing (Internal - Engine callback)
-        """
-        pass
-
     def test_update_organization(self) -> None:
         """Test case for update_organization
 
         Update Organization Private
+        """
+        pass
+
+    def test_update_task_status_internal(self) -> None:
+        """Test case for update_task_status_internal
+
+        Update task status (Engine callback)
         """
         pass
 

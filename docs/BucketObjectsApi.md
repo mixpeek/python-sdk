@@ -113,12 +113,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_object_buckets**
-> ObjectResponse create_object_buckets(bucket_identifier, create_object_request, policy=policy, authorization=authorization, x_namespace=x_namespace)
+> ObjectResponse create_object_buckets(bucket_identifier, create_object_request, policy=policy, auto_process=auto_process, authorization=authorization, x_namespace=x_namespace)
 
 Create Object
 
 This endpoint creates a new object in the specified bucket.
-    The object must conform to the bucket's schema. It does not trigger processing.
+    The object must conform to the bucket's schema.
+
+    **Processing**: By default, objects are created in DRAFT status and require
+    batch submission for processing. Set `auto_process=true` to automatically
+    create a batch and submit it for processing (zero-touch workflow).
 
     If the bucket has a unique_key configured, the insertion policy determines behavior:
     - insert: Create only. Fail with 409 Conflict if unique key exists.
@@ -154,12 +158,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     create_object_request = mixpeek.CreateObjectRequest() # CreateObjectRequest | 
     policy = 'policy_example' # str | Insertion policy for unique key enforcement. Valid values: 'insert', 'update', 'upsert'. Only applies if bucket has unique_key configured. Overrides bucket's default_policy if provided. (optional)
+    auto_process = False # bool | Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows. (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Object
-        api_response = api_instance.create_object_buckets(bucket_identifier, create_object_request, policy=policy, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_object_buckets(bucket_identifier, create_object_request, policy=policy, auto_process=auto_process, authorization=authorization, x_namespace=x_namespace)
         print("The response of BucketObjectsApi->create_object_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -176,6 +181,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **create_object_request** | [**CreateObjectRequest**](CreateObjectRequest.md)|  | 
  **policy** | **str**| Insertion policy for unique key enforcement. Valid values: &#39;insert&#39;, &#39;update&#39;, &#39;upsert&#39;. Only applies if bucket has unique_key configured. Overrides bucket&#39;s default_policy if provided. | [optional] 
+ **auto_process** | **bool**| Automatically create a batch and submit it for processing. When true, the object will be immediately queued for processing without requiring separate batch creation and submission calls. Ideal for onboarding and single-object workflows. | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
@@ -207,12 +213,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_objects_batch_buckets**
-> CreateObjectsBatchResponse create_objects_batch_buckets(bucket_identifier, create_objects_batch_request, authorization=authorization, x_namespace=x_namespace)
+> CreateObjectsBatchResponse create_objects_batch_buckets(bucket_identifier, create_objects_batch_request, auto_process=auto_process, authorization=authorization, x_namespace=x_namespace)
 
 Create Objects in Batch
 
 This endpoint creates multiple new objects in the specified bucket as a batch.
-    Each object must conform to the bucket's schema. It does not trigger processing.
+    Each object must conform to the bucket's schema.
+
+    **Processing**: By default, objects are created in DRAFT status and require
+    batch submission for processing. Set `auto_process=true` to automatically
+    create a processing batch and submit it (zero-touch workflow).
 
     **Partial Success**: This endpoint uses partial success - valid objects are created
     even if some fail validation. Failed objects are returned separately with error details,
@@ -244,12 +254,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.BucketObjectsApi(api_client)
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     create_objects_batch_request = mixpeek.CreateObjectsBatchRequest() # CreateObjectsBatchRequest | 
+    auto_process = False # bool | Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows. (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Objects in Batch
-        api_response = api_instance.create_objects_batch_buckets(bucket_identifier, create_objects_batch_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_objects_batch_buckets(bucket_identifier, create_objects_batch_request, auto_process=auto_process, authorization=authorization, x_namespace=x_namespace)
         print("The response of BucketObjectsApi->create_objects_batch_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -265,6 +276,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **create_objects_batch_request** | [**CreateObjectsBatchRequest**](CreateObjectsBatchRequest.md)|  | 
+ **auto_process** | **bool**| Automatically create a batch and submit it for processing. When true, all successfully created objects will be immediately queued for processing without requiring separate batch calls. Ideal for onboarding and bulk upload workflows. | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 

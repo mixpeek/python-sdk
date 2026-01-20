@@ -30,7 +30,6 @@ class NotificationChannel(str, Enum):
     EMAIL = 'email'
     SLACK = 'slack'
     WEBHOOK = 'webhook'
-    SMS = 'sms'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

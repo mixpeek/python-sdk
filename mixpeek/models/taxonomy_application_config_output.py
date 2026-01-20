@@ -20,6 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
+from mixpeek.models.hierarchical_enrichment_style import HierarchicalEnrichmentStyle
 from mixpeek.models.logical_operator_output import LogicalOperatorOutput
 from mixpeek.models.taxonomy_execution_mode import TaxonomyExecutionMode
 from typing import Optional, Set
@@ -27,14 +29,17 @@ from typing_extensions import Self
 
 class TaxonomyApplicationConfigOutput(BaseModel):
     """
-    Configuration block that attaches a taxonomy to a collection.
+    Configuration block that attaches a taxonomy to a collection.  Supports execution phase ordering for unified post-processing with taxonomies, clusters, and alerts.
     """ # noqa: E501
     taxonomy_id: StrictStr = Field(description="ID of the `TaxonomyModel` to execute.")
     execution_mode: Optional[TaxonomyExecutionMode] = Field(default=None, description="Execution mode for taxonomy enrichment. Materializes results during ingestion.")
     target_collection_id: Optional[StrictStr] = Field(default=None, description="Optional collection to persist results into when `execution_mode` is 'materialize'. If omitted, the source collection is updated in-place.")
     scroll_filters: Optional[LogicalOperatorOutput] = Field(default=None, description="Additional filters applied when scrolling the source collection before enrichment.")
+    execution_phase: Optional[Annotated[int, Field(le=3, strict=True, ge=1)]] = Field(default=1, description="Which phase this taxonomy runs in. Default: 1 (TAXONOMY phase, runs first). Valid values: 1=TAXONOMY, 2=CLUSTER, 3=ALERT. Lower phases run earlier.")
+    priority: Optional[Annotated[int, Field(le=1000, strict=True, ge=0)]] = Field(default=0, description="Priority within the execution phase (higher = runs first)")
+    hierarchical_enrichment_style: Optional[HierarchicalEnrichmentStyle] = Field(default=None, description="For hierarchical taxonomies, controls how enrichment fields are structured. 'full_chain': Each tier writes to tier-prefixed fields (tier1_id, tier2_id, etc.). 'best_match': Only deepest match stored (category_id, category_name, path[]). 'combined' (default): Both full chain AND best match summary fields.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["taxonomy_id", "execution_mode", "target_collection_id", "scroll_filters"]
+    __properties: ClassVar[List[str]] = ["taxonomy_id", "execution_mode", "target_collection_id", "scroll_filters", "execution_phase", "priority", "hierarchical_enrichment_style"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -100,7 +105,10 @@ class TaxonomyApplicationConfigOutput(BaseModel):
             "taxonomy_id": obj.get("taxonomy_id"),
             "execution_mode": obj.get("execution_mode"),
             "target_collection_id": obj.get("target_collection_id"),
-            "scroll_filters": LogicalOperatorOutput.from_dict(obj["scroll_filters"]) if obj.get("scroll_filters") is not None else None
+            "scroll_filters": LogicalOperatorOutput.from_dict(obj["scroll_filters"]) if obj.get("scroll_filters") is not None else None,
+            "execution_phase": obj.get("execution_phase") if obj.get("execution_phase") is not None else 1,
+            "priority": obj.get("priority") if obj.get("priority") is not None else 0,
+            "hierarchical_enrichment_style": obj.get("hierarchical_enrichment_style")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

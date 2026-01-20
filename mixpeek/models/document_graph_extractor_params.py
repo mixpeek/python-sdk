@@ -29,7 +29,8 @@ class DocumentGraphExtractorParams(BaseModel):
     Parameters for the document graph extractor.  This extractor decomposes PDFs into spatial blocks with layout classification, confidence scoring, and optional VLM correction for degraded documents.  **When to Use**:     - Historical/archival document processing (FBI files, old records)     - Scanned documents with mixed quality     - Documents requiring spatial understanding (forms, tables, multi-column)     - When you need block-level granularity with bounding boxes     - When confidence scoring is needed for downstream filtering  **When NOT to Use**:     - Simple text-only documents -> Use text_extractor instead     - When page-level granularity is sufficient -> Use pdf_extractor instead     - Real-time processing requirements -> VLM correction adds latency
     """ # noqa: E501
     extractor_type: Optional[StrictStr] = Field(default='document_graph_extractor', description="Discriminator field for parameter type identification. Must be 'document_graph_extractor'.")
-    use_layout_detection: Optional[StrictBool] = Field(default=True, description="Enable ML-based layout detection to find ALL document elements (text, images, tables, figures). When enabled, uses PaddleOCR to detect and extract both text regions AND non-text elements (scanned images, figures, charts) as separate documents. **Recommended for**: Scanned documents, image-heavy PDFs, mixed content documents. **When disabled**: Falls back to text-only extraction (faster but misses images). Default: True (detects all elements including images).")
+    use_layout_detection: Optional[StrictBool] = Field(default=True, description="Enable ML-based layout detection to find ALL document elements (text, images, tables, figures). When enabled, uses the configured layout_detector to detect and extract both text regions AND non-text elements (scanned images, figures, charts) as separate documents. **Recommended for**: Scanned documents, image-heavy PDFs, mixed content documents. **When disabled**: Falls back to text-only extraction (faster but misses images). Default: True (detects all elements including images).")
+    layout_detector: Optional[StrictStr] = Field(default='pymupdf', description="Layout detection engine to use when use_layout_detection=True. 'pymupdf': Fast, rule-based detection using PyMuPDF heuristics (~15 pages/sec). 'docling': SOTA ML-based detection using IBM Docling with DiT model (~3-8 sec/doc). **Docling advantages**: Better semantic type detection (section_header vs paragraph), true table structure extraction (rows/cols), more accurate figure detection. **PyMuPDF advantages**: Much faster, lower memory usage, simpler dependencies. Default: 'pymupdf' for speed. Use 'docling' for accuracy-critical applications.")
     vertical_threshold: Optional[Union[Annotated[float, Field(le=100.0, strict=True, ge=1.0)], Annotated[int, Field(le=100, strict=True, ge=1)]]] = Field(default=15.0, description="Maximum vertical gap (in points) between lines to be grouped in same block. Increase for looser grouping, decrease for tighter blocks. Default 15pt works well for standard documents.")
     horizontal_threshold: Optional[Union[Annotated[float, Field(le=200.0, strict=True, ge=1.0)], Annotated[int, Field(le=200, strict=True, ge=1)]]] = Field(default=50.0, description="Maximum horizontal distance (in points) for overlap detection. Affects column detection and block merging. Increase for wider columns, decrease for narrow layouts.")
     min_text_length: Optional[Annotated[int, Field(le=500, strict=True, ge=1)]] = Field(default=20, description="Minimum text length (characters) to keep a block. Blocks with less text are filtered out. Helps remove noise and tiny fragments.")
@@ -39,12 +40,13 @@ class DocumentGraphExtractorParams(BaseModel):
     fast_mode: Optional[StrictBool] = Field(default=False, description="Skip VLM correction entirely for maximum throughput (~15 pages/sec). Overrides use_vlm_correction. Use when speed is more important than accuracy.")
     vlm_provider: Optional[StrictStr] = Field(default='google', description="LLM provider for VLM correction. Options: 'google' (Gemini), 'openai' (GPT-4V), 'anthropic' (Claude). Google recommended for best vision quality.")
     vlm_model: Optional[StrictStr] = Field(default='gemini-2.0-flash', description="Specific model for VLM correction. Examples: 'gemini-2.0-flash', 'gpt-4o', 'claude-3-5-sonnet'.")
+    llm_api_key: Optional[StrictStr] = Field(default=None, description="API key for VLM correction (BYOK - Bring Your Own Key). Supports: - Direct key: 'sk-proj-abc123...' - Secret reference: '{{SECRET.openai_api_key}}'  When using secret reference, the key is loaded from your organization's secrets vault at runtime. Store secrets via POST /v1/organizations/secrets.  If not provided, uses Mixpeek's default API keys.")
     run_text_embedding: Optional[StrictBool] = Field(default=True, description="Generate text embeddings for semantic search over block content. Uses E5-Large (1024-dim) for multilingual support.")
     render_dpi: Optional[Annotated[int, Field(le=300, strict=True, ge=72)]] = Field(default=150, description="DPI for page rendering (used for VLM correction). 72: Fast, lower quality. 150: Balanced (recommended). 300: High quality, slower.")
     generate_thumbnails: Optional[StrictBool] = Field(default=True, description="Generate thumbnail images for blocks. Useful for visual previews and UI display.")
     thumbnail_mode: Optional[StrictStr] = Field(default='both', description="Thumbnail generation mode. 'full_page': Low-res thumbnail of entire page. 'segment': Cropped thumbnail of just the block's bounding box. 'both': Generate both types (recommended for flexibility).")
     thumbnail_dpi: Optional[Annotated[int, Field(le=150, strict=True, ge=36)]] = Field(default=72, description="DPI for thumbnail generation. Lower DPI = smaller files. 72: Standard web quality. 36: Very small thumbnails.")
-    __properties: ClassVar[List[str]] = ["extractor_type", "use_layout_detection", "vertical_threshold", "horizontal_threshold", "min_text_length", "base_confidence", "min_confidence_for_vlm", "use_vlm_correction", "fast_mode", "vlm_provider", "vlm_model", "run_text_embedding", "render_dpi", "generate_thumbnails", "thumbnail_mode", "thumbnail_dpi"]
+    __properties: ClassVar[List[str]] = ["extractor_type", "use_layout_detection", "layout_detector", "vertical_threshold", "horizontal_threshold", "min_text_length", "base_confidence", "min_confidence_for_vlm", "use_vlm_correction", "fast_mode", "vlm_provider", "vlm_model", "llm_api_key", "run_text_embedding", "render_dpi", "generate_thumbnails", "thumbnail_mode", "thumbnail_dpi"]
 
     @field_validator('extractor_type')
     def extractor_type_validate_enum(cls, value):
@@ -54,6 +56,16 @@ class DocumentGraphExtractorParams(BaseModel):
 
         if value not in set(['document_graph_extractor']):
             raise ValueError("must be one of enum values ('document_graph_extractor')")
+        return value
+
+    @field_validator('layout_detector')
+    def layout_detector_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['pymupdf', 'docling']):
+            raise ValueError("must be one of enum values ('pymupdf', 'docling')")
         return value
 
     model_config = ConfigDict(
@@ -109,6 +121,7 @@ class DocumentGraphExtractorParams(BaseModel):
         _obj = cls.model_validate({
             "extractor_type": obj.get("extractor_type") if obj.get("extractor_type") is not None else 'document_graph_extractor',
             "use_layout_detection": obj.get("use_layout_detection") if obj.get("use_layout_detection") is not None else True,
+            "layout_detector": obj.get("layout_detector") if obj.get("layout_detector") is not None else 'pymupdf',
             "vertical_threshold": obj.get("vertical_threshold") if obj.get("vertical_threshold") is not None else 15.0,
             "horizontal_threshold": obj.get("horizontal_threshold") if obj.get("horizontal_threshold") is not None else 50.0,
             "min_text_length": obj.get("min_text_length") if obj.get("min_text_length") is not None else 20,
@@ -118,6 +131,7 @@ class DocumentGraphExtractorParams(BaseModel):
             "fast_mode": obj.get("fast_mode") if obj.get("fast_mode") is not None else False,
             "vlm_provider": obj.get("vlm_provider") if obj.get("vlm_provider") is not None else 'google',
             "vlm_model": obj.get("vlm_model") if obj.get("vlm_model") is not None else 'gemini-2.0-flash',
+            "llm_api_key": obj.get("llm_api_key"),
             "run_text_embedding": obj.get("run_text_embedding") if obj.get("run_text_embedding") is not None else True,
             "render_dpi": obj.get("render_dpi") if obj.get("render_dpi") is not None else 150,
             "generate_thumbnails": obj.get("generate_thumbnails") if obj.get("generate_thumbnails") is not None else True,

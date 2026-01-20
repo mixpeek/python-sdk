@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
+from mixpeek.models.alert_application_config_output import AlertApplicationConfigOutput
 from mixpeek.models.bucket_schema_output import BucketSchemaOutput
 from mixpeek.models.cluster_application_config import ClusterApplicationConfig
 from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_output import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigOutput
@@ -56,9 +57,10 @@ class CollectionResponse(BaseModel):
     schema_sync_enabled: Optional[StrictBool] = Field(default=True, description="Whether automatic schema discovery and sync is enabled for this collection. When True, schema is periodically updated by sampling documents. When False, schema remains fixed at creation time.")
     taxonomy_applications: Optional[List[TaxonomyApplicationConfigOutput]] = Field(default=None, description="NOT REQUIRED. List of taxonomies to apply to documents in this collection. Each entry specifies: taxonomy_id, optional target_collection_id, optional filters. Enrichments are materialized (persisted to documents) during ingestion. Empty/null if no taxonomies attached. Use for: Categorization, hierarchical classification.")
     cluster_applications: Optional[List[ClusterApplicationConfig]] = Field(default=None, description="NOT REQUIRED. List of clusters to automatically execute when batch processing completes. Each entry specifies: cluster_id, auto_execute_on_batch, min_document_threshold, cooldown_seconds. Clusters enrich source documents with cluster assignments (cluster_id, cluster_label, etc.). Empty/null if no clusters attached. Use for: Segmentation, grouping, pattern discovery.")
+    alert_applications: Optional[List[AlertApplicationConfigOutput]] = Field(default=None, description="NOT REQUIRED. List of alerts to automatically execute when documents are ingested. Each entry specifies: alert_id, execution_mode, input_mappings, execution_phase, priority. Alerts run retrievers on ingested documents and send notifications when matches are found. Empty/null if no alerts attached. Use for: Content monitoring, safety detection, compliance alerts.")
     taxonomy_count: Optional[StrictInt] = Field(default=None, description="Number of taxonomies connected to this collection")
     retriever_count: Optional[StrictInt] = Field(default=None, description="Number of retrievers connected to this collection")
-    __properties: ClassVar[List[str]] = ["collection_id", "collection_name", "description", "input_schema", "output_schema", "feature_extractor", "source", "source_bucket_schemas", "source_lineage", "vector_indexes", "payload_indexes", "enabled", "metadata", "created_at", "updated_at", "document_count", "schema_version", "last_schema_sync", "schema_sync_enabled", "taxonomy_applications", "cluster_applications", "taxonomy_count", "retriever_count"]
+    __properties: ClassVar[List[str]] = ["collection_id", "collection_name", "description", "input_schema", "output_schema", "feature_extractor", "source", "source_bucket_schemas", "source_lineage", "vector_indexes", "payload_indexes", "enabled", "metadata", "created_at", "updated_at", "document_count", "schema_version", "last_schema_sync", "schema_sync_enabled", "taxonomy_applications", "cluster_applications", "alert_applications", "taxonomy_count", "retriever_count"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -139,6 +141,13 @@ class CollectionResponse(BaseModel):
                 if _item_cluster_applications:
                     _items.append(_item_cluster_applications.to_dict())
             _dict['cluster_applications'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in alert_applications (list)
+        _items = []
+        if self.alert_applications:
+            for _item_alert_applications in self.alert_applications:
+                if _item_alert_applications:
+                    _items.append(_item_alert_applications.to_dict())
+            _dict['alert_applications'] = _items
         return _dict
 
     @classmethod
@@ -177,6 +186,7 @@ class CollectionResponse(BaseModel):
             "schema_sync_enabled": obj.get("schema_sync_enabled") if obj.get("schema_sync_enabled") is not None else True,
             "taxonomy_applications": [TaxonomyApplicationConfigOutput.from_dict(_item) for _item in obj["taxonomy_applications"]] if obj.get("taxonomy_applications") is not None else None,
             "cluster_applications": [ClusterApplicationConfig.from_dict(_item) for _item in obj["cluster_applications"]] if obj.get("cluster_applications") is not None else None,
+            "alert_applications": [AlertApplicationConfigOutput.from_dict(_item) for _item in obj["alert_applications"]] if obj.get("alert_applications") is not None else None,
             "taxonomy_count": obj.get("taxonomy_count"),
             "retriever_count": obj.get("retriever_count")
         })

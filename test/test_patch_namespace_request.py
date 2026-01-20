@@ -45,7 +45,25 @@ class TestPatchNamespaceRequest(unittest.TestCase):
                         field_schema = null, 
                         is_protected = True, )
                     ],
-                auto_create_indexes = True
+                auto_create_indexes = True,
+                infrastructure = mixpeek.models.namespace_infrastructure.NamespaceInfrastructure(
+                    ray_cluster_id = 'ray_HqXzyCBw3_uufVPIPFhB9JcGRYnua_cdyyvLY8IzLpul9', 
+                    ray_head_node_url = '', 
+                    ray_dashboard_url = '', 
+                    qdrant_url = '', 
+                    qdrant_api_key = '', 
+                    qdrant_collection = '012', 
+                    compute_tier = 'shared', 
+                    max_concurrent_jobs = 1.0, 
+                    autoscaling_enabled = True, 
+                    min_workers = 0.0, 
+                    max_workers = 1.0, 
+                    gpu_type = '', 
+                    gpus_per_worker = 0.0, 
+                    s3_plugin_bucket = 'mixpeek-plugins', 
+                    s3_plugin_prefix = '', 
+                    max_custom_plugins = 0.0, 
+                    max_custom_models = 0.0, )
             )
         else:
             return PatchNamespaceRequest(

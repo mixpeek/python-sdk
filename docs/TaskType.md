@@ -40,6 +40,8 @@ Types of asynchronous tasks that can be performed in the system.  Task types ide
 
 * `API_RETRIEVERS_PUBLISH` (value: `'api_retrievers_publish'`)
 
+* `API_COLLECTIONS_EXPORT` (value: `'api_collections_export'`)
+
 * `ENGINE_FEATURE_EXTRACTOR_RUN` (value: `'engine_feature_extractor_run'`)
 
 * `ENGINE_INFERENCE_RUN` (value: `'engine_inference_run'`)
@@ -55,6 +57,10 @@ Types of asynchronous tasks that can be performed in the system.  Task types ide
 * `AUDIO_SEGMENT` (value: `'audio_segment'`)
 
 * `MATERIALIZE` (value: `'materialize'`)
+
+* `PLUGIN_CUSTOM` (value: `'plugin_custom'`)
+
+* `MODEL_CUSTOM` (value: `'model_custom'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

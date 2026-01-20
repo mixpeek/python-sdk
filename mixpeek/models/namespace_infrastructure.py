@@ -42,7 +42,11 @@ class NamespaceInfrastructure(BaseModel):
     max_workers: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=10, description="Upper bound for Ray workers when autoscaling is enabled.")
     gpu_type: Optional[StrictStr] = Field(default=None, description="GPU type for dedicated GPU clusters (e.g. A100, T4).")
     gpus_per_worker: Optional[Annotated[int, Field(le=8, strict=True, ge=0)]] = Field(default=1, description="Number of GPUs allocated to each Ray worker when using GPUs.")
-    __properties: ClassVar[List[str]] = ["ray_cluster_id", "ray_head_node_url", "ray_dashboard_url", "qdrant_url", "qdrant_api_key", "qdrant_collection", "compute_tier", "max_concurrent_jobs", "autoscaling_enabled", "min_workers", "max_workers", "gpu_type", "gpus_per_worker"]
+    s3_plugin_bucket: Optional[StrictStr] = Field(default='mixpeek-plugins', description="S3 bucket for storing custom plugins and model weights.")
+    s3_plugin_prefix: Optional[StrictStr] = Field(default=None, description="S3 prefix for namespace-scoped plugin storage. Format: {namespace_id}/ when custom plugins are enabled.")
+    max_custom_plugins: Optional[Annotated[int, Field(le=100, strict=True, ge=0)]] = Field(default=0, description="Maximum number of custom plugins allowed for this namespace. 0 = custom plugins disabled (shared tier). Set to >0 for dedicated tiers to enable custom plugins.")
+    max_custom_models: Optional[Annotated[int, Field(le=50, strict=True, ge=0)]] = Field(default=0, description="Maximum number of custom model weights allowed for this namespace. 0 = custom models disabled (shared tier). Set to >0 for dedicated tiers to enable custom model uploads.")
+    __properties: ClassVar[List[str]] = ["ray_cluster_id", "ray_head_node_url", "ray_dashboard_url", "qdrant_url", "qdrant_api_key", "qdrant_collection", "compute_tier", "max_concurrent_jobs", "autoscaling_enabled", "min_workers", "max_workers", "gpu_type", "gpus_per_worker", "s3_plugin_bucket", "s3_plugin_prefix", "max_custom_plugins", "max_custom_models"]
 
     @field_validator('ray_cluster_id')
     def ray_cluster_id_validate_regular_expression(cls, value):
@@ -117,7 +121,11 @@ class NamespaceInfrastructure(BaseModel):
             "min_workers": obj.get("min_workers") if obj.get("min_workers") is not None else 1,
             "max_workers": obj.get("max_workers") if obj.get("max_workers") is not None else 10,
             "gpu_type": obj.get("gpu_type"),
-            "gpus_per_worker": obj.get("gpus_per_worker") if obj.get("gpus_per_worker") is not None else 1
+            "gpus_per_worker": obj.get("gpus_per_worker") if obj.get("gpus_per_worker") is not None else 1,
+            "s3_plugin_bucket": obj.get("s3_plugin_bucket") if obj.get("s3_plugin_bucket") is not None else 'mixpeek-plugins',
+            "s3_plugin_prefix": obj.get("s3_plugin_prefix"),
+            "max_custom_plugins": obj.get("max_custom_plugins") if obj.get("max_custom_plugins") is not None else 0,
+            "max_custom_models": obj.get("max_custom_models") if obj.get("max_custom_models") is not None else 0
         })
         return _obj
 

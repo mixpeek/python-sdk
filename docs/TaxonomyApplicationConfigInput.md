@@ -1,6 +1,6 @@
 # TaxonomyApplicationConfigInput
 
-Configuration block that attaches a taxonomy to a collection.
+Configuration block that attaches a taxonomy to a collection.  Supports execution phase ordering for unified post-processing with taxonomies, clusters, and alerts.
 
 ## Properties
 
@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **execution_mode** | [**TaxonomyExecutionMode**](TaxonomyExecutionMode.md) | Execution mode for taxonomy enrichment. Materializes results during ingestion. | [optional] 
 **target_collection_id** | **str** | Optional collection to persist results into when &#x60;execution_mode&#x60; is &#39;materialize&#39;. If omitted, the source collection is updated in-place. | [optional] 
 **scroll_filters** | [**LogicalOperatorInput**](LogicalOperatorInput.md) | Additional filters applied when scrolling the source collection before enrichment. | [optional] 
+**execution_phase** | **int** | Which phase this taxonomy runs in. Default: 1 (TAXONOMY phase, runs first). Valid values: 1&#x3D;TAXONOMY, 2&#x3D;CLUSTER, 3&#x3D;ALERT. Lower phases run earlier. | [optional] [default to 1]
+**priority** | **int** | Priority within the execution phase (higher &#x3D; runs first) | [optional] [default to 0]
+**hierarchical_enrichment_style** | [**HierarchicalEnrichmentStyle**](HierarchicalEnrichmentStyle.md) | For hierarchical taxonomies, controls how enrichment fields are structured. &#39;full_chain&#39;: Each tier writes to tier-prefixed fields (tier1_id, tier2_id, etc.). &#39;best_match&#39;: Only deepest match stored (category_id, category_name, path[]). &#39;combined&#39; (default): Both full chain AND best match summary fields. | [optional] 
 
 ## Example
 

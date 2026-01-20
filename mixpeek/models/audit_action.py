@@ -66,6 +66,11 @@ class AuditAction(str, Enum):
     TAXONOMY_UPDATED = 'taxonomy_updated'
     TAXONOMY_DELETED = 'taxonomy_deleted'
     TAXONOMY_ACCESSED = 'taxonomy_accessed'
+    ALERT_CREATED = 'alert_created'
+    ALERT_UPDATED = 'alert_updated'
+    ALERT_DELETED = 'alert_deleted'
+    ALERT_ACCESSED = 'alert_accessed'
+    ALERT_TRIGGERED = 'alert_triggered'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

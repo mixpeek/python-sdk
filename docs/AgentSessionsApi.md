@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**list_sessions_agents**](AgentSessionsApi.md#list_sessions_agents) | **POST** /v1/agents/sessions/list | List Sessions
 [**list_tools_agents_sessions**](AgentSessionsApi.md#list_tools_agents_sessions) | **GET** /v1/agents/sessions/tools | List Tools
 [**patch_session_agents**](AgentSessionsApi.md#patch_session_agents) | **PATCH** /v1/agents/sessions/{session_id} | Patch Session
+[**respond_to_confirmation_agents_sessions**](AgentSessionsApi.md#respond_to_confirmation_agents_sessions) | **POST** /v1/agents/sessions/{session_id}/confirmations/{confirmation_id} | Respond To Confirmation
 [**send_message_agents_sessions**](AgentSessionsApi.md#send_message_agents_sessions) | **POST** /v1/agents/sessions/{session_id}/messages | Send Message
 [**submit_feedback_agents_sessions**](AgentSessionsApi.md#submit_feedback_agents_sessions) | **POST** /v1/agents/sessions/{session_id}/feedback | Submit Feedback
 [**terminate_session_agents**](AgentSessionsApi.md#terminate_session_agents) | **DELETE** /v1/agents/sessions/{session_id} | Terminate Session
@@ -540,16 +541,17 @@ List Tools
 List all available agent tools.
 
 Use this endpoint to discover available tools before creating a session.
-Pass tool names to `available_tools` in AgentConfig when creating a session.
 
 Tool Categories:
-- search: Tools for searching data (smart_search, execute_retriever, execute_adhoc_retriever)
+- search: Tools for searching data (execute_retriever)
 - read: Tools for reading resources (list_*, get_*)
-- create: Tools for creating resources (create_*)
-- analyze: Tools for analyzing content (analyze_sample_with_pipeline, transcribe_with_pipeline)
-- upload: Tools for file uploads (create_upload, confirm_upload, get_upload_status)
-- memory: Tools for agent memory (search_feedback)
-- recommendations: Tools for getting recommendations
+- create: Tools for creating resources (create_*) - requires confirmation
+- update: Tools for updating resources (update_*) - requires confirmation
+- delete: Tools for deleting resources (delete_*) - requires confirmation
+- upload: Tools for file uploads (upload_object)
+
+Note: Write operations (create, update, delete) require user confirmation
+via the /confirmations endpoint before execution.
 
 Args:
     request: FastAPI request with tenant context
@@ -726,6 +728,143 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PatchSessionResponse**](PatchSessionResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **respond_to_confirmation_agents_sessions**
+> object respond_to_confirmation_agents_sessions(session_id, confirmation_id, confirmation_request, authorization=authorization, x_namespace=x_namespace)
+
+Respond To Confirmation
+
+Respond to a pending confirmation for a write operation.
+
+When the agent requests a write operation (create, update, delete),
+the stream pauses and emits a `confirmation_required` event. The user
+must call this endpoint to approve or deny the action.
+
+After responding, this endpoint returns a new SSE stream that continues
+the agent's execution from where it paused.
+
+## Confirmation Workflow
+
+1. User sends message via POST /sessions/{id}/messages
+2. Agent proposes a write operation
+3. Stream emits `confirmation_required` event with `confirmation_id`
+4. User calls this endpoint with `approved: true/false`
+5. This endpoint returns SSE stream continuing the agent's work
+6. If approved, agent executes the tool and continues
+7. If denied, agent acknowledges and continues without executing
+
+## Confirmation Expiration
+
+Confirmations expire after 5 minutes. Attempting to respond to an
+expired confirmation returns a 400 error.
+
+Args:
+    request: FastAPI request with tenant context
+    session_id: Session identifier
+    confirmation_id: Confirmation identifier from `confirmation_required` event
+    payload: Approval/denial decision
+
+Returns:
+    StreamingResponse with SSE events (continuation of agent execution)
+
+Raises:
+    NotFoundError: If session or confirmation not found
+    ValidationError: If confirmation already processed or expired
+
+Example:
+    ```bash
+    # Approve a pending action
+    curl -N -X POST http://localhost:8000/v1/agents/sessions/ses_abc/confirmations/conf_xyz \
+      -H "Authorization: Bearer {api_key}" \
+      -H "X-Namespace: {namespace_id}" \
+      -H "Content-Type: application/json" \
+      -d '{"approved": true}'
+
+    # SSE Output (continuation):
+    event: tool_result
+    data: {"tool_name": "delete_collection", "success": true, "result": {...}}
+
+    event: token
+    data: {"content": "I've deleted the collection as requested."}
+
+    event: done
+    data: {}
+    ```
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.confirmation_request import ConfirmationRequest
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.AgentSessionsApi(api_client)
+    session_id = 'session_id_example' # str | Session ID
+    confirmation_id = 'confirmation_id_example' # str | Confirmation ID
+    confirmation_request = mixpeek.ConfirmationRequest() # ConfirmationRequest | 
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
+
+    try:
+        # Respond To Confirmation
+        api_response = api_instance.respond_to_confirmation_agents_sessions(session_id, confirmation_id, confirmation_request, authorization=authorization, x_namespace=x_namespace)
+        print("The response of AgentSessionsApi->respond_to_confirmation_agents_sessions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling AgentSessionsApi->respond_to_confirmation_agents_sessions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **session_id** | **str**| Session ID | 
+ **confirmation_id** | **str**| Confirmation ID | 
+ **confirmation_request** | [**ConfirmationRequest**](ConfirmationRequest.md)|  | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
+
+### Return type
+
+**object**
 
 ### Authorization
 

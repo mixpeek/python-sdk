@@ -19,6 +19,10 @@ Name | Type | Description | Notes
 **max_workers** | **int** | Upper bound for Ray workers when autoscaling is enabled. | [optional] [default to 10]
 **gpu_type** | **str** | GPU type for dedicated GPU clusters (e.g. A100, T4). | [optional] 
 **gpus_per_worker** | **int** | Number of GPUs allocated to each Ray worker when using GPUs. | [optional] [default to 1]
+**s3_plugin_bucket** | **str** | S3 bucket for storing custom plugins and model weights. | [optional] [default to 'mixpeek-plugins']
+**s3_plugin_prefix** | **str** | S3 prefix for namespace-scoped plugin storage. Format: {namespace_id}/ when custom plugins are enabled. | [optional] 
+**max_custom_plugins** | **int** | Maximum number of custom plugins allowed for this namespace. 0 &#x3D; custom plugins disabled (shared tier). Set to &gt;0 for dedicated tiers to enable custom plugins. | [optional] [default to 0]
+**max_custom_models** | **int** | Maximum number of custom model weights allowed for this namespace. 0 &#x3D; custom models disabled (shared tier). Set to &gt;0 for dedicated tiers to enable custom model uploads. | [optional] [default to 0]
 
 ## Example
 

@@ -5,13 +5,16 @@ All URIs are relative to *https://api.mixpeek.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_notification**](NotificationsApi.md#delete_notification) | **DELETE** /v1/notifications/{notification_id} | Delete Notification
+[**get_funnel_state_notifications**](NotificationsApi.md#get_funnel_state_notifications) | **GET** /v1/notifications/funnel/state | Get Funnel State
 [**get_notification**](NotificationsApi.md#get_notification) | **GET** /v1/notifications/{notification_id} | Get Notification
 [**get_preferences_notifications**](NotificationsApi.md#get_preferences_notifications) | **GET** /v1/notifications/preferences | Get Preferences
+[**get_reminder_preferences_notifications**](NotificationsApi.md#get_reminder_preferences_notifications) | **GET** /v1/notifications/preferences/reminders | Get Reminder Preferences
 [**get_unread_count_notifications**](NotificationsApi.md#get_unread_count_notifications) | **GET** /v1/notifications/unread/count | Get Unread Count
 [**list_notifications**](NotificationsApi.md#list_notifications) | **POST** /v1/notifications/list | List Notifications
 [**mark_all_as_read_notifications**](NotificationsApi.md#mark_all_as_read_notifications) | **POST** /v1/notifications/read/all | Mark All As Read
 [**mark_as_read_notifications**](NotificationsApi.md#mark_as_read_notifications) | **POST** /v1/notifications/{notification_id}/read | Mark As Read
 [**update_preferences_notifications**](NotificationsApi.md#update_preferences_notifications) | **PUT** /v1/notifications/preferences | Update Preferences
+[**update_reminder_preferences_notifications**](NotificationsApi.md#update_reminder_preferences_notifications) | **PUT** /v1/notifications/preferences/reminders | Update Reminder Preferences
 
 
 # **delete_notification**
@@ -78,6 +81,85 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_funnel_state_notifications**
+> Dict[str, object] get_funnel_state_notifications(authorization=authorization)
+
+Get Funnel State
+
+Get the current funnel state for the organization.
+
+Returns the user's position in the onboarding funnel, including:
+- Current stage
+- When each stage was reached
+- Nudges that have been sent
+- Last activity timestamp
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.NotificationsApi(api_client)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Get Funnel State
+        api_response = api_instance.get_funnel_state_notifications(authorization=authorization)
+        print("The response of NotificationsApi->get_funnel_state_notifications:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NotificationsApi->get_funnel_state_notifications: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+**Dict[str, object]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
 **400** | Bad Request |  -  |
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
@@ -212,6 +294,83 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Dict[str, object]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_reminder_preferences_notifications**
+> ReminderPreferencesResponse get_reminder_preferences_notifications(authorization=authorization)
+
+Get Reminder Preferences
+
+Get reminder/nudge email preferences for the organization.
+
+These preferences control funnel-based onboarding nudges,
+re-engagement emails, and feature tips.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.reminder_preferences_response import ReminderPreferencesResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.NotificationsApi(api_client)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Get Reminder Preferences
+        api_response = api_instance.get_reminder_preferences_notifications(authorization=authorization)
+        print("The response of NotificationsApi->get_reminder_preferences_notifications:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NotificationsApi->get_reminder_preferences_notifications: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+[**ReminderPreferencesResponse**](ReminderPreferencesResponse.md)
 
 ### Authorization
 
@@ -600,6 +759,90 @@ Name | Type | Description  | Notes
 ### Return type
 
 **Dict[str, object]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_reminder_preferences_notifications**
+> ReminderPreferencesResponse update_reminder_preferences_notifications(update_reminder_preferences_request, authorization=authorization)
+
+Update Reminder Preferences
+
+Update reminder/nudge email preferences for the organization.
+
+You can update individual preferences without affecting others:
+- enabled: Master toggle for all reminder emails
+- onboarding_nudges: Funnel progression nudges
+- engagement_reminders: Re-engagement emails for inactivity
+- feature_tips: Helpful tips and inspiration
+- quiet_hours_start/end: Hours (0-23 UTC) when no emails are sent
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.reminder_preferences_response import ReminderPreferencesResponse
+from mixpeek.models.update_reminder_preferences_request import UpdateReminderPreferencesRequest
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.NotificationsApi(api_client)
+    update_reminder_preferences_request = mixpeek.UpdateReminderPreferencesRequest() # UpdateReminderPreferencesRequest | 
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Update Reminder Preferences
+        api_response = api_instance.update_reminder_preferences_notifications(update_reminder_preferences_request, authorization=authorization)
+        print("The response of NotificationsApi->update_reminder_preferences_notifications:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling NotificationsApi->update_reminder_preferences_notifications: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **update_reminder_preferences_request** | [**UpdateReminderPreferencesRequest**](UpdateReminderPreferencesRequest.md)|  | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+[**ReminderPreferencesResponse**](ReminderPreferencesResponse.md)
 
 ### Authorization
 

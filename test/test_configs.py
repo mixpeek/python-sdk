@@ -59,11 +59,7 @@ class TestConfigs(unittest.TestCase):
                     'key' : ''
                     },
                 payload_template = { },
-                timeout = 1.337,
-                phone_numbers = [
-                    ''
-                    ],
-                message_template = ''
+                timeout = 1.337
             )
         else:
             return Configs(
@@ -72,9 +68,6 @@ class TestConfigs(unittest.TestCase):
                     ],
                 webhook_url = '',
                 url = '',
-                phone_numbers = [
-                    ''
-                    ],
         )
         """
 

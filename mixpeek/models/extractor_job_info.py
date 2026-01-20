@@ -41,7 +41,8 @@ class ExtractorJobInfo(BaseModel):
     duration_ms: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Processing duration in milliseconds")
     documents_written: Optional[StrictInt] = Field(default=None, description="Number of documents written by this extractor job")
     errors: Optional[List[BatchErrorDetail]] = Field(default=None, description="Detailed errors from this extractor job")
-    __properties: ClassVar[List[str]] = ["extractor_type", "collection_ids", "ray_job_id", "celery_task_id", "status", "started_at", "completed_at", "duration_ms", "documents_written", "errors"]
+    error: Optional[StrictStr] = Field(default=None, description="OPTIONAL. Simple error message string for quick debugging. Set when the Ray job fails with error details from JobStatusMonitor. For detailed error information, see errors array.")
+    __properties: ClassVar[List[str]] = ["extractor_type", "collection_ids", "ray_job_id", "celery_task_id", "status", "started_at", "completed_at", "duration_ms", "documents_written", "errors", "error"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -110,7 +111,8 @@ class ExtractorJobInfo(BaseModel):
             "completed_at": obj.get("completed_at"),
             "duration_ms": obj.get("duration_ms"),
             "documents_written": obj.get("documents_written"),
-            "errors": [BatchErrorDetail.from_dict(_item) for _item in obj["errors"]] if obj.get("errors") is not None else None
+            "errors": [BatchErrorDetail.from_dict(_item) for _item in obj["errors"]] if obj.get("errors") is not None else None,
+            "error": obj.get("error")
         })
         return _obj
 

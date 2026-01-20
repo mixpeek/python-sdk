@@ -48,7 +48,11 @@ class TestNamespaceInfrastructure(unittest.TestCase):
                 min_workers = 0.0,
                 max_workers = 1.0,
                 gpu_type = '',
-                gpus_per_worker = 0.0
+                gpus_per_worker = 0.0,
+                s3_plugin_bucket = 'mixpeek-plugins',
+                s3_plugin_prefix = '',
+                max_custom_plugins = 0.0,
+                max_custom_models = 0.0
             )
         else:
             return NamespaceInfrastructure(

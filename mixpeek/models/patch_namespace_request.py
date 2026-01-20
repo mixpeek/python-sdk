@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.namespace_infrastructure import NamespaceInfrastructure
 from mixpeek.models.payload_index_config_input import PayloadIndexConfigInput
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +33,8 @@ class PatchNamespaceRequest(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="Updated description for the namespace")
     payload_indexes: Optional[List[PayloadIndexConfigInput]] = Field(default=None, description="Updated list of custom payload indexes for this namespace.")
     auto_create_indexes: Optional[StrictBool] = Field(default=None, description="Enable automatic creation of Qdrant payload indexes based on filter usage patterns. When enabled, the system tracks which fields are most frequently filtered (>100 queries/24h) and automatically creates indexes to improve query performance. Background task runs every 6 hours. Expected performance improvement: 50-90% latency reduction for filtered queries. Default: False.")
-    __properties: ClassVar[List[str]] = ["namespace_name", "description", "payload_indexes", "auto_create_indexes"]
+    infrastructure: Optional[NamespaceInfrastructure] = Field(default=None, description="Infrastructure configuration for this namespace. Set compute_tier to 'dedicated_cpu' or 'dedicated_gpu' and max_custom_models > 0 to enable custom model uploads. Requires Enterprise account.")
+    __properties: ClassVar[List[str]] = ["namespace_name", "description", "payload_indexes", "auto_create_indexes", "infrastructure"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +82,9 @@ class PatchNamespaceRequest(BaseModel):
                 if _item_payload_indexes:
                     _items.append(_item_payload_indexes.to_dict())
             _dict['payload_indexes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of infrastructure
+        if self.infrastructure:
+            _dict['infrastructure'] = self.infrastructure.to_dict()
         return _dict
 
     @classmethod
@@ -95,7 +100,8 @@ class PatchNamespaceRequest(BaseModel):
             "namespace_name": obj.get("namespace_name"),
             "description": obj.get("description"),
             "payload_indexes": [PayloadIndexConfigInput.from_dict(_item) for _item in obj["payload_indexes"]] if obj.get("payload_indexes") is not None else None,
-            "auto_create_indexes": obj.get("auto_create_indexes")
+            "auto_create_indexes": obj.get("auto_create_indexes"),
+            "infrastructure": NamespaceInfrastructure.from_dict(obj["infrastructure"]) if obj.get("infrastructure") is not None else None
         })
         return _obj
 

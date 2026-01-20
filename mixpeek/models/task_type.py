@@ -45,6 +45,7 @@ class TaskType(str, Enum):
     API_EVALUATIONS_RUN = 'api_evaluations_run'
     API_EVALUATIONS_DATASET_CREATE = 'api_evaluations_dataset_create'
     API_RETRIEVERS_PUBLISH = 'api_retrievers_publish'
+    API_COLLECTIONS_EXPORT = 'api_collections_export'
     ENGINE_FEATURE_EXTRACTOR_RUN = 'engine_feature_extractor_run'
     ENGINE_INFERENCE_RUN = 'engine_inference_run'
     ENGINE_OBJECT_PROCESSING = 'engine_object_processing'
@@ -53,6 +54,8 @@ class TaskType(str, Enum):
     VIDEO_SEGMENT = 'video_segment'
     AUDIO_SEGMENT = 'audio_segment'
     MATERIALIZE = 'materialize'
+    PLUGIN_CUSTOM = 'plugin_custom'
+    MODEL_CUSTOM = 'model_custom'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

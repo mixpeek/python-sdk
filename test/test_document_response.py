@@ -38,6 +38,20 @@ class TestDocumentResponse(unittest.TestCase):
             return DocumentResponse(
                 document_id = '',
                 collection_id = '',
+                document_blobs = [
+                    mixpeek.models.blob_url_ref.BlobURLRef(
+                        field = '0', 
+                        role = 'source', 
+                        type = 'other', 
+                        url = '0', 
+                        filename = '', 
+                        size_bytes = 0.0, 
+                        content_type = '', 
+                        checksum = '', 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        source_blob_id = '', 
+                        presigned_url = '0', )
+                    ],
                 internal = {
                     'key' : null
                     }

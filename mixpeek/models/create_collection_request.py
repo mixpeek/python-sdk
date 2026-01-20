@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from mixpeek.models.alert_application_config_input import AlertApplicationConfigInput
 from mixpeek.models.bucket_schema_input import BucketSchemaInput
 from mixpeek.models.cluster_application_config import ClusterApplicationConfig
 from mixpeek.models.shared_collection_features_extractors_models_feature_extractor_config_input import SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput
@@ -41,7 +42,8 @@ class CreateCollectionRequest(BaseModel):
     metadata: Optional[Dict[str, Any]] = Field(default=None, description="Additional metadata for the collection")
     taxonomy_applications: Optional[List[TaxonomyApplicationConfigInput]] = Field(default=None, description="Optional taxonomy applications to automatically enrich documents in this collection. Each taxonomy will classify/enrich documents based on configured retriever matches.")
     cluster_applications: Optional[List[ClusterApplicationConfig]] = Field(default=None, description="Optional cluster applications to automatically execute when batch processing completes. Each cluster enriches documents with cluster assignments (cluster_id, cluster_label, etc.).")
-    __properties: ClassVar[List[str]] = ["collection_name", "description", "source", "input_schema", "feature_extractor", "enabled", "metadata", "taxonomy_applications", "cluster_applications"]
+    alert_applications: Optional[List[AlertApplicationConfigInput]] = Field(default=None, description="Optional alert applications to automatically execute when documents are ingested. Each alert runs a retriever against new documents and sends notifications if matches are found. Supports both ON_INGEST (triggered per batch) and SCHEDULED (periodic) execution modes.")
+    __properties: ClassVar[List[str]] = ["collection_name", "description", "source", "input_schema", "feature_extractor", "enabled", "metadata", "taxonomy_applications", "cluster_applications", "alert_applications"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -105,6 +107,13 @@ class CreateCollectionRequest(BaseModel):
                 if _item_cluster_applications:
                     _items.append(_item_cluster_applications.to_dict())
             _dict['cluster_applications'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in alert_applications (list)
+        _items = []
+        if self.alert_applications:
+            for _item_alert_applications in self.alert_applications:
+                if _item_alert_applications:
+                    _items.append(_item_alert_applications.to_dict())
+            _dict['alert_applications'] = _items
         return _dict
 
     @classmethod
@@ -125,7 +134,8 @@ class CreateCollectionRequest(BaseModel):
             "enabled": obj.get("enabled") if obj.get("enabled") is not None else True,
             "metadata": obj.get("metadata"),
             "taxonomy_applications": [TaxonomyApplicationConfigInput.from_dict(_item) for _item in obj["taxonomy_applications"]] if obj.get("taxonomy_applications") is not None else None,
-            "cluster_applications": [ClusterApplicationConfig.from_dict(_item) for _item in obj["cluster_applications"]] if obj.get("cluster_applications") is not None else None
+            "cluster_applications": [ClusterApplicationConfig.from_dict(_item) for _item in obj["cluster_applications"]] if obj.get("cluster_applications") is not None else None,
+            "alert_applications": [AlertApplicationConfigInput.from_dict(_item) for _item in obj["alert_applications"]] if obj.get("alert_applications") is not None else None
         })
         return _obj
 

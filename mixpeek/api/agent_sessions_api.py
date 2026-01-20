@@ -20,6 +20,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
 from typing import Any, Optional
 from typing_extensions import Annotated
+from mixpeek.models.confirmation_request import ConfirmationRequest
 from mixpeek.models.create_session_request import CreateSessionRequest
 from mixpeek.models.create_session_response import CreateSessionResponse
 from mixpeek.models.detect_intent_request import DetectIntentRequest
@@ -1756,7 +1757,7 @@ class AgentSessionsApi:
     ) -> ListToolsResponse:
         """List Tools
 
-        List all available agent tools.  Use this endpoint to discover available tools before creating a session. Pass tool names to `available_tools` in AgentConfig when creating a session.  Tool Categories: - search: Tools for searching data (smart_search, execute_retriever, execute_adhoc_retriever) - read: Tools for reading resources (list_*, get_*) - create: Tools for creating resources (create_*) - analyze: Tools for analyzing content (analyze_sample_with_pipeline, transcribe_with_pipeline) - upload: Tools for file uploads (create_upload, confirm_upload, get_upload_status) - memory: Tools for agent memory (search_feedback) - recommendations: Tools for getting recommendations  Args:     request: FastAPI request with tenant context     category: Optional filter by tool category  Returns:     ListToolsResponse with available tools  Example:     ```bash     # List all tools     curl -X GET http://localhost:8000/v1/agents/tools \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"      # List only search tools     curl -X GET \"http://localhost:8000/v1/agents/tools?category=search\" \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"     ```
+        List all available agent tools.  Use this endpoint to discover available tools before creating a session.  Tool Categories: - search: Tools for searching data (execute_retriever) - read: Tools for reading resources (list_*, get_*) - create: Tools for creating resources (create_*) - requires confirmation - update: Tools for updating resources (update_*) - requires confirmation - delete: Tools for deleting resources (delete_*) - requires confirmation - upload: Tools for file uploads (upload_object)  Note: Write operations (create, update, delete) require user confirmation via the /confirmations endpoint before execution.  Args:     request: FastAPI request with tenant context     category: Optional filter by tool category  Returns:     ListToolsResponse with available tools  Example:     ```bash     # List all tools     curl -X GET http://localhost:8000/v1/agents/tools \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"      # List only search tools     curl -X GET \"http://localhost:8000/v1/agents/tools?category=search\" \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"     ```
 
         :param category: Filter by tool category
         :type category: str
@@ -1837,7 +1838,7 @@ class AgentSessionsApi:
     ) -> ApiResponse[ListToolsResponse]:
         """List Tools
 
-        List all available agent tools.  Use this endpoint to discover available tools before creating a session. Pass tool names to `available_tools` in AgentConfig when creating a session.  Tool Categories: - search: Tools for searching data (smart_search, execute_retriever, execute_adhoc_retriever) - read: Tools for reading resources (list_*, get_*) - create: Tools for creating resources (create_*) - analyze: Tools for analyzing content (analyze_sample_with_pipeline, transcribe_with_pipeline) - upload: Tools for file uploads (create_upload, confirm_upload, get_upload_status) - memory: Tools for agent memory (search_feedback) - recommendations: Tools for getting recommendations  Args:     request: FastAPI request with tenant context     category: Optional filter by tool category  Returns:     ListToolsResponse with available tools  Example:     ```bash     # List all tools     curl -X GET http://localhost:8000/v1/agents/tools \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"      # List only search tools     curl -X GET \"http://localhost:8000/v1/agents/tools?category=search\" \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"     ```
+        List all available agent tools.  Use this endpoint to discover available tools before creating a session.  Tool Categories: - search: Tools for searching data (execute_retriever) - read: Tools for reading resources (list_*, get_*) - create: Tools for creating resources (create_*) - requires confirmation - update: Tools for updating resources (update_*) - requires confirmation - delete: Tools for deleting resources (delete_*) - requires confirmation - upload: Tools for file uploads (upload_object)  Note: Write operations (create, update, delete) require user confirmation via the /confirmations endpoint before execution.  Args:     request: FastAPI request with tenant context     category: Optional filter by tool category  Returns:     ListToolsResponse with available tools  Example:     ```bash     # List all tools     curl -X GET http://localhost:8000/v1/agents/tools \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"      # List only search tools     curl -X GET \"http://localhost:8000/v1/agents/tools?category=search\" \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"     ```
 
         :param category: Filter by tool category
         :type category: str
@@ -1918,7 +1919,7 @@ class AgentSessionsApi:
     ) -> RESTResponseType:
         """List Tools
 
-        List all available agent tools.  Use this endpoint to discover available tools before creating a session. Pass tool names to `available_tools` in AgentConfig when creating a session.  Tool Categories: - search: Tools for searching data (smart_search, execute_retriever, execute_adhoc_retriever) - read: Tools for reading resources (list_*, get_*) - create: Tools for creating resources (create_*) - analyze: Tools for analyzing content (analyze_sample_with_pipeline, transcribe_with_pipeline) - upload: Tools for file uploads (create_upload, confirm_upload, get_upload_status) - memory: Tools for agent memory (search_feedback) - recommendations: Tools for getting recommendations  Args:     request: FastAPI request with tenant context     category: Optional filter by tool category  Returns:     ListToolsResponse with available tools  Example:     ```bash     # List all tools     curl -X GET http://localhost:8000/v1/agents/tools \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"      # List only search tools     curl -X GET \"http://localhost:8000/v1/agents/tools?category=search\" \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"     ```
+        List all available agent tools.  Use this endpoint to discover available tools before creating a session.  Tool Categories: - search: Tools for searching data (execute_retriever) - read: Tools for reading resources (list_*, get_*) - create: Tools for creating resources (create_*) - requires confirmation - update: Tools for updating resources (update_*) - requires confirmation - delete: Tools for deleting resources (delete_*) - requires confirmation - upload: Tools for file uploads (upload_object)  Note: Write operations (create, update, delete) require user confirmation via the /confirmations endpoint before execution.  Args:     request: FastAPI request with tenant context     category: Optional filter by tool category  Returns:     ListToolsResponse with available tools  Example:     ```bash     # List all tools     curl -X GET http://localhost:8000/v1/agents/tools \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"      # List only search tools     curl -X GET \"http://localhost:8000/v1/agents/tools?category=search\" \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\"     ```
 
         :param category: Filter by tool category
         :type category: str
@@ -2366,6 +2367,357 @@ class AgentSessionsApi:
         return self.api_client.param_serialize(
             method='PATCH',
             resource_path='/v1/agents/sessions/{session_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def respond_to_confirmation_agents_sessions(
+        self,
+        session_id: Annotated[StrictStr, Field(description="Session ID")],
+        confirmation_id: Annotated[StrictStr, Field(description="Confirmation ID")],
+        confirmation_request: ConfirmationRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> object:
+        """Respond To Confirmation
+
+        Respond to a pending confirmation for a write operation.  When the agent requests a write operation (create, update, delete), the stream pauses and emits a `confirmation_required` event. The user must call this endpoint to approve or deny the action.  After responding, this endpoint returns a new SSE stream that continues the agent's execution from where it paused.  ## Confirmation Workflow  1. User sends message via POST /sessions/{id}/messages 2. Agent proposes a write operation 3. Stream emits `confirmation_required` event with `confirmation_id` 4. User calls this endpoint with `approved: true/false` 5. This endpoint returns SSE stream continuing the agent's work 6. If approved, agent executes the tool and continues 7. If denied, agent acknowledges and continues without executing  ## Confirmation Expiration  Confirmations expire after 5 minutes. Attempting to respond to an expired confirmation returns a 400 error.  Args:     request: FastAPI request with tenant context     session_id: Session identifier     confirmation_id: Confirmation identifier from `confirmation_required` event     payload: Approval/denial decision  Returns:     StreamingResponse with SSE events (continuation of agent execution)  Raises:     NotFoundError: If session or confirmation not found     ValidationError: If confirmation already processed or expired  Example:     ```bash     # Approve a pending action     curl -N -X POST http://localhost:8000/v1/agents/sessions/ses_abc/confirmations/conf_xyz \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\" \\       -H \"Content-Type: application/json\" \\       -d '{\"approved\": true}'      # SSE Output (continuation):     event: tool_result     data: {\"tool_name\": \"delete_collection\", \"success\": true, \"result\": {...}}      event: token     data: {\"content\": \"I've deleted the collection as requested.\"}      event: done     data: {}     ```
+
+        :param session_id: Session ID (required)
+        :type session_id: str
+        :param confirmation_id: Confirmation ID (required)
+        :type confirmation_id: str
+        :param confirmation_request: (required)
+        :type confirmation_request: ConfirmationRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._respond_to_confirmation_agents_sessions_serialize(
+            session_id=session_id,
+            confirmation_id=confirmation_id,
+            confirmation_request=confirmation_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def respond_to_confirmation_agents_sessions_with_http_info(
+        self,
+        session_id: Annotated[StrictStr, Field(description="Session ID")],
+        confirmation_id: Annotated[StrictStr, Field(description="Confirmation ID")],
+        confirmation_request: ConfirmationRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[object]:
+        """Respond To Confirmation
+
+        Respond to a pending confirmation for a write operation.  When the agent requests a write operation (create, update, delete), the stream pauses and emits a `confirmation_required` event. The user must call this endpoint to approve or deny the action.  After responding, this endpoint returns a new SSE stream that continues the agent's execution from where it paused.  ## Confirmation Workflow  1. User sends message via POST /sessions/{id}/messages 2. Agent proposes a write operation 3. Stream emits `confirmation_required` event with `confirmation_id` 4. User calls this endpoint with `approved: true/false` 5. This endpoint returns SSE stream continuing the agent's work 6. If approved, agent executes the tool and continues 7. If denied, agent acknowledges and continues without executing  ## Confirmation Expiration  Confirmations expire after 5 minutes. Attempting to respond to an expired confirmation returns a 400 error.  Args:     request: FastAPI request with tenant context     session_id: Session identifier     confirmation_id: Confirmation identifier from `confirmation_required` event     payload: Approval/denial decision  Returns:     StreamingResponse with SSE events (continuation of agent execution)  Raises:     NotFoundError: If session or confirmation not found     ValidationError: If confirmation already processed or expired  Example:     ```bash     # Approve a pending action     curl -N -X POST http://localhost:8000/v1/agents/sessions/ses_abc/confirmations/conf_xyz \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\" \\       -H \"Content-Type: application/json\" \\       -d '{\"approved\": true}'      # SSE Output (continuation):     event: tool_result     data: {\"tool_name\": \"delete_collection\", \"success\": true, \"result\": {...}}      event: token     data: {\"content\": \"I've deleted the collection as requested.\"}      event: done     data: {}     ```
+
+        :param session_id: Session ID (required)
+        :type session_id: str
+        :param confirmation_id: Confirmation ID (required)
+        :type confirmation_id: str
+        :param confirmation_request: (required)
+        :type confirmation_request: ConfirmationRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._respond_to_confirmation_agents_sessions_serialize(
+            session_id=session_id,
+            confirmation_id=confirmation_id,
+            confirmation_request=confirmation_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def respond_to_confirmation_agents_sessions_without_preload_content(
+        self,
+        session_id: Annotated[StrictStr, Field(description="Session ID")],
+        confirmation_id: Annotated[StrictStr, Field(description="Confirmation ID")],
+        confirmation_request: ConfirmationRequest,
+        authorization: Annotated[Optional[StrictStr], Field(description="REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.")] = None,
+        x_namespace: Annotated[Optional[StrictStr], Field(description="REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Respond To Confirmation
+
+        Respond to a pending confirmation for a write operation.  When the agent requests a write operation (create, update, delete), the stream pauses and emits a `confirmation_required` event. The user must call this endpoint to approve or deny the action.  After responding, this endpoint returns a new SSE stream that continues the agent's execution from where it paused.  ## Confirmation Workflow  1. User sends message via POST /sessions/{id}/messages 2. Agent proposes a write operation 3. Stream emits `confirmation_required` event with `confirmation_id` 4. User calls this endpoint with `approved: true/false` 5. This endpoint returns SSE stream continuing the agent's work 6. If approved, agent executes the tool and continues 7. If denied, agent acknowledges and continues without executing  ## Confirmation Expiration  Confirmations expire after 5 minutes. Attempting to respond to an expired confirmation returns a 400 error.  Args:     request: FastAPI request with tenant context     session_id: Session identifier     confirmation_id: Confirmation identifier from `confirmation_required` event     payload: Approval/denial decision  Returns:     StreamingResponse with SSE events (continuation of agent execution)  Raises:     NotFoundError: If session or confirmation not found     ValidationError: If confirmation already processed or expired  Example:     ```bash     # Approve a pending action     curl -N -X POST http://localhost:8000/v1/agents/sessions/ses_abc/confirmations/conf_xyz \\       -H \"Authorization: Bearer {api_key}\" \\       -H \"X-Namespace: {namespace_id}\" \\       -H \"Content-Type: application/json\" \\       -d '{\"approved\": true}'      # SSE Output (continuation):     event: tool_result     data: {\"tool_name\": \"delete_collection\", \"success\": true, \"result\": {...}}      event: token     data: {\"content\": \"I've deleted the collection as requested.\"}      event: done     data: {}     ```
+
+        :param session_id: Session ID (required)
+        :type session_id: str
+        :param confirmation_id: Confirmation ID (required)
+        :type confirmation_id: str
+        :param confirmation_request: (required)
+        :type confirmation_request: ConfirmationRequest
+        :param authorization: REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings.
+        :type authorization: str
+        :param x_namespace: REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace'
+        :type x_namespace: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._respond_to_confirmation_agents_sessions_serialize(
+            session_id=session_id,
+            confirmation_id=confirmation_id,
+            confirmation_request=confirmation_request,
+            authorization=authorization,
+            x_namespace=x_namespace,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "object",
+            '400': "ErrorResponse",
+            '401': "ErrorResponse",
+            '403': "ErrorResponse",
+            '404': "ErrorResponse",
+            '500': "ErrorResponse",
+            '422': "HTTPValidationError",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _respond_to_confirmation_agents_sessions_serialize(
+        self,
+        session_id,
+        confirmation_id,
+        confirmation_request,
+        authorization,
+        x_namespace,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if session_id is not None:
+            _path_params['session_id'] = session_id
+        if confirmation_id is not None:
+            _path_params['confirmation_id'] = confirmation_id
+        # process the query parameters
+        # process the header parameters
+        if authorization is not None:
+            _header_params['Authorization'] = authorization
+        if x_namespace is not None:
+            _header_params['X-Namespace'] = x_namespace
+        # process the form parameters
+        # process the body parameter
+        if confirmation_request is not None:
+            _body_params = confirmation_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v1/agents/sessions/{session_id}/confirmations/{confirmation_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

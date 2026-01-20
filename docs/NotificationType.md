@@ -24,6 +24,12 @@ Enum for notification types.
 
 * `CUSTOM` (value: `'custom'`)
 
+* `ONBOARDING_NUDGE` (value: `'onboarding_nudge'`)
+
+* `ENGAGEMENT_NUDGE` (value: `'engagement_nudge'`)
+
+* `FEATURE_TIP` (value: `'feature_tip'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

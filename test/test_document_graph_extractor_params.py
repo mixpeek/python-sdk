@@ -38,6 +38,7 @@ class TestDocumentGraphExtractorParams(unittest.TestCase):
             return DocumentGraphExtractorParams(
                 extractor_type = 'document_graph_extractor',
                 use_layout_detection = True,
+                layout_detector = 'pymupdf',
                 vertical_threshold = 1.0,
                 horizontal_threshold = 1.0,
                 min_text_length = 1.0,
@@ -47,6 +48,7 @@ class TestDocumentGraphExtractorParams(unittest.TestCase):
                 fast_mode = True,
                 vlm_provider = 'google',
                 vlm_model = 'gemini-2.0-flash',
+                llm_api_key = '',
                 run_text_embedding = True,
                 render_dpi = 72.0,
                 generate_thumbnails = True,
