@@ -21,6 +21,11 @@ else
     echo "✅ Using existing openapi.json file"
 fi
 
+# Flatten nested $defs (OpenAPI Generator doesn't support them)
+echo "🔄 Flattening nested \$defs..."
+python3 flatten_defs.py openapi.json openapi-flattened-temp.json
+mv openapi-flattened-temp.json openapi.json
+
 # Clean the OpenAPI spec (remove anyOf with null types and simplify operation IDs)
 echo "🧼 Cleaning OpenAPI specification..."
 python3 << 'PYTHON_SCRIPT'
