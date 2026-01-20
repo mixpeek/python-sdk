@@ -1,0 +1,356 @@
+"""{{ plugin_name }} batch processing pipeline.
+
+This file implements the batch extraction pipeline that processes multiple items at once.
+
+**What is this file?**
+
+The pipeline defines the steps to transform input data into output features.
+Think of it as a data processing assembly line: input → step 1 → step 2 → ... → output.
+
+**Key Concepts:**
+
+- **Batch Processing**: Process multiple items together for efficiency
+- **Steps**: Individual processing units (e.g., embed text, extract attributes)
+- **DataFrame**: Data is passed as pandas DataFrame between steps
+
+**LLM-Friendly Design:**
+
+This template shows the complete structure with clear examples.
+Modify the TextEmbeddingProcessor class to implement your custom logic.
+
+**How to Modify:**
+
+1. Update TextEmbeddingProcessor to implement your feature extraction
+2. Change embedding_dim to match your model
+3. Add additional processing steps if needed
+4. Test with: mixpeek test --mock
+"""
+
+import hashlib
+from typing import Any, Dict, List, Optional
+
+import numpy as np
+import pandas as pd
+
+
+def text_to_embedding(text: str, dim: int = 128) -> List[float]:
+    """Generate a deterministic embedding from text.
+
+    **Default Implementation:**
+
+    Uses SHA-256 hash to create deterministic embeddings for testing.
+    This ensures the same text always produces the same embedding.
+
+    **How to Customize:**
+
+    Replace this function with your own embedding model:
+
+    Example with a custom model:
+    ```python
+    def text_to_embedding(text: str, dim: int = 128) -> List[float]:
+        # Load your custom model
+        from mixpeek_dev.models import load_custom_model
+        model = load_custom_model("./models/my_model.safetensors")
+
+        # Generate embedding
+        embedding = model.encode(text)
+        return embedding.tolist()
+    ```
+
+    Example with a Hugging Face model:
+    ```python
+    from transformers import AutoModel, AutoTokenizer
+
+    def text_to_embedding(text: str, dim: int = 128) -> List[float]:
+        tokenizer = AutoTokenizer.from_pretrained("model-name")
+        model = AutoModel.from_pretrained("model-name")
+
+        inputs = tokenizer(text, return_tensors="pt")
+        outputs = model(**inputs)
+        embedding = outputs.last_hidden_state.mean(dim=1).squeeze()
+        return embedding.tolist()
+    ```
+
+    Args:
+        text: Input text to embed
+        dim: Dimension of the output embedding
+
+    Returns:
+        List of floats representing the embedding (normalized to unit length)
+    """
+    # Default implementation: SHA-256 hash-based embedding (for testing)
+    hash_bytes = hashlib.sha256(text.encode("utf-8")).digest()
+    seed = int.from_bytes(hash_bytes[:4], byteorder="big")
+    rng = np.random.default_rng(seed)
+
+    # Generate normalized embedding
+    embedding = rng.standard_normal(dim).astype(np.float32)
+    norm = np.linalg.norm(embedding)
+    if norm > 0:
+        embedding = embedding / norm
+
+    return embedding.tolist()
+
+
+class TextEmbeddingProcessor:
+    """Batch processor for text embeddings.
+
+    This class processes a batch of texts and adds embedding features.
+
+    **How It Works:**
+
+    1. Receives a pandas DataFrame with a text column
+    2. Generates embeddings for each text
+    3. Adds embeddings as a new column
+    4. Returns the modified DataFrame
+
+    **Attributes:**
+        text_column: Name of input column with text (default: "text")
+        output_column: Name of output column for embeddings
+        embedding_dim: Dimension of embeddings (must match manifest)
+
+    **Customization:**
+
+    Modify the __call__ method to implement your processing logic:
+    - Change embedding generation (use custom model)
+    - Add preprocessing (cleaning, normalization)
+    - Extract additional features (attributes, metadata)
+    """
+
+    def __init__(self, config: Optional[Dict[str, Any]] = None, **kwargs):
+        """Initialize the batch processor.
+
+        Args:
+            config: Configuration dict with processing parameters
+            **kwargs: Additional arguments (e.g., progress_actor for monitoring)
+
+        Example config:
+        ```python
+        config = {
+            "text_column": "text",
+            "output_column_name": "{{ plugin_name }}_v1_embedding",
+            "embedding_dim": 128
+        }
+        ```
+        """
+        config = config or {}
+        self.text_column = config.get("text_column", "text")
+        self.output_column = config.get("output_column_name", "{{ plugin_name }}_v1_embedding")
+        self.embedding_dim = config.get("embedding_dim", 128)
+
+    def __call__(self, batch: pd.DataFrame) -> pd.DataFrame:
+        """Process a batch of texts.
+
+        This method is called by the Mixpeek pipeline for each batch of data.
+
+        **Processing Steps:**
+
+        1. Extract texts from the input column
+        2. Filter out empty/invalid texts
+        3. Generate embeddings for valid texts
+        4. Add embeddings to output column
+        5. Return modified DataFrame
+
+        **Error Handling:**
+
+        - Empty DataFrame → Return as-is (no error)
+        - Missing text column → Column will be empty
+        - Null/empty texts → Embedding set to None for that row
+
+        Args:
+            batch: Input DataFrame with text column
+
+        Returns:
+            DataFrame with embedding column added
+
+        Example:
+        ```python
+        # Input DataFrame:
+        #   text
+        # 0 "Hello world"
+        # 1 "Another document"
+
+        # Output DataFrame:
+        #   text                 {{ plugin_name }}_v1_embedding
+        # 0 "Hello world"        [0.1, 0.2, 0.3, ...]
+        # 1 "Another document"   [0.4, 0.5, 0.6, ...]
+        ```
+        """
+        if batch.empty:
+            return batch
+
+        # Reset index to prevent enumerate bugs
+        batch = batch.reset_index(drop=True)
+
+        # Extract texts from the specified column
+        raw_texts = batch.get(self.text_column, [])
+        texts: List[str] = []
+        valid_indices: List[int] = []
+
+        # Filter and validate texts
+        for idx, v in enumerate(raw_texts):
+            # Handle None, empty strings, and non-string types
+            text = "" if v is None else (v if isinstance(v, str) else str(v))
+            if text and text.strip():
+                texts.append(text)
+                valid_indices.append(idx)
+
+        # Initialize output column with None (for invalid rows)
+        batch[self.output_column] = None
+
+        if not texts:
+            # No valid texts to process
+            return batch
+
+        # Generate embeddings for all valid texts
+        embeddings = [text_to_embedding(text, self.embedding_dim) for text in texts]
+
+        # Assign embeddings to valid rows
+        for i, orig_idx in enumerate(valid_indices):
+            batch.at[orig_idx, self.output_column] = embeddings[i]
+
+        return batch
+
+
+def build_steps(
+    extractor_request: Any,
+    container: Any = None,
+    base_steps: Optional[list] = None,
+    dataset_size: Optional[int] = None,
+    content_flags: Optional[dict] = None,
+) -> Dict[str, Any]:
+    """Build the extraction pipeline steps.
+
+    This function is called by Mixpeek to construct your pipeline.
+
+    **Parameters Explained:**
+
+    - extractor_request: Contains plugin configuration and parameters
+    - container: ServiceContainer for accessing Mixpeek services (E5, Whisper, etc.)
+    - base_steps: Optional preprocessing steps to prepend
+    - dataset_size: Number of items to process (for optimization)
+    - content_flags: Metadata about input data types
+
+    **How to Use ServiceContainer:**
+
+    Access builtin Mixpeek services:
+    ```python
+    # Get E5 embedding service
+    e5_service = container.inference.get("intfloat/e5-large")
+
+    # Get Whisper transcription service
+    whisper = container.inference.get("openai/whisper")
+    ```
+
+    **Pipeline Customization:**
+
+    Add multiple steps for complex processing:
+    ```python
+    steps = list(base_steps or [])
+
+    # Step 1: Clean text
+    steps.append(TextCleanerProcessor())
+
+    # Step 2: Extract attributes
+    steps.append(AttributeExtractorProcessor())
+
+    # Step 3: Generate embeddings
+    steps.append(TextEmbeddingProcessor(config=config))
+
+    return {"steps": steps, "prepare": _prepare}
+    ```
+
+    Args:
+        extractor_request: Plugin configuration
+        container: Service container (optional)
+        base_steps: Preprocessing steps (optional)
+        dataset_size: Dataset size (optional)
+        content_flags: Content metadata (optional)
+
+    Returns:
+        Dict with 'steps' list and 'prepare' function
+    """
+    # Extract configuration from request
+    # (In production, extractor_request contains user parameters)
+    config = {
+        "embedding_dim": 128,  # Must match manifest dimensions
+    }
+
+    # Create batch processor
+    processor = TextEmbeddingProcessor(config=config)
+
+    # Identity prepare function (no dataset preprocessing needed)
+    def _prepare(ds: Any) -> Any:
+        """Prepare dataset before processing.
+
+        Override this to add preprocessing:
+        - Filter rows
+        - Add columns
+        - Repartition data
+
+        Example:
+        ```python
+        def _prepare(ds):
+            # Remove empty texts
+            return ds.filter(lambda row: row.get("text"))
+        ```
+        """
+        return ds
+
+    # Build pipeline steps
+    steps = list(base_steps or [])
+    steps.append(processor)
+
+    return {
+        "steps": steps,
+        "prepare": _prepare,
+    }
+
+
+def extract(
+    extractor_request: Any,
+    base_steps: Optional[list] = None,
+    dataset_size: Optional[int] = None,
+    content_flags: Optional[dict] = None,
+) -> Any:
+    """Main entry point for plugin extraction.
+
+    This function is called by the Mixpeek plugin loader.
+    It must return an object with `.steps` and `.prepare` attributes.
+
+    **DO NOT MODIFY** unless you know what you're doing.
+    Customize `build_steps()` instead.
+
+    Args:
+        extractor_request: Plugin configuration
+        base_steps: Preprocessing steps
+        dataset_size: Dataset size
+        content_flags: Content metadata
+
+    Returns:
+        Object with steps and prepare attributes
+    """
+    result = build_steps(
+        extractor_request=extractor_request,
+        base_steps=base_steps,
+        dataset_size=dataset_size,
+        content_flags=content_flags,
+    )
+
+    # Return simple object with steps and prepare
+    class PipelineResult:
+        def __init__(self, steps, prepare):
+            self.steps = steps
+            self.prepare = prepare
+
+    return PipelineResult(result["steps"], result["prepare"])
+
+
+# Tips for LLM Agents:
+# --------------------
+# When modifying this pipeline:
+# 1. Keep embedding_dim consistent with manifest.py
+# 2. Update output_column to match feature name in manifest
+# 3. Test with: mixpeek test --mock
+# 4. For custom models: use mixpeek_dev.models.load_custom_model()
+# 5. For builtin services: use container.inference.get("service-name")

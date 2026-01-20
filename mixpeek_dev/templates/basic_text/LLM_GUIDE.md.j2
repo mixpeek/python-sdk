@@ -1,0 +1,587 @@
+# LLM Assistant Guide: {{ plugin_name }}
+
+**For AI Assistants helping users customize this plugin**
+
+This guide helps you (the LLM) understand the plugin structure and guide users effectively.
+
+---
+
+## 🎯 Your Role as an LLM Assistant
+
+You're helping a user customize the `{{ plugin_name }}` plugin. Your job is to:
+1. **Understand** the existing structure (read this guide first)
+2. **Explain** what each file does and why
+3. **Customize** the plugin based on user requirements
+4. **Test** changes locally with `mixpeek test --mock`
+5. **Debug** issues with clear explanations
+
+---
+
+## 📁 Plugin Structure Overview
+
+```
+{{ plugin_name }}/
+├── manifest.py          # Plugin metadata (WHAT it does)
+├── pipeline.py          # Batch processing (HOW it processes batches)
+├── realtime.py          # Realtime inference (HOW it handles single requests)
+├── models/              # Custom model files (.safetensors, .pt, .onnx)
+├── tests/               # Unit tests
+└── LLM_GUIDE.md         # This file (YOUR reference)
+```
+
+---
+
+## 📄 File-by-File Guide
+
+### 1. manifest.py - Plugin Metadata
+
+**Purpose:** Tells Mixpeek what the plugin does and what it outputs.
+
+**Key sections:**
+```python
+feature_extractor_name = "{{ plugin_name }}"  # Unique ID
+version = "v1"                                 # Version
+description = "..."                            # What it does
+features = [...]                               # What it extracts
+output_schema = {...}                          # Output structure
+```
+
+**Common customizations:**
+- Adding new attributes to `output_schema`
+- Changing vector dimensions
+- Adding dependencies
+
+**Example user request:**
+> "Add a 'sentiment' field to the output"
+
+**Your response:**
+```python
+# Add to output_schema in manifest.py:
+output_schema = {
+    # ... existing fields
+    "sentiment": {
+        "type": "string",
+        "description": "Sentiment (positive, negative, neutral)",
+    },
+}
+```
+
+---
+
+### 2. pipeline.py - Batch Processing
+
+**Purpose:** Processes multiple items efficiently (batch extraction).
+
+**Architecture:**
+```
+Input DataFrame
+    ↓
+Step 1: Custom processor (user's logic)
+    ↓
+Step 2: Builtin service (E5, Whisper, etc.)
+    ↓
+Output DataFrame
+```
+
+**Key functions:**
+- `build_steps()`: Constructs the pipeline
+- `extract()`: Entry point (don't modify)
+
+**Common customizations:**
+
+#### A. Adding a new extraction step
+```python
+class SentimentExtractor:
+    def __call__(self, batch: pd.DataFrame) -> pd.DataFrame:
+        # Add sentiment column
+        batch["sentiment"] = batch["text"].apply(self.classify_sentiment)
+        return batch
+
+def build_steps(...):
+    steps = []
+    steps.append(SentimentExtractor())  # Add your step
+    # ... rest of pipeline
+```
+
+#### B. Using a builtin Mixpeek service
+```python
+def build_steps(extractor_request, container=None, ...):
+    steps = []
+
+    # Custom logic first
+    steps.append(MyCustomExtractor())
+
+    # Then builtin service
+    if container:
+        e5 = container.inference.get("intfloat/multilingual-e5-large-instruct")
+        steps.append(wrap_e5_for_batch(e5))
+
+    return {"steps": steps, "prepare": lambda ds: ds}
+```
+
+#### C. Loading a custom model
+```python
+# User uploads model to models/ directory
+# Then in pipeline:
+
+class MyModelExtractor:
+    def __init__(self):
+        from mixpeek_dev.models import load_custom_model
+        self.model = load_custom_model("./models/my_model.safetensors")
+
+    def __call__(self, batch):
+        # Use self.model for inference
+        pass
+```
+
+---
+
+### 3. realtime.py - Realtime Inference
+
+**Purpose:** Handles single requests via HTTP API (low latency).
+
+**Key class:**
+```python
+class {{ plugin_class_name }}(BaseInferenceService):
+    def __init__(self):
+        # Load model ONCE (expensive operations here)
+        pass
+
+    async def run_inference(self, inputs, parameters):
+        # Process ONE request (keep this fast!)
+        return {"embeddings": [...]}
+```
+
+**Common customizations:**
+
+#### A. Adding model inference
+```python
+def __init__(self):
+    super().__init__()
+    # Load model once
+    from mixpeek_dev.models import load_custom_model
+    self.model = load_custom_model("./models/my_model.safetensors")
+
+async def run_inference(self, inputs, parameters):
+    text = inputs.get("text", "")
+    # Use self.model
+    result = self.model.predict(text)
+    return {"prediction": result}
+```
+
+#### B. Supporting multiple input formats
+```python
+async def run_inference(self, inputs, parameters):
+    # Support both single and batch
+    texts = inputs.get("texts", [])
+    if not texts and "text" in inputs:
+        texts = [inputs["text"]]
+
+    # Process all texts
+    results = [self.model.predict(t) for t in texts]
+    return {"predictions": results}
+```
+
+---
+
+## 🔧 Common User Requests & Your Responses
+
+### Request: "Make this extract sentiment"
+
+**Your steps:**
+1. **Update manifest.py:**
+   ```python
+   output_schema = {
+       # ... existing
+       "sentiment": {"type": "string", "description": "Sentiment score"}
+   }
+   ```
+
+2. **Update pipeline.py:**
+   ```python
+   class SentimentExtractor:
+       def __call__(self, batch):
+           # Simple keyword-based sentiment (or use a model)
+           def get_sentiment(text):
+               positive = ["good", "great", "excellent", "love"]
+               negative = ["bad", "terrible", "hate", "awful"]
+
+               text_lower = text.lower()
+               if any(word in text_lower for word in positive):
+                   return "positive"
+               elif any(word in text_lower for word in negative):
+                   return "negative"
+               return "neutral"
+
+           batch["sentiment"] = batch["text"].apply(get_sentiment)
+           return batch
+
+   def build_steps(...):
+       steps = [SentimentExtractor()]  # Add this
+       # ... rest
+   ```
+
+3. **Test:**
+   ```bash
+   mixpeek test --mock
+   ```
+
+---
+
+### Request: "Use my custom BERT model"
+
+**Your steps:**
+1. **Ask user to upload model:**
+   ```
+   "Please place your model file in the models/ directory:
+   - For PyTorch: models/my_bert.pt
+   - For SafeTensors: models/my_bert.safetensors
+   - For ONNX: models/my_bert.onnx"
+   ```
+
+2. **Update pipeline.py:**
+   ```python
+   class BertExtractor:
+       def __init__(self):
+           from mixpeek_dev.models import load_custom_model
+           self.model = load_custom_model("./models/my_bert.safetensors")
+
+       def __call__(self, batch):
+           embeddings = []
+           for text in batch["text"]:
+               emb = self.model.encode(text)  # Adjust based on model API
+               embeddings.append(emb)
+           batch["embedding"] = embeddings
+           return batch
+   ```
+
+3. **Update manifest.py dimensions:**
+   ```python
+   features = [{
+       "dimensions": 768,  # Change to match your BERT output
+   }]
+   ```
+
+---
+
+### Request: "Add E5 embeddings from Mixpeek"
+
+**Your response:**
+```python
+# In pipeline.py build_steps():
+
+def build_steps(extractor_request, container=None, ...):
+    steps = []
+
+    # Your custom logic first
+    steps.append(MyCustomExtractor())
+
+    # Add builtin E5 embeddings
+    if container:
+        e5_service = container.inference.get("intfloat/multilingual-e5-large-instruct")
+
+        # Wrap for batch processing
+        class E5Wrapper:
+            def __init__(self, service):
+                self.service = service
+
+            def __call__(self, batch):
+                texts = batch["text"].tolist()
+                embeddings = self.service.embed_batch(texts)
+                batch["text_embedding"] = embeddings
+                return batch
+
+        steps.append(E5Wrapper(e5_service))
+
+    return {"steps": steps, "prepare": lambda ds: ds}
+```
+
+**Update manifest.py:**
+```python
+output_schema = {
+    # ... existing
+    "text_embedding": {
+        "type": "array",
+        "items": {"type": "number"},
+        "description": "1024-dim E5 embedding"
+    }
+}
+
+features = [{
+    "name": "text_embedding",
+    "type": "vector",
+    "dimensions": 1024,  # E5-Large
+    "distance": "cosine"
+}]
+```
+
+---
+
+## 🐛 Debugging Guide for LLMs
+
+### Issue: "Test fails with KeyError"
+
+**Diagnosis:**
+```python
+# User likely added output field without implementing extraction
+```
+
+**Your response:**
+```
+"The error shows that the output is missing the 'X' field.
+
+Check:
+1. manifest.py has 'X' in output_schema
+2. pipeline.py actually creates that field:
+   batch['X'] = ...
+
+Here's how to add it in pipeline.py:
+[show code example]
+"
+```
+
+---
+
+### Issue: "Can't import MockServiceContainer"
+
+**Diagnosis:**
+```python
+# User trying to import internal testing code in plugin
+```
+
+**Your response:**
+```
+"MockServiceContainer is only for local testing.
+
+In your plugin code (pipeline.py, realtime.py):
+- DON'T import MockServiceContainer
+- DO use the 'container' parameter passed to build_steps()
+
+Example:
+def build_steps(extractor_request, container=None, ...):
+    if container:  # Container is provided automatically
+        e5 = container.inference.get('intfloat/e5-large')
+"
+```
+
+---
+
+### Issue: "Pipeline returns empty DataFrame"
+
+**Common causes:**
+1. Filter removed all rows
+2. Column name mismatch
+3. Processing step failed silently
+
+**Your debugging approach:**
+```python
+"Let's add debug logging to find where data is lost:
+
+def build_steps(...):
+    steps = []
+
+    class DebugStep:
+        def __call__(self, batch):
+            print(f'Debug: {len(batch)} rows, columns: {batch.columns.tolist()}')
+            print(f'Sample: {batch.head(1).to_dict()}')
+            return batch
+
+    steps.append(DebugStep())  # Add after each real step
+    steps.append(YourActualStep())
+    steps.append(DebugStep())  # See what changed
+
+    return {'steps': steps, 'prepare': lambda ds: ds}
+
+Then run: mixpeek test --mock --verbose
+"
+```
+
+---
+
+## 🎓 Testing Guide
+
+### Quick test after changes:
+```bash
+mixpeek test --mock
+```
+
+### Test with custom data:
+```bash
+# Create test_data.json:
+[
+  {"text": "Sample input 1"},
+  {"text": "Sample input 2"}
+]
+
+mixpeek test --mock --input=test_data.json --verbose
+```
+
+### What to check in output:
+1. ✅ All expected fields present
+2. ✅ No null values where unexpected
+3. ✅ Data types match manifest
+4. ✅ Vector dimensions correct
+
+---
+
+## 🚀 Builtin Mixpeek Services
+
+Services available via `container.inference.get()`:
+
+### Text Embeddings
+```python
+e5 = container.inference.get("intfloat/multilingual-e5-large-instruct")
+# Output: 1024-dimensional embeddings
+```
+
+### Audio Transcription
+```python
+whisper = container.inference.get("openai/whisper-large-v3")
+# Output: Text transcription + timestamps
+```
+
+### More services
+Check Mixpeek docs for latest: https://docs.mixpeek.com/services
+
+---
+
+## 💡 Pro Tips for LLMs
+
+### 1. Always read manifest.py first
+It tells you what the plugin promises to output.
+
+### 2. Match pipeline to manifest
+Every field in `output_schema` must be created by pipeline steps.
+
+### 3. Test incrementally
+After each change:
+```bash
+mixpeek test --mock
+```
+
+### 4. Use verbose mode for debugging
+```bash
+mixpeek test --mock --verbose
+```
+Shows actual output values.
+
+### 5. Keep it simple
+Don't add features the user didn't ask for.
+
+---
+
+## 📚 Quick Reference
+
+### File you'll modify most:
+- `pipeline.py` - Add extraction logic here
+
+### File you'll modify sometimes:
+- `manifest.py` - When adding new output fields
+
+### File you'll rarely modify:
+- `realtime.py` - Only if different from batch logic
+
+### Files you won't modify:
+- `LLM_GUIDE.md` - That's this file!
+
+---
+
+## 🤖 Example Conversation Flow
+
+**User:** "Make this plugin extract product prices"
+
+**You:**
+```
+I'll help you add price extraction to {{ plugin_name }}.
+
+Step 1: Update manifest.py to define the output field
+[show code]
+
+Step 2: Add price extraction logic to pipeline.py
+[show code]
+
+Step 3: Test the changes
+Run: mixpeek test --mock --verbose
+
+Would you like me to implement a simple regex-based price extractor,
+or do you have a specific extraction method in mind?
+```
+
+**User:** "Use regex"
+
+**You:**
+```python
+# I'll add this to pipeline.py:
+
+import re
+
+class PriceExtractor:
+    def extract_price(self, text):
+        # Match $X.XX or $X,XXX.XX patterns
+        pattern = r'\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?'
+        match = re.search(pattern, text)
+        return match.group(0) if match else None
+
+    def __call__(self, batch):
+        batch["price"] = batch["text"].apply(self.extract_price)
+        return batch
+
+# Then in build_steps():
+def build_steps(...):
+    steps = [PriceExtractor()]  # Add this
+    # ... rest of your pipeline
+
+I've implemented a price extractor that finds patterns like:
+- $19.99
+- $1,234.56
+- $999
+
+Test it with:
+mixpeek test --mock --verbose
+
+Does this match your needs, or would you like a different pattern?
+```
+
+---
+
+## ✅ Checklist for LLMs
+
+Before suggesting changes, verify:
+- [ ] Understand what user wants
+- [ ] Check if it requires manifest.py changes
+- [ ] Implement in pipeline.py
+- [ ] Suggest test command
+- [ ] Explain what the code does
+
+After making changes:
+- [ ] Suggest: `mixpeek test --mock`
+- [ ] Explain expected output
+- [ ] Offer to help debug if tests fail
+
+---
+
+## 🆘 When You're Stuck
+
+**If you're unsure how to help:**
+
+1. **Read the existing code** - Pattern is already there
+2. **Check manifest.py** - See what's currently defined
+3. **Ask clarifying questions** - "Do you want this for batch, realtime, or both?"
+4. **Start simple** - Basic implementation first, optimize later
+5. **Test frequently** - `mixpeek test --mock` after each change
+
+**Remember:** You have access to all files. Read them to understand the current implementation before making suggestions.
+
+---
+
+## 📖 Additional Resources
+
+- Mixpeek Docs: https://docs.mixpeek.com/plugins
+- Template Reference: See the .j2 files in mixpeek_dev/templates/
+- Test Examples: Look at tests/e2e/plugins/fixtures/
+
+---
+
+**End of LLM Guide**
+
+This guide is regenerated each time `mixpeek init` is run, so it's always up-to-date with the template structure.

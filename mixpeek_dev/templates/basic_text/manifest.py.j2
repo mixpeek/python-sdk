@@ -1,0 +1,174 @@
+"""{{ plugin_name }} plugin manifest.
+
+This manifest defines the metadata and configuration for your custom plugin.
+
+**What is this file?**
+
+The manifest tells Mixpeek what your plugin does, what features it provides,
+and how to use it. Think of it as the plugin's "README" for the Mixpeek platform.
+
+**Key Fields:**
+
+- feature_extractor_name: Unique identifier for your plugin (lowercase_with_underscores)
+- version: Version string (e.g., "v1", "v2")
+- description: Human-readable explanation of what your plugin does
+- features: List of features your plugin extracts (embeddings, attributes, etc.)
+- output_schema: JSON schema defining your plugin's output structure
+
+**LLM-Friendly Design:**
+
+This template is designed to be easily understood and modified by AI assistants.
+Each field has clear documentation and examples.
+"""
+
+# =============================================================================
+# PLUGIN IDENTIFICATION
+# =============================================================================
+
+# Unique identifier for this plugin (lowercase with underscores)
+# Example: "fashion_attribute_extractor", "brand_detector", "sentiment_analyzer"
+feature_extractor_name = "{{ plugin_name }}"
+
+# Version identifier (start with v1, increment as you make changes)
+# Example: "v1", "v2", "v1_1"
+version = "v1"
+
+# Human-readable description (explain what your plugin does and why it's useful)
+# This will be shown to users in the Mixpeek UI
+description = (
+    "{{ description }}"
+)
+
+# =============================================================================
+# DEPENDENCIES
+# =============================================================================
+
+# Python packages required by your plugin
+# These will be installed automatically when your plugin is deployed
+# Example: ["transformers==4.30.0", "pillow>=10.0.0"]
+dependencies = []
+
+# =============================================================================
+# FEATURES
+# =============================================================================
+
+# Features define what your plugin extracts from input data
+# Each feature becomes a field in the output and can be indexed/searched
+
+# Feature URI for realtime inference lookups
+# Format: mixpeek://{extractor}@{version}/{vector_index}
+feature_uri = "mixpeek://{{ plugin_name }}@v1/{{ plugin_name }}_v1"
+
+features = [
+    {
+        # Name of the feature (this becomes a column in the output)
+        "name": "{{ plugin_name }}_v1_embedding",
+
+        # Type of feature: "vector" (embeddings), "text", "number", "boolean", etc.
+        "type": "vector",
+
+        # For vector features: dimension of the embedding
+        # Common sizes: 128 (fast), 384 (balanced), 768 (high quality), 1024 (max quality)
+        "dimensions": 128,
+
+        # Distance metric for vector search
+        # Options: "cosine" (most common), "euclidean", "dot"
+        "distance": "cosine",
+    }
+]
+
+# =============================================================================
+# OUTPUT SCHEMA
+# =============================================================================
+
+# This defines the structure of your plugin's output
+# Each field should match a feature you defined above
+
+output_schema = {
+    # Original text content (always include this for reference)
+    "text": {
+        "type": "string",
+        "description": "The processed text content",
+    },
+
+    # Vector embedding feature (must match feature name above)
+    "{{ plugin_name }}_v1_embedding": {
+        "type": "array",
+        "items": {"type": "number"},
+        "description": "128-dimensional dense vector embedding",
+    },
+}
+
+# =============================================================================
+# INPUT MAPPINGS
+# =============================================================================
+
+# Maps plugin input fields to source data fields
+# Example: {"text": "text"} means the plugin expects a "text" field
+input_mappings = {"text": "text"}
+
+# =============================================================================
+# COST CONFIGURATION
+# =============================================================================
+
+# Cost tier (1 = cheapest, 5 = most expensive)
+# Tier 1: Simple operations (hash, keyword extraction)
+# Tier 2: Small model inference (<100M params)
+# Tier 3: Medium model inference (100M-1B params)
+# Tier 4: Large model inference (1B-10B params)
+# Tier 5: Very large model inference (>10B params)
+tier = 1
+tier_label = "SIMPLE"
+
+# =============================================================================
+# EXAMPLES & DOCUMENTATION
+# =============================================================================
+
+# Example usage (shown in Mixpeek UI and docs)
+example_input = {
+    "text": "Example product description: Red summer dress with floral pattern"
+}
+
+example_output = {
+    "text": "Example product description: Red summer dress with floral pattern",
+    "{{ plugin_name }}_v1_embedding": [0.1, 0.2, 0.3, "... (128 dimensions total)"],
+}
+
+# =============================================================================
+# 🤖 GUIDE FOR LLM ASSISTANTS
+# =============================================================================
+#
+# If you're helping a user customize this plugin:
+#
+# QUICK START FOR LLMs:
+# 1. Read LLM_GUIDE.md in this directory (comprehensive guide)
+# 2. Understand what user wants to extract
+# 3. Add fields to output_schema below
+# 4. Implement extraction in pipeline.py
+# 5. Test: mixpeek test --mock
+#
+# COMMON USER REQUESTS:
+#
+# "Add a price field":
+#   output_schema["price"] = {"type": "number", "description": "Product price"}
+#   Then implement in pipeline.py
+#
+# "Extract sentiment":
+#   output_schema["sentiment"] = {"type": "string", "description": "positive/negative/neutral"}
+#   Then implement in pipeline.py
+#
+# "Use custom embeddings":
+#   features = [{"name": "my_embedding", "type": "vector", "dimensions": 768, "distance": "cosine"}]
+#   output_schema["my_embedding"] = {"type": "array", "items": {"type": "number"}}
+#   Then implement in pipeline.py with custom model
+#
+# "Add E5 embeddings from Mixpeek":
+#   See LLM_GUIDE.md section "Adding E5 embeddings from Mixpeek"
+#
+# CRITICAL RULES:
+# - Every field in output_schema MUST be created by pipeline.py
+# - Vector dimensions MUST match model output
+# - Always test after changes: mixpeek test --mock
+# - Read LLM_GUIDE.md for detailed examples
+#
+# =============================================================================

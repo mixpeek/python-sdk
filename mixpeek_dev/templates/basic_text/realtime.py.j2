@@ -1,0 +1,274 @@
+"""{{ plugin_name }} realtime inference service.
+
+This file implements the realtime inference API for on-demand, low-latency predictions.
+
+**What is this file?**
+
+The realtime service handles single inference requests via HTTP API.
+Unlike batch processing (pipeline.py), this is for real-time use cases like:
+- Live search queries
+- Instant recommendations
+- Interactive applications
+
+**Key Differences from Batch:**
+
+- Batch (pipeline.py): Process 1000s of items efficiently, higher latency OK
+- Realtime (realtime.py): Process 1 item instantly, low latency required
+
+**Ray Serve:**
+
+Mixpeek uses Ray Serve for scalable realtime inference:
+- Automatic load balancing
+- GPU acceleration
+- Health monitoring
+
+**LLM-Friendly Design:**
+
+This template provides a complete working example.
+Modify run_inference() to implement your custom logic.
+"""
+
+import hashlib
+from typing import Any, Dict, List
+
+import numpy as np
+
+
+def text_to_embedding(text: str, dim: int = 128) -> List[float]:
+    """Generate embedding from text.
+
+    **Default Implementation:**
+
+    Uses SHA-256 hash for deterministic embeddings (same as pipeline.py).
+
+    **Customization:**
+
+    Replace with your model inference:
+
+    Example with custom model:
+    ```python
+    def text_to_embedding(text: str, dim: int = 128) -> List[float]:
+        # Load model once in __init__, reuse here
+        embedding = self.model.encode(text)
+        return embedding.tolist()
+    ```
+
+    Args:
+        text: Input text
+        dim: Embedding dimension
+
+    Returns:
+        Embedding vector (list of floats)
+    """
+    hash_bytes = hashlib.sha256(text.encode("utf-8")).digest()
+    seed = int.from_bytes(hash_bytes[:4], byteorder="big")
+    rng = np.random.default_rng(seed)
+    embedding = rng.standard_normal(dim).astype(np.float32)
+    norm = np.linalg.norm(embedding)
+    if norm > 0:
+        embedding = embedding / norm
+    return embedding.tolist()
+
+
+# NOTE: BaseInferenceService import will fail in local testing
+# This is expected - realtime services run in the Mixpeek engine, not locally
+try:
+    from shared.plugins.inference.serve import BaseInferenceService
+except ImportError:
+    # Fallback for local testing
+    class BaseInferenceService:
+        """Fallback base class for local testing."""
+
+        def __init__(self):
+            pass
+
+
+class {{ plugin_class_name }}(BaseInferenceService):
+    """Realtime inference service for {{ plugin_name }}.
+
+    This service is deployed as a Ray Serve deployment and handles
+    real-time inference requests via HTTP API.
+
+    **Lifecycle:**
+
+    1. __init__: Initialize once when service starts (load model here)
+    2. run_inference: Called for each request (keep this fast!)
+
+    **Optimization Tips:**
+
+    - Load models in __init__, not run_inference
+    - Use GPU if available (check for CUDA)
+    - Batch multiple inputs when possible
+    - Cache frequent requests
+
+    **Example Usage:**
+
+    ```python
+    # Client code (via Mixpeek SDK)
+    client = Mixpeek(api_key="...")
+    result = client.extract.realtime(
+        extractor="{{ plugin_name }}",
+        version="v1",
+        inputs={"text": "Query text"},
+    )
+    # result = {"embeddings": [[0.1, 0.2, ...]]}
+    ```
+    """
+
+    def __init__(self, embedding_dim: int = 128):
+        """Initialize the inference service.
+
+        This method is called ONCE when the service starts.
+        Use this to:
+        - Load models (expensive operation, do once)
+        - Initialize GPU
+        - Load configuration
+
+        **Model Loading Example:**
+
+        ```python
+        def __init__(self, embedding_dim: int = 128):
+            super().__init__()
+            self.embedding_dim = embedding_dim
+
+            # Load custom model
+            from mixpeek_dev.models import load_custom_model
+            self.model = load_custom_model("models/my_model.safetensors")
+
+            # Or load from Hugging Face
+            from transformers import AutoModel
+            self.model = AutoModel.from_pretrained("model-name")
+            self.model.eval()  # Set to evaluation mode
+        ```
+
+        Args:
+            embedding_dim: Dimension of output embeddings
+        """
+        super().__init__()
+        self.embedding_dim = embedding_dim
+        # TODO: Load your model here
+        # self.model = load_model("path/to/model")
+
+    async def run_inference(
+        self, inputs: Dict[str, Any], parameters: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Process a single inference request.
+
+        This method is called for EVERY request.
+        Keep it fast! Don't load models here.
+
+        **Input Format:**
+
+        ```python
+        inputs = {
+            "text": "Single text to process"
+            # OR
+            "texts": ["Multiple", "texts", "to process"]
+        }
+
+        parameters = {
+            # Optional parameters from user
+            "max_length": 512,
+            "temperature": 0.7,
+        }
+        ```
+
+        **Output Format:**
+
+        Must return a dict with embeddings:
+        ```python
+        {
+            "embeddings": [
+                [0.1, 0.2, 0.3, ...],  # Embedding for first text
+                [0.4, 0.5, 0.6, ...],  # Embedding for second text
+            ]
+        }
+        ```
+
+        **Error Handling:**
+
+        Raise descriptive errors for invalid inputs:
+        ```python
+        if "text" not in inputs and "texts" not in inputs:
+            raise ValueError("inputs must contain 'text' or 'texts'")
+        ```
+
+        Args:
+            inputs: Input dict with 'text' or 'texts'
+            parameters: Optional processing parameters
+
+        Returns:
+            Dict with 'embeddings' list
+
+        Example:
+        ```python
+        # Single text
+        result = await service.run_inference(
+            inputs={"text": "Hello"},
+            parameters={}
+        )
+        # result = {"embeddings": [[0.1, 0.2, ...]]}
+
+        # Multiple texts
+        result = await service.run_inference(
+            inputs={"texts": ["Hello", "World"]},
+            parameters={}
+        )
+        # result = {"embeddings": [[0.1, ...], [0.2, ...]]}
+        ```
+        """
+        # Support both single 'text' and multiple 'texts'
+        texts = inputs.get("texts", [])
+        if not texts and "text" in inputs:
+            texts = [inputs["text"]]
+
+        if not texts:
+            raise ValueError(
+                "inputs must contain 'text' (string) or 'texts' (list of strings)"
+            )
+
+        # Generate embeddings
+        # TODO: Replace with your model inference
+        embeddings = [text_to_embedding(text, self.embedding_dim) for text in texts]
+
+        return {"embeddings": embeddings}
+
+    async def __call__(
+        self, inputs: Dict[str, Any], parameters: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Alias for run_inference.
+
+        Ray Serve can call either run_inference() or __call__().
+        This ensures both work.
+
+        **DO NOT MODIFY**
+        """
+        return await self.run_inference(inputs, parameters)
+
+
+# Factory function for plugin loader
+def get_inference_service(**kwargs) -> {{ plugin_class_name }}:
+    """Create and return an inference service instance.
+
+    This function is called by the Mixpeek plugin loader to instantiate your service.
+
+    **DO NOT MODIFY** unless you need to pass custom initialization parameters.
+
+    Args:
+        **kwargs: Configuration parameters
+
+    Returns:
+        {{ plugin_class_name }} instance
+    """
+    return {{ plugin_class_name }}(**kwargs)
+
+
+# Tips for LLM Agents:
+# --------------------
+# When modifying this service:
+# 1. Load models in __init__, not run_inference
+# 2. Keep run_inference fast (it's called for every request)
+# 3. Support both single text and batch inputs
+# 4. Return embeddings in the correct format: {"embeddings": [[...]]}
+# 5. Test locally with: mixpeek test --mock
+# 6. For production GPU inference, check torch.cuda.is_available()
