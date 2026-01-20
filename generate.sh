@@ -12,9 +12,14 @@ if ! command -v openapi-generator-cli &> /dev/null; then
     npm install -g @openapitools/openapi-generator-cli
 fi
 
-# Download the latest OpenAPI spec
-echo "📥 Downloading OpenAPI specification..."
-curl -s https://server-xb24.onrender.com/docs/openapi.json -o openapi.json
+# Use existing openapi.json (synced from server repo)
+# Or download if it doesn't exist (for manual generation)
+if [ ! -f "openapi.json" ]; then
+    echo "📥 Downloading OpenAPI specification from production..."
+    curl -s https://server-xb24.onrender.com/docs/openapi.json -o openapi.json
+else
+    echo "✅ Using existing openapi.json file"
+fi
 
 # Clean the OpenAPI spec (remove anyOf with null types and simplify operation IDs)
 echo "🧼 Cleaning OpenAPI specification..."
