@@ -211,6 +211,10 @@ openapi-generator-cli generate \
     --package-name mixpeek \
     --additional-properties=projectName=mixpeek,packageVersion=0.81.0,packageUrl=https://github.com/mixpeek/python-sdk,library=urllib3
 
+# Fix OpenAPI Generator null bug: JSON null renders as Python `null` instead of `None`
+echo "🔧 Fixing null → None in generated models..."
+find mixpeek -name '*.py' -exec sed -i '' 's/default=null/default=None/g' {} +
+
 # Post-generation cleanup
 echo "✨ Post-generation cleanup..."
 

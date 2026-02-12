@@ -242,6 +242,10 @@ jobs:
           # Cleanup unnecessary files
           rm -f .travis.yml git_push.sh .gitlab-ci.yml || true
 
+          # Fix OpenAPI Generator null bug: JSON null renders as Python `null` instead of `None`
+          echo "🔧 Fixing null → None in generated models..."
+          find mixpeek -name '*.py' -exec sed -i 's/default=null/default=None/g' {} +
+
           # Restore custom wrapper code
           if [ -d "/tmp/_client_backup" ]; then
             echo "📦 Restoring custom wrapper..."
