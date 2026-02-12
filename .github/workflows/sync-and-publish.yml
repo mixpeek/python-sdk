@@ -13,10 +13,13 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   generate-and-publish:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout python-sdk repo
         uses: actions/checkout@v4
