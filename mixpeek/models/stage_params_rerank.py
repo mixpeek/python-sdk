@@ -31,7 +31,7 @@ class StageParamsRerank(BaseModel):
     inference_name: Optional[StrictStr] = Field(default='baai_bge_reranker_v2_m3', description="Reranking inference service name. Must be a reranking service. Use GET /engine/inference to list available rerankers.")
     query: Optional[StrictStr] = Field(default='{{INPUT.query}}', description="Query text to compare against documents. Supports template variables: {{INPUT.query}}, etc.")
     document_field: Optional[StrictStr] = Field(default='content', description="Document field path containing text to rerank against")
-    top_k: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=null, description="Number of top documents to keep after reranking. If None, returns all documents in reranked order.")
+    top_k: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Number of top documents to keep after reranking. If None, returns all documents in reranked order.")
     score_field: Optional[StrictStr] = Field(default='scores.rerank', description="Document field path to store reranking scores")
     batch_size: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=32, description="Batch size for reranking inference calls")
     __properties: ClassVar[List[str]] = ["inference_name", "query", "document_field", "top_k", "score_field", "batch_size"]

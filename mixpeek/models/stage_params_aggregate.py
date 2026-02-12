@@ -32,9 +32,9 @@ class StageParamsAggregate(BaseModel):
     """ # noqa: E501
     aggregations: Optional[Annotated[List[AggregationOperation], Field(min_length=1)]] = Field(default=None, description="List of aggregation operations to compute. At least one aggregation is required. Multiple aggregations can be computed in a single stage.")
     group_by: Optional[List[GroupByFieldConfig]] = Field(default=None, description="OPTIONAL. Fields to group by before aggregating. When specified, aggregations are computed per-group. When None, aggregations are computed across all documents (global). Multiple fields create composite groups (e.g., category + year).")
-    sort_by: Optional[StrictStr] = Field(default='null', description="OPTIONAL. Metric alias to sort aggregation results by. Must match an alias from the aggregations list. Only applies when group_by is specified.")
+    sort_by: Optional[StrictStr] = Field(default=None, description="OPTIONAL. Metric alias to sort aggregation results by. Must match an alias from the aggregations list. Only applies when group_by is specified.")
     sort_order: Optional[StrictStr] = Field(default='desc', description="OPTIONAL. Sort order for aggregation results. 'desc': Highest values first (default). 'asc': Lowest values first.")
-    limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=null, description="OPTIONAL. Maximum number of aggregation results to return. Only applies when group_by is specified. Useful for 'top N' queries (e.g., top 10 categories by count).")
+    limit: Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]] = Field(default=None, description="OPTIONAL. Maximum number of aggregation results to return. Only applies when group_by is specified. Useful for 'top N' queries (e.g., top 10 categories by count).")
     include_documents: Optional[StrictBool] = Field(default=False, description="OPTIONAL. Whether to include the original documents in output. False (default): Only return aggregation results in metadata. True: Pass through documents and add aggregation results to metadata. Set to True when aggregations are supplementary to search results.")
     __properties: ClassVar[List[str]] = ["aggregations", "group_by", "sort_by", "sort_order", "limit", "include_documents"]
 

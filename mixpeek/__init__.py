@@ -15,7 +15,10 @@
 """  # noqa: E501
 
 
-__version__ = "0.81.0"
+__version__ = "0.82.0"
+
+# High-level client
+from mixpeek._client import Mixpeek as Mixpeek  # noqa: E402
 
 # Define package exports
 __all__ = [

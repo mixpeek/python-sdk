@@ -32,7 +32,7 @@ class StageParamsSample(BaseModel):
     strategy: Optional[StrictStr] = Field(default='random', description="OPTIONAL. Sampling strategy: - 'random': Uniform random sampling (default) - 'stratified': Proportional sampling across stratify_by field values - 'reservoir': Reservoir sampling (memory-efficient for large sets)")
     stratify_by: Optional[StrictStr] = Field(default='null', description="OPTIONAL. Field to stratify on (required when strategy='stratified'). Samples proportionally from each unique value of this field. Supports dot notation for nested fields.")
     min_per_stratum: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=1, description="OPTIONAL. Minimum documents per stratum (stratified mode). Ensures each category gets at least this many documents.")
-    seed: Optional[StrictInt] = Field(default=null, description="OPTIONAL. Random seed for reproducible sampling. Same seed + same input = same output. Leave None for non-deterministic sampling.")
+    seed: Optional[StrictInt] = Field(default=None, description="OPTIONAL. Random seed for reproducible sampling. Same seed + same input = same output. Leave None for non-deterministic sampling.")
     preserve_top_k: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=0, description="OPTIONAL. Always keep the top K documents by score, sample from remainder. Useful when you want to guarantee top results are included. Default: 0 (no preservation, sample from all).")
     __properties: ClassVar[List[str]] = ["count", "strategy", "stratify_by", "min_per_stratum", "seed", "preserve_top_k"]
 
