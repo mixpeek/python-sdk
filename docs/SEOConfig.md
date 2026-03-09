@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **twitter_site** | **str** | Twitter @handle for the site | [optional] [default to '@mixpeek']
 **twitter_creator** | **str** | Twitter @handle for content creator (optional) | [optional] 
 **robots** | **str** | Robots meta directive for search engine crawlers. Use &#39;noindex, nofollow&#39; to hide from search engines. | [optional] [default to 'index, follow']
-**canonical_url** | **str** | Canonical URL if different from default. Auto-set to https://apps.mixpeek.com/r/{public_name} if not provided. | [optional] 
+**canonical_url** | **str** | Canonical URL if different from default. Auto-set to https://mxp.co/r/{public_name} if not provided. | [optional] 
 **site_name** | **str** | Site name for OG tags and branding | [optional] [default to 'Mixpeek']
 **author** | **str** | Content author/creator name | [optional] 
 **locale** | **str** | Content language/locale | [optional] [default to 'en_US']

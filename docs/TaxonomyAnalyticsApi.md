@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **analyze_transition_paths_taxonomies_taxonomy_id_analytics**
-> PathAnalysisResponse analyze_transition_paths_taxonomies_taxonomy_id_analytics(taxonomy_id, path_analysis_request, authorization=authorization, x_namespace=x_namespace)
+> PathAnalysisResponse analyze_transition_paths_taxonomies_taxonomy_id_analytics(taxonomy_id, path_analysis_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Analyze multi-step transition paths
 
@@ -146,11 +146,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     path_analysis_request = mixpeek.PathAnalysisRequest() # PathAnalysisRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Analyze multi-step transition paths
-        api_response = api_instance.analyze_transition_paths_taxonomies_taxonomy_id_analytics(taxonomy_id, path_analysis_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.analyze_transition_paths_taxonomies_taxonomy_id_analytics(taxonomy_id, path_analysis_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyAnalyticsApi->analyze_transition_paths_taxonomies_taxonomy_id_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -167,6 +168,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **path_analysis_request** | [**PathAnalysisRequest**](PathAnalysisRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -191,13 +193,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyze_transition_paths_taxonomies_taxonomy_id_analytics_0**
-> PathAnalysisResponse analyze_transition_paths_taxonomies_taxonomy_id_analytics_0(taxonomy_id, path_analysis_request, authorization=authorization, x_namespace=x_namespace)
+> PathAnalysisResponse analyze_transition_paths_taxonomies_taxonomy_id_analytics_0(taxonomy_id, path_analysis_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Analyze multi-step transition paths
 
@@ -330,11 +332,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     path_analysis_request = mixpeek.PathAnalysisRequest() # PathAnalysisRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Analyze multi-step transition paths
-        api_response = api_instance.analyze_transition_paths_taxonomies_taxonomy_id_analytics_0(taxonomy_id, path_analysis_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.analyze_transition_paths_taxonomies_taxonomy_id_analytics_0(taxonomy_id, path_analysis_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyAnalyticsApi->analyze_transition_paths_taxonomies_taxonomy_id_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -351,6 +354,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **path_analysis_request** | [**PathAnalysisRequest**](PathAnalysisRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -375,13 +379,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **compute_step_transitions_taxonomies_taxonomy_id_analytics**
-> StepTransitionResponse compute_step_transitions_taxonomies_taxonomy_id_analytics(taxonomy_id, step_transition_request, authorization=authorization, x_namespace=x_namespace)
+> StepTransitionResponse compute_step_transitions_taxonomies_taxonomy_id_analytics(taxonomy_id, step_transition_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Compute step transition analytics
 
@@ -494,11 +498,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     step_transition_request = mixpeek.StepTransitionRequest() # StepTransitionRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Compute step transition analytics
-        api_response = api_instance.compute_step_transitions_taxonomies_taxonomy_id_analytics(taxonomy_id, step_transition_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.compute_step_transitions_taxonomies_taxonomy_id_analytics(taxonomy_id, step_transition_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyAnalyticsApi->compute_step_transitions_taxonomies_taxonomy_id_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -515,6 +520,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **step_transition_request** | [**StepTransitionRequest**](StepTransitionRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -539,13 +545,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **compute_step_transitions_taxonomies_taxonomy_id_analytics_0**
-> StepTransitionResponse compute_step_transitions_taxonomies_taxonomy_id_analytics_0(taxonomy_id, step_transition_request, authorization=authorization, x_namespace=x_namespace)
+> StepTransitionResponse compute_step_transitions_taxonomies_taxonomy_id_analytics_0(taxonomy_id, step_transition_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Compute step transition analytics
 
@@ -658,11 +664,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     step_transition_request = mixpeek.StepTransitionRequest() # StepTransitionRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Compute step transition analytics
-        api_response = api_instance.compute_step_transitions_taxonomies_taxonomy_id_analytics_0(taxonomy_id, step_transition_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.compute_step_transitions_taxonomies_taxonomy_id_analytics_0(taxonomy_id, step_transition_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyAnalyticsApi->compute_step_transitions_taxonomies_taxonomy_id_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -679,6 +686,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **step_transition_request** | [**StepTransitionRequest**](StepTransitionRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -703,13 +711,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_available_steps_taxonomies_taxonomy_id_analytics**
-> AvailableStepsResponse get_available_steps_taxonomies_taxonomy_id_analytics(taxonomy_id, collection_id, authorization=authorization, x_namespace=x_namespace)
+> AvailableStepsResponse get_available_steps_taxonomies_taxonomy_id_analytics(taxonomy_id, collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Available Steps
 
@@ -787,11 +795,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     collection_id = 'collection_id_example' # str | Collection ID to analyze
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Available Steps
-        api_response = api_instance.get_available_steps_taxonomies_taxonomy_id_analytics(taxonomy_id, collection_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_available_steps_taxonomies_taxonomy_id_analytics(taxonomy_id, collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyAnalyticsApi->get_available_steps_taxonomies_taxonomy_id_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -808,6 +817,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **collection_id** | **str**| Collection ID to analyze | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -832,13 +842,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_available_steps_taxonomies_taxonomy_id_analytics_0**
-> AvailableStepsResponse get_available_steps_taxonomies_taxonomy_id_analytics_0(taxonomy_id, collection_id, authorization=authorization, x_namespace=x_namespace)
+> AvailableStepsResponse get_available_steps_taxonomies_taxonomy_id_analytics_0(taxonomy_id, collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Available Steps
 
@@ -916,11 +926,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     collection_id = 'collection_id_example' # str | Collection ID to analyze
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Available Steps
-        api_response = api_instance.get_available_steps_taxonomies_taxonomy_id_analytics_0(taxonomy_id, collection_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_available_steps_taxonomies_taxonomy_id_analytics_0(taxonomy_id, collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyAnalyticsApi->get_available_steps_taxonomies_taxonomy_id_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -937,6 +948,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **collection_id** | **str**| Collection ID to analyze | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -961,8 +973,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

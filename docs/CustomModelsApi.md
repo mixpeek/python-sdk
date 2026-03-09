@@ -87,8 +87,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Model not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -179,8 +179,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Model not found |  -  |
-**500** | Deployment failed |  -  |
 **422** | Validation Error |  -  |
+**500** | Deployment failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -260,8 +260,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Model not enabled in namespace |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -348,8 +348,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Org model not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -426,8 +426,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Model not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -505,8 +505,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -581,8 +581,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -637,9 +637,9 @@ with mixpeek.ApiClient(configuration) as api_client:
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
     framework = 'framework_example' # str | ML framework (e.g., sentence-transformers) (optional)
     task_type = 'task_type_example' # str | Task type (e.g., embedding, classification) (optional)
-    num_cpus = 1.0 # float | CPU requirements (optional) (default to 1.0)
+    num_cpus = 1 # float | CPU requirements (optional) (default to 1)
     num_gpus = 0 # int | GPU requirements (optional) (default to 0)
-    memory_gb = 4.0 # float | Memory in GB (optional) (default to 4.0)
+    memory_gb = 4 # float | Memory in GB (optional) (default to 4)
 
     try:
         # Upload a custom model
@@ -665,9 +665,9 @@ Name | Type | Description  | Notes
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
  **framework** | **str**| ML framework (e.g., sentence-transformers) | [optional] 
  **task_type** | **str**| Task type (e.g., embedding, classification) | [optional] 
- **num_cpus** | **float**| CPU requirements | [optional] [default to 1.0]
+ **num_cpus** | **float**| CPU requirements | [optional] [default to 1]
  **num_gpus** | **int**| GPU requirements | [optional] [default to 0]
- **memory_gb** | **float**| Memory in GB | [optional] [default to 4.0]
+ **memory_gb** | **float**| Memory in GB | [optional] [default to 4]
 
 ### Return type
 
@@ -691,9 +691,9 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Custom models not supported |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **409** | Model already exists |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

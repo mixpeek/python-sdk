@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **collection_id** | **str** | REQUIRED. ID of the collection this document belongs to. Format: &#39;col_&#39; prefix + alphanumeric characters. Use for: Collection-scoped queries, filtering. | 
 **document_blobs** | [**List[BlobURLRef]**](BlobURLRef.md) | Document blobs with presigned URLs when requested | [optional] 
 **internal** | [**InternalPayloadModel**](InternalPayloadModel.md) | System-managed internal fields. Contains all Mixpeek-managed metadata including lineage, processing info, timestamps, and blob references. User-defined fields appear at root level alongside document_id and collection_id. | [optional] 
+**vectors** | **List[str]** | List of available named vectors for this document. Only present when return_vector_names&#x3D;true. Contains sorted vector names stored in Qdrant (e.g., [&#39;fashionsiglip_v1_embedding&#39;, &#39;text_extractor_v1_embedding&#39;]). Use individual names with return_vector_names&#x3D;[&#39;name&#39;] to fetch specific embeddings. | [optional] 
 
 ## Example
 

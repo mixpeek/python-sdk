@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **var_not** | [**List[AndInner]**](AndInner.md) | Logical NOT operation - all conditions must be false | [optional] 
 **case_sensitive** | **bool** | Whether to perform case-sensitive matching | [optional] [default to False]
 **var_field** | **str** | Field name to filter on | 
-**operator** | [**FilterOperator**](FilterOperator.md) | Comparison operator | [optional] 
-**value** | [**DynamicValue**](DynamicValue.md) |  | 
+**operator** | [**StageDefsFilterOperator**](StageDefsFilterOperator.md) | Comparison operator | [optional] 
+**value** | [**StageDefsDynamicValue**](StageDefsDynamicValue.md) |  | 
 
 ## Example
 

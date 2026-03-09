@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_taxonomy_template_taxonomies_from**
-> CreateTemplateFromResourceResponse create_taxonomy_template_taxonomies_from(taxonomy_id, create_template_from_resource_request, authorization=authorization, x_namespace=x_namespace)
+> CreateTemplateFromResourceResponse create_taxonomy_template_taxonomies_from(taxonomy_id, create_template_from_resource_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Taxonomy Template
 
@@ -46,11 +46,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | Taxonomy ID
     create_template_from_resource_request = mixpeek.CreateTemplateFromResourceRequest() # CreateTemplateFromResourceRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Taxonomy Template
-        api_response = api_instance.create_taxonomy_template_taxonomies_from(taxonomy_id, create_template_from_resource_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_taxonomy_template_taxonomies_from(taxonomy_id, create_template_from_resource_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyTemplatesApi->create_taxonomy_template_taxonomies_from:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,6 +68,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**| Taxonomy ID | 
  **create_template_from_resource_request** | [**CreateTemplateFromResourceRequest**](CreateTemplateFromResourceRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -91,13 +93,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_taxonomy_template_taxonomies**
-> BaseTemplateModel get_taxonomy_template_taxonomies(template_id, authorization=authorization, x_namespace=x_namespace)
+> BaseTemplateModel get_taxonomy_template_taxonomies(template_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Taxonomy Template
 
@@ -125,11 +127,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.TaxonomyTemplatesApi(api_client)
     template_id = 'template_id_example' # str | Template ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Taxonomy Template
-        api_response = api_instance.get_taxonomy_template_taxonomies(template_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_taxonomy_template_taxonomies(template_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyTemplatesApi->get_taxonomy_template_taxonomies:\n")
         pprint(api_response)
     except Exception as e:
@@ -145,6 +148,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **str**| Template ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -169,13 +173,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **instantiate_taxonomy_template_taxonomies**
-> InstantiatedTaxonomyTemplateResponse instantiate_taxonomy_template_taxonomies(template_id, instantiate_taxonomy_template_request, authorization=authorization, x_namespace=x_namespace)
+> InstantiatedTaxonomyTemplateResponse instantiate_taxonomy_template_taxonomies(template_id, instantiate_taxonomy_template_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Instantiate Taxonomy Template
 
@@ -205,11 +209,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     template_id = 'template_id_example' # str | Template ID
     instantiate_taxonomy_template_request = mixpeek.InstantiateTaxonomyTemplateRequest() # InstantiateTaxonomyTemplateRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Instantiate Taxonomy Template
-        api_response = api_instance.instantiate_taxonomy_template_taxonomies(template_id, instantiate_taxonomy_template_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.instantiate_taxonomy_template_taxonomies(template_id, instantiate_taxonomy_template_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of TaxonomyTemplatesApi->instantiate_taxonomy_template_taxonomies:\n")
         pprint(api_response)
     except Exception as e:
@@ -226,6 +231,7 @@ Name | Type | Description  | Notes
  **template_id** | **str**| Template ID | 
  **instantiate_taxonomy_template_request** | [**InstantiateTaxonomyTemplateRequest**](InstantiateTaxonomyTemplateRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -250,13 +256,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_taxonomy_templates_taxonomies**
-> ListTemplatesResponse list_taxonomy_templates_taxonomies(authorization=authorization, x_namespace=x_namespace, list_templates_request=list_templates_request)
+> ListTemplatesResponse list_taxonomy_templates_taxonomies(authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_templates_request=list_templates_request)
 
 List Taxonomy Templates
 
@@ -286,12 +292,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.TaxonomyTemplatesApi(api_client)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_templates_request = mixpeek.ListTemplatesRequest() # ListTemplatesRequest |  (optional)
 
     try:
         # List Taxonomy Templates
-        api_response = api_instance.list_taxonomy_templates_taxonomies(authorization=authorization, x_namespace=x_namespace, list_templates_request=list_templates_request)
+        api_response = api_instance.list_taxonomy_templates_taxonomies(authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_templates_request=list_templates_request)
         print("The response of TaxonomyTemplatesApi->list_taxonomy_templates_taxonomies:\n")
         pprint(api_response)
     except Exception as e:
@@ -306,6 +313,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_templates_request** | [**ListTemplatesRequest**](ListTemplatesRequest.md)|  | [optional] 
 
@@ -331,8 +339,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

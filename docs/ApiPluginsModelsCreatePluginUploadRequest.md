@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** | Plugin name (alphanumeric with underscores, no spaces) | 
 **version** | **str** | Semantic version string | 
 **description** | **str** | Optional description of the plugin | [optional] 
-**file_size_bytes** | **int** | Expected file size in bytes for quota validation | [optional] 
+**file_size_bytes** | **int** | Expected file size in bytes for quota validation (500MB max) | [optional] 
 **presigned_url_expiration** | **int** | Presigned URL expiration time in seconds (1-24 hours) | [optional] [default to 3600]
 
 ## Example

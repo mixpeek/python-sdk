@@ -7,7 +7,7 @@ Overall progress tracking for a migration.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **overall_status** | [**MigrationStatus**](MigrationStatus.md) | Overall migration status | 
-**overall_progress_percent** | **float** | Overall progress % | [optional] [default to 0.0]
+**overall_progress_percent** | **float** | Overall progress % | [optional] [default to 0]
 **current_stage** | [**MigrationStage**](MigrationStage.md) | Currently executing stage | [optional] 
 **stages** | [**List[StageProgress]**](StageProgress.md) | Progress for each stage | [optional] 
 **resources** | [**List[ResourceProgress]**](ResourceProgress.md) | Progress for each resource | [optional] 

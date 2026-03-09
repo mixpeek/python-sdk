@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **create_benchmark_retrievers**
-> BenchmarkResponse create_benchmark_retrievers(create_benchmark_request, authorization=authorization, x_namespace=x_namespace)
+> BenchmarkResponse create_benchmark_retrievers(create_benchmark_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create benchmark
 
@@ -44,11 +44,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverBenchmarksApi(api_client)
     create_benchmark_request = mixpeek.CreateBenchmarkRequest() # CreateBenchmarkRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create benchmark
-        api_response = api_instance.create_benchmark_retrievers(create_benchmark_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_benchmark_retrievers(create_benchmark_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverBenchmarksApi->create_benchmark_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_benchmark_request** | [**CreateBenchmarkRequest**](CreateBenchmarkRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -88,13 +90,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_benchmark_retrievers_0**
-> BenchmarkResponse create_benchmark_retrievers_0(create_benchmark_request, authorization=authorization, x_namespace=x_namespace)
+> BenchmarkResponse create_benchmark_retrievers_0(create_benchmark_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create benchmark
 
@@ -123,11 +125,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverBenchmarksApi(api_client)
     create_benchmark_request = mixpeek.CreateBenchmarkRequest() # CreateBenchmarkRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create benchmark
-        api_response = api_instance.create_benchmark_retrievers_0(create_benchmark_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_benchmark_retrievers_0(create_benchmark_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverBenchmarksApi->create_benchmark_retrievers_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -143,6 +146,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_benchmark_request** | [**CreateBenchmarkRequest**](CreateBenchmarkRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -167,13 +171,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_benchmark_retrievers**
-> delete_benchmark_retrievers(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+> delete_benchmark_retrievers(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete benchmark
 
@@ -200,11 +204,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverBenchmarksApi(api_client)
     benchmark_id = 'benchmark_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete benchmark
-        api_instance.delete_benchmark_retrievers(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+        api_instance.delete_benchmark_retrievers(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
     except Exception as e:
         print("Exception when calling RetrieverBenchmarksApi->delete_benchmark_retrievers: %s\n" % e)
 ```
@@ -218,6 +223,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **benchmark_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -242,13 +248,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_benchmark_retrievers_0**
-> delete_benchmark_retrievers_0(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+> delete_benchmark_retrievers_0(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete benchmark
 
@@ -275,11 +281,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverBenchmarksApi(api_client)
     benchmark_id = 'benchmark_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete benchmark
-        api_instance.delete_benchmark_retrievers_0(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+        api_instance.delete_benchmark_retrievers_0(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
     except Exception as e:
         print("Exception when calling RetrieverBenchmarksApi->delete_benchmark_retrievers_0: %s\n" % e)
 ```
@@ -293,6 +300,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **benchmark_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -317,13 +325,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_benchmark_retrievers**
-> BenchmarkResponse get_benchmark_retrievers(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+> BenchmarkResponse get_benchmark_retrievers(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get benchmark
 
@@ -351,11 +359,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverBenchmarksApi(api_client)
     benchmark_id = 'benchmark_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get benchmark
-        api_response = api_instance.get_benchmark_retrievers(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_benchmark_retrievers(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverBenchmarksApi->get_benchmark_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -371,6 +380,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **benchmark_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -395,13 +405,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_benchmark_retrievers_0**
-> BenchmarkResponse get_benchmark_retrievers_0(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+> BenchmarkResponse get_benchmark_retrievers_0(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get benchmark
 
@@ -429,11 +439,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverBenchmarksApi(api_client)
     benchmark_id = 'benchmark_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get benchmark
-        api_response = api_instance.get_benchmark_retrievers_0(benchmark_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_benchmark_retrievers_0(benchmark_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverBenchmarksApi->get_benchmark_retrievers_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -449,6 +460,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **benchmark_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -473,13 +485,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_benchmarks_retrievers**
-> BenchmarkListResponse list_benchmarks_retrievers(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, x_namespace=x_namespace)
+> BenchmarkListResponse list_benchmarks_retrievers(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 List benchmarks
 
@@ -510,11 +522,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     page = 1 # int | Page number (optional) (default to 1)
     page_size = 20 # int | Items per page (optional) (default to 20)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # List benchmarks
-        api_response = api_instance.list_benchmarks_retrievers(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.list_benchmarks_retrievers(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverBenchmarksApi->list_benchmarks_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -533,6 +546,7 @@ Name | Type | Description  | Notes
  **page** | **int**| Page number | [optional] [default to 1]
  **page_size** | **int**| Items per page | [optional] [default to 20]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -557,13 +571,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_benchmarks_retrievers_0**
-> BenchmarkListResponse list_benchmarks_retrievers_0(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, x_namespace=x_namespace)
+> BenchmarkListResponse list_benchmarks_retrievers_0(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 List benchmarks
 
@@ -594,11 +608,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     page = 1 # int | Page number (optional) (default to 1)
     page_size = 20 # int | Items per page (optional) (default to 20)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # List benchmarks
-        api_response = api_instance.list_benchmarks_retrievers_0(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.list_benchmarks_retrievers_0(retriever_id=retriever_id, status=status, page=page, page_size=page_size, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverBenchmarksApi->list_benchmarks_retrievers_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -617,6 +632,7 @@ Name | Type | Description  | Notes
  **page** | **int**| Page number | [optional] [default to 1]
  **page_size** | **int**| Items per page | [optional] [default to 20]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -641,8 +657,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

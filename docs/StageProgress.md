@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **status** | [**MigrationStatus**](MigrationStatus.md) | Stage status | 
 **started_at** | **datetime** | Stage start time | [optional] 
 **completed_at** | **datetime** | Stage completion time | [optional] 
-**progress_percent** | **float** | Progress % | [optional] [default to 0.0]
+**progress_percent** | **float** | Progress % | [optional] [default to 0]
 **items_total** | **int** | Total items to process | [optional] [default to 0]
 **items_completed** | **int** | Items completed | [optional] [default to 0]
 **items_failed** | **int** | Items failed | [optional] [default to 0]

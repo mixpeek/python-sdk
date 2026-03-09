@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **total_messages** | **int** | Total messages sent in session | [optional] [default to 0]
 **total_tokens** | **int** | Cumulative tokens used (for cost tracking) | [optional] [default to 0]
 **total_tool_calls** | **int** | Total tool invocations | [optional] [default to 0]
-**avg_latency_ms** | **float** | Average message latency in milliseconds | [optional] [default to 0.0]
+**avg_latency_ms** | **float** | Average message latency in milliseconds | [optional] [default to 0]
 
 ## Example
 

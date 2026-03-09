@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **timeout_ms** | **int** | Execution timeout in milliseconds (100ms-30s, default 5s) | [optional] [default to 5000]
 **max_output_size** | **int** | Max output size in bytes (default 100KB, max 1MB) | [optional] [default to 100000]
 **env** | **Dict[str, str]** | Environment variables available during execution. Supports INPUT and SECRET templates: {&#39;API_KEY&#39;: &#39;{{SECRET.stripe_key}}&#39;, &#39;USER_ID&#39;: &#39;{{INPUT.user_id}}&#39;} | [optional] 
-**on_error** | [**ErrorHandling**](ErrorHandling.md) | &#39;skip&#39;: On error, return input documents unchanged. &#39;raise&#39;: Fail entire pipeline on any error. | [optional] 
+**on_error** | [**StageDefsErrorHandling**](StageDefsErrorHandling.md) | &#39;skip&#39;: On error, return input documents unchanged. &#39;raise&#39;: Fail entire pipeline on any error. | [optional] 
 
 ## Example
 

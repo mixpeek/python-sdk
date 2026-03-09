@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **namespace_id** | **str** | Unique identifier for the namespace | [optional] 
 **namespace_name** | **str** | Name of the namespace | 
+**namespace_type** | [**NamespaceType**](NamespaceType.md) | Type of namespace. STANDARD for regular namespaces, MARKETPLACE for curated datasets that can be subscribed to. | [optional] 
 **infrastructure** | [**NamespaceInfrastructure**](NamespaceInfrastructure.md) | Infrastructure configuration for the namespace (Ray, Qdrant). | [optional] 
 **cluster_id** | **str** | Infrastructure cluster ID for this namespace (Enterprise only). When set, this namespace uses dedicated Anyscale/Ray + Qdrant cluster. If None, uses shared infrastructure or organization-level infrastructure. Format: iclstr_xxx | [optional] 
 **description** | **str** | Description of the namespace | [optional] 

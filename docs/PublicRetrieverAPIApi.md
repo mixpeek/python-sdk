@@ -14,15 +14,16 @@ Method | HTTP request | Description
 
 
 # **execute_retriever_name**
-> object execute_retriever_name(public_name, x_public_api_key, retriever_execution_request, return_presigned_urls=return_presigned_urls, x_retriever_password=x_retriever_password)
+> object execute_retriever_name(public_name, retriever_execution_request, return_presigned_urls=return_presigned_urls, x_public_api_key=x_public_api_key, x_retriever_password=x_retriever_password)
 
 Execute Public Retriever
 
 Execute a published retriever (public endpoint).
 
 **Authentication:**
-- Requires `X-Public-API-Key` header with the retriever's public API key
-- If password-protected, also requires `X-Retriever-Password` header
+- API key is OPTIONAL for public retrievers
+- Supports: no key, prk_ keys (deprecated), or ret_sk_ keys
+- If password-protected, requires `X-Retriever-Password` header
 
 **Rate Limiting:**
 - Subject to per-retriever rate limits (per minute/hour/day)
@@ -34,10 +35,9 @@ Execute a published retriever (public endpoint).
 - Includes `execution_id` for interaction tracking
 - Presigned URLs returned by default (return_presigned_urls=true) for media rendering
 
-**Example:**
+**Example (no API key - recommended for public access):**
 ```bash
 curl -X POST "https://api.mixpeek.com/v1/public/retrievers/video-search/execute" \
-  -H "X-Public-API-Key: prk_abc123..." \
   -H "Content-Type: application/json" \
   -d '{
     "inputs": {"query": "red car"},
@@ -45,10 +45,10 @@ curl -X POST "https://api.mixpeek.com/v1/public/retrievers/video-search/execute"
   }'
 ```
 
-**Example with return_presigned_urls disabled:**
+**Example with ret_sk_ key (for SDK/programmatic access):**
 ```bash
-curl -X POST "https://api.mixpeek.com/v1/public/retrievers/video-search/execute?return_presigned_urls=false" \
-  -H "X-Public-API-Key: prk_abc123..." \
+curl -X POST "https://api.mixpeek.com/v1/public/retrievers/video-search/execute" \
+  -H "X-Public-API-Key: ret_sk_abc123..." \
   -H "Content-Type: application/json" \
   -d '{
     "inputs": {"query": "red car"},
@@ -77,14 +77,14 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.PublicRetrieverAPIApi(api_client)
     public_name = 'public_name_example' # str | Public name of the published retriever
-    x_public_api_key = 'x_public_api_key_example' # str | 
     retriever_execution_request = mixpeek.RetrieverExecutionRequest() # RetrieverExecutionRequest | 
     return_presigned_urls = True # bool | Generate fresh presigned download URLs for all blobs with S3 storage. Default: True for public retrievers to enable media rendering. Set to False if you only need metadata without URLs. (optional) (default to True)
+    x_public_api_key = 'x_public_api_key_example' # str |  (optional)
     x_retriever_password = 'x_retriever_password_example' # str |  (optional)
 
     try:
         # Execute Public Retriever
-        api_response = api_instance.execute_retriever_name(public_name, x_public_api_key, retriever_execution_request, return_presigned_urls=return_presigned_urls, x_retriever_password=x_retriever_password)
+        api_response = api_instance.execute_retriever_name(public_name, retriever_execution_request, return_presigned_urls=return_presigned_urls, x_public_api_key=x_public_api_key, x_retriever_password=x_retriever_password)
         print("The response of PublicRetrieverAPIApi->execute_retriever_name:\n")
         pprint(api_response)
     except Exception as e:
@@ -99,9 +99,9 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_name** | **str**| Public name of the published retriever | 
- **x_public_api_key** | **str**|  | 
  **retriever_execution_request** | [**RetrieverExecutionRequest**](RetrieverExecutionRequest.md)|  | 
  **return_presigned_urls** | **bool**| Generate fresh presigned download URLs for all blobs with S3 storage. Default: True for public retrievers to enable media rendering. Set to False if you only need metadata without URLs. | [optional] [default to True]
+ **x_public_api_key** | **str**|  | [optional] 
  **x_retriever_password** | **str**|  | [optional] 
 
 ### Return type
@@ -126,8 +126,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -138,8 +138,11 @@ Get Public Retriever Config
 
 Get display configuration for public page rendering.
 
+⚠️ **DEPRECATED**: Use `/v1/marketplace/catalog/{public_name}/config` instead.
+This endpoint is maintained for backwards compatibility but may be removed in the future.
+
 Returns the UI configuration needed to render the public search interface.
-Used by the frontend app at apps.mixpeek.com to dynamically build the UI.
+Used by the frontend app at mxp.co to dynamically build the UI.
 
 **Authentication:**
 - NO authentication required - this endpoint is public
@@ -152,9 +155,14 @@ Used by the frontend app at apps.mixpeek.com to dynamically build the UI.
 - Password protection status
 - Public API key for subsequent authenticated requests
 
-**Example:**
+**Example (deprecated):**
 ```bash
 curl -X GET "https://api.mixpeek.com/v1/public/retrievers/video-search/config"
+```
+
+**Example (recommended):**
+```bash
+curl -X GET "https://api.mixpeek.com/v1/marketplace/catalog/video-search/config"
 ```
 
 ### Example
@@ -219,8 +227,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -342,8 +350,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -472,13 +480,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **track_interaction_batch_retrievers_name**
-> object track_interaction_batch_retrievers_name(public_name, x_public_api_key, public_interaction_batch_request, x_session_id=x_session_id)
+> object track_interaction_batch_retrievers_name(public_name, public_interaction_batch_request, x_session_id=x_session_id, x_public_api_key=x_public_api_key)
 
 Track Interaction Batch
 
@@ -488,7 +496,7 @@ More efficient than sending individual interaction requests.
 Use this for batching viewport visibility, bulk actions, etc.
 
 **Authentication:**
-- Requires `X-Public-API-Key` header
+- API key is OPTIONAL (same as execute endpoint)
 - Password NOT required (tracking should work even without auth)
 
 **Recommended Headers:**
@@ -500,7 +508,6 @@ Use this for batching viewport visibility, bulk actions, etc.
 **Example:**
 ```bash
 curl -X POST "https://api.mixpeek.com/v1/public/retrievers/video-search/interactions/batch" \
-  -H "X-Public-API-Key: prk_abc123..." \
   -H "X-Session-ID: sess_xyz..." \
   -H "Content-Type: application/json" \
   -d '{
@@ -542,13 +549,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.PublicRetrieverAPIApi(api_client)
     public_name = 'public_name_example' # str | Public name of the published retriever
-    x_public_api_key = 'x_public_api_key_example' # str | 
     public_interaction_batch_request = mixpeek.PublicInteractionBatchRequest() # PublicInteractionBatchRequest | 
     x_session_id = 'x_session_id_example' # str |  (optional)
+    x_public_api_key = 'x_public_api_key_example' # str |  (optional)
 
     try:
         # Track Interaction Batch
-        api_response = api_instance.track_interaction_batch_retrievers_name(public_name, x_public_api_key, public_interaction_batch_request, x_session_id=x_session_id)
+        api_response = api_instance.track_interaction_batch_retrievers_name(public_name, public_interaction_batch_request, x_session_id=x_session_id, x_public_api_key=x_public_api_key)
         print("The response of PublicRetrieverAPIApi->track_interaction_batch_retrievers_name:\n")
         pprint(api_response)
     except Exception as e:
@@ -563,9 +570,9 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_name** | **str**| Public name of the published retriever | 
- **x_public_api_key** | **str**|  | 
  **public_interaction_batch_request** | [**PublicInteractionBatchRequest**](PublicInteractionBatchRequest.md)|  | 
  **x_session_id** | **str**|  | [optional] 
+ **x_public_api_key** | **str**|  | [optional] 
 
 ### Return type
 
@@ -589,13 +596,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **track_interaction_retrievers_name**
-> object track_interaction_retrievers_name(public_name, x_public_api_key, public_interaction_request, x_session_id=x_session_id)
+> object track_interaction_retrievers_name(public_name, public_interaction_request, x_session_id=x_session_id, x_public_api_key=x_public_api_key)
 
 Track Interaction
 
@@ -605,7 +612,7 @@ Records user engagement (clicks, views, etc.) for analytics and
 potential search optimization (Learning to Rank).
 
 **Authentication:**
-- Requires `X-Public-API-Key` header
+- API key is OPTIONAL (same as execute endpoint)
 - Password NOT required (tracking should work even without auth)
 
 **Recommended Headers:**
@@ -626,7 +633,6 @@ potential search optimization (Learning to Rank).
 **Example:**
 ```bash
 curl -X POST "https://api.mixpeek.com/v1/public/retrievers/video-search/interactions" \
-  -H "X-Public-API-Key: prk_abc123..." \
   -H "X-Session-ID: sess_xyz..." \
   -H "Content-Type: application/json" \
   -d '{
@@ -659,13 +665,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.PublicRetrieverAPIApi(api_client)
     public_name = 'public_name_example' # str | Public name of the published retriever
-    x_public_api_key = 'x_public_api_key_example' # str | 
     public_interaction_request = mixpeek.PublicInteractionRequest() # PublicInteractionRequest | 
     x_session_id = 'x_session_id_example' # str |  (optional)
+    x_public_api_key = 'x_public_api_key_example' # str |  (optional)
 
     try:
         # Track Interaction
-        api_response = api_instance.track_interaction_retrievers_name(public_name, x_public_api_key, public_interaction_request, x_session_id=x_session_id)
+        api_response = api_instance.track_interaction_retrievers_name(public_name, public_interaction_request, x_session_id=x_session_id, x_public_api_key=x_public_api_key)
         print("The response of PublicRetrieverAPIApi->track_interaction_retrievers_name:\n")
         pprint(api_response)
     except Exception as e:
@@ -680,9 +686,9 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **public_name** | **str**| Public name of the published retriever | 
- **x_public_api_key** | **str**|  | 
  **public_interaction_request** | [**PublicInteractionRequest**](PublicInteractionRequest.md)|  | 
  **x_session_id** | **str**|  | [optional] 
+ **x_public_api_key** | **str**|  | [optional] 
 
 ### Return type
 
@@ -706,8 +712,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -823,8 +829,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

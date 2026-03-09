@@ -7,7 +7,7 @@ Aggregate statistics for a list of documents.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_documents** | **int** | Total number of documents in the result | [optional] [default to 0]
-**avg_blobs_per_document** | **float** | Average number of source blobs per document | [optional] [default to 0.0]
+**avg_blobs_per_document** | **float** | Average number of source blobs per document | [optional] [default to 0]
 **total_groups** | **int** | Total number of groups when group_by is used. None for non-grouped results. | [optional] 
 **avg_documents_per_group** | **float** | Average number of documents per group when group_by is used. None for non-grouped results. | [optional] 
 

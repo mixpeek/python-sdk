@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **cancel_execution_clusters_id_run**
-> object cancel_execution_clusters_id_run(cluster_id, run_id, authorization=authorization, x_namespace=x_namespace)
+> object cancel_execution_clusters_id_run(cluster_id, run_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Cancel Execution
 
@@ -48,11 +48,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     cluster_id = 'cluster_id_example' # str | Cluster ID
     run_id = 'run_id_example' # str | Run ID to cancel
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Cancel Execution
-        api_response = api_instance.cancel_execution_clusters_id_run(cluster_id, run_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.cancel_execution_clusters_id_run(cluster_id, run_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of ClusterExecutionsApi->cancel_execution_clusters_id_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
  **cluster_id** | **str**| Cluster ID | 
  **run_id** | **str**| Run ID to cancel | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -93,13 +95,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cluster_execution**
-> ClusterExecutionResult get_cluster_execution(cluster_id, authorization=authorization, x_namespace=x_namespace)
+> ClusterExecutionResult get_cluster_execution(cluster_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Latest Cluster Execution
 
@@ -140,11 +142,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.ClusterExecutionsApi(api_client)
     cluster_id = 'cluster_id_example' # str | Cluster ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Latest Cluster Execution
-        api_response = api_instance.get_cluster_execution(cluster_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_cluster_execution(cluster_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of ClusterExecutionsApi->get_cluster_execution:\n")
         pprint(api_response)
     except Exception as e:
@@ -160,6 +163,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cluster_id** | **str**| Cluster ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -184,13 +188,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cluster_execution_by_run**
-> ClusterExecutionResult get_cluster_execution_by_run(cluster_id, run_id, authorization=authorization, x_namespace=x_namespace)
+> ClusterExecutionResult get_cluster_execution_by_run(cluster_id, run_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Specific Cluster Execution
 
@@ -222,11 +226,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     cluster_id = 'cluster_id_example' # str | Cluster ID
     run_id = 'run_id_example' # str | Run ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Specific Cluster Execution
-        api_response = api_instance.get_cluster_execution_by_run(cluster_id, run_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_cluster_execution_by_run(cluster_id, run_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of ClusterExecutionsApi->get_cluster_execution_by_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -243,6 +248,7 @@ Name | Type | Description  | Notes
  **cluster_id** | **str**| Cluster ID | 
  **run_id** | **str**| Run ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -267,13 +273,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_cluster_executions**
-> ListClusterExecutionsResponse list_cluster_executions(cluster_id, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_cluster_executions_request=list_cluster_executions_request)
+> ListClusterExecutionsResponse list_cluster_executions(cluster_id, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_cluster_executions_request=list_cluster_executions_request)
 
 List Cluster Execution History
 
@@ -326,12 +332,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_cluster_executions_request = mixpeek.ListClusterExecutionsRequest() # ListClusterExecutionsRequest |  (optional)
 
     try:
         # List Cluster Execution History
-        api_response = api_instance.list_cluster_executions(cluster_id, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_cluster_executions_request=list_cluster_executions_request)
+        api_response = api_instance.list_cluster_executions(cluster_id, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_cluster_executions_request=list_cluster_executions_request)
         print("The response of ClusterExecutionsApi->list_cluster_executions:\n")
         pprint(api_response)
     except Exception as e:
@@ -351,6 +358,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_cluster_executions_request** | [**ListClusterExecutionsRequest**](ListClusterExecutionsRequest.md)|  | [optional] 
 
@@ -376,8 +384,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

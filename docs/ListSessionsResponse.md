@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**List[GetSessionResponse]**](GetSessionResponse.md) | Session list | 
 **total** | **int** | Total matching sessions | 
-**pagination** | **object** | Pagination information | 
+**pagination** | **Dict[str, object]** | Pagination information | 
 
 ## Example
 

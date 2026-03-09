@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**confirm_payment_method_organizations_billing**](OrganizationBillingApi.md#confirm_payment_method_organizations_billing) | **POST** /v1/organizations/billing/confirm-payment-method | Confirm Payment Method
 [**disable_auto_billing_organizations**](OrganizationBillingApi.md#disable_auto_billing_organizations) | **POST** /v1/organizations/billing/disable-auto-billing | Disable Auto Billing
 [**enable_auto_billing_organizations**](OrganizationBillingApi.md#enable_auto_billing_organizations) | **POST** /v1/organizations/billing/enable-auto-billing | Enable Auto Billing
+[**generate_invoice_now_organizations_billing**](OrganizationBillingApi.md#generate_invoice_now_organizations_billing) | **POST** /v1/organizations/billing/generate-invoice | Generate Invoice Now
 [**get_credit_balance_organizations_billing**](OrganizationBillingApi.md#get_credit_balance_organizations_billing) | **GET** /v1/organizations/billing/balance | Get Credit Balance
 [**get_current_usage_organizations_billing**](OrganizationBillingApi.md#get_current_usage_organizations_billing) | **GET** /v1/organizations/billing/usage/current | Get Current Usage
 [**get_payment_method_organizations_billing**](OrganizationBillingApi.md#get_payment_method_organizations_billing) | **GET** /v1/organizations/billing/payment-method | Get Payment Method
@@ -105,8 +106,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -190,8 +191,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -276,8 +277,102 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **generate_invoice_now_organizations_billing**
+> Dict[str, object] generate_invoice_now_organizations_billing(authorization=authorization, body_generate_invoice_now_v1_organizations_billing_generate_invoice_post=body_generate_invoice_now_v1_organizations_billing_generate_invoice_post)
+
+Generate Invoice Now
+
+Manually trigger invoice generation for this organization.
+
+Useful for testing the billing flow or generating retroactive invoices.
+Requires ADMIN permission.
+
+**Example:**
+```python
+# Dry run
+response = await client.post(
+    "/v1/organizations/billing/generate-invoice",
+    json={"dry_run": true}
+)
+
+# Actually generate
+response = await client.post(
+    "/v1/organizations/billing/generate-invoice",
+    json={"billing_month": "2026-01"}
+)
+```
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.body_generate_invoice_now_v1_organizations_billing_generate_invoice_post import BodyGenerateInvoiceNowV1OrganizationsBillingGenerateInvoicePost
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.OrganizationBillingApi(api_client)
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    body_generate_invoice_now_v1_organizations_billing_generate_invoice_post = mixpeek.BodyGenerateInvoiceNowV1OrganizationsBillingGenerateInvoicePost() # BodyGenerateInvoiceNowV1OrganizationsBillingGenerateInvoicePost |  (optional)
+
+    try:
+        # Generate Invoice Now
+        api_response = api_instance.generate_invoice_now_organizations_billing(authorization=authorization, body_generate_invoice_now_v1_organizations_billing_generate_invoice_post=body_generate_invoice_now_v1_organizations_billing_generate_invoice_post)
+        print("The response of OrganizationBillingApi->generate_invoice_now_organizations_billing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling OrganizationBillingApi->generate_invoice_now_organizations_billing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **body_generate_invoice_now_v1_organizations_billing_generate_invoice_post** | [**BodyGenerateInvoiceNowV1OrganizationsBillingGenerateInvoicePost**](BodyGenerateInvoiceNowV1OrganizationsBillingGenerateInvoicePost.md)|  | [optional] 
+
+### Return type
+
+**Dict[str, object]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -363,8 +458,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -450,8 +545,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -537,8 +632,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -625,8 +720,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -722,8 +817,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -814,8 +909,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -908,8 +1003,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1028,8 +1123,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

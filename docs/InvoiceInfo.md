@@ -7,8 +7,8 @@ Information about a monthly invoice.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **invoice_id** | **str** | Stripe Invoice ID | 
-**invoice_url** | **str** | Stripe-hosted invoice URL | 
-**invoice_pdf** | **str** | PDF download URL | 
+**invoice_url** | **str** | Stripe-hosted invoice URL (None if not yet finalized) | [optional] 
+**invoice_pdf** | **str** | PDF download URL (None if not yet finalized) | [optional] 
 **amount_due** | **int** | Amount due in cents | 
 **amount_paid** | **int** | Amount paid in cents | 
 **status** | **str** | Invoice status | 

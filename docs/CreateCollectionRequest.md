@@ -12,10 +12,12 @@ Name | Type | Description | Notes
 **input_schema** | [**BucketSchemaInput**](BucketSchemaInput.md) | Input schema for the collection. If not provided, inferred from source bucket&#39;s bucket_schema or source collection&#39;s output_schema. REQUIRED for input_mappings to work - defines what fields can be mapped to feature extractors. | [optional] 
 **feature_extractor** | [**SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput**](SharedCollectionFeaturesExtractorsModelsFeatureExtractorConfigInput.md) | Single feature extractor for this collection. Use field_passthrough within the extractor config to include additional source fields. For multiple extractors, create multiple collections and use collection-to-collection pipelines. | 
 **enabled** | **bool** | Whether the collection is enabled | [optional] [default to True]
-**metadata** | **object** | Additional metadata for the collection | [optional] 
+**metadata** | **Dict[str, object]** | Additional metadata for the collection | [optional] 
+**schedule** | [**CollectionScheduleConfig**](CollectionScheduleConfig.md) | Optional schedule for automatic re-processing. Creates a COLLECTION_TRIGGER trigger behind the scenes. Supports cron and interval schedules. | [optional] 
 **taxonomy_applications** | [**List[TaxonomyApplicationConfigInput]**](TaxonomyApplicationConfigInput.md) | Optional taxonomy applications to automatically enrich documents in this collection. Each taxonomy will classify/enrich documents based on configured retriever matches. | [optional] 
 **cluster_applications** | [**List[ClusterApplicationConfig]**](ClusterApplicationConfig.md) | Optional cluster applications to automatically execute when batch processing completes. Each cluster enriches documents with cluster assignments (cluster_id, cluster_label, etc.). | [optional] 
 **alert_applications** | [**List[AlertApplicationConfigInput]**](AlertApplicationConfigInput.md) | Optional alert applications to automatically execute when documents are ingested. Each alert runs a retriever against new documents and sends notifications if matches are found. Supports both ON_INGEST (triggered per batch) and SCHEDULED (periodic) execution modes. | [optional] 
+**retriever_enrichments** | [**List[RetrieverEnrichmentConfigInput]**](RetrieverEnrichmentConfigInput.md) | Optional retriever enrichments to run on documents during post-processing. Each enrichment executes a retriever pipeline and writes selected result fields back to the document. Use for: LLM classification, cross-collection joins, multi-stage enrichment at ingestion time. | [optional] 
 
 ## Example
 

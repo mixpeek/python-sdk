@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **total_buckets** | **int** | Total number of buckets across all namespaces | [optional] [default to 0]
 **total_collections** | **int** | Total number of collections across all namespaces | [optional] [default to 0]
 **total_objects** | **int** | Total number of objects across all namespaces | [optional] [default to 0]
-**avg_feature_extractors_per_namespace** | **float** | Average number of feature extractors per namespace | [optional] [default to 0.0]
-**avg_payload_indexes_per_namespace** | **float** | Average number of payload indexes per namespace | [optional] [default to 0.0]
-**avg_documents_per_namespace** | **float** | Average number of documents per namespace | [optional] [default to 0.0]
-**avg_buckets_per_namespace** | **float** | Average number of buckets per namespace | [optional] [default to 0.0]
-**avg_collections_per_namespace** | **float** | Average number of collections per namespace | [optional] [default to 0.0]
-**avg_objects_per_namespace** | **float** | Average number of objects per namespace | [optional] [default to 0.0]
+**avg_feature_extractors_per_namespace** | **float** | Average number of feature extractors per namespace | [optional] [default to 0]
+**avg_payload_indexes_per_namespace** | **float** | Average number of payload indexes per namespace | [optional] [default to 0]
+**avg_documents_per_namespace** | **float** | Average number of documents per namespace | [optional] [default to 0]
+**avg_buckets_per_namespace** | **float** | Average number of buckets per namespace | [optional] [default to 0]
+**avg_collections_per_namespace** | **float** | Average number of collections per namespace | [optional] [default to 0]
+**avg_objects_per_namespace** | **float** | Average number of objects per namespace | [optional] [default to 0]
 
 ## Example
 

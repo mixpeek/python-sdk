@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_key_breakdown_organizations_id_usage_endpoints**
-> List[object] get_key_breakdown_organizations_id_usage_endpoints(key_id, start=start, end=end, authorization=authorization)
+> List[Dict[str, object]] get_key_breakdown_organizations_id_usage_endpoints(key_id, start=start, end=end, authorization=authorization)
 
 Get Api Key Endpoint Breakdown
 
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -83,13 +83,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_key_usage_organizations**
-> object get_key_usage_organizations(key_id, start=start, end=end, authorization=authorization)
+> Dict[str, object] get_key_usage_organizations(key_id, start=start, end=end, authorization=authorization)
 
 Get Api Key Usage
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -162,13 +162,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_org_usage_organizations**
-> object get_org_usage_organizations(start=start, end=end, authorization=authorization)
+> Dict[str, object] get_org_usage_organizations(start=start, end=end, authorization=authorization)
 
 Get Org Usage
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -239,8 +239,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

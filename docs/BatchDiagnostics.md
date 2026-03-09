@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **bucket_id** | **str** | Source bucket ID | 
 **current_tier** | **int** | Current tier being processed | [optional] [default to 0]
 **total_tiers** | **int** | Total number of tiers | [optional] [default to 1]
-**overall_progress** | **float** | Overall progress percentage (0-100) | [optional] [default to 0.0]
+**overall_progress** | **float** | Overall progress percentage (0-100) | [optional] [default to 0]
 **created_at** | **datetime** | When batch was created | [optional] 
 **submitted_at** | **datetime** | When batch was submitted | [optional] 
 **started_at** | **datetime** | When processing started | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **estimated_completion** | **datetime** | Estimated completion time | [optional] 
 **tiers** | [**List[TierDiagnostic]**](TierDiagnostic.md) | Diagnostic info for each tier | [optional] 
 **collections** | [**List[CollectionDiagnostic]**](CollectionDiagnostic.md) | Status of target collections | [optional] 
-**performance_summary** | **object** | Performance metrics summary (available after completion) | [optional] 
+**performance_summary** | **Dict[str, object]** | Performance metrics summary (available after completion) | [optional] 
 **insights** | [**List[PerformanceInsight]**](PerformanceInsight.md) | Performance insights and recommendations | [optional] 
 **has_failures** | **bool** | Whether batch has any failures | [optional] [default to False]
 **failed_tier_count** | **int** | Number of failed tiers | [optional] [default to 0]

@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **execute_adhoc_retriever**
-> object execute_adhoc_retriever(adhoc_execute_request, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, authorization=authorization, x_namespace=x_namespace)
+> object execute_adhoc_retriever(adhoc_execute_request, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Execute Adhoc Retriever
 
@@ -79,11 +79,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     return_presigned_urls = False # bool |  (optional) (default to False)
     return_vectors = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Execute Adhoc Retriever
-        api_response = api_instance.execute_adhoc_retriever(adhoc_execute_request, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.execute_adhoc_retriever(adhoc_execute_request, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AdhocRetrieversApi->execute_adhoc_retriever:\n")
         pprint(api_response)
     except Exception as e:
@@ -101,6 +102,7 @@ Name | Type | Description  | Notes
  **return_presigned_urls** | **bool**|  | [optional] [default to False]
  **return_vectors** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -125,13 +127,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_adhoc_execution_retrievers**
-> AdhocExecutionDetail get_adhoc_execution_retrievers(execution_id, authorization=authorization, x_namespace=x_namespace)
+> AdhocExecutionDetail get_adhoc_execution_retrievers(execution_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Adhoc Execution
 
@@ -175,11 +177,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AdhocRetrieversApi(api_client)
     execution_id = 'execution_id_example' # str | Execution identifier.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Adhoc Execution
-        api_response = api_instance.get_adhoc_execution_retrievers(execution_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_adhoc_execution_retrievers(execution_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AdhocRetrieversApi->get_adhoc_execution_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -195,6 +198,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **execution_id** | **str**| Execution identifier. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -219,13 +223,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_adhoc_executions_retrievers**
-> ListAdhocExecutionsResponse list_adhoc_executions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_adhoc_executions_request=list_adhoc_executions_request)
+> ListAdhocExecutionsResponse list_adhoc_executions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_adhoc_executions_request=list_adhoc_executions_request)
 
 List Adhoc Executions
 
@@ -275,12 +279,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_adhoc_executions_request = mixpeek.ListAdhocExecutionsRequest() # ListAdhocExecutionsRequest |  (optional)
 
     try:
         # List Adhoc Executions
-        api_response = api_instance.list_adhoc_executions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_adhoc_executions_request=list_adhoc_executions_request)
+        api_response = api_instance.list_adhoc_executions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_adhoc_executions_request=list_adhoc_executions_request)
         print("The response of AdhocRetrieversApi->list_adhoc_executions_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -299,6 +304,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_adhoc_executions_request** | [**ListAdhocExecutionsRequest**](ListAdhocExecutionsRequest.md)|  | [optional] 
 
@@ -324,8 +330,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

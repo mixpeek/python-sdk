@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_interaction_retrievers**
-> InteractionResponse create_interaction_retrievers(search_interaction, authorization=authorization, x_namespace=x_namespace)
+> InteractionResponse create_interaction_retrievers(search_interaction, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Interaction
 
@@ -40,11 +40,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverInteractionsApi(api_client)
     search_interaction = mixpeek.SearchInteraction() # SearchInteraction | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Interaction
-        api_response = api_instance.create_interaction_retrievers(search_interaction, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_interaction_retrievers(search_interaction, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverInteractionsApi->create_interaction_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -60,6 +61,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search_interaction** | [**SearchInteraction**](SearchInteraction.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -84,13 +86,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_interaction_retrievers**
-> object delete_interaction_retrievers(interaction_id, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] delete_interaction_retrievers(interaction_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete Interaction
 
@@ -117,11 +119,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverInteractionsApi(api_client)
     interaction_id = 'interaction_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Interaction
-        api_response = api_instance.delete_interaction_retrievers(interaction_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.delete_interaction_retrievers(interaction_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverInteractionsApi->delete_interaction_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -137,11 +140,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **interaction_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -161,13 +165,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_interaction_retrievers**
-> InteractionResponse get_interaction_retrievers(interaction_id, authorization=authorization, x_namespace=x_namespace)
+> InteractionResponse get_interaction_retrievers(interaction_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Interaction
 
@@ -195,11 +199,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.RetrieverInteractionsApi(api_client)
     interaction_id = 'interaction_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Interaction
-        api_response = api_instance.get_interaction_retrievers(interaction_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_interaction_retrievers(interaction_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of RetrieverInteractionsApi->get_interaction_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -215,6 +220,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **interaction_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -239,13 +245,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_interactions_retrievers**
-> ListInteractionsResponse list_interactions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_interactions_request=list_interactions_request)
+> ListInteractionsResponse list_interactions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_interactions_request=list_interactions_request)
 
 List Interactions
 
@@ -279,12 +285,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_interactions_request = mixpeek.ListInteractionsRequest() # ListInteractionsRequest |  (optional)
 
     try:
         # List Interactions
-        api_response = api_instance.list_interactions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_interactions_request=list_interactions_request)
+        api_response = api_instance.list_interactions_retrievers(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_interactions_request=list_interactions_request)
         print("The response of RetrieverInteractionsApi->list_interactions_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -303,6 +310,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_interactions_request** | [**ListInteractionsRequest**](ListInteractionsRequest.md)|  | [optional] 
 
@@ -328,8 +336,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

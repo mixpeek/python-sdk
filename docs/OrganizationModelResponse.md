@@ -11,12 +11,15 @@ Name | Type | Description | Notes
 **logo_url** | **str** |  | [optional] 
 **account_type** | [**AccountTier**](AccountTier.md) |  | 
 **credit_count** | **int** |  | 
-**metadata** | **object** |  | [optional] 
+**metadata** | **Dict[str, object]** |  | [optional] 
 **billing_email** | **str** |  | [optional] 
 **rate_limits** | [**BaseRateLimits**](BaseRateLimits.md) |  | 
+**auto_billing_enabled** | **bool** |  | [optional] [default to False]
+**billing_cycle_start** | **int** |  | [optional] [default to 1]
+**current_month_usage** | **int** |  | [optional] [default to 0]
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
-**users** | **List[object]** |  | [optional] 
+**users** | **List[Dict[str, object]]** |  | [optional] 
 
 ## Example
 

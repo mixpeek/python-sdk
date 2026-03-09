@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **processed_documents** | **int** | Number of documents processed | [optional] [default to 0]
 **total_documents** | **int** | Total documents to process | [optional] [default to 0]
-**percentage** | **float** | Progress percentage (0-100) | [optional] [default to 0.0]
+**percentage** | **float** | Progress percentage (0-100) | [optional] [default to 0]
 
 ## Example
 

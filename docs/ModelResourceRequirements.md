@@ -6,7 +6,7 @@ Resource requirements for model deployment.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**num_cpus** | **float** | Number of CPUs | [optional] [default to 1.0]
+**num_cpus** | **float** | Number of CPUs | [optional] [default to 1]
 **num_gpus** | **int** | Number of GPUs | [optional] [default to 0]
 **memory** | **int** | Memory in bytes (default 4GB) | [optional] [default to 4294967296]
 

@@ -15,13 +15,14 @@ Name | Type | Description | Notes
 **budget_limits** | [**BudgetLimits**](BudgetLimits.md) | Execution budget limits for the retriever (OPTIONAL). | [optional] 
 **feature_dependencies** | [**List[FeatureAddress]**](FeatureAddress.md) | Feature addresses required by stages (OPTIONAL, aids validation). | [optional] 
 **tags** | **List[str]** | Arbitrary tags to help organise retrievers (OPTIONAL). | [optional] 
-**display_config** | **object** | Display configuration for public retriever UI rendering (OPTIONAL). Defines how the search interface should appear when the retriever is published, including input fields, theme, layout, exposed result fields, and field formatting. This configuration is used as the default when publishing the retriever. | [optional] 
+**display_config** | **Dict[str, object]** | Display configuration for public retriever UI rendering (OPTIONAL). Defines how the search interface should appear when the retriever is published, including input fields, theme, layout, exposed result fields, and field formatting. This configuration is used as the default when publishing the retriever. | [optional] 
 **version** | **int** | Version number that increments on each update (REQUIRED). | [optional] [default to 1]
 **created_at** | **datetime** | Creation timestamp in UTC (REQUIRED). | [optional] 
 **updated_at** | **datetime** | Last update timestamp in UTC (REQUIRED). | [optional] 
 **created_by** | **str** | Identifier of the user who created the retriever (OPTIONAL). | [optional] 
 **updated_by** | **str** | Identifier of the user who last updated the retriever (OPTIONAL). | [optional] 
-**is_published** | **bool** | Whether this retriever is currently published as a public API | [optional] [default to False]
+**is_published** | **bool** | Whether this retriever is currently published (either as public retriever or in marketplace) | [optional] [default to False]
+**marketplace_listing_id** | **str** | Marketplace listing ID if this retriever is published to the marketplace, None otherwise | [optional] 
 
 ## Example
 

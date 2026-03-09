@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **clone_collection**
-> CloneCollectionResponse clone_collection(collection_identifier, clone_collection_request, authorization=authorization, x_namespace=x_namespace)
+> CloneCollectionResponse clone_collection(collection_identifier, clone_collection_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Clone Collection
 
@@ -70,11 +70,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | Source collection ID or name to clone.
     clone_collection_request = mixpeek.CloneCollectionRequest() # CloneCollectionRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Clone Collection
-        api_response = api_instance.clone_collection(collection_identifier, clone_collection_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.clone_collection(collection_identifier, clone_collection_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionsApi->clone_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -91,6 +92,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| Source collection ID or name to clone. | 
  **clone_collection_request** | [**CloneCollectionRequest**](CloneCollectionRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -115,17 +117,42 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_collection**
-> CollectionResponse create_collection(create_collection_request, authorization=authorization, x_namespace=x_namespace)
+> CollectionResponse create_collection(create_collection_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Collection
 
-This endpoint allows you to create a new collection.
+Create a new processing collection linked to a namespace.
+
+A collection defines the feature extraction pipeline that runs when objects are
+uploaded to a bucket.  One feature extractor per collection.
+
+**Custom plugin collections:**
+
+When `feature_extractor_name` references a custom plugin, the collection's vector
+indexes are read from the plugin's `manifest.py` `features` list.  The `features`
+entries **must** use these exact key names — wrong keys silently produce a collection
+with no vector indexes and 0 documents will be written:
+
+```json
+{
+  "feature_type": "embedding",
+  "feature_name": "my_embedding",
+  "embedding_dim": 768,
+  "distance_metric": "cosine"
+}
+```
+
+Common wrong keys (will be ignored): `type`, `name`, `dimensions`, `distance`.
+
+**Vector schema:** Custom plugin vectors are automatically added to the namespace's
+Qdrant collection the first time a batch is processed, so there is no need to recreate
+the namespace when adding a plugin with new embedding types.
 
 ### Example
 
@@ -150,11 +177,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionsApi(api_client)
     create_collection_request = mixpeek.CreateCollectionRequest() # CreateCollectionRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Collection
-        api_response = api_instance.create_collection(create_collection_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_collection(create_collection_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionsApi->create_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -170,6 +198,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_collection_request** | [**CreateCollectionRequest**](CreateCollectionRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -194,13 +223,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_collection**
-> object delete_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace)
+> object delete_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete Collection
 
@@ -235,11 +264,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to delete
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Collection
-        api_response = api_instance.delete_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.delete_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionsApi->delete_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -255,6 +285,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to delete | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -279,13 +310,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **describe_collection_features**
-> DescribeCollectionFeaturesResponse describe_collection_features(collection_identifier, authorization=authorization, x_namespace=x_namespace)
+> DescribeCollectionFeaturesResponse describe_collection_features(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Describe collection features
 
@@ -313,11 +344,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to describe
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Describe collection features
-        api_response = api_instance.describe_collection_features(collection_identifier, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.describe_collection_features(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionsApi->describe_collection_features:\n")
         pprint(api_response)
     except Exception as e:
@@ -333,6 +365,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to describe | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -357,13 +390,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **export_collection**
-> CollectionExportResponse export_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace, collection_export_request=collection_export_request)
+> CollectionExportResponse export_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, collection_export_request=collection_export_request)
 
 Export Collection
 
@@ -414,12 +447,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to export
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     collection_export_request = mixpeek.CollectionExportRequest() # CollectionExportRequest |  (optional)
 
     try:
         # Export Collection
-        api_response = api_instance.export_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace, collection_export_request=collection_export_request)
+        api_response = api_instance.export_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, collection_export_request=collection_export_request)
         print("The response of CollectionsApi->export_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -435,6 +469,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to export | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **collection_export_request** | [**CollectionExportRequest**](CollectionExportRequest.md)|  | [optional] 
 
@@ -460,13 +495,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_collection**
-> CollectionResponse get_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace)
+> CollectionResponse get_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Collection
 
@@ -494,11 +529,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to retrieve
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Collection
-        api_response = api_instance.get_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionsApi->get_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -514,6 +550,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to retrieve | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -538,13 +575,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_collections**
-> ListCollectionsResponse list_collections(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_collections_request=list_collections_request)
+> ListCollectionsResponse list_collections(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_collections_request=list_collections_request)
 
 List Collections
 
@@ -576,12 +613,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_collections_request = mixpeek.ListCollectionsRequest() # ListCollectionsRequest |  (optional)
 
     try:
         # List Collections
-        api_response = api_instance.list_collections(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_collections_request=list_collections_request)
+        api_response = api_instance.list_collections(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_collections_request=list_collections_request)
         print("The response of CollectionsApi->list_collections:\n")
         pprint(api_response)
     except Exception as e:
@@ -600,6 +638,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_collections_request** | [**ListCollectionsRequest**](ListCollectionsRequest.md)|  | [optional] 
 
@@ -625,13 +664,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **trigger_collection**
-> TriggerCollectionResponse trigger_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace, trigger_collection_request=trigger_collection_request)
+> TriggerCollectionResponse trigger_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, trigger_collection_request=trigger_collection_request)
 
 Trigger Collection Processing
 
@@ -677,12 +716,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to trigger
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     trigger_collection_request = mixpeek.TriggerCollectionRequest() # TriggerCollectionRequest |  (optional)
 
     try:
         # Trigger Collection Processing
-        api_response = api_instance.trigger_collection(collection_identifier, authorization=authorization, x_namespace=x_namespace, trigger_collection_request=trigger_collection_request)
+        api_response = api_instance.trigger_collection(collection_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, trigger_collection_request=trigger_collection_request)
         print("The response of CollectionsApi->trigger_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -698,6 +738,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to trigger | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **trigger_collection_request** | [**TriggerCollectionRequest**](TriggerCollectionRequest.md)|  | [optional] 
 
@@ -723,13 +764,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_collection**
-> CollectionResponse update_collection(collection_identifier, body, authorization=authorization, x_namespace=x_namespace)
+> CollectionResponse update_collection(collection_identifier, request_body, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Update Collection
 
@@ -756,13 +797,14 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.CollectionsApi(api_client)
     collection_identifier = 'collection_identifier_example' # str | The ID or name of the collection to update
-    body = None # object | 
+    request_body = None # Dict[str, object] | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Update Collection
-        api_response = api_instance.update_collection(collection_identifier, body, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.update_collection(collection_identifier, request_body, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionsApi->update_collection:\n")
         pprint(api_response)
     except Exception as e:
@@ -777,8 +819,9 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_identifier** | **str**| The ID or name of the collection to update | 
- **body** | **object**|  | 
+ **request_body** | [**Dict[str, object]**](object.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -803,8 +846,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

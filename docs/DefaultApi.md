@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create_trigger**
-> SharedTriggersModelsTriggerModel create_trigger(shared_triggers_models_create_trigger_request, authorization=authorization, x_namespace=x_namespace)
+> SharedTriggersModelsTriggerModel create_trigger(shared_triggers_models_create_trigger_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Trigger
 
@@ -83,11 +83,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.DefaultApi(api_client)
     shared_triggers_models_create_trigger_request = mixpeek.SharedTriggersModelsCreateTriggerRequest() # SharedTriggersModelsCreateTriggerRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Trigger
-        api_response = api_instance.create_trigger(shared_triggers_models_create_trigger_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_trigger(shared_triggers_models_create_trigger_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->create_trigger:\n")
         pprint(api_response)
     except Exception as e:
@@ -103,6 +104,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **shared_triggers_models_create_trigger_request** | [**SharedTriggersModelsCreateTriggerRequest**](SharedTriggersModelsCreateTriggerRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -127,13 +129,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_trigger**
-> delete_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+> delete_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete Trigger
 
@@ -160,11 +162,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.DefaultApi(api_client)
     trigger_id = 'trigger_id_example' # str | Trigger ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Trigger
-        api_instance.delete_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+        api_instance.delete_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
     except Exception as e:
         print("Exception when calling DefaultApi->delete_trigger: %s\n" % e)
 ```
@@ -178,6 +181,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **trigger_id** | **str**| Trigger ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -202,13 +206,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **execute_trigger_now**
-> TaskResponse execute_trigger_now(trigger_id, authorization=authorization, x_namespace=x_namespace)
+> TaskResponse execute_trigger_now(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Execute Trigger Now
 
@@ -241,11 +245,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.DefaultApi(api_client)
     trigger_id = 'trigger_id_example' # str | Trigger ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Execute Trigger Now
-        api_response = api_instance.execute_trigger_now(trigger_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.execute_trigger_now(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->execute_trigger_now:\n")
         pprint(api_response)
     except Exception as e:
@@ -261,6 +266,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **trigger_id** | **str**| Trigger ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -285,13 +291,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_trigger**
-> SharedTriggersModelsTriggerModel get_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+> SharedTriggersModelsTriggerModel get_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Trigger
 
@@ -319,11 +325,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.DefaultApi(api_client)
     trigger_id = 'trigger_id_example' # str | Trigger ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Trigger
-        api_response = api_instance.get_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->get_trigger:\n")
         pprint(api_response)
     except Exception as e:
@@ -339,6 +346,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **trigger_id** | **str**| Trigger ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -363,13 +371,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_trigger_history**
-> SharedTriggersModelsTriggerHistoryResponse get_trigger_history(trigger_id, offset=offset, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> SharedTriggersModelsTriggerHistoryResponse get_trigger_history(trigger_id, offset=offset, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Trigger Execution History
 
@@ -399,11 +407,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     offset = 0 # int | Pagination offset (optional) (default to 0)
     limit = 50 # int | Results per page (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Trigger Execution History
-        api_response = api_instance.get_trigger_history(trigger_id, offset=offset, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_trigger_history(trigger_id, offset=offset, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->get_trigger_history:\n")
         pprint(api_response)
     except Exception as e:
@@ -421,6 +430,7 @@ Name | Type | Description  | Notes
  **offset** | **int**| Pagination offset | [optional] [default to 0]
  **limit** | **int**| Results per page | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -445,13 +455,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_triggers**
-> SharedTriggersModelsListTriggersResponse list_triggers(authorization=authorization, x_namespace=x_namespace, shared_triggers_models_list_triggers_request=shared_triggers_models_list_triggers_request)
+> SharedTriggersModelsListTriggersResponse list_triggers(authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, shared_triggers_models_list_triggers_request=shared_triggers_models_list_triggers_request)
 
 List Triggers
 
@@ -485,12 +495,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = mixpeek.DefaultApi(api_client)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     shared_triggers_models_list_triggers_request = mixpeek.SharedTriggersModelsListTriggersRequest() # SharedTriggersModelsListTriggersRequest |  (optional)
 
     try:
         # List Triggers
-        api_response = api_instance.list_triggers(authorization=authorization, x_namespace=x_namespace, shared_triggers_models_list_triggers_request=shared_triggers_models_list_triggers_request)
+        api_response = api_instance.list_triggers(authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, shared_triggers_models_list_triggers_request=shared_triggers_models_list_triggers_request)
         print("The response of DefaultApi->list_triggers:\n")
         pprint(api_response)
     except Exception as e:
@@ -505,6 +516,7 @@ with mixpeek.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **shared_triggers_models_list_triggers_request** | [**SharedTriggersModelsListTriggersRequest**](SharedTriggersModelsListTriggersRequest.md)|  | [optional] 
 
@@ -530,13 +542,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pause_trigger**
-> SharedTriggersModelsTriggerModel pause_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+> SharedTriggersModelsTriggerModel pause_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Pause Trigger
 
@@ -564,11 +576,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.DefaultApi(api_client)
     trigger_id = 'trigger_id_example' # str | Trigger ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Pause Trigger
-        api_response = api_instance.pause_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.pause_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->pause_trigger:\n")
         pprint(api_response)
     except Exception as e:
@@ -584,6 +597,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **trigger_id** | **str**| Trigger ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -608,13 +622,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resume_trigger**
-> SharedTriggersModelsTriggerModel resume_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+> SharedTriggersModelsTriggerModel resume_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Resume Trigger
 
@@ -642,11 +656,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.DefaultApi(api_client)
     trigger_id = 'trigger_id_example' # str | Trigger ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Resume Trigger
-        api_response = api_instance.resume_trigger(trigger_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.resume_trigger(trigger_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->resume_trigger:\n")
         pprint(api_response)
     except Exception as e:
@@ -662,6 +677,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **trigger_id** | **str**| Trigger ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -686,13 +702,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_trigger**
-> SharedTriggersModelsTriggerModel update_trigger(trigger_id, shared_triggers_models_update_trigger_request, authorization=authorization, x_namespace=x_namespace)
+> SharedTriggersModelsTriggerModel update_trigger(trigger_id, shared_triggers_models_update_trigger_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Update Trigger
 
@@ -732,11 +748,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     trigger_id = 'trigger_id_example' # str | Trigger ID
     shared_triggers_models_update_trigger_request = mixpeek.SharedTriggersModelsUpdateTriggerRequest() # SharedTriggersModelsUpdateTriggerRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Update Trigger
-        api_response = api_instance.update_trigger(trigger_id, shared_triggers_models_update_trigger_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.update_trigger(trigger_id, shared_triggers_models_update_trigger_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DefaultApi->update_trigger:\n")
         pprint(api_response)
     except Exception as e:
@@ -753,6 +770,7 @@ Name | Type | Description  | Notes
  **trigger_id** | **str**| Trigger ID | 
  **shared_triggers_models_update_trigger_request** | [**SharedTriggersModelsUpdateTriggerRequest**](SharedTriggersModelsUpdateTriggerRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -777,8 +795,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

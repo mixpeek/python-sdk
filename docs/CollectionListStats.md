@@ -7,7 +7,7 @@ Aggregate statistics for a list of collections.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_documents** | **int** | Total number of documents across all collections | [optional] [default to 0]
-**avg_documents_per_collection** | **float** | Average number of documents per collection | [optional] [default to 0.0]
+**avg_documents_per_collection** | **float** | Average number of documents per collection | [optional] [default to 0]
 **collections_with_taxonomies** | **int** | Number of collections with taxonomy applications | [optional] [default to 0]
 **total_feature_extractors** | **int** | Total number of feature extractors across all collections | [optional] [default to 0]
 **total_taxonomies** | **int** | Total number of taxonomy connections across all collections | [optional] [default to 0]

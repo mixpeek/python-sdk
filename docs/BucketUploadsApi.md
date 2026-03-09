@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **confirm_upload_buckets**
-> ConfirmUploadResponse confirm_upload_buckets(bucket_identifier, upload_id, confirm_upload_request, var_async=var_async, authorization=authorization, x_namespace=x_namespace)
+> ConfirmUploadResponse confirm_upload_buckets(bucket_identifier, upload_id, confirm_upload_request, var_async=var_async, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Confirm Upload
 
@@ -60,11 +60,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     confirm_upload_request = mixpeek.ConfirmUploadRequest() # ConfirmUploadRequest | 
     var_async = False # bool | Process confirmation asynchronously (recommended for files >= 100MB) (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Confirm Upload
-        api_response = api_instance.confirm_upload_buckets(bucket_identifier, upload_id, confirm_upload_request, var_async=var_async, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.confirm_upload_buckets(bucket_identifier, upload_id, confirm_upload_request, var_async=var_async, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketUploadsApi->confirm_upload_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -83,6 +84,7 @@ Name | Type | Description  | Notes
  **confirm_upload_request** | [**ConfirmUploadRequest**](ConfirmUploadRequest.md)|  | 
  **var_async** | **bool**| Process confirmation asynchronously (recommended for files &gt;&#x3D; 100MB) | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -107,13 +109,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **confirm_uploads_batch_buckets**
-> BatchConfirmResponse confirm_uploads_batch_buckets(bucket_identifier, batch_confirm_request, authorization=authorization, x_namespace=x_namespace)
+> BatchConfirmResponse confirm_uploads_batch_buckets(bucket_identifier, batch_confirm_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Batch Confirm Uploads
 
@@ -148,11 +150,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket
     batch_confirm_request = mixpeek.BatchConfirmRequest() # BatchConfirmRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Batch Confirm Uploads
-        api_response = api_instance.confirm_uploads_batch_buckets(bucket_identifier, batch_confirm_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.confirm_uploads_batch_buckets(bucket_identifier, batch_confirm_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketUploadsApi->confirm_uploads_batch_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -169,6 +172,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket | 
  **batch_confirm_request** | [**BatchConfirmRequest**](BatchConfirmRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -193,13 +197,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_upload_buckets**
-> UploadResponse create_upload_buckets(bucket_identifier, create_upload_request, authorization=authorization, x_namespace=x_namespace)
+> UploadResponse create_upload_buckets(bucket_identifier, create_upload_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Upload
 
@@ -242,11 +246,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket
     create_upload_request = mixpeek.CreateUploadRequest() # CreateUploadRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Upload
-        api_response = api_instance.create_upload_buckets(bucket_identifier, create_upload_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_upload_buckets(bucket_identifier, create_upload_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketUploadsApi->create_upload_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -263,6 +268,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket | 
  **create_upload_request** | [**CreateUploadRequest**](CreateUploadRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -287,13 +293,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_uploads_batch_buckets**
-> BatchUploadResponse create_uploads_batch_buckets(bucket_identifier, batch_upload_request, authorization=authorization, x_namespace=x_namespace)
+> BatchUploadResponse create_uploads_batch_buckets(bucket_identifier, batch_upload_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Batch Create Uploads
 
@@ -328,11 +334,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket
     batch_upload_request = mixpeek.BatchUploadRequest() # BatchUploadRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Batch Create Uploads
-        api_response = api_instance.create_uploads_batch_buckets(bucket_identifier, batch_upload_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_uploads_batch_buckets(bucket_identifier, batch_upload_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketUploadsApi->create_uploads_batch_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -349,6 +356,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket | 
  **batch_upload_request** | [**BatchUploadRequest**](BatchUploadRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -373,13 +381,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_upload_buckets**
-> delete_upload_buckets(bucket_identifier, upload_id, delete_s3_object=delete_s3_object, authorization=authorization, x_namespace=x_namespace)
+> delete_upload_buckets(bucket_identifier, upload_id, delete_s3_object=delete_s3_object, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete Upload
 
@@ -411,11 +419,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     upload_id = 'upload_id_example' # str | The unique identifier of the upload
     delete_s3_object = True # bool | Whether to delete the S3 object (optional) (default to True)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Upload
-        api_instance.delete_upload_buckets(bucket_identifier, upload_id, delete_s3_object=delete_s3_object, authorization=authorization, x_namespace=x_namespace)
+        api_instance.delete_upload_buckets(bucket_identifier, upload_id, delete_s3_object=delete_s3_object, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
     except Exception as e:
         print("Exception when calling BucketUploadsApi->delete_upload_buckets: %s\n" % e)
 ```
@@ -431,6 +440,7 @@ Name | Type | Description  | Notes
  **upload_id** | **str**| The unique identifier of the upload | 
  **delete_s3_object** | **bool**| Whether to delete the S3 object | [optional] [default to True]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -455,13 +465,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_upload_buckets**
-> object get_upload_buckets(bucket_identifier, upload_id, return_presigned_urls=return_presigned_urls, authorization=authorization, x_namespace=x_namespace)
+> object get_upload_buckets(bucket_identifier, upload_id, return_presigned_urls=return_presigned_urls, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Upload
 
@@ -495,11 +505,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     upload_id = 'upload_id_example' # str | The unique identifier of the upload
     return_presigned_urls = False # bool | Generate fresh presigned download URLs for all blobs with S3 storage (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Upload
-        api_response = api_instance.get_upload_buckets(bucket_identifier, upload_id, return_presigned_urls=return_presigned_urls, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_upload_buckets(bucket_identifier, upload_id, return_presigned_urls=return_presigned_urls, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketUploadsApi->get_upload_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -517,6 +528,7 @@ Name | Type | Description  | Notes
  **upload_id** | **str**| The unique identifier of the upload | 
  **return_presigned_urls** | **bool**| Generate fresh presigned download URLs for all blobs with S3 storage | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -541,13 +553,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_uploads_buckets**
-> ListUploadsResponse list_uploads_buckets(bucket_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_uploads_request=list_uploads_request)
+> ListUploadsResponse list_uploads_buckets(bucket_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_uploads_request=list_uploads_request)
 
 List Uploads
 
@@ -593,12 +605,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_uploads_request = mixpeek.ListUploadsRequest() # ListUploadsRequest |  (optional)
 
     try:
         # List Uploads
-        api_response = api_instance.list_uploads_buckets(bucket_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_uploads_request=list_uploads_request)
+        api_response = api_instance.list_uploads_buckets(bucket_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_uploads_request=list_uploads_request)
         print("The response of BucketUploadsApi->list_uploads_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -618,6 +631,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_uploads_request** | [**ListUploadsRequest**](ListUploadsRequest.md)|  | [optional] 
 
@@ -643,8 +657,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

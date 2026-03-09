@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **get_decomposition_tree_objects**
-> object get_decomposition_tree_objects(object_id, include_document_ids=include_document_ids, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] get_decomposition_tree_objects(object_id, include_document_ids=include_document_ids, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get decomposition tree visualization
 
@@ -38,11 +38,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     object_id = 'object_id_example' # str | Root object ID to build decomposition tree for
     include_document_ids = False # bool | Include full list of document IDs (can be large) (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get decomposition tree visualization
-        api_response = api_instance.get_decomposition_tree_objects(object_id, include_document_ids=include_document_ids, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_decomposition_tree_objects(object_id, include_document_ids=include_document_ids, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DocumentLineageApi->get_decomposition_tree_objects:\n")
         pprint(api_response)
     except Exception as e:
@@ -59,11 +60,12 @@ Name | Type | Description  | Notes
  **object_id** | **str**| Root object ID to build decomposition tree for | 
  **include_document_ids** | **bool**| Include full list of document IDs (can be large) | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -83,13 +85,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_lineage**
-> object get_document_lineage(collection_id, document_id, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] get_document_lineage(collection_id, document_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get document lineage
 
@@ -117,11 +119,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_id = 'collection_id_example' # str | ID of the collection containing the document
     document_id = 'document_id_example' # str | ID of the document to trace
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get document lineage
-        api_response = api_instance.get_document_lineage(collection_id, document_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_document_lineage(collection_id, document_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DocumentLineageApi->get_document_lineage:\n")
         pprint(api_response)
     except Exception as e:
@@ -138,11 +141,12 @@ Name | Type | Description  | Notes
  **collection_id** | **str**| ID of the collection containing the document | 
  **document_id** | **str**| ID of the document to trace | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -162,13 +166,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_documents_by_object**
-> object get_documents_by_object(object_id, collection_ids=collection_ids, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] get_documents_by_object(object_id, collection_ids=collection_ids, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get all documents derived from an object
 
@@ -196,11 +200,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     object_id = 'object_id_example' # str | Root object ID to find all derived documents
     collection_ids = ['collection_ids_example'] # List[str] | Optional: Filter to specific collections (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get all documents derived from an object
-        api_response = api_instance.get_documents_by_object(object_id, collection_ids=collection_ids, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_documents_by_object(object_id, collection_ids=collection_ids, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of DocumentLineageApi->get_documents_by_object:\n")
         pprint(api_response)
     except Exception as e:
@@ -217,11 +222,12 @@ Name | Type | Description  | Notes
  **object_id** | **str**| Root object ID to find all derived documents | 
  **collection_ids** | [**List[str]**](str.md)| Optional: Filter to specific collections | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -241,8 +247,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

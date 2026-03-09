@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **next_tier** | **str** | Next available tier or null if at max tier | [optional] 
 **credits_until_next_tier** | **int** | Credits needed to reach next tier (null if at max tier or N/A) | [optional] 
 **estimated_days_remaining** | **int** | Estimated days until credits depleted based on 7-day burn rate. Null if no usage history or unlimited (auto-billing enabled). | [optional] 
-**daily_burn_rate** | **float** | Average credits consumed per day (7-day rolling average) | [optional] [default to 0.0]
+**daily_burn_rate** | **float** | Average credits consumed per day (7-day rolling average) | [optional] [default to 0]
 
 ## Example
 

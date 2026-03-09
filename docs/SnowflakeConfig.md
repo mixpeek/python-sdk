@@ -7,7 +7,7 @@ Snowflake data warehouse configuration for table-based sync.  Enables syncing Sn
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **provider_type** | **str** |  | [optional] [default to 'snowflake']
-**credentials** | [**Credentials3**](Credentials3.md) |  | 
+**credentials** | [**Credentials4**](Credentials4.md) |  | 
 **account** | **str** | REQUIRED. Snowflake account identifier. Format: {account_locator}.{cloud_region} or {org_name}-{account_name} Find in: Snowflake UI &gt; Account dropdown &gt; Account URL | 
 **warehouse** | **str** | REQUIRED. Warehouse name for compute resources. Must have USAGE privilege on this warehouse. Warehouse will be used for all sync queries. Consider: Use dedicated warehouse for sync operations to isolate costs. | 
 **database** | **str** | NOT REQUIRED if fully qualified table name used in source_path. Database name for default context. Can be omitted if source_path uses {DATABASE}.{SCHEMA}.{TABLE} format. Must have USAGE privilege if specified. | [optional] 

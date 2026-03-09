@@ -7,7 +7,7 @@ Configuration for re-sorting documents by relevance score.  **Stage Category**: 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **score_field** | **str** | OPTIONAL. Document field path to use for sorting. Defaults to top-level &#39;score&#39; field populated by SEARCH stages. Use dot notation for nested fields (e.g., &#39;metadata.rerank_score&#39;). Supports template expressions for dynamic field selection. | [optional] [default to 'score']
-**direction** | [**SortDirection**](SortDirection.md) | OPTIONAL. Sort direction for relevance scores. &#39;desc&#39; (default): Highest scores first (most relevant). &#39;asc&#39;: Lowest scores first (least relevant, rarely used). | [optional] 
+**direction** | [**StageDefsSortDirection**](StageDefsSortDirection.md) | OPTIONAL. Sort direction for relevance scores. &#39;desc&#39; (default): Highest scores first (most relevant). &#39;asc&#39;: Lowest scores first (least relevant, rarely used). | [optional] 
 **feature_address** | **str** | OPTIONAL. Feature address to compute similarity when scores are missing. If a document lacks the score_field, the system can compute similarity using this feature and the query embedding from earlier SEARCH stages. Format: &#39;mixpeek://extractor@version/output&#39;. NOT REQUIRED - only use when expecting missing scores and want to compute them. | [optional] [default to 'null']
 **missing_score** | **str** | OPTIONAL. How to handle documents without a score_field value. &#39;bottom&#39; (default): Place at end of results (lowest priority). &#39;top&#39;: Place at start of results (highest priority, rarely used). &#39;preserve&#39;: Keep in original position (maintain insertion order). | [optional] [default to 'bottom']
 

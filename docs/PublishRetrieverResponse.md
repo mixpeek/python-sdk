@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **public_id** | **str** | Public identifier for this published retriever | 
 **retriever_id** | **str** | ID of the underlying retriever | 
 **public_url** | **str** | Full public URL to the retriever page | 
-**short_url** | **str** | Short URL via mxp.co redirect | 
-**public_api_key** | **str** | Public API key for accessing this retriever. IMPORTANT: Save this key - it&#39;s needed for all API requests. It&#39;s safe to share since it&#39;s scoped to this retriever only. | 
+**short_url** | **str** | Short URL via mxp.co redirect (same as public_url) | 
+**public_api_key** | **str** | DEPRECATED: API keys are no longer required for public retriever access. For programmatic SDK access, create a ret_sk_ key via the retrievers/{id}/keys endpoint. | [optional] 
 
 ## Example
 

@@ -11,12 +11,13 @@ Name | Type | Description | Notes
 **description** | **str** | Description of the bucket | [optional] 
 **bucket_schema** | [**BucketSchemaOutput**](BucketSchemaOutput.md) | Schema definition for objects in this bucket | [optional] 
 **unique_key** | [**UniqueKeyConfig**](UniqueKeyConfig.md) | Unique key configuration for this bucket (if configured) | [optional] 
-**metadata** | **object** | Additional metadata for the bucket | [optional] 
+**metadata** | **Dict[str, object]** | Additional metadata for the bucket | [optional] 
 **object_count** | **int** | Number of objects in the bucket | 
 **total_size_bytes** | **int** | Total size of all objects in the bucket in bytes | 
 **created_at** | **datetime** | When the bucket was created | [optional] 
 **updated_at** | **datetime** | Last modification time of bucket metadata | [optional] 
 **last_upload_at** | **datetime** | When the last object was uploaded to this bucket | [optional] 
+**stats_updated_at** | **datetime** | When bucket stats were last successfully recalculated | [optional] 
 **status** | [**TaskStatusEnum**](TaskStatusEnum.md) | Bucket lifecycle status (ACTIVE, ARCHIVED, SUSPENDED, IN_PROGRESS for deleting) | [optional] 
 **is_locked** | **bool** | Whether the bucket is locked (read-only) | [optional] [default to False]
 **batch_stats** | [**BatchStatistics**](BatchStatistics.md) | Batch statistics for this bucket (calculated asynchronously, stored in DB) | [optional] 

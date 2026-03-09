@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **taxonomy_id** | **str** |  | 
 **time_range** | [**ApiAnalyticsTaxonomiesModelsTimeRange**](ApiAnalyticsTaxonomiesModelsTimeRange.md) |  | 
 **metrics** | [**List[AssignmentMetric]**](AssignmentMetric.md) |  | 
-**summary** | **object** |  | [optional] 
+**summary** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**export_manifest_get**](ManifestApi.md#export_manifest_get) | **GET** /v1/manifest/export | Export Manifest Get
 [**export_manifest_post**](ManifestApi.md#export_manifest_post) | **POST** /v1/manifest/export | Export Manifest Post
 [**generate_manifest**](ManifestApi.md#generate_manifest) | **POST** /v1/manifest/generate | Generate Manifest
+[**lint_manifest**](ManifestApi.md#lint_manifest) | **POST** /v1/manifest/lint | Lint Manifest
 [**validate_manifest**](ManifestApi.md#validate_manifest) | **POST** /v1/manifest/validate | Validate Manifest
 
 
@@ -123,8 +124,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -214,8 +215,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -317,8 +318,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -405,8 +406,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -513,8 +514,132 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **lint_manifest**
+> LintResponse lint_manifest(manifest_file, skip_rules=skip_rules, authorization=authorization)
+
+Lint Manifest
+
+Lint a YAML manifest for best practices and potential issues.
+
+Goes beyond basic validation to provide actionable suggestions for
+improving your manifest configuration. This endpoint is designed for
+AI agents and developers who want to optimize their Mixpeek setup.
+
+**Lint Rules:**
+- `UNUSED_EXTRACTOR`: Feature extractor defined but not used by any collection
+- `UNUSED_COLLECTION`: Collection not referenced by any retriever
+- `MISSING_INPUT_SCHEMA`: Retriever uses templates but has no input_schema
+- `MISSING_CACHE_CONFIG`: Retriever without caching (especially with LLM stages)
+- `SUBOPTIMAL_STAGE_ORDER`: Filter stages after expensive operations
+- `DUPLICATE_FEATURE_URI`: Same feature searched multiple times
+- `MISSING_DESCRIPTION`: Resources without descriptions
+- `NO_SEARCH_STAGE`: Retriever with no search stages
+- `EXTRACTOR_NOT_IN_NAMESPACE`: Collection uses extractor not in namespace
+- `MISSING_SECRET`: Secret reference not configured
+
+**Severity Levels:**
+- `error`: Must be fixed before applying
+- `warning`: Best practice violation, should be fixed
+- `info`: Suggestion for improvement
+
+**Example:**
+```bash
+curl -X POST /v1/manifest/lint \
+  -H "Authorization: Bearer $API_KEY" \
+  -F "manifest_file=@mixpeek.yaml"
+```
+
+**Response includes actionable suggestions:**
+```json
+{
+  "valid": true,
+  "results": [
+    {
+      "code": "MISSING_CACHE_CONFIG",
+      "severity": "warning",
+      "message": "Retriever 'product_search' has no cache configuration",
+      "location": "retrievers[0]",
+      "suggestion": "Add cache_config to improve performance",
+      "fix_example": "cache_config:\n  enabled: true\n  ttl_seconds: 3600"
+    }
+  ],
+  "summary": {"error": 0, "warning": 1, "info": 0}
+}
+```
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.lint_response import LintResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.ManifestApi(api_client)
+    manifest_file = None # bytearray | YAML manifest file
+    skip_rules = [] # List[str] | Rule codes to skip (e.g., MISSING_DESCRIPTION) (optional) (default to [])
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Lint Manifest
+        api_response = api_instance.lint_manifest(manifest_file, skip_rules=skip_rules, authorization=authorization)
+        print("The response of ManifestApi->lint_manifest:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ManifestApi->lint_manifest: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **manifest_file** | **bytearray**| YAML manifest file | 
+ **skip_rules** | [**List[str]**](str.md)| Rule codes to skip (e.g., MISSING_DESCRIPTION) | [optional] [default to []]
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+[**LintResponse**](LintResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -608,8 +733,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

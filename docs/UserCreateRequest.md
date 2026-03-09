@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **user_name** | **str** | Display name shown in dashboards and audit trails. | 
 **avatar_url** | **str** | Profile picture URL (e.g., from PropelAuth picture_url property). | [optional] 
 **role** | [**UserRole**](UserRole.md) | Default role within the organization if omitted. | [optional] 
-**metadata** | **object** | Custom key/value metadata stored with the user record. | [optional] 
+**status** | [**UserStatus**](UserStatus.md) | Initial lifecycle status. Use &#39;pending&#39; for invited users who haven&#39;t accepted yet. | [optional] 
+**metadata** | **Dict[str, object]** | Custom key/value metadata stored with the user record. | [optional] 
 
 ## Example
 

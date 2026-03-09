@@ -7,7 +7,7 @@ Microsoft SharePoint and OneDrive for Business configuration.  Enables Mixpeek t
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **provider_type** | **str** |  | [optional] [default to 'sharepoint']
-**credentials** | [**Credentials2**](Credentials2.md) |  | 
+**credentials** | [**Credentials3**](Credentials3.md) |  | 
 **site_id** | **str** | NOT REQUIRED if using personal OneDrive. SharePoint site identifier for targeting a specific site. Format: &#39;{hostname},{site-collection-id},{web-id}&#39; or site URL. Find via: Microsoft Graph API GET /sites?search&#x3D;{keyword} Example: &#39;contoso.sharepoint.com,12345678-...,87654321-...&#39; | [optional] 
 **drive_id** | **str** | NOT REQUIRED if you want to use the default document library. Specific drive (document library) ID within the site. Find via: GET /sites/{site-id}/drives Format: Base64-encoded ID starting with &#39;b!&#39; | [optional] 
 **folder_path** | **str** | NOT REQUIRED. Path within the drive to sync from. If omitted, syncs from the root of the drive. Format: Forward-slash separated path (e.g., &#39;/Documents/Marketing&#39;). Note: Leading slash is optional. | [optional] 

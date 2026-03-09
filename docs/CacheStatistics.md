@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hit_count** | **int** | Number of cache hits | [optional] [default to 0]
 **miss_count** | **int** | Number of cache misses | [optional] [default to 0]
-**hit_rate** | **float** | Cache hit rate (0.0 - 1.0) | [optional] [default to 0.0]
+**hit_rate** | **float** | Cache hit rate (0.0 - 1.0) | [optional] [default to 0]
 **size_bytes** | **int** | Total size of cached data in bytes | [optional] [default to 0]
 **entry_count** | **int** | Number of entries in cache | [optional] [default to 0]
 **last_invalidated_at** | **datetime** | When the cache was last invalidated | [optional] 

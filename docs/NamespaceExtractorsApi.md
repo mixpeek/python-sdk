@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_extractor_namespaces**
-> UnifiedExtractorResponse get_extractor_namespaces(namespace_id, extractor_id, authorization=authorization, x_namespace=x_namespace)
+> UnifiedExtractorResponse get_extractor_namespaces(namespace_id, extractor_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get extractor details
 
@@ -48,11 +48,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     namespace_id = 'namespace_id_example' # str | 
     extractor_id = 'extractor_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get extractor details
-        api_response = api_instance.get_extractor_namespaces(namespace_id, extractor_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_namespaces(namespace_id, extractor_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of NamespaceExtractorsApi->get_extractor_namespaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
  **namespace_id** | **str**|  | 
  **extractor_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -93,13 +95,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Extractor not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_extractors_namespaces**
-> UnifiedExtractorListResponse list_extractors_namespaces(namespace_id, source=source, include_disabled=include_disabled, authorization=authorization, x_namespace=x_namespace)
+> UnifiedExtractorListResponse list_extractors_namespaces(namespace_id, source=source, include_disabled=include_disabled, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 List all extractors available to namespace
 
@@ -150,11 +152,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     source = 'source_example' # str | Filter by extractor source (builtin, custom, or all) (optional)
     include_disabled = False # bool | Include disabled/undeployed custom plugins (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # List all extractors available to namespace
-        api_response = api_instance.list_extractors_namespaces(namespace_id, source=source, include_disabled=include_disabled, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.list_extractors_namespaces(namespace_id, source=source, include_disabled=include_disabled, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of NamespaceExtractorsApi->list_extractors_namespaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -172,6 +175,7 @@ Name | Type | Description  | Notes
  **source** | **str**| Filter by extractor source (builtin, custom, or all) | [optional] 
  **include_disabled** | **bool**| Include disabled/undeployed custom plugins | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -196,8 +200,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

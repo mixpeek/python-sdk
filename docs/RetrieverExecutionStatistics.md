@@ -7,8 +7,8 @@ Aggregated execution statistics for an entire retriever execution run.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **stages** | [**Dict[str, StageStatistics]**](StageStatistics.md) | Per-stage statistics keyed by stage instance name (REQUIRED). | [optional] 
-**total_time_ms** | **float** | Total retriever execution time in milliseconds (REQUIRED). | [optional] [default to 0.0]
-**credits_used** | **float** | Total credits consumed across all stages (OPTIONAL in MVP). | [optional] [default to 0.0]
+**total_time_ms** | **float** | Total retriever execution time in milliseconds (REQUIRED). | [optional] [default to 0]
+**credits_used** | **float** | Total credits consumed across all stages (OPTIONAL in MVP). | [optional] [default to 0]
 
 ## Example
 

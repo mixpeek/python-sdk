@@ -7,6 +7,7 @@ The request model for listing batches.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | [**TaskStatusEnum**](TaskStatusEnum.md) | Filter batches by status. | [optional] 
+**collection_id** | **str** | Filter batches to only those associated with a specific collection ID. Useful for tracking the processing state of all batches for a given collection. | [optional] 
 **offset** | **int** | The number of batches to skip. | [optional] [default to 0]
 **limit** | **int** | The maximum number of batches to return. | [optional] [default to 100]
 

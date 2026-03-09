@@ -6,7 +6,7 @@ Request model for updating notification preferences.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**preferences** | **object** | Updated notification preferences | 
+**preferences** | **Dict[str, object]** | Updated notification preferences | 
 
 ## Example
 

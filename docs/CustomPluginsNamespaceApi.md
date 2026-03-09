@@ -14,6 +14,8 @@ Method | HTTP request | Description
 [**get_plugin_namespaces**](CustomPluginsNamespaceApi.md#get_plugin_namespaces) | **GET** /v1/namespaces/{namespace_id}/plugins/{plugin_id} | Get plugin details
 [**list_available_org_plugins_namespaces**](CustomPluginsNamespaceApi.md#list_available_org_plugins_namespaces) | **GET** /v1/namespaces/{namespace_id}/plugins/available | List available org plugins
 [**list_plugins_namespaces**](CustomPluginsNamespaceApi.md#list_plugins_namespaces) | **GET** /v1/namespaces/{namespace_id}/plugins | List plugins in namespace
+[**reconfigure_namespace_id_plugins**](CustomPluginsNamespaceApi.md#reconfigure_namespace_id_plugins) | **POST** /v1/namespaces/{namespace_id}/plugins/reconfigure | Reconfigure namespace Qdrant schema
+[**test_realtime_inference_namespaces_id_plugins**](CustomPluginsNamespaceApi.md#test_realtime_inference_namespaces_id_plugins) | **POST** /v1/namespaces/{namespace_id}/plugins/{plugin_id}/realtime/test | Test plugin realtime inference
 [**undeploy_plugin_namespaces**](CustomPluginsNamespaceApi.md#undeploy_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins/{plugin_id}/undeploy | Undeploy a plugin
 [**upload_plugin_namespaces**](CustomPluginsNamespaceApi.md#upload_plugin_namespaces) | **POST** /v1/namespaces/{namespace_id}/plugins | Upload a custom plugin
 
@@ -29,8 +31,8 @@ Confirm a plugin upload after the archive has been uploaded to S3.
 S3 presigned URLs have no callback mechanism, so the API cannot detect when
 your upload completes. You must explicitly confirm to:
 - Verify the file exists in S3
-- Validate archive structure (manifest.py, pipeline.py required)
-- Run security scan
+- Validate archive structure (`manifest.py` and `pipeline.py` required)
+- Run security scan on all `.py` files
 - Create the plugin record
 - Mark upload as COMPLETED
 
@@ -40,7 +42,24 @@ your upload completes. You must explicitly confirm to:
 
 **On Success:**
 - Plugin is created with status "pending" deployment
-- Returns plugin_id and feature_uri for use in collections
+- Returns `plugin_id` and `feature_uri` for use in collections
+
+**Security scanner rules:**
+- Blocked imports: `subprocess`, `ctypes`, `socket`, `multiprocessing`, `threading`
+- Blocked calls: `os.system()`, `os.popen()`, `os.exec*()`, `eval()`, `exec()`, `open()`
+- `import os` is **allowed** — only the dangerous functions above are blocked
+- `getattr()`, `hasattr()`, `os.environ`, `os.path` are all allowed
+
+**manifest.py `features` format:** Use these exact key names or the collection will be
+created with no vector indexes (no error is returned, but 0 documents will be indexed):
+```json
+{
+  "feature_type": "embedding",
+  "feature_name": "my_embedding",
+  "embedding_dim": 768,
+  "distance_metric": "cosine"
+}
+```
 
 ### Example
 
@@ -111,8 +130,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Upload not found or S3 object missing |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -201,13 +220,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Plugin not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deploy_plugin_namespaces**
-> object deploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
+> Dict[str, object] deploy_plugin_namespaces(namespace_id, plugin_id, deployment_type=deployment_type, authorization=authorization)
 
 Deploy or redeploy a plugin
 
@@ -215,10 +234,10 @@ Deploy a plugin for use in the namespace.
 
 **Deployment Types:**
 - `batch_only`: All accounts - plugin available for batch processing
-- `realtime`: Enterprise only - plugin deployed via Anyscale blue-green deployment
+- `realtime`: Enterprise only - plugin deployed via GKE RayService rolling update
 
 Plugins with `realtime.py` require dedicated infrastructure (Enterprise). They are
-queued and rolled out via Anyscale's blue-green deployment. Non-enterprise accounts
+queued and rolled out via GKE RayService rolling deployment. Non-enterprise accounts
 can still use batch-only plugins and reference existing feature URIs.
 
 **Response:**
@@ -247,11 +266,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CustomPluginsNamespaceApi(api_client)
     namespace_id = 'namespace_id_example' # str | 
     plugin_id = 'plugin_id_example' # str | 
+    deployment_type = 'deployment_type_example' # str |  (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
 
     try:
         # Deploy or redeploy a plugin
-        api_response = api_instance.deploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
+        api_response = api_instance.deploy_plugin_namespaces(namespace_id, plugin_id, deployment_type=deployment_type, authorization=authorization)
         print("The response of CustomPluginsNamespaceApi->deploy_plugin_namespaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -267,11 +287,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **namespace_id** | **str**|  | 
  **plugin_id** | **str**|  | 
+ **deployment_type** | **str**|  | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -291,8 +312,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Plugin not found |  -  |
-**500** | Deployment failed |  -  |
 **422** | Validation Error |  -  |
+**500** | Deployment failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -376,8 +397,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Org plugin not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -465,8 +486,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Org plugin not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -565,9 +586,9 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Plugin quota exceeded |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **409** | Plugin already exists |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -656,8 +677,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Plugin not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -736,8 +757,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Plugin not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -819,8 +840,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -895,13 +916,210 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reconfigure_namespace_id_plugins**
+> ReconfigureNamespaceResponse reconfigure_namespace_id_plugins(namespace_id, reconfigure_namespace_request, authorization=authorization)
+
+Reconfigure namespace Qdrant schema
+
+Reconfigure the namespace's Qdrant collection to include vectors from all deployed plugins.
+
+**When to use this:**
+After deploying a new plugin to a namespace that already has data (points_count > 0).
+The auto-rebuild (Phase 1) only works on empty collections. For namespaces with existing
+data, use this endpoint to rebuild the schema, then re-trigger batches to re-ingest.
+
+**WARNING: This is destructive!**
+- All existing Qdrant points are **deleted**
+- The collection is recreated with merged vector definitions
+- You must re-trigger batches on each collection to re-populate data
+
+**Workflow:**
+1. Deploy your new plugin: `POST /plugins/uploads/{id}/confirm`
+2. Deploy it: `POST /plugins/{id}/deploy`
+3. Reconfigure: `POST /plugins/reconfigure` with `{"confirm": true}`
+4. Re-trigger each collection listed in `collections_to_reprocess`
+
+**Response includes:**
+- `vectors_added`: New vector indexes added by the reconfigure
+- `vectors_total`: All vector indexes in the reconfigured collection
+- `collections_to_reprocess`: Collection IDs to re-trigger for data re-ingestion
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.reconfigure_namespace_request import ReconfigureNamespaceRequest
+from mixpeek.models.reconfigure_namespace_response import ReconfigureNamespaceResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.CustomPluginsNamespaceApi(api_client)
+    namespace_id = 'namespace_id_example' # str | 
+    reconfigure_namespace_request = mixpeek.ReconfigureNamespaceRequest() # ReconfigureNamespaceRequest | 
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Reconfigure namespace Qdrant schema
+        api_response = api_instance.reconfigure_namespace_id_plugins(namespace_id, reconfigure_namespace_request, authorization=authorization)
+        print("The response of CustomPluginsNamespaceApi->reconfigure_namespace_id_plugins:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CustomPluginsNamespaceApi->reconfigure_namespace_id_plugins: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **namespace_id** | **str**|  | 
+ **reconfigure_namespace_request** | [**ReconfigureNamespaceRequest**](ReconfigureNamespaceRequest.md)|  | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+[**ReconfigureNamespaceResponse**](ReconfigureNamespaceResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Namespace reconfigured successfully |  -  |
+**400** | confirm&#x3D;true not set |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Namespace or Qdrant collection not found |  -  |
+**422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **test_realtime_inference_namespaces_id_plugins**
+> PluginRealtimeTestResponse test_realtime_inference_namespaces_id_plugins(namespace_id, plugin_id, plugin_realtime_test_request, authorization=authorization)
+
+Test plugin realtime inference
+
+Test a plugin's realtime inference endpoint and return the raw response.
+
+**Use this to debug custom plugin inference** — especially when retrievers fail
+with "Cannot extract dense vector" errors. This endpoint calls the same inference
+path that retrievers use, but returns the raw response instead of trying to
+extract an embedding.
+
+**What to check in the response:**
+- `response_type`: Should be "dict" for embedding plugins
+- `response_keys`: Should contain "embedding" or similar key
+- `raw_response`: The actual data your plugin returns
+
+**Example:**
+```json
+POST /{plugin_id}/realtime/test
+{"inputs": {"text": "hello world"}}
+```
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.plugin_realtime_test_request import PluginRealtimeTestRequest
+from mixpeek.models.plugin_realtime_test_response import PluginRealtimeTestResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.CustomPluginsNamespaceApi(api_client)
+    namespace_id = 'namespace_id_example' # str | 
+    plugin_id = 'plugin_id_example' # str | 
+    plugin_realtime_test_request = mixpeek.PluginRealtimeTestRequest() # PluginRealtimeTestRequest | 
+    authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+
+    try:
+        # Test plugin realtime inference
+        api_response = api_instance.test_realtime_inference_namespaces_id_plugins(namespace_id, plugin_id, plugin_realtime_test_request, authorization=authorization)
+        print("The response of CustomPluginsNamespaceApi->test_realtime_inference_namespaces_id_plugins:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CustomPluginsNamespaceApi->test_realtime_inference_namespaces_id_plugins: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **namespace_id** | **str**|  | 
+ **plugin_id** | **str**|  | 
+ **plugin_realtime_test_request** | [**PluginRealtimeTestRequest**](PluginRealtimeTestRequest.md)|  | 
+ **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+
+### Return type
+
+[**PluginRealtimeTestResponse**](PluginRealtimeTestResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Inference test result |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Plugin not found |  -  |
+**422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **undeploy_plugin_namespaces**
-> object undeploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
+> Dict[str, object] undeploy_plugin_namespaces(namespace_id, plugin_id, authorization=authorization)
 
 Undeploy a plugin
 
@@ -958,7 +1176,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -978,8 +1196,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Plugin not found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1087,9 +1305,9 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Plugin quota exceeded |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **409** | Plugin already exists |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -7,7 +7,7 @@ Google Drive and Google Workspace shared drive configuration.  This configuratio
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **provider_type** | **str** |  | [optional] [default to 'google_drive']
-**credentials** | [**Credentials**](Credentials.md) |  | 
+**credentials** | [**Credentials1**](Credentials1.md) |  | 
 **shared_drive_id** | **str** | NOT REQUIRED. Google Workspace shared drive (Team Drive) identifier. When provided, sync operations are scoped to this shared drive only. When omitted, syncs from &#39;My Drive&#39; of the authenticated account. Find ID: Open shared drive in browser, copy ID from URL. Format: 0A{alphanumeric-string} | [optional] 
 **impersonate_user** | **str** | NOT REQUIRED. Email address to impersonate when using service account credentials. Requires domain-wide delegation to be enabled for the service account. Used in G Suite environments to access files as a specific user. When omitted, uses the service account&#39;s own access. Format: Valid email address in the G Suite domain. | [optional] 
 

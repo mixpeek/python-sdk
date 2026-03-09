@@ -7,7 +7,7 @@ Amazon S3 and S3-compatible storage provider configuration.  This configuration 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **provider_type** | **str** |  | [optional] [default to 's3']
-**credentials** | [**Credentials1**](Credentials1.md) |  | 
+**credentials** | [**Credentials2**](Credentials2.md) |  | 
 **region** | **str** | REQUIRED. AWS region where the S3 bucket is located. Must match the bucket&#39;s actual region to avoid routing errors. For S3-compatible services, use their documented region value or &#39;us-east-1&#39; as a default if regions are not applicable. Format: AWS region code (e.g., us-east-1, eu-west-1) | 
 **endpoint_url** | **str** | NOT REQUIRED for AWS S3 (uses default AWS endpoints). REQUIRED for S3-compatible services to specify custom endpoint URL. Must be a valid HTTPS or HTTP URL without trailing slash. Examples: - MinIO: https://minio.example.com - DigitalOcean Spaces: https://nyc3.digitaloceanspaces.com - Wasabi: https://s3.wasabisys.com | [optional] 
 **use_ssl** | **bool** | Whether to use TLS/SSL encryption for connections to S3. RECOMMENDED: Always True for production environments. Set to False only for local development with unencrypted endpoints. Default: True | [optional] [default to True]

@@ -42,6 +42,8 @@ Types of asynchronous tasks that can be performed in the system.  Task types ide
 
 * `API_COLLECTIONS_EXPORT` (value: `'api_collections_export'`)
 
+* `API_COLLECTIONS_TRIGGER` (value: `'api_collections_trigger'`)
+
 * `ENGINE_FEATURE_EXTRACTOR_RUN` (value: `'engine_feature_extractor_run'`)
 
 * `ENGINE_INFERENCE_RUN` (value: `'engine_inference_run'`)

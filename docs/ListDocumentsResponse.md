@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **results** | [**List[DocumentResponse]**](DocumentResponse.md) | List of documents when group_by is NOT specified. Contains flat list of documents with pagination applied. Mutually exclusive with &#39;groups&#39; field. | [optional] 
 **groups** | [**List[DocumentGroup]**](DocumentGroup.md) | List of document groups when group_by IS specified. Each group contains documents sharing the same field value. Pagination applies to groups, not individual documents. Mutually exclusive with &#39;results&#39; field. | [optional] 
 **pagination** | [**PaginationResponse**](PaginationResponse.md) | Pagination information. Includes next_cursor for cursor-based pagination. When group_by is used, pagination applies to groups (not individual documents). total_count reflects total number of groups, not total documents. | 
+**total_documents** | **int** | Total number of documents matching the query (across all pages). Alias for stats.total_documents — included at the top level for convenience. | [optional] 
 **stats** | [**DocumentListStats**](DocumentListStats.md) | Aggregate statistics across all documents in the result | [optional] 
 **group_by_field** | **str** | The field that was used for grouping when group_by was specified. None for non-grouped results. Useful for clients to understand the grouping structure. | [optional] 
 

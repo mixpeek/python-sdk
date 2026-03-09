@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_objects** | **int** | Total number of objects across all buckets | [optional] [default to 0]
 **total_size_bytes** | **int** | Total size in bytes across all buckets | [optional] [default to 0]
-**avg_objects_per_bucket** | **float** | Average number of objects per bucket | [optional] [default to 0.0]
-**avg_size_per_bucket** | **float** | Average size in bytes per bucket | [optional] [default to 0.0]
+**avg_objects_per_bucket** | **float** | Average number of objects per bucket | [optional] [default to 0]
+**avg_size_per_bucket** | **float** | Average size in bytes per bucket | [optional] [default to 0]
 
 ## Example
 

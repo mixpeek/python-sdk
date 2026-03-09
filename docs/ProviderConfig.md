@@ -6,8 +6,8 @@ REQUIRED. Provider-specific configuration payload including credentials. Type de
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider_type** | **str** |  | [optional] [default to 'postgresql']
-**credentials** | [**PostgreSQLCredentials**](PostgreSQLCredentials.md) | REQUIRED. PostgreSQL authentication credentials. Currently supports username/password authentication. | 
+**provider_type** | **str** |  | [optional] [default to 'box']
+**credentials** | [**Credentials**](Credentials.md) |  | 
 **shared_drive_id** | **str** | NOT REQUIRED. Google Workspace shared drive (Team Drive) identifier. When provided, sync operations are scoped to this shared drive only. When omitted, syncs from &#39;My Drive&#39; of the authenticated account. Find ID: Open shared drive in browser, copy ID from URL. Format: 0A{alphanumeric-string} | [optional] 
 **impersonate_user** | **str** | NOT REQUIRED. Email address to impersonate when using service account credentials. Requires domain-wide delegation to be enabled for the service account. Used in G Suite environments to access files as a specific user. When omitted, uses the service account&#39;s own access. Format: Valid email address in the G Suite domain. | [optional] 
 **region** | **str** | Region for Tigris. Typically &#39;auto&#39; for automatic global distribution. Tigris automatically distributes data globally, so region is usually &#39;auto&#39;. Default: auto | [default to 'auto']
@@ -29,6 +29,17 @@ Name | Type | Description | Notes
 **host** | **str** | REQUIRED. PostgreSQL server hostname or IP address. Examples: &#39;localhost&#39;, &#39;db.example.com&#39;, &#39;192.168.1.100&#39; | 
 **port** | **int** | PostgreSQL server port. Default: 5432 (standard PostgreSQL port) | [optional] [default to 5432]
 **ssl_mode** | **str** | SSL/TLS connection mode. Options: &#39;disable&#39;, &#39;allow&#39;, &#39;prefer&#39;, &#39;require&#39;, &#39;verify-ca&#39;, &#39;verify-full&#39;. Default: &#39;prefer&#39;. RECOMMENDED: Use &#39;require&#39; or stricter for production environments. | [optional] [default to 'prefer']
+**scopes** | **List[str]** | OAuth scopes granted during authorization. | [optional] [default to [user.info.basic, video.list]]
+**business_account_id** | **str** | Instagram Business Account ID if different from the user ID. Auto-populated from OAuth flow. | [optional] 
+**user_agent** | **str** | User-Agent header for API requests. | [optional] [default to 'Mixpeek HTTP API Sync/1.0']
+**request_timeout** | **int** | HTTP request timeout in seconds. | [optional] [default to 30]
+**http_method** | **str** | HTTP method to use when calling the API. | [optional] [default to 'GET']
+**request_body** | **Dict[str, object]** | Optional JSON body for POST requests. | [optional] 
+**items_path** | **str** | Dot-notation path to the array of items in the JSON response. Examples: &#39;hits&#39; for {hits: [...]}, &#39;data.items&#39; for {data: {items: [...]}}. Leave empty if the response is a top-level array. | [optional] [default to '']
+**item_id_field** | **str** | REQUIRED. Field name in each item used as a unique ID for deduplication. Examples: &#39;id&#39;, &#39;objectID&#39;, &#39;uuid&#39;. | 
+**item_modified_field** | **str** | Optional field name for a timestamp used for incremental sync. Supports ISO 8601 strings and Unix timestamps. Examples: &#39;updated_at&#39;, &#39;created_at&#39;, &#39;modified&#39;. | [optional] 
+**response_content_type** | **str** | Response format: &#39;json&#39; (default) or &#39;jsonl&#39; (newline-delimited JSON). | [optional] [default to 'json']
+**folder_id** | **str** | Box folder ID to sync from. Default &#39;0&#39; is the root folder. Find folder ID: Open folder in Box web UI, copy the numeric ID from the URL. Example URL: https://app.box.com/folder/123456789 → folder_id&#x3D;&#39;123456789&#39; | [optional] [default to '0']
 
 ## Example
 

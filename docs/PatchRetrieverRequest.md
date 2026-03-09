@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **retriever_name** | **str** | Updated retriever name. OPTIONAL - only provide if you want to rename the retriever. | [optional] 
 **description** | **str** | Updated human-readable description. OPTIONAL - only provide if you want to update the description. | [optional] 
+**visibility** | [**RetrieverVisibility**](RetrieverVisibility.md) | Updated visibility level. OPTIONAL - only provide if you want to change the visibility. | [optional] 
+**marketplace_listing_id** | **str** | Updated marketplace listing ID. OPTIONAL - only provide if you want to update the marketplace listing. | [optional] 
+**requires_subscription** | **bool** | Updated subscription requirement. OPTIONAL - only provide if you want to change the subscription requirement. | [optional] 
 **tags** | **List[str]** | Updated tags for organization and filtering. OPTIONAL - replaces existing tags if provided. | [optional] 
 **display_config** | [**DisplayConfigInput**](DisplayConfigInput.md) | Updated display configuration for public retriever UI rendering. OPTIONAL - only provide if you want to update the display settings. Defines how the search interface should appear when published. | [optional] 
 

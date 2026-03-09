@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **add_objects_to_batch_buckets_batches**
-> BatchModel add_objects_to_batch_buckets_batches(bucket_identifier, batch_id, add_objects_to_batch_request, skip_validation=skip_validation, authorization=authorization, x_namespace=x_namespace)
+> BatchModel add_objects_to_batch_buckets_batches(bucket_identifier, batch_id, add_objects_to_batch_request, skip_validation=skip_validation, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Add Objects to Batch
 
@@ -51,11 +51,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     add_objects_to_batch_request = mixpeek.AddObjectsToBatchRequest() # AddObjectsToBatchRequest | 
     skip_validation = False # bool | Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly. (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Add Objects to Batch
-        api_response = api_instance.add_objects_to_batch_buckets_batches(bucket_identifier, batch_id, add_objects_to_batch_request, skip_validation=skip_validation, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.add_objects_to_batch_buckets_batches(bucket_identifier, batch_id, add_objects_to_batch_request, skip_validation=skip_validation, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->add_objects_to_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
  **add_objects_to_batch_request** | [**AddObjectsToBatchRequest**](AddObjectsToBatchRequest.md)|  | 
  **skip_validation** | **bool**| Skip object existence validation. Use this for large batches (&gt;10k objects) or when you&#39;re certain all object IDs are valid. Improves performance significantly. | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -98,13 +100,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cancel_batch_buckets_batches**
-> TaskResponse cancel_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace)
+> TaskResponse cancel_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Cancel Batch
 
@@ -133,11 +135,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Cancel Batch
-        api_response = api_instance.cancel_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.cancel_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->cancel_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -154,6 +157,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **batch_id** | **str**| The unique identifier of the batch. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -178,13 +182,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_batch_buckets_batches**
-> BatchModel create_batch_buckets_batches(bucket_identifier, create_batch_request, skip_validation=skip_validation, authorization=authorization, x_namespace=x_namespace)
+> BatchModel create_batch_buckets_batches(bucket_identifier, create_batch_request, skip_validation=skip_validation, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Batch
 
@@ -215,11 +219,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     create_batch_request = mixpeek.CreateBatchRequest() # CreateBatchRequest | 
     skip_validation = False # bool | Skip object existence validation. Use this for large batches (>10k objects) or when you're certain all object IDs are valid. Improves performance significantly. (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Batch
-        api_response = api_instance.create_batch_buckets_batches(bucket_identifier, create_batch_request, skip_validation=skip_validation, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_batch_buckets_batches(bucket_identifier, create_batch_request, skip_validation=skip_validation, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->create_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -237,6 +242,7 @@ Name | Type | Description  | Notes
  **create_batch_request** | [**CreateBatchRequest**](CreateBatchRequest.md)|  | 
  **skip_validation** | **bool**| Skip object existence validation. Use this for large batches (&gt;10k objects) or when you&#39;re certain all object IDs are valid. Improves performance significantly. | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -261,13 +267,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_batch_buckets_batches**
-> GenericDeleteResponse delete_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace)
+> GenericDeleteResponse delete_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete Batch
 
@@ -296,11 +302,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete Batch
-        api_response = api_instance.delete_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.delete_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->delete_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -317,6 +324,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **batch_id** | **str**| The unique identifier of the batch. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -341,13 +349,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_batch_buckets_batches**
-> BatchModel get_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace)
+> BatchModel get_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Batch Configuration
 
@@ -376,11 +384,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Batch Configuration
-        api_response = api_instance.get_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->get_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -397,6 +406,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **batch_id** | **str**| The unique identifier of the batch. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -421,13 +431,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_batch_logs_buckets_batches**
-> object get_batch_logs_buckets_batches(bucket_identifier, batch_id, tier_num=tier_num, authorization=authorization, x_namespace=x_namespace)
+> object get_batch_logs_buckets_batches(bucket_identifier, batch_id, tier_num=tier_num, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Ray Job Logs for Batch
 
@@ -456,11 +466,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     tier_num = 56 # int | Optional tier number (0-based). If not provided, returns logs for all tiers. (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Ray Job Logs for Batch
-        api_response = api_instance.get_batch_logs_buckets_batches(bucket_identifier, batch_id, tier_num=tier_num, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_batch_logs_buckets_batches(bucket_identifier, batch_id, tier_num=tier_num, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->get_batch_logs_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -478,6 +489,7 @@ Name | Type | Description  | Notes
  **batch_id** | **str**| The unique identifier of the batch. | 
  **tier_num** | **int**| Optional tier number (0-based). If not provided, returns logs for all tiers. | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -502,13 +514,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_failed_documents_buckets_batches_batch**
-> object get_failed_documents_buckets_batches_batch(bucket_identifier, batch_id, tier_num=tier_num, collection_id=collection_id, limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] get_failed_documents_buckets_batches_batch(bucket_identifier, batch_id, tier_num=tier_num, collection_id=collection_id, limit=limit, offset=offset, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Failed Documents for Batch
 
@@ -540,11 +552,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     limit = 100 # int |  (optional) (default to 100)
     offset = 0 # int |  (optional) (default to 0)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Failed Documents for Batch
-        api_response = api_instance.get_failed_documents_buckets_batches_batch(bucket_identifier, batch_id, tier_num=tier_num, collection_id=collection_id, limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_failed_documents_buckets_batches_batch(bucket_identifier, batch_id, tier_num=tier_num, collection_id=collection_id, limit=limit, offset=offset, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->get_failed_documents_buckets_batches_batch:\n")
         pprint(api_response)
     except Exception as e:
@@ -565,11 +578,12 @@ Name | Type | Description  | Notes
  **limit** | **int**|  | [optional] [default to 100]
  **offset** | **int**|  | [optional] [default to 0]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -589,13 +603,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_batches_buckets**
-> ListBatchesResponse list_batches_buckets(bucket_identifier, authorization=authorization, x_namespace=x_namespace, list_batches_request=list_batches_request)
+> ListBatchesResponse list_batches_buckets(bucket_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_batches_request=list_batches_request)
 
 List Batches
 
@@ -624,12 +638,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.BucketBatchesApi(api_client)
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_batches_request = mixpeek.ListBatchesRequest() # ListBatchesRequest |  (optional)
 
     try:
         # List Batches
-        api_response = api_instance.list_batches_buckets(bucket_identifier, authorization=authorization, x_namespace=x_namespace, list_batches_request=list_batches_request)
+        api_response = api_instance.list_batches_buckets(bucket_identifier, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_batches_request=list_batches_request)
         print("The response of BucketBatchesApi->list_batches_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -645,6 +660,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_batches_request** | [**ListBatchesRequest**](ListBatchesRequest.md)|  | [optional] 
 
@@ -670,13 +686,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_batch_buckets_batches**
-> BatchModel patch_batch_buckets_batches(bucket_identifier, batch_id, patch_batch_request, authorization=authorization, x_namespace=x_namespace)
+> BatchModel patch_batch_buckets_batches(bucket_identifier, batch_id, patch_batch_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Partially Update Batch
 
@@ -709,11 +725,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     patch_batch_request = mixpeek.PatchBatchRequest() # PatchBatchRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Partially Update Batch
-        api_response = api_instance.patch_batch_buckets_batches(bucket_identifier, batch_id, patch_batch_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.patch_batch_buckets_batches(bucket_identifier, batch_id, patch_batch_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->patch_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -731,6 +748,7 @@ Name | Type | Description  | Notes
  **batch_id** | **str**| The unique identifier of the batch. | 
  **patch_batch_request** | [**PatchBatchRequest**](PatchBatchRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -755,13 +773,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **retry_batch_buckets_batches**
-> object retry_batch_buckets_batches(bucket_identifier, batch_id, retry_batch_request, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] retry_batch_buckets_batches(bucket_identifier, batch_id, retry_batch_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Retry Failed Documents
 
@@ -791,11 +809,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     retry_batch_request = mixpeek.RetryBatchRequest() # RetryBatchRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Retry Failed Documents
-        api_response = api_instance.retry_batch_buckets_batches(bucket_identifier, batch_id, retry_batch_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.retry_batch_buckets_batches(bucket_identifier, batch_id, retry_batch_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->retry_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -813,11 +832,12 @@ Name | Type | Description  | Notes
  **batch_id** | **str**| The unique identifier of the batch. | 
  **retry_batch_request** | [**RetryBatchRequest**](RetryBatchRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -837,13 +857,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **retry_qdrant_write_buckets_batches_batch_id_tiers_num**
-> object retry_qdrant_write_buckets_batches_batch_id_tiers_num(bucket_identifier, batch_id, tier_num, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] retry_qdrant_write_buckets_batches_batch_id_tiers_num(bucket_identifier, batch_id, tier_num, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Retry Qdrant Write from S3
 
@@ -872,11 +892,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     tier_num = 56 # int | The tier number to retry (0-based).
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Retry Qdrant Write from S3
-        api_response = api_instance.retry_qdrant_write_buckets_batches_batch_id_tiers_num(bucket_identifier, batch_id, tier_num, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.retry_qdrant_write_buckets_batches_batch_id_tiers_num(bucket_identifier, batch_id, tier_num, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of BucketBatchesApi->retry_qdrant_write_buckets_batches_batch_id_tiers_num:\n")
         pprint(api_response)
     except Exception as e:
@@ -894,11 +915,12 @@ Name | Type | Description  | Notes
  **batch_id** | **str**| The unique identifier of the batch. | 
  **tier_num** | **int**| The tier number to retry (0-based). | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -918,13 +940,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submit_batch_buckets_batches**
-> TaskResponse submit_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace, submit_batch_request=submit_batch_request)
+> TaskResponse submit_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, submit_batch_request=submit_batch_request)
 
 Submit Batch for Processing
 
@@ -954,12 +976,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_identifier = 'bucket_identifier_example' # str | The unique identifier of the bucket.
     batch_id = 'batch_id_example' # str | The unique identifier of the batch.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     submit_batch_request = mixpeek.SubmitBatchRequest() # SubmitBatchRequest |  (optional)
 
     try:
         # Submit Batch for Processing
-        api_response = api_instance.submit_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, x_namespace=x_namespace, submit_batch_request=submit_batch_request)
+        api_response = api_instance.submit_batch_buckets_batches(bucket_identifier, batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, submit_batch_request=submit_batch_request)
         print("The response of BucketBatchesApi->submit_batch_buckets_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -976,6 +999,7 @@ Name | Type | Description  | Notes
  **bucket_identifier** | **str**| The unique identifier of the bucket. | 
  **batch_id** | **str**| The unique identifier of the batch. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **submit_batch_request** | [**SubmitBatchRequest**](SubmitBatchRequest.md)|  | [optional] 
 
@@ -1001,8 +1025,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

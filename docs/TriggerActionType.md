@@ -10,6 +10,8 @@ Type of action to execute when trigger fires.  Supported action types: - **clust
 
 * `BATCH_RERUN` (value: `'batch_rerun'`)
 
+* `COLLECTION_TRIGGER` (value: `'collection_trigger'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -1,6 +1,6 @@
 # WebScraperExtractorParams
 
-Parameters for the web scraper extractor.  The web scraper extractor crawls websites and extracts content with three types of embeddings for comprehensive multimodal search:  **Embedding Types:** - Text (E5-Large): 1024D embeddings for page content - Code (Jina Code): 768D embeddings for code blocks - Images (SigLIP): 768D embeddings for figures/screenshots  **Crawl Modes:** - DETERMINISTIC: BFS following all links (default, predictable) - SEMANTIC: LLM-guided, prioritizes pages matching crawl_goal  **Rendering Strategies:** - STATIC: Fast HTTP fetch (default, works for most sites) - JAVASCRIPT: Playwright browser for SPAs (React/Vue/Angular) - AUTO: Tries static, falls back to JS if content too short  **Use Cases:** - Documentation freshness: Crawl docs, compare against course content - Job board ingestion: Extract job listings with structured data - Knowledge base building: Convert websites to searchable collections - Code example indexing: Find API usage patterns across docs
+Parameters for the web scraper extractor.  The web scraper extractor crawls websites and extracts content with three types of embeddings for comprehensive multimodal search:  **Embedding Types:** - Text (E5-Large): 1024D embeddings for page content - Code (Jina Code): 768D embeddings for code blocks - Images (SigLIP): 768D semantic embeddings for figures/screenshots - Images (DINOv2): 768D structure embeddings for visual layout comparison  **Crawl Modes:** - DETERMINISTIC: BFS following all links (default, predictable) - SEMANTIC: LLM-guided, prioritizes pages matching crawl_goal  **Rendering Strategies:** - STATIC: Fast HTTP fetch (default, works for most sites) - JAVASCRIPT: Playwright browser for SPAs (React/Vue/Angular) - AUTO: Tries static, falls back to JS if content too short  **Use Cases:** - Documentation freshness: Crawl docs, compare against course content - Job board ingestion: Extract job listings with structured data - Knowledge base building: Convert websites to searchable collections - Code example indexing: Find API usage patterns across docs
 
 ## Properties
 
@@ -22,13 +22,14 @@ Name | Type | Description | Notes
 **generate_text_embeddings** | **bool** | Generate E5 embeddings for text content. | [optional] [default to True]
 **generate_code_embeddings** | **bool** | Generate Jina code embeddings for code blocks. | [optional] [default to True]
 **generate_image_embeddings** | **bool** | Generate SigLIP embeddings for images/figures. | [optional] [default to True]
+**generate_structure_embeddings** | **bool** | Generate DINOv2 visual structure embeddings for layout comparison. | [optional] [default to True]
 **response_shape** | [**ResponseShape3**](ResponseShape3.md) |  | [optional] 
 **llm_provider** | **str** | LLM provider for structured extraction: openai, google, anthropic | [optional] 
 **llm_model** | **str** | LLM model for structured extraction. | [optional] 
 **llm_api_key** | **str** | API key for LLM operations (BYOK - Bring Your Own Key). Supports: - Direct key: &#39;sk-proj-abc123...&#39; - Secret reference: &#39;{{SECRET.openai_api_key}}&#39;  When using secret reference, the key is loaded from your organization&#39;s secrets vault at runtime. Store secrets via POST /v1/organizations/secrets.  If not provided, uses Mixpeek&#39;s default API keys. | [optional] 
 **max_retries** | **int** | Maximum retry attempts for failed HTTP requests. Uses exponential backoff with jitter. Default: 3. | [optional] [default to 3]
-**retry_base_delay** | **float** | Base delay in seconds for retry backoff. Actual delay &#x3D; base * 2^attempt + jitter. Default: 1.0. | [optional] [default to 1.0]
-**retry_max_delay** | **float** | Maximum delay in seconds between retries. Default: 30. | [optional] [default to 30.0]
+**retry_base_delay** | **float** | Base delay in seconds for retry backoff. Actual delay &#x3D; base * 2^attempt + jitter. Default: 1.0. | [optional] [default to 1]
+**retry_max_delay** | **float** | Maximum delay in seconds between retries. Default: 30. | [optional] [default to 30]
 **respect_retry_after** | **bool** | Respect Retry-After header from 429/503 responses. If False, uses exponential backoff instead. Default: True. | [optional] [default to True]
 **proxies** | **List[str]** | List of proxy URLs for rotation. Supports formats: &#39;http://host:port&#39;, &#39;http://user:pass@host:port&#39;, &#39;socks5://host:port&#39;. Proxies rotate on errors or every N requests. | [optional] 
 **rotate_proxy_on_error** | **bool** | Rotate to next proxy when request fails. Default: True. | [optional] [default to True]
@@ -38,7 +39,7 @@ Name | Type | Description | Notes
 **detect_captcha** | **bool** | Detect captcha challenges (Cloudflare, reCAPTCHA, hCaptcha). If detected and no solver configured, page is skipped. Default: True. | [optional] [default to True]
 **persist_cookies** | **bool** | Persist cookies across requests within a crawl session. Useful for sites requiring authentication. Default: True. | [optional] [default to True]
 **custom_headers** | **Dict[str, str]** | Custom HTTP headers to include in all requests. Example: {&#39;Authorization&#39;: &#39;Bearer token&#39;, &#39;X-Custom&#39;: &#39;value&#39;} | [optional] 
-**delay_between_requests** | **float** | Delay in seconds between consecutive requests. Useful for polite crawling and avoiding rate limits. Default: 0 (no delay). | [optional] [default to 0.0]
+**delay_between_requests** | **float** | Delay in seconds between consecutive requests. Useful for polite crawling and avoiding rate limits. Default: 0 (no delay). | [optional] [default to 0]
 
 ## Example
 

@@ -6,7 +6,7 @@ Performance statistics for a retriever stage.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**avg_execution_ms** | **float** | Average execution time in milliseconds | [optional] [default to 0.0]
+**avg_execution_ms** | **float** | Average execution time in milliseconds | [optional] [default to 0]
 **execution_count** | **int** | Number of times executed | [optional] [default to 0]
 **error_count** | **int** | Number of errors encountered | [optional] [default to 0]
 **last_executed_at** | **datetime** | Last time this stage was executed | [optional] 

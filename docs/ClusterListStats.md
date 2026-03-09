@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_clusters** | **int** | Total number of clusters in the result | [optional] [default to 0]
 **total_documents** | **int** | Total number of documents across all clusters | [optional] [default to 0]
-**avg_documents_per_cluster** | **float** | Average number of documents per cluster | [optional] [default to 0.0]
+**avg_documents_per_cluster** | **float** | Average number of documents per cluster | [optional] [default to 0]
 **clusters_by_status** | **Dict[str, int]** | Count of clusters grouped by status | [optional] 
 
 ## Example

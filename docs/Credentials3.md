@@ -1,16 +1,16 @@
 # Credentials3
 
-REQUIRED. Authentication credentials for Snowflake. Choose key_pair for production (recommended) or username_password for simpler setup. The 'type' field determines which credential mechanism is used.
+REQUIRED. Azure AD authentication credentials. Choose client_credentials for production (app-only) or delegated for user-level access. The 'type' field determines which authentication flow is used.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] [default to 'key_pair']
-**username** | **str** | REQUIRED. Snowflake username (case-insensitive). | 
-**private_key** | **str** | REQUIRED. PEM-encoded RSA private key for authentication. SECURITY: This field is encrypted at rest via CSFLE. Never log or expose. Format: -----BEGIN PRIVATE KEY-----...-----END PRIVATE KEY-----  | 
-**private_key_passphrase** | **str** | NOT REQUIRED. Passphrase for encrypted private key. SECURITY: Encrypted at rest if provided. Use only if private key is passphrase-protected. | [optional] 
-**password** | **str** | REQUIRED. Snowflake password for authentication. SECURITY: This field is encrypted at rest via CSFLE. Never log or expose. | 
+**type** | **str** |  | [optional] [default to 'client_credentials']
+**tenant_id** | **str** | REQUIRED. Azure AD tenant ID. Use &#39;common&#39; for multi-tenant apps, or specific tenant ID for single-tenant. | 
+**client_id** | **str** | REQUIRED. Azure AD application (client) ID. | 
+**client_secret** | **str** | REQUIRED. Azure AD client secret. SECURITY: Encrypted at rest via CSFLE. | 
+**refresh_token** | **str** | REQUIRED. OAuth2 refresh token obtained from consent flow. SECURITY: Encrypted at rest. Can be revoked by user. Obtain via: Complete OAuth flow with Files.Read.All scope. | 
 
 ## Example
 

@@ -7,8 +7,8 @@ Minimum feature extractor definition.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **feature_extractor_name** | **str** | Name of the feature extractor | 
-**version** | **str** | Version of the feature extractor | 
-**params** | **object** | Optional extractor parameters that affect vector index configuration. Parameters set here are locked at namespace creation and determine vector dimensions in Qdrant. Collections using this extractor must use compatible params. Example: {&#39;model&#39;: &#39;siglip_base&#39;} | [optional] 
+**version** | **str** | Version of the feature extractor (e.g., &#39;v1&#39;, &#39;v2&#39;) | 
+**params** | **Dict[str, object]** | Optional extractor parameters that affect vector index configuration. Parameters set here are locked at namespace creation and determine vector dimensions in Qdrant. Collections using this extractor must use compatible params. Example: {&#39;model&#39;: &#39;siglip_base&#39;} | [optional] 
 **feature_extractor_id** | **str** | Construct unique identifier for the feature extractor instance (name + version). | [readonly] 
 
 ## Example

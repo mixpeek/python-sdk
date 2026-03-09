@@ -4,11 +4,155 @@ All URIs are relative to *https://api.mixpeek.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**celery_beat_health**](HealthApi.md#celery_beat_health) | **GET** /v1/health/beat | Celery Beat Health
+[**celery_beat_health_0**](HealthApi.md#celery_beat_health_0) | **GET** /v1/health/beat | Celery Beat Health
 [**healthcheck_health**](HealthApi.md#healthcheck_health) | **GET** /v1/health | Healthcheck
 [**healthcheck_health_0**](HealthApi.md#healthcheck_health_0) | **GET** /v1/health | Healthcheck
 [**liveness_health**](HealthApi.md#liveness_health) | **GET** /v1/health/liveness | Liveness
 [**liveness_health_0**](HealthApi.md#liveness_health_0) | **GET** /v1/health/liveness | Liveness
 
+
+# **celery_beat_health**
+> object celery_beat_health()
+
+Celery Beat Health
+
+Check if Celery Beat scheduler is running.
+
+Reads the heartbeat timestamp from Redis (written every 60s by beat).
+Returns unhealthy if heartbeat is older than 5 minutes.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.HealthApi(api_client)
+
+    try:
+        # Celery Beat Health
+        api_response = api_instance.celery_beat_health()
+        print("The response of HealthApi->celery_beat_health:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling HealthApi->celery_beat_health: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **celery_beat_health_0**
+> object celery_beat_health_0()
+
+Celery Beat Health
+
+Check if Celery Beat scheduler is running.
+
+Reads the heartbeat timestamp from Redis (written every 60s by beat).
+Returns unhealthy if heartbeat is older than 5 minutes.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.HealthApi(api_client)
+
+    try:
+        # Celery Beat Health
+        api_response = api_instance.celery_beat_health_0()
+        print("The response of HealthApi->celery_beat_health_0:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling HealthApi->celery_beat_health_0: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**object**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **healthcheck_health**
 > HealthCheckResponse healthcheck_health(deep=deep, metrics=metrics)
@@ -81,8 +225,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -157,8 +301,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

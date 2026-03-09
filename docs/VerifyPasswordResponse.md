@@ -7,7 +7,7 @@ Response from password verification.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **valid** | **bool** | Whether the provided password is valid | 
-**public_api_key** | **str** | Public API key for this retriever (only included if password is valid) | [optional] 
+**public_api_key** | **str** | DEPRECATED: API keys are no longer required. After password verification, call the execute endpoint directly. | [optional] 
 
 ## Example
 

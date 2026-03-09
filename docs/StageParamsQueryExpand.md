@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **num_expansions** | **int** | Number of query variations to generate. More expansions &#x3D; better recall but slower. | [optional] [default to 3]
 **expansion_prompt** | **str** | Custom prompt for query expansion. Use {{QUERY}} for the original query and {{NUM_EXPANSIONS}} for the count. If not provided, uses a default prompt. | [optional] [default to 'null']
 **expansion_model** | **str** | LLM model to use for generating query expansions. | [optional] [default to 'gpt-4o-mini']
-**feature_search_config** | **object** | Full feature_search configuration. This is the same config you would pass to a standalone feature_search stage. The query.text field will be replaced with each expanded query. | 
+**feature_search_config** | **Dict[str, object]** | Full feature_search configuration. This is the same config you would pass to a standalone feature_search stage. The query.text field will be replaced with each expanded query. | 
 **include_original** | **bool** | Whether to include the original query in addition to expansions. | [optional] [default to True]
 **rrf_k** | **int** | RRF constant k. Higher values give more weight to lower-ranked results. Default of 60 is standard. Use lower (20-40) for precision, higher (80-100) for recall. | [optional] [default to 60]
 **fusion_strategy** | **str** | How to fuse results from multiple queries. &#39;rrf&#39; &#x3D; Reciprocal Rank Fusion (recommended), &#39;linear&#39; &#x3D; simple score averaging. | [optional] [default to 'rrf']

@@ -7,7 +7,7 @@ Configuration for sorting documents by an attribute field.  **Stage Category**: 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_field** | **str** | Document field path to sort on. Use dot notation for nested fields (e.g., &#39;metadata.release_date&#39;). Supports template expressions for dynamic field selection. Can sort by strings, numbers, dates, or booleans. Examples: &#39;metadata.created_at&#39;, &#39;metadata.popularity&#39;, &#39;title&#39;. | [optional] [default to 'metadata.created_at']
-**direction** | [**SortDirection**](SortDirection.md) | OPTIONAL. Sort direction. &#39;desc&#39; (default): Highest/latest values first (Z-A, 100-0, newest-oldest). &#39;asc&#39;: Lowest/earliest values first (A-Z, 0-100, oldest-newest). | [optional] 
+**direction** | [**StageDefsSortDirection**](StageDefsSortDirection.md) | OPTIONAL. Sort direction. &#39;desc&#39; (default): Highest/latest values first (Z-A, 100-0, newest-oldest). &#39;asc&#39;: Lowest/earliest values first (A-Z, 0-100, oldest-newest). | [optional] 
 **nulls_last** | **bool** | OPTIONAL. Whether documents with null/missing field values should be placed at the end of results regardless of sort direction. true (default): Nulls always at the end. false: Nulls follow natural sort order (beginning for asc, end for desc). | [optional] [default to True]
 
 ## Example

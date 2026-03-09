@@ -6,8 +6,8 @@ Generic content input for automatic content-type detection.  Used for URL or bas
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **str** | OPTIONAL. URL to content for embedding generation. Mutually exclusive with base64 - provide exactly one. System will automatically detect content type (image, video, text, etc.) via HTTP HEAD request and/or file extension analysis. Supported protocols: HTTP, HTTPS, S3 (for Mixpeek-managed buckets). S3 URLs must point to the configured AWS_BUCKET. Examples: image URL, video URL, text file URL, S3 object path. | [optional] 
-**var_base64** | **str** | OPTIONAL. Base64-encoded content for embedding generation. Mutually exclusive with url - provide exactly one. Can include data URI scheme (data:mime/type;base64,...) or just base64 string. System will automatically detect content type from data URI or by decoding. Supported types: images, videos, audio, documents. Maximum size: Limited by your namespace configuration. | [optional] 
+**url** | **str** | OPTIONAL. URL to content for embedding generation. Mutually exclusive with base64 - provide exactly one. System will automatically detect content type (image, video, text, etc.) via HTTP HEAD request and/or file extension analysis. Supported protocols: HTTP, HTTPS, S3 (for Mixpeek-managed buckets). S3 URLs must point to the configured AWS_BUCKET. NOTE: For multimodal embeddings, URL-based inputs may fail if the upstream embedding provider cannot fetch the URL (e.g., geo-restrictions, rate limiting, redirects). Consider using the base64 field instead for more reliable results. | [optional] 
+**var_base64** | **str** | OPTIONAL. Base64-encoded content for embedding generation (RECOMMENDED for multimodal embeddings). Mutually exclusive with url - provide exactly one. Must include data URI scheme (data:mime/type;base64,...) for reliable MIME detection. System will automatically detect content type from data URI prefix. Supported types: images (image/jpeg, image/png), videos (video/mp4), audio, documents. Maximum size: Limited by your namespace configuration. | [optional] 
 
 ## Example
 

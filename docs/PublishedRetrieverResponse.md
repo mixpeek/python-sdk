@@ -11,12 +11,14 @@ Name | Type | Description | Notes
 **public_name** | **str** | Public URL-safe name | 
 **description** | **str** | Description of this public retriever | [optional] 
 **icon_base64** | **str** | Base64 encoded icon/favicon for this retriever | [optional] 
-**public_api_key** | **str** | Public API key (safe to show to retriever owner) | 
+**public_api_key** | **str** | DEPRECATED: Public API key (prk_). API keys are no longer required for public retriever access. For SDK access, use ret_sk_ keys. | [optional] 
 **display_config** | [**DisplayConfigOutput**](DisplayConfigOutput.md) | Display configuration for UI rendering | 
 **rate_limit_config** | [**RateLimitConfig**](RateLimitConfig.md) | Rate limiting configuration | 
 **password_protected** | **bool** | Whether password protection is enabled | 
 **is_active** | **bool** | Whether the published retriever is active | 
 **retriever_metadata** | [**RetrieverMetadata**](RetrieverMetadata.md) | Optional technical metadata about the retriever | [optional] 
+**tags** | **List[str]** | Tags for categorizing this retriever | [optional] 
+**category** | **str** | Primary category for this retriever | [optional] 
 **created_at** | **datetime** | Timestamp when published | 
 **updated_at** | **datetime** | Timestamp when last updated | 
 

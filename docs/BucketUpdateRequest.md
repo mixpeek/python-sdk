@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bucket_name** | **str** | Human-readable name for the bucket | [optional] 
 **description** | **str** | Description of the bucket | [optional] 
-**metadata** | **object** | Additional metadata for the bucket | [optional] 
+**metadata** | **Dict[str, object]** | Additional metadata for the bucket | [optional] 
+**bucket_schema** | [**BucketSchemaInput**](BucketSchemaInput.md) | Schema definition for objects in this bucket | [optional] 
 
 ## Example
 

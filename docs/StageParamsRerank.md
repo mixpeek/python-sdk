@@ -6,12 +6,14 @@ Configuration for reranking documents using cross-encoder models.  Reranking ref
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inference_name** | **str** | Reranking inference service name. Must be a reranking service. Use GET /engine/inference to list available rerankers. | [optional] [default to 'baai_bge_reranker_v2_m3']
+**inference_name** | **str** | Reranking inference service name. Must be a reranking service. Use GET /engine/inference to list available rerankers. | [optional] [default to 'BAAI__bge_reranker_v2_m3']
 **query** | **str** | Query text to compare against documents. Supports template variables: {{INPUT.query}}, etc. | [optional] [default to '{{INPUT.query}}']
 **document_field** | **str** | Document field path containing text to rerank against | [optional] [default to 'content']
 **top_k** | **int** | Number of top documents to keep after reranking. If None, returns all documents in reranked order. | [optional] [default to null]
 **score_field** | **str** | Document field path to store reranking scores | [optional] [default to 'scores.rerank']
 **batch_size** | **int** | Batch size for reranking inference calls | [optional] [default to 32]
+**max_document_chars** | **int** | Maximum characters of document text to send for reranking. The cross-encoder tokenizer truncates to ~512 tokens anyway, so sending full page content (often 10K+ chars) wastes bandwidth and increases latency. 2000 chars ≈ 500 tokens covers the tokenizer window with margin. | [optional] [default to 2000]
+**max_concurrent_batches** | **int** | Maximum number of inference batches to process concurrently. When the number of pairs exceeds batch_size, they are split into batches and sent as concurrent inference requests. | [optional] [default to 3]
 
 ## Example
 

@@ -7,6 +7,7 @@ Request schema for creating a new namespace.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **namespace_name** | **str** | Name of the namespace to create | 
+**namespace_type** | [**NamespaceType**](NamespaceType.md) | Type of namespace. STANDARD for regular namespaces, MARKETPLACE for curated datasets. | [optional] 
 **description** | **str** | Description of the namespace | [optional] 
 **feature_extractors** | [**List[BaseFeatureExtractorModelInput]**](BaseFeatureExtractorModelInput.md) | List of feature extractors to use. At least one feature extractor must be provided. Optional &#39;params&#39; can be specified for extractors with configurable settings (e.g., model selection) that affect vector dimensions. These params are locked at namespace creation time. | 
 **payload_indexes** | [**List[PayloadIndexConfigInput]**](PayloadIndexConfigInput.md) | Optional list of custom payload index configurations. Indexes required by selected feature extractors will be added automatically. | [optional] 

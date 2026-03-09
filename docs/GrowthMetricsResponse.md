@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **collection_id** | **str** |  | 
 **time_range** | [**ApiAnalyticsCollectionsModelsTimeRange**](ApiAnalyticsCollectionsModelsTimeRange.md) |  | 
 **metrics** | [**List[GrowthMetric]**](GrowthMetric.md) |  | 
-**summary** | **object** |  | [optional] 
+**summary** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 

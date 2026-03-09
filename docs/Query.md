@@ -6,11 +6,11 @@ REQUIRED. Input for this feature search. Can be plain text, URL with auto-detect
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**input_mode** | **str** | Discriminator field. Always &#39;document&#39; for document reference queries. | [optional] [default to 'document']
-**value** | **str** | Content input with auto-detection (RECOMMENDED). System auto-detects format: - http://, https://, s3:// → fetched as URL - data: → decoded as base64 data URI - Otherwise → treated as raw base64 string. Supports template variables: {{INPUT.field_name}}. | [optional] 
+**input_mode** | **str** | Discriminator field. Always &#39;vector&#39; for raw embedding queries. | [optional] [default to 'vector']
+**value** | [**Value2**](Value2.md) |  | [optional] 
 **text** | **str** | Legacy text field (DEPRECATED - use &#39;value&#39; instead). Supports template variables: {{INPUT.field_name}}. | [optional] 
-**content** | [**ContentInput**](ContentInput.md) | Legacy content input (DEPRECATED - use &#39;value&#39; instead). Provide URL or base64 separately via ContentInput model. | [optional] 
-**document_ref** | [**DocumentReference**](DocumentReference.md) | Reference to existing document&#39;s pre-computed features. The system fetches the document&#39;s feature vectors for the specified feature_uri and uses them directly without re-processing. Document must exist and have features for the specified feature_uri. | 
+**content** | [**StageDefsContentInput**](StageDefsContentInput.md) | Legacy content input (DEPRECATED - use &#39;value&#39; instead). Provide URL or base64 separately via ContentInput model. | [optional] 
+**document_ref** | [**StageDefsDocumentReference**](StageDefsDocumentReference.md) | Reference to existing document&#39;s pre-computed features. The system fetches the document&#39;s feature vectors for the specified feature_uri and uses them directly without re-processing. Document must exist and have features for the specified feature_uri. | 
 
 ## Example
 

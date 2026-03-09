@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **retriever_id** | **str** | Unique identifier for the retriever | [optional] 
 **retriever_name** | **str** | Name of the retriever | 
 **description** | **str** | Description of the retriever | [optional] 
+**visibility** | [**RetrieverVisibility**](RetrieverVisibility.md) | Visibility level: PRIVATE (owner only), PUBLIC (any valid API key), MARKETPLACE (requires subscription) | [optional] 
+**marketplace_listing_id** | **str** | Associated marketplace listing ID when visibility is MARKETPLACE | [optional] 
+**requires_subscription** | **bool** | Whether this retriever requires an active subscription to access (marketplace only) | [optional] [default to False]
 **input_schema** | [**RetrieverSchema**](RetrieverSchema.md) | Input schema for the retriever | 
 **collection_ids** | **List[str]** | List of collection IDs | 
 **stages** | [**List[StageInstanceConfig]**](StageInstanceConfig.md) | List of stage configurations | 
@@ -20,7 +23,7 @@ Name | Type | Description | Notes
 **status** | [**RetrieverStatus**](RetrieverStatus.md) | Current operational status | [optional] 
 **usage_stats** | [**UsageStatistics**](UsageStatistics.md) | Usage and performance statistics | [optional] 
 **collections** | [**List[CollectionDetail]**](CollectionDetail.md) | Expanded collection details with names and metadata | [optional] 
-**metadata** | **object** | Custom key-value metadata | [optional] 
+**metadata** | **Dict[str, object]** | Custom key-value metadata | [optional] 
 **tags** | **List[str]** | Tags for organization and filtering | [optional] 
 **created_by** | [**CreatorInfo**](CreatorInfo.md) | Information about who created this retriever | [optional] 
 **updated_by** | [**CreatorInfo**](CreatorInfo.md) | Information about who last updated this retriever | [optional] 

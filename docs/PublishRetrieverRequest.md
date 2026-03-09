@@ -1,18 +1,21 @@
 # PublishRetrieverRequest
 
-Request to publish a retriever.  Requires public_name. display_config is optional - if not provided, the retriever's stored display_config will be used (if available).
+Request to publish a retriever.  Either `public_name` (slug) or `display_name` (human-readable) is required. If only `display_name` is provided, a slug is auto-generated from it. If `display_config` is not provided, the retriever's stored display_config will be used.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**public_name** | **str** | Public URL-safe name (lowercase, numbers, hyphens only). Must start and end with alphanumeric character. Will be used in URL: apps.mixpeek.com/r/{public_name} | 
+**display_name** | **str** | Human-readable display name for this retriever (free-form text). Example: &#39;Peptide Evidence Search&#39;. A URL-safe slug is auto-generated from this if &#x60;public_name&#x60; is not provided. | [optional] 
+**public_name** | **str** | URL-safe slug (lowercase letters, digits, hyphens only). Must start and end with an alphanumeric character. Example: &#39;peptide-evidence-search&#39;. Used in the public URL: mxp.co/r/{public_name}. Auto-generated from &#x60;display_name&#x60; if not provided. | [optional] 
 **description** | **str** | Description of this public retriever. Explains what the retriever does and what it searches. Displayed in public listings and search results. | [optional] 
 **icon_base64** | **str** | Base64 encoded icon/favicon for this public retriever. Data URI format recommended. Max size: ~200KB encoded. Displayed in public listings and as the retriever&#39;s icon. | [optional] 
 **display_config** | [**DisplayConfigInput**](DisplayConfigInput.md) | Display configuration defining how the public UI should be rendered. Includes input fields, theme, layout, and exposed result fields. If not provided, uses the retriever&#39;s stored display_config. | [optional] 
 **rate_limit_config** | [**RateLimitConfig**](RateLimitConfig.md) | Rate limiting configuration for public endpoint. Defaults to STANDARD tier (10/min, 100/hour, 1k/day). Use ELEVATED tier for trusted public apps (30/min, 500/hour, 5k/day). Use ENTERPRISE tier for monitored deployments (100/min, 2k/hour, 20k/day). Custom limits override tier defaults. | [optional] 
 **password_secret_name** | **str** | OPTIONAL. Name of organization secret containing password for access protection. If provided, users must send password via X-Retriever-Password header. | [optional] 
 **include_metadata** | **bool** | Whether to capture and store retriever metadata (stages, collections, capabilities). Recommended: True for better developer experience and debugging. Default: True. | [optional] [default to True]
+**tags** | **List[str]** | Tags for categorizing this retriever. Used for filtering in public listings and gallery views. | [optional] 
+**category** | **str** | Primary category for this retriever. Examples: &#39;sandbox&#39;, &#39;marketplace&#39;, &#39;demo&#39;, &#39;production&#39;. | [optional] 
 
 ## Example
 

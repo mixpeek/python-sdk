@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **segment** | **int** | Extract a specific path segment by index. 0 &#x3D; first segment (root folder), 1 &#x3D; second segment, etc. -1 &#x3D; last segment (immediate parent), -2 &#x3D; second to last, etc. If None and full_path is False, extracts the immediate parent folder. | [optional] 
 **full_path** | **bool** | If True, extracts the complete folder path (joined with &#39;/&#39;). If False, extracts only the segment specified or immediate parent. Does not include the filename. | [optional] [default to False]
 **value** | **object** |  | 
+**var_field** | **str** | RSS entry field: title, author, link, categories, summary, published | 
 
 ## Example
 

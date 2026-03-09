@@ -1,13 +1,13 @@
 # PublicRetrieverConfigResponse
 
-Response for fetching public retriever configuration (for UI rendering).  This is what the public frontend (apps.mixpeek.com) fetches to render the search interface. It includes everything needed for UI rendering.
+Response for fetching public retriever configuration (for UI rendering).  This is what the public frontend (mxp.co/r/{name}) fetches to render the search interface. It includes everything needed for UI rendering.  Note: API keys are no longer required. The execute endpoint can be called without authentication - rate limiting and optional password protection provide security.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **public_name** | **str** | Public name of the retriever | 
-**public_api_key** | **str** | Public API key for making authenticated requests. Frontend needs this to call the execute endpoint. | 
+**public_api_key** | **str** | DEPRECATED: API keys are no longer required for public access. The execute endpoint can be called without authentication. | [optional] 
 **display_config** | [**DisplayConfigOutput**](DisplayConfigOutput.md) | Display configuration for rendering the UI. Includes inputs, theme, layout, and exposed fields. | 
 **password_protected** | **bool** | Whether this retriever requires password authentication | 
 **retriever_metadata** | [**RetrieverMetadata**](RetrieverMetadata.md) | OPTIONAL. Technical metadata about how the retriever works. Only present if include_metadata&#x3D;True was set during publishing. | [optional] 

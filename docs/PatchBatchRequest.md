@@ -6,7 +6,7 @@ Request model for partially updating a batch (PATCH operation).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | **object** | Additional user-defined metadata for the batch. | [optional] 
+**metadata** | **Dict[str, object]** | Additional user-defined metadata for the batch. | [optional] 
 
 ## Example
 

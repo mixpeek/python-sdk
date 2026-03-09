@@ -9,16 +9,16 @@ Name | Type | Description | Notes
 **url** | **str** | API endpoint URL to call. Supports template variables: {INPUT.field}, {DOC.field}. Must be HTTP/HTTPS. Domain must be in allowed_domains list. Default uses httpbin.org for testing. Examples: &#39;https://api.stripe.com/v1/customers/{DOC.metadata.customer_id}&#39; | [optional] [default to 'https://httpbin.org/get']
 **allowed_domains** | **List[str]** | Allowlist of domains that can be called. CRITICAL FOR SECURITY - prevents SSRF attacks. Supports wildcards: &#39;*.example.com&#39; matches subdomains. NEVER use &#39;*&#39; (all domains) in production. Default allows httpbin.org for testing. Examples: [&#39;api.stripe.com&#39;, &#39;*.github.com&#39;, &#39;api.weatherapi.com&#39;] | [optional] [default to ["httpbin.org"]]
 **method** | **str** | HTTP method: GET, POST, PUT, PATCH, DELETE. Default: GET. | [optional] [default to 'GET']
-**auth** | [**AuthConfig**](AuthConfig.md) | OPTIONAL. Authentication configuration. Uses organization vault for credential storage. See AuthConfig for details. | [optional] 
+**auth** | [**StageDefsAuthConfig**](StageDefsAuthConfig.md) | OPTIONAL. Authentication configuration. Uses organization vault for credential storage. See AuthConfig for details. | [optional] 
 **headers** | **Dict[str, str]** | OPTIONAL. Additional HTTP headers to include. Do NOT include authentication headers here - use &#39;auth&#39; field. Supports template variables in values. Example: {&#39;Content-Type&#39;: &#39;application/json&#39;, &#39;X-Custom&#39;: &#39;{{INPUT.value}}&#39;} | [optional] 
-**body** | **object** | OPTIONAL. Request body (for POST/PUT/PATCH). Serialized as JSON. Supports template variables in values. Only used for non-GET requests. | [optional] 
+**body** | **Dict[str, object]** | OPTIONAL. Request body (for POST/PUT/PATCH). Serialized as JSON. Supports template variables in values. Only used for non-GET requests. | [optional] 
 **output_field** | **str** | Dot-path where API response should be stored. Creates nested structure if needed. Response stored as-is (JSON object/array/primitive). Example: &#39;metadata.api_data&#39; | [optional] [default to 'metadata.api_response']
 **timeout** | **int** | Request timeout in seconds. Range: 1-60. Default: 10. | [optional] [default to 10]
 **max_response_size** | **int** | Maximum response size in bytes. Prevents memory exhaustion. Default: 10MB. | [optional] [default to 10485760]
-**rate_limit** | [**RateLimitConfig**](RateLimitConfig.md) | OPTIONAL. Rate limiting configuration per domain. | [optional] 
+**rate_limit** | [**StageDefsRateLimitConfig**](StageDefsRateLimitConfig.md) | OPTIONAL. Rate limiting configuration per domain. | [optional] 
 **response_path** | **str** | OPTIONAL. JSONPath expression to extract specific field from response. If not specified, stores entire response. Examples: &#39;$.data&#39;, &#39;$.results[0]&#39;, &#39;$.customer.email&#39; | [optional] [default to 'null']
-**when** | [**LogicalOperator**](LogicalOperator.md) | OPTIONAL. Conditional filter for selective enrichment. Only documents matching condition will call API. RECOMMENDED for cost/performance optimization. | [optional] 
-**on_error** | [**ErrorHandling**](ErrorHandling.md) | Error handling strategy: &#39;skip&#39;: Pass document through unchanged. &#39;remove&#39;: Remove failed documents. &#39;raise&#39;: Halt pipeline on error. Default: &#39;skip&#39;. | [optional] 
+**when** | [**StageDefsLogicalOperator**](StageDefsLogicalOperator.md) | OPTIONAL. Conditional filter for selective enrichment. Only documents matching condition will call API. RECOMMENDED for cost/performance optimization. | [optional] 
+**on_error** | [**StageDefsErrorHandling**](StageDefsErrorHandling.md) | Error handling strategy: &#39;skip&#39;: Pass document through unchanged. &#39;remove&#39;: Remove failed documents. &#39;raise&#39;: Halt pipeline on error. Default: &#39;skip&#39;. | [optional] 
 
 ## Example
 

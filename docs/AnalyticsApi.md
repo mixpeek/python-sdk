@@ -87,7 +87,7 @@ Method | HTTP request | Description
 
 
 # **analyze_bottlenecks_analytics_performance_engine**
-> BottleneckResponse analyze_bottlenecks_analytics_performance_engine(hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> BottleneckResponse analyze_bottlenecks_analytics_performance_engine(hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Analyze Bottlenecks
 
@@ -134,11 +134,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int | Hours of history (optional) (default to 24)
     limit = 10 # int | Number of bottlenecks to return (optional) (default to 10)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Analyze Bottlenecks
-        api_response = api_instance.analyze_bottlenecks_analytics_performance_engine(hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.analyze_bottlenecks_analytics_performance_engine(hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->analyze_bottlenecks_analytics_performance_engine:\n")
         pprint(api_response)
     except Exception as e:
@@ -155,6 +156,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **limit** | **int**| Number of bottlenecks to return | [optional] [default to 10]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -179,13 +181,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyze_bottlenecks_analytics_performance_engine_0**
-> BottleneckResponse analyze_bottlenecks_analytics_performance_engine_0(hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> BottleneckResponse analyze_bottlenecks_analytics_performance_engine_0(hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Analyze Bottlenecks
 
@@ -232,11 +234,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int | Hours of history (optional) (default to 24)
     limit = 10 # int | Number of bottlenecks to return (optional) (default to 10)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Analyze Bottlenecks
-        api_response = api_instance.analyze_bottlenecks_analytics_performance_engine_0(hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.analyze_bottlenecks_analytics_performance_engine_0(hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->analyze_bottlenecks_analytics_performance_engine_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -253,6 +256,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **limit** | **int**| Number of bottlenecks to return | [optional] [default to 10]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -277,13 +281,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyze_for_tuning_analytics_retrievers**
-> InteractionTuningResponse analyze_for_tuning_analytics_retrievers(retriever_id, days=days, authorization=authorization, x_namespace=x_namespace)
+> InteractionTuningResponse analyze_for_tuning_analytics_retrievers(retriever_id, days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Analyze For Tuning
 
@@ -336,11 +340,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     retriever_id = 'retriever_id_example' # str | 
     days = 7 # int | Days of history to analyze (optional) (default to 7)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Analyze For Tuning
-        api_response = api_instance.analyze_for_tuning_analytics_retrievers(retriever_id, days=days, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.analyze_for_tuning_analytics_retrievers(retriever_id, days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->analyze_for_tuning_analytics_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -357,6 +362,7 @@ Name | Type | Description  | Notes
  **retriever_id** | **str**|  | 
  **days** | **int**| Days of history to analyze | [optional] [default to 7]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -381,13 +387,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyze_for_tuning_analytics_retrievers_0**
-> InteractionTuningResponse analyze_for_tuning_analytics_retrievers_0(retriever_id, days=days, authorization=authorization, x_namespace=x_namespace)
+> InteractionTuningResponse analyze_for_tuning_analytics_retrievers_0(retriever_id, days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Analyze For Tuning
 
@@ -440,11 +446,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     retriever_id = 'retriever_id_example' # str | 
     days = 7 # int | Days of history to analyze (optional) (default to 7)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Analyze For Tuning
-        api_response = api_instance.analyze_for_tuning_analytics_retrievers_0(retriever_id, days=days, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.analyze_for_tuning_analytics_retrievers_0(retriever_id, days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->analyze_for_tuning_analytics_retrievers_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -461,6 +468,7 @@ Name | Type | Description  | Notes
  **retriever_id** | **str**|  | 
  **days** | **int**| Days of history to analyze | [optional] [default to 7]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -485,13 +493,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_assignment_metrics_analytics_taxonomies_taxonomy**
-> AssignmentMetricsResponse get_assignment_metrics_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> AssignmentMetricsResponse get_assignment_metrics_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Assignment Metrics
 
@@ -532,11 +540,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     group_by = 'day' # str |  (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Assignment Metrics
-        api_response = api_instance.get_assignment_metrics_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_assignment_metrics_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_assignment_metrics_analytics_taxonomies_taxonomy:\n")
         pprint(api_response)
     except Exception as e:
@@ -555,6 +564,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**|  | [optional] 
  **group_by** | **str**|  | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -579,13 +589,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_assignment_metrics_analytics_taxonomies_taxonomy_0**
-> AssignmentMetricsResponse get_assignment_metrics_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> AssignmentMetricsResponse get_assignment_metrics_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Assignment Metrics
 
@@ -626,11 +636,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     group_by = 'day' # str |  (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Assignment Metrics
-        api_response = api_instance.get_assignment_metrics_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_assignment_metrics_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_assignment_metrics_analytics_taxonomies_taxonomy_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -649,6 +660,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**|  | [optional] 
  **group_by** | **str**|  | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -673,13 +685,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_batch_diagnostics_analytics_performance_batches**
-> BatchDiagnostics get_batch_diagnostics_analytics_performance_batches(batch_id, authorization=authorization, x_namespace=x_namespace)
+> BatchDiagnostics get_batch_diagnostics_analytics_performance_batches(batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Batch Diagnostics
 
@@ -735,11 +747,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     batch_id = 'batch_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Batch Diagnostics
-        api_response = api_instance.get_batch_diagnostics_analytics_performance_batches(batch_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_batch_diagnostics_analytics_performance_batches(batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_batch_diagnostics_analytics_performance_batches:\n")
         pprint(api_response)
     except Exception as e:
@@ -755,6 +768,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **batch_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -779,13 +793,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_batch_diagnostics_analytics_performance_batches_0**
-> BatchDiagnostics get_batch_diagnostics_analytics_performance_batches_0(batch_id, authorization=authorization, x_namespace=x_namespace)
+> BatchDiagnostics get_batch_diagnostics_analytics_performance_batches_0(batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Batch Diagnostics
 
@@ -841,11 +855,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     batch_id = 'batch_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Batch Diagnostics
-        api_response = api_instance.get_batch_diagnostics_analytics_performance_batches_0(batch_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_batch_diagnostics_analytics_performance_batches_0(batch_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_batch_diagnostics_analytics_performance_batches_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -861,6 +876,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **batch_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -885,13 +901,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_bucket_health_analytics**
-> BucketHealthResponse get_bucket_health_analytics(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> BucketHealthResponse get_bucket_health_analytics(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Bucket Health
 
@@ -939,11 +955,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_id = 'bucket_id_example' # str | 
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket Health
-        api_response = api_instance.get_bucket_health_analytics(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_bucket_health_analytics(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_bucket_health_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -960,6 +977,7 @@ Name | Type | Description  | Notes
  **bucket_id** | **str**|  | 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -984,13 +1002,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_bucket_health_analytics_0**
-> BucketHealthResponse get_bucket_health_analytics_0(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> BucketHealthResponse get_bucket_health_analytics_0(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Bucket Health
 
@@ -1038,11 +1056,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_id = 'bucket_id_example' # str | 
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket Health
-        api_response = api_instance.get_bucket_health_analytics_0(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_bucket_health_analytics_0(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_bucket_health_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -1059,6 +1078,7 @@ Name | Type | Description  | Notes
  **bucket_id** | **str**|  | 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1083,13 +1103,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_bucket_storage_analytics**
-> BucketStorageResponse get_bucket_storage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> BucketStorageResponse get_bucket_storage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Bucket Storage
 
@@ -1138,11 +1158,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     group_by = 'day' # str | Time grouping: hour, day, week, month (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket Storage
-        api_response = api_instance.get_bucket_storage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_bucket_storage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_bucket_storage_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -1161,6 +1182,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **group_by** | **str**| Time grouping: hour, day, week, month | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1185,13 +1207,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_bucket_storage_analytics_0**
-> BucketStorageResponse get_bucket_storage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> BucketStorageResponse get_bucket_storage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Bucket Storage
 
@@ -1240,11 +1262,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     group_by = 'day' # str | Time grouping: hour, day, week, month (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket Storage
-        api_response = api_instance.get_bucket_storage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_bucket_storage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_bucket_storage_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -1263,6 +1286,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **group_by** | **str**| Time grouping: hour, day, week, month | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1287,13 +1311,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_bucket_usage_analytics**
-> BucketUsageResponse get_bucket_usage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> BucketUsageResponse get_bucket_usage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Bucket Usage
 
@@ -1343,11 +1367,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     group_by = 'day' # str | Time grouping: hour, day, week, month (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket Usage
-        api_response = api_instance.get_bucket_usage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_bucket_usage_analytics(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_bucket_usage_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -1366,6 +1391,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **group_by** | **str**| Time grouping: hour, day, week, month | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1390,13 +1416,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_bucket_usage_analytics_0**
-> BucketUsageResponse get_bucket_usage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> BucketUsageResponse get_bucket_usage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Bucket Usage
 
@@ -1446,11 +1472,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     group_by = 'day' # str | Time grouping: hour, day, week, month (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Bucket Usage
-        api_response = api_instance.get_bucket_usage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_bucket_usage_analytics_0(bucket_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_bucket_usage_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -1469,6 +1496,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **group_by** | **str**| Time grouping: hour, day, week, month | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1493,13 +1521,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cache_performance_analytics_retrievers**
-> CachePerformanceResponse get_cache_performance_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> CachePerformanceResponse get_cache_performance_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Cache Performance
 
@@ -1546,11 +1574,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     retriever_id = 'retriever_id_example' # str | 
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Cache Performance
-        api_response = api_instance.get_cache_performance_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_cache_performance_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_cache_performance_analytics_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -1567,6 +1596,7 @@ Name | Type | Description  | Notes
  **retriever_id** | **str**|  | 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1591,13 +1621,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_cache_performance_analytics_retrievers_0**
-> CachePerformanceResponse get_cache_performance_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> CachePerformanceResponse get_cache_performance_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Cache Performance
 
@@ -1644,11 +1674,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     retriever_id = 'retriever_id_example' # str | 
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Cache Performance
-        api_response = api_instance.get_cache_performance_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_cache_performance_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_cache_performance_analytics_retrievers_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -1665,6 +1696,7 @@ Name | Type | Description  | Notes
  **retriever_id** | **str**|  | 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1689,13 +1721,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_collection_overview_analytics**
-> CollectionOverviewResponse get_collection_overview_analytics(collection_id, authorization=authorization, x_namespace=x_namespace)
+> CollectionOverviewResponse get_collection_overview_analytics(collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Collection Overview
 
@@ -1733,11 +1765,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     collection_id = 'collection_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Collection Overview
-        api_response = api_instance.get_collection_overview_analytics(collection_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_collection_overview_analytics(collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_collection_overview_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -1753,6 +1786,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1777,13 +1811,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_collection_overview_analytics_0**
-> CollectionOverviewResponse get_collection_overview_analytics_0(collection_id, authorization=authorization, x_namespace=x_namespace)
+> CollectionOverviewResponse get_collection_overview_analytics_0(collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Collection Overview
 
@@ -1821,11 +1855,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     collection_id = 'collection_id_example' # str | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Collection Overview
-        api_response = api_instance.get_collection_overview_analytics_0(collection_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_collection_overview_analytics_0(collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_collection_overview_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -1841,6 +1876,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_id** | **str**|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1865,13 +1901,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_compound_index_patterns_analytics_namespaces_indexes**
-> CompoundIndexResponse get_compound_index_patterns_analytics_namespaces_indexes(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> CompoundIndexResponse get_compound_index_patterns_analytics_namespaces_indexes(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Compound Index Patterns
 
@@ -1928,11 +1964,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     limit = 50 # int | Maximum patterns to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Compound Index Patterns
-        api_response = api_instance.get_compound_index_patterns_analytics_namespaces_indexes(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_compound_index_patterns_analytics_namespaces_indexes(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_compound_index_patterns_analytics_namespaces_indexes:\n")
         pprint(api_response)
     except Exception as e:
@@ -1949,6 +1986,7 @@ Name | Type | Description  | Notes
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **limit** | **int**| Maximum patterns to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1973,13 +2011,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_compound_index_patterns_analytics_namespaces_indexes_0**
-> CompoundIndexResponse get_compound_index_patterns_analytics_namespaces_indexes_0(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> CompoundIndexResponse get_compound_index_patterns_analytics_namespaces_indexes_0(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Compound Index Patterns
 
@@ -2036,11 +2074,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     limit = 50 # int | Maximum patterns to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Compound Index Patterns
-        api_response = api_instance.get_compound_index_patterns_analytics_namespaces_indexes_0(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_compound_index_patterns_analytics_namespaces_indexes_0(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_compound_index_patterns_analytics_namespaces_indexes_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -2057,6 +2096,7 @@ Name | Type | Description  | Notes
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **limit** | **int**| Maximum patterns to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2081,13 +2121,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_confidence_distribution_analytics_taxonomies_taxonomy**
-> ConfidenceResponse get_confidence_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ConfidenceResponse get_confidence_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Confidence Distribution
 
@@ -2126,11 +2166,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     hours = 168 # int |  (optional) (default to 168)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Confidence Distribution
-        api_response = api_instance.get_confidence_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_confidence_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_confidence_distribution_analytics_taxonomies_taxonomy:\n")
         pprint(api_response)
     except Exception as e:
@@ -2147,6 +2188,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 168]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2171,13 +2213,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_confidence_distribution_analytics_taxonomies_taxonomy_0**
-> ConfidenceResponse get_confidence_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ConfidenceResponse get_confidence_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Confidence Distribution
 
@@ -2216,11 +2258,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     taxonomy_id = 'taxonomy_id_example' # str | 
     hours = 168 # int |  (optional) (default to 168)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Confidence Distribution
-        api_response = api_instance.get_confidence_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_confidence_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_confidence_distribution_analytics_taxonomies_taxonomy_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -2237,6 +2280,7 @@ Name | Type | Description  | Notes
  **taxonomy_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 168]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2261,13 +2305,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_growth_analytics**
-> GrowthMetricsResponse get_document_growth_analytics(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> GrowthMetricsResponse get_document_growth_analytics(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Document Growth
 
@@ -2301,11 +2345,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     group_by = 'day' # str | hour, day, week, month (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Document Growth
-        api_response = api_instance.get_document_growth_analytics(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_document_growth_analytics(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_document_growth_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -2324,6 +2369,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**|  | [optional] 
  **group_by** | **str**| hour, day, week, month | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2348,13 +2394,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_growth_analytics_0**
-> GrowthMetricsResponse get_document_growth_analytics_0(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> GrowthMetricsResponse get_document_growth_analytics_0(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Document Growth
 
@@ -2388,11 +2434,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     group_by = 'day' # str | hour, day, week, month (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Document Growth
-        api_response = api_instance.get_document_growth_analytics_0(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_document_growth_analytics_0(collection_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_document_growth_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -2411,6 +2458,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**|  | [optional] 
  **group_by** | **str**| hour, day, week, month | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2435,13 +2483,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_engine_performance_analytics**
-> EnginePerformanceResponse get_engine_performance_analytics(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> EnginePerformanceResponse get_engine_performance_analytics(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Engine Performance
 
@@ -2496,11 +2544,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date for time range (optional)
     group_by = 'hour' # str | Time grouping (minute, hour, day, week) (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Engine Performance
-        api_response = api_instance.get_engine_performance_analytics(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_engine_performance_analytics(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_engine_performance_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -2519,6 +2568,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date for time range | [optional] 
  **group_by** | **str**| Time grouping (minute, hour, day, week) | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2543,13 +2593,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_engine_performance_analytics_0**
-> EnginePerformanceResponse get_engine_performance_analytics_0(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> EnginePerformanceResponse get_engine_performance_analytics_0(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Engine Performance
 
@@ -2604,11 +2654,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date for time range (optional)
     group_by = 'hour' # str | Time grouping (minute, hour, day, week) (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Engine Performance
-        api_response = api_instance.get_engine_performance_analytics_0(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_engine_performance_analytics_0(hours=hours, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_engine_performance_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -2627,6 +2678,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date for time range | [optional] 
  **group_by** | **str**| Time grouping (minute, hour, day, week) | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2651,13 +2703,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_engine_stage_breakdown_analytics_performance**
-> EngineStageBreakdownResponse get_engine_stage_breakdown_analytics_performance(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> EngineStageBreakdownResponse get_engine_stage_breakdown_analytics_performance(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Engine Stage Breakdown
 
@@ -2706,11 +2758,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Engine Stage Breakdown
-        api_response = api_instance.get_engine_stage_breakdown_analytics_performance(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_engine_stage_breakdown_analytics_performance(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_engine_stage_breakdown_analytics_performance:\n")
         pprint(api_response)
     except Exception as e:
@@ -2728,6 +2781,7 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date | [optional] 
  **end_date** | **datetime**| End date | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2752,13 +2806,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_engine_stage_breakdown_analytics_performance_0**
-> EngineStageBreakdownResponse get_engine_stage_breakdown_analytics_performance_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> EngineStageBreakdownResponse get_engine_stage_breakdown_analytics_performance_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Engine Stage Breakdown
 
@@ -2807,11 +2861,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Engine Stage Breakdown
-        api_response = api_instance.get_engine_stage_breakdown_analytics_performance_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_engine_stage_breakdown_analytics_performance_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_engine_stage_breakdown_analytics_performance_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -2829,6 +2884,7 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date | [optional] 
  **end_date** | **datetime**| End date | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2853,13 +2909,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_enrichment_history_analytics_taxonomies_taxonomy**
-> EnrichmentHistoryResponse get_enrichment_history_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> EnrichmentHistoryResponse get_enrichment_history_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Enrichment History
 
@@ -2900,11 +2956,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     group_by = 'day' # str |  (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Enrichment History
-        api_response = api_instance.get_enrichment_history_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_enrichment_history_analytics_taxonomies_taxonomy(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_enrichment_history_analytics_taxonomies_taxonomy:\n")
         pprint(api_response)
     except Exception as e:
@@ -2923,6 +2980,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**|  | [optional] 
  **group_by** | **str**|  | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -2947,13 +3005,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_enrichment_history_analytics_taxonomies_taxonomy_0**
-> EnrichmentHistoryResponse get_enrichment_history_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> EnrichmentHistoryResponse get_enrichment_history_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Enrichment History
 
@@ -2994,11 +3052,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     group_by = 'day' # str |  (optional) (default to 'day')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Enrichment History
-        api_response = api_instance.get_enrichment_history_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_enrichment_history_analytics_taxonomies_taxonomy_0(taxonomy_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_enrichment_history_analytics_taxonomies_taxonomy_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -3017,6 +3076,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**|  | [optional] 
  **group_by** | **str**|  | [optional] [default to &#39;day&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3041,13 +3101,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_execution_history_analytics_clusters**
-> ExecutionHistoryResponse get_execution_history_analytics_clusters(cluster_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> ExecutionHistoryResponse get_execution_history_analytics_clusters(cluster_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Execution History
 
@@ -3087,11 +3147,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 168 # int | Hours of history (optional) (default to 168)
     limit = 100 # int |  (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Execution History
-        api_response = api_instance.get_execution_history_analytics_clusters(cluster_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_execution_history_analytics_clusters(cluster_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_execution_history_analytics_clusters:\n")
         pprint(api_response)
     except Exception as e:
@@ -3109,6 +3170,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history | [optional] [default to 168]
  **limit** | **int**|  | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3133,13 +3195,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_execution_history_analytics_clusters_0**
-> ExecutionHistoryResponse get_execution_history_analytics_clusters_0(cluster_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> ExecutionHistoryResponse get_execution_history_analytics_clusters_0(cluster_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Execution History
 
@@ -3179,11 +3241,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 168 # int | Hours of history (optional) (default to 168)
     limit = 100 # int |  (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Execution History
-        api_response = api_instance.get_execution_history_analytics_clusters_0(cluster_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_execution_history_analytics_clusters_0(cluster_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_execution_history_analytics_clusters_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -3201,6 +3264,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history | [optional] [default to 168]
  **limit** | **int**|  | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3225,13 +3289,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_breakdown_analytics_performance_engine**
-> ExtractorBreakdownResponse get_extractor_breakdown_analytics_performance_engine(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> ExtractorBreakdownResponse get_extractor_breakdown_analytics_performance_engine(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Extractor Breakdown
 
@@ -3278,11 +3342,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Extractor Breakdown
-        api_response = api_instance.get_extractor_breakdown_analytics_performance_engine(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_breakdown_analytics_performance_engine(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_extractor_breakdown_analytics_performance_engine:\n")
         pprint(api_response)
     except Exception as e:
@@ -3300,6 +3365,7 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date | [optional] 
  **end_date** | **datetime**| End date | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3324,13 +3390,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_breakdown_analytics_performance_engine_0**
-> ExtractorBreakdownResponse get_extractor_breakdown_analytics_performance_engine_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> ExtractorBreakdownResponse get_extractor_breakdown_analytics_performance_engine_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Extractor Breakdown
 
@@ -3377,11 +3443,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Extractor Breakdown
-        api_response = api_instance.get_extractor_breakdown_analytics_performance_engine_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_breakdown_analytics_performance_engine_0(hours=hours, start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_extractor_breakdown_analytics_performance_engine_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -3399,6 +3466,7 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date | [optional] 
  **end_date** | **datetime**| End date | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3423,13 +3491,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_performance_analytics**
-> List[object] get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[Dict[str, object]] get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -3469,11 +3537,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     extractor_name = 'extractor_name_example' # str | Filter by extractor (optional)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Extractor Performance
-        api_response = api_instance.get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_performance_analytics(extractor_name=extractor_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_extractor_performance_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -3490,11 +3559,12 @@ Name | Type | Description  | Notes
  **extractor_name** | **str**| Filter by extractor | [optional] 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -3514,13 +3584,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_performance_analytics_0**
-> List[object] get_extractor_performance_analytics_0(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[Dict[str, object]] get_extractor_performance_analytics_0(extractor_name=extractor_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -3560,11 +3630,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     extractor_name = 'extractor_name_example' # str | Filter by extractor (optional)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Extractor Performance
-        api_response = api_instance.get_extractor_performance_analytics_0(extractor_name=extractor_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_performance_analytics_0(extractor_name=extractor_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_extractor_performance_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -3581,11 +3652,12 @@ Name | Type | Description  | Notes
  **extractor_name** | **str**| Filter by extractor | [optional] 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -3605,13 +3677,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_performance_analytics_1**
-> ExtractorPerformanceResponse get_extractor_performance_analytics_1(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ExtractorPerformanceResponse get_extractor_performance_analytics_1(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -3650,11 +3722,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_id = 'collection_id_example' # str | 
     hours = 24 # int |  (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Extractor Performance
-        api_response = api_instance.get_extractor_performance_analytics_1(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_performance_analytics_1(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_extractor_performance_analytics_1:\n")
         pprint(api_response)
     except Exception as e:
@@ -3671,6 +3744,7 @@ Name | Type | Description  | Notes
  **collection_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3695,13 +3769,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_extractor_performance_analytics_2**
-> ExtractorPerformanceResponse get_extractor_performance_analytics_2(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ExtractorPerformanceResponse get_extractor_performance_analytics_2(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Extractor Performance
 
@@ -3740,11 +3814,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_id = 'collection_id_example' # str | 
     hours = 24 # int |  (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Extractor Performance
-        api_response = api_instance.get_extractor_performance_analytics_2(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_extractor_performance_analytics_2(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_extractor_performance_analytics_2:\n")
         pprint(api_response)
     except Exception as e:
@@ -3761,6 +3836,7 @@ Name | Type | Description  | Notes
  **collection_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3785,13 +3861,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_failure_analysis_analytics**
-> ApiAnalyticsCollectionsModelsFailureAnalysisResponse get_failure_analysis_analytics(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ApiAnalyticsCollectionsModelsFailureAnalysisResponse get_failure_analysis_analytics(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Failure Analysis
 
@@ -3830,11 +3906,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_id = 'collection_id_example' # str | 
     hours = 72 # int |  (optional) (default to 72)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Failure Analysis
-        api_response = api_instance.get_failure_analysis_analytics(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_failure_analysis_analytics(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_failure_analysis_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -3851,6 +3928,7 @@ Name | Type | Description  | Notes
  **collection_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 72]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3875,13 +3953,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_failure_analysis_analytics_0**
-> ApiAnalyticsCollectionsModelsFailureAnalysisResponse get_failure_analysis_analytics_0(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ApiAnalyticsCollectionsModelsFailureAnalysisResponse get_failure_analysis_analytics_0(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Failure Analysis
 
@@ -3920,11 +3998,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_id = 'collection_id_example' # str | 
     hours = 72 # int |  (optional) (default to 72)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Failure Analysis
-        api_response = api_instance.get_failure_analysis_analytics_0(collection_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_failure_analysis_analytics_0(collection_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_failure_analysis_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -3941,6 +4020,7 @@ Name | Type | Description  | Notes
  **collection_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 72]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -3965,13 +4045,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_failure_analysis_analytics_clusters**
-> ApiAnalyticsClustersModelsFailureAnalysisResponse get_failure_analysis_analytics_clusters(cluster_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ApiAnalyticsClustersModelsFailureAnalysisResponse get_failure_analysis_analytics_clusters(cluster_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Failure Analysis
 
@@ -4010,11 +4090,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     cluster_id = 'cluster_id_example' # str | 
     hours = 168 # int |  (optional) (default to 168)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Failure Analysis
-        api_response = api_instance.get_failure_analysis_analytics_clusters(cluster_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_failure_analysis_analytics_clusters(cluster_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_failure_analysis_analytics_clusters:\n")
         pprint(api_response)
     except Exception as e:
@@ -4031,6 +4112,7 @@ Name | Type | Description  | Notes
  **cluster_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 168]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4055,13 +4137,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_failure_analysis_analytics_clusters_0**
-> ApiAnalyticsClustersModelsFailureAnalysisResponse get_failure_analysis_analytics_clusters_0(cluster_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> ApiAnalyticsClustersModelsFailureAnalysisResponse get_failure_analysis_analytics_clusters_0(cluster_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Failure Analysis
 
@@ -4100,11 +4182,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     cluster_id = 'cluster_id_example' # str | 
     hours = 168 # int |  (optional) (default to 168)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Failure Analysis
-        api_response = api_instance.get_failure_analysis_analytics_clusters_0(cluster_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_failure_analysis_analytics_clusters_0(cluster_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_failure_analysis_analytics_clusters_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -4121,6 +4204,7 @@ Name | Type | Description  | Notes
  **cluster_id** | **str**|  | 
  **hours** | **int**|  | [optional] [default to 168]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4145,13 +4229,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_field_performance_analytics_namespaces**
-> FieldPerformanceResponse get_field_performance_analytics_namespaces(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> FieldPerformanceResponse get_field_performance_analytics_namespaces(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Field Performance
 
@@ -4206,11 +4290,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     limit = 50 # int | Maximum fields to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Field Performance
-        api_response = api_instance.get_field_performance_analytics_namespaces(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_field_performance_analytics_namespaces(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_field_performance_analytics_namespaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -4227,6 +4312,7 @@ Name | Type | Description  | Notes
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **limit** | **int**| Maximum fields to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4251,13 +4337,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_field_performance_analytics_namespaces_0**
-> FieldPerformanceResponse get_field_performance_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> FieldPerformanceResponse get_field_performance_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Field Performance
 
@@ -4312,11 +4398,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     limit = 50 # int | Maximum fields to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Field Performance
-        api_response = api_instance.get_field_performance_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_field_performance_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_field_performance_analytics_namespaces_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -4333,6 +4420,7 @@ Name | Type | Description  | Notes
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **limit** | **int**| Maximum fields to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4357,13 +4445,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_field_usage_analytics_indexes**
-> FieldUsageResponse get_field_usage_analytics_indexes(period=period, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+> FieldUsageResponse get_field_usage_analytics_indexes(period=period, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Field Usage
 
@@ -4392,11 +4480,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     period = '24h' # str | Time period: Xh (hours) or Xd (days), e.g., 24h, 7d, 30d (optional) (default to '24h')
     min_count = 1 # int | Minimum query count to include a field (optional) (default to 1)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Field Usage
-        api_response = api_instance.get_field_usage_analytics_indexes(period=period, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_field_usage_analytics_indexes(period=period, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_field_usage_analytics_indexes:\n")
         pprint(api_response)
     except Exception as e:
@@ -4413,6 +4502,7 @@ Name | Type | Description  | Notes
  **period** | **str**| Time period: Xh (hours) or Xd (days), e.g., 24h, 7d, 30d | [optional] [default to &#39;24h&#39;]
  **min_count** | **int**| Minimum query count to include a field | [optional] [default to 1]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4437,13 +4527,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_field_usage_analytics_indexes_0**
-> FieldUsageResponse get_field_usage_analytics_indexes_0(period=period, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+> FieldUsageResponse get_field_usage_analytics_indexes_0(period=period, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Field Usage
 
@@ -4472,11 +4562,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     period = '24h' # str | Time period: Xh (hours) or Xd (days), e.g., 24h, 7d, 30d (optional) (default to '24h')
     min_count = 1 # int | Minimum query count to include a field (optional) (default to 1)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Field Usage
-        api_response = api_instance.get_field_usage_analytics_indexes_0(period=period, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_field_usage_analytics_indexes_0(period=period, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_field_usage_analytics_indexes_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -4493,6 +4584,7 @@ Name | Type | Description  | Notes
  **period** | **str**| Time period: Xh (hours) or Xd (days), e.g., 24h, 7d, 30d | [optional] [default to &#39;24h&#39;]
  **min_count** | **int**| Minimum query count to include a field | [optional] [default to 1]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4517,13 +4609,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_index_recommendations_analytics_namespaces_indexes**
-> IndexRecommendationsResponse get_index_recommendations_analytics_namespaces_indexes(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> IndexRecommendationsResponse get_index_recommendations_analytics_namespaces_indexes(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Index Recommendations
 
@@ -4581,11 +4673,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     min_usage_count = 5 # int | Minimum queries to consider (optional) (default to 5)
     limit = 50 # int | Maximum recommendations to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Index Recommendations
-        api_response = api_instance.get_index_recommendations_analytics_namespaces_indexes(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_index_recommendations_analytics_namespaces_indexes(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_index_recommendations_analytics_namespaces_indexes:\n")
         pprint(api_response)
     except Exception as e:
@@ -4603,6 +4696,7 @@ Name | Type | Description  | Notes
  **min_usage_count** | **int**| Minimum queries to consider | [optional] [default to 5]
  **limit** | **int**| Maximum recommendations to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4627,13 +4721,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_index_recommendations_analytics_namespaces_indexes_0**
-> IndexRecommendationsResponse get_index_recommendations_analytics_namespaces_indexes_0(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> IndexRecommendationsResponse get_index_recommendations_analytics_namespaces_indexes_0(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Index Recommendations
 
@@ -4691,11 +4785,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     min_usage_count = 5 # int | Minimum queries to consider (optional) (default to 5)
     limit = 50 # int | Maximum recommendations to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Index Recommendations
-        api_response = api_instance.get_index_recommendations_analytics_namespaces_indexes_0(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_index_recommendations_analytics_namespaces_indexes_0(days=days, min_usage_count=min_usage_count, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_index_recommendations_analytics_namespaces_indexes_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -4713,6 +4808,7 @@ Name | Type | Description  | Notes
  **min_usage_count** | **int**| Minimum queries to consider | [optional] [default to 5]
  **limit** | **int**| Maximum recommendations to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4737,13 +4833,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_index_suggestions_analytics_indexes**
-> IndexSuggestionsResponse get_index_suggestions_analytics_indexes(hours=hours, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+> IndexSuggestionsResponse get_index_suggestions_analytics_indexes(hours=hours, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Index Suggestions
 
@@ -4772,11 +4868,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int | Time window in hours to analyze (max 30 days) (optional) (default to 24)
     min_count = 100 # int | Minimum query count threshold for suggestions (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Index Suggestions
-        api_response = api_instance.get_index_suggestions_analytics_indexes(hours=hours, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_index_suggestions_analytics_indexes(hours=hours, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_index_suggestions_analytics_indexes:\n")
         pprint(api_response)
     except Exception as e:
@@ -4793,6 +4890,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Time window in hours to analyze (max 30 days) | [optional] [default to 24]
  **min_count** | **int**| Minimum query count threshold for suggestions | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4817,13 +4915,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_index_suggestions_analytics_indexes_0**
-> IndexSuggestionsResponse get_index_suggestions_analytics_indexes_0(hours=hours, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+> IndexSuggestionsResponse get_index_suggestions_analytics_indexes_0(hours=hours, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Index Suggestions
 
@@ -4852,11 +4950,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int | Time window in hours to analyze (max 30 days) (optional) (default to 24)
     min_count = 100 # int | Minimum query count threshold for suggestions (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Index Suggestions
-        api_response = api_instance.get_index_suggestions_analytics_indexes_0(hours=hours, min_count=min_count, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_index_suggestions_analytics_indexes_0(hours=hours, min_count=min_count, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_index_suggestions_analytics_indexes_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -4873,6 +4972,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Time window in hours to analyze (max 30 days) | [optional] [default to 24]
  **min_count** | **int**| Minimum query count threshold for suggestions | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -4897,13 +4997,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_inference_performance_analytics**
-> List[object] get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[Dict[str, object]] get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Inference Performance
 
@@ -4933,11 +5033,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     model_name = 'model_name_example' # str | Filter by model (optional)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Inference Performance
-        api_response = api_instance.get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_inference_performance_analytics(model_name=model_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_inference_performance_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -4954,11 +5055,12 @@ Name | Type | Description  | Notes
  **model_name** | **str**| Filter by model | [optional] 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -4978,13 +5080,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_inference_performance_analytics_0**
-> List[object] get_inference_performance_analytics_0(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[Dict[str, object]] get_inference_performance_analytics_0(model_name=model_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Inference Performance
 
@@ -5014,11 +5116,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     model_name = 'model_name_example' # str | Filter by model (optional)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Inference Performance
-        api_response = api_instance.get_inference_performance_analytics_0(model_name=model_name, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_inference_performance_analytics_0(model_name=model_name, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_inference_performance_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -5035,11 +5138,12 @@ Name | Type | Description  | Notes
  **model_name** | **str**| Filter by model | [optional] 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -5059,13 +5163,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_label_distribution_analytics_taxonomies_taxonomy**
-> LabelDistributionResponse get_label_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> LabelDistributionResponse get_label_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Label Distribution
 
@@ -5105,11 +5209,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 168 # int |  (optional) (default to 168)
     limit = 50 # int |  (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Label Distribution
-        api_response = api_instance.get_label_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_label_distribution_analytics_taxonomies_taxonomy(taxonomy_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_label_distribution_analytics_taxonomies_taxonomy:\n")
         pprint(api_response)
     except Exception as e:
@@ -5127,6 +5232,7 @@ Name | Type | Description  | Notes
  **hours** | **int**|  | [optional] [default to 168]
  **limit** | **int**|  | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5151,13 +5257,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_label_distribution_analytics_taxonomies_taxonomy_0**
-> LabelDistributionResponse get_label_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> LabelDistributionResponse get_label_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Label Distribution
 
@@ -5197,11 +5303,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 168 # int |  (optional) (default to 168)
     limit = 50 # int |  (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Label Distribution
-        api_response = api_instance.get_label_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_label_distribution_analytics_taxonomies_taxonomy_0(taxonomy_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_label_distribution_analytics_taxonomies_taxonomy_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -5219,6 +5326,7 @@ Name | Type | Description  | Notes
  **hours** | **int**|  | [optional] [default to 168]
  **limit** | **int**|  | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5243,13 +5351,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_latency_metrics_analytics**
-> LatencyResponse get_latency_metrics_analytics(collection_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> LatencyResponse get_latency_metrics_analytics(collection_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Latency Metrics
 
@@ -5284,11 +5392,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int |  (optional) (default to 24)
     group_by = 'hour' # str |  (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Latency Metrics
-        api_response = api_instance.get_latency_metrics_analytics(collection_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_latency_metrics_analytics(collection_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_latency_metrics_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -5306,6 +5415,7 @@ Name | Type | Description  | Notes
  **hours** | **int**|  | [optional] [default to 24]
  **group_by** | **str**|  | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5330,13 +5440,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_latency_metrics_analytics_0**
-> LatencyResponse get_latency_metrics_analytics_0(collection_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> LatencyResponse get_latency_metrics_analytics_0(collection_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Latency Metrics
 
@@ -5371,11 +5481,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int |  (optional) (default to 24)
     group_by = 'hour' # str |  (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Latency Metrics
-        api_response = api_instance.get_latency_metrics_analytics_0(collection_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_latency_metrics_analytics_0(collection_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_latency_metrics_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -5393,6 +5504,7 @@ Name | Type | Description  | Notes
  **hours** | **int**|  | [optional] [default to 24]
  **group_by** | **str**|  | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5417,13 +5529,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_most_queried_fields_analytics_namespaces**
-> MostQueriedFieldsResponse get_most_queried_fields_analytics_namespaces(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> MostQueriedFieldsResponse get_most_queried_fields_analytics_namespaces(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Most Queried Fields
 
@@ -5473,11 +5585,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     limit = 50 # int | Maximum fields to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Most Queried Fields
-        api_response = api_instance.get_most_queried_fields_analytics_namespaces(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_most_queried_fields_analytics_namespaces(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_most_queried_fields_analytics_namespaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -5494,6 +5607,7 @@ Name | Type | Description  | Notes
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **limit** | **int**| Maximum fields to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5518,13 +5632,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_most_queried_fields_analytics_namespaces_0**
-> MostQueriedFieldsResponse get_most_queried_fields_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> MostQueriedFieldsResponse get_most_queried_fields_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Most Queried Fields
 
@@ -5574,11 +5688,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     limit = 50 # int | Maximum fields to return (optional) (default to 50)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Most Queried Fields
-        api_response = api_instance.get_most_queried_fields_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_most_queried_fields_analytics_namespaces_0(days=days, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_most_queried_fields_analytics_namespaces_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -5595,6 +5710,7 @@ Name | Type | Description  | Notes
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **limit** | **int**| Maximum fields to return | [optional] [default to 50]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5619,13 +5735,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_namespace_summary_analytics**
-> NamespaceSummaryResponse get_namespace_summary_analytics(days=days, authorization=authorization, x_namespace=x_namespace)
+> NamespaceSummaryResponse get_namespace_summary_analytics(days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Namespace Summary
 
@@ -5686,11 +5802,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Namespace Summary
-        api_response = api_instance.get_namespace_summary_analytics(days=days, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_namespace_summary_analytics(days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_namespace_summary_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -5706,6 +5823,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5730,13 +5848,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_namespace_summary_analytics_0**
-> NamespaceSummaryResponse get_namespace_summary_analytics_0(days=days, authorization=authorization, x_namespace=x_namespace)
+> NamespaceSummaryResponse get_namespace_summary_analytics_0(days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Namespace Summary
 
@@ -5797,11 +5915,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     days = 30 # int | Days of history to analyze (optional) (default to 30)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Namespace Summary
-        api_response = api_instance.get_namespace_summary_analytics_0(days=days, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_namespace_summary_analytics_0(days=days, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_namespace_summary_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -5817,6 +5936,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **days** | **int**| Days of history to analyze | [optional] [default to 30]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5841,13 +5961,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_retriever_performance_analytics**
-> RetrieverPerformanceResponse get_retriever_performance_analytics(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> RetrieverPerformanceResponse get_retriever_performance_analytics(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Retriever Performance
 
@@ -5897,11 +6017,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     group_by = 'hour' # str | Time grouping: hour, day, week (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Retriever Performance
-        api_response = api_instance.get_retriever_performance_analytics(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_retriever_performance_analytics(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_retriever_performance_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -5920,6 +6041,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **group_by** | **str**| Time grouping: hour, day, week | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -5944,13 +6066,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_retriever_performance_analytics_0**
-> RetrieverPerformanceResponse get_retriever_performance_analytics_0(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> RetrieverPerformanceResponse get_retriever_performance_analytics_0(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Retriever Performance
 
@@ -6000,11 +6122,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     group_by = 'hour' # str | Time grouping: hour, day, week (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Retriever Performance
-        api_response = api_instance.get_retriever_performance_analytics_0(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_retriever_performance_analytics_0(retriever_id, start_date=start_date, end_date=end_date, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_retriever_performance_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -6023,6 +6146,7 @@ Name | Type | Description  | Notes
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **group_by** | **str**| Time grouping: hour, day, week | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6047,13 +6171,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_retriever_signals_analytics**
-> List[RetrieverSignal] get_retriever_signals_analytics(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[RetrieverSignal] get_retriever_signals_analytics(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Retriever Signals
 
@@ -6110,11 +6234,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     limit = 100 # int | Maximum results (optional) (default to 100)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Retriever Signals
-        api_response = api_instance.get_retriever_signals_analytics(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_retriever_signals_analytics(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_retriever_signals_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -6133,6 +6258,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Maximum results | [optional] [default to 100]
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6157,13 +6283,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_retriever_signals_analytics_0**
-> List[RetrieverSignal] get_retriever_signals_analytics_0(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[RetrieverSignal] get_retriever_signals_analytics_0(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Retriever Signals
 
@@ -6220,11 +6346,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     limit = 100 # int | Maximum results (optional) (default to 100)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Retriever Signals
-        api_response = api_instance.get_retriever_signals_analytics_0(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_retriever_signals_analytics_0(retriever_id, signal_type=signal_type, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_retriever_signals_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -6243,6 +6370,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Maximum results | [optional] [default to 100]
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6267,13 +6395,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slow_queries_analytics_namespaces**
-> SlowQueriesResponse get_slow_queries_analytics_namespaces(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> SlowQueriesResponse get_slow_queries_analytics_namespaces(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Slow Queries
 
@@ -6325,11 +6453,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     latency_threshold_ms = 500 # float | Latency threshold in ms (optional) (default to 500)
     limit = 100 # int | Maximum queries to return (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Slow Queries
-        api_response = api_instance.get_slow_queries_analytics_namespaces(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_slow_queries_analytics_namespaces(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_slow_queries_analytics_namespaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -6347,6 +6476,7 @@ Name | Type | Description  | Notes
  **latency_threshold_ms** | **float**| Latency threshold in ms | [optional] [default to 500]
  **limit** | **int**| Maximum queries to return | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6371,13 +6501,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slow_queries_analytics_namespaces_0**
-> SlowQueriesResponse get_slow_queries_analytics_namespaces_0(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> SlowQueriesResponse get_slow_queries_analytics_namespaces_0(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Slow Queries
 
@@ -6429,11 +6559,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     latency_threshold_ms = 500 # float | Latency threshold in ms (optional) (default to 500)
     limit = 100 # int | Maximum queries to return (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Slow Queries
-        api_response = api_instance.get_slow_queries_analytics_namespaces_0(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_slow_queries_analytics_namespaces_0(days=days, latency_threshold_ms=latency_threshold_ms, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_slow_queries_analytics_namespaces_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -6451,6 +6582,7 @@ Name | Type | Description  | Notes
  **latency_threshold_ms** | **float**| Latency threshold in ms | [optional] [default to 500]
  **limit** | **int**| Maximum queries to return | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6475,13 +6607,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_operations_analytics_performance_engine_slow**
-> SlowOperationsResponse get_slowest_operations_analytics_performance_engine_slow(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, x_namespace=x_namespace)
+> SlowOperationsResponse get_slowest_operations_analytics_performance_engine_slow(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Slowest Operations
 
@@ -6532,13 +6664,14 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     hours = 24 # int | Hours of history (optional) (default to 24)
     limit = 10 # int | Number of operations to return (optional) (default to 10)
-    threshold_ms = 1000.0 # float | Only show operations slower than this (ms) (optional) (default to 1000.0)
+    threshold_ms = 1000 # float | Only show operations slower than this (ms) (optional) (default to 1000)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Slowest Operations
-        api_response = api_instance.get_slowest_operations_analytics_performance_engine_slow(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_slowest_operations_analytics_performance_engine_slow(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_slowest_operations_analytics_performance_engine_slow:\n")
         pprint(api_response)
     except Exception as e:
@@ -6554,8 +6687,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **limit** | **int**| Number of operations to return | [optional] [default to 10]
- **threshold_ms** | **float**| Only show operations slower than this (ms) | [optional] [default to 1000.0]
+ **threshold_ms** | **float**| Only show operations slower than this (ms) | [optional] [default to 1000]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6580,13 +6714,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_operations_analytics_performance_engine_slow_0**
-> SlowOperationsResponse get_slowest_operations_analytics_performance_engine_slow_0(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, x_namespace=x_namespace)
+> SlowOperationsResponse get_slowest_operations_analytics_performance_engine_slow_0(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Slowest Operations
 
@@ -6637,13 +6771,14 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AnalyticsApi(api_client)
     hours = 24 # int | Hours of history (optional) (default to 24)
     limit = 10 # int | Number of operations to return (optional) (default to 10)
-    threshold_ms = 1000.0 # float | Only show operations slower than this (ms) (optional) (default to 1000.0)
+    threshold_ms = 1000 # float | Only show operations slower than this (ms) (optional) (default to 1000)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Slowest Operations
-        api_response = api_instance.get_slowest_operations_analytics_performance_engine_slow_0(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_slowest_operations_analytics_performance_engine_slow_0(hours=hours, limit=limit, threshold_ms=threshold_ms, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_slowest_operations_analytics_performance_engine_slow_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -6659,8 +6794,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **limit** | **int**| Number of operations to return | [optional] [default to 10]
- **threshold_ms** | **float**| Only show operations slower than this (ms) | [optional] [default to 1000.0]
+ **threshold_ms** | **float**| Only show operations slower than this (ms) | [optional] [default to 1000]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6685,13 +6821,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_queries_analytics_retrievers_id_slow**
-> List[object] get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[Dict[str, object]] get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Slowest Queries
 
@@ -6739,11 +6875,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     limit = 10 # int | Number of queries to return (optional) (default to 10)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Slowest Queries
-        api_response = api_instance.get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_slowest_queries_analytics_retrievers_id_slow(retriever_id, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_slowest_queries_analytics_retrievers_id_slow:\n")
         pprint(api_response)
     except Exception as e:
@@ -6761,11 +6898,12 @@ Name | Type | Description  | Notes
  **limit** | **int**| Number of queries to return | [optional] [default to 10]
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -6785,13 +6923,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_slowest_queries_analytics_retrievers_id_slow_0**
-> List[object] get_slowest_queries_analytics_retrievers_id_slow_0(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> List[Dict[str, object]] get_slowest_queries_analytics_retrievers_id_slow_0(retriever_id, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Slowest Queries
 
@@ -6839,11 +6977,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     limit = 10 # int | Number of queries to return (optional) (default to 10)
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Slowest Queries
-        api_response = api_instance.get_slowest_queries_analytics_retrievers_id_slow_0(retriever_id, limit=limit, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_slowest_queries_analytics_retrievers_id_slow_0(retriever_id, limit=limit, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_slowest_queries_analytics_retrievers_id_slow_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -6861,11 +7000,12 @@ Name | Type | Description  | Notes
  **limit** | **int**| Number of queries to return | [optional] [default to 10]
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**List[object]**
+**List[Dict[str, object]]**
 
 ### Authorization
 
@@ -6885,13 +7025,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_stage_breakdown_analytics_retrievers**
-> StageBreakdownResponse get_stage_breakdown_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> StageBreakdownResponse get_stage_breakdown_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Stage Breakdown
 
@@ -6938,11 +7078,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     retriever_id = 'retriever_id_example' # str | 
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Stage Breakdown
-        api_response = api_instance.get_stage_breakdown_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_stage_breakdown_analytics_retrievers(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_stage_breakdown_analytics_retrievers:\n")
         pprint(api_response)
     except Exception as e:
@@ -6959,6 +7100,7 @@ Name | Type | Description  | Notes
  **retriever_id** | **str**|  | 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -6983,13 +7125,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_stage_breakdown_analytics_retrievers_0**
-> StageBreakdownResponse get_stage_breakdown_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> StageBreakdownResponse get_stage_breakdown_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Stage Breakdown
 
@@ -7036,11 +7178,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     retriever_id = 'retriever_id_example' # str | 
     hours = 24 # int | Hours of history (optional) (default to 24)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Stage Breakdown
-        api_response = api_instance.get_stage_breakdown_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_stage_breakdown_analytics_retrievers_0(retriever_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_stage_breakdown_analytics_retrievers_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -7057,6 +7200,7 @@ Name | Type | Description  | Notes
  **retriever_id** | **str**|  | 
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7081,13 +7225,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sync_comparison_analytics_buckets**
-> SyncComparisonResponse get_sync_comparison_analytics_buckets(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> SyncComparisonResponse get_sync_comparison_analytics_buckets(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Sync Comparison
 
@@ -7135,11 +7279,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_id = 'bucket_id_example' # str | 
     hours = 168 # int | Hours of history (default: 7 days) (optional) (default to 168)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Sync Comparison
-        api_response = api_instance.get_sync_comparison_analytics_buckets(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_sync_comparison_analytics_buckets(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_sync_comparison_analytics_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -7156,6 +7301,7 @@ Name | Type | Description  | Notes
  **bucket_id** | **str**|  | 
  **hours** | **int**| Hours of history (default: 7 days) | [optional] [default to 168]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7180,13 +7326,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sync_comparison_analytics_buckets_0**
-> SyncComparisonResponse get_sync_comparison_analytics_buckets_0(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+> SyncComparisonResponse get_sync_comparison_analytics_buckets_0(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Sync Comparison
 
@@ -7234,11 +7380,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     bucket_id = 'bucket_id_example' # str | 
     hours = 168 # int | Hours of history (default: 7 days) (optional) (default to 168)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Sync Comparison
-        api_response = api_instance.get_sync_comparison_analytics_buckets_0(bucket_id, hours=hours, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_sync_comparison_analytics_buckets_0(bucket_id, hours=hours, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_sync_comparison_analytics_buckets_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -7255,6 +7402,7 @@ Name | Type | Description  | Notes
  **bucket_id** | **str**|  | 
  **hours** | **int**| Hours of history (default: 7 days) | [optional] [default to 168]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7279,13 +7427,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sync_performance_analytics_buckets**
-> SyncPerformanceResponse get_sync_performance_analytics_buckets(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> SyncPerformanceResponse get_sync_performance_analytics_buckets(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Sync Performance
 
@@ -7334,11 +7482,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 168 # int | Hours of history (default: 7 days) (optional) (default to 168)
     limit = 100 # int | Maximum sync runs to return (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Sync Performance
-        api_response = api_instance.get_sync_performance_analytics_buckets(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_sync_performance_analytics_buckets(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_sync_performance_analytics_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -7357,6 +7506,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history (default: 7 days) | [optional] [default to 168]
  **limit** | **int**| Maximum sync runs to return | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7381,13 +7531,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sync_performance_analytics_buckets_0**
-> SyncPerformanceResponse get_sync_performance_analytics_buckets_0(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+> SyncPerformanceResponse get_sync_performance_analytics_buckets_0(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Sync Performance
 
@@ -7436,11 +7586,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 168 # int | Hours of history (default: 7 days) (optional) (default to 168)
     limit = 100 # int | Maximum sync runs to return (optional) (default to 100)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Sync Performance
-        api_response = api_instance.get_sync_performance_analytics_buckets_0(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_sync_performance_analytics_buckets_0(bucket_id, sync_config_id=sync_config_id, hours=hours, limit=limit, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_sync_performance_analytics_buckets_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -7459,6 +7610,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history (default: 7 days) | [optional] [default to 168]
  **limit** | **int**| Maximum sync runs to return | [optional] [default to 100]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7483,13 +7635,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_upload_performance_analytics_buckets**
-> UploadPerformanceResponse get_upload_performance_analytics_buckets(bucket_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> UploadPerformanceResponse get_upload_performance_analytics_buckets(bucket_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Upload Performance
 
@@ -7537,11 +7689,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int | Hours of history (optional) (default to 24)
     group_by = 'hour' # str | Time grouping: hour, day (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Upload Performance
-        api_response = api_instance.get_upload_performance_analytics_buckets(bucket_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_upload_performance_analytics_buckets(bucket_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_upload_performance_analytics_buckets:\n")
         pprint(api_response)
     except Exception as e:
@@ -7559,6 +7712,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **group_by** | **str**| Time grouping: hour, day | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7583,13 +7737,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_upload_performance_analytics_buckets_0**
-> UploadPerformanceResponse get_upload_performance_analytics_buckets_0(bucket_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+> UploadPerformanceResponse get_upload_performance_analytics_buckets_0(bucket_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Upload Performance
 
@@ -7637,11 +7791,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     hours = 24 # int | Hours of history (optional) (default to 24)
     group_by = 'hour' # str | Time grouping: hour, day (optional) (default to 'hour')
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Upload Performance
-        api_response = api_instance.get_upload_performance_analytics_buckets_0(bucket_id, hours=hours, group_by=group_by, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_upload_performance_analytics_buckets_0(bucket_id, hours=hours, group_by=group_by, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_upload_performance_analytics_buckets_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -7659,6 +7814,7 @@ Name | Type | Description  | Notes
  **hours** | **int**| Hours of history | [optional] [default to 24]
  **group_by** | **str**| Time grouping: hour, day | [optional] [default to &#39;hour&#39;]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -7683,13 +7839,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_summary_analytics**
-> object get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Usage Summary
 
@@ -7734,11 +7890,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date (UTC) (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Usage Summary
-        api_response = api_instance.get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_usage_summary_analytics(start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_usage_summary_analytics:\n")
         pprint(api_response)
     except Exception as e:
@@ -7755,11 +7912,12 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date (UTC) | [optional] 
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -7779,13 +7937,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_usage_summary_analytics_0**
-> object get_usage_summary_analytics_0(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+> Dict[str, object] get_usage_summary_analytics_0(start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Usage Summary
 
@@ -7830,11 +7988,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     start_date = '2013-10-20T19:20:30+01:00' # datetime | Start date (UTC) (optional)
     end_date = '2013-10-20T19:20:30+01:00' # datetime | End date (UTC) (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Usage Summary
-        api_response = api_instance.get_usage_summary_analytics_0(start_date=start_date, end_date=end_date, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_usage_summary_analytics_0(start_date=start_date, end_date=end_date, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AnalyticsApi->get_usage_summary_analytics_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -7851,11 +8010,12 @@ Name | Type | Description  | Notes
  **start_date** | **datetime**| Start date (UTC) | [optional] 
  **end_date** | **datetime**| End date (UTC) | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -7875,8 +8035,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

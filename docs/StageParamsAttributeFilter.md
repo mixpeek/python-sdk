@@ -7,9 +7,9 @@ Configuration for filtering documents by attribute conditions.  **Stage Category
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_field** | **str** | Dot-delimited field path to evaluate on each document. Supports template variables (e.g. &#39;{{DOC.metadata.category}}&#39;). REQUIRED for simple mode. NOT USED when &#39;conditions&#39; is specified. | [optional] [default to 'metadata.status']
-**operator** | [**FilterOperator**](FilterOperator.md) | Comparison operator to apply. Supported operators: eq, ne, gt, gte, lt, lte, in, nin, contains, starts_with, ends_with, regex, exists, is_null. REQUIRED for simple mode. NOT USED when &#39;conditions&#39; is specified. | [optional] 
+**operator** | [**StageDefsFilterOperator**](StageDefsFilterOperator.md) | Comparison operator to apply. Supported operators: eq, ne, gt, gte, lt, lte, in, nin, contains, starts_with, ends_with, regex, exists, is_null. REQUIRED for simple mode. NOT USED when &#39;conditions&#39; is specified. | [optional] 
 **value** | **object** |  | [optional] 
-**conditions** | [**LogicalOperator**](LogicalOperator.md) | Complex filter conditions using boolean logic (AND/OR/NOT). Use this for combining multiple filter conditions. REQUIRED for boolean mode. Cannot be used with &#39;field&#39;/&#39;operator&#39;/&#39;value&#39;. | [optional] 
+**conditions** | [**StageDefsLogicalOperator**](StageDefsLogicalOperator.md) | Complex filter conditions using boolean logic (AND/OR/NOT). Use this for combining multiple filter conditions. REQUIRED for boolean mode. Cannot be used with &#39;field&#39;/&#39;operator&#39;/&#39;value&#39;. | [optional] 
 **batch_size** | **int** | Number of documents to evaluate per batch. The executor streams documents through the filter in chunks to avoid large in-memory spikes. | [optional] [default to 100]
 **case_insensitive** | **bool** | When true, string comparisons are performed case-insensitively where the operator supports it. Applies to both simple and boolean modes. | [optional] [default to False]
 

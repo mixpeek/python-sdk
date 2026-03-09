@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **retriever_name** | **str** | Unique retriever name (REQUIRED). | 
 **description** | **str** | Human readable retriever description (OPTIONAL). | [optional] 
+**visibility** | [**RetrieverVisibility**](RetrieverVisibility.md) | Visibility level: PRIVATE (owner only), PUBLIC (any valid API key), MARKETPLACE (requires subscription). Defaults to PRIVATE. | [optional] 
+**marketplace_listing_id** | **str** | Associated marketplace listing ID when visibility is MARKETPLACE (OPTIONAL). | [optional] 
+**requires_subscription** | **bool** | Whether this retriever requires an active subscription to access (marketplace only). | [optional] [default to False]
 **collection_identifiers** | **List[str]** | Collection identifiers (names or IDs) queried by the retriever (OPTIONAL). Identifiers can be collection names (e.g., &#39;my_collection&#39;) or collection IDs (e.g., &#39;col_abc123&#39;). The system will resolve names to IDs automatically. Can be empty for inference-only pipelines (e.g., LLM query analysis without document retrieval). | [optional] 
 **stages** | [**List[StageConfig]**](StageConfig.md) | Ordered stage configurations (REQUIRED). | 
 **input_schema** | [**Dict[str, RetrieverInputSchemaFieldInput]**](RetrieverInputSchemaFieldInput.md) | Input schema properties keyed by field name (OPTIONAL). Can be empty for static retrievers with hardcoded stage parameters. Each field can include: type, description, required, default, and examples. The &#39;examples&#39; field (list) provides sample values that will be shown to users when the retriever is published with include_metadata&#x3D;true. | [optional] 

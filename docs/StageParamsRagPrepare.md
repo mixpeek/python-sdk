@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **content_field** | **str** | Primary field to extract content from each document. | [optional] [default to 'content']
 **separator** | **str** | Separator between documents in single_context mode. | [optional] [default to '''
 ''']
-**citation** | [**CitationConfig**](CitationConfig.md) | Citation configuration for source tracking. | [optional] 
+**citation** | [**StageDefsCitationConfig**](StageDefsCitationConfig.md) | Citation configuration for source tracking. | [optional] 
 **context_field** | **str** | Field name for combined context (single_context mode). | [optional] [default to 'rag_context']
 **citations_field** | **str** | Field name for citation metadata. | [optional] [default to 'citations']
 **formatted_content_field** | **str** | Field name for formatted content (formatted_list mode). | [optional] [default to 'formatted_content']

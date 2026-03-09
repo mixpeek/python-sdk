@@ -4,6 +4,7 @@ All URIs are relative to *https://api.mixpeek.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**accept_invitation_organizations**](PrivateApi.md#accept_invitation_organizations) | **POST** /v1/private/organizations/invitations/accept | Accept Invitation
 [**add_user_to_organization**](PrivateApi.md#add_user_to_organization) | **POST** /v1/private/organizations/add-user | Add User To Organization Private
 [**complete_tier_internal_batches_batch_id_num**](PrivateApi.md#complete_tier_internal_batches_batch_id_num) | **POST** /v1/internal/batches/{batch_id}/tiers/{tier_num}/complete | Mark tier complete and trigger next tier (KISS - Engine callback)
 [**configure_storage_cors_configurations**](PrivateApi.md#configure_storage_cors_configurations) | **POST** /v1/private/configurations/storage/cors | Configure CORS for Object Storage
@@ -12,10 +13,90 @@ Method | HTTP request | Description
 [**delete_organization**](PrivateApi.md#delete_organization) | **DELETE** /v1/private/organizations/{organization_identifier} | Delete Organization Private
 [**diagnose_clickhouse_configurations_diagnostics**](PrivateApi.md#diagnose_clickhouse_configurations_diagnostics) | **GET** /v1/private/configurations/clickhouse/diagnostics | Diagnose ClickHouse Configuration
 [**get_organization**](PrivateApi.md#get_organization) | **GET** /v1/private/organizations/{organization_identifier} | Get Organization Private
+[**get_pending_invitations_organizations_email**](PrivateApi.md#get_pending_invitations_organizations_email) | **GET** /v1/private/organizations/invitations/{email} | Get Pending Invitations
 [**get_storage_cors_configurations**](PrivateApi.md#get_storage_cors_configurations) | **GET** /v1/private/configurations/storage/cors | Get Current CORS Configuration
+[**remove_user_from_organization**](PrivateApi.md#remove_user_from_organization) | **POST** /v1/private/organizations/remove-user | Remove User From Organization Private
 [**update_organization**](PrivateApi.md#update_organization) | **PATCH** /v1/private/organizations/{organization_identifier} | Update Organization Private
 [**update_task_status_internal**](PrivateApi.md#update_task_status_internal) | **POST** /v1/internal/tasks/{task_id}/status | Update task status (Engine callback)
 
+
+# **accept_invitation_organizations**
+> Dict[str, object] accept_invitation_organizations(request_body)
+
+Accept Invitation
+
+Activate a pending invitation (status: pending → active).
+
+Expected payload:
+    email: str
+    organization_id: str
+    user_name: str | None  (optional, updates display name)
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.PrivateApi(api_client)
+    request_body = None # Dict[str, object] | 
+
+    try:
+        # Accept Invitation
+        api_response = api_instance.accept_invitation_organizations(request_body)
+        print("The response of PrivateApi->accept_invitation_organizations:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivateApi->accept_invitation_organizations: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**Dict[str, object]**](object.md)|  | 
+
+### Return type
+
+**Dict[str, object]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_user_to_organization**
 > OrganizationModelResponse add_user_to_organization(add_user_to_organization_request)
@@ -87,8 +168,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -167,8 +248,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -262,13 +343,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_bootstrap_key_organizations_id_users_email**
-> object create_bootstrap_key_organizations_id_users_email(organization_id, user_email)
+> Dict[str, object] create_bootstrap_key_organizations_id_users_email(organization_id, user_email)
 
 Create Bootstrap Api Key
 
@@ -340,7 +421,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+**Dict[str, object]**
 
 ### Authorization
 
@@ -360,8 +441,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -439,8 +520,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -513,8 +594,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -660,8 +741,84 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_pending_invitations_organizations_email**
+> Dict[str, object] get_pending_invitations_organizations_email(email)
+
+Get Pending Invitations
+
+Return all pending Mixpeek invitations for the given email address.
+
+Searches across all organizations for users with this email and status=pending.
+Used on the signup flow to offer invited users a chance to join their org.
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.PrivateApi(api_client)
+    email = 'email_example' # str | 
+
+    try:
+        # Get Pending Invitations
+        api_response = api_instance.get_pending_invitations_organizations_email(email)
+        print("The response of PrivateApi->get_pending_invitations_organizations_email:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivateApi->get_pending_invitations_organizations_email: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | **str**|  | 
+
+### Return type
+
+**Dict[str, object]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -736,6 +893,84 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
+**500** | Internal Server Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **remove_user_from_organization**
+> GenericDeleteResponse remove_user_from_organization(request_body)
+
+Remove User From Organization Private
+
+Remove a user from an organization by email (admin-only).
+
+Mirrors the add-user endpoint. Accepts:
+    - organization_identifier: org ID or name
+    - email: user email to remove
+
+### Example
+
+
+```python
+import mixpeek
+from mixpeek.models.generic_delete_response import GenericDeleteResponse
+from mixpeek.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.mixpeek.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mixpeek.Configuration(
+    host = "https://api.mixpeek.com"
+)
+
+
+# Enter a context with an instance of the API client
+with mixpeek.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mixpeek.PrivateApi(api_client)
+    request_body = None # Dict[str, object] | 
+
+    try:
+        # Remove User From Organization Private
+        api_response = api_instance.remove_user_from_organization(request_body)
+        print("The response of PrivateApi->remove_user_from_organization:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PrivateApi->remove_user_from_organization: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**Dict[str, object]**](object.md)|  | 
+
+### Return type
+
+[**GenericDeleteResponse**](GenericDeleteResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Not Found |  -  |
+**422** | Validation Error |  -  |
 **500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -817,8 +1052,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -895,8 +1130,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_queries** | **int** | Total number of queries executed | [optional] [default to 0]
 **queries_last_24h** | **int** | Number of queries in the last 24 hours | [optional] [default to 0]
-**avg_latency_ms** | **float** | Average latency in milliseconds | [optional] [default to 0.0]
-**error_rate** | **float** | Error rate as a fraction (0.0 - 1.0) | [optional] [default to 0.0]
+**avg_latency_ms** | **float** | Average latency in milliseconds | [optional] [default to 0]
+**error_rate** | **float** | Error rate as a fraction (0.0 - 1.0) | [optional] [default to 0]
 **last_error** | **str** | Most recent error message for debugging | [optional] 
 **cache_hit_rate** | **float** | Cache hit rate if caching is enabled (0.0 - 1.0) | [optional] 
 

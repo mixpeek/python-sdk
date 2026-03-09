@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **create_session_agents**
-> CreateSessionResponse create_session_agents(create_session_request, authorization=authorization, x_namespace=x_namespace)
+> CreateSessionResponse create_session_agents(create_session_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create Session
 
@@ -76,11 +76,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AgentSessionsApi(api_client)
     create_session_request = mixpeek.CreateSessionRequest() # CreateSessionRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create Session
-        api_response = api_instance.create_session_agents(create_session_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_session_agents(create_session_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->create_session_agents:\n")
         pprint(api_response)
     except Exception as e:
@@ -96,6 +97,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_session_request** | [**CreateSessionRequest**](CreateSessionRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -120,13 +122,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **detect_intent_agents_sessions**
-> IntentClassification detect_intent_agents_sessions(detect_intent_request, authorization=authorization, x_namespace=x_namespace)
+> IntentClassification detect_intent_agents_sessions(detect_intent_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Detect Intent
 
@@ -182,11 +184,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AgentSessionsApi(api_client)
     detect_intent_request = mixpeek.DetectIntentRequest() # DetectIntentRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Detect Intent
-        api_response = api_instance.detect_intent_agents_sessions(detect_intent_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.detect_intent_agents_sessions(detect_intent_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->detect_intent_agents_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -202,6 +205,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **detect_intent_request** | [**DetectIntentRequest**](DetectIntentRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -226,13 +230,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_history_agents_sessions**
-> GetHistoryResponse get_history_agents_sessions(session_id, limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
+> GetHistoryResponse get_history_agents_sessions(session_id, limit=limit, offset=offset, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get History
 
@@ -283,11 +287,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     limit = 50 # int | Maximum messages to return (optional) (default to 50)
     offset = 0 # int | Pagination offset (optional) (default to 0)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get History
-        api_response = api_instance.get_history_agents_sessions(session_id, limit=limit, offset=offset, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_history_agents_sessions(session_id, limit=limit, offset=offset, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->get_history_agents_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -305,6 +310,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Maximum messages to return | [optional] [default to 50]
  **offset** | **int**| Pagination offset | [optional] [default to 0]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -329,13 +335,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_session_agents**
-> GetSessionResponse get_session_agents(session_id, authorization=authorization, x_namespace=x_namespace)
+> GetSessionResponse get_session_agents(session_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get Session
 
@@ -380,11 +386,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AgentSessionsApi(api_client)
     session_id = 'session_id_example' # str | Session ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get Session
-        api_response = api_instance.get_session_agents(session_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_session_agents(session_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->get_session_agents:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,6 +407,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **session_id** | **str**| Session ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -424,13 +432,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_sessions_agents**
-> ListSessionsResponse list_sessions_agents(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_sessions_request=list_sessions_request)
+> ListSessionsResponse list_sessions_agents(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_sessions_request=list_sessions_request)
 
 List Sessions
 
@@ -479,12 +487,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_sessions_request = mixpeek.ListSessionsRequest() # ListSessionsRequest |  (optional)
 
     try:
         # List Sessions
-        api_response = api_instance.list_sessions_agents(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_sessions_request=list_sessions_request)
+        api_response = api_instance.list_sessions_agents(limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_sessions_request=list_sessions_request)
         print("The response of AgentSessionsApi->list_sessions_agents:\n")
         pprint(api_response)
     except Exception as e:
@@ -503,6 +512,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_sessions_request** | [**ListSessionsRequest**](ListSessionsRequest.md)|  | [optional] 
 
@@ -528,13 +538,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tools_agents_sessions**
-> ListToolsResponse list_tools_agents_sessions(category=category, authorization=authorization, x_namespace=x_namespace)
+> ListToolsResponse list_tools_agents_sessions(category=category, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 List Tools
 
@@ -595,11 +605,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AgentSessionsApi(api_client)
     category = 'category_example' # str | Filter by tool category (optional)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # List Tools
-        api_response = api_instance.list_tools_agents_sessions(category=category, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.list_tools_agents_sessions(category=category, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->list_tools_agents_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -615,6 +626,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **category** | **str**| Filter by tool category | [optional] 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -639,13 +651,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_session_agents**
-> PatchSessionResponse patch_session_agents(session_id, patch_session_request, authorization=authorization, x_namespace=x_namespace)
+> PatchSessionResponse patch_session_agents(session_id, patch_session_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Patch Session
 
@@ -702,11 +714,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     session_id = 'session_id_example' # str | Session ID
     patch_session_request = mixpeek.PatchSessionRequest() # PatchSessionRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Patch Session
-        api_response = api_instance.patch_session_agents(session_id, patch_session_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.patch_session_agents(session_id, patch_session_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->patch_session_agents:\n")
         pprint(api_response)
     except Exception as e:
@@ -723,6 +736,7 @@ Name | Type | Description  | Notes
  **session_id** | **str**| Session ID | 
  **patch_session_request** | [**PatchSessionRequest**](PatchSessionRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -747,13 +761,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **respond_to_confirmation_agents_sessions**
-> object respond_to_confirmation_agents_sessions(session_id, confirmation_id, confirmation_request, authorization=authorization, x_namespace=x_namespace)
+> object respond_to_confirmation_agents_sessions(session_id, confirmation_id, confirmation_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Respond To Confirmation
 
@@ -838,11 +852,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     confirmation_id = 'confirmation_id_example' # str | Confirmation ID
     confirmation_request = mixpeek.ConfirmationRequest() # ConfirmationRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Respond To Confirmation
-        api_response = api_instance.respond_to_confirmation_agents_sessions(session_id, confirmation_id, confirmation_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.respond_to_confirmation_agents_sessions(session_id, confirmation_id, confirmation_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->respond_to_confirmation_agents_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -860,6 +875,7 @@ Name | Type | Description  | Notes
  **confirmation_id** | **str**| Confirmation ID | 
  **confirmation_request** | [**ConfirmationRequest**](ConfirmationRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -884,13 +900,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **send_message_agents_sessions**
-> object send_message_agents_sessions(session_id, send_message_request, authorization=authorization, x_namespace=x_namespace)
+> object send_message_agents_sessions(session_id, send_message_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Send Message
 
@@ -1012,11 +1028,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     session_id = 'session_id_example' # str | Session ID
     send_message_request = mixpeek.SendMessageRequest() # SendMessageRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Send Message
-        api_response = api_instance.send_message_agents_sessions(session_id, send_message_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.send_message_agents_sessions(session_id, send_message_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->send_message_agents_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -1033,6 +1050,7 @@ Name | Type | Description  | Notes
  **session_id** | **str**| Session ID | 
  **send_message_request** | [**SendMessageRequest**](SendMessageRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1057,13 +1075,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submit_feedback_agents_sessions**
-> SubmitFeedbackResponse submit_feedback_agents_sessions(session_id, submit_feedback_request, authorization=authorization, x_namespace=x_namespace)
+> SubmitFeedbackResponse submit_feedback_agents_sessions(session_id, submit_feedback_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Submit Feedback
 
@@ -1121,11 +1139,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     session_id = 'session_id_example' # str | Session ID
     submit_feedback_request = mixpeek.SubmitFeedbackRequest() # SubmitFeedbackRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Submit Feedback
-        api_response = api_instance.submit_feedback_agents_sessions(session_id, submit_feedback_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.submit_feedback_agents_sessions(session_id, submit_feedback_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->submit_feedback_agents_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -1142,6 +1161,7 @@ Name | Type | Description  | Notes
  **session_id** | **str**| Session ID | 
  **submit_feedback_request** | [**SubmitFeedbackRequest**](SubmitFeedbackRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1166,13 +1186,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **terminate_session_agents**
-> TerminateSessionResponse terminate_session_agents(session_id, authorization=authorization, x_namespace=x_namespace)
+> TerminateSessionResponse terminate_session_agents(session_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Terminate Session
 
@@ -1219,11 +1239,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.AgentSessionsApi(api_client)
     session_id = 'session_id_example' # str | Session ID
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Terminate Session
-        api_response = api_instance.terminate_session_agents(session_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.terminate_session_agents(session_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of AgentSessionsApi->terminate_session_agents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1239,6 +1260,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **session_id** | **str**| Session ID | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -1263,8 +1285,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -7,12 +7,12 @@ Summary statistics for performance.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **total_executions** | **int** | Total number of executions | [optional] [default to 0]
-**avg_latency_ms** | **float** | Average latency | [optional] [default to 0.0]
-**p50_latency_ms** | **float** | Median latency | [optional] [default to 0.0]
-**p95_latency_ms** | **float** | 95th percentile latency | [optional] [default to 0.0]
-**p99_latency_ms** | **float** | 99th percentile latency | [optional] [default to 0.0]
-**max_latency_ms** | **float** | Maximum latency | [optional] [default to 0.0]
-**total_time_seconds** | **float** | Total time spent across all executions | [optional] [default to 0.0]
+**avg_latency_ms** | **float** | Average latency | [optional] [default to 0]
+**p50_latency_ms** | **float** | Median latency | [optional] [default to 0]
+**p95_latency_ms** | **float** | 95th percentile latency | [optional] [default to 0]
+**p99_latency_ms** | **float** | 99th percentile latency | [optional] [default to 0]
+**max_latency_ms** | **float** | Maximum latency | [optional] [default to 0]
+**total_time_seconds** | **float** | Total time spent across all executions | [optional] [default to 0]
 
 ## Example
 

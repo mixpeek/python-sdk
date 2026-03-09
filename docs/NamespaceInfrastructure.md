@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **qdrant_url** | **str** | Dedicated Qdrant instance URL for this namespace. When set, this namespace uses its own Qdrant instance instead of organization or shared infrastructure. Format: http://hostname:port or https://hostname:port. REQUIRED when compute_tier is DEDICATED_CPU or DEDICATED_GPU. NOT REQUIRED for SHARED tier (inherits from organization or uses shared). | [optional] 
 **qdrant_api_key** | **str** | API key for dedicated Qdrant instance. REQUIRED when qdrant_url is set. NOT REQUIRED for shared tier. | [optional] 
 **qdrant_collection** | **str** | Qdrant collection backing this namespace&#39;s vector data. | 
+**s3_vector_bucket** | **str** | S3 Vectors bucket name for vector tiering. When set, vectors are durably stored in S3. | [optional] 
 **compute_tier** | [**ComputeTier**](ComputeTier.md) | Compute tier controlling isolation and performance characteristics. | [optional] 
 **max_concurrent_jobs** | **int** | Maximum concurrent Ray jobs allowed for the namespace. | [optional] [default to 10]
 **autoscaling_enabled** | **bool** | Toggle autoscaling for dedicated clusters (ignored for shared tier). | [optional] [default to True]

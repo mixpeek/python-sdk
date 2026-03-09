@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **prompt** | **str** | REQUIRED. Prompt template for the LLM. Must include {{DOCUMENTS}} placeholder.   Available placeholders: - {{DOCUMENTS}}: Formatted list of all documents - {{DOC_COUNT}}: Number of documents - {{GROUP_VALUE}}: Current group value (when using group_by) - {{INPUT.*}}: Query input values - {{CONTEXT.*}}: Execution context | [optional] [default to '''Summarize the following {{DOC_COUNT}} documents concisely:
 
 {{DOCUMENTS}}''']
-**provider** | [**LLMProvider**](LLMProvider.md) | LLM provider to use. Supported providers: - openai: GPT models (GPT-4o, GPT-4o-mini) - google: Gemini models (Gemini 2.0 Flash) - anthropic: Claude models (Claude 3.5 Sonnet/Haiku)  If not specified, defaults to &#39;google&#39;. Can be auto-inferred from model_name. | [optional] 
+**provider** | [**StageDefsLLMProvider**](StageDefsLLMProvider.md) | LLM provider to use. Supported providers: - openai: GPT models (GPT-4o, GPT-4o-mini) - google: Gemini models (Gemini 2.0 Flash) - anthropic: Claude models (Claude 3.5 Sonnet/Haiku)  If not specified, defaults to &#39;google&#39;. Can be auto-inferred from model_name. | [optional] 
 **model_name** | **str** | Specific LLM model to use. If not specified, uses provider default. Examples: gemini-2.0-flash, gpt-4o-mini, gpt-4o | [optional] [default to 'null']
 **inference_name** | **str** | DEPRECATED: Use &#39;provider&#39; and &#39;model_name&#39; instead. Legacy format: &#39;provider:model&#39; (e.g., &#39;gemini:gemini-2.0-flash&#39;). Kept for backward compatibility only. | [optional] 
 **document_template** | **str** | OPTIONAL. Template for formatting each document in {{DOCUMENTS}}. Default: &#39;[{{INDEX}}] {{DOC.content}}\\n&#39;.   Available placeholders: - {{INDEX}}: 1-based document index - {{DOC.*}}: Any document field (e.g., {{DOC.content}}, {{DOC.metadata.title}}) | [optional] [default to '''[{{INDEX}}] {{DOC.content}}
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **truncation_strategy** | **str** | OPTIONAL. How to handle documents exceeding max_input_tokens.   Strategies: - &#39;drop_last&#39;: Include documents in order until limit, drop remaining - &#39;truncate_each&#39;: Give each document equal token budget, truncate individually - &#39;smart&#39;: Prioritize by relevance score, truncate lower-scored documents first | [optional] [default to 'drop_last']
 **temperature** | **float** | OPTIONAL. LLM temperature for summary generation. Lower values (0.1-0.3) produce more focused, deterministic summaries. Higher values (0.7-1.0) produce more creative, varied summaries. Default: 0.3 (factual summarization). | [optional] [default to 0.3]
 **max_output_tokens** | **int** | OPTIONAL. Maximum tokens for the summary output. Default: 1024. | [optional] [default to 1024]
-**output_schema** | **object** | OPTIONAL. JSON schema for structured output. When provided, LLM output is parsed as JSON matching this schema. | [optional] 
+**output_schema** | **Dict[str, object]** | OPTIONAL. JSON schema for structured output. When provided, LLM output is parsed as JSON matching this schema. | [optional] 
 
 ## Example
 

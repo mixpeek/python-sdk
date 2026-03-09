@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **sync_collection_schema**
-> ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost sync_collection_schema(collection_id, authorization=authorization, x_namespace=x_namespace, schema_sync_request=schema_sync_request)
+> ResponseSyncCollectionSchemaV1CollectionsCollectionIdSyncSchemaPost sync_collection_schema(collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, schema_sync_request=schema_sync_request)
 
 Sync Collection Schema
 
@@ -51,12 +51,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     api_instance = mixpeek.CollectionSchemaApi(api_client)
     collection_id = 'collection_id_example' # str | Collection ID to sync schema for
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     schema_sync_request = mixpeek.SchemaSyncRequest() # SchemaSyncRequest |  (optional)
 
     try:
         # Sync Collection Schema
-        api_response = api_instance.sync_collection_schema(collection_id, authorization=authorization, x_namespace=x_namespace, schema_sync_request=schema_sync_request)
+        api_response = api_instance.sync_collection_schema(collection_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, schema_sync_request=schema_sync_request)
         print("The response of CollectionSchemaApi->sync_collection_schema:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,6 +73,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **collection_id** | **str**| Collection ID to sync schema for | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **schema_sync_request** | [**SchemaSyncRequest**](SchemaSyncRequest.md)|  | [optional] 
 
@@ -97,8 +99,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **rate_limit_config** | [**RateLimitConfig**](RateLimitConfig.md) | Update rate limiting configuration | [optional] 
 **password_secret_name** | **str** | Update or remove password protection (set to empty string to remove) | [optional] 
 **is_active** | **bool** | Activate or deactivate the published retriever | [optional] 
+**tags** | **List[str]** | Update tags for categorizing this retriever | [optional] 
+**category** | **str** | Update the primary category for this retriever | [optional] 
 
 ## Example
 

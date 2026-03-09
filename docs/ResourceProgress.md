@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **resource_id** | **str** | Resource ID | 
 **resource_type** | [**SharedNamespacesMigrationsModelsResourceType**](SharedNamespacesMigrationsModelsResourceType.md) | Resource type | 
 **status** | [**MigrationStatus**](MigrationStatus.md) | Resource status | 
-**progress_percent** | **float** | Progress % | [optional] [default to 0.0]
+**progress_percent** | **float** | Progress % | [optional] [default to 0]
 **error_message** | **str** | Error if failed | [optional] 
 
 ## Example

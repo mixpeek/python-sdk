@@ -1,6 +1,6 @@
 # DisplayConfigInput
 
-Display configuration for public retriever UI.  This model defines how the public search interface should be rendered, including input fields, theme, layout, and result card configuration.  The frontend (apps.mixpeek.com) uses this to dynamically build the UI without hardcoded components.
+Display configuration for public retriever UI.  This model defines how the public search interface should be rendered, including input fields, theme, layout, and result card configuration.  The frontend (mxp.co) uses this to dynamically build the UI without hardcoded components.
 
 ## Properties
 
@@ -22,7 +22,8 @@ Name | Type | Description | Notes
 **external_links** | [**List[ExternalLink]**](ExternalLink.md) | External resource links for this retriever (GitHub repos, blog posts, docs, etc.). Displayed on homepage and retriever listing pages to provide additional context. | [optional] 
 **template_type** | **str** | Template identifier for frontend rendering. Built-in templates: portrait-gallery, media-search, document-search. Custom templates can use any string identifier. | [optional] 
 **field_mappings** | **Dict[str, str]** | Field mappings from collection output fields to template display slots. Maps template slot names (e.g., &#39;thumbnail&#39;, &#39;title&#39;) to actual field names in the search results. | [optional] 
-**extensions** | **object** | Generic extensions for template-specific configuration. Allows templates to store custom config without schema changes. | [optional] 
+**extensions** | **Dict[str, object]** | Generic extensions for template-specific configuration. Allows templates to store custom config without schema changes. | [optional] 
+**retriever_config** | **Dict[str, object]** | Embedded retriever configuration (stages, feature extractors) for the View Config modal. Auto-populated at publish time. | [optional] 
 
 ## Example
 

@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **aggregate_documents**
-> DocumentAggregationResponse aggregate_documents(collection_identifier, document_aggregation_request, authorization=authorization, x_namespace=x_namespace)
+> DocumentAggregationResponse aggregate_documents(collection_identifier, document_aggregation_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Aggregate Documents
 
@@ -64,11 +64,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | The unique identifier of the collection.
     document_aggregation_request = mixpeek.DocumentAggregationRequest() # DocumentAggregationRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Aggregate Documents
-        api_response = api_instance.aggregate_documents(collection_identifier, document_aggregation_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.aggregate_documents(collection_identifier, document_aggregation_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->aggregate_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -85,6 +86,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| The unique identifier of the collection. | 
  **document_aggregation_request** | [**DocumentAggregationRequest**](DocumentAggregationRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -109,13 +111,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **batch_delete**
-> BatchDeleteDocumentsResponse batch_delete(collection_identifier, batch_delete_documents_request, authorization=authorization, x_namespace=x_namespace)
+> BatchDeleteDocumentsResponse batch_delete(collection_identifier, batch_delete_documents_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Batch Delete Documents
 
@@ -177,11 +179,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | The ID of the collection to delete documents from.
     batch_delete_documents_request = mixpeek.BatchDeleteDocumentsRequest() # BatchDeleteDocumentsRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Batch Delete Documents
-        api_response = api_instance.batch_delete(collection_identifier, batch_delete_documents_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.batch_delete(collection_identifier, batch_delete_documents_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->batch_delete:\n")
         pprint(api_response)
     except Exception as e:
@@ -198,6 +201,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| The ID of the collection to delete documents from. | 
  **batch_delete_documents_request** | [**BatchDeleteDocumentsRequest**](BatchDeleteDocumentsRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -222,13 +226,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **batch_update**
-> BatchUpdateDocumentsResponse batch_update(collection_identifier, batch_update_documents_request, authorization=authorization, x_namespace=x_namespace)
+> BatchUpdateDocumentsResponse batch_update(collection_identifier, batch_update_documents_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Batch Update Documents
 
@@ -292,11 +296,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | The ID of the collection to update documents in.
     batch_update_documents_request = mixpeek.BatchUpdateDocumentsRequest() # BatchUpdateDocumentsRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Batch Update Documents
-        api_response = api_instance.batch_update(collection_identifier, batch_update_documents_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.batch_update(collection_identifier, batch_update_documents_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->batch_update:\n")
         pprint(api_response)
     except Exception as e:
@@ -313,6 +318,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| The ID of the collection to update documents in. | 
  **batch_update_documents_request** | [**BatchUpdateDocumentsRequest**](BatchUpdateDocumentsRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -337,13 +343,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **bulk_update**
-> BulkUpdateDocumentsResponse bulk_update(collection_identifier, bulk_update_documents_request, authorization=authorization, x_namespace=x_namespace)
+> BulkUpdateDocumentsResponse bulk_update(collection_identifier, bulk_update_documents_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Bulk Update Documents
 
@@ -379,11 +385,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | The ID of the collection to update documents in.
     bulk_update_documents_request = mixpeek.BulkUpdateDocumentsRequest() # BulkUpdateDocumentsRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Bulk Update Documents
-        api_response = api_instance.bulk_update(collection_identifier, bulk_update_documents_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.bulk_update(collection_identifier, bulk_update_documents_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->bulk_update:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,6 +407,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| The ID of the collection to update documents in. | 
  **bulk_update_documents_request** | [**BulkUpdateDocumentsRequest**](BulkUpdateDocumentsRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -424,13 +432,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_document**
-> DocumentResponse create_document(collection_identifier, document_create_request, authorization=authorization, x_namespace=x_namespace)
+> DocumentResponse create_document(collection_identifier, document_create_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Create a document.
 
@@ -460,11 +468,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | The ID of the collection.
     document_create_request = mixpeek.DocumentCreateRequest() # DocumentCreateRequest | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Create a document.
-        api_response = api_instance.create_document(collection_identifier, document_create_request, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.create_document(collection_identifier, document_create_request, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->create_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -481,6 +490,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| The ID of the collection. | 
  **document_create_request** | [**DocumentCreateRequest**](DocumentCreateRequest.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -505,13 +515,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_document**
-> GenericDeleteResponse delete_document(collection_identifier, document_id, authorization=authorization, x_namespace=x_namespace)
+> GenericDeleteResponse delete_document(collection_identifier, document_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Delete a document by ID.
 
@@ -540,11 +550,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     collection_identifier = 'collection_identifier_example' # str | The ID of the collection.
     document_id = 'document_id_example' # str | The ID of the document to delete.
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Delete a document by ID.
-        api_response = api_instance.delete_document(collection_identifier, document_id, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.delete_document(collection_identifier, document_id, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->delete_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -561,6 +572,7 @@ Name | Type | Description  | Notes
  **collection_identifier** | **str**| The ID of the collection. | 
  **document_id** | **str**| The ID of the document to delete. | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -585,13 +597,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document**
-> DocumentResponse get_document(collection_identifier, document_id, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, authorization=authorization, x_namespace=x_namespace)
+> DocumentResponse get_document(collection_identifier, document_id, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, return_vector_names=return_vector_names, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Get a document by ID.
 
@@ -621,12 +633,14 @@ with mixpeek.ApiClient(configuration) as api_client:
     document_id = 'document_id_example' # str | The ID of the document to retrieve.
     return_presigned_urls = False # bool | Generate fresh presigned download URLs for all blobs with S3 storage (optional) (default to False)
     return_vectors = False # bool |  (optional) (default to False)
+    return_vector_names = False # bool | Include a '_vectors' field listing available vector names for this document (without actual embedding data) (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Get a document by ID.
-        api_response = api_instance.get_document(collection_identifier, document_id, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.get_document(collection_identifier, document_id, return_presigned_urls=return_presigned_urls, return_vectors=return_vectors, return_vector_names=return_vector_names, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->get_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -644,7 +658,9 @@ Name | Type | Description  | Notes
  **document_id** | **str**| The ID of the document to retrieve. | 
  **return_presigned_urls** | **bool**| Generate fresh presigned download URLs for all blobs with S3 storage | [optional] [default to False]
  **return_vectors** | **bool**|  | [optional] [default to False]
+ **return_vector_names** | **bool**| Include a &#39;_vectors&#39; field listing available vector names for this document (without actual embedding data) | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -669,13 +685,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_documents**
-> ListDocumentsResponse list_documents(collection_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_documents_request=list_documents_request)
+> ListDocumentsResponse list_documents(collection_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_documents_request=list_documents_request)
 
 List documents.
 
@@ -717,12 +733,13 @@ with mixpeek.ApiClient(configuration) as api_client:
     cursor = 'cursor_example' # str |  (optional)
     include_total = False # bool |  (optional) (default to False)
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
     list_documents_request = mixpeek.ListDocumentsRequest() # ListDocumentsRequest |  (optional)
 
     try:
         # List documents.
-        api_response = api_instance.list_documents(collection_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, x_namespace=x_namespace, list_documents_request=list_documents_request)
+        api_response = api_instance.list_documents(collection_identifier, limit=limit, offset=offset, cursor=cursor, include_total=include_total, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace, list_documents_request=list_documents_request)
         print("The response of CollectionDocumentsApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -742,6 +759,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**|  | [optional] 
  **include_total** | **bool**|  | [optional] [default to False]
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
  **list_documents_request** | [**ListDocumentsRequest**](ListDocumentsRequest.md)|  | [optional] 
 
@@ -767,13 +785,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **patch_document**
-> DocumentResponse patch_document(collection_identifier, document_id, request_body, authorization=authorization, x_namespace=x_namespace)
+> DocumentResponse patch_document(collection_identifier, document_id, request_body, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Patch Document
 
@@ -803,11 +821,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     document_id = 'document_id_example' # str | The ID of the document to patch.
     request_body = None # Dict[str, object] | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Patch Document
-        api_response = api_instance.patch_document(collection_identifier, document_id, request_body, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.patch_document(collection_identifier, document_id, request_body, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->patch_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -825,6 +844,7 @@ Name | Type | Description  | Notes
  **document_id** | **str**| The ID of the document to patch. | 
  **request_body** | [**Dict[str, object]**](object.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -849,13 +869,13 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_document**
-> DocumentResponse update_document(collection_identifier, document_id, request_body, authorization=authorization, x_namespace=x_namespace)
+> DocumentResponse update_document(collection_identifier, document_id, request_body, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
 
 Update Document
 
@@ -885,11 +905,12 @@ with mixpeek.ApiClient(configuration) as api_client:
     document_id = 'document_id_example' # str | The ID of the document to update.
     request_body = None # Dict[str, object] | 
     authorization = 'authorization_example' # str | REQUIRED: Bearer token authentication using your API key. Format: 'Bearer sk_xxxxxxxxxxxxx'. You can create API keys in the Mixpeek dashboard under Organization Settings. (optional)
+    authorization2 = 'authorization_example' # str |  (optional)
     x_namespace = 'x_namespace_example' # str | REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like 'my-namespace' (optional)
 
     try:
         # Update Document
-        api_response = api_instance.update_document(collection_identifier, document_id, request_body, authorization=authorization, x_namespace=x_namespace)
+        api_response = api_instance.update_document(collection_identifier, document_id, request_body, authorization=authorization, authorization2=authorization2, x_namespace=x_namespace)
         print("The response of CollectionDocumentsApi->update_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -907,6 +928,7 @@ Name | Type | Description  | Notes
  **document_id** | **str**| The ID of the document to update. | 
  **request_body** | [**Dict[str, object]**](object.md)|  | 
  **authorization** | **str**| REQUIRED: Bearer token authentication using your API key. Format: &#39;Bearer sk_xxxxxxxxxxxxx&#39;. You can create API keys in the Mixpeek dashboard under Organization Settings. | [optional] 
+ **authorization2** | **str**|  | [optional] 
  **x_namespace** | **str**| REQUIRED: Namespace identifier for scoping this request. All resources (collections, buckets, taxonomies, etc.) are scoped to a namespace. You can provide either the namespace name or namespace ID. Format: ns_xxxxxxxxxxxxx (ID) or a custom name like &#39;my-namespace&#39; | [optional] 
 
 ### Return type
@@ -931,8 +953,8 @@ No authorization required
 **401** | Unauthorized |  -  |
 **403** | Forbidden |  -  |
 **404** | Not Found |  -  |
-**500** | Internal Server Error |  -  |
 **422** | Validation Error |  -  |
+**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

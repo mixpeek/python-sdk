@@ -15,11 +15,12 @@ Name | Type | Description | Notes
 **enable_quality_scoring** | **bool** | Compute quality scores (blur, size, landmarks). Adds ~5ms per face. | [optional] [default to True]
 **quality_threshold** | **float** | Minimum quality score to index faces. None: Index all faces. 0.5: Moderate filtering. 0.7: High quality only. | [optional] 
 **max_video_length** | **int** | Maximum video length in seconds. 60: Default. 10: Recommended for retrieval. 300: Maximum (extraction only). | [optional] [default to 60]
-**video_sampling_fps** | **float** | Frames per second to sample from video. 1.0: One frame per second (recommended). | [optional] [default to 1.0]
+**video_sampling_fps** | **float** | Frames per second to sample from video. 1.0: One frame per second (recommended). | [optional] [default to 1]
 **video_deduplication** | **bool** | Remove duplicate faces across video frames (extraction only). Reduces 90-95% redundancy. NOT used in retrieval. | [optional] [default to True]
 **video_deduplication_threshold** | **float** | Cosine similarity threshold for deduplication. 0.8: Conservative (default). | [optional] [default to 0.8]
 **output_mode** | **str** | &#39;per_face&#39;: One document per face (recommended). &#39;per_image&#39;: One doc per image with faces array. | [optional] [default to 'per_face']
 **include_face_crops** | **bool** | Include aligned 112×112 face crops as base64. Adds ~5KB per face. | [optional] [default to False]
+**include_source_frame_thumbnail** | **bool** | Include resized source frame/image as base64 thumbnail (~15-30KB per face). Used for display with bounding box overlay. | [optional] [default to False]
 **store_detection_metadata** | **bool** | Store bbox, landmarks, detection scores. Recommended for debugging. | [optional] [default to True]
 
 ## Example

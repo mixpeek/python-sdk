@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **name** | **str** | Human-readable template name | 
 **description** | **str** | Detailed description of the template&#39;s purpose | 
 **category** | **str** | Optional category for organizing templates | [optional] 
-**configuration** | **object** | Template-specific configuration (varies by template_type) | 
+**configuration** | **Dict[str, object]** | Template-specific configuration (varies by template_type) | 
 **tags** | **List[str]** | Tags for categorizing and filtering templates | [optional] 
 **is_active** | **bool** | Whether this template is available for use | [optional] [default to True]
 **is_public** | **bool** | Whether this template is publicly discoverable without authentication | [optional] [default to False]
@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **requirements** | **List[str]** | List of requirements (e.g., &#39;Requires text embeddings&#39;) | [optional] 
 **created_by** | **str** | User ID who created this template (for org templates) | [optional] 
 **source_resource_id** | **str** | ID of the resource this template was created from (for org templates) | [optional] 
+**sample_namespace_id** | **str** | Reference to a sample/golden namespace for this scaffold (used for Studio quickstart cloning) | [optional] 
 **created_at** | **datetime** | Timestamp when template was created | [optional] 
 **updated_at** | **datetime** | Timestamp when template was last updated | [optional] 
 

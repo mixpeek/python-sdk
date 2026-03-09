@@ -7,9 +7,9 @@ Request to generate a presigned URL for plugin archive upload.  This is step 1 o
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Plugin name (alphanumeric with underscores, no spaces) | 
-**version** | **str** | Semantic version string | 
+**version** | **str** | Semantic version string. Accepts &#39;v1&#39;, &#39;1.0&#39;, &#39;1.0.0&#39; — all normalized to X.Y.Z | 
 **description** | **str** | Optional description of the plugin | [optional] 
-**file_size_bytes** | **int** | Expected file size in bytes for quota validation | [optional] 
+**file_size_bytes** | **int** | Expected file size in bytes for quota validation (500MB max) | [optional] 
 **presigned_url_expiration** | **int** | Presigned URL expiration time in seconds (1-24 hours) | [optional] [default to 3600]
 
 ## Example
